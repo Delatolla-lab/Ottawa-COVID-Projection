@@ -1,0 +1,21 @@
+﻿input,type,valid,label,example
+strata_1,string,,Strata 1,high-distancing
+strata_2,string,,Strata 2,all-ages
+strata_3,string,,Strata 3,long-ICU
+population,number,,Regional Population,1000000
+market_share,number,"[0.5,100]",Hospital Market Share (%),100
+current_hospitalized,number,,Currently Hospitalized COVID-19 Patients,15
+date_first_hospitalized,date,"NULL, YYYY/MM/DD",Date of the first hospitalized case,NULL
+doubling_time,number,,Doubling time before current date,4
+relative_contact_rate,number,"[0,100]",Social distancing (% reduction in social contact),70
+hospitalized.rate,number,"[0,100]",Hospitalization %(total infections),2.5
+icu.rate,number,"[0,100]",ICU %(total infections),0.75
+ventilated.rate,number,"[0,100]",Ventilated %(total infections),0.5
+infectious_days,number,,Infectious days,14
+hospitalized.days,number,,Average Hospital Length of Stay (days),14
+icu.days,number,,Average Days in ICU,10
+ventilated.days,number,,Average Days on Ventilator,7
+n_days,number,,Number of days to project,150
+,,,,
+,,,,
+,,,,
