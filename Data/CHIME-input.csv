@@ -16,6 +16,3 @@ hospitalized.days,number,,Average Hospital Length of Stay (days),14
 icu.days,number,,Average Days in ICU,10
 ventilated.days,number,,Average Days on Ventilator,7
 n_days,number,,Number of days to project,150
-,,,,
-,,,,
-,,,,

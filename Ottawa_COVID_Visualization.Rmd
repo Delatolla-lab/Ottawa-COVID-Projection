@@ -9,15 +9,19 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## About
+
 The charts below show projected hospital resource use for COVID-19 patients in the Ottawa area. Projections are based on the [CHIME model](https://penn-chime.phl.io/) developed by the University of Pennsylvania Health System. Data observed in Ottawa hospitals is also plotted in these charts. Observed data is as of March 29, 2020.
-
-
-```{r, echo=FALSE}
-ott_data <- read.csv(file.path(getwd(), "Data/Ottawa_hospitalization_estimates_COVID.csv"))
-```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(plotly)
+ott_data <- read.csv(file.path(getwd(), "Data/Ottawa_hospitalization_estimates_COVID.csv"))
+CHIME_input_display <- read.csv(file.path(getwd(),"Data/CHIME_input_display.csv"))
+```
+
+### Hospitalization projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 trace1 <- list(
   fill = "tozeroy", 
   meta = list(columnNames = list(
@@ -125,10 +129,9 @@ p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autos
 p
 ```
 
-
+### ICU Projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(plotly)
 trace1 <- list(
   fill = "tozeroy", 
   meta = list(columnNames = list(
@@ -230,7 +233,7 @@ p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autos
 p
 ```
 
-
+### Ventilator projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(plotly)
@@ -333,4 +336,14 @@ p <- add_trace(p, meta=trace4$meta, mode=trace4$mode, name=trace4$name, type=tra
 p <- add_trace(p, line=trace5$line, meta=trace5$meta, mode=trace5$mode, name=trace5$name, type=trace5$type, xsrc=trace5$xsrc, x=trace5$x, ysrc=trace5$ysrc, y=trace5$y)
 p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=FALSE, width = 1000, height = 500)
 p
+```
+
+## Data & input parameters
+
+Below are tables illustrating the inputted parameters and data obtained to generate the projection charts
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(DT)
+datatable(CHIME_input_display)
+datatable(ott_data, options = list(scrollX = TRUE))
 ```
