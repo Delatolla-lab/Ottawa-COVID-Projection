@@ -1,0 +1,14 @@
+﻿Parameter,Value
+Regional Population,1000000
+Hospital Market Share (%),100
+Currently hospitalized,18
+Date of first hospitalized case,03/17/2020
+Social distancing (%),50-70
+Hospitalization % (total infections),2.6
+ICU % (total infections),0.75
+Ventilated % (total infections),0.5
+Infectious days,14
+Average Hospital Length of Stay (days),10
+Average Days in ICU,21
+Average Days on Ventilator,10
+Number of days to project,200
