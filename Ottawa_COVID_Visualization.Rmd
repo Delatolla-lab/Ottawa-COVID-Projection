@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r, echo=FALSE}
-ott_data <- read.csv(file.path(getwd(), "Ottawa_hospitalization_estimates_COVID.csv"))
+ott_data <- read.csv(file.path(getwd(), "Data/Ottawa_hospitalization_estimates_COVID.csv"))
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
