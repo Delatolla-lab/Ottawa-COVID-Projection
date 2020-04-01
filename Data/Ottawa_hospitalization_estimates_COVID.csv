@@ -1,4 +1,4 @@
-﻿day,date,hospitalized_50,icu_50,ventilated_50,hospitalized_60,icu_60,ventilated_60,hospitalized_70,icu_70,ventilated_70,observed_hospitalized,observed_icu,observed_ventilated,capacity_hospitalized,capacity_icu,capacity_ventilated
+﻿day,date,hospitalizations_50,icu_50,ventilators_50,hospitalizations_60,icu_60,ventilators_60,hospitalizations_70,icu_70,ventilators_70,observed_hospitalizations,observed_icu,observed_ventilators,capacity_hospitalized,capacity_icu,capacity_ventilated
 -14,2020-03-17,,,,,,,,,,1,0,,,,
 -13,2020-03-18,1,1,1,1,1,1,1,1,1,0,0,,,,
 -12,2020-03-19,1,1,1,1,1,1,1,1,1,1,0,,,,
@@ -13,7 +13,7 @@
 -3,2020-03-28,11,3,2,11,3,2,11,3,2,18,5,,,,
 -2,2020-03-29,13,4,3,13,4,3,13,4,3,21,5,,,,
 -1,2020-03-30,15,5,3,15,5,3,15,5,3,,,,,,
-0,2020-03-31,19,6,4,19,6,4,19,6,4,,,,,,
+0,2020-03-31,19,6,4,19,6,4,19,6,4,25,7,,,,
 1,2020-04-01,20,7,4,20,7,4,20,7,4,,,,,,
 2,2020-04-02,22,8,5,21,7,4,20,7,4,,,,,,
 3,2020-04-03,24,8,5,22,8,5,21,7,4,,,,,,
