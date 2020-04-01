@@ -14,12 +14,12 @@ The charts below show projected hospital resource use for COVID-19 patients in t
 
 This page is private and provisional. Do not circulate. See the bottom of page for [contacts](#contact) and further details. 
 
-### Key model paramters
+### Key model parameters
 1) *Projections are based on reported daily hospital Ottawa census.* 
     - Daily hospital use reported by Ottawa Public Health as of March 29, 2020.
     - Ottawa COVID-19 bed census = 21 patients on March 29, 2020. 
     - Doubling time 3 days from March 20 to 29, 2020. Projections initialized with 4 day hospital doubling time. 
-2) *Scenarios based on effective physical distancing.* Effectiveness of preventive measures is the most influential parameter for all model platforms and projections - and hence the most important source of projection uncertainty.
+2) *Scenarios are based on effective physical distancing.* Effectiveness of preventive measures is the most influential parameter for all model platforms and projections - and hence the most important source of projection uncertainty.
     - Scenarios reflect the potential reduction in people's contact in the community. 
     - Physical distancing reduces hospital doubling time from **4 days (current) to:
         - **12.1 days with 50% physical distancing** 
