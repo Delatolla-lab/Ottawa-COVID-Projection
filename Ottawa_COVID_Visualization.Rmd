@@ -1,8 +1,8 @@
 ---
 title: "Ottawa COVID-19 Projections"
-date: '2020-03-31'
 output:
-  html_document
+  html_document:
+    theme: cosmo
 ---
 
 ```{r setup, include=FALSE}
@@ -44,7 +44,7 @@ trace1 <- list(
       y = "hospitalized_50"
     )), 
   mode = "lines", 
-  name = "50% social distancing", 
+  name = "50% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:6:949fbc", 
   x = ott_data$date, 
@@ -59,7 +59,7 @@ trace2 <- list(
       y = "hospitalized_60"
     )), 
   mode = "lines", 
-  name = "60% social distancing", 
+  name = "60% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:6:949fbc", 
   x = ott_data$date, 
@@ -74,7 +74,7 @@ trace3 <- list(
       y = "hospitalized_70"
     )), 
   mode = "lines", 
-  name = "70% social distancing", 
+  name = "70% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:6:949fbc", 
   x = ott_data$date, 
@@ -154,7 +154,7 @@ trace1 <- list(
       y = "icu_50"
     )), 
   mode = "lines", 
-  name = "50% social distancing", 
+  name = "50% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:10:cbbd3e", 
   x = ott_data$date, 
@@ -168,7 +168,7 @@ trace2 <- list(
       y = "icu_60"
     )), 
   mode = "lines", 
-  name = "60% social distancing", 
+  name = "60% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:10:cbbd3e", 
   x = ott_data$date, 
@@ -183,7 +183,7 @@ trace3 <- list(
       y = "icu_70"
     )), 
   mode = "lines", 
-  name = "70% social distancing", 
+  name = "70% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:10:cbbd3e", 
   x = ott_data$date, 
@@ -259,7 +259,7 @@ trace1 <- list(
       y = "ventilation_50"
     )), 
   mode = "lines", 
-  name = "50% social distancing", 
+  name = "50% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:1:9c770a", 
   x = ott_data$date, 
@@ -273,7 +273,7 @@ trace2 <- list(
       y = "ventilation_60"
     )), 
   mode = "lines", 
-  name = "60% social distancing", 
+  name = "60% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:1:9c770a", 
   x = ott_data$date, 
@@ -288,7 +288,7 @@ trace3 <- list(
       y = "ventilation_70"
     )), 
   mode = "lines", 
-  name = "70% social distancing", 
+  name = "70% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:1:9c770a", 
   x = ott_data$date, 
