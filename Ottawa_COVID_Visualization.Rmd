@@ -17,7 +17,7 @@ This page is private and provisional. Do not circulate. See the bottom of page f
 ### Key model parameters
 1) *Projections are based on reported daily hospital Ottawa census.* 
     - Census is defined as the number of hospitalized patients in a given day 
-    - Daily hospital use reported by Ottawa Public Health as of March 29, 2020.
+    - Daily hospital use reported by Ottawa Public Health as of March 31, 2020. Work to incorporate regional data rather than just Ottawa cases is ongoing.
     - Ottawa COVID-19 bed census = 21 patients on March 29, 2020. 
     - Doubling time (time for number of hospitalized COVID-19 patients to double) of 3 days from March 20 to 29, 2020. Projections initialized with 4 day hospital doubling time. 
 2) *Scenarios based on effective physical distancing.* Effectiveness of preventive measures is the most influential parameter for all model platforms and projections - and hence the most important source of projection uncertainty.
@@ -27,7 +27,7 @@ This page is private and provisional. Do not circulate. See the bottom of page f
         - **21.5 days with 60% physical distancing**
         - **103 days with 70% physical distancing**
 3) *Projections are based on the [CHIME model](https://penn-chime.phl.io/) v1.1.0 developed by the University of Pennsylvania Health System.* The projections can be updated for other models.
-4) *Model parameters other than Ottawa hospital use are aligned with [COVID-19-MC](https://www.covid-19-mc.ca/interactive-model) and [Tuite et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) models where possible, with updates based on [Verity et al.](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)* Model parameters are [here](#parameters).
+4) *Model parameters other than Ottawa hospital use are aligned with [COVID-19-MC](https://www.covid-19-mc.ca/interactive-model) and [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) models where possible, with updates based on [Verity et al. (Lancet, March 20, 2020)](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)* Model parameters are [here](#parameters).
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(plotly)
@@ -79,6 +79,12 @@ Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca)
 Alan Forster
 
 ## Changelog
+
+### V0.1.1
+
+Updated Ottawa hospital census data to 2020-03-31.
+
+Overview updated.
 
 ### V0.1.0 
 2020-04-01
