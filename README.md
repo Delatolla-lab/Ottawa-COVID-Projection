@@ -3,7 +3,7 @@
 Projections for hospital and ICU use for patients with COVID-19. 
 Current projections are based on PENN CHIME model, but the figures can be used to present projections for other models.
 
-This site is not public. Contact Doug Manuel dmanuel@ohri.ca if you would like access.
+This repository is not public. Contact Doug Manuel dmanuel@ohri.ca if you would like access.
 
 ## Updates
 
