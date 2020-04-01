@@ -1,8 +1,8 @@
 ---
 title: "Ottawa COVID-19 Projections"
-date: '2020-03-31'
 output:
-  html_document
+  html_document:
+    theme: cosmo
 ---
 
 ```{r setup, include=FALSE}
@@ -14,12 +14,12 @@ The charts below show projected hospital resource use for COVID-19 patients in t
 
 This page is private and provisional. Do not circulate. See the bottom of page for [contacts](#contact) and further details. 
 
-### Key model paramters
+### Key model parameters
 1) *Projections are based on reported daily hospital Ottawa census.* 
     - Daily hospital use reported by Ottawa Public Health as of March 29, 2020.
     - Ottawa COVID-19 bed census = 21 patients on March 29, 2020. 
     - Doubling time 3 days from March 20 to 29, 2020. Projections initialized with 4 day hospital doubling time. 
-2) *Scenarios based on effective physical distancing.* Effectiveness of preventive measures is the most influential parameter for all model platforms and projections - and hence the most important source of projection uncertainty.
+2) *Scenarios are based on effective physical distancing.* Effectiveness of preventive measures is the most influential parameter for all model platforms and projections - and hence the most important source of projection uncertainty.
     - Scenarios reflect the potential reduction in people's contact in the community. 
     - Physical distancing reduces hospital doubling time from **4 days (current) to:
         - **12.1 days with 50% physical distancing** 
@@ -44,7 +44,7 @@ trace1 <- list(
       y = "hospitalized_50"
     )), 
   mode = "lines", 
-  name = "50% social distancing", 
+  name = "50% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:6:949fbc", 
   x = ott_data$date, 
@@ -59,7 +59,7 @@ trace2 <- list(
       y = "hospitalized_60"
     )), 
   mode = "lines", 
-  name = "60% social distancing", 
+  name = "60% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:6:949fbc", 
   x = ott_data$date, 
@@ -74,7 +74,7 @@ trace3 <- list(
       y = "hospitalized_70"
     )), 
   mode = "lines", 
-  name = "70% social distancing", 
+  name = "70% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:6:949fbc", 
   x = ott_data$date, 
@@ -154,7 +154,7 @@ trace1 <- list(
       y = "icu_50"
     )), 
   mode = "lines", 
-  name = "50% social distancing", 
+  name = "50% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:10:cbbd3e", 
   x = ott_data$date, 
@@ -168,7 +168,7 @@ trace2 <- list(
       y = "icu_60"
     )), 
   mode = "lines", 
-  name = "60% social distancing", 
+  name = "60% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:10:cbbd3e", 
   x = ott_data$date, 
@@ -183,7 +183,7 @@ trace3 <- list(
       y = "icu_70"
     )), 
   mode = "lines", 
-  name = "70% social distancing", 
+  name = "70% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:10:cbbd3e", 
   x = ott_data$date, 
@@ -259,7 +259,7 @@ trace1 <- list(
       y = "ventilation_50"
     )), 
   mode = "lines", 
-  name = "50% social distancing", 
+  name = "50% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:1:9c770a", 
   x = ott_data$date, 
@@ -273,7 +273,7 @@ trace2 <- list(
       y = "ventilation_60"
     )), 
   mode = "lines", 
-  name = "60% social distancing", 
+  name = "60% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:1:9c770a", 
   x = ott_data$date, 
@@ -288,7 +288,7 @@ trace3 <- list(
       y = "ventilation_70"
     )), 
   mode = "lines", 
-  name = "70% social distancing", 
+  name = "70% physical distancing", 
   type = "scatter", 
   xsrc = "wyusuf:1:9c770a", 
   x = ott_data$date, 
