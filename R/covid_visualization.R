@@ -51,7 +51,7 @@ covid_visualization <- function(data, parameter){
       y = "observed_data"
     )), 
     mode = "markers+lines", 
-    name = "Observed acute care census", 
+    name = "Observed data", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
     x = data$date, 
@@ -77,7 +77,7 @@ covid_visualization <- function(data, parameter){
   )
   data <- list(trace1, trace2, trace3, trace4, trace5)
   layout <- list(
-    title = list(text = paste("Projected census of COVID-19", as.character(parameter), "patients in Ottawa")), 
+    title = list(text = paste("Projected census of COVID-19", as.character(parameter), "in Ottawa")), 
     xaxis = list(
       type = "date", 
       range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
