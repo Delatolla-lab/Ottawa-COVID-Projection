@@ -14,7 +14,7 @@ The charts below show projected hospital resource use for COVID-19 patients in t
 
 This page is private and provisional. Do not circulate. See the bottom of page for [contacts](#contact) and further details. 
 
-### Key model paramters
+### Key model parameters
 1) *Projections are based on reported daily hospital Ottawa census.* 
     - Daily hospital use reported by Ottawa Public Health as of March 29, 2020.
     - Ottawa COVID-19 bed census = 21 patients on March 29, 2020. 
@@ -145,7 +145,7 @@ p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autos
 p
 ```
 
-### ICU Projections
+### ICU projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 trace1 <- list(
