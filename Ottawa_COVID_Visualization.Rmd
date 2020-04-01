@@ -328,7 +328,7 @@ trace5 <- list(
 )
 data <- list(trace1, trace2, trace3, trace4, trace5)
 layout <- list(
-  title = list(text = "Projected census of COVID-19 ventilation usage in Ottawa"), 
+  title = list(text = "Projected census of COVID-19 ventilator usage in Ottawa"), 
   xaxis = list(
     type = "date", 
     range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
