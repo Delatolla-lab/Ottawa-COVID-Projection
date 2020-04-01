@@ -130,7 +130,7 @@ layout <- list(
     side = "left", 
     type = "linear", 
     range = c(-290.8157396897466, 3595.3060915626183), 
-    title = list(text = "Census (# of patients)"), 
+    title = list(text = "Census (# of patients occupying beds)"), 
     domain = c(0, 1), 
     autorange = TRUE
   ), 
@@ -235,7 +235,7 @@ layout <- list(
   yaxis = list(
     type = "linear", 
     range = c(-176.97699707235466, 2110.3672103722292), 
-    title = list(text = "Census (# of patients)"), 
+    title = list(text = "Census (# of patients occupying beds)"), 
     autorange = TRUE
   ), 
   autosize = TRUE
@@ -340,7 +340,7 @@ layout <- list(
   yaxis = list(
     type = "linear", 
     range = c(0, 688.421052631579), 
-    title = list(text = "Census (# of patients)"), 
+    title = list(text = "Census (# of patients occupying beds)"), 
     autorange = TRUE
   ), 
   autosize = TRUE
