@@ -16,9 +16,10 @@ This page is private and provisional. Do not circulate. See the bottom of page f
 
 ### Key model parameters
 1) *Projections are based on reported daily hospital Ottawa census.* 
+    - Census is defined as the number of hospitalized patients in a given day 
     - Daily hospital use reported by Ottawa Public Health as of March 29, 2020.
     - Ottawa COVID-19 bed census = 21 patients on March 29, 2020. 
-    - Doubling time 3 days from March 20 to 29, 2020. Projections initialized with 4 day hospital doubling time. 
+    - Doubling time (time for number of hospitalized COVID-19 patients to double) of 3 days from March 20 to 29, 2020. Projections initialized with 4 day hospital doubling time. 
 2) *Scenarios based on effective physical distancing.* Effectiveness of preventive measures is the most influential parameter for all model platforms and projections - and hence the most important source of projection uncertainty.
     - Scenarios reflect the potential reduction in people's contact in the community. 
     - Physical distancing reduces hospital doubling time from **4 days (current) to:**
@@ -129,7 +130,7 @@ layout <- list(
     side = "left", 
     type = "linear", 
     range = c(-290.8157396897466, 3595.3060915626183), 
-    title = list(text = "Census"), 
+    title = list(text = "Census (# of patients occupying beds)"), 
     domain = c(0, 1), 
     autorange = TRUE
   ), 
@@ -234,7 +235,7 @@ layout <- list(
   yaxis = list(
     type = "linear", 
     range = c(-176.97699707235466, 2110.3672103722292), 
-    title = list(text = "Census"), 
+    title = list(text = "Census (# of patients occupying beds)"), 
     autorange = TRUE
   ), 
   autosize = TRUE
@@ -339,7 +340,7 @@ layout <- list(
   yaxis = list(
     type = "linear", 
     range = c(0, 688.421052631579), 
-    title = list(text = "Census"), 
+    title = list(text = "Census (# of patients occupying beds)"), 
     autorange = TRUE
   ), 
   autosize = TRUE
