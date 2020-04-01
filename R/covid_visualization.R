@@ -56,7 +56,7 @@ covid_visualization <- function(data, parameter){
     xsrc = "wyusuf:1:9c770a", 
     x = data$date, 
     ysrc = "wyusuf:1:420b6f", 
-    y = data[,grepl("observed", paste(as.character(parameter), sep = "_"), names(data))]
+    y = data[,grepl(paste("observed",as.character(parameter), sep = "_"), names(data))]
   )
   trace5 <- list(
     line = list(
@@ -73,11 +73,11 @@ covid_visualization <- function(data, parameter){
     xsrc = "wyusuf:1:9c770a", 
     x = data$date, 
     ysrc = "wyusuf:1:a5d486", 
-    y = data[,grepl("capacity", paste(as.character(parameter), sep = "_"), names(data))]
+    y = data[,grepl(paste("capacity", as.character(parameter), sep = "_"), names(data))]
   )
   data <- list(trace1, trace2, trace3, trace4, trace5)
   layout <- list(
-    title = list(text = "Projected census of COVID-19", paste(as.character(parameter)), "patients in Ottawa"), 
+    title = list(text = paste("Projected census of COVID-19", as.character(parameter), "patients in Ottawa")), 
     xaxis = list(
       type = "date", 
       range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
