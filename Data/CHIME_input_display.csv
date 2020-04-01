@@ -1,9 +1,9 @@
-﻿Parameter,Value
+Parameter,Value
 Regional Population,1000000
 Hospital Market Share (%),100
 Currently hospitalized,21
 Date of first hospitalized case,03/17/2020
-Social distancing (%),50-70
+Social distancing (%) (aka physical distancing),50-70
 Hospitalization % (total infections),2.6
 ICU % (total infections),0.75
 Ventilated % (total infections),0.5

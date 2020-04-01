@@ -36,6 +36,7 @@ CHIME_input_display <- read.csv(file.path(getwd(),"Data/CHIME_input_display.csv"
 
 ### Hospitalization projections
 
+Web version of visualizations are interactive. Click or over over top right of visualization for how to download, zoom and pan.
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 trace1 <- list(
   fill = "tozeroy", 
@@ -88,7 +89,7 @@ trace4 <- list(
       y = "observed_data"
     )), 
   mode = "markers+lines", 
-  name = "Observed data", 
+  name = "Reported acute care patients", 
   type = "scatter", 
   xsrc = "wyusuf:6:949fbc", 
   x = ott_data$date, 
@@ -114,7 +115,7 @@ trace5 <- list(
 )
 data <- list(trace1, trace2, trace3, trace4, trace5)
 layout <- list(
-  title = list(text = "Projected census of COVID-19 hospitalizations in Ottawa"), 
+  title = list(text = "Projected census of COVID-19 acute care patients in Ottawa"), 
   xaxis = list(
     side = "bottom", 
     type = "date", 
@@ -197,7 +198,7 @@ trace4 <- list(
       y = "observed_data"
     )), 
   mode = "markers+lines", 
-  name = "Observed data", 
+  name = "Reported ICU patients", 
   type = "scatter", 
   xsrc = "wyusuf:10:cbbd3e", 
   x = ott_data$date, 
@@ -223,7 +224,7 @@ trace5 <- list(
 )
 data <- list(trace1, trace2, trace3, trace4, trace5)
 layout <- list(
-  title = list(text = "Projected census of COVID-19 ICU usage in Ottawa"), 
+  title = list(text = "Projected census of COVID-19 ICU patients in Ottawa"), 
   xaxis = list(
     type = "date", 
     range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
@@ -302,7 +303,7 @@ trace4 <- list(
       y = "observed_data"
     )), 
   mode = "markers+lines", 
-  name = "Observed data", 
+  name = "Observed acute care census", 
   type = "scatter", 
   xsrc = "wyusuf:1:9c770a", 
   x = ott_data$date, 
@@ -328,7 +329,7 @@ trace5 <- list(
 )
 data <- list(trace1, trace2, trace3, trace4, trace5)
 layout <- list(
-  title = list(text = "Projected census of COVID-19 ventilator usage in Ottawa"), 
+  title = list(text = "Projected census of COVID-19 ventilator patients in Ottawa"), 
   xaxis = list(
     type = "date", 
     range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
