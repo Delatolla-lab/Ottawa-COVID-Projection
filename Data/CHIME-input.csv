@@ -16,6 +16,20 @@ hospitalized.days,number,,Average Hospital Length of Stay (days),14,11,10,,,11,m
 icu.days,number,,Average Days in ICU,10,8,21,,,16,midpoint of sanders and fisman estimates
 ventilated.days,number,,Average Days on Ventilator,7,,,,,,
 n_days,number,,Number of days to project,150,,,,,200,
+p_hospital_age_0-20,,0,,,,,,,0,From OPH 2020-04-01. Proportion of every hospitalized.
+p_hospital_age_20-44,,0.14,,,,,,,0.14,From OPH 2020-04-01. Proportion of every hospitalized.
+p_hospital_age_45-64,,0.37,,,,,,,0.37,From OPH 2020-04-01. Proportion of every hospitalized.
+p_hospital_age_65p,,0.49,,,,,,,0.49,From OPH 2020-04-01. Proportion of every hospitalized.
+p_ICU_age_0-20,,0,,,,,,,0,From OPH 2020-04-01. Proportion of every in ICU.
+p_ICU_age_20-44,,0.11,,,,,,,0.11,From OPH 2020-04-01. Proportion of every in ICU.
+p_ICU_age_45-64,,0.22,,,,,,,0.22,From OPH 2020-04-01. Proportion of every in ICU.
+p_ICU_age_65p,,0.67,,,,,,,0.67,From OPH 2020-04-01. Proportion of every in ICU.
+p_death_ICU_age_0-20,,,,,,,,,0.2,Estimate by adapting Fisman parameter. Currently proportion of co-morbidity is not known. Age groups different.
+p_death_ICU_age_20-44,,,,,,,,,0.4,Estimate by adapting Fisman parameter. Currently proportion of co-morbidity is not known. Age groups different.
+p_ICU_death_age_45-64,,,,,,,,,0.7,Estimate by adapting Fisman parameter. Currently proportion of co-morbidity is not known. Age groups different.
+p_ICU_death_age_65p,,,,,,,,,0.8,Estimate by adapting Fisman parameter. Currently proportion of co-morbidity is not known. Age groups different.
+,,,,,,,,,,
+,,,,,,,,,,
 p_death_ward,,,,,0,,,,,
 p_death_icu,,,,,0.49,,,,,
 p_death_vent,,,,,0.67,,,,,
@@ -30,7 +44,7 @@ p_death_icu_70_morb,,,,,,1,,,,
 ,,,,,,,,,,
 OPH_data,Age,,,% ever hosp,% ICU,,,,,
 ,<5,,,0,0,,,,,
-,5-19,,,0,0,,,,,
+,19-May,,,0,0,,,,,
 ,20 to 44,,,0.14,0.11,,,,,
 ,45 to 64,,,0.37,0.22,,,,,
 ,>65,,,0.49,0.67,,,,,
