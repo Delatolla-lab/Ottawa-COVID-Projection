@@ -1,4 +1,4 @@
-hosp_visualization <- function(data, parameter){
+hosp_visualization <- function(data1, data2, parameter, title, y_label){
   library(plotly)
   trace1 <- list(
     fill = "tozeroy", 
@@ -10,9 +10,9 @@ hosp_visualization <- function(data, parameter){
     name = "50% physical distancing", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
-    x = data$date, 
+    x = data1$date, 
     ysrc = "wyusuf:1:d75a98", 
-    y = data[,grepl(paste(paste("^",as.character(parameter),sep = ""), 50, sep = "_"), names(data))]
+    y = data1[,grepl(paste(paste("^",as.character(parameter),sep = ""), 50, sep = "_"), names(data1))]
   )
   trace2 <- list(
     fill = "tozeroy", 
@@ -24,9 +24,9 @@ hosp_visualization <- function(data, parameter){
     name = "60% physical distancing", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
-    x = data$date, 
+    x = data1$date, 
     ysrc = "wyusuf:1:768815", 
-    y = data[,grepl(paste(paste("^",as.character(parameter),sep = ""), 60, sep = "_"), names(data))], 
+    y = data1[,grepl(paste(paste("^",as.character(parameter),sep = ""), 60, sep = "_"), names(data1))], 
     stackgroup = NULL
   )
   trace3 <- list(
@@ -39,9 +39,9 @@ hosp_visualization <- function(data, parameter){
     name = "70% physical distancing", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
-    x = data$date, 
+    x = data1$date, 
     ysrc = "wyusuf:1:3dc4e1", 
-    y = data[,grepl(paste(paste("^",as.character(parameter),sep = ""), 70, sep = "_"), names(data))], 
+    y = data1[,grepl(paste(paste("^",as.character(parameter),sep = ""), 70, sep = "_"), names(data1))], 
     stackgroup = NULL
   )
   trace4 <- list(
@@ -53,9 +53,9 @@ hosp_visualization <- function(data, parameter){
     name = "Observed data", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
-    x = data$date, 
+    x = data2$date, 
     ysrc = "wyusuf:1:420b6f", 
-    y = data[,grepl(paste("^observed",as.character(parameter), sep = "_"), names(data))]
+    y = data2[,grepl(paste("^observed",as.character(parameter), sep = "_"), names(data2))]
   )
   trace5 <- list(
     line = list(
@@ -70,13 +70,13 @@ hosp_visualization <- function(data, parameter){
     name = "Hospital capacity", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
-    x = data$date, 
+    x = data2$date, 
     ysrc = "wyusuf:1:a5d486", 
-    y = data[,grepl(paste("^capacity", as.character(parameter), sep = "_"), names(data))]
+    y = data2[,grepl(paste("^capacity", as.character(parameter), sep = "_"), names(data2))]
   )
   data <- list(trace1, trace2, trace3, trace4, trace5)
   layout <- list(
-    title = list(text = paste("Projected census of COVID-19", as.character(parameter), "in Ottawa")), 
+    title = list(text = paste(as.character(title))), 
     xaxis = list(
       type = "date", 
       range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
@@ -86,7 +86,7 @@ hosp_visualization <- function(data, parameter){
     yaxis = list(
       type = "linear", 
       range = c(0, 688.421052631579), 
-      title = list(text = "Census (# of patients)"), 
+      title = list(text = paste(as.character(y_label))), 
       autorange = TRUE
     ), 
     autosize = TRUE
@@ -101,7 +101,7 @@ hosp_visualization <- function(data, parameter){
   p
 }
 
-death_visualization <- function(data, parameter){
+death_visualization <- function(data1, data2, parameter, title, y_label){
   library(plotly)
   trace1 <- list(
     fill = "tozeroy", 
@@ -113,9 +113,9 @@ death_visualization <- function(data, parameter){
     name = "50% physical distancing", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
-    x = data$date, 
+    x = data1$date, 
     ysrc = "wyusuf:1:d75a98", 
-    y = data[,grepl(paste(paste("^",as.character(parameter),sep = ""), 50, sep = "_"), names(data))]
+    y = data1[,grepl(paste(paste("^",as.character(parameter),sep = ""), "50$", sep = "_"), names(data1))]
   )
   trace2 <- list(
     fill = "tozeroy", 
@@ -127,9 +127,9 @@ death_visualization <- function(data, parameter){
     name = "60% physical distancing", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
-    x = data$date, 
+    x = data1$date, 
     ysrc = "wyusuf:1:768815", 
-    y = data[,grepl(paste(paste("^",as.character(parameter),sep = ""), 60, sep = "_"), names(data))], 
+    y = data1[,grepl(paste(paste("^",as.character(parameter),sep = ""), "60$", sep = "_"), names(data1))], 
     stackgroup = NULL
   )
   trace3 <- list(
@@ -142,9 +142,9 @@ death_visualization <- function(data, parameter){
     name = "70% physical distancing", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
-    x = data$date, 
+    x = data1$date, 
     ysrc = "wyusuf:1:3dc4e1", 
-    y = data[,grepl(paste(paste("^",as.character(parameter),sep = ""), 70, sep = "_"), names(data))], 
+    y = data1[,grepl(paste(paste("^",as.character(parameter),sep = ""), "70$", sep = "_"), names(data1))], 
     stackgroup = NULL
   )
   trace4 <- list(
@@ -156,13 +156,13 @@ death_visualization <- function(data, parameter){
     name = "Observed data", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
-    x = data$date, 
+    x = data2$date, 
     ysrc = "wyusuf:1:420b6f", 
-    y = data[,grepl(paste("^observed",as.character(parameter), sep = "_"), names(data))]
+    y = data2[,grepl(paste("^observed",as.character(parameter), sep = "_"), names(data2))]
   )
   data <- list(trace1, trace2, trace3, trace4)
   layout <- list(
-    title = list(text = paste("Projected census of COVID-19", as.character(parameter), "in Ottawa")), 
+    title = list(text = paste(as.character(title))), 
     xaxis = list(
       type = "date", 
       range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
@@ -172,7 +172,7 @@ death_visualization <- function(data, parameter){
     yaxis = list(
       type = "linear", 
       range = c(0, 688.421052631579), 
-      title = list(text = "Census (# of patients)"), 
+      title = list(text = paste(as.character(title))), 
       autorange = TRUE
     ), 
     autosize = TRUE

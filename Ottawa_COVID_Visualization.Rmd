@@ -31,7 +31,8 @@ This page is private and provisional. Do not circulate. See the bottom of page f
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(plotly)
-ott_data <- read.csv(file.path(getwd(), "Data/Ottawa_hospitalization_estimates_COVID.csv"))
+ott_projections <- read.csv(file.path(getwd(), "Data/Ottawa_hospitalization_estimates_COVID.csv"))
+ott_observed <- read.csv(file.path(getwd(), "Data/Observed data/Ottawa_Observed_COVID_Data.csv"))
 CHIME_input_display <- read.csv(file.path(getwd(),"Data/CHIME_input_display.csv"))
 ```
 
@@ -40,29 +41,36 @@ CHIME_input_display <- read.csv(file.path(getwd(),"Data/CHIME_input_display.csv"
 Web version of visualizations are interactive. Click or over over top right of visualization for how to download, zoom and pan.
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/covid_visualization.R")
-hosp_visualization(ott_data, "hospitalizations")
-
+hosp_visualization(ott_projections, ott_observed, "hospitalizations", title = "Projected census of COVID-19 hospitalizations in Ottawa", y_label = "Census (# of patients)")
 ```
 
 ### ICU projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/covid_visualization.R")
-hosp_visualization(ott_data, "ICU")
+hosp_visualization(ott_projections, ott_observed, "ICU", title = "Projected census of COVID-19 ICU patients in Ottawa", y_label = "Census (# of patients)")
 ```
 
 ### Ventilator projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/covid_visualization.R")
-hosp_visualization(ott_data, "ventilators")
+hosp_visualization(ott_projections, ott_observed, "ventilators", title = "Projected census of COVID-19 ventilator usage in Ottawa", y_label = "Census (# of patients)")
 ```
 
-### Death projections
+## Death projections
+
+### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/covid_visualization.R")
-death_visualization(ott_data, "deaths")
+death_visualization(ott_projections, ott_observed, "daily_deaths", title = "Projected number of COVID-19 daily hospital deaths in Ottawa", y_label = "Census (# of patients)")
+```
+
+### Total projections
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("R/covid_visualization.R")
+death_visualization(ott_projections, ott_observed, "total_deaths", title = "Projected number of COVID-19 total hospital deaths in Ottawa", y_label = "Census (# of patients)")
 ```
 
 ## Input parameters {#parameters}
@@ -77,7 +85,8 @@ datatable(CHIME_input_display)
 ## Data used to plot visualizations
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-datatable(ott_data, options = list(scrollX = TRUE))
+datatable(ott_projections, options = list(scrollX = TRUE))
+datatable(ott_observed, options = list(scrollX = TRUE))
 ```
 
 ## Contact {#contact}
