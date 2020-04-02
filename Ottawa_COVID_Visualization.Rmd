@@ -103,5 +103,8 @@ Key parameters:
 - Model Projections are based on the [CHIME model](https://penn-chime.phl.io/) v1.1.0
 
 ## Roadmap
-- The main purpose to visualize Ottawa-based projections for models performed by other teams.
-- Suggestions welcomed. 
+The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
+
+- Add mortality projections for hospitalized patients.
+- Add plots for new admissions.
+- Add plot for observed hospital census trend, with estimated doubling time.  
