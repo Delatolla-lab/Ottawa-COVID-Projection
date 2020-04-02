@@ -35,26 +35,34 @@ ott_data <- read.csv(file.path(getwd(), "Data/Ottawa_hospitalization_estimates_C
 CHIME_input_display <- read.csv(file.path(getwd(),"Data/CHIME_input_display.csv"))
 ```
 
-### Hospitalization projections
+## Hospitalization projections
 
 Web version of visualizations are interactive. Click or over over top right of visualization for how to download, zoom and pan.
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/covid_visualization.R")
-covid_visualization(ott_data, "hospitalizations")
+hosp_visualization(ott_data, "hospitalizations")
+
 ```
 
 ### ICU projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/covid_visualization.R")
-covid_visualization(ott_data, "ICU")
+hosp_visualization(ott_data, "ICU")
 ```
 
 ### Ventilator projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/covid_visualization.R")
-covid_visualization(ott_data, "ventilators")
+hosp_visualization(ott_data, "ventilators")
+```
+
+### Death projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("R/covid_visualization.R")
+death_visualization(ott_data, "deaths")
 ```
 
 ## Input parameters {#parameters}
