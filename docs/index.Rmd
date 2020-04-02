@@ -118,8 +118,8 @@ datatable(CHIME_input_display)
 ## Data used to plot visualizations
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-datatable(ott_projections, options = list(scrollX = TRUE))
-datatable(ott_observed, options = list(scrollX = TRUE))
+datatable(ott_projections, caption = htmltools::tags$caption("Projected data", style="font-size: 20px"), options = list(pageLength = -1, lengthMenu = list(c(-1, 15), c("All", 15)), scrollX = TRUE))
+datatable(ott_observed, caption = htmltools::tags$caption("Reported hospital use and deaths from Ottawa Public Health", style="font-size: 20px"), options = list(pageLength = -1, lengthMenu = list(c(-1, 15), c("All", 15)), scrollX = TRUE))
 ```
 
 ## Contact {#contact}
@@ -160,6 +160,4 @@ Key parameters:
 ## Roadmap
 The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
 
-- Add mortality projections for hospitalized patients.
-- Add plots for new admissions.
 - Add plot for observed hospital census trend, with estimated doubling time. 
