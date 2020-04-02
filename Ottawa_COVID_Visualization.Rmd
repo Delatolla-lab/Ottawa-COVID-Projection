@@ -3,6 +3,8 @@ title: "Ottawa COVID-19 Projections"
 output:
   html_document:
     theme: cosmo
+  word_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -159,4 +161,4 @@ The main purpose of this site is to visualize Ottawa-based projections for model
 
 - Add mortality projections for hospitalized patients.
 - Add plots for new admissions.
-- Add plot for observed hospital census trend, with estimated doubling time.  
+- Add plot for observed hospital census trend, with estimated doubling time. 
