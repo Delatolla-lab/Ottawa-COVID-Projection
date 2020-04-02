@@ -1,4 +1,4 @@
-﻿day,date,observed_new_acute_care,observed_new_ICU,observed_new_acute_p_ICU,observed_new_vents,observed_census_acute_care,observed_census_ICU,observed_census_acute_p_ICU,observed_census_vents,daily_discharges,observed_new_deaths,observed_cumulative_deaths,capacity_new_acute_care,capacity_new_ICU,capacity_new_vents,capacity_census_acute_care,capacity_census_ICU,capacity_census_vents
+﻿day,date,observed_new_acute_care,observed_new_ICU,observed_new_acute_care_p_ICU,observed_new_vents,observed_census_acute_care,observed_census_ICU,observed_census_acute_care_p_ICU,observed_census_vents,daily_discharges,observed_new_deaths,observed_cumulative_deaths,capacity_census_acute_care_p_ICU,capacity_census_ICU,capacity_census_vents,capacity_new_acute_care_p_ICU,capacity_new_ICU,capacity_new_vents
 -14,2020-03-17,,,0,NA,1,0,1,NA,0,0,0,NA,NA,NA,NA,NA,NA
 -13,2020-03-18,,,0,NA,0,0,0,NA,1,0,0,NA,NA,NA,NA,NA,NA
 -12,2020-03-19,,,0,NA,1,0,1,NA,1,0,0,NA,NA,NA,NA,NA,NA
