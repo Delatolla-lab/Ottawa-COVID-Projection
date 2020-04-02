@@ -57,13 +57,18 @@ source("R/covid_visualization.R")
 covid_visualization(ott_data, "ventilators")
 ```
 
-## Data & input parameters {#parameters}
+## Input parameters {#parameters}
 
 Below are tables illustrating the inputted parameters and data obtained to generate the projection charts
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(DT)
 datatable(CHIME_input_display)
+```
+
+## Data used to plot visualizations
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 datatable(ott_data, options = list(scrollX = TRUE))
 ```
 
