@@ -172,7 +172,7 @@ death_visualization <- function(data1, data2, parameter, title, y_label){
     yaxis = list(
       type = "linear", 
       range = c(0, 688.421052631579), 
-      title = list(text = paste(as.character(title))), 
+      title = list(text = paste(as.character(y_label))), 
       autorange = TRUE
     ), 
     autosize = TRUE

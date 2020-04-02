@@ -39,38 +39,68 @@ CHIME_input_display <- read.csv(file.path(getwd(),"Data/CHIME_input_display.csv"
 ## Hospitalization projections
 
 Web version of visualizations are interactive. Click or over over top right of visualization for how to download, zoom and pan.
+
+### Total projections
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/covid_visualization.R")
 hosp_visualization(ott_projections, ott_observed, "hospitalizations", title = "Projected census of COVID-19 hospitalizations in Ottawa", y_label = "Census (# of patients)")
 ```
 
-### ICU projections
+### Daily projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "daily_hospitalizations", title = "Projected daily COVID-19 hospitalizations in Ottawa", y_label = "Census (# of patients)")
+```
+
+## ICU projections
+
+### Total projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/covid_visualization.R")
 hosp_visualization(ott_projections, ott_observed, "ICU", title = "Projected census of COVID-19 ICU patients in Ottawa", y_label = "Census (# of patients)")
 ```
 
-### Ventilator projections
+### Daily projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "daily_ICU", title = "Projected daily COVID-19 ICU admissions in Ottawa", y_label = "Census (# of patients)")
+```
+
+## Ventilator projections
+
+### Total projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/covid_visualization.R")
 hosp_visualization(ott_projections, ott_observed, "ventilators", title = "Projected census of COVID-19 ventilator usage in Ottawa", y_label = "Census (# of patients)")
 ```
 
+### Daily projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "daily_ventilators", title = "Projected daily COVID-19 ventilator usage in Ottawa", y_label = "Census (# of patients)")
+```
+
+
 ## Death projections
+
+### Total projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("R/covid_visualization.R")
+death_visualization(ott_projections, ott_observed, "total_deaths", title = "Projected number of COVID-19 total hospital deaths in Ottawa", y_label = "# of patients")
+```
 
 ### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/covid_visualization.R")
-death_visualization(ott_projections, ott_observed, "daily_deaths", title = "Projected number of COVID-19 daily hospital deaths in Ottawa", y_label = "Census (# of patients)")
-```
-
-### Total projections
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("R/covid_visualization.R")
-death_visualization(ott_projections, ott_observed, "total_deaths", title = "Projected number of COVID-19 total hospital deaths in Ottawa", y_label = "Census (# of patients)")
+death_visualization(ott_projections, ott_observed, "daily_deaths", title = "Projected number of COVID-19 daily hospital deaths in Ottawa", y_label = "# of patients")
 ```
 
 ## Input parameters {#parameters}
