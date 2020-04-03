@@ -95,7 +95,7 @@ hosp_visualization <- function(data1, data2, parameter, title, y_label, annote =
         list(
           list(
             x = Sys.Date(), 
-            y = max(trace4$y), 
+            y = max(trace4$y, na.rm = TRUE), 
             ax = 0, 
             ay = -50, 
             font = list(color = "rgb(214, 39, 40)"), 
