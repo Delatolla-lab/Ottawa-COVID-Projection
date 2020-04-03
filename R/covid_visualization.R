@@ -105,7 +105,7 @@ hosp_visualization <- function(data1, data2, parameter, title, y_label, annote =
         ),
         list())
   )
-  p <- plot_ly()
+  p <- plot_ly() %>% config(modeBarButtonsToRemove = c("toggleSpikelines", "lasso2d"))
   p <- add_trace(p, fill=trace1$fill, meta=trace1$meta, mode=trace1$mode, name=trace1$name, type=trace1$type, xsrc=trace1$xsrc, x=trace1$x, ysrc=trace1$ysrc, y=trace1$y)
   p <- add_trace(p, fill=trace2$fill, meta=trace2$meta, mode=trace2$mode, name=trace2$name, type=trace2$type, xsrc=trace2$xsrc, x=trace2$x, ysrc=trace2$ysrc, y=trace2$y, stackgroup=trace2$stackgroup)
   p <- add_trace(p, fill=trace3$fill, meta=trace3$meta, mode=trace3$mode, name=trace3$name, type=trace3$type, xsrc=trace3$xsrc, x=trace3$x, ysrc=trace3$ysrc, y=trace3$y, stackgroup=trace3$stackgroup)
@@ -193,7 +193,7 @@ death_visualization <- function(data1, data2, parameter, title, y_label){
     ), 
     autosize = TRUE
   )
-  p <- plot_ly()
+  p <- plot_ly() %>% config(modeBarButtonsToRemove = c("toggleSpikelines", "lasso2d"))
   p <- add_trace(p, fill=trace1$fill, meta=trace1$meta, mode=trace1$mode, name=trace1$name, type=trace1$type, xsrc=trace1$xsrc, x=trace1$x, ysrc=trace1$ysrc, y=trace1$y)
   p <- add_trace(p, fill=trace2$fill, meta=trace2$meta, mode=trace2$mode, name=trace2$name, type=trace2$type, xsrc=trace2$xsrc, x=trace2$x, ysrc=trace2$ysrc, y=trace2$y, stackgroup=trace2$stackgroup)
   p <- add_trace(p, fill=trace3$fill, meta=trace3$meta, mode=trace3$mode, name=trace3$name, type=trace3$type, xsrc=trace3$xsrc, x=trace3$x, ysrc=trace3$ysrc, y=trace3$y, stackgroup=trace3$stackgroup)
