@@ -55,7 +55,7 @@ hosp_visualization <- function(data1, data2, parameter, title, y_label, annote =
     xsrc = "wyusuf:1:9c770a", 
     x = data2$date, 
     ysrc = "wyusuf:1:420b6f", 
-    y = data2[,grepl(paste("^observed",as.character(parameter), sep = "_"), names(data2))]
+    y = data2[,grepl(paste("^observed",paste(as.character(parameter),"$",sep=""), sep = "_"), names(data2))]
   )
   trace5 <- list(
     line = list(
@@ -72,7 +72,7 @@ hosp_visualization <- function(data1, data2, parameter, title, y_label, annote =
     xsrc = "wyusuf:1:9c770a", 
     x = data2$date, 
     ysrc = "wyusuf:1:a5d486", 
-    y = data2[,grepl(paste("^capacity", as.character(parameter), sep = "_"), names(data2))]
+    y = data2[,grepl(paste("^capacity", paste(as.character(parameter),"$",sep=""), sep = "_"), names(data2))]
   )
   data <- list(trace1, trace2, trace3, trace4, trace5)
   layout <- list(
@@ -174,7 +174,7 @@ death_visualization <- function(data1, data2, parameter, title, y_label){
     xsrc = "wyusuf:1:9c770a", 
     x = data2$date, 
     ysrc = "wyusuf:1:420b6f", 
-    y = data2[,grepl(paste("^observed",as.character(parameter), sep = "_"), names(data2))]
+    y = data2[,grepl(paste("^observed",paste(as.character(parameter),"$",sep=""), sep = "_"), names(data2))]
   )
   data <- list(trace1, trace2, trace3, trace4)
   layout <- list(
