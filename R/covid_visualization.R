@@ -90,19 +90,20 @@ hosp_visualization <- function(data1, data2, parameter, title, y_label, annote =
       autorange = TRUE
     ), 
     autosize = TRUE,
-    if(annote == TRUE) {
-      annotations = list(
+    annotations =
+      ifelse(annote == TRUE,
         list(
-          x = Sys.Date(), 
-          y = min(trace4$y), 
-          ax = 0, 
-          ay = -50, 
-          font = list(color = "rgb(214, 39, 40)"), 
-          text = "Current use (click to zoom)", 
-          arrowcolor = "rgb(214, 39, 40)"
-        )
-      )
-    }
+          list(
+            x = Sys.Date(), 
+            y = max(trace4$y), 
+            ax = 0, 
+            ay = -50, 
+            font = list(color = "rgb(214, 39, 40)"), 
+            text = "Current use (click to zoom)", 
+            arrowcolor = "rgb(214, 39, 40)"
+          )
+        ),
+        list())
   )
   p <- plot_ly()
   p <- add_trace(p, fill=trace1$fill, meta=trace1$meta, mode=trace1$mode, name=trace1$name, type=trace1$type, xsrc=trace1$xsrc, x=trace1$x, ysrc=trace1$ysrc, y=trace1$y)
