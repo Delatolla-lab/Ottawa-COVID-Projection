@@ -3,6 +3,8 @@ title: "Ottawa COVID-19 Projections"
 date: "Last updated `r format(Sys.time(), '%d %B, %Y, %X EST.  Updated daily around noon, EST')`"
 output:
   html_document:
+    includes:
+       in_header: GA_script.html
     theme: cosmo
   word_document: default
   pdf_document: default
