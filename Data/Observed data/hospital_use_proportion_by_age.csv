@@ -1,0 +1,5 @@
+﻿age_cat,age_cat_label,p_ICU_nomorb,p_ICU_morb,p_ICU_total,p_acute_care_nomorb,p_acute_care_morb,p_acute_care_total,p_ICU_p_acute_care_total
+1,0 to 20,,,,,,,
+2,21 to 49,,,,,,,
+3,50 to 69,,,,,,,
+4,70 plus,,,,,,,

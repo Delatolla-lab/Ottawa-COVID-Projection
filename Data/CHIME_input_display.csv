@@ -12,3 +12,11 @@ Average Hospital Length of Stay (days),10
 Average Days in ICU,21
 Average Days on Ventilator,10
 Number of days to project,200
+Probability ICU patient is aged 0-20,0
+Probability ICU patient is aged 20-44,0.11
+Probability ICU patient is aged 45-64,0.22
+Probability ICU patient is aged 65+,0.67
+Probability ICU patient aged 0-20 dies,0.2
+Probability ICU patient aged 20-44 dies,0.4
+Probability ICU patient aged 45-64 dies,0.7
+Probability ICU patient aged 65+ dies,0.8
