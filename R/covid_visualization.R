@@ -99,7 +99,7 @@ hosp_visualization <- function(data1, data2, parameter, title, y_label, annote =
             ax = 0, 
             ay = -50, 
             font = list(color = "rgb(214, 39, 40)"), 
-            text = "Current use (click to zoom)", 
+            text = "Current use (drag to zoom)", 
             arrowcolor = "rgb(214, 39, 40)"
           )
         ),
