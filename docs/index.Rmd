@@ -94,7 +94,7 @@ hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projecte
 
 Death projections were made using existing data from Ottawa Public Health and probability data from [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) These projections assume all hospital deaths are in the ICU. Model parameters are [here](#parameters). 
 
-Only deaths for hospital patients are included in the projections. Long-term care (LTC, also known as nursing homes) and retirement homes are not included in the projections. On April 3, 2020 40 to 60% of COVID-19 related deaths occurred in LTC or retirement homes. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) does not want advanced life support or transfer to the hospital if they have a life threatening illness. 
+Only deaths for hospital patients are included in the projections. Long-term care (LTC, also known as nursing homes) and retirement homes are not included in the projections. As of April 3, 2020, 40 to 60% of COVID-19 related deaths occurred in residents of LTC or retirement homes. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) does not want advanced life support or transfer to the hospital if they have a life threatening illness. 
 
 ### Total projections
 
@@ -138,21 +138,18 @@ Created at the Ottawa Hospital with input from Ottawa Public Health.
 ### V0.2.0
 2020-04-03
 
-Projections added for daily admissions.
-
-Projections added for daily and total deaths in hospital.
-
-Updated Ottawa hospital census data to 2020-04-01.
-
-Improvements to existing charts.
-
-Overview updated.
+- Updated Ottawa hospital census data to 2020-04-02.
+- Projections added:
+    - Daily admissions.
+    - Daily and total deaths in hospital (provisional).
+- Overview updated.
+- Improvements to the labels and figures.
 
 Changes to key parameters:
 
-- Census (acute and ICU) = 24 patients, Ottawa hospital census data to 2020-04-01.
-- Hospital bed doubling time = 4 days
-- Model Projections are based on the CHIME model v1.1.1
+- Census (acute and ICU) = 24 patients. Ottawa hospital census data to 2020-04-03.
+- Hospital bed doubling time = 4 days.
+- Model rojections are based on the CHIME model v1.1.2
 
 ### V0.1.0 
 2020-04-01
@@ -168,4 +165,7 @@ Key parameters:
 ## Roadmap
 The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
 
+- Review and update model parameters based on recent published studies. Priories for review:
+    - ventilated patients
+    - deaths
 - Add plot for observed hospital census trend, with estimated doubling time. 
