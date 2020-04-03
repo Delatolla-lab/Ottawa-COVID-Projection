@@ -59,7 +59,7 @@ hosp_visualization(ott_projections, ott_observed, "census_acute_care", title = "
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
 source("../R/estimate_scripts.R")
-hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Projected daily COVID-19 hospitalizations (acute + ICU) in Ottawa", y_label = "New admissions (# of patients)")
+hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Projected daily acute COVID-19 hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
 ```
 
 ## ICU projections
@@ -104,14 +104,14 @@ Only deaths for hospital patients are included in the projections. Long-term car
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
-death_visualization(ott_projections, ott_observed, "cumulative_deaths", title = "Projected cumulative number of COVID-19 hospital deaths in Ottawa", y_label = "Reported deaths")
+death_visualization(ott_projections, ott_observed, "cumulative_deaths", title = "Projected cumulative number of COVID-19 hospital deaths in Ottawa", y_label = "Deaths")
 ```
 
 ### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
-death_visualization(ott_projections, ott_observed, "new_deaths", title = "Projected number of COVID-19 daily hospital deaths in Ottawa", y_label = "Reported deaths")
+death_visualization(ott_projections, ott_observed, "new_deaths", title = "Projected number of COVID-19 daily hospital deaths in Ottawa", y_label = "Deaths")
 ```
 
 ## Input parameters {#parameters}
