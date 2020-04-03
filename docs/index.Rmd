@@ -138,17 +138,19 @@ Created at the Ottawa Hospital with input from Ottawa Public Health.
 ### V0.2.0
 2020-04-03
 
-Projections added for daily admissions
+Projections added for daily admissions.
 
-Projections added for daily and total deaths in hospital
+Projections added for daily and total deaths in hospital.
 
 Updated Ottawa hospital census data to 2020-04-01.
+
+Improvements to existing charts.
 
 Overview updated.
 
 Changes to key parameters:
 
-- Census (acute and ICU) = 24 patients, Ottawa hospital census data to 2020-04-03.
+- Census (acute and ICU) = 24 patients, Ottawa hospital census data to 2020-04-01.
 - Hospital bed doubling time = 4 days
 - Model Projections are based on the CHIME model v1.1.1
 
