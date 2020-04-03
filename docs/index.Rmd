@@ -20,7 +20,7 @@ This page is private and provisional. Do not circulate. See the bottom of page f
 ### Key model parameters
 1) *Projections are based on reported daily hospital Ottawa census.* 
     - Census is defined as the number of hospitalized patients in a given day 
-    - Daily hospital use reported by Ottawa Public Health as of April 3, 2020. Work to incorporate regional data rather than just Ottawa cases is ongoing.
+    - Daily hospital use reported by Ottawa Public Health as of April 3, 2020. There are discussion to incorporate regional data rather than just Ottawa cases.
     - Ottawa COVID-19 bed census = 24 patients on April 2, 2020. 
     - Doubling time (time for number of hospitalized COVID-19 patients to double) of 3 days from March 17 to 25, 2020. Projections initialized with 4 day hospital doubling time. 
 2) *Scenarios based on effective physical distancing.* Effectiveness of preventive measures is the most influential parameter for all model platforms and projections - and hence the most important source of projection uncertainty. **NOTE:** Most models show new hospital admissions and census will decrease with greater than 70-80% physical distancing. We can do it!
