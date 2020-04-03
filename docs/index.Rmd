@@ -127,13 +127,9 @@ datatable(ott_observed, caption = htmltools::tags$caption("Reported hospital use
 ## Contact {#contact}
 Created at the Ottawa Hospital with input from Ottawa Public Health.
 
-**Contacts:**
+**Contacts:** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster
 
-Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca)
-
-Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca)
-
-Alan Forster
+**Acknowledgements:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Yulric
 
 ## Changelog
 
@@ -147,6 +143,12 @@ Projections added for daily and total deaths in hospital
 Updated Ottawa hospital census data to 2020-04-01.
 
 Overview updated.
+
+Changes to key parameters:
+
+- Census (acute and ICU) = 24 patients, Ottawa hospital census data to 2020-04-03.
+- Hospital bed doubling time = 4 days
+- Model Projections are based on the CHIME model v1.1.1
 
 ### V0.1.0 
 2020-04-01
