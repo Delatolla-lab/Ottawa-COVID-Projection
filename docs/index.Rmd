@@ -40,6 +40,7 @@ library(plotly)
 ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
 ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
 CHIME_input_display <- read.csv(file.path(getwd(),"../Data/CHIME_input_display.csv"))
+source("../R/estimate_scripts.R")
 ```
 
 ## Acute care hospitalization projections
@@ -50,7 +51,6 @@ Web version of visualizations are interactive. Click or over over top right of v
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
-source("../R/estimate_scripts.R")
 hosp_visualization(ott_projections, ott_observed, "census_acute_care", title = "Projected census of acute COVID-19 hospitalizations in Ottawa", y_label = "Census (# of patients)", annote = TRUE)
 ```
 
@@ -58,7 +58,6 @@ hosp_visualization(ott_projections, ott_observed, "census_acute_care", title = "
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
-source("../R/estimate_scripts.R")
 hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Projected daily acute COVID-19 hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
 ```
 
