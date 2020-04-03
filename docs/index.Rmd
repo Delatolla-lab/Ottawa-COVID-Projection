@@ -40,7 +40,7 @@ ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observ
 CHIME_input_display <- read.csv(file.path(getwd(),"../Data/CHIME_input_display.csv"))
 ```
 
-## Hospitalization projections
+## Acute care hospitalization projections
 
 Web version of visualizations are interactive. Click or over over top right of visualization for how to download, zoom and pan.
 
@@ -48,14 +48,16 @@ Web version of visualizations are interactive. Click or over over top right of v
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "census_acute_care_p_ICU", title = "Projected census of COVID-19 hospitalizations (acute + ICU) in Ottawa", y_label = "Census (# of patients)", annote = TRUE)
+source("../R/estimate_scripts.R")
+hosp_visualization(ott_projections, ott_observed, "census_acute_care", title = "Projected census of acute COVID-19 hospitalizations in Ottawa", y_label = "Census (# of patients)", annote = TRUE)
 ```
 
 ### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "new_acute_care_p_ICU", title = "Projected daily COVID-19 hospitalizations (acute + ICU) in Ottawa", y_label = "New admissions (# of patients)")
+source("../R/estimate_scripts.R")
+hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Projected daily COVID-19 hospitalizations (acute + ICU) in Ottawa", y_label = "New admissions (# of patients)")
 ```
 
 ## ICU projections
@@ -100,7 +102,7 @@ Only deaths for hospital patients are included in the projections. Long-term car
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
-death_visualization(ott_projections, ott_observed, "cumulative_deaths", title = "Projected number of COVID-19 total hospital deaths in Ottawa", y_label = "Reported deaths")
+death_visualization(ott_projections, ott_observed, "cumulative_deaths", title = "Projected cumulative number of COVID-19 hospital deaths in Ottawa", y_label = "Reported deaths")
 ```
 
 ### Daily projections
