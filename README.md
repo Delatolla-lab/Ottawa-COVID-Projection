@@ -7,4 +7,4 @@ This repository is not public. Contact Doug Manuel dmanuel@ohri.ca if you would 
 
 ## Updates
 
-See [changelog](https://big-life-lab.github.io/Ottawa-COVID-Projection/NEWS.md) for updates.
+See [changelog](https://github.com/Big-Life-Lab/Ottawa-COVID-Projection/blob/master/docs/index.Rmd#L140) for updates.
