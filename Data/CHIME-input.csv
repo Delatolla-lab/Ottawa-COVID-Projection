@@ -4,7 +4,7 @@ strata_2,string,,Strata 2,all-ages,,,,,,
 strata_3,string,,Strata 3,long-ICU,,,,,,
 population,number,,Regional Population,1000000,,,,,1000000,
 market_share,number,"[0.5,100]",Hospital Market Share (%),100,,,,,100,
-current_hospitalized,number,,Currently Hospitalized COVID-19 Patients,15,,,,,21,
+current_hospitalized,number,,Currently Hospitalized COVID-19 Patients,15,,,,,24,
 date_first_hospitalized,date,"NULL, YYYY/MM/DD",Date of the first hospitalized case,NULL,,,,,2020-03-17,
 doubling_time,number,,Doubling time before current date,4,,,,,4,
 relative_contact_rate,number,"[0,100]",Social distancing (% reduction in social contact),70,,,,,,
@@ -33,14 +33,14 @@ p_ICU_death_age_65p,,,,,,,,,0.8,Estimate by adapting Fisman parameter. Currently
 p_death_ward,,,,,0,,,,,
 p_death_icu,,,,,0.49,,,,,
 p_death_vent,,,,,0.67,,,,,
-p_death_icu_15_nomorb,,,,,,0,,,,
-p_death_icu_15_morb,,,,,,0,,,,
-p_death_icu_1549_nomorb,,,,,,0.2,,,,
-p_death_icu_1549_morb,,,,,,0.53,,,,
-p_death_icu_5069_nomorb,,,,,,0.36,,,,
-p_death_icu_5069_morb,,,,,,0.9,,,,
-p_death_icu_70_nomorb,,,,,,0.58,,,,
-p_death_icu_70_morb,,,,,,1,,,,
+p_death_icu_15_nomorb,,,,,,0,,,,Fisman estimates
+p_death_icu_15_morb,,,,,,0,,,,Fisman estimates
+p_death_icu_1549_nomorb,,,,,,0.2,,,,Fisman estimates
+p_death_icu_1549_morb,,,,,,0.53,,,,Fisman estimates
+p_death_icu_5069_nomorb,,,,,,0.36,,,,Fisman estimates
+p_death_icu_5069_morb,,,,,,0.9,,,,Fisman estimates
+p_death_icu_70_nomorb,,,,,,0.58,,,,Fisman estimates
+p_death_icu_70_morb,,,,,,1,,,,Fisman estimates
 ,,,,,,,,,,
 OPH_data,Age,,,% ever hosp,% ICU,,,,,
 ,<5,,,0,0,,,,,
