@@ -40,6 +40,14 @@ The second situation — the effectiveness of preventive measures — is more di
 Below are tables illustrating the inputted parameters and data obtained to generate the projection charts
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(plotly)
+ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
+ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
+CHIME_input_display <- read.csv(file.path(getwd(),"../Data/CHIME_input_display.csv"))
+source("../R/estimate_scripts.R")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(DT)
 datatable(CHIME_input_display[,c(1,3)])
 ```
