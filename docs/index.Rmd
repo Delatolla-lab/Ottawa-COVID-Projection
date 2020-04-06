@@ -119,7 +119,7 @@ Below are tables illustrating the inputted parameters and data obtained to gener
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(DT)
-datatable(CHIME_input_display)
+datatable(CHIME_input_display[,c(1,3)])
 ```
 
 ## Data used to plot visualizations
