@@ -20,7 +20,6 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "/contact/"
 
 [params]
-    customCSS=["/css/app.css"]
     description = "A website built through Hugo and blogdown."
 
     # options for highlight.js (version, additional languages, and theme)
@@ -34,7 +33,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
     # path to the favicon, under "static"
     favicon = "favicon.png"
-
+    
+    customCSS=["/css/app.css"]
+        
     [params.logo]
     url = "/favicon.png"
     width = 50
