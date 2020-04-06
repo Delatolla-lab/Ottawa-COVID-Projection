@@ -1,4 +1,4 @@
-hosp_visualization <- function(data1, data2, parameter, title, y_label){
+hosp_visualization <- function(data1, data2, parameter, title, y_label, annote = FALSE){
   library(plotly)
   trace1 <- list(
     fill = "tozeroy", 
@@ -50,12 +50,12 @@ hosp_visualization <- function(data1, data2, parameter, title, y_label){
       y = "observed_data"
     )), 
     mode = "markers+lines", 
-    name = "Observed data", 
+    name = "Reported # of patients", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
     x = data2$date, 
     ysrc = "wyusuf:1:420b6f", 
-    y = data2[,grepl(paste("^observed",as.character(parameter), sep = "_"), names(data2))]
+    y = data2[,grepl(paste("^observed",paste(as.character(parameter),"$",sep=""), sep = "_"), names(data2))]
   )
   trace5 <- list(
     line = list(
@@ -72,7 +72,7 @@ hosp_visualization <- function(data1, data2, parameter, title, y_label){
     xsrc = "wyusuf:1:9c770a", 
     x = data2$date, 
     ysrc = "wyusuf:1:a5d486", 
-    y = data2[,grepl(paste("^capacity", as.character(parameter), sep = "_"), names(data2))]
+    y = data2[,grepl(paste("^capacity", paste(as.character(parameter),"$",sep=""), sep = "_"), names(data2))]
   )
   data <- list(trace1, trace2, trace3, trace4, trace5)
   layout <- list(
@@ -89,15 +89,32 @@ hosp_visualization <- function(data1, data2, parameter, title, y_label){
       title = list(text = paste(as.character(y_label))), 
       autorange = TRUE
     ), 
-    autosize = TRUE
+    autosize = TRUE,
+    annotations =
+      ifelse(annote == TRUE,
+        list(
+          list(
+            x = Sys.Date(), 
+            y = max(trace4$y, na.rm = TRUE), 
+            ax = 0, 
+            ay = -50, 
+            font = list(color = "rgb(214, 39, 40)"), 
+            text = "Current use (drag to zoom,
+            double click to zoom out)", 
+            arrowcolor = "rgb(214, 39, 40)"
+          )
+        ),
+        list())
   )
-  p <- plot_ly()
+  p <- plot_ly() %>% config(modeBarButtonsToRemove = c("toggleSpikelines", "lasso2d", "select2d"))
   p <- add_trace(p, fill=trace1$fill, meta=trace1$meta, mode=trace1$mode, name=trace1$name, type=trace1$type, xsrc=trace1$xsrc, x=trace1$x, ysrc=trace1$ysrc, y=trace1$y)
   p <- add_trace(p, fill=trace2$fill, meta=trace2$meta, mode=trace2$mode, name=trace2$name, type=trace2$type, xsrc=trace2$xsrc, x=trace2$x, ysrc=trace2$ysrc, y=trace2$y, stackgroup=trace2$stackgroup)
   p <- add_trace(p, fill=trace3$fill, meta=trace3$meta, mode=trace3$mode, name=trace3$name, type=trace3$type, xsrc=trace3$xsrc, x=trace3$x, ysrc=trace3$ysrc, y=trace3$y, stackgroup=trace3$stackgroup)
   p <- add_trace(p, meta=trace4$meta, mode=trace4$mode, name=trace4$name, type=trace4$type, xsrc=trace4$xsrc, x=trace4$x, ysrc=trace4$ysrc, y=trace4$y)
   p <- add_trace(p, line=trace5$line, meta=trace5$meta, mode=trace5$mode, name=trace5$name, type=trace5$type, xsrc=trace5$xsrc, x=trace5$x, ysrc=trace5$ysrc, y=trace5$y)
-  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=FALSE, width = 1000, height = 500)
+  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, 
+              annotations=layout$annotations, 
+              autosize=TRUE, width = 1000, height = 500)
   p
 }
 
@@ -153,12 +170,12 @@ death_visualization <- function(data1, data2, parameter, title, y_label){
       y = "observed_data"
     )), 
     mode = "markers+lines", 
-    name = "Observed data", 
+    name = "Reported # of deaths", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
     x = data2$date, 
     ysrc = "wyusuf:1:420b6f", 
-    y = data2[,grepl(paste("^observed",as.character(parameter), sep = "_"), names(data2))]
+    y = data2[,grepl(paste("^observed",paste(as.character(parameter),"$",sep=""), sep = "_"), names(data2))]
   )
   data <- list(trace1, trace2, trace3, trace4)
   layout <- list(
@@ -177,11 +194,12 @@ death_visualization <- function(data1, data2, parameter, title, y_label){
     ), 
     autosize = TRUE
   )
-  p <- plot_ly()
+  p <- plot_ly() %>% config(modeBarButtonsToRemove = c("toggleSpikelines", "lasso2d", "select2d"))
   p <- add_trace(p, fill=trace1$fill, meta=trace1$meta, mode=trace1$mode, name=trace1$name, type=trace1$type, xsrc=trace1$xsrc, x=trace1$x, ysrc=trace1$ysrc, y=trace1$y)
   p <- add_trace(p, fill=trace2$fill, meta=trace2$meta, mode=trace2$mode, name=trace2$name, type=trace2$type, xsrc=trace2$xsrc, x=trace2$x, ysrc=trace2$ysrc, y=trace2$y, stackgroup=trace2$stackgroup)
   p <- add_trace(p, fill=trace3$fill, meta=trace3$meta, mode=trace3$mode, name=trace3$name, type=trace3$type, xsrc=trace3$xsrc, x=trace3$x, ysrc=trace3$ysrc, y=trace3$y, stackgroup=trace3$stackgroup)
   p <- add_trace(p, meta=trace4$meta, mode=trace4$mode, name=trace4$name, type=trace4$type, xsrc=trace4$xsrc, x=trace4$x, ysrc=trace4$ysrc, y=trace4$y)
-  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=FALSE, width = 1000, height = 500)
+  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=TRUE,
+              width = 1000, height = 500)
   p
 }
