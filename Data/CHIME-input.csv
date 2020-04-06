@@ -9,12 +9,12 @@ date_first_hospitalized,date,"NULL, YYYY/MM/DD",Date of the first hospitalized c
 doubling_time,number,,Doubling time before current date,4,,,,,4,
 relative_contact_rate,number,"[0,100]",Social distancing (% reduction in social contact),70,,,,,,
 hospitalized.rate,number,"[0,100]",Hospitalization %(total infections),2.5,,,,,,
-icu.rate,number,"[0,100]",ICU %(total infections),0.75,,,,,,
+icu.rate,number,"[0,100]",ICU %(total infections),0.75,,,,,0.75,
 ventilated.rate,number,"[0,100]",Ventilated %(total infections),0.5,,,,,,
-infectious_days,number,,Infectious days,14,,,,,,
+infectious_days,number,,Infectious days,14,,,,,7,https://github.com/CodeForPhilly/chime/issues/492
 hospitalized.days,number,,Average Hospital Length of Stay (days),14,11,10,,,11,midpoint of sanders and fisman estimates
 icu.days,number,,Average Days in ICU,10,8,21,,,16,midpoint of sanders and fisman estimates
-ventilated.days,number,,Average Days on Ventilator,7,,,,,,
+ventilated.days,number,,Average Days on Ventilator,7,,,,,7,
 n_days,number,,Number of days to project,150,,,,,200,
 p_hospital_age_0-20,,0,,,,,,,0,From OPH 2020-04-01. Proportion of every hospitalized.
 p_hospital_age_20-44,,0.14,,,,,,,0.14,From OPH 2020-04-01. Proportion of every hospitalized.
@@ -48,3 +48,14 @@ OPH_data,Age,,,% ever hosp,% ICU,,,,,
 ,20 to 44,,,0.14,0.11,,,,,
 ,45 to 64,,,0.37,0.22,,,,,
 ,>65,,,0.49,0.67,,,,,
+,,,,,,,,,,
+(years),% symptomatic cases requiring hospitalisation,% hospitalized cass requiring critical care,Infection Fatality Ratio,,,,,,Impact of non-pharmaceutical interventions (NPIs) to reduce COVID19 mortality and healthcare demand,
+0 to 9,0.10%,5.00%,0.00%,,,,,,,
+10 to 19,0.30%,5.00%,0.01%,,,,,,,
+20 to 29,1.20%,5.00%,0.03%,,,,,,,
+30 to 39,3.20%,5.00%,0.08%,,,,,,,
+40 to 49,4.90%,6.30%,0.15%,,,,,,,
+50 to 59,10.20%,12.20%,0.60%,,,,,,,
+60 to 69,16.60%,27.40%,2.20%,,,,,,,
+70 to 79,24.30%,43.20%,5.10%,,,,,,,
+80+,27.30%,70.90%,9.30%,,,,,,,
