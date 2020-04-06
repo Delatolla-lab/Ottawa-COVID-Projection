@@ -1,7 +1,10 @@
+* {
+  font-family: 'Open Sans' !important;
+}
+
 .header {
   background-color: #64d0fa;
 }
-
 .header .nav-links a {
   color: white;
 }
