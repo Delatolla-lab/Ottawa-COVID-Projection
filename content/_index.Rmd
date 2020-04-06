@@ -153,36 +153,6 @@ datatable(ott_projections, caption = htmltools::tags$caption("Projected data", s
 datatable(ott_observed, caption = htmltools::tags$caption("Reported hospital use and deaths from Ottawa Public Health", style="font-size: 20px"), options = list(scrollX = TRUE))
 ```
 
-# More info (will be a new page) 
-
-## Physical Distancing 
-
-Physical distancing is the reduction of physical contact between people. You have a 70% reduction in physical distancing if pre-COVID-19 you had close contact with 10 people per day and you reduce your contact to 3 people per day. 
-
-A 70% physical distancing scenario means the people in Ottawa have an average 70% reduction in their person-to-person contact. Some people, such as essential workers, will not be able to reduce their contact as much as others. This means that non-essential contact needs to have a higher reduction than essential contact.  
-
-[Image here - in discussion with TOH about getting some graphic design help] 
-
-https://www.visualcapitalist.com/the-math-behind-social-distancing/ 
-
-# Model (will be new page)
-
-## Key model parameters 
-
-1) *Projections are based on the reported daily hospital census for Ottawa.*  
-
-    - Census is defined as the number of hospitalized patients each day  
-
-    - Daily hospital use reported by Ottawa Public Health. There is discussion to incorporate regional data rather than just cases from Ottawa hospitals. 
-
-    - Doubling time (time it takes for the number of hospitalized COVID-19 patients to double) of 3 days from March 17 to 25, 2020. Projections initialized with a 4-day hospital doubling time. 
-
-3) *Projections are based on the [CHIME model](https://penn-chime.phl.io/) v1.1.2 developed by the University of Pennsylvania Health System.* The projections can be updated for other models. 
-
-4) *Model parameters other than Ottawa hospital use are aligned with [COVID-19-MC](https://www.covid-19-mc.ca/interactive-model) and [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) models where possible, with updates based on [Verity et al. (Lancet, March 20, 2020)](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)* and [Ferguson et al. (March 16, 2020)](https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf). Model parameters are [here](#parameters). 
-
-See [below](link) for a description of model parameters. 
-
 ## Why are the projections based on the daily hospital census for Ottawa? 
 
 Ottawa COVID-19 projections augment the projections of Public Health Ontario and other models by incorporating local reported hospitalizations since the beginning of the COVID-19 pandemic. Using local hospitalization rates follows the analogy of forecasting hurricanes. We monitor the local hospital COVID-19 use and then project the trend into the future based on the knowledge of COVID-19 and how it spreads in communities. 
@@ -198,49 +168,3 @@ The doubling time of new hospital admissions for COVID-19 will continue at the s
 The first situation — how doubling time decreases as the number of susceptible people decreases — is understandable and can be easily modelled using mathematical formulas. 
 
 The second situation — the effectiveness of preventive measures — is more difficult to accurately estimate. Effectiveness of preventive measures depends not only on what preventive measures are in place over the last 2-4 weeks, but also how well citizens adhere to the measures. Current hospital use must be monitored to inform the overall effectiveness of public health measures. Doubling times for hospital use are calculated based on the previous weeks’ increase or decrease in new admissions and hospital census.  
-
-## Changelog
-
-### V0.3.0
-2020-04-06
-
-- Updated Ottawa hospital census data to 2020-04-04
-- Projections added:
-    - Census and daily acute care hospitalizations
-- Expanded description of documentation
-
-### V0.2.0
-2020-04-03
-
-- Updated Ottawa hospital census data to 2020-04-02.
-- Projections added:
-    - Daily admissions.
-    - Daily and total deaths in hospital (provisional).
-- Overview updated.
-- Improvements to the labels and figures.
-
-Changes to key parameters:
-
-- Census (acute and ICU) = 24 patients. Ottawa hospital census data to 2020-04-03.
-- Hospital bed doubling time = 4 days.
-- Model rojections are based on the CHIME model v1.1.2
-
-### V0.1.0 
-2020-04-01
-
-Initial projections based on Ottawa hospital census data to 2020-03-29.
-
-Key parameters:
-
-- Census (acute and ICU) = 21 patients
-- Hospital bed doubling time = 4 days
-- Model Projections are based on the [CHIME model](https://penn-chime.phl.io/) v1.1.0
-
-## Roadmap
-The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
-
-- Review and update model parameters based on recent published studies. Priories for review:
-    - ventilated patients
-    - deaths
-- Add plot for observed hospital census trend, with estimated doubling time. 
-

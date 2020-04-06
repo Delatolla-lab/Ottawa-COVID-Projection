@@ -17,11 +17,19 @@
   </url>
   
   <url>
+    <loc>/change-log/</loc>
+  </url>
+  
+  <url>
     <loc>/contact/</loc>
   </url>
   
   <url>
     <loc>/more/</loc>
+  </url>
+  
+  <url>
+    <loc>/roadmap/</loc>
   </url>
   
   <url>

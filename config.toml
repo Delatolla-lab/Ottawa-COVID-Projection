@@ -12,12 +12,23 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[menu.main]]
     name = "Model"
     url = "/model/"
+    weight = 1
 [[menu.main]]
     name = "More"
     url = "/more/"
+    weight = 2
 [[menu.main]]
     name = "Contact"
     url = "/contact/"
+    weight = 3
+[[menu.main]]
+    name = "Change Log"
+    url = "/change-log/"
+    weight = 4
+[[menu.main]]
+    name = "Roadmap"
+    url = "/roadmap/"
+    weight = 5
 
 [params]
     description = "A website built through Hugo and blogdown."
@@ -35,9 +46,3 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     favicon = "favicon.png"
     
     customCSS=["/css/app.css"]
-        
-    [params.logo]
-    url = "/favicon.png"
-    width = 50
-    height = 50
-    alt = "Logo"
