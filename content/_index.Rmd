@@ -1,0 +1,181 @@
+---
+title: "Ottawa COVID Projections"
+---
+
+---
+site: blogdown:::blogdown_site
+title: "Ottawa COVID-19 Projections"
+date: "Last updated `r format(Sys.time(), '%d %B, %Y, %X EST.  Updated daily around noon, EST')`"
+output:
+  html_document:
+    includes:
+       in_header: GA_script.html
+    theme: cosmo
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+The charts below show projected hospital resource use for COVID-19 patients in the Ottawa area. 
+
+This page is private and provisional. Do not circulate. See the bottom of page for [contacts](#contact) and further details. 
+
+### Key model parameters
+1) *Projections are based on reported daily hospital Ottawa census.* 
+    - Census is defined as the number of hospitalized patients in a given day 
+    - Daily hospital use reported by Ottawa Public Health as of April 3, 2020. There are discussion to incorporate regional data rather than just Ottawa cases.
+    - Ottawa COVID-19 bed census = 24 patients on April 2, 2020. 
+    - Doubling time (time for number of hospitalized COVID-19 patients to double) of 3 days from March 17 to 25, 2020. Projections initialized with 4 day hospital doubling time. 
+2) *Scenarios based on effective physical distancing.* Effectiveness of preventive measures is the most influential parameter for all model platforms and projections - and hence the most important source of projection uncertainty. **NOTE:** Most models show new hospital admissions and census will decrease with greater than 70-80% physical distancing. We can do it!
+    - Scenarios reflect the potential reduction in people's contact in the community. 
+    - Physical distancing reduces hospital doubling time from **~4 days (without social distancing) to:**
+        - **12.1 days with 50% physical distancing** 
+        - **21.5 days with 60% physical distancing**
+        - **103 days with 70% physical distancing**
+        
+3) *Projections are based on the [CHIME model](https://penn-chime.phl.io/) v1.1.2 developed by the University of Pennsylvania Health System.* The projections can be updated for other models.
+4) *Model parameters other than Ottawa hospital use are aligned with [COVID-19-MC](https://www.covid-19-mc.ca/interactive-model) and [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) models where possible, with updates based on [Verity et al. (Lancet, March 20, 2020)](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)*. Model parameters are [here](#parameters).
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(plotly)
+ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
+ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
+CHIME_input_display <- read.csv(file.path(getwd(),"../Data/CHIME_input_display.csv"))
+```
+
+## Acute care hospitalization projections
+
+Web version of visualizations are interactive. Click or over over top right of visualization for how to download, zoom and pan.
+
+### Total projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+source("../R/estimate_scripts.R")
+hosp_visualization(ott_projections, ott_observed, "census_acute_care", title = "Projected census of acute COVID-19 hospitalizations in Ottawa", y_label = "Census (# of patients)", annote = TRUE)
+```
+
+### Daily projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+source("../R/estimate_scripts.R")
+hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Projected daily acute COVID-19 hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
+```
+
+## ICU projections
+
+### Total projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "census_ICU", title = "Projected census of COVID-19 ICU patients in Ottawa", y_label = "Census (# of patients)")
+```
+
+### Daily projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "new_ICU", title = "Projected daily COVID-19 ICU admissions in Ottawa", y_label = "New admissions (# of patients)")
+```
+
+## Ventilator projections
+
+### Total projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "census_vents", title = "Projected census of COVID-19 ventilator use in Ottawa", y_label = "Census (# of patients)")
+```
+
+### Daily projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projected daily COVID-19 ventilator use in Ottawa", y_label = "New admissions (# of patients)")
+```
+
+## Death projections
+
+Death projections were made using existing data from Ottawa Public Health and probability data from [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) These projections assume all hospital deaths are in the ICU. Model parameters are [here](#parameters). 
+
+Only deaths for hospital patients are included in the projections. Long-term care (LTC, also known as nursing homes) and retirement homes are not included in the projections. As of April 3, 2020, 40 to 60% of COVID-19 related deaths occurred in residents of LTC or retirement homes. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) does not want advanced life support or transfer to the hospital if they have a life threatening illness. 
+
+### Total projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+death_visualization(ott_projections, ott_observed, "cumulative_deaths", title = "Projected cumulative number of COVID-19 hospital deaths in Ottawa", y_label = "Deaths")
+```
+
+### Daily projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+death_visualization(ott_projections, ott_observed, "new_deaths", title = "Projected number of COVID-19 daily hospital deaths in Ottawa", y_label = "Deaths")
+```
+
+## Input parameters {#parameters}
+
+Below are tables illustrating the inputted parameters and data obtained to generate the projection charts
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(DT)
+datatable(CHIME_input_display)
+```
+
+## Data used to plot visualizations
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+datatable(ott_projections, caption = htmltools::tags$caption("Projected data", style="font-size: 20px"), options = list(scrollX = TRUE))
+datatable(ott_observed, caption = htmltools::tags$caption("Reported hospital use and deaths from Ottawa Public Health", style="font-size: 20px"), options = list(scrollX = TRUE))
+```
+
+## Contact {#contact}
+Created at the Ottawa Hospital with input from Ottawa Public Health.
+
+**Contacts:** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster
+
+**Acknowledgements:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira
+
+## Changelog
+
+### V0.2.0
+2020-04-03
+
+- Updated Ottawa hospital census data to 2020-04-02.
+- Projections added:
+    - Daily admissions.
+    - Daily and total deaths in hospital (provisional).
+- Overview updated.
+- Improvements to the labels and figures.
+
+Changes to key parameters:
+
+- Census (acute and ICU) = 24 patients. Ottawa hospital census data to 2020-04-03.
+- Hospital bed doubling time = 4 days.
+- Model rojections are based on the CHIME model v1.1.2
+
+### V0.1.0 
+2020-04-01
+
+Initial projections based on Ottawa hospital census data to 2020-03-29.
+
+Key parameters:
+
+- Census (acute and ICU) = 21 patients
+- Hospital bed doubling time = 4 days
+- Model Projections are based on the [CHIME model](https://penn-chime.phl.io/) v1.1.0
+
+## Roadmap
+The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
+
+- Review and update model parameters based on recent published studies. Priories for review:
+    - ventilated patients
+    - deaths
+- Add plot for observed hospital census trend, with estimated doubling time. 
+
