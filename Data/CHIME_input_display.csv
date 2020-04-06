@@ -1,22 +1,23 @@
-Parameter,Value
-Regional Population,1000000
-Hospital Market Share (%),100
-Currently hospitalized,21
-Date of first hospitalized case,03/17/2020
-Social distancing (%) (aka physical distancing),50-70
-Hospitalization % (total infections),2.6
-ICU % (total infections),0.75
-Ventilated % (total infections),0.5
-Infectious days,14
-Average Hospital Length of Stay (days),10
-Average Days in ICU,21
-Average Days on Ventilator,10
-Number of days to project,200
-Probability ICU patient is aged 0-20,0
-Probability ICU patient is aged 20-44,0.11
-Probability ICU patient is aged 45-64,0.22
-Probability ICU patient is aged 65+,0.67
-Probability ICU patient aged 0-20 dies,0.2
-Probability ICU patient aged 20-44 dies,0.4
-Probability ICU patient aged 45-64 dies,0.7
-Probability ICU patient aged 65+ dies,0.8
+Parameter,Value,Values
+Model date,2020-04-03,2020-04-06
+Regional Population,1000000,1000000
+Hospital Market Share (%),100,100
+Currently hospitalized,24,30
+Date of first hospitalized case,2020-03-17,2020-03-17
+Social distancing (%) (aka physical distancing),50-70,50-70
+Hospitalization % (total infections),2.6,2.6
+ICU % (total infections),0.75,0.75
+Ventilated % (total infections),0.5,0.5
+Infectious days,14,14
+Average Hospital Length of Stay (days),10,10
+Average Days in ICU,21,16
+Average Days on Ventilator,10,7
+Number of days to project,200,200
+Probability ICU patient is aged 0-20,0,0
+Probability ICU patient is aged 20-44,0.11,0.11
+Probability ICU patient is aged 45-64,0.22,0.22
+Probability ICU patient is aged 65+,0.67,0.67
+Probability ICU patient aged 0-20 dies,0.2,0.2
+Probability ICU patient aged 20-44 dies,0.4,0.4
+Probability ICU patient aged 45-64 dies,0.7,0.7
+Probability ICU patient aged 65+ dies,0.8,0.8
