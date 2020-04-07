@@ -2,6 +2,19 @@
 title: "More Info"
 ---
 
+---
+site: blogdown:::blogdown_site
+title: "Ottawa COVID-19 Projections"
+date: "Last updated `r format(Sys.time(), '%d %B, %Y, %X EST.')`"
+output:
+  html_document:
+    includes:
+       in_header: GA_script.html
+    theme: cosmo
+  word_document: default
+  pdf_document: default
+---
+
 ## Physical Distancing 
 
 Physical distancing is the reduction of close contacts between people. Close contact is defined as being within two meters of another person.  
@@ -9,3 +22,7 @@ Physical distancing is the reduction of close contacts between people. Close con
 If a person who had close contact with 10 people per day before the COVID-19 pandemic now has close contact with three people per day, their physical distancing score is 70 percent. If they have contact with five people per day, their score is 50 percent.   
 
 In these projection models, a 70 percent physical distancing scenario means that on average the people of Ottawa have reduced their close contacts by 70 percent. Some people, like essential workers, cannot reduce their number of close contacts.
+
+<img src="/images/176989- infographic 50 percent .svg" style="margin-bottom: 15px;" />
+<img src="/images/176989- infographic 75 percent.svg" style="margin-bottom: 15px;" />
+<img src="/images/176989- infographic No.svg" style="margin-bottom: 15px;" />
