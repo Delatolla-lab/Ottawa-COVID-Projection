@@ -1,0 +1,11 @@
+---
+title: "Contact"
+---
+
+## Contact {#contact}
+
+Created at the Ottawa Hospital with input from Ottawa Public Health.
+
+**Contacts:** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster
+
+**Acknowledgements:** Warsame Yusuf, Rostyslav Vyuha, Mary Scott, Yulric Sequeira

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.68.3" />
+
+
+<title>Model - A Hugo website</title>
+<meta property="og:title" content="Model - A Hugo website">
+
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-162699461-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-162699461-1');
+</script>
+
+  <link href='/favicon.png' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+<link rel="stylesheet" href="/css/app.css">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/%3cnil%3e"
+         width=""
+         height=""
+         alt="">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/model/">Model</a></li>
+    
+    <li><a href="/more/">More</a></li>
+    
+    <li><a href="/contact/">Contact</a></li>
+    
+    <li><a href="/change-log/">Change Log</a></li>
+    
+    <li><a href="/roadmap/">Roadmap</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">Model</h1>
+
+    
+
+    <div class="article-content">
+      <h1 id="key-model-parameters">Key model parameters</h1>
+<ol>
+<li>
+<p><em>Projections are based on the reported daily hospital census for Ottawa.</em></p>
+<ul>
+<li>
+<p>Census is defined as the number of hospitalized patients each day</p>
+</li>
+<li>
+<p>Daily hospital use reported by Ottawa Public Health. There is discussion to incorporate regional data rather than just cases from Ottawa hospitals.</p>
+</li>
+<li>
+<p>Doubling time (time it takes for the number of hospitalized COVID-19 patients to double) of 3 days from March 17 to 25, 2020. Projections initialized with a 4-day hospital doubling time.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><em>Projections are based on the <a href="https://penn-chime.phl.io/">CHIME model</a> v1.1.2 developed by the University of Pennsylvania Health System.</em> The projections can be updated for other models.</p>
+</li>
+<li>
+<p><em>Model parameters other than Ottawa hospital use are aligned with <a href="https://www.covid-19-mc.ca/interactive-model">COVID-19-MC</a> and <a href="https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1">Tuite, Fisman, et al.</a> models where possible, with updates based on <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext">Verity et al. (Lancet, March 20, 2020)</a></em> and <a href="https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf">Ferguson et al. (March 16, 2020)</a>. Model parameters are <a href="#parameters">here</a>.</p>
+</li>
+</ol>
+<p>See <a href="#parameters">below</a> for a description of model parameters.</p>
+<h2 id="why-are-the-projections-based-on-the-daily-hospital-census-for-ottawa">Why are the projections based on the daily hospital census for Ottawa?</h2>
+<p>Ottawa COVID-19 projections augment the projections of Public Health Ontario and other models by incorporating local reported hospitalizations since the beginning of the COVID-19 pandemic. Using local hospitalization rates follows the analogy of forecasting hurricanes. We monitor the local hospital COVID-19 use and then project the trend into the future based on the knowledge of COVID-19 and how it spreads in communities.</p>
+<p>The trend of COVID-19 hospital use is summarized as “doubling time”. Doubling time — and the weekly change in doubling time — are the most important inputs in COVID-19 projections that vary between jurisdictions. Doubling time is change (increase or decrease) in hospitalization rate over time. There will be a 4-day doubling time if the number of patients in a hospital doubles over four days. For example, the number of COVID-19 patients increases from 50 to 100 over four days and from 100 to 200 over the subsequent four days.</p>
+<p>The doubling time of new hospital admissions for COVID-19 will continue at the same rate as previous weeks except in two situations:</p>
+<ol>
+<li>
+<p>The number of people susceptible to infection decreases. As an epidemic progresses there will be fewer people remaining in the community who can become infected.</p>
+</li>
+<li>
+<p>Preventive measures slow the spread of infection and reduce the number new infections, resulting in an increased doubling time of hospital use.</p>
+</li>
+</ol>
+<p>The first situation — how doubling time decreases as the number of susceptible people decreases — is understandable and can be easily modelled using mathematical formulas.</p>
+<p>The second situation — the effectiveness of preventive measures — is more difficult to accurately estimate. Effectiveness of preventive measures depends not only on what preventive measures are in place over the last 2-4 weeks, but also how well citizens adhere to the measures. Current hospital use must be monitored to inform the overall effectiveness of public health measures. Doubling times for hospital use are calculated based on the previous weeks’ increase or decrease in new admissions and hospital census.</p>
+<h2 id="parameters">Input parameters</h2>
+<p>Below are tables illustrating the inputted parameters and data obtained to generate the projection charts</p>
+<pre><code class="language-{r," data-lang="{r,">library(DT)
+datatable(CHIME_input_display[,c(1,3)])
+</code></pre><h2 id="data-used-to-plot-visualizations">Data used to plot visualizations</h2>
+<pre><code class="language-{r," data-lang="{r,">datatable(ott_projections, caption = htmltools::tags$caption(&quot;Projected data&quot;, style=&quot;font-size: 20px&quot;), options = list(scrollX = TRUE))
+datatable(ott_observed, caption = htmltools::tags$caption(&quot;Reported hospital use and deaths from Ottawa Public Health&quot;, style=&quot;font-size: 20px&quot;), options = list(scrollX = TRUE))
+</code></pre>
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+<div class="footer-partial" style="display: flex; padding: 0 25%;">
+  <div>
+    <img src="/images/uottawa-logo.png" style="width: 100%;"/>
+  </div>
+  <div>
+    <img src="/images/toh-logo.jpg" style="width: 100%;"/>
+  </div>
+</div>
+
+<div style="display: flex; justify-content: center; margin-bottom: 20px;">
+  <span style="align-self: center; margin-right: 10px; font-weight: bold;">MADE BY</span> 
+  <img src="/images/pbl-logo.png" />
+</div>
+

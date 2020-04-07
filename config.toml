@@ -1,0 +1,48 @@
+baseurl = "/"
+languageCode = "en-us"
+title = "A Hugo website"
+theme = "hugo-lithium"
+googleAnalytics = ""
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+    
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "Model"
+    url = "/model/"
+    weight = 1
+[[menu.main]]
+    name = "More"
+    url = "/more/"
+    weight = 2
+[[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 3
+[[menu.main]]
+    name = "Change Log"
+    url = "/change-log/"
+    weight = 4
+[[menu.main]]
+    name = "Roadmap"
+    url = "/roadmap/"
+    weight = 5
+
+[params]
+    description = "A website built through Hugo and blogdown."
+
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.12.0"
+    highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
+
+    MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    MathJaxVersion = "2.7.5"
+
+    # path to the favicon, under "static"
+    favicon = "favicon.png"
+    
+    customCSS=["/css/app.css"]
