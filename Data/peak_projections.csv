@@ -1,4 +1,4 @@
 intervention,peak_hospital_census,peak_icu_census,peak_vent_census
-No intervention,10124,"4,275","1,406"
-50% physical distancing,"2,530","1,156",341
+No intervention,10124,4275,1406
+50% physical distancing,2530,1156,341
 70% physical distancing,96,44,12
