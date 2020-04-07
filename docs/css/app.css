@@ -1,0 +1,40 @@
+* {
+  font-family: 'Open Sans' !important;
+}
+
+.navbar {
+  background-color: #64d0fa;
+}
+.navbar-blue .navbar-nav .nav-link {
+  color: white;
+}
+.navbar-blue .navbar-brand {
+  color: white;
+}
+
+/* To make sure the content is now hidden behind the fixed navbar*/
+.content {
+  padding-top: 50px !important;
+}
+
+/* To make sure the sections do not overlap each other */
+.section {
+  margin-bottom: 30px;
+}
+
+/* Removes the green border and box-shadow when the plotly graph controls are hovered*/
+.modebar a {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Brings the font size for text within DT widgets to original value */
+.datatables {
+  font-size: 15px;
+}
+/* Removes the green box-shadow from datatables paginate button applied by the
+hugo lithium theme */
+.datatables .paginate_button {
+  box-shadow: none;
+}
+
