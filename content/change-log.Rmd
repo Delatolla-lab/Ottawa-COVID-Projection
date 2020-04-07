@@ -36,3 +36,16 @@ Key parameters:
 - Census (acute and ICU) = 21 patients
 - Hospital bed doubling time = 4 days
 - Model Projections are based on the [CHIME model](https://penn-chime.phl.io/) v1.1.0
+
+# Roadmap
+
+The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
+
+- Review and update model parameters based on recent published studies. Priories for review:
+    - ventilated patients
+    - deaths
+- Add plot for observed hospital census trend, with estimated doubling time. 
+
+
+
+
