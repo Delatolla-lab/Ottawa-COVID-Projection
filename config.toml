@@ -6,7 +6,8 @@ googleAnalytics = ""
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 publishDir = "./docs"
-    
+canonifyURLs = true
+
 [permalinks]
     post = "/:year/:month/:day/:slug/"
 
