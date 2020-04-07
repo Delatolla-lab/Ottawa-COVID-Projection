@@ -105,16 +105,9 @@ hosp_visualization <-
         )
       
     }
-    p <-
-      layout(
-        p,
-        title = layout$title,
-        xaxis = layout$xaxis,
-        yaxis = layout$yaxis,
-        autosize = TRUE,
-        width = 1000,
-        height = 500
-      )
+    p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, 
+                annotations=layout$annotations, 
+                autosize=TRUE, width = 1000, height = 500)
     return(p)
   }
 death_visualization <- function(data1, data2, parameter, title, y_label){
