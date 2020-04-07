@@ -1,6 +1,6 @@
 baseurl = "/"
 languageCode = "en-us"
-title = "A Hugo website"
+title = "Ottawa COVID19"
 theme = "hugo-lithium"
 googleAnalytics = ""
 disqusShortname = ""
@@ -44,5 +44,3 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
     # path to the favicon, under "static"
     favicon = "favicon.png"
-    
-    customCSS=["/css/app.css"]
