@@ -1,0 +1,47 @@
+baseURL = "https://613covid.ca"
+languageCode = "en-us"
+title = "Ottawa COVID19"
+theme = "hugo-lithium"
+googleAnalytics = ""
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+publishDir = "./docs"
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+[[menu.main]]
+    name = "Model"
+    url = "/model/"
+    weight = 2
+[[menu.main]]
+    name = "More"
+    url = "/more/"
+    weight = 3
+[[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 4
+[[menu.main]]
+    name = "Changelog"
+    url = "/change-log/"
+    weight = 5
+
+[params]
+    description = "Ottawa COVID-19 hospital projections."
+
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.12.0"
+    highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
+
+    MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    MathJaxVersion = "2.7.5"
+
+    # path to the favicon, under "static"
+    favicon = "favicon.png"

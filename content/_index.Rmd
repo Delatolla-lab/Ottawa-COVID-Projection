@@ -1,0 +1,102 @@
+---
+title: "Ottawa COVID Projections"
+---
+
+---
+site: blogdown:::blogdown_site
+title: "Ottawa COVID-19 Projections"
+date: "Last updated `r format(Sys.time(), '%d %B, %Y, %X EST.')`"
+output:
+  html_document:
+    includes:
+       in_header: GA_script.html
+    theme: cosmo
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+_Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST._
+
+The charts below show projected hospital resource use for COVID-19 patients in the Ottawa area. The projections supplement provincial projections with current, local data on acute hospital care and intensive care unit (ICU) use.  
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(plotly)
+ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
+ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
+CHIME_input_display <- read.csv(file.path(getwd(),"../Data/CHIME_input_display.csv"))
+source("../R/estimate_scripts.R")
+```
+
+## Acute care hospitalization projections
+
+Click or over over top right of visualization for how to download, zoom and pan.
+
+### Total projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "census_acute_care", title = "Projected census of acute care COVID-19 hospitalizations in Ottawa", y_label = "Census (# of patients)", annote = TRUE)
+```
+
+### Daily projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Projected daily acute care COVID-19 hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
+```
+
+## ICU projections
+
+### Total projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "census_ICU", title = "Projected census of COVID-19 ICU hospitalizations in Ottawa", y_label = "Census (# of patients)")
+```
+
+### Daily projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "new_ICU", title = "Projected daily COVID-19 ICU hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
+```
+
+## Ventilator projections
+
+### Total projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "census_vents", title = "Projected census of COVID-19 ventilator use in Ottawa", y_label = "Census (# of patients)")
+```
+
+### Daily projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projected daily COVID-19 ventilator use in Ottawa", y_label = "New admissions (# of patients)")
+```
+
+## Death projections
+
+Death projections were made using existing data from Ottawa Public Health and probability data from [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) These projections assume all hospital deaths are in the ICU. Model parameters are [here](#parameters). 
+
+Only deaths for hospital patients are included in the projections. Long-term care (LTC, also known as nursing homes) and retirement homes are not included in the projections. As of April 3, 2020, 40 to 60% of COVID-19 related deaths occurred in residents of LTC or retirement homes. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) does not want advanced life support or transfer to the hospital if they have a life threatening illness. 
+
+### Total projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+death_visualization(ott_projections, ott_observed, "cumulative_deaths", title = "Projected cumulative number of COVID-19 hospital deaths in Ottawa", y_label = "Deaths")
+```
+
+### Daily projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+death_visualization(ott_projections, ott_observed, "new_deaths", title = "Projected number of COVID-19 daily hospital deaths in Ottawa", y_label = "Deaths")
+```
+

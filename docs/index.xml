@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ottawa COVID Projections on Ottawa COVID19</title>
+    <link>https://613covid.ca/</link>
+    <description>Recent content in Ottawa COVID Projections on Ottawa COVID19</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 May 2016 21:48:51 -0700</lastBuildDate>
+    
+	<atom:link href="https://613covid.ca/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Model parameters</title>
+      <link>https://613covid.ca/model/</link>
+      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
+      
+      <guid>https://613covid.ca/model/</guid>
+      <description>Projections are based on the reported daily hospital census for Ottawa.
+Census is defined as the number of hospitalized patients each day
+Daily hospital use reported by Ottawa Public Health. There is discussion to incorporate regional data rather than just cases from Ottawa hospitals.
+Doubling time (time it takes for the number of hospitalized COVID-19 patients to double) of 3 days from March 17 to 25, 2020.</description>
+    </item>
+    
+    <item>
+      <title>Changelog</title>
+      <link>https://613covid.ca/change-log/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://613covid.ca/change-log/</guid>
+      <description>V1.0.02020-04-07
+Website now publicUpdated Ottawa hospital census data to 2020-04-06V0.3.02020-04-06
+Updated Ottawa hospital census data to 2020-04-04Projections added:Census and daily acute care hospitalizationsExpanded description of documentationV0.2.02020-04-03
+Updated Ottawa hospital census data to 2020-04-02.Projections added:Daily admissions.Daily and total deaths in hospital (provisional).Overview updated.Improvements to the labels and figures.</description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://613covid.ca/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://613covid.ca/contact/</guid>
+      <description>Media contact: Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, mschreiter@toh.ca ph: 613-222-7674
+Science contacts: Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca
+Acknowledgements for website and content: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches, and the Big Life Lab team.</description>
+    </item>
+    
+    <item>
+      <title>More Info</title>
+      <link>https://613covid.ca/more/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://613covid.ca/more/</guid>
+      <description>Physical DistancingShort-term projections (2 to 4 weeks) to inform the immediate need for hospital and critical care services for COVID-19 patients.
+Long-term projections (6 weeks to 10 months) to assess how to ‘flatten the curve’.
+The projections are created by the team behind ProjectBigLife.ca at the Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health.
+Model accuracyProjecting the spread COVID-19 is like forecasting hurricanes.</description>
+    </item>
+    
+    <item>
+      <title>Roadmap</title>
+      <link>https://613covid.ca/roadmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://613covid.ca/roadmap/</guid>
+      <description>The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
+Review and update model parameters based on recent published studies. Priories for review:ventilated patientsdeathsAdd plot for observed hospital census trend, with estimated doubling time.</description>
+    </item>
+    
+  </channel>
+</rss>

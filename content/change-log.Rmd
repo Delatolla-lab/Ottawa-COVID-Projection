@@ -1,0 +1,57 @@
+---
+title: Changelog
+---
+
+# V1.0.0
+2020-04-07
+
+- Website now public
+- Updated Ottawa hospital census data to 2020-04-06
+
+# V0.3.0
+2020-04-06
+
+- Updated Ottawa hospital census data to 2020-04-04
+- Projections added:
+    - Census and daily acute care hospitalizations
+- Expanded description of documentation
+
+# V0.2.0
+2020-04-03
+
+- Updated Ottawa hospital census data to 2020-04-02.
+- Projections added:
+    - Daily admissions.
+    - Daily and total deaths in hospital (provisional).
+- Overview updated.
+- Improvements to the labels and figures.
+
+Changes to key parameters:
+
+- Census (acute and ICU) = 24 patients. Ottawa hospital census data to 2020-04-03.
+- Hospital bed doubling time = 4 days.
+- Model rojections are based on the CHIME model v1.1.2
+
+# V0.1.0 
+2020-04-01
+
+Initial projections based on Ottawa hospital census data to 2020-03-29.
+
+Key parameters:
+
+- Census (acute and ICU) = 21 patients
+- Hospital bed doubling time = 4 days
+- Model Projections are based on the [CHIME model](https://penn-chime.phl.io/) v1.1.0
+
+# Roadmap
+
+The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
+
+- Review and update model parameters based on recent published studies. Priories for review:
+    - ventilated patients
+    - deaths
+- Add plot for observed hospital census trend, with estimated doubling time. 
+
+
+
+
