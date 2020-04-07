@@ -2,7 +2,37 @@
 title: "More Info"
 ---
 
-## Physical Distancing 
+There are two main uses of the hospital projections: 
+
+1) Short-term projections (2 to 4 weeks) to inform the immediate need for hospital and critical care services for COVID-19 patients. 
+
+2) Long-term projections (6 weeks to 10 months) to assess how to 'flatten the curve'.  
+
+The projections are created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at the Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health.
+
+## Model accuracy 
+
+Projecting the spread COVID-19 is like forecasting hurricanes. Projections are updated with the latest data, including local data to help understand when and where the hurricane will reach landfall.  
+
+We can't reliably forecast the weather six months out, and we can't forecast COVID-19 six months out. However, we can reliably forecast COVID-19 two to four weeks into the future. Those short-term projections give us time to plan and increase health-care resources as needed. 
+
+That being said, hurricanes and COVID-19 are not the same. We can't prevent a hurricane from reaching the shore or changing its direction. However, we can change the impact of COVID-19 on our local communities through preventative measures like physical distancing.  
+
+Long-range COVID-19 projections provide information on the effectiveness of physical distancing and other preventive measures. 
+
+## Scenarios of physical distancing 
+
+Physical distancing and other preventive measures are the most important factors for projecting long-range (1 to 10 months) COVID-19 cases and hospital use.  
+
+Public Health Ontario projected 100,000 COVID-19 Ontario deaths with no preventative measures and a lower estimate of 3,000 deaths with preventive measures This wide range of estimates (100,000 to 3,000 deaths) reflects different levels of physical distancing.  
+
+A high level of physical distancing will achieve a **97% reduction in deaths** compared to a scenario of no preventive action (100,000 deaths). The wide range in projections is why we need to monitor and update Ottawa projections to reflect how well we achieve COVID-19 prevention. 
+
+ 
+A definition and description of physical distancing is [here](/more.html) test. 
+
+
+## What is physical distancing 
 
 Physical distancing is the reduction of close contacts between people. Close contact is defined as being within two meters of another person.  
 
