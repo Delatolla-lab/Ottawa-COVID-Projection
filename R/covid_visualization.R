@@ -59,20 +59,35 @@ hosp_visualization <-
     library(plotly)
     data <- trace
     layout <- list(
-      title = list(text = paste(as.character(title))),
+      title = list(text = paste(as.character(title))), 
       xaxis = list(
-        type = "date",
-        range = c("2020-03-05 14:13:30.5106", "2020-10-16"),
-        title = list(text = "Date"),
+        type = "date", 
+        range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
+        title = list(text = "Date"), 
         autorange = TRUE
-      ),
+      ), 
       yaxis = list(
-        type = "linear",
-        range = c(0, 688.421052631579),
-        title = list(text = paste(as.character(y_label))),
+        type = "linear", 
+        range = c(0, 688.421052631579), 
+        title = list(text = paste(as.character(y_label))), 
         autorange = TRUE
-      ),
-      autosize = TRUE
+      ), 
+      autosize = TRUE,
+      annotations =
+        ifelse(annote == TRUE,
+               list(
+                 list(
+                   x = Sys.Date(), 
+                   y = max(trace[[4]]$y, na.rm = TRUE), 
+                   ax = 0, 
+                   ay = -50, 
+                   font = list(color = "rgb(214, 39, 40)"), 
+                   text = "Current use (drag to zoom,
+            double click to zoom out)", 
+                   arrowcolor = "rgb(214, 39, 40)"
+                 )
+               ),
+               list())
     )
     p <-
       plot_ly() %>% config(modeBarButtonsToRemove = c("toggleSpikelines", "lasso2d", "select2d"))
