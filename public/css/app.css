@@ -12,7 +12,13 @@
   color: white;
 }
 
+/* To make sure the content is now hidden behind the fixed navbar*/
 .content {
   padding-top: 50px !important;
+}
+
+/* To make sure the sections do not overlap each other */
+.section {
+  margin-bottom: 30px;
 }
 
