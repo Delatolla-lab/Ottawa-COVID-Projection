@@ -28,3 +28,8 @@
   box-shadow: none !important;
 }
 
+/* Brings the font size for text within DT widgets to original value */
+.datatables {
+  font-size: 15px;
+}
+
