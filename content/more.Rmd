@@ -56,3 +56,18 @@ In these projection models, a 70 percent physical distancing scenario means that
 <img src="/images/176989- infographic 50 percent .svg" style="margin-bottom: 15px;" />
 <img src="/images/176989- infographic 75 percent.svg" style="margin-bottom: 15px;" />
 <img src="/images/176989- infographic No.svg" style="margin-bottom: 15px;" />
+
+## Flatten the curve 
+
+Flattening the curve means preventing a sharp peak of cases, and spreading the infection rate over a longer period of time so that the health-care system is not overwhelmed. To understand how to flatten the curve, we first need to understand how the curve develops.  
+
+There are three parts of the curve:  
+
+the first part of the curve that sweeps upward. An epidemic spreads through a community by infecting people who are susceptible to infection. If an infected person comes into contact with many people who aren’t infected, the infection will spread quickly. 
+
+the second part of the curve that levels. An epidemic will slow as the number of susceptible people decreases or preventive measures slow the spread. 
+
+The third part of the curve that descends downward as fewer and fewer people develop COVID-19. 
+
+Because COVID-19 is a new virus, the entire population was susceptible to COVID-19 infection at the beginning of the outbreak. Flattening the curve is slowing the spread amongst people who are susceptible to COVID-19.
+

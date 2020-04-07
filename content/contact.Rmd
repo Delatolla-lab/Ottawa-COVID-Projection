@@ -2,10 +2,8 @@
 title: "Contact"
 ---
 
-## Contact {#contact}
+**Media contact**: Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, mschreiter@toh.ca ph: 613-222-7674 
 
-Created at the Ottawa Hospital with input from Ottawa Public Health.
+**Science contacts**: Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca 
 
-**Contacts:** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster
-
-**Acknowledgements:** Warsame Yusuf, Rostyslav Vyuha, Mary Scott, Yulric Sequeira
+**Acknowledgements for website and content**: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches, and the Big Life Lab team. 
