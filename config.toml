@@ -44,5 +44,3 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
     # path to the favicon, under "static"
     favicon = "favicon.png"
-    
-    customCSS=["/css/app.css"]

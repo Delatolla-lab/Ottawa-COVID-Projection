@@ -2,10 +2,17 @@
   font-family: 'Open Sans' !important;
 }
 
-.header {
+.navbar {
   background-color: #64d0fa;
 }
-.header .nav-links a {
+.navbar-blue .navbar-nav .nav-link {
   color: white;
+}
+.navbar-blue .navbar-brand {
+  color: white;
+}
+
+.content {
+  padding-top: 50px !important;
 }
 
