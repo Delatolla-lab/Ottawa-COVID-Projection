@@ -32,4 +32,9 @@
 .datatables {
   font-size: 15px;
 }
+/* Removes the green box-shadow from datatables paginate button applied by the
+hugo lithium theme */
+.datatables .paginate_button {
+  box-shadow: none;
+}
 
