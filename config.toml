@@ -28,7 +28,7 @@ canonifyURLs = true
     url = "/contact/"
     weight = 4
 [[menu.main]]
-    name = "Change Log"
+    name = "Changelog"
     url = "/change-log/"
     weight = 5
 
