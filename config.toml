@@ -1,11 +1,13 @@
-baseurl = "/"
+baseURL = "https://yulric.github.io/613-COVID"
 languageCode = "en-us"
 title = "Ottawa COVID19"
 theme = "hugo-lithium"
 googleAnalytics = ""
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
-    
+publishDir = "./docs"
+canonifyURLs = true
+
 [permalinks]
     post = "/:year/:month/:day/:slug/"
 

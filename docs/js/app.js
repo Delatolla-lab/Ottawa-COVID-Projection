@@ -14,5 +14,3 @@ document.addEventListener("DOMContentLoaded", function () {
         history.replaceState(null, null, document.location.pathname + e.target.getAttribute("href"));
     })
 })
-
-

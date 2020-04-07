@@ -11,19 +11,19 @@
 <meta property="og:title" content="{{ .Title }} - {{ .Site.Title }}">
 {{ end }}
 {{ with .Site.Params.favicon }}
-  <link href='{{ . | absURL }}' rel='icon' type='image/x-icon'/>
+<link href='{{ . | absURL }}' rel='icon' type='image/x-icon' />
 {{ end }}
 
 {{ if eq .RelPermalink "/" }}
 <meta property="description" content="{{ .Site.Params.description }}">
 {{ else }}
-  {{ if .Description }}
-  <meta property="description" content="{{ .Description }}">
-  {{ end }}
+{{ if .Description }}
+<meta property="description" content="{{ .Description }}">
+{{ end }}
 {{ end }}
 
 {{ if .Keywords }}
-<meta property="keywords" content ="{{ delimit .Keywords ", " }}">
+<meta property="keywords" content="{{ delimit .Keywords ", " }}">
 {{ end }}
 
 {{ with .OutputFormats.Get "RSS" }}
