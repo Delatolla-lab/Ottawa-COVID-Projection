@@ -1,4 +1,4 @@
-baseURL = "https://yulric.github.io/613-COVID/"
+baseURL = "https://613covid.ca"
 languageCode = "en-us"
 title = "Ottawa COVID19"
 theme = "hugo-lithium"
