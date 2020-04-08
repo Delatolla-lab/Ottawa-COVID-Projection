@@ -44,6 +44,8 @@ h <- ggplot(peak_projections, aes(intervention, peak_hospital_census)) + geom_co
   labs(title = "Projected peak hospitalizations in Ottawa by intervention", x = "Scenario",
        y = "Census (# of beds)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) + 
   theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
+
+h
 ```
 
 ## Acute care hospitalization projections
