@@ -61,6 +61,7 @@ alt="75% reduction in physical distanicng. One person infects 0.625 people on da
 <img src="/images/176989- infographic No.png"
 alt="No reduction in physical distanicng. One person infects 5.5 people on day 5 and 406 people on day 30"/>
 </div>
+Original source: [visualcapitalist.com](https://www.visualcapitalist.com/the-math-behind-social-distancing/)
 
 ## Flatten the curve 
 
