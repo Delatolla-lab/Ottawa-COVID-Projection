@@ -1,4 +1,3 @@
-console.log(window.location.hash)
 var hash = window.location.hash;
 window.location.hash = "";
 
@@ -6,6 +5,29 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.location.pathname === "/") {
         window.addEventListener("hashchange", function (e) {
             e.preventDefault();
+        })
+
+        // Set the image width to 100% for the peak hispitalization grpahs so it works
+        // well on mobiles
+        document.getElementById("peak-hospitalization-projections").querySelector("img").style = "width: 100%;"
+        // Resize all plotly graphs if the user is viewing them on mobile screens
+        // so they lool better
+        setTimeout(() => {
+            if (window.innerWidth <= 425) {
+                var plotlyPlots = document.querySelectorAll(".js-plotly-plot")
+                for (var i = 0; i < plotlyPlots.length; i++) {
+                    Plotly.relayout(plotlyPlots[i].getAttribute("id"), {
+                        width: window.innerWidth,
+                    })
+                    // Move the legends to the top left of the graphs so the
+                    // graphs itself can become bigger
+                    Plotly.update(plotlyPlots[i].getAttribute("id"), null, {
+                        legend: {
+                            x: 0, y: 200
+                        }
+                    })
+                }
+            }
         })
 
         if (hash) {
