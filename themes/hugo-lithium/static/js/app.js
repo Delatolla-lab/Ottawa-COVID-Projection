@@ -17,7 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 var plotlyPlots = document.querySelectorAll(".js-plotly-plot")
                 for (var i = 0; i < plotlyPlots.length; i++) {
                     Plotly.relayout(plotlyPlots[i].getAttribute("id"), {
-                        width: window.innerWidth
+                        width: window.innerWidth,
+                    })
+                    // Move the legends to the top left of the graphs so the
+                    // graphs itself can become bigger
+                    Plotly.update(plotlyPlots[i].getAttribute("id"), null, {
+                        legend: {
+                            x: 0, y: 200
+                        }
                     })
                 }
             }
