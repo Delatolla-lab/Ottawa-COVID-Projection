@@ -48,11 +48,19 @@ Physical distancing is the reduction of close contacts between people. Close con
 If a person who had close contact with 10 people per day before the COVID-19 pandemic now has close contact with three people per day, their physical distancing score is 70 percent. If they have contact with five people per day, their score is 50 percent.   
 
 In these projection models, a 70 percent physical distancing scenario means that on average the people of Ottawa have reduced their close contacts by 70 percent. Some people, like essential workers, cannot reduce their number of close contacts.
+<!--
+<img 
+    src="/images/176989- infographic 50 percent .png",
+    alt="50% reduction in physical distanicng. One person infects 1.25 people on day 5 and 15 people on day 30", sizes="100vw", style="margin-bottom: 15px;" />
+<img src="/images/176989- infographic 75 percent.png",
+alt="75% reduction in physical distanicng. One person infects 0.625 people on day 2.5 and 15 people on day 30", style="margin-bottom: 15px;" />
+<img src="/images/176989- infographic No.png",
+alt="No reduction in physical distanicng. One person infects 5.5 people on day 5 and 406 people on day 30", style="margin-bottom: 15px;" />
 
 <img src="/images/176989- infographic 50 percent .svg" style="margin-bottom: 15px;" />
 <img src="/images/176989- infographic 75 percent.svg" style="margin-bottom: 15px;" />
 <img src="/images/176989- infographic No.svg" style="margin-bottom: 15px;" />
-
+-->
 ## Flatten the curve 
 
 Flattening the curve means preventing a sharp peak of cases, and spreading the infection rate over a longer period of time so that the health-care system is not overwhelmed. To understand how to flatten the curve, we first need to understand how the curve develops.  
