@@ -14,6 +14,9 @@ output:
   word_document: default
   pdf_document: default
 ---
+## Model use 
+
+There are two main uses of the projections:
 
 1) Short-term projections (2 to 4 weeks) to inform the immediate need for hospital and critical care services for COVID-19 patients. 
 
@@ -25,7 +28,7 @@ Projecting the spread COVID-19 is like forecasting hurricanes. Projections are u
 
 We can't reliably forecast the weather six months out, and we can't forecast COVID-19 six months out. However, we can reliably forecast COVID-19 two to four weeks into the future. Those short-term projections give us time to plan and increase health-care resources as needed. 
 
-That being said, hurricanes and COVID-19 are not the same. We can't prevent a hurricane from reaching the shore or changing its direction. However, we can change the impact of COVID-19 on our local communities through preventative measures like physical distancing.  
+That being said, hurricanes and COVID-19 are not the same. We can't prevent a hurricane from reaching the shore or change its direction. However, we can change the impact of COVID-19 on our local communities through preventative measures like physical distancing.  
 
 Long-range COVID-19 projections provide information on the effectiveness of physical distancing and other preventive measures. 
 
@@ -63,15 +66,15 @@ alt="No reduction in physical distanicng. One person infects 5.5 people on day 5
 -->
 ## Flatten the curve 
 
-Flattening the curve means preventing a sharp peak of cases, and spreading the infection rate over a longer period of time so that the health-care system is not overwhelmed. To understand how to flatten the curve, we first need to understand how the curve develops.  
+Flattening the curve means preventing a sharp peak in the number of cases, and spreading the infection rate over a longer period of time so that the health-care system is not overwhelmed. To understand how to flatten the curve, we first need to understand how the curve develops.  
 
 There are three parts of the curve:  
 
-the first part of the curve that sweeps upward. An epidemic spreads through a community by infecting people who are susceptible to infection. If an infected person comes into contact with many people who aren’t infected, the infection will spread quickly. 
+1) The first part of the curve that sweeps upward. An epidemic spreads through a community by infecting people who are susceptible to infection. If an infected person comes into contact with many people who aren’t infected, the infection will spread quickly. 
 
-the second part of the curve that levels. An epidemic will slow as the number of susceptible people decreases or preventive measures slow the spread. 
+2) The second part of the curve that levels. An epidemic will slow as the number of susceptible people decreases or preventive measures slow the spread. 
 
-The third part of the curve that descends downward as fewer and fewer people develop COVID-19. 
+3) The third part of the curve that descends downward as fewer and fewer people develop COVID-19. 
 
-Because COVID-19 is a new virus, the entire population was susceptible to COVID-19 infection at the beginning of the outbreak. Flattening the curve is slowing the spread amongst people who are susceptible to COVID-19.
+Because COVID-19 is a new virus, the entire population was susceptible to COVID-19 infection at the beginning of the outbreak. Flattening the curve means slowing the spread amongst people who are susceptible to COVID-19.
 
