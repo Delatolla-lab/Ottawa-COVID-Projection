@@ -28,8 +28,21 @@ The projections are created by the team behind [ProjectBigLife.ca](https://www.p
 library(plotly)
 ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
 ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
-CHIME_input_display <- read.csv(file.path(getwd(),"../Data/CHIME_input_display.csv"))
 source("../R/estimate_scripts.R")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
+peak_projections$intervention <- 
+  factor(peak_projections$intervention, levels = c("No prevention & control",
+                                                   "50% physical distancing", "70% physical distancing"))
+
+library(ggplot2)
+h <- ggplot(peak_projections, aes(intervention, peak_hospital_census)) + geom_col(fill = "#3182bd") +
+  labs(title = "Projected peak hospitalizations in Ottawa by intervention", x = "Scenario",
+       y = "Census (# of beds)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) + 
+  theme(panel.background = element_rect(fill = 'white'))
+h
 ```
 
 ## Acute care hospitalization projections
