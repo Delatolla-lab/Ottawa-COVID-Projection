@@ -42,7 +42,7 @@ library(ggplot2)
 t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
                                      xpos=1:n()-0.5,
                                     Diff=End-peak_hospital_census,
-                                     Percent=paste(round(Diff/End*100,1),"%")) %>%
+                                     Percent=paste(round(Diff/End*100,0),"%")) %>%
   ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#D62728", "#1F77B4", "#2CA02C")) +
   labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
        y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) +
