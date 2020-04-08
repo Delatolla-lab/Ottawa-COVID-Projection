@@ -8,7 +8,7 @@ This repository is not public. Contact Doug Manuel dmanuel@ohri.ca if you would 
 # To build the website
 
 1. FOllow the instructions here to install blogdown and hugo https://bookdown.org/yihui/blogdown/installation.html
-2. Once installed, run `blogdown::serve_site()` and navigate to http://127.0.0.1:4321/ to view the site. This command will also continuously watch your files for changes so that the website will be automatically rebuilt and refreshed whenever you change any of the files.
+2. Once installed, run `blogdown::serve_site()` and navigate to http://127.0.0.1:4450/613-COVID/ to view the site. This command will also continuously watch your files for changes so that the website will be automatically rebuilt and refreshed whenever you change any of the files.
 
 ## Updates
 
