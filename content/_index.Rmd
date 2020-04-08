@@ -54,7 +54,7 @@ t
 
 ## Acute care hospitalization projections
 
-Click or hover over over top right of visualization for how to download, zoom and pan.
+Click or hover over over top right of visualization for downloading, zooming and panning.
 
 ### Total projections
 
@@ -99,7 +99,7 @@ hosp_visualization(ott_projections, ott_observed, "census_vents", title = "Proje
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projected daily COVID-19 ventilator use in Ottawa", y_label = "New admissions (# of patients)")
+hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projected daily COVID-19 ventilator use in Ottawa", y_label = "Newly ventilated (# of patients)")
 ```
 
 ## Death projections
