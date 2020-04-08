@@ -32,6 +32,9 @@ source("../R/estimate_scripts.R")
 ```
 
 ## Peak hospitalization projections
+```
+
+```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
@@ -39,11 +42,12 @@ peak_projections$intervention <-
   factor(peak_projections$intervention, levels = c("No prevention & control",
                                                    "50% physical distancing", "70% physical distancing"))
 
+
 library(ggplot2)
 h <- ggplot(peak_projections, aes(intervention, peak_hospital_census)) + geom_col(fill = c("#D62728", "#1F77B4", "#2CA02C")) +
   labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
        y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) + 
-  theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
+  theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) + geom_text(data = ) 
 
 h
 ```
