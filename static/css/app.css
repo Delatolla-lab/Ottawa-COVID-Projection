@@ -39,3 +39,7 @@ hugo lithium theme */
   box-shadow: none;
 }
 
+.more-info-images img {
+  width: 100%;
+  margin-bottom: 15px;
+}

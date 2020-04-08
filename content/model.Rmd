@@ -11,46 +11,47 @@ title: Model parameters
 
     - Doubling time (time it takes for the number of hospitalized COVID-19 patients to double) of 3 days from March 17 to 25, 2020. Projections initialized with a 4-day hospital doubling time. 
 
-2) *Projections are based on the [CHIME model](https://penn-chime.phl.io/) v1.1.2 developed by the University of Pennsylvania Health System.* 
+2) *Model parameters other than Ottawa hospital use are aligned with [COVID-19-MC](https://www.covid-19-mc.ca/interactive-model) and [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) models where possible, with updates based on [Verity et al. (Lancet, March 20, 2020)](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)* and [Ferguson et al. (March 16, 2020)](https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf). 
 
-    - CHIME is an SIR model that is initiated on hospital use. A SIR model calculates the projected number of people infected with a contagious illness in a closed population over time. 
+3) *[CHIME model](https://penn-chime.phl.io/) v1.1.2 developed by the University of Pennsylvania Health System.*  
 
-    - The projections can be updated for other models. 
+   - CHIME is an SIR model that is initiated on hospital use. A SIR model calculates the projected number of people infected with a contagious illness in a closed population over time. 
 
-3) *Model parameters other than Ottawa hospital use are aligned with [COVID-19-MC](https://www.covid-19-mc.ca/interactive-model) and [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) models where possible, with updates based on [Verity et al. (Lancet, March 20, 2020)](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)* and [Ferguson et al. (March 16, 2020)](https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf). 
-
-4) *[CHIME model](https://penn-chime.phl.io/) v1.1.2 developed by the University of Pennsylvania Health System.*  
+  - The projections can be updated for other models. 
 
 A description of the model parameters and input data is [here](#parameters). 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(plotly)
-ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
-ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
-CHIME_input_display <- read.csv(file.path(getwd(),"../Data/CHIME_input_display.csv"))
-source("../R/estimate_scripts.R")
-```
-
 ## Why are the projections based on the daily hospital census for Ottawa? 
 
-Ottawa COVID-19 projections augment the projections of Public Health Ontario and other models by incorporating local reported hospitalizations since the beginning of the COVID-19 pandemic. Using local hospitalization rates follows the analogy of forecasting hurricanes. We monitor the local hospital COVID-19 use and then project the trend into the future based on the knowledge of COVID-19 and how it spreads in communities. 
+Ottawa COVID-19 projections augment the projections of Public Health Ontario and other models by incorporating local reported hospitalizations since the beginning of the COVID-19 pandemic.  
 
-The trend of COVID-19 hospital use is summarized as “doubling time”. Doubling time — and the weekly change in doubling time — are the most important inputs in COVID-19 projections that vary between jurisdictions. Doubling time is change (increase or decrease) in hospitalization rate over time. There will be a 4-day doubling time if the number of patients in a hospital doubles over four days. For example, the number of COVID-19 patients increases from 50 to 100 over four days and from 100 to 200 over the subsequent four days.  
+Using local hospitalization rates follows the analogy of forecasting hurricanes. We monitor the local hospital COVID-19 use and then project the trend into the future based on the knowledge of COVID-19 and how it spreads in communities. 
 
-The doubling time of new hospital admissions for COVID-19 will continue at the same rate as previous weeks except in two situations:  
+The trend of COVID-19 hospital use is summarized as “doubling time.” Doubling time — and the weekly change in doubling time — are the most important inputs in COVID-19 projections that vary between communities.  
 
-1) The number of people susceptible to infection decreases. As an epidemic progresses there will be fewer people remaining in the community who can become infected.  
+Doubling time is change (increase or decrease) in hospitalization rate over time. There will be a 4-day doubling time if the number of patients in a hospital doubles over four days. Doubling times for hospital use are calculated based on the previous weeks’ increase or decrease in new admissions and hospital census.  
 
-2) Preventive measures slow the spread of infection and reduce the number new infections, resulting in an increased doubling time of hospital use. 
+The doubling time of new hospital admissions for COVID-19 will continue at the same rate except in two situations:  
 
-The first situation — how doubling time decreases as the number of susceptible people decreases — is understandable and can be easily modelled using mathematical formulas. 
+1) The number of people susceptible to infection decreases. As an epidemic progresses, there will be fewer people left in the community who can become infected.  
 
-The second situation — the effectiveness of preventive measures — is more difficult to accurately estimate. Effectiveness of preventive measures depends not only on what preventive measures are in place over the last 2-4 weeks, but also how well citizens adhere to the measures. Current hospital use must be monitored to inform the overall effectiveness of public health measures. Doubling times for hospital use are calculated based on the previous weeks’ increase or decrease in new admissions and hospital census.  
+2) Preventive measures slow the spread of infection and reduce the number of new infections, resulting in an increased doubling time. 
+
+The first situation — how doubling time decreases as the number of susceptible people decreases — can be easily modelled using mathematical formulas. 
+
+The second situation — the effectiveness of preventive measures — is more difficult to estimate accurately.  
+
+Effectiveness of preventive measures depends not only on what preventive measures are in place over the last 2-4 weeks, but also how well people follow the measures.  
+
+Current hospital use must be monitored to inform the overall effectiveness of public health measures.   
 
 ## Input parameters {#parameters}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(DT)
+CHIME_input_display <- read.csv(file.path(getwd(),"../Data/CHIME_input_display.csv"))
+ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
+ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
 datatable(CHIME_input_display[,c(1,3)])
 ```
 

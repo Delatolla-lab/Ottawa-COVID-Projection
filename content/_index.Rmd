@@ -22,17 +22,39 @@ _Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST._
 
 The charts below show projected hospital resource use for COVID-19 patients in the Ottawa area. The projections supplement provincial projections with current, local data on acute hospital care and intensive care unit (ICU) use.  
 
+The projections are created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at the Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health.
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(plotly)
 ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
 ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
-CHIME_input_display <- read.csv(file.path(getwd(),"../Data/CHIME_input_display.csv"))
 source("../R/estimate_scripts.R")
+```
+
+## Peak hospitalization projections
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
+peak_projections$intervention <-
+  factor(peak_projections$intervention, levels = c("No prevention & control",
+                                                   "50% physical distancing", "70% physical distancing"))
+library(tidyverse)
+library(ggplot2)
+t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
+                                     xpos=1:n()-0.5,
+                                    Diff=End-peak_hospital_census,
+                                     Percent=paste(round(Diff/End*100,1),"%")) %>%
+  ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#D62728", "#1F77B4", "#2CA02C")) +
+  labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
+       y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) +
+  theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) +
+    geom_segment(aes(x=xpos, y = End, xend=xpos, yend=peak_hospital_census)) +
+    geom_text(aes(x=xpos,y =  End-Diff/2, label=paste(as.character(Percent), "reduction"), hjust=-0.2))
+t
 ```
 
 ## Acute care hospitalization projections
 
-Click or over over top right of visualization for how to download, zoom and pan.
+Click or hover over over top right of visualization for downloading, zooming and panning.
 
 ### Total projections
 
@@ -77,14 +99,14 @@ hosp_visualization(ott_projections, ott_observed, "census_vents", title = "Proje
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projected daily COVID-19 ventilator use in Ottawa", y_label = "New admissions (# of patients)")
+hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projected daily COVID-19 ventilator use in Ottawa", y_label = "Newly ventilated (# of patients)")
 ```
 
 ## Death projections
 
-Death projections were made using existing data from Ottawa Public Health and probability data from [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) These projections assume all hospital deaths are in the ICU. Model parameters are [here](#parameters). 
+Death projections were made using existing data from Ottawa Public Health and probability data from [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) These projections assume all hospital deaths are in the ICU. Model parameters are [here](/model#parameters). 
 
-Only deaths for hospital patients are included in the projections. Long-term care (LTC, also known as nursing homes) and retirement homes are not included in the projections. As of April 3, 2020, 40 to 60% of COVID-19 related deaths occurred in residents of LTC or retirement homes. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) does not want advanced life support or transfer to the hospital if they have a life threatening illness. 
+Only deaths for hospital patients are included in the projections. Long-term care (LTC, also known as nursing homes) and retirement homes are not included in the projections. As of April 3, 2020, 40 to 60% of COVID-19 related deaths occurred in residents of LTC or retirement homes. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) do not want advanced life support or transfer to the hospital if they have a life threatening illness. 
 
 ### Total projections
 
