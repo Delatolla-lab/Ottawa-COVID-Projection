@@ -1,4 +1,3 @@
-console.log(window.location.hash)
 var hash = window.location.hash;
 window.location.hash = "";
 
@@ -6,6 +5,17 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.location.pathname === "/") {
         window.addEventListener("hashchange", function (e) {
             e.preventDefault();
+        })
+
+        setTimeout(() => {
+            if (window.innerWidth <= 425) {
+                var plotlyPlots = document.querySelectorAll(".js-plotly-plot")
+                for (var i = 0; i < plotlyPlots.length; i++) {
+                    Plotly.relayout(plotlyPlots[i].getAttribute("id"), {
+                        width: window.innerWidth
+                    })
+                }
+            }
         })
 
         if (hash) {
