@@ -15,13 +15,9 @@ output:
   pdf_document: default
 ---
 
-## Physical Distancing 
-
 1) Short-term projections (2 to 4 weeks) to inform the immediate need for hospital and critical care services for COVID-19 patients. 
 
 2) Long-term projections (6 weeks to 10 months) to assess how to 'flatten the curve'.  
-
-The projections are created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at the Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health.
 
 ## Model accuracy 
 
