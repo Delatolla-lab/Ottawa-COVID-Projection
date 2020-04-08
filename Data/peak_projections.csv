@@ -1,4 +1,4 @@
-intervention,peak_hospital_census,peak_hospital_census_date,peak_icu_census,peak_vent_census
-No prevention & control,10124,10124 (May 16),4275,1406
-50% physical distancing,2530,2530 (July 14),1156,341
-70% physical distancing,96,96 (Feb 2021),44,12
+intervention,peak_hospital_census,peak_hospital_census_date
+No prevention & control,10124,10124 (May 16)
+50% physical distancing,2530,2530 (July 14)
+70% physical distancing,96,96 (Feb 2021)

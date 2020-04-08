@@ -32,20 +32,24 @@ source("../R/estimate_scripts.R")
 ```
 
 ## Peak hospitalization projections
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
-peak_projections$intervention <- 
+peak_projections$intervention <-
   factor(peak_projections$intervention, levels = c("No prevention & control",
                                                    "50% physical distancing", "70% physical distancing"))
-
+library(tidyverse)
 library(ggplot2)
-h <- ggplot(peak_projections, aes(intervention, peak_hospital_census)) + geom_col(fill = c("#D62728", "#1F77B4", "#2CA02C")) +
+t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
+                                     xpos=1:n()-0.5,
+                                    Diff=End-peak_hospital_census,
+                                     Percent=paste(round(Diff/End*100,1),"%")) %>%
+  ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#D62728", "#1F77B4", "#2CA02C")) +
   labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
-       y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) + 
-  theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
-
-h
+       y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) +
+  theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) +
+    geom_segment(aes(x=xpos, y = End, xend=xpos, yend=peak_hospital_census)) +
+    geom_text(aes(x=xpos,y =  End-Diff/2, label=paste(as.character(Percent), "reduction"), hjust=-0.2))
+t
 ```
 
 ## Acute care hospitalization projections
