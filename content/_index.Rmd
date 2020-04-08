@@ -31,6 +31,8 @@ ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observ
 source("../R/estimate_scripts.R")
 ```
 
+## Peak hospitalization projections
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
 peak_projections$intervention <- 
@@ -41,8 +43,7 @@ library(ggplot2)
 h <- ggplot(peak_projections, aes(intervention, peak_hospital_census)) + geom_col(fill = "#3182bd") +
   labs(title = "Projected peak hospitalizations in Ottawa by intervention", x = "Scenario",
        y = "Census (# of beds)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) + 
-  theme(panel.background = element_rect(fill = 'white'))
-h
+  theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
 ```
 
 ## Acute care hospitalization projections
