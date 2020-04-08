@@ -1,17 +1,17 @@
 Parameter,Value,Values
 Model date,2020-04-06,2020-04-07
-Regional Population,1000000,1000000
-Hospital Market Share (%),100,100
+Regional population,1000000,1000000
+Hospital market share (%),100,100
 Currently hospitalized,30,36
 Date of first hospitalized case,2020-03-17,2020-03-17
-Social distancing (%) (aka physical distancing),50-70,50-70
-Hospitalization % (total infections),2.6,2.6
-ICU % (total infections),0.75,0.75
-Ventilated % (total infections),0.5,0.5
+Physical distancing (%),50-70,50-70
+Hospitalization (% of total infections),2.6,2.6
+ICU (% of total infections),0.75,0.75
+Ventilated (% of total infections),0.5,0.5
 Infectious days,14,14
-Average Hospital Length of Stay (days),10,10
-Average Days in ICU,16,16
-Average Days on Ventilator,7,7
+Average hospital length of stay (days),10,10
+Average days in ICU,16,16
+Average days on ventilator,7,7
 Number of days to project,200,200
 Probability ICU patient is aged 0-20,0,0
 Probability ICU patient is aged 20-44,0.11,0.11
