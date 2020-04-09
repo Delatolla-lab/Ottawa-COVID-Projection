@@ -77,3 +77,8 @@ There are three parts of the curve:
 
 Because COVID-19 is a new virus, the entire population was susceptible to COVID-19 infection at the beginning of the outbreak. Flattening the curve means slowing the spread amongst people who are susceptible to COVID-19.
 
+<div class="more-info-images">
+<img 
+    src="/images/flatten-curve.png"
+    alt="Flatten the curve diagram. Physical distancing reduces the height of the curve and the curve occurs further out in time. Two curves are presented -- with and without physical distancing." />
+</div>
