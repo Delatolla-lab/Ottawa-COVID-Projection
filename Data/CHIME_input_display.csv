@@ -2,7 +2,7 @@ Parameter,Value,Values
 Model date,2020-04-07,2020-04-09
 Regional population,1000000,1000000
 Hospital market share (%),100,100
-Currently hospitalized,36,35
+Currently hospitalized,36,30
 Date of first hospitalized case,2020-03-17,N/A
 Doubling time in days (up to today),N/A,4
 Physical distancing (%),50-70,50-70
