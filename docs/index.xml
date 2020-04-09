@@ -30,11 +30,10 @@
       
       <guid>/change-log/</guid>
       <description>V1.1.2 2020-04-09
- Updated Ottawa hospital census data to 2020-04-08 Improvements to documentation, including additional figures   V1.1.1 2020-04-08
+ Updated Ottawa hospital census data to 2020-04-08 Used doubling time of 4 days as opposed to first hospitalization date to generate projections Improvements to documentation, including additional figures   V1.1.1 2020-04-08
  Improvements to mobile version of website   V1.1.0 2020-04-08
  Projections added:  Peak hospitalizations  Updates to documentation   V1.0.0 2020-04-07
- Website now public Updated Ottawa hospital census data to 2020-04-06   V0.3.0 2020-04-06
- Updated Ottawa hospital census data to 2020-04-04 Projections added:  Census and daily acute care hospitalizations  Expanded description of documentation   V0.</description>
+ Website now public Updated Ottawa hospital census data to 2020-04-06   V0.</description>
     </item>
     
     <item>
