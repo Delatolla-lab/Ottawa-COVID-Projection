@@ -24,6 +24,27 @@ calc_mean_rate_of_increase <- function(input){
   return(out)
 }
 
+# Temporary dataset starting at March 26
+tmp <- na.omit(ott_observed[10:nrow(ott_observed), "observed_census_ICU_p_acute_care"])
+
+rate_of <- calc_rate_of_increase(tmp)
+
+# Create rate of increase column
+ott_observed$rate_of_increase_mar26_onward <- NA
+ott_observed[11:(11+length(rate_of)-1),"rate_of_increase_mar26_onward"] <-rate_of 
+daily_mean_rate <- calc_mean_rate_of_increase(rate_of)
+ott_observed$mean_daily_rate_of_increase <- NA
+ott_observed[11:(11+length(daily_mean_rate)-1),"mean_daily_rate_of_increase_mar26_onward"] <- daily_mean_rate
+
+# Object for initial observed value at March 26
+day1 <- ott_observed[10,"observed_census_ICU_p_acute_care"]
+expected_value <- cal_expected_value(day1, last(daily_mean_rate), length(daily_mean_rate))
+
+# Column for expected values
+ott_observed$expected_val_mar26_onward <- NA
+ott_observed[10:(10+length(expected_value)-1),"expected_val_mar26_onward"] <- expected_value
+
+
 
 # INSERT INTO INDEX.RMD 
 # for testing
