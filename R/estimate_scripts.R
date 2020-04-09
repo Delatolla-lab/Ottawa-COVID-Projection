@@ -29,6 +29,9 @@ p_death_ICU_age_20_44 <- 0.4
 p_death_ICU_age_45_64 <- 0.7
 p_death_ICU_age_65p <- 0.8
 
+## Set all NA to 0
+ott_projections[is.na(ott_projections)] <- 0
+
 ## Daily death estimates
 ott_projections$new_deaths_50_0_20 <- 
   ott_projections$new_ICU_50*p_ICU_age_0_20*p_death_ICU_age_0_20
@@ -79,6 +82,7 @@ ott_projections$new_deaths_70 <-
   ott_projections$new_deaths_70_45_64 + ott_projections$new_deaths_70_65p
 
 ## Cumulative death estimates
+
 ott_projections$cumulative_deaths_50 <- 
   cumsum(ott_projections$new_deaths_50)
 
