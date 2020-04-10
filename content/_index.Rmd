@@ -34,7 +34,6 @@ source("../R/estimate_scripts.R")
 ```
 
 ## Peak hospitalization projections
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
 peak_projections$intervention <-
@@ -45,17 +44,17 @@ library(ggplot2)
 t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
                                      xpos=1:n()-0.5,
                                     Diff=End-peak_hospital_census,
-                                     Percent=paste(round(Diff/End*100,0),"%", sep = "")) %>%
+                                     Percent=paste(round(Diff/End*100,0),"%")) %>%
   ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#D62728", "#1F77B4", "#2CA02C")) +
   labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
        y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) +
-  theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) +
-    geom_segment(aes(x=xpos, y = End, xend=xpos, yend=peak_hospital_census)) +
-    geom_text(aes(x=xpos,y =  End-Diff/2, label=paste("",as.character(Percent), " reduction from\n", as.character(intervention), sep = ""), hjust=-0.06, vjust = -0.2))
+  theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
 t
 ```
 
-Going from no prevention & control to 70% physical distancing results in a **99%** reduction in peak hospitalization census.
+50% physical distancing is a 75% reduction in peak hospitalizations from no prevention & control.
+
+70% physical distancing is a 99% reduction in peak hospitalizations from no prevention & control.
 
 ## Acute care hospitalization projections
 
