@@ -105,9 +105,11 @@ hosp_visualization <-
         )
       
     }
+ 
     p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, 
                 annotations=layout$annotations, 
-                autosize=TRUE, width = 1000, height = 500)
+                autosize = FALSE, width = 700, height = 500,
+                legend = list(x = 0.05, y = 0.9))
     return(p)
   }
 death_visualization <- function(data1, data2, parameter, title, y_label){
@@ -192,6 +194,7 @@ death_visualization <- function(data1, data2, parameter, title, y_label){
   p <- add_trace(p, fill=trace3$fill, meta=trace3$meta, mode=trace3$mode, name=trace3$name, type=trace3$type, xsrc=trace3$xsrc, x=trace3$x, ysrc=trace3$ysrc, y=trace3$y, stackgroup=trace3$stackgroup)
   p <- add_trace(p, meta=trace4$meta, mode=trace4$mode, name=trace4$name, type=trace4$type, xsrc=trace4$xsrc, x=trace4$x, ysrc=trace4$ysrc, y=trace4$y)
   p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=TRUE,
-              width = 1000, height = 500)
+              width = 700, height = 500,
+              legend = list(x = 0.05, y = 0.9))
   p
 }
