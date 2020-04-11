@@ -24,16 +24,27 @@
     </item>
     
     <item>
+      <title></title>
+      <link>/more/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/more/</guid>
+      <description>Model use There are two main uses of the projections:
+Short-term projections (2 to 4 weeks) to inform the immediate need for hospital and critical care services for COVID-19 patients.
+ Long-term projections (6 weeks to 10 months) to assess how to ‘flatten the curve’.
+   Model accuracy Creating accurate, long-range projections to predict the spread COVID-19 is difficult. It’s akin to forecasting when a hurricane will make landfall when it is still thousands of kilometers out at sea.</description>
+    </item>
+    
+    <item>
       <title>Changelog</title>
       <link>/change-log/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/change-log/</guid>
-      <description>V1.1.2 2020-04-09
- Updated Ottawa hospital census data to 2020-04-08 Used doubling time of 4 days as opposed to first hospitalization date to generate projections Improvements to documentation, including additional figures   V1.1.1 2020-04-08
- Improvements to mobile version of website   V1.1.0 2020-04-08
- Projections added:  Peak hospitalizations  Updates to documentation   V1.0.0 2020-04-07
- Website now public Updated Ottawa hospital census data to 2020-04-06   V0.</description>
+      <description>V1.1.4 2020-04-11
+ Updated Ottawa hospital census data to 2020-04-10 No change in model parameters.   V1.1.3 2020-04-10
+ Updated Ottawa hospital census data to 2020-04-09 No change in model parameters. Improvements to figures.   V1.1.2 2020-04-09
+ Updated Ottawa hospital census data to 2020-04-08 Used doubling time of 4 days as opposed to first hospitalization date to generate projections Improvements to documentation, including additional figures   V1.</description>
     </item>
     
     <item>
@@ -45,18 +56,6 @@
       <description>Media contact: Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, mschreiter@toh.ca ph: 613-222-7674
 Science contacts: Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca, Alan Forster
 Acknowledgements for website and content: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches, and others on Big Life Lab team.</description>
-    </item>
-    
-    <item>
-      <title>More Info</title>
-      <link>/more/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/more/</guid>
-      <description>Model use There are two main uses of the projections:
-Short-term projections (2 to 4 weeks) to inform the immediate need for hospital and critical care services for COVID-19 patients.
- Long-term projections (6 weeks to 10 months) to assess how to ‘flatten the curve’.
-   Model accuracy Creating accurate, long-range projections to predict the spread COVID-19 is difficult. It’s akin to forecasting when a hurricane will make landfall when it is still thousands of kilometers out at sea.</description>
     </item>
     
     <item>

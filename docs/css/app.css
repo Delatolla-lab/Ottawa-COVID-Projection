@@ -1,10 +1,14 @@
 * {
-  font-family: 'Open Sans' !important;
+  font-family: "Open Sans" !important;
 }
 
 .navbar {
   background-color: #64d0fa;
   font-size: 20px;
+}
+.navbar-brand {
+  font-size: 1.6em;
+  font-weight: bold;
 }
 .navbar-blue .navbar-nav .nav-link {
   color: white;
