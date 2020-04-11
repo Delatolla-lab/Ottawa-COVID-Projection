@@ -6,6 +6,7 @@ title: Changelog
 2020-04-11
 
 - Updated Ottawa hospital census data to 2020-04-10
+- COVID-19 icon added to navbar. 
 - No change in model parameters.
 
 # V1.1.3
