@@ -13,6 +13,10 @@
   </url>
   
   <url>
+    <loc>/more/</loc>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
   </url>
   
@@ -22,10 +26,6 @@
   
   <url>
     <loc>/contact/</loc>
-  </url>
-  
-  <url>
-    <loc>/more/</loc>
   </url>
   
   <url>

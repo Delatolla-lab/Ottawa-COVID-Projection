@@ -92,7 +92,7 @@ hosp_visualization(ott_projections, ott_observed, "new_ICU", title = "Projected 
 
 ## Ventilator projections
 
-### Ce nsus projections
+### Census projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
