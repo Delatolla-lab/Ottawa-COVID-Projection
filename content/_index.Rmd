@@ -60,7 +60,7 @@ t
 
 Click or hover over over top right of visualization for downloading, zooming and panning.
 
-### Total projections
+### Census projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
@@ -76,7 +76,7 @@ hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Pro
 
 ## ICU projections
 
-### Total projections
+### Census projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
@@ -92,7 +92,7 @@ hosp_visualization(ott_projections, ott_observed, "new_ICU", title = "Projected 
 
 ## Ventilator projections
 
-### Total projections
+### Ce nsus projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
@@ -112,7 +112,7 @@ Death projections were made using existing data from Ottawa Public Health and pr
 
 Only deaths for hospital patients are included in the projections. Long-term care (LTC, also known as nursing homes) and retirement homes are not included in the projections. As of April 3, 2020, 40 to 60% of COVID-19 related deaths occurred in residents of LTC or retirement homes. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) do not want advanced life support or transfer to the hospital if they have a life threatening illness. 
 
-### Total projections
+### Cummulative deaths in hospital
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
