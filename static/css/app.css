@@ -47,3 +47,15 @@ hugo lithium theme */
   width: 100%;
   margin-bottom: 15px;
 }
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 0em;
+  padding: 3px 10px 3px 1.3em;
+}
+
+figcaption {
+  text-align: right;
+  font-size: smaller;
+}
