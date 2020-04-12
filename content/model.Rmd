@@ -1,6 +1,8 @@
 ---
 date: "2016-05-05T21:48:51-07:00"
 title: Model parameters
+link-citations: true
+bibliography: refs.bib
 ---
 
 1) *Projections are based on the reported daily hospital census for Ottawa.*  
@@ -43,7 +45,19 @@ The second situation — the effectiveness of preventive measures — is more di
 
 Effectiveness of preventive measures depends not only on what preventive measures are in place over the last 2-4 weeks, but also how well people follow the measures.  
 
-Current hospital use must be monitored to inform the overall effectiveness of public health measures.   
+Current hospital use must be monitored to inform the overall effectiveness of public health measures.
+
+## How physical distancing affects COVID-19 projections
+
+The projections of hospital cases uses an $SIR$ model ($S$ = susceptible, $I$ = infected, $R$ = recovered people). Within an SIR model, 
+new infections at time ($t+1$) are equal to:
+
+$$I_{t+1} = \beta S_t I_t $$
+Where $\beta$ is commonly referred as the "force of infection" because it describes how quickly a disease can move through a population. $\beta$ is a probability or risk that ranges from 0 to 1. $\beta$ value = 0.5 means 50% of susceptible people ($S_t$) who are in contact with an infected person ($I_t$) will become infected ($I_{t+1}$). 
+
+Physical distancing is a 'control measure' to reduce the effective force of infection, $\beta$. A control measure, $\lambda$ reduces new infections, where $\lambda = 1$ results in a complete disruption in new infections (conversly, $\lambda = 0$ has no effect for reducing new infections). The projections presented on this website assume physical distancing is directly related to effective control. This means 50% physical distancing is the same as $\lambda = 0.5$. @daughton2017approach
+
+Note that $\beta$ is related to the the commonly references $R_0$. $R_0 = \frac{\beta}{\gamma}$, where $\gamma$ is the reciprocal of the infectious period ($\psi$).
 
 ## Input parameters {#parameters}
 
