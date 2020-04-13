@@ -41,7 +41,7 @@ Public Health Ontario projected 100,000 COVID-19 Ontario deaths with no preventa
 A high level of physical distancing will achieve a **97% reduction in deaths** compared to a scenario of no preventive action (100,000 deaths). The wide range in projections is why we need to monitor and update Ottawa projections to reflect how well we achieve COVID-19 prevention. 
 
  
-A definition and description of physical distancing is [here](/more.html) test. 
+A definition and description of physical distancing is [here](/more). 
 
 
 ## What is physical distancing {#distancing}

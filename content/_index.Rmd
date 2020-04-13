@@ -57,7 +57,7 @@ t
 - 70% physical distancing is a 99% reduction in peak hospitalizations from no prevention & control.
 
 
-**50% physical distancing means that there is a 50% reduction in close contact between people.** See **[more](/more#distancing)** for a description of physical distancing.
+> **50% physical distancing means that there is a 50% reduction in close contact between people.** See **[more](/more#distancing)** for a description of physical distancing.
 
 ## Acute care hospitalization projections
 
