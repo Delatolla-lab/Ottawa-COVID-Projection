@@ -2,6 +2,16 @@
 title: Changelog
 ---
 
+# V1.2.0
+2020-04-14
+
+- Updated Ottawa hospital census data to 2020-04-12
+- Changes to model parameters:
+  - Doubling time changed from 4 days to 5 days
+  - Date of physical distancing implementation set to 2020-04-12
+  - Infectious days changed from 14 days to 10 days
+- Edits to documentation
+
 # V1.1.4
 2020-04-11
 
@@ -15,7 +25,6 @@ title: Changelog
 - Updated Ottawa hospital census data to 2020-04-09
 - No change in model parameters.
 - Improvements to figures.
-
 
 # V1.1.2
 2020-04-09

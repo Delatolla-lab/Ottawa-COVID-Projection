@@ -128,4 +128,3 @@ death_visualization(ott_projections, ott_observed, "cumulative_deaths", title = 
 source("../R/covid_visualization.R")
 death_visualization(ott_projections, ott_observed, "new_deaths", title = "Projected number of COVID-19 daily hospital deaths in Ottawa", y_label = "Deaths")
 ```
-
