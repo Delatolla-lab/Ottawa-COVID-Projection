@@ -25,8 +25,8 @@ calc_mean_rate_of_increase <- function(input){
 }
 
 calc_doubling_time <- function(observed_data){
-  total_time <- length(observed_data)
-  out <- ((total_time*log(2))/(log(observed_data[[total_time]]/observed_data[[1]])))
+  total_time <- (length(observed_data)-1)
+  out <- ((total_time*log(2))/(log(observed_data[[total_time+1]]/observed_data[[1]])))
   return(out)
 }
 

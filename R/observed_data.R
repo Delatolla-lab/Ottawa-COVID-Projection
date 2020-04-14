@@ -45,7 +45,7 @@ observed_figure <- function(data, title, y_label) {
       y = "Rate of growth"
     )), 
     mode = "lines", 
-    name = "Expected values (March 26 onwards)", 
+    name = paste("Expected values (March 26 onwards,\nbased on an observed doubling time\nof", round(doubling_time, 2), "days)"), 
     type = "scatter", 
     xsrc = "wyusuf:11:3cac68", 
     x = data$date,
@@ -413,6 +413,6 @@ observed_figure <- function(data, title, y_label) {
   p <- add_trace(p, meta=trace1$meta, mode=trace1$mode, name=trace1$name, type=trace1$type, xsrc=trace1$xsrc, x=trace1$x, ysrc=trace1$ysrc, y=trace1$y, marker=trace1$marker, visible=trace1$visible, orientation=trace1$orientation)
   p <- add_trace(p, meta=trace2$meta, name=trace2$name, type=trace2$type, xsrc=trace2$xsrc, x=trace2$x, ysrc=trace2$ysrc, y=trace2$y, visible=trace2$visible, orientation=trace2$orientation)
   p <- add_trace(p, line=trace3$line, meta=trace3$meta, mode=trace3$mode, name=trace3$name, type=trace3$type, xsrc=trace3$xsrc, x=trace3$x, ysrc=trace3$ysrc, y=trace3$y, visible=trace3$visible, orientation=trace3$orientation)
-  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, barmode=layout$barmode, autosize=layout$autosize, template=layout$template)
+  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, barmode=layout$barmode, autosize=layout$autosize, template=layout$template, legend = list(x = 0.05, y = 0.9))
   p
 }
