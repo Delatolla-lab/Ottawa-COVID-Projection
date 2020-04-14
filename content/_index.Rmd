@@ -52,9 +52,10 @@ t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
 t
 ```
 
-- 50% physical distancing is a 75% reduction in peak hospitalizations from no prevention & control.
+- 50% physical distancing is a 93% reduction in peak hospitalizations from no prevention & control.
 
 - 70% physical distancing is a 99% reduction in peak hospitalizations from no prevention & control.
+
 
 > **50% physical distancing means that there is a 50% reduction in close contact between people.** See **[more](/more#distancing)** for a description of physical distancing.
 
@@ -114,7 +115,7 @@ Death projections were made using existing data from Ottawa Public Health and pr
 
 Only deaths for hospital patients are included in the projections. Long-term care (LTC, also known as nursing homes) and retirement homes are not included in the projections. As of April 3, 2020, 40 to 60% of COVID-19 related deaths occurred in residents of LTC or retirement homes. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) do not want advanced life support or transfer to the hospital if they have a life threatening illness. 
 
-### Cummulative deaths in hospital
+### Cumulative deaths in hospital
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
@@ -127,4 +128,3 @@ death_visualization(ott_projections, ott_observed, "cumulative_deaths", title = 
 source("../R/covid_visualization.R")
 death_visualization(ott_projections, ott_observed, "new_deaths", title = "Projected number of COVID-19 daily hospital deaths in Ottawa", y_label = "Deaths")
 ```
-
