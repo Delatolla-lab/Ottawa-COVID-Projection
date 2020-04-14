@@ -24,6 +24,12 @@ calc_mean_rate_of_increase <- function(input){
   return(out)
 }
 
+calc_doubling_time <- function(observed_data){
+  total_time <- length(observed_data)
+  out <- ((total_time*log(2))/(log(observed_data[[total_time]]/observed_data[[1]])))
+  return(out)
+}
+
 # Temporary dataset starting at March 26
 tmp <- na.omit(ott_observed[10:nrow(ott_observed), "observed_census_ICU_p_acute_care"])
 
@@ -44,7 +50,9 @@ expected_value <- cal_expected_value(day1, last(daily_mean_rate), length(daily_m
 ott_observed$expected_val_mar26_onward <- NA
 ott_observed[10:(10+length(expected_value)-1),"expected_val_mar26_onward"] <- expected_value
 
-
+#Doubling Time
+observed_date <- na.omit(ott_observed[10:nrow(ott_observed), "observed_census_ICU_p_acute_care"])
+doubling_time <- calc_doubling_time(observed_date)
 
 # INSERT INTO INDEX.RMD 
 # for testing
