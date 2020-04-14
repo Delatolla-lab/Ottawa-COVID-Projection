@@ -2,8 +2,14 @@
 title: Changelog
 ---
 
+# V1.2.1
+2020-04-14 (12:30pm)
+
+- Updated Ottawa hospital census data to 2020-04-13
+- No change in model parameters.
+
 # V1.2.0
-2020-04-14
+2020-04-14 (9:30am)
 
 - Updated Ottawa hospital census data to 2020-04-12
 - Changes to model parameters:
