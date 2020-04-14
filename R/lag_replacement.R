@@ -41,7 +41,7 @@ day1 <- ott_observed[10,"observed_census_ICU_p_acute_care"]
 expected_value <- cal_expected_value(day1, last(daily_mean_rate), length(daily_mean_rate))
 
 # Column for expected values
-ott_observed$expected_val_mar26_onward <- 0
+ott_observed$expected_val_mar26_onward <- NA
 ott_observed[10:(10+length(expected_value)-1),"expected_val_mar26_onward"] <- expected_value
 
 

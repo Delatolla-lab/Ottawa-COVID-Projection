@@ -50,7 +50,7 @@ observed_figure <- function(data, title, y_label) {
     xsrc = "wyusuf:11:3cac68", 
     x = data$date,
     ysrc = "wyusuf:11:c15d89", 
-    y = data$expected_val_mar26_onwards,
+    y = data$expected_val_mar26_onward,
     visible = TRUE, 
     orientation = "v"
   )
