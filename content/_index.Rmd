@@ -71,6 +71,8 @@ tmp <- calc_expected_values_for_n_weeks(ott_observed, number_weeks = 3)
 observed_figure(tmp, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
 ```
 
+> Doubling time refers the time it takes (in days) for the number of hospitalized patients to double in number.
+
 ## Acute care hospitalization projections
 
 Click or hover over over top right of visualization for downloading, zooming and panning.
