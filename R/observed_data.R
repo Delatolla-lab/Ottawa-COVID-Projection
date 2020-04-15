@@ -454,7 +454,7 @@ observed_figure <- function(param_list, title, y_label) {
   p <- add_trace(p, line=trace3$line, meta=trace3$meta, mode=trace3$mode, name=trace3$name, type=trace3$type, xsrc=trace3$xsrc, x=trace3$x, ysrc=trace3$ysrc, y=trace3$y, visible=trace3$visible, orientation=trace3$orientation)
   p <- add_trace(p, line=trace4$line, meta=trace4$meta, mode=trace4$mode, name=trace4$name, type=trace4$type, xsrc=trace4$xsrc, x=trace4$x, ysrc=trace4$ysrc, y=trace4$y, y=trace4$y, visible=trace4$visible, orientation=trace4$orientation)
   p <- add_trace(p, line=trace5$line, meta=trace5$meta, mode=trace5$mode, name=trace5$name, type=trace5$type, xsrc=trace5$xsrc, x=trace5$x, ysrc=trace5$ysrc, y=trace5$y, y=trace5$y, visible=trace5$visible, orientation=trace5$orientation)
-  p <- add_annotations(p, x = median(expected_values[[1]]$date), y = median(expected_values[[1]]$expected_val), text = paste(as.character(round(doubling_time[[1]], 2)), "days", sep = " "), xref = "x", yref = "y", showarrow = FALSE)
+  p <- add_annotations(p, x = median(expected_values[[1]]$date, na.rm = TRUE), y = median(expected_values[[1]]$expected_val, na.rm = TRUE), text = paste(as.character(round(doubling_time[[1]], 2)), "days", sep = " "), xref = "x", yref = "y", showarrow = FALSE)
   p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, barmode=layout$barmode, autosize=layout$autosize, template=layout$template, legend = list(x = 0.05, y = 1))
   p
 }
