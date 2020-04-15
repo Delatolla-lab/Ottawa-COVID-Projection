@@ -56,7 +56,7 @@ calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
     data[(start_of_calculation_week+1):(start_of_calculation_week+6),"mean_daily_rate_of_increase_mar26_onward"] <- daily_mean_rate
     
     expected_value <- cal_expected_value(all_days[[start_of_calculation_week]], last(daily_mean_rate), length(daily_mean_rate))
-    data[start_of_calculation_week:(start_of_calculation_week+6),"expected_val_mar26_onward"]
+    data[start_of_calculation_week:(start_of_calculation_week+6),"expected_val_mar26_onward"] <- expected_value
     
     doubling_time[[week]] <- calc_doubling_time(observed_input_for_week)
   }
