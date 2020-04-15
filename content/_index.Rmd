@@ -65,7 +65,9 @@ t
 source("../R/lag_replacement.R")
 source("../R/observed_data.R")
 
-observed_figure(ott_observed, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
+tmp <- calc_expected_values_for_n_weeks(ott_observed, number_weeks = 3)
+
+observed_figure(tmp, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
 ```
 
 > A doubling time for hospital census translates to an effective physical distancing of xx%. Note that there is a lag period between a change in physical distancing and the effect on hospital census. **See [more](/more#distancing)**
