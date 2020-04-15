@@ -41,12 +41,12 @@ calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
     stop(paste("The requested number of weeks is above the maximum number of complete weeks. The last incomplete week starts at row number:", start_of_first_full_week_index+(7*max_number_of_weeks)))
   }
   
-  start_of_calculation_week <- ifelse(number_weeks!=max_number_of_weeks, start_of_first_full_week_index + 7*(max_number_of_weeks - number_weeks),start_of_first_full_week_index)
+  start_of_calculation_week_standard <- ifelse(number_weeks!=max_number_of_weeks, start_of_first_full_week_index + 7*(max_number_of_weeks - number_weeks),start_of_first_full_week_index)
   doubling_time <- list()
   for (week in seq(number_weeks)) {
     # Convert to number of weeks to add
     weeks_to_add <- week-1
-    start_of_calculation_week <- start_of_calculation_week + 7*weeks_to_add
+    start_of_calculation_week <- start_of_calculation_week_standard + 7*weeks_to_add
     
     observed_input_for_week <- all_days[start_of_calculation_week:(start_of_calculation_week+6)]
     rate_of <- calc_rate_of_increase(observed_input_for_week)
