@@ -1,6 +1,24 @@
-observed_figure <- function(data, title, y_label) {
+observed_figure <- function(param_list, title, y_label) {
+  data <- param_list[[1]]
+  doubling_time <- param_list[[2]]
+  expected_values <- param_list[[3]]
   library(plotly)
   trace1 <- list(
+    meta = list(columnNames = list(
+      x = "date", 
+      y = "observed_census_ICU"
+    )), 
+    name = "ICU census", 
+    type = "bar", 
+    xsrc = "wyusuf:11:3cac68", 
+    x = data$date,
+    ysrc = "wyusuf:11:5f8f8c", 
+    y = data$observed_census_ICU,
+    visible = TRUE,
+    showlegend = TRUE,
+    orientation = "v"
+  )
+  trace2 <- list(
     meta = list(columnNames = list(
       x = "date", 
       y = "observed_census_acute_care", 
@@ -18,20 +36,7 @@ observed_figure <- function(data, title, y_label) {
       color = "#636efa"
     ), 
     visible = TRUE, 
-    orientation = "v"
-  )
-  trace2 <- list(
-    meta = list(columnNames = list(
-      x = "date", 
-      y = "observed_census_ICU"
-    )), 
-    name = "ICU census", 
-    type = "bar", 
-    xsrc = "wyusuf:11:3cac68", 
-    x = data$date,
-    ysrc = "wyusuf:11:5f8f8c", 
-    y = data$observed_census_ICU,
-    visible = TRUE, 
+    showlegend = TRUE,
     orientation = "v"
   )
   trace3 <- list(
@@ -45,16 +50,59 @@ observed_figure <- function(data, title, y_label) {
       y = "Rate of growth"
     )), 
     mode = "lines", 
-    name = "Expected values (March 26 onwards)", 
+    name = paste("Expected values for 3 weeks ago,\nbased on an observed doubling time\nof", round(doubling_time[[1]], 2), "days)"), 
     type = "scatter", 
     xsrc = "wyusuf:11:3cac68", 
     x = data$date,
     ysrc = "wyusuf:11:c15d89", 
-    y = data$expected_val_mar26_onwards,
-    visible = TRUE, 
+    y = expected_values[[1]]$expected_val,
+    visible = TRUE,
+    showlegend = FALSE,
     orientation = "v"
   )
-  data <- list(trace1, trace2, trace3)
+  trace4 <- list(
+    line = list(
+      dash = "dash", 
+      color = "rgb(4, 157, 53)", 
+      width = 5
+    ), 
+    meta = list(columnNames = list(
+      x = "date", 
+      y = "previous 7 day"
+    )), 
+    mode = "lines", 
+    name = paste("Expected values for 2 weeks ago,\nbased on an observed doubling time\nof", round(doubling_time[[2]], 2), "days)"),
+    type = "scatter", 
+    xsrc = "wyusuf:11:3cac68", 
+    x = data$date,
+    ysrc = "wyusuf:11:3ea644", 
+    y = expected_values[[2]]$expected_val,
+    visible = TRUE,
+    showlegend = FALSE,
+    orientation = "v"
+  )
+  trace5 <- list(
+    line = list(
+      dash = "dash", 
+      color = "rgb(4, 157, 53)", 
+      width = 5
+    ), 
+    meta = list(columnNames = list(
+      x = "date", 
+      y = "previous previous 7 day"
+    )), 
+    mode = "lines", 
+    type = "scatter",
+    name = paste("Expected values for last week,\nbased on an observed doubling time\nof", round(doubling_time[[3]], 2), "days)"),
+    xsrc = "wyusuf:11:3cac68", 
+    x = data$date,
+    ysrc = "wyusuf:11:51678f", 
+    y = expected_values[[3]]$expected_val,
+    visible = TRUE,
+    showlegend = FALSE,
+    orientation = "v"
+  )
+  data <- list(trace1, trace2, trace3, trace4, trace5)
   layout <- list(
     title = list(text = as.character(title)), 
     xaxis = list(
@@ -410,9 +458,14 @@ observed_figure <- function(data, title, y_label) {
     )
   )
   p <- plot_ly()
-  p <- add_trace(p, meta=trace1$meta, mode=trace1$mode, name=trace1$name, type=trace1$type, xsrc=trace1$xsrc, x=trace1$x, ysrc=trace1$ysrc, y=trace1$y, marker=trace1$marker, visible=trace1$visible, orientation=trace1$orientation)
-  p <- add_trace(p, meta=trace2$meta, name=trace2$name, type=trace2$type, xsrc=trace2$xsrc, x=trace2$x, ysrc=trace2$ysrc, y=trace2$y, visible=trace2$visible, orientation=trace2$orientation)
-  p <- add_trace(p, line=trace3$line, meta=trace3$meta, mode=trace3$mode, name=trace3$name, type=trace3$type, xsrc=trace3$xsrc, x=trace3$x, ysrc=trace3$ysrc, y=trace3$y, visible=trace3$visible, orientation=trace3$orientation)
-  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, barmode=layout$barmode, autosize=layout$autosize, template=layout$template)
+  p <- add_trace(p, meta=trace1$meta, mode=trace1$mode, name=trace1$name, type=trace1$type, xsrc=trace1$xsrc, x=trace1$x, ysrc=trace1$ysrc, y=trace1$y, marker=trace1$marker, visible=trace1$visible, showlegend = trace1$showlegend, orientation=trace1$orientation)
+  p <- add_trace(p, meta=trace2$meta, name=trace2$name, type=trace2$type, xsrc=trace2$xsrc, x=trace2$x, ysrc=trace2$ysrc, y=trace2$y, visible=trace2$visible, showlegend = trace2$showlegend, orientation=trace2$orientation)
+  p <- add_trace(p, line=trace3$line, meta=trace3$meta, mode=trace3$mode, name=trace3$name, type=trace3$type, xsrc=trace3$xsrc, x=trace3$x, ysrc=trace3$ysrc, y=trace3$y, visible=trace3$visible, showlegend = trace3$showlegend, orientation=trace3$orientation)
+  p <- add_trace(p, line=trace4$line, meta=trace4$meta, mode=trace4$mode, name=trace4$name, type=trace4$type, xsrc=trace4$xsrc, x=trace4$x, ysrc=trace4$ysrc, y=trace4$y, y=trace4$y, visible=trace4$visible, showlegend = trace4$showlegend, orientation=trace4$orientation)
+  p <- add_trace(p, line=trace5$line, meta=trace5$meta, mode=trace5$mode, name=trace5$name, type=trace5$type, xsrc=trace5$xsrc, x=trace5$x, ysrc=trace5$ysrc, y=trace5$y, y=trace5$y, visible=trace5$visible, showlegend = trace5$showlegend, orientation=trace5$orientation)
+  p <- add_annotations(p, x = min(expected_values[[1]]$date, na.rm = TRUE), y = median(expected_values[[1]]$expected_val, na.rm = TRUE), text = paste("Doubling time:", "\n",as.character(round(doubling_time[[1]], 2)), "days", sep = " "), xref = "x", yref = "y", showarrow = FALSE)
+  p <- add_annotations(p, x = min(expected_values[[2]]$date, na.rm = TRUE), y = median(expected_values[[2]]$expected_val, na.rm = TRUE), text = paste("Doubling time:", "\n",as.character(round(doubling_time[[2]], 2)), "days", sep = " "), xref = "x", yref = "y", showarrow = FALSE)
+  p <- add_annotations(p, x = min(expected_values[[3]]$date, na.rm = TRUE), y = median(expected_values[[3]]$expected_val, na.rm = TRUE), text = paste("Doubling time:", "\n", as.character(round(doubling_time[[3]], 2)), "days", sep = " "), xref = "x", yref = "y", showarrow = FALSE)
+  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, barmode=layout$barmode, autosize=TRUE, template=layout$template, legend = list(x = 0.05, y = 1))
   p
 }
