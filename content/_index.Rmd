@@ -64,6 +64,7 @@ t
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/lag_replacement.R")
 source("../R/observed_data.R")
+library(dplyr)
 
 tmp <- calc_expected_values_for_n_weeks(ott_observed, number_weeks = 3)
 

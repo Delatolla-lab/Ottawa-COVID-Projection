@@ -91,7 +91,8 @@ calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
     expected_sub_data[,"expected_val"] <- NA
     expected_sub_data[,"date"] <- NA
     expected_sub_data[start_of_calculation_week:(start_of_calculation_week+6),"expected_val"] <- expected_value
-    expected_sub_data[start_of_calculation_week:(start_of_calculation_week+6),"date"] <- data[start_of_calculation_week:(start_of_calculation_week+6),"date"]
+    expected_sub_data[start_of_calculation_week:(start_of_calculation_week+6),"date"] <- 
+      as.character(data[start_of_calculation_week:(start_of_calculation_week+6),"date"])
     expected_out[[week]] <- expected_sub_data
     doubling_time[[week]] <- calc_doubling_time(observed_input_for_week)
   }
