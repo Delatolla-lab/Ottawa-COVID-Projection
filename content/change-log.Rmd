@@ -3,6 +3,7 @@ title: Changelog
 ---
 
 # V1.3.0
+2020-04-15
 
 - Updated Ottawa hospital census data to 2020-04-14
 - New figure: Observed census & doubling time
