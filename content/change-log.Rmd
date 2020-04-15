@@ -2,6 +2,13 @@
 title: Changelog
 ---
 
+# V1.3.0
+
+- Updated Ottawa hospital census data to 2020-04-14
+- New figure: Observed hospital resource use
+  - Figure displays observed acute-care and ICU census in Ottawa
+  - Figure estimates weekly doubling based on observed data
+
 # V1.2.1
 2020-04-14 (12:30pm)
 
