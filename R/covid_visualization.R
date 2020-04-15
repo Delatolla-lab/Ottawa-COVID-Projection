@@ -59,7 +59,7 @@ hosp_visualization <-
     library(plotly)
     data <- trace
     layout <- list(
-      title = list(text = paste(as.character(title))), 
+      title = list(text = paste(as.character(title)), x = 0.5), 
       xaxis = list(
         type = "date", 
         range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
@@ -173,7 +173,7 @@ death_visualization <- function(data1, data2, parameter, title, y_label){
   )
   data <- list(trace1, trace2, trace3, trace4)
   layout <- list(
-    title = list(text = paste(as.character(title))), 
+    title = list(text = paste(as.character(title)), x = 0.5), 
     xaxis = list(
       type = "date", 
       range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
