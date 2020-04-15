@@ -1,5 +1,13 @@
-
-cal_expected_value <- function(default, rate, len){
+#' Calculate expected values
+#' 
+#' Internal function for calculating expected values based on passed rate
+#' 
+#' @param default the value to start the expected calculations from
+#' @param rate of change for that period
+#' @param len length of the period
+#' 
+#' @return a numeric vector containing calculated expected values
+calc_expected_value <- function(default, rate, len){
   out <- numeric()
   out[1] <- default
   for (i in 2:(len+1)) {
@@ -8,6 +16,13 @@ cal_expected_value <- function(default, rate, len){
   return(out)
 }
 
+#' Calculate Rate of Increase
+#' 
+#' Calculate rate of increase between two days in the given range
+#' 
+#' @param input range of observed data to calculate rate of increase on
+#' 
+#' @return daily rate of change for the passed range with len of input-1
 calc_rate_of_increase <- function(input){
   out <- numeric()
   for (i in 2:length(input)) {
@@ -16,6 +31,13 @@ calc_rate_of_increase <- function(input){
   return(out)
 }
 
+#' Calculate mean rate of increase
+#'
+#' Calculates running average of the passed range
+#' 
+#' @param input daily rate of increase range
+#' 
+#' @return vector containing means
 calc_mean_rate_of_increase <- function(input){
   out <- numeric()
   for (i in 1:length(input)) {
@@ -24,6 +46,11 @@ calc_mean_rate_of_increase <- function(input){
   return(out)
 }
 
+#' Calculate doubling time for given range
+#' 
+#' @param observed_data range of observed data to calculate doubling time on
+#' 
+#' @return numeric representing doubling time for passed range
 calc_doubling_time <- function(observed_data){
   total_time <- (length(observed_data)-1)
   out <- ((total_time*log(2))/(log(observed_data[[total_time+1]]/observed_data[[1]])))
@@ -56,13 +83,15 @@ calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
     daily_mean_rate <- calc_mean_rate_of_increase(rate_of)
     data[(start_of_calculation_week+1):(start_of_calculation_week+6),"mean_daily_rate_of_increase"] <- daily_mean_rate
     
-    expected_value <- cal_expected_value(all_days[[start_of_calculation_week]], last(daily_mean_rate), length(daily_mean_rate))
+    expected_value <- calc_expected_value(all_days[[start_of_calculation_week]], last(daily_mean_rate), length(daily_mean_rate))
     data[start_of_calculation_week:(start_of_calculation_week+6),"expected_val"] <- expected_value
     
     # This is done to preserve row numbers
     expected_sub_data <- as.data.frame(data[,0])
     expected_sub_data[,"expected_val"] <- NA
+    expected_sub_data[,"date"] <- NA
     expected_sub_data[start_of_calculation_week:(start_of_calculation_week+6),"expected_val"] <- expected_value
+    expected_sub_data[start_of_calculation_week:(start_of_calculation_week+6),"date"] <- data[start_of_calculation_week:(start_of_calculation_week+6),"date"]
     expected_out[[week]] <- expected_sub_data
     doubling_time[[week]] <- calc_doubling_time(observed_input_for_week)
   }
