@@ -1,4 +1,4 @@
-observed_figure <- function(data, title, y_label) {
+observed_figure <- function(data, title, y_label, expected_values) {
   library(plotly)
   trace1 <- list(
     meta = list(columnNames = list(
@@ -50,7 +50,7 @@ observed_figure <- function(data, title, y_label) {
     xsrc = "wyusuf:11:3cac68", 
     x = data$date,
     ysrc = "wyusuf:11:c15d89", 
-    y = data$expected_val_mar26_onward,
+    y = expected_values[[1]]$expected_val_mar26_onward,
     visible = TRUE, 
     orientation = "v"
   )
@@ -69,7 +69,7 @@ observed_figure <- function(data, title, y_label) {
     xsrc = "wyusuf:11:3cac68", 
     x = data$date,
     ysrc = "wyusuf:11:3ea644", 
-    y = NA
+    y = expected_values[[2]]$expected_val_mar26_onward
   )
   trace5 <- list(
     line = list(
@@ -86,7 +86,7 @@ observed_figure <- function(data, title, y_label) {
     xsrc = "wyusuf:11:3cac68", 
     x = data$date,
     ysrc = "wyusuf:11:51678f", 
-    y = NA
+    y = expected_values[[3]]$expected_val_mar26_onward
   )
   data <- list(trace1, trace2, trace3, trace4, trace5)
   layout <- list(

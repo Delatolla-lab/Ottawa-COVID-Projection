@@ -43,6 +43,7 @@ calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
   
   start_of_calculation_week_standard <- ifelse(number_weeks!=max_number_of_weeks, start_of_first_full_week_index + 7*(max_number_of_weeks - number_weeks),start_of_first_full_week_index)
   doubling_time <- list()
+  expected_out <- list()
   for (week in seq(number_weeks)) {
     # Convert to number of weeks to add
     weeks_to_add <- week-1
@@ -58,10 +59,15 @@ calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
     expected_value <- cal_expected_value(all_days[[start_of_calculation_week]], last(daily_mean_rate), length(daily_mean_rate))
     data[start_of_calculation_week:(start_of_calculation_week+6),"expected_val_mar26_onward"] <- expected_value
     
+    # This is done to preserve row numbers
+    expected_sub_data <- as.data.frame(data[,0])
+    expected_sub_data[,"expected_val_mar26_onward"] <- NA
+    expected_sub_data[start_of_calculation_week:(start_of_calculation_week+6),"expected_val_mar26_onward"] <- expected_value
+    expected_out[[week]] <- expected_sub_data
     doubling_time[[week]] <- calc_doubling_time(observed_input_for_week)
   }
 
-  return(list(data,doubling_time))
+  return(list(data, doubling_time, expected_out))
 }
 
 # To use
