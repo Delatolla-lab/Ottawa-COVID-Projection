@@ -104,7 +104,7 @@ observed_figure <- function(param_list, title, y_label) {
   )
   data <- list(trace1, trace2, trace3, trace4, trace5)
   layout <- list(
-    title = list(text = as.character(title)), 
+    title = list(text = title, x=0.5), 
     xaxis = list(
       type = "date", 
       range = c("2020-03-16 12:00", "2020-04-07 12:00"), 
