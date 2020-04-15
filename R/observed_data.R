@@ -1,4 +1,7 @@
-observed_figure <- function(data, title, y_label, expected_values) {
+observed_figure <- function(param_list, title, y_label) {
+  data <- param_list[[1]]
+  doubling_time <- param_list[[2]]
+  expected_values <- param_list[[3]]
   library(plotly)
   trace1 <- list(
     meta = list(columnNames = list(
@@ -45,7 +48,7 @@ observed_figure <- function(data, title, y_label, expected_values) {
       y = "Rate of growth"
     )), 
     mode = "lines", 
-    name = paste("Expected values (March 26 onwards,\nbased on an observed doubling time\nof", round(doubling_time, 2), "days)"), 
+    name = paste("Expected values (March 26 onwards,\nbased on an observed doubling time\nof", round(doubling_time[[1]], 2), "days)"), 
     type = "scatter", 
     xsrc = "wyusuf:11:3cac68", 
     x = data$date,
