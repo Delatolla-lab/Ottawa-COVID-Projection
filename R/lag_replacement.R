@@ -30,50 +30,42 @@ calc_doubling_time <- function(observed_data){
   return(out)
 }
 
-# Temporary dataset starting at March 26
-tmp <- na.omit(ott_observed[10:nrow(ott_observed), "observed_census_ICU_p_acute_care"])
+calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
+  all_days <- na.omit(data[, "observed_census_ICU_p_acute_care"])
+  # Numeric representation of all_days[[1]] as a day of the week
+  first_day <- 2
+  # TODO Use dates to verify no skipped days
+  start_of_first_full_week_index <- (7 - first_day)+2
+  max_number_of_weeks <- floor((length(all_days)-(start_of_first_full_week_index-1))/7)
+  if (number_weeks > max_number_of_weeks){
+    stop(paste("The requested number of weeks is above the maximum number of complete weeks. The last incomplete week starts at row number:", start_of_first_full_week_index+(7*max_number_of_weeks)))
+  }
+  
+  start_of_calculation_week <- ifelse(number_weeks!=max_number_of_weeks, start_of_first_full_week_index + 7*(max_number_of_weeks - number_weeks),start_of_first_full_week_index)
+  doubling_time <- list()
+  for (week in seq(number_weeks)) {
+    # Convert to number of weeks to add
+    weeks_to_add <- week-1
+    start_of_calculation_week <- start_of_calculation_week + 7*weeks_to_add
+    
+    observed_input_for_week <- all_days[start_of_calculation_week:(start_of_calculation_week+6)]
+    rate_of <- calc_rate_of_increase(observed_input_for_week)
+    data[(start_of_calculation_week+1):(start_of_calculation_week+6),"rate_of_increase_mar26_onward"] <-rate_of
+    
+    daily_mean_rate <- calc_mean_rate_of_increase(rate_of)
+    data[(start_of_calculation_week+1):(start_of_calculation_week+6),"mean_daily_rate_of_increase_mar26_onward"] <- daily_mean_rate
+    
+    expected_value <- cal_expected_value(all_days[[start_of_calculation_week]], last(daily_mean_rate), length(daily_mean_rate))
+    data[start_of_calculation_week:(start_of_calculation_week+6),"expected_val_mar26_onward"]
+    
+    doubling_time[[week]] <- calc_doubling_time(observed_input_for_week)
+  }
 
-rate_of <- calc_rate_of_increase(tmp)
+  return(list(data,doubling_time))
+}
 
-# Create rate of increase column
-ott_observed$rate_of_increase_mar26_onward <- 0
-ott_observed[11:(11+length(rate_of)-1),"rate_of_increase_mar26_onward"] <-rate_of 
-daily_mean_rate <- calc_mean_rate_of_increase(rate_of)
-ott_observed$mean_daily_rate_of_increase <- 0
-ott_observed[11:(11+length(daily_mean_rate)-1),"mean_daily_rate_of_increase_mar26_onward"] <- daily_mean_rate
-
-# Object for initial observed value at March 26
-day1 <- ott_observed[10,"observed_census_ICU_p_acute_care"]
-expected_value <- cal_expected_value(day1, last(daily_mean_rate), length(daily_mean_rate))
-
-# Column for expected values
-ott_observed$expected_val_mar26_onward <- NA
-ott_observed[10:(10+length(expected_value)-1),"expected_val_mar26_onward"] <- expected_value
-
-#Doubling Time
-observed_date <- na.omit(ott_observed[10:nrow(ott_observed), "observed_census_ICU_p_acute_care"])
-doubling_time <- calc_doubling_time(observed_date)
-
-# INSERT INTO INDEX.RMD 
-# for testing
-
-# ```{r}
-# ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
-# tmp <- na.omit(ott_observed[10:nrow(ott_observed), "observed_census_ICU_p_acute_care"])
-# rate_of <- calc_rate_of_increase(tmp)
-# ott_observed$rate_of_increase_mar26_onward <- NA
-# ott_observed[11:(11+length(rate_of)-1),"rate_of_increase_mar26_onward"] <-rate_of 
-# 
-# daily_mean_rate <- calc_mean_rate_of_increase(rate_of)
-# ott_observed$mean_daily_rate_of_increase <- NA
-# ott_observed[11:(11+length(daily_mean_rate)-1),"mean_daily_rate_of_increase_mar26_onward"] <- daily_mean_rate
-# 
-# day1 <- ott_observed[10,"observed_census_ICU_p_acute_care"]
-# expected_value <- cal_expected_value(day1, last(daily_mean_rate), length(daily_mean_rate))
-# ott_observed$expected_val_mar26_onward <- NA
-# ott_observed[10:(10+length(expected_value)-1),"expected_val_mar26_onward"] <- expected_value
-# View(ott_observed[,c("expected_val_mar26_onward", "mean_daily_rate_of_increase_mar26_onward", "rate_of_increase_mar26_onward")])
-# 
-# ```
-
+# To use
+#  tmp <- calc_expected_values_for_n_weeks(ott_observed, number_weeks = 2)
+# doubling_time <- tmp[[2]]
+# new_data <- tmp[[1]]
 
