@@ -60,7 +60,7 @@ intervention_70 <- peak_projections[3,2]
 - With physical distancing at 70%, there is a `r round(((no_intervention - intervention_70)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
 
 
-> **Physical distancing means that there is a reduction in close contact between people.** For example, 50% physical refers to a 50% reduction in close contact between people. See [more](/more#distancing) for more details about physical distancing.
+> **Physical distancing means that there is a reduction in close contact between people.** For example, 50% physical refers to a 50% reduction in close contact between people. See [more](/more#distancing) for details about physical distancing.
 
 ## Observed census & doubling time
 
@@ -74,7 +74,15 @@ tmp <- calc_expected_values_for_n_weeks(ott_observed, number_weeks = 3)
 observed_figure(tmp, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
 ```
 
-> Doubling time refers the time it takes (in days) for the number of hospitalized patients to double in number. In this figure, doubling time was calculated for each 7 day period (Mon-Sun). Doubling time can then be used to estimate the effective physical distancing that is being observed.
+Doubling time refers the time it takes (in days) for the number of hospitalized patients to double in number. In this figure, doubling time was calculated for each 7 day period (Mon-Sun). Doubling time can then be used to estimate the effective physical distancing that is being observed.
+
+Physical distancing slows the spread of COVID-19 through the community. The result is a slower increase (or even a decrease) in hospitaization.
+
+> **Hospital census doubling time 32 days translates to effective physical distancing of 50%.** 
+
+> There is a lag of several weeks between the current level of physical distancing in the community and the level of effective physical distancing observed in recent hospital census trends. This means the currently level of physical distancing in the community is higher than 50%.
+
+A further explination of effective physical distancing will be added to the More page soon.
 
 ## Acute care hospitalization projections
 
