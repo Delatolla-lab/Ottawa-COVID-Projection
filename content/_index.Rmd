@@ -37,7 +37,7 @@ source("../R/estimate_scripts.R")
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
 peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("No prevention & control", "Current physical distancing", "70% physical distancing"))
+  factor(peak_projections$intervention, levels = c("No prevention & control", "Current distancing effectiveness", "70% physical distancing"))
 library(tidyverse)
 library(ggplot2)
 t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
@@ -78,7 +78,7 @@ observed_figure(tmp, "Observed census of COVID-19 hospitalizations in Ottawa", "
 
 ## Acute care hospitalization projections
 
-Click or hover over over top right of visualization for downloading, zooming and panning.
+Click or hover over over top right of visualization for downloading, zooming and panning. Projections are as of `r format(Sys.Date(), '%b %d, %Y')` and are based on the current number of hospitalizations and the observed doubling time. See [here](/model#parameters) for all input parameters.
 
 ### Census projections
 
