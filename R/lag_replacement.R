@@ -16,35 +16,6 @@ calc_expected_value <- function(default, rate, len){
   return(out)
 }
 
-#' Calculate Rate of Increase
-#' 
-#' Calculate rate of increase between two days in the given range
-#' 
-#' @param input range of observed data to calculate rate of increase on
-#' 
-#' @return daily rate of change for the passed range with len of input-1
-calc_rate_of_increase <- function(input){
-  out <- numeric()
-  for (i in 2:length(input)) {
-    out[i-1] <- ((input[i]-input[i-1])/input[i-1])
-  }
-  return(out)
-}
-
-#' Calculate mean rate of increase
-#'
-#' Calculates running average of the passed range
-#' 
-#' @param input daily rate of increase range
-#' 
-#' @return vector containing means
-calc_mean_rate_of_increase <- function(input){
-  out <- numeric()
-  for (i in 1:length(input)) {
-    out[i] <- mean(input[1:i])
-  }
-  return(out)
-}
 
 #' Calculate doubling time for given range
 #' 
@@ -55,6 +26,12 @@ calc_doubling_time <- function(observed_data){
   total_time <- (length(observed_data)-1)
   out <- ((total_time*log(2))/(log(observed_data[[total_time+1]]/observed_data[[1]])))
   return(out)
+}
+
+calc_growth <- function(doubling_time){
+  growth <- (2^(1/doubling_time)) - 1
+  
+  return(growth)
 }
 
 calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
@@ -77,14 +54,17 @@ calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
     start_of_calculation_week <- start_of_calculation_week_standard + 7*weeks_to_add
     
     observed_input_for_week <- all_days[start_of_calculation_week:(start_of_calculation_week+6)]
-    rate_of <- calc_rate_of_increase(observed_input_for_week)
-    data[(start_of_calculation_week+1):(start_of_calculation_week+6),"rate_of_increase"] <-rate_of
+    #rate_of <- calc_rate_of_increase(observed_input_for_week)
+    #data[(start_of_calculation_week+1):(start_of_calculation_week+6),"rate_of_increase"] <-rate_of
     
-    daily_mean_rate <- calc_mean_rate_of_increase(rate_of)
-    data[(start_of_calculation_week+1):(start_of_calculation_week+6),"mean_daily_rate_of_increase"] <- daily_mean_rate
+    #daily_mean_rate <- calc_mean_rate_of_increase(rate_of)
+    #data[(start_of_calculation_week+1):(start_of_calculation_week+6),"mean_daily_rate_of_increase"] <- daily_mean_rate
     
-    expected_value <- calc_expected_value(all_days[[start_of_calculation_week]], last(daily_mean_rate), length(daily_mean_rate))
-    data[start_of_calculation_week:(start_of_calculation_week+6),"expected_val"] <- expected_value
+    doubling_time[[week]] <- calc_doubling_time(observed_input_for_week)
+    growth <- calc_growth(doubling_time[[week]])
+    
+    expected_value <- calc_expected_value(all_days[[start_of_calculation_week]], growth, length(observed_input_for_week)-1)
+    #data[start_of_calculation_week:(start_of_calculation_week+6),"expected_val"] <- expected_value
     
     # This is done to preserve row numbers
     expected_sub_data <- as.data.frame(data[,0])
@@ -94,7 +74,7 @@ calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
     expected_sub_data[start_of_calculation_week:(start_of_calculation_week+6),"date"] <- 
       as.character(data[start_of_calculation_week:(start_of_calculation_week+6),"date"])
     expected_out[[week]] <- expected_sub_data
-    doubling_time[[week]] <- calc_doubling_time(observed_input_for_week)
+    #doubling_time[[week]] <- calc_doubling_time(observed_input_for_week)
   }
 
   return(list(data, doubling_time, expected_out))
@@ -104,4 +84,34 @@ calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
 #  tmp <- calc_expected_values_for_n_weeks(ott_observed, number_weeks = 2)
 # doubling_time <- tmp[[2]]
 # new_data <- tmp[[1]]
+# ---------- DEPRICATED ----------
 
+#' #' Calculate Rate of Increase
+#' #' 
+#' #' Calculate rate of increase between two days in the given range
+#' #' 
+#' #' @param input range of observed data to calculate rate of increase on
+#' #' 
+#' #' @return daily rate of change for the passed range with len of input-1
+#' calc_rate_of_increase <- function(input){
+#'   out <- numeric()
+#'   for (i in 2:length(input)) {
+#'     out[i-1] <- ((input[i]-input[i-1])/input[i-1])
+#'   }
+#'   return(out)
+#' }
+#' 
+#' #' Calculate mean rate of increase
+#' #'
+#' #' Calculates running average of the passed range
+#' #' 
+#' #' @param input daily rate of increase range
+#' #' 
+#' #' @return vector containing means
+#' calc_mean_rate_of_increase <- function(input){
+#'   out <- numeric()
+#'   for (i in 1:length(input)) {
+#'     out[i] <- mean(input[1:i])
+#'   }
+#'   return(out)
+#' }
