@@ -80,7 +80,9 @@ Physical distancing slows the spread of COVID-19 through the community. The resu
 
 > **Hospital census doubling time 32 days translates to an effective physical distancing of 50%.** 
 
-> There is a lag of several weeks between the current level of physical distancing in the community and the level of effective physical distancing observed in recent hospital census trends. This means the current level of physical distancing in the community is higher than 50%. A further explanation of effective physical distancing will be added to the [More](/more) page soon.
+> There is a lag of several weeks between the current level of physical distancing in the community and the level of effective physical distancing observed in recent hospital census trends. This means the current level of physical distancing in the community is higher than 50%. 
+
+> A further explanation of effective physical distancing will be added to the [More](/more) page soon.
 
 ## Acute care hospitalization projections
 
