@@ -50,11 +50,15 @@ t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
        y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) +
   theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
 t
+
+no_intervention <- peak_projections[1,2]
+current_intervention <- peak_projections[2,2]
+intervention_70 <- peak_projections[3,2]
 ```
 
-- 50% physical distancing is a 93% reduction in peak hospitalizations from no prevention & control.
+- 50% physical distancing is a `r round(((no_intervention - current_intervention)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
 
-- 70% physical distancing is a 99% reduction in peak hospitalizations from no prevention & control.
+- 70% physical distancing is a `r round(((no_intervention - intervention_70)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
 
 
 > **50% physical distancing means that there is a 50% reduction in close contact between people.** See **[more](/more#distancing)** for a description of physical distancing.
