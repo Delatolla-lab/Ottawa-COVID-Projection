@@ -7,4 +7,3 @@ The main purpose of this site is to visualize Ottawa-based projections for model
 - Review and update model parameters based on recent published studies. Priories for review:
     - ventilated patients
     - deaths
-- Add plot for observed hospital census trend, with estimated doubling time. 

@@ -1,16 +1,16 @@
 Parameter,Value,Values
-Model date,2020-04-09,2020-04-16
+Model date,2020-04-16,2020-04-17
 Regional population,1000000,1000000
 Hospital market share (%),100,100
-Currently hospitalized,30,43
+Currently hospitalized,43,37
 Date of first hospitalized case,N/A,N/A
-Doubling time in days (up to today),4,31.98
-Physical distancing (%),50-70,0-20
-Date of physical distancing implementation,N/A,2020-04-16
+Doubling time in days (up to today),31.98,31.98
+Physical distancing (%),50-70,50-70
+Date of physical distancing implementation,2020-04-16,2020-04-17
 Hospitalization (% of total infections),2.6,2.6
 ICU (% of total infections),0.75,0.75
 Ventilated (% of total infections),0.5,0.5
-Infectious days,14,7
+Infectious days,7,7
 Average hospital length of stay (days),10,10
 Average days in ICU,16,16
 Average days on ventilator,7,7

@@ -112,66 +112,49 @@ hosp_visualization <-
                 legend = list(x = 0.05, y = 0.9))
     return(p)
   }
-death_visualization <- function(data1, data2, parameter, title, y_label){
+
+death_visualization <- function(data1,
+                                data2,
+                                parameter,
+                                title,
+                                y_label){
+  trace <- list()
+  fill <- c("tozeroy", "tozeroy", "tozeroy", NULL)
+  meta <-
+    c(
+      param_append(parameter, 50),
+      param_append(parameter, 60),
+      param_append(parameter, 70),
+      "observed_data"
+    )
+  mode <- c("lines", "lines", "lines", "markers+lines")
+  name <-
+    c(
+      "Current distancing effectiveness",
+      "60% physical distancing",
+      "70% physical distancing",
+      "Reported # of deaths"
+    )
+  type <- c("scatter", "scatter", "scatter", "scatter")
+  x <- list(data1$date, data1$date, data1$date, data2$date)
+  ydata <- list(data1, data1, data1, data2)
+  yprefix <- c("^", "^", "^", "^observed_")
+  ysuffix <- c("_50$", "_60$", "_70$", "")
+  ypre_suffix <- c("", "", "", "$")
+  for (trace_index in 1:4) {
+    trace[[trace_index]] <- list(
+      fill = fill[trace_index],
+      meta = list(columnNames = list(x = "date",
+                                     y = meta[trace_index])),
+      mode = mode[trace_index],
+      name = name[trace_index],
+      type = type[trace_index],
+      x = x[[trace_index]],
+      y = data_y_creation(ydata[[trace_index]], yprefix[trace_index], ysuffix[trace_index], ypre_suffix[trace_index], parameter)
+    )
+  }
   library(plotly)
-  trace1 <- list(
-    fill = "tozeroy", 
-    meta = list(columnNames = list(
-      x = "date", 
-      y = paste(parameter, 50, sep = "_")
-    )), 
-    mode = "lines", 
-    name = "Current distancing effectiveness", 
-    type = "scatter", 
-    xsrc = "wyusuf:1:9c770a", 
-    x = data1$date, 
-    ysrc = "wyusuf:1:d75a98", 
-    y = data1[,grepl(paste(paste("^",as.character(parameter),sep = ""), "50$", sep = "_"), names(data1))]
-  )
-  trace2 <- list(
-    fill = "tozeroy", 
-    meta = list(columnNames = list(
-      x = "date", 
-      y = paste(as.character(parameter), 60, sep = "_")
-    )), 
-    mode = "lines", 
-    name = "60% physical distancing", 
-    type = "scatter", 
-    xsrc = "wyusuf:1:9c770a", 
-    x = data1$date, 
-    ysrc = "wyusuf:1:768815", 
-    y = data1[,grepl(paste(paste("^",as.character(parameter),sep = ""), "60$", sep = "_"), names(data1))], 
-    stackgroup = NULL
-  )
-  trace3 <- list(
-    fill = "tozeroy", 
-    meta = list(columnNames = list(
-      x = "date", 
-      y = paste(as.character(parameter), 70, sep = "_")
-    )), 
-    mode = "lines", 
-    name = "70% physical distancing", 
-    type = "scatter", 
-    xsrc = "wyusuf:1:9c770a", 
-    x = data1$date, 
-    ysrc = "wyusuf:1:3dc4e1", 
-    y = data1[,grepl(paste(paste("^",as.character(parameter),sep = ""), "70$", sep = "_"), names(data1))], 
-    stackgroup = NULL
-  )
-  trace4 <- list(
-    meta = list(columnNames = list(
-      x = "date", 
-      y = "observed_data"
-    )), 
-    mode = "markers+lines", 
-    name = "Reported # of deaths", 
-    type = "scatter", 
-    xsrc = "wyusuf:1:9c770a", 
-    x = data2$date, 
-    ysrc = "wyusuf:1:420b6f", 
-    y = data2[,grepl(paste("^observed",paste(as.character(parameter),"$",sep=""), sep = "_"), names(data2))]
-  )
-  data <- list(trace1, trace2, trace3, trace4)
+  data <- trace
   layout <- list(
     title = list(text = paste(as.character(title)), x = 0.5), 
     xaxis = list(
@@ -188,13 +171,25 @@ death_visualization <- function(data1, data2, parameter, title, y_label){
     ), 
     autosize = TRUE
   )
-  p <- plot_ly() %>% config(modeBarButtonsToRemove = c("toggleSpikelines", "lasso2d", "select2d"))
-  p <- add_trace(p, fill=trace1$fill, meta=trace1$meta, mode=trace1$mode, name=trace1$name, type=trace1$type, xsrc=trace1$xsrc, x=trace1$x, ysrc=trace1$ysrc, y=trace1$y)
-  p <- add_trace(p, fill=trace2$fill, meta=trace2$meta, mode=trace2$mode, name=trace2$name, type=trace2$type, xsrc=trace2$xsrc, x=trace2$x, ysrc=trace2$ysrc, y=trace2$y, stackgroup=trace2$stackgroup)
-  p <- add_trace(p, fill=trace3$fill, meta=trace3$meta, mode=trace3$mode, name=trace3$name, type=trace3$type, xsrc=trace3$xsrc, x=trace3$x, ysrc=trace3$ysrc, y=trace3$y, stackgroup=trace3$stackgroup)
-  p <- add_trace(p, meta=trace4$meta, mode=trace4$mode, name=trace4$name, type=trace4$type, xsrc=trace4$xsrc, x=trace4$x, ysrc=trace4$ysrc, y=trace4$y)
+  
+  p <- 
+    plot_ly() %>% config(modeBarButtonsToRemove = c("toggleSpikelines", "lasso2d", "select2d"))
+  for (trace_index in 1:4) {
+    p <-
+      add_trace(
+        p,
+        fill = trace[[trace_index]]$fill,
+        meta = trace[[trace_index]]$meta,
+        mode = trace[[trace_index]]$mode,
+        name = trace[[trace_index]]$name,
+        type = trace[[trace_index]]$type,
+        x = trace[[trace_index]]$x,
+        y = trace[[trace_index]]$y
+      )
+    
+  }
   p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=TRUE,
               width = 700, height = 500,
               legend = list(x = 0.05, y = 0.9))
-  p
+  return(p)
 }

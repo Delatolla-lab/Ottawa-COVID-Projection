@@ -2,6 +2,14 @@
 title: Changelog
 ---
 
+# V1.4.1
+2020-04-17
+
+- Updated Ottawa hospital census data to 2020-04-15.
+- Minor changes to model parameters:
+  - Current # of hospitalized patients changed from 43 to 37.
+  - Date of physical distancing implementation set to 2020-04-17.
+
 # V1.4.0
 2020-04-16
 
