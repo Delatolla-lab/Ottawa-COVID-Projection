@@ -137,9 +137,9 @@ death_visualization <- function(data1,
     )
   type <- c("scatter", "scatter", "scatter", "scatter")
   x <- list(data1$date, data1$date, data1$date, data2$date)
-  ydata <- list(data1, data1, data1, data2, data2)
+  ydata <- list(data1, data1, data1, data2)
   yprefix <- c("^", "^", "^", "^observed_")
-  ysuffix <- c("_50", "_60", "_70", "")
+  ysuffix <- c("_50$", "_60$", "_70$", "")
   ypre_suffix <- c("", "", "", "$")
   for (trace_index in 1:4) {
     trace[[trace_index]] <- list(
