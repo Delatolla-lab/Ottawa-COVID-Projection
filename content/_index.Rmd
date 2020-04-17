@@ -31,6 +31,9 @@ library(plotly)
 ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
 ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
 source("../R/estimate_scripts.R")
+source("../R/lag_replacement.R")
+source("../R/observed_data.R")
+source("../R/effective_physical_distancing.R")
 ```
 
 ## Peak hospitalization projections
@@ -65,8 +68,6 @@ intervention_70 <- peak_projections[3,2]
 ## Observed census & doubling time
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/lag_replacement.R")
-source("../R/observed_data.R")
 library(dplyr)
 
 tmp <- calc_expected_values_for_n_weeks(ott_observed, number_weeks = 3)
@@ -78,7 +79,7 @@ Doubling time refers the time it takes (in days) for the number of hospitalized 
 
 Physical distancing slows the spread of COVID-19 through the community. The result is a slower increase (or even a decrease) in hospitalization.
 
-> **Hospital census doubling time 32 days translates to an effective physical distancing of 50%.** 
+> **Hospital census doubling time of `r round(tmp[[2]][[3]], 1)` days translates to an effective physical distancing of approximately `r round(effective_pd, 0)`%** 
 
 > There is a lag of several weeks between the current level of physical distancing in the community and the level of effective physical distancing observed in recent hospital census trends. This means the current level of physical distancing in the community is higher than 50%. 
 
