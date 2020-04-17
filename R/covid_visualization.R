@@ -31,7 +31,7 @@ hosp_visualization <-
     mode <- c("lines", "lines", "lines", "markers+lines", "lines")
     name <-
       c(
-        "50% physical distancing",
+        "Current distancing effectiveness",
         "60% physical distancing",
         "70% physical distancing",
         "Reported # of patients",
@@ -121,7 +121,7 @@ death_visualization <- function(data1, data2, parameter, title, y_label){
       y = paste(parameter, 50, sep = "_")
     )), 
     mode = "lines", 
-    name = "50% physical distancing", 
+    name = "Current distancing effectiveness", 
     type = "scatter", 
     xsrc = "wyusuf:1:9c770a", 
     x = data1$date, 

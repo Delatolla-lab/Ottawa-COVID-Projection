@@ -82,12 +82,15 @@ ott_projections$new_deaths_70 <-
   ott_projections$new_deaths_70_45_64 + ott_projections$new_deaths_70_65p
 
 ## Cumulative death estimates
-
+library(dplyr)
 ott_projections$cumulative_deaths_50 <- 
+  last(na.omit(ott_observed$observed_cumulative_deaths)) +
   cumsum(ott_projections$new_deaths_50)
 
 ott_projections$cumulative_deaths_60 <-
+  last(na.omit(ott_observed$observed_cumulative_deaths)) +
   cumsum(ott_projections$new_deaths_60)
 
 ott_projections$cumulative_deaths_70 <-
+  last(na.omit(ott_observed$observed_cumulative_deaths)) +
   cumsum(ott_projections$new_deaths_70)
