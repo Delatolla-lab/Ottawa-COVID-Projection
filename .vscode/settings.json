@@ -1,0 +1,7 @@
+{
+    "html.format.enable": false,
+    "prettier.disableLanguages": [
+        "vue",
+        "html"
+    ]
+}

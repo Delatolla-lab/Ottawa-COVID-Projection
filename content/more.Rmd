@@ -54,7 +54,7 @@ In these projection models, a 70 percent physical distancing scenario means that
 
 See [model](/model) for a technical discussion about how physical distancing affects COVID-19 infectivity.
 
-<div class="more-info-images">
+<div id="more-info-images" class="more-info-images">
 <figure>
 <img src="/images/176989- infographic 50 percent.png"
   alt="50% reduction in physical distanicng. One person infects 1.25 people on day 5 and 15 people on day 30" />
