@@ -11,21 +11,48 @@ publishDir = "./docs"
     post = "/:year/:month/:day/:slug/"
 
 [[menu.main]]
+    name = "Visualizations"
+    url = ""
+    weight = 1
+
+[[menu.main]]
+    name = "Acute Care Projections"
+    url = "/#acute-care-hospitalization-projections"
+    weight = 1
+    parent="Visualizations"
+
+[[menu.main]]
+    name = "ICU Projections"
+    url = "/#icu-projections"
+    weight = 2
+    parent="Visualizations"
+
+[[menu.main]]
+    name = "Ventilator Projections"
+    url = "/#ventilator-projections"
+    weight = 3
+    parent="Visualizations"
+  
+[[menu.main]]
     name = "Home"
     url = "/"
     weight = 1
+
 [[menu.main]]
     name = "Model"
     url = "/model/"
     weight = 2
+
 [[menu.main]]
     name = "More"
     url = "/more/"
     weight = 3
+
 [[menu.main]]
     name = "Contact"
     url = "/contact/"
     weight = 4
+
 [[menu.main]]
     name = "Changelog"
     url = "/change-log/"
