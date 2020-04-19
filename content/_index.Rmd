@@ -22,27 +22,90 @@ _Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST._
 
 La version française de ce contenu sera publiée sous peu.
 
-The charts below show observed & projected hospital resource use for COVID-19 patients in the Ottawa area. The projections supplement provincial projections with current, local data on acute hospital care and intensive care unit (ICU) use.  
-
-The projections are created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at the Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health.
+Current of forecast hospital use for COVID-19 patients in the Ottawa area. Created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at the Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+# libraries
 library(plotly)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+
+# data
 ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
 ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
+peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
+
+# scripts
 source("../R/estimate_scripts.R")
 source("../R/lag_replacement.R")
 source("../R/observed_data.R")
 source("../R/effective_physical_distancing.R")
+
+# data for dashboard and figures
+
+## Observed census
+exp_census <- calc_expected_values_for_n_weeks(ott_observed, number_weeks = 3)
+
+## Dt = doubling (or halving) time
+Dt <- exp_census[[2]][[3]]
+
+Dt_label = switch( 
+  (sign(Dt) + 2),
+  "halving time",
+  "no growth (flat)",
+  "doubling time")
+
+## projections
+peak_projections$intervention <-
+  factor(peak_projections$intervention, levels = c("No prevention & control", "Current distancing effectiveness", "70% physical distancing"))
+
+no_intervention <- peak_projections[1,2]
+current_intervention <- peak_projections[2,2]
+intervention_70 <- peak_projections[3,2]
+
 ```
+
+# Dashboard
+
+As of (date):
+
+### Current
+
+**X** confirmed COVID-19 patient in hospital.
+
+Including: **Y** acute care patients. **Z** ICU patients. **X** ventilated patients.
+
+**`r round(effective_pd, 0)`%** physical distance effectiveness (approximate), resulting in a **`r round(((no_intervention - current_intervention)/no_intervention*100), 0)`%** reduction in peak hospitalizations from no prevention & control.
+
+### Short-range forecast
+
+**(more, fewer, about the same)** patients in hospital the following week, reflecting a current `r Dt_label` of **`r round(exp_census[[2]][[3]], 1)`** days (growth of X%).
+
+### Long-range forecast
+
+**X to y** peak patients in hospital between **X to y (DATE)**. 
+
+
+## Observed Hospital census
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+observed_figure(exp_census, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
+```
+
+- Hospital census `r Dt_label` of **`r round(exp_census[[2]][[3]], 1)`** days translates to current physical distancing effectiveness of approximately `r round(effective_pd, 0)`%. See More.
+
+> **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
+
+> **Doubling time refers** is time it takes for the number of hospitalized patients to double in number. 
+
+In the figure, doubling time was calculated for each 7 day period (Mon-Sun). Halving time is the time it takes to half the number of hospitalized patients.
 
 ## Peak hospitalization projections
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
-peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("No prevention & control", "Current distancing effectiveness", "70% physical distancing"))
-library(tidyverse)
-library(ggplot2)
+
 t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
                                      xpos=1:n()-0.5,
                                     Diff=End-peak_hospital_census,
@@ -51,44 +114,26 @@ t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
   labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
        y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) +
   theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
+
 t
 
-no_intervention <- peak_projections[1,2]
-current_intervention <- peak_projections[2,2]
-intervention_70 <- peak_projections[3,2]
 ```
 
-- Current physical distancing measures results in a `r round(((no_intervention - current_intervention)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
+Forecast of:
 
-- With physical distancing at 70%, there is a `r round(((no_intervention - intervention_70)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
+- 350 patients in XXl, based on current physical distancing effectiveness, or a `r round(((no_intervention - intervention_70)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
 
+- 40 patients in Apri, based on a physical distancing effectiveness of 70%.
 
-> **Physical distancing means that there is a reduction in close contact between people.** For example, 50% physical refers to a 50% reduction in close contact between people. See [more](/more#distancing) for details about physical distancing.
+> **Physical distancing** is the reduction in close contact between people. 
 
-## Observed census & doubling time
+> **Physical distancing effectiveness** is the amount that people without COVID-19 stay away from people who are infectious with COVID-19, compared to the time before COVID-19 control measures. 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(dplyr)
-
-tmp <- calc_expected_values_for_n_weeks(ott_observed, number_weeks = 3)
-
-observed_figure(tmp, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
-```
-
-Doubling time refers the time it takes (in days) for the number of hospitalized patients to double in number. In this figure, doubling time was calculated for each 7 day period (Mon-Sun). Doubling time can then be used to estimate the effective physical distancing that is being observed.
-
-Physical distancing slows the spread of COVID-19 through the community. The result is a slower increase (or even a decrease) in hospitalization.
-
-> **Hospital census doubling time of `r round(tmp[[2]][[3]], 1)` days translates to an effective physical distancing of approximately `r round(effective_pd, 0)`%** 
-
-> There is a lag of several weeks between the current level of physical distancing in the community and the level of effective physical distancing observed in recent hospital census trends. This means the current level of physical distancing in the community is higher than 50%. 
-
-
-A further explanation of effective physical distancing will be added to the More page soon.
+For example, a physical distancing effectiveness of 70% means there is a 70% reduction close contact between people with and without COVID-19 infection . See [more](/more#distancing) for details about physical distancing.
 
 ## Acute care hospitalization projections
 
-Click or hover over over top right of visualization for downloading, zooming and panning. Projections are as of `r format(Sys.Date(), '%b %d, %Y')` and are based on the current number of hospitalizations and the observed doubling time. See [here](/model#parameters) for all input parameters.
+See [here](/model#parameters) for all input parameters.
 
 ### Census projections
 
