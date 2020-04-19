@@ -10,75 +10,78 @@ publishDir = "./docs"
 [permalinks]
     post = "/:year/:month/:day/:slug/"
 
-[[menu.main]]
-    name = "Visualizations"
-    url = ""
-    weight = 1
 
-[[menu.main]]
-    name = "Peak hospitalization projections"
-    url = "/#peak-hospitalization-projections"
-    parent="Visualizations"
-    
-[[menu.main]]
-    name = "Acute Care Projections"
-    url = "/#acute-care-hospitalization-projections"
-    parent="Visualizations"
-
-[[menu.main]]
-    name = "ICU Projections"
-    url = "/#icu-projections"
-    parent="Visualizations"
-
-[[menu.main]]
-    name = "Ventilator Projections"
-    url = "/#ventilator-projections"
-    parent="Visualizations"
-
-[[menu.main]]
-    name = "Physical distancing"
-    url = "/more/#what-is-physical-distancing"
-    parent = "Visualization"
-  
 [[menu.main]]
     name = "Home"
     url = "/"
     weight = 1
 
 [[menu.main]]
+    name = "Visualizations"
+    url = ""
+    weight = 2
+
+[[menu.main]]
+    name = "Peak hospitalization projections"
+    url = "/#peak-hospitalization-projections"
+    parent = "Visualizations"
+    weight = 1
+    
+[[menu.main]]
+    name = "Acute Care Projections"
+    url = "/#acute-care-hospitalization-projections"
+    parent = "Visualizations"
+    weight = 2
+
+[[menu.main]]
+    name = "ICU Projections"
+    url = "/#icu-projections"
+    parent = "Visualizations"
+    weight = 3
+
+[[menu.main]]
+    name = "Ventilator Projections"
+    url = "/#ventilator-projections"
+    parent = "Visualizations"
+    weight = 4
+
+[[menu.main]]
+    name = "Mortality Projections"
+    url = "/#deaths"
+    parent = "Visualizations"
+    weight = 5
+
+[[menu.main]]
     name = "Model"
     url = "/model/"
-    weight = 2
+    weight = 3
 
 [[menu.main]]
     name = "More"
     url = "/more/"
-    weight = 3
+    weight = 4
 
 [[menu.main]]
     name = "Physical distancing"
     url = "/more/#physical-distance-image"
     parent = "More"
-    
-[[menu.main]]
-    name = "Physical distancing"
-    url = "/more/#physical-distance-image"
-    parent = "More"
+    weight = 1
     
 [[menu.main]]
     name = "Flattening the curve"
     url = "/more/#flatten-image"
     parent = "More"
+    weight = 2
 
 [[menu.main]]
     name = "Contact"
     url = "/contact/"
-    weight = 4
+    weight = 5
 
 [[menu.main]]
     name = "Changelog"
     url = "/change-log/"
-    weight = 5
+    weight = 6
 
 [params]
     description = "Ottawa COVID-19 hospital projections."
