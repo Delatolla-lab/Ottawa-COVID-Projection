@@ -36,7 +36,7 @@ source("../R/observed_data.R")
 source("../R/effective_physical_distancing.R")
 ```
 
-## Peak hospitalization projections
+## Peak hospitalization projections {#peak}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
 peak_projections$intervention <-
@@ -86,7 +86,7 @@ Physical distancing slows the spread of COVID-19 through the community. The resu
 
 A further explanation of effective physical distancing will be added to the [More](/more) page soon.
 
-## Acute care hospitalization projections
+## Acute care hospitalization projections {acute_care_projections}
 
 Click or hover over over top right of visualization for downloading, zooming and panning. Projections are as of `r format(Sys.Date(), '%b %d, %Y')` and are based on the current number of hospitalizations and the observed doubling time. See [here](/model#parameters) for all input parameters.
 
@@ -149,7 +149,7 @@ source("../R/covid_visualization.R")
 death_visualization(ott_projections, ott_observed, "cumulative_deaths", title = "Projected cumulative number of COVID-19 hospital deaths in Ottawa", y_label = "Deaths")
 ```
 
-### Daily projections
+### Daily projections {#deaths}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
