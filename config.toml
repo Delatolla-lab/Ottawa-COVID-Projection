@@ -18,19 +18,16 @@ publishDir = "./docs"
 [[menu.main]]
     name = "Acute Care Projections"
     url = "/#acute-care-hospitalization-projections"
-    weight = 1
     parent="Visualizations"
 
 [[menu.main]]
     name = "ICU Projections"
     url = "/#icu-projections"
-    weight = 2
     parent="Visualizations"
 
 [[menu.main]]
     name = "Ventilator Projections"
     url = "/#ventilator-projections"
-    weight = 3
     parent="Visualizations"
   
 [[menu.main]]
@@ -47,6 +44,11 @@ publishDir = "./docs"
     name = "More"
     url = "/more/"
     weight = 3
+
+[[menu.main]]
+    name = "Social Distancing"
+    url = "/more/#more-info-images"
+    parent="More"
 
 [[menu.main]]
     name = "Contact"
