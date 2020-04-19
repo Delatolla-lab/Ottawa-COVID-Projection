@@ -123,13 +123,13 @@ Forecast of:
 
 - 350 patients in XXl, based on current physical distancing effectiveness, or a `r round(((no_intervention - intervention_70)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
 
-- 40 patients in Apri, based on a physical distancing effectiveness of 70%.
+> **Hospital census doubling time of `r round(tmp[[2]][[3]], 1)` days translates to an effective physical distancing of approximately `r round(effective_pd, 0)`%.** 
 
 > **Physical distancing** is the reduction in close contact between people. 
 
 > **Physical distancing effectiveness** is the amount that people without COVID-19 stay away from people who are infectious with COVID-19, compared to the time before COVID-19 control measures. 
 
-For example, a physical distancing effectiveness of 70% means there is a 70% reduction close contact between people with and without COVID-19 infection . See [more](/more#distancing) for details about physical distancing.
+A further explanation of effective physical distancing will be added to the [More](/more) page soon.
 
 ## Acute care hospitalization projections
 
