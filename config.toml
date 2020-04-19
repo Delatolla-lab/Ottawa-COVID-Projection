@@ -46,7 +46,7 @@ publishDir = "./docs"
     weight = 3
 
 [[menu.main]]
-    name = "Social Distancing"
+    name = "Physical distancing"
     url = "/more/#more-info-images"
     parent="More"
 
