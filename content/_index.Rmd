@@ -65,17 +65,21 @@ no_intervention <- peak_projections[1,2]
 current_intervention <- peak_projections[2,2]
 intervention_70 <- peak_projections[3,2]
 
+no_intervention_date <- peak_projections[1,4]
+current_intervention_date <- peak_projections[2,4]
+intervention_70_date <- peak_projections[3,4]
+
 ```
 
 # Dashboard
 
-As of (date):
+As of `r format(Sys.Date(), '%b %d, %Y')`:
 
 ### Current
 
-**X** confirmed COVID-19 patient in hospital.
+**`r last(na.omit(ott_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patient in hospital.
 
-Including: **Y** acute care patients. **Z** ICU patients. **X** ventilated patients.
+Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute care patients. **`r last(na.omit(ott_observed$observed_census_ICU))`** ICU patients.
 
 **`r round(effective_pd, 0)`%** physical distance effectiveness (approximate), resulting in a **`r round(((no_intervention - current_intervention)/no_intervention*100), 0)`%** reduction in peak hospitalizations from no prevention & control.
 
@@ -112,7 +116,7 @@ t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
                                      Percent=paste(round(Diff/End*100,0),"%")) %>%
   ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#D62728", "#1F77B4", "#2CA02C")) +
   labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
-       y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_census_date), vjust = -0.5) +
+       y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_round), vjust = -0.5) +
   theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
 
 t
@@ -121,9 +125,9 @@ t
 
 Forecast of:
 
-- 350 patients in XXl, based on current physical distancing effectiveness, or a `r round(((no_intervention - intervention_70)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
+- `r round(current_intervention, -1)` patients in `r paste(current_intervention_date)`, based on current physical distancing effectiveness, or a `r round(((no_intervention - intervention_70)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
 
-> **Hospital census doubling time of `r round(tmp[[2]][[3]], 1)` days translates to an effective physical distancing of approximately `r round(effective_pd, 0)`%.** 
+> **Hospital census doubling time of `r round(exp_census[[2]][[3]], 1)` days translates to an effective physical distancing of approximately `r round(effective_pd, 0)`%.** 
 
 > **Physical distancing** is the reduction in close contact between people. 
 
