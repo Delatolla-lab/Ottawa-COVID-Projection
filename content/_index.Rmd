@@ -66,15 +66,15 @@ more_less = switch(
 
 ## projections
 peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("No prevention & control", "Current distancing effectiveness", "70% physical distancing"))
+  factor(peak_projections$intervention, levels = c("No prevention & control", "50% physical distancing", "Current distancing effectiveness"))
 
 no_intervention <- peak_projections[1,2]
-current_intervention <- peak_projections[2,2]
-intervention_70 <- peak_projections[3,2]
+intervention_50 <- peak_projections[2,2]
+current_intervention <- peak_projections[3,2]
 
 no_intervention_date <- peak_projections[1,4]
-current_intervention_date <- peak_projections[2,4]
-intervention_70_date <- peak_projections[3,4]
+intervention_50_date <- peak_projections[2,4]
+current_intervention_date <- peak_projections[3,4]
 
 ```
 
@@ -96,7 +96,7 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 
 ### Long-range forecast
 
-**`r paste(intervention_70, "to", current_intervention)`** peak patients in hospital between **`r paste(intervention_70_date, "&", current_intervention_date)`**. 
+**`r paste(current_intervention, "to", intervention_50)`** peak patients in hospital between **`r paste(current_intervention_date, "&", intervention_50_date)`**. 
 
 
 ## Observed Hospital census {#doubling-time}
@@ -134,7 +134,7 @@ t
 
 Forecast of:
 
-- `r round(current_intervention, -1)` patients in `r paste(current_intervention_date)`, based on current physical distancing effectiveness, or a `r round(((no_intervention - intervention_70)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
+- `r round(current_intervention, -1)` patients in `r paste(current_intervention_date)`, based on current physical distancing effectiveness, or a `r round(((no_intervention - current_intervention)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
 
 > **Hospital census `r Dt_label` of `r round(abs(exp_census[[2]][[3]]), 1)` days translates to an effective physical distancing of approximately `r round(effective_pd, 0)`%.** 
 
