@@ -35,7 +35,7 @@ function updatePlotlyGraphs() {
     // Set the image width to 100% for the peak hispitalization grpahs so it works
     // well on mobiles
     document
-      .getElementById("peak-hospitalization-projections")
+      .getElementById("peak-hosp-projections")
       .querySelector("img").style = "width: 100%;";
     // Resize all plotly graphs if the user is viewing them on mobile screens
     // so they lool better

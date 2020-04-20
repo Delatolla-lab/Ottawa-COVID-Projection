@@ -23,13 +23,13 @@ publishDir = "./docs"
 
 [[menu.main]]
     name = "Peak hospitalization projections"
-    url = "/#peak-hospitalization-projections"
+    url = "/#peak-hosp-projections"
     parent = "Visualizations"
     weight = 1
     
 [[menu.main]]
     name = "Acute Care Projections"
-    url = "/#acute-care-hospitalization-projections"
+    url = "/#acute-care-projections"
     parent = "Visualizations"
     weight = 2
 
@@ -44,6 +44,18 @@ publishDir = "./docs"
     url = "/#ventilator-projections"
     parent = "Visualizations"
     weight = 4
+    
+[[menu.main]]
+    name = "Physical distancing"
+    url = "/more/#distancing"
+    parent = "Visualizations"
+    weight = 5
+
+[[menu.main]]
+    name = "Flattening the curve"
+    url = "/more/#flatten-curve"
+    parent = "Visualizations"
+    weight = 6
 
 [[menu.main]]
     name = "Mortality Projections"
@@ -60,18 +72,6 @@ publishDir = "./docs"
     name = "More"
     url = "/more/"
     weight = 4
-
-[[menu.main]]
-    name = "Physical distancing"
-    url = "/more/#physical-distance-image"
-    parent = "More"
-    weight = 1
-    
-[[menu.main]]
-    name = "Flattening the curve"
-    url = "/more/#flatten-image"
-    parent = "More"
-    weight = 2
 
 [[menu.main]]
     name = "Contact"

@@ -36,7 +36,7 @@ source("../R/observed_data.R")
 source("../R/effective_physical_distancing.R")
 ```
 
-## Peak hospitalization projections {#peak}
+## Peak hospitalization projections {#peak-hosp-projections}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
 peak_projections$intervention <-
@@ -65,7 +65,7 @@ intervention_70 <- peak_projections[3,2]
 
 > **Physical distancing means that there is a reduction in close contact between people.** For example, 50% physical refers to a 50% reduction in close contact between people. See [more](/more#distancing) for details about physical distancing.
 
-## Observed census & doubling time
+## Observed census & doubling time {#doubling-time}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(dplyr)
@@ -86,7 +86,7 @@ Physical distancing slows the spread of COVID-19 through the community. The resu
 
 A further explanation of effective physical distancing will be added to the [More](/more) page soon.
 
-## Acute care hospitalization projections {acute_care_projections}
+## Acute care hospitalization projections {#acute-care-projections}
 
 Click or hover over over top right of visualization for downloading, zooming and panning. Projections are as of `r format(Sys.Date(), '%b %d, %Y')` and are based on the current number of hospitalizations and the observed doubling time. See [here](/model#parameters) for all input parameters.
 
@@ -104,7 +104,7 @@ source("../R/covid_visualization.R")
 hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Projected daily acute care COVID-19 hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
 ```
 
-## ICU projections
+## ICU projections {#icu-projections}
 
 ### Census projections
 
@@ -120,7 +120,7 @@ source("../R/covid_visualization.R")
 hosp_visualization(ott_projections, ott_observed, "new_ICU", title = "Projected daily COVID-19 ICU hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
 ```
 
-## Ventilator projections
+## Ventilator projections {#ventilator-projections}
 
 ### Census projections
 
@@ -136,7 +136,7 @@ source("../R/covid_visualization.R")
 hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projected daily COVID-19 ventilator use in Ottawa", y_label = "Newly ventilated (# of patients)")
 ```
 
-## Death projections
+## Death projections {#deaths}
 
 Death projections were made using existing data from Ottawa Public Health and probability data from [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) These projections assume all hospital deaths are in the ICU. Model parameters are [here](/model#parameters). 
 
@@ -149,7 +149,7 @@ source("../R/covid_visualization.R")
 death_visualization(ott_projections, ott_observed, "cumulative_deaths", title = "Projected cumulative number of COVID-19 hospital deaths in Ottawa", y_label = "Deaths")
 ```
 
-### Daily projections {#deaths}
+### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")

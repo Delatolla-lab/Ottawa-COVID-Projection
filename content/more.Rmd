@@ -54,7 +54,7 @@ In these projection models, a 70 percent physical distancing scenario means that
 
 See [model](/model) for a technical discussion about how physical distancing affects COVID-19 infectivity.
 
-<div id="physical-distance-image" class="more-info-images">
+<div class="more-info-images">
 <figure>
 <img src="/images/176989- infographic 50 percent.png"
   alt="50% reduction in physical distanicng. One person infects 1.25 people on day 5 and 15 people on day 30" />
@@ -69,7 +69,7 @@ See [model](/model) for a technical discussion about how physical distancing aff
 </div>
 
 
-## Flatten the curve 
+## Flatten the curve {#flatten-curve}
 
 Flattening the curve means preventing a sharp peak in the number of cases, and spreading the infection rate over a longer period of time so that the health-care system is not overwhelmed. To understand how to flatten the curve, we first need to understand how the curve develops.  
 
@@ -83,7 +83,7 @@ There are three parts of the curve:
 
 Because COVID-19 is a new virus, the entire population was susceptible to COVID-19 infection at the beginning of the outbreak. Flattening the curve means slowing the spread amongst people who are susceptible to COVID-19.
 
-<div id="flatten-image" class="more-info-images">
+<div class="more-info-images">
 <img 
     src="/images/flatten-curve.png"
     alt="Flatten the curve diagram. Physical distancing reduces the height of the curve and the curve occurs further out in time. Two curves are presented -- with and without physical distancing."/>
