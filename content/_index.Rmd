@@ -85,7 +85,7 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 
 ### Short-range forecast
 
-**(more, fewer, about the same)** patients in hospital the following week, reflecting a current `r Dt_label` of **`r round(exp_census[[2]][[3]], 1)`** days (growth of X%).
+**(more, fewer, about the same)** patients in hospital the following week, reflecting a current `r Dt_label` of **`r round(exp_census[[2]][[3]], 1)`** days (daily growth of `r round(exp_census[[4]][[3]], 4)`%).
 
 ### Long-range forecast
 
