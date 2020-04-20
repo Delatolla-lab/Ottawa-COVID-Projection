@@ -107,7 +107,7 @@ observed_figure(exp_census, "Observed census of COVID-19 hospitalizations in Ott
 
 In the figure, doubling time was calculated for each 7 day period (Mon-Sun). Halving time is the time it takes to half the number of hospitalized patients.
 
-## Peak hospitalization projections
+## Peak hospitalization projections {#peak-hosp-projections}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
