@@ -22,8 +22,8 @@ hosp_visualization <-
     fill <- c("tozeroy", "tozeroy", "tozeroy", NULL, NULL)
     meta <-
       c(
+        param_append(parameter, 50),
         param_append(parameter, "current"),
-        param_append(parameter, 60),
         param_append(parameter, 70),
         "observed_data",
         "hospital_capacity"
@@ -31,8 +31,8 @@ hosp_visualization <-
     mode <- c("lines", "lines", "lines", "markers+lines", "lines")
     name <-
       c(
-        "Current distancing effectiveness",
         "50% physical distancing",
+        "Current distancing effectiveness",
         "70% physical distancing",
         "Reported # of patients",
         "Hospital capacity"
@@ -41,7 +41,7 @@ hosp_visualization <-
     x <- list(data1$date, data1$date, data1$date, data2$date, data2$date)
     ydata <- list(data1, data1, data1, data2, data2)
     yprefix <- c("^", "^", "^", "^observed_", "^capacity_")
-    ysuffix <- c("_current", "_50", "_70", "", "")
+    ysuffix <- c("_50", "_current", "_70", "", "")
     ypre_suffix <- c("", "", "", "$", "$")
     
     for (trace_index in 1:5) {
@@ -92,7 +92,6 @@ hosp_visualization <-
     }
  
     p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, 
-
                 autosize = FALSE, width = 700, height = 500,
                 legend = list(x = 0.05, y = 0.9))
     return(p)
@@ -107,16 +106,16 @@ death_visualization <- function(data1,
   fill <- c("tozeroy", "tozeroy", "tozeroy", NULL)
   meta <-
     c(
-      param_append(parameter, "current"),
       param_append(parameter, 50),
+      param_append(parameter, "current"),
       param_append(parameter, 70),
       "observed_data"
     )
   mode <- c("lines", "lines", "lines", "markers+lines")
   name <-
     c(
-      "Current distancing effectiveness",
       "50% physical distancing",
+      "Current distancing effectiveness",
       "70% physical distancing",
       "Reported # of deaths"
     )
@@ -124,7 +123,7 @@ death_visualization <- function(data1,
   x <- list(data1$date, data1$date, data1$date, data2$date)
   ydata <- list(data1, data1, data1, data2)
   yprefix <- c("^", "^", "^", "^observed_")
-  ysuffix <- c("_current$", "_50$", "_70$", "")
+  ysuffix <- c("_50$", "_current$", "_70$", "")
   ypre_suffix <- c("", "", "", "$")
   for (trace_index in 1:4) {
     trace[[trace_index]] <- list(
