@@ -92,7 +92,7 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 **X to y** peak patients in hospital between **X to y (DATE)**. 
 
 
-## Observed Hospital census
+## Observed Hospital census {#doubling-time}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -107,7 +107,7 @@ observed_figure(exp_census, "Observed census of COVID-19 hospitalizations in Ott
 
 In the figure, doubling time was calculated for each 7 day period (Mon-Sun). Halving time is the time it takes to half the number of hospitalized patients.
 
-## Peak hospitalization projections
+## Peak hospitalization projections {#peak-hosp-projections}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
@@ -135,7 +135,7 @@ Forecast of:
 
 A further explanation of effective physical distancing will be added to the [More](/more) page soon.
 
-## Acute care hospitalization projections
+## Acute care hospitalization projections {#acute-care-projections}
 
 See [here](/model#parameters) for all input parameters.
 
@@ -153,7 +153,7 @@ source("../R/covid_visualization.R")
 hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Projected daily acute care COVID-19 hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
 ```
 
-## ICU projections
+## ICU projections {#icu-projections}
 
 ### Census projections
 
@@ -169,7 +169,7 @@ source("../R/covid_visualization.R")
 hosp_visualization(ott_projections, ott_observed, "new_ICU", title = "Projected daily COVID-19 ICU hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
 ```
 
-## Ventilator projections
+## Ventilator projections {#ventilator-projections}
 
 ### Census projections
 
@@ -185,7 +185,7 @@ source("../R/covid_visualization.R")
 hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projected daily COVID-19 ventilator use in Ottawa", y_label = "Newly ventilated (# of patients)")
 ```
 
-## Death projections
+## Death projections {#deaths}
 
 Death projections were made using existing data from Ottawa Public Health and probability data from [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) These projections assume all hospital deaths are in the ICU. Model parameters are [here](/model#parameters). 
 
