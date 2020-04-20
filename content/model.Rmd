@@ -32,7 +32,7 @@ The use of local hospitalization rates follows the analogy of forecasting hurric
 
 The trend of COVID-19 hospital use is summarized as “doubling time.” Doubling time — and the weekly change in doubling time — are the most important parameters in COVID-19 projections that vary between communities. 
 
-An expendital growth in hosptial census (doubling time of less than 4 days) will occur unless one of two situations occurs:  
+An exponential growth in hosptial census (doubling time of less than 4 days) will occur unless one of two situations occurs:  
 
 1) The number of people susceptible to infection decreases. As an epidemic progresses, there will be fewer people left in the community who can become infected. However, as of  `r format(Sys.Date()-1, '%b %d, %Y')` only a small proportion of people living in Ottawa are currently infected or are recovered from COVID-19 -- likely less than 1%. This means that the current reduction in susceptible people has a negiligble effect effect on changes to hospital infection doubling times. Approximately 50 to 60% of people need to be immune to COVID-19 (infected or recovered) before doubling time becomes negative -- meaning there is a weekly decrease in the patients in hospital.
 
