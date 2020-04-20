@@ -41,9 +41,10 @@ Short-term projections (2 to 4 weeks) to inform the immediate need for hospital 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/change-log/</guid>
-      <description>V1.4.1 2020-04-17
- Updated Ottawa hospital census data to 2020-04-15. Minor changes to model parameters:  Current # of hospitalized patients changed from 43 to 37. Date of physical distancing implementation set to 2020-04-17.    V1.4.0 2020-04-16
- Updated Ottawa hospital census data to 2020-04-15. Changes to model parameters:  Doubling time changed from 5 days to 31.98 days based on observed doubling time in the last week.</description>
+      <description>V1.3.0 2020-04-15
+ Updated Ottawa hospital census data to 2020-04-14 New figure: Observed census &amp;amp; doubling time  Figure displays observed acute-care and ICU census in Ottawa Figure estimates weekly doubling time based on observed data    V1.2.1 2020-04-14 (12:30pm)
+ Updated Ottawa hospital census data to 2020-04-13 No change in model parameters.   V1.2.0 2020-04-14 (9:30am)
+ Updated Ottawa hospital census data to 2020-04-12 Changes to model parameters:  Doubling time changed from 4 days to 5 days Date of physical distancing implementation set to 2020-04-12 Infectious days changed from 14 days to 10 days  Edits to documentation   V1.</description>
     </item>
     
     <item>
@@ -66,7 +67,7 @@ Attribution: COVID-19 icons made by surang from www.flaticon.com.</description>
       
       <guid>/roadmap/</guid>
       <description> The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
- Review and update model parameters based on recent published studies. Priories for review:  ventilated patients deaths   </description>
+ Review and update model parameters based on recent published studies. Priories for review:  ventilated patients deaths  Add plot for observed hospital census trend, with estimated doubling time.  </description>
     </item>
     
   </channel>
