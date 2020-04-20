@@ -80,7 +80,7 @@ current_intervention_date <- peak_projections[3,4]
 
 # Dashboard
 
-As of `r format(Sys.Date(), '%b %d, %Y')`:
+data to `r format(Sys.Date()-1, '%b %d, %Y')`
 
 ### Current
 
@@ -112,9 +112,7 @@ observed_figure(exp_census, "Observed census of COVID-19 hospitalizations in Ott
 
 > **Doubling time refers** to the time it takes for the number of hospitalized patients to double in number. 
 
-> **Halving time refers** to the time it takes for the number of hospitalized patients to halve in number.
-
-In the figure, doubling/halving time was calculated for each 7 day period (Mon-Sun). Halving time is the time it takes to half the number of hospitalized patients.
+ Halving time is the time it takes to half the number of hospitalized patients. Doubling/halving time was calculated for each 7 day period (Mon-Sun).
 
 ## Peak hospitalization projections {#peak-hosp-projections}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -136,8 +134,6 @@ Forecast of:
 
 - `r round(current_intervention, -1)` patients in `r paste(current_intervention_date)`, based on current physical distancing effectiveness, or a `r round(((no_intervention - current_intervention)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
 
-> **Hospital census `r Dt_label` of `r round(abs(exp_census[[2]][[3]]), 1)` days translates to an effective physical distancing of approximately `r round(effective_pd, 0)`%.** 
-
 > **Physical distancing** is the reduction in close contact between people. 
 
 > **Physical distancing effectiveness** is the amount that people without COVID-19 stay away from people who are infectious with COVID-19, compared to the time before COVID-19 control measures. 
@@ -146,7 +142,7 @@ A further explanation of effective physical distancing will be added to the [Mor
 
 ## Acute care hospitalization projections {#acute-care-projections}
 
-See [here](/model#parameters) for all input parameters.
+<!--See [here](/model#parameters) for all input parameters. -->
 
 ### Census projections
 
