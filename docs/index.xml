@@ -42,8 +42,8 @@ Short-term projections (2 to 4 weeks) to inform the immediate need for hospital 
       
       <guid>/change-log/</guid>
       <description>V1.4.1 2020-04-17
- Updated Ottawa hospital census data to 2020-04-15. Minor changes to model parameters: Current # of hospitalized patients changed from 43 to 37. Date of physical distancing implementation set to 2020-04-17.   V1.4.0 2020-04-16
- Updated Ottawa hospital census data to 2020-04-15. Changes to model parameters: Doubling time changed from 5 days to 31.98 days based on observed doubling time in the last week. Changed physical distancing % from 50-70 to 0-20.</description>
+ Updated Ottawa hospital census data to 2020-04-15. Minor changes to model parameters:  Current # of hospitalized patients changed from 43 to 37. Date of physical distancing implementation set to 2020-04-17.    V1.4.0 2020-04-16
+ Updated Ottawa hospital census data to 2020-04-15. Changes to model parameters:  Doubling time changed from 5 days to 31.98 days based on observed doubling time in the last week.</description>
     </item>
     
     <item>

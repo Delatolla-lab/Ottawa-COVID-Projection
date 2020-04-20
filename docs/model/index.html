@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Hugo 0.69.0" />
+<meta name="generator" content="Hugo 0.68.3" />
 
 
 <title>Model parameters - Ottawa COVID19</title>
@@ -85,13 +85,21 @@
                     
                         <a 
                             class="dropdown-item" 
+<<<<<<< Updated upstream
                             href="/#peak-hosp-projections">
+=======
+                            href="/#peak-hospitalization-projections">
+>>>>>>> Stashed changes
                             Peak hospitalization projections
                         </a>
                     
                         <a 
                             class="dropdown-item" 
+<<<<<<< Updated upstream
                             href="/#acute-care-projections">
+=======
+                            href="/#acute-care-hospitalization-projections">
+>>>>>>> Stashed changes
                             Acute Care Projections
                         </a>
                     
@@ -113,6 +121,7 @@
                             Mortality Projections
                         </a>
                     
+<<<<<<< Updated upstream
                         <a 
                             class="dropdown-item" 
                             href="/more/#distancing">
@@ -125,6 +134,8 @@
                             Flattening the curve
                         </a>
                     
+=======
+>>>>>>> Stashed changes
                     </div>
                 </li>
                 
@@ -136,9 +147,35 @@
                 
             
                 
+<<<<<<< Updated upstream
                     <li class="nav-item">
                         <a class="nav-link" href="/more/">More</a>
                     </li>
+=======
+                <li class="nav-item dropdown">
+                    <a 
+                        class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        More
+                    </a>
+                    <div 
+                        class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdownMenuLink" id="viz-dropdown">
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/more/#physical-distance-image">
+                            Physical distancing
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/more/#flatten-image">
+                            Flattening the curve
+                        </a>
+                    
+                    </div>
+                </li>
+>>>>>>> Stashed changes
                 
             
                 
@@ -186,12 +223,14 @@
 <li><p>Daily hospital use reported by Ottawa Public Health. There is discussion to incorporate regional data rather than just cases from Ottawa hospitals.</p></li>
 <li><p>Doubling time (time it takes for the number of hospitalized COVID-19 patients to double) of 3 days from March 17 to 25, 2020. Projections initialized with a 4-day hospital doubling time.</p></li>
 </ul></li>
-<li><p><em>Model parameters other than Ottawa hospital use are aligned with <a href="https://www.covid-19-mc.ca/interactive-model">COVID-19-MC</a> and <a href="https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1">Tuite, Fisman, et al.</a> models where possible, with updates based on <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext">Verity et al. (Lancet, March 20, 2020)</a></em> and <a href="https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf">Ferguson et al. (March 16, 2020)</a>.</p></li>
-<li><p><em><a href="https://penn-chime.phl.io/">CHIME model</a> v1.1.3 developed by the University of Pennsylvania Health System.</em></p></li>
+<li><p><em>Model parameters other than Ottawa hospital use are aligned with <a href="https://www.covid-19-mc.ca/interactive-model">COVID-19-MC</a> and <a href="https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1">Tuite, Fisman, et al.</a> models where possible, with updates based on <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext">Verity et al. (Lancet, March 20, 2020)</a></em> and <a href="https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf">Ferguson et al. (March 16, 2020)</a>.</p></li>
+<li><p><em><a href="https://penn-chime.phl.io/">CHIME model</a> v1.1.3 developed by the University of Pennsylvania Health System.</em></p>
+<ul>
+<li>CHIME is an SIR model that is initiated on hospital use. A SIR model calculates the projected number of people infected with a contagious illness in a closed population over time.</li>
+</ul></li>
 </ol>
 <ul>
-<li><p>CHIME is an SIR model that is initiated on hospital use. A SIR model calculates the projected number of people infected with a contagious illness in a closed population over time.</p></li>
-<li><p>The projections can be updated for other models.</p></li>
+<li>The projections can be updated for other models.</li>
 </ul>
 <p>A description of the model parameters and input data is <a href="#parameters">here</a>.</p>
 <div id="why-are-the-projections-based-on-the-daily-hospital-census-for-ottawa" class="section level2">
@@ -212,9 +251,11 @@
 </div>
 <div id="how-physical-distancing-affects-covid-19-projections" class="section level2">
 <h2>How physical distancing affects COVID-19 projections</h2>
-<p>The projections of hospital cases uses an <span class="math inline">\(SIR\)</span> model (<span class="math inline">\(S\)</span> = susceptible, <span class="math inline">\(I\)</span> = infected, <span class="math inline">\(R\)</span> = recovered people). Within an SIR model, new infections at time (<span class="math inline">\(t+1\)</span>) are equal to:</p>
-<p><span class="math display">\[I_{t+1} = \beta S_t I_t \]</span> Where <span class="math inline">\(\beta\)</span> is commonly referred as the “force of infection” because it describes how quickly a disease can move through a population. <span class="math inline">\(\beta\)</span> is a probability or risk that ranges from 0 to 1. <span class="math inline">\(\beta\)</span> value = 0.5 means 50% of susceptible people (<span class="math inline">\(S_t\)</span>) who are in contact with an infected person (<span class="math inline">\(I_t\)</span>) will become infected (<span class="math inline">\(I_{t+1}\)</span>).</p>
-<p>Physical distancing is a ‘control measure’ to reduce the effective force of infection, <span class="math inline">\(\beta\)</span>. A control measure, <span class="math inline">\(\lambda\)</span> reduces new infections, where <span class="math inline">\(\lambda = 1\)</span> results in a complete disruption in new infections (conversly, <span class="math inline">\(\lambda = 0\)</span> has no effect for reducing new infections). The projections presented on this website assume physical distancing is directly related to effective control. This means 50% physical distancing is the same as <span class="math inline">\(\lambda = 0.5\)</span>. <span class="citation">Daughton et al. (<a href="#ref-daughton2017approach">2017</a>)</span></p>
+<p>The projections of hospital cases uses an <span class="math inline">\(SIR\)</span> model (<span class="math inline">\(S\)</span> = susceptible, <span class="math inline">\(I\)</span> = infected, <span class="math inline">\(R\)</span> = recovered people). Within an SIR model,
+new infections at time (<span class="math inline">\(t+1\)</span>) are equal to:</p>
+<p><span class="math display">\[I_{t+1} = \beta S_t I_t \]</span>
+Where <span class="math inline">\(\beta\)</span> is commonly referred as the “force of infection” because it describes how quickly a disease can move through a population. <span class="math inline">\(\beta\)</span> is a probability or risk that ranges from 0 to 1. <span class="math inline">\(\beta\)</span> value = 0.5 means 50% of susceptible people (<span class="math inline">\(S_t\)</span>) who are in contact with an infected person (<span class="math inline">\(I_t\)</span>) will become infected (<span class="math inline">\(I_{t+1}\)</span>).</p>
+<p>Physical distancing is a ‘control measure’ to reduce the effective force of infection, <span class="math inline">\(\beta\)</span>. A control measure, <span class="math inline">\(\lambda\)</span> reduces new infections, where <span class="math inline">\(\lambda = 1\)</span> results in a complete disruption in new infections (conversly, <span class="math inline">\(\lambda = 0\)</span> has no effect for reducing new infections). The projections presented on this website assume physical distancing is directly related to effective control. This means 50% physical distancing is the same as <span class="math inline">\(\lambda = 0.5\)</span>. <span class="citation">Daughton et al. (<a href="#ref-daughton2017approach" role="doc-biblioref">2017</a>)</span></p>
 <p>Note that <span class="math inline">\(\beta\)</span> is related to the the commonly references <span class="math inline">\(R_0\)</span>. <span class="math inline">\(R_0 = \frac{\beta}{\gamma}\)</span>, where <span class="math inline">\(\gamma\)</span> is the reciprocal of the infectious period (<span class="math inline">\(\psi\)</span>).</p>
 </div>
 <div id="parameters" class="section level2">
@@ -231,7 +272,7 @@
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-daughton2017approach">
-<p>Daughton, Ashlynn R, Nicholas Generous, Reid Priedhorsky, and Alina Deshpande. 2017. “An Approach to and Web-Based Tool for Infectious Disease Outbreak Intervention Analysis.” <em>Scientific Reports</em> 7. Nature Publishing Group: 46076.</p>
+<p>Daughton, Ashlynn R, Nicholas Generous, Reid Priedhorsky, and Alina Deshpande. 2017. “An Approach to and Web-Based Tool for Infectious Disease Outbreak Intervention Analysis.” <em>Scientific Reports</em> 7: 46076.</p>
 </div>
 </div>
 </div>
