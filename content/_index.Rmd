@@ -57,6 +57,13 @@ Dt_label = switch(
   "no growth (flat)",
   "doubling time")
 
+more_less = switch(
+  (sign(Dt) + 2),
+  "Less",
+  "About the same",
+  "More"
+)
+
 ## projections
 peak_projections$intervention <-
   factor(peak_projections$intervention, levels = c("No prevention & control", "Current distancing effectiveness", "70% physical distancing"))
@@ -85,11 +92,11 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 
 ### Short-range forecast
 
-**(more, fewer, about the same)** patients in hospital the following week, reflecting a current `r Dt_label` of **`r round(exp_census[[2]][[3]], 1)`** days (daily growth of `r round(exp_census[[4]][[3]], 4)`%).
+**`r more_less`** patients in hospital the following week, reflecting a current `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days (daily growth of `r round(exp_census[[4]][[3]], 4)`%).
 
 ### Long-range forecast
 
-**X to y** peak patients in hospital between **X to y (DATE)**. 
+**`r paste(intervention_70, "to", current_intervention)`** peak patients in hospital between **`r paste(intervention_70_date, "&", current_intervention_date)`**. 
 
 
 ## Observed Hospital census {#doubling-time}
@@ -99,7 +106,7 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 observed_figure(exp_census, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
 ```
 
-- Hospital census `r Dt_label` of **`r round(exp_census[[2]][[3]], 1)`** days translates to current physical distancing effectiveness of approximately `r round(effective_pd, 0)`%. See More.
+- Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days translates to current physical distancing effectiveness of approximately `r round(effective_pd, 0)`%. See More.
 
 > **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
 
