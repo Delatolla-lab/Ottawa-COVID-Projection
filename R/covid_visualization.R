@@ -72,22 +72,7 @@ hosp_visualization <-
         title = list(text = paste(as.character(y_label))), 
         autorange = TRUE
       ), 
-      autosize = TRUE,
-      annotations =
-        ifelse(annote == TRUE,
-               list(
-                 list(
-                   x = Sys.Date(), 
-                   y = max(trace[[4]]$y, na.rm = TRUE), 
-                   ax = 0, 
-                   ay = -50, 
-                   font = list(color = "rgb(214, 39, 40)"), 
-                   text = "Current use (drag to zoom,
-            double click to zoom out)", 
-                   arrowcolor = "rgb(214, 39, 40)"
-                 )
-               ),
-               list())
+      autosize = TRUE
     )
     p <-
       plot_ly() %>% config(modeBarButtonsToRemove = c("toggleSpikelines", "lasso2d", "select2d"))
@@ -107,7 +92,7 @@ hosp_visualization <-
     }
  
     p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, 
-                annotations=layout$annotations, 
+
                 autosize = FALSE, width = 700, height = 500,
                 legend = list(x = 0.05, y = 0.9))
     return(p)
