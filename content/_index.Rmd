@@ -59,7 +59,7 @@ Dt_label = switch(
 
 more_less = switch(
   (sign(Dt) + 2),
-  "Less",
+  "Fewer",
   "About the same",
   "More"
 )

@@ -22,7 +22,7 @@ hosp_visualization <-
     fill <- c("tozeroy", "tozeroy", "tozeroy", NULL, NULL)
     meta <-
       c(
-        param_append(parameter, 50),
+        param_append(parameter, "current"),
         param_append(parameter, 60),
         param_append(parameter, 70),
         "observed_data",
@@ -32,7 +32,7 @@ hosp_visualization <-
     name <-
       c(
         "Current distancing effectiveness",
-        "60% physical distancing",
+        "50% physical distancing",
         "70% physical distancing",
         "Reported # of patients",
         "Hospital capacity"
@@ -41,7 +41,7 @@ hosp_visualization <-
     x <- list(data1$date, data1$date, data1$date, data2$date, data2$date)
     ydata <- list(data1, data1, data1, data2, data2)
     yprefix <- c("^", "^", "^", "^observed_", "^capacity_")
-    ysuffix <- c("_50", "_60", "_70", "", "")
+    ysuffix <- c("_current", "_50", "_70", "", "")
     ypre_suffix <- c("", "", "", "$", "$")
     
     for (trace_index in 1:5) {
@@ -122,8 +122,8 @@ death_visualization <- function(data1,
   fill <- c("tozeroy", "tozeroy", "tozeroy", NULL)
   meta <-
     c(
+      param_append(parameter, "current"),
       param_append(parameter, 50),
-      param_append(parameter, 60),
       param_append(parameter, 70),
       "observed_data"
     )
@@ -131,7 +131,7 @@ death_visualization <- function(data1,
   name <-
     c(
       "Current distancing effectiveness",
-      "60% physical distancing",
+      "50% physical distancing",
       "70% physical distancing",
       "Reported # of deaths"
     )
@@ -139,7 +139,7 @@ death_visualization <- function(data1,
   x <- list(data1$date, data1$date, data1$date, data2$date)
   ydata <- list(data1, data1, data1, data2)
   yprefix <- c("^", "^", "^", "^observed_")
-  ysuffix <- c("_50$", "_60$", "_70$", "")
+  ysuffix <- c("_current$", "_50$", "_70$", "")
   ypre_suffix <- c("", "", "", "$")
   for (trace_index in 1:4) {
     trace[[trace_index]] <- list(
