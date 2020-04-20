@@ -106,13 +106,13 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 observed_figure(exp_census, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
 ```
 
-- Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days translates to current physical distancing effectiveness of approximately `r round(effective_pd, 0)`%. See More.
+Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days translates to current physical distancing effectiveness of approximately **`r round(effective_pd, 0)`%**. 
 
 > **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
 
 > **Doubling time refers** to the time it takes for the number of hospitalized patients to double in number. 
 
- Halving time is the time it takes to half the number of hospitalized patients. Doubling/halving time was calculated for each 7 day period (Mon-Sun).
+Halving time is the time it takes to half the number of hospitalized patients. Doubling/halving time was calculated for each 7 day period (Mon-Sun).
 
 ## Peak hospitalization projections {#peak-hosp-projections}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -130,9 +130,7 @@ t
 
 ```
 
-Forecast of:
-
-- `r round(current_intervention, -1)` patients in `r paste(current_intervention_date)`, based on current physical distancing effectiveness, or a `r round(((no_intervention - current_intervention)/no_intervention*100), 0)`% reduction in peak hospitalizations from no prevention & control.
+The forecast of `r round(current_intervention, -1)` patients in hospital in `r paste(current_intervention_date)` is based on the previous weeks' physical distancing effectiveness of **`r round(effective_pd, 0)`%**.  `r round(effective_pd, 0)`% physical distancing effectiveness will result in an estimated `r round(((no_intervention - current_intervention)/no_intervention*100), 0)`% reduction in peak hospitalizations compared to no prevention & control.
 
 > **Physical distancing** is the reduction in close contact between people. 
 
