@@ -1,4 +1,4 @@
-intervention,peak_hospital_census,peak_hospital_census_date
-No prevention & control,7089,7000 (May 2020)
-Current distancing effectiveness,350,350 (Sep 2020)
-70% physical distancing,40,40 (Apr 2020)
+intervention,peak_hospital_census,peak_hospital_round,peak_date
+No prevention & control,7089,7000 (May 2020),May 2020
+50% physical distancing,348,350 (Oct 2020),Oct 2020
+Current distancing effectiveness,43,40 (Apr 2020),Apr 2020

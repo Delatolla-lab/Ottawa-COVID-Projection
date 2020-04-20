@@ -23,7 +23,7 @@ hosp_visualization <-
     meta <-
       c(
         param_append(parameter, 50),
-        param_append(parameter, 60),
+        param_append(parameter, "current"),
         param_append(parameter, 70),
         "observed_data",
         "hospital_capacity"
@@ -31,8 +31,8 @@ hosp_visualization <-
     mode <- c("lines", "lines", "lines", "markers+lines", "lines")
     name <-
       c(
+        "50% physical distancing",
         "Current distancing effectiveness",
-        "60% physical distancing",
         "70% physical distancing",
         "Reported # of patients",
         "Hospital capacity"
@@ -41,7 +41,7 @@ hosp_visualization <-
     x <- list(data1$date, data1$date, data1$date, data2$date, data2$date)
     ydata <- list(data1, data1, data1, data2, data2)
     yprefix <- c("^", "^", "^", "^observed_", "^capacity_")
-    ysuffix <- c("_50", "_60", "_70", "", "")
+    ysuffix <- c("_50", "_current", "_70", "", "")
     ypre_suffix <- c("", "", "", "$", "$")
     
     for (trace_index in 1:5) {
@@ -72,22 +72,7 @@ hosp_visualization <-
         title = list(text = paste(as.character(y_label))), 
         autorange = TRUE
       ), 
-      autosize = TRUE,
-      annotations =
-        ifelse(annote == TRUE,
-               list(
-                 list(
-                   x = Sys.Date(), 
-                   y = max(trace[[4]]$y, na.rm = TRUE), 
-                   ax = 0, 
-                   ay = -50, 
-                   font = list(color = "rgb(214, 39, 40)"), 
-                   text = "Current use (drag to zoom,
-            double click to zoom out)", 
-                   arrowcolor = "rgb(214, 39, 40)"
-                 )
-               ),
-               list())
+      autosize = TRUE
     )
     p <-
       plot_ly() %>% config(modeBarButtonsToRemove = c("toggleSpikelines", "lasso2d", "select2d"))
@@ -107,7 +92,6 @@ hosp_visualization <-
     }
  
     p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, 
-                annotations=layout$annotations, 
                 autosize = FALSE, width = 700, height = 500,
                 legend = list(x = 0.05, y = 0.9))
     return(p)
@@ -123,15 +107,15 @@ death_visualization <- function(data1,
   meta <-
     c(
       param_append(parameter, 50),
-      param_append(parameter, 60),
+      param_append(parameter, "current"),
       param_append(parameter, 70),
       "observed_data"
     )
   mode <- c("lines", "lines", "lines", "markers+lines")
   name <-
     c(
+      "50% physical distancing",
       "Current distancing effectiveness",
-      "60% physical distancing",
       "70% physical distancing",
       "Reported # of deaths"
     )
@@ -139,7 +123,7 @@ death_visualization <- function(data1,
   x <- list(data1$date, data1$date, data1$date, data2$date)
   ydata <- list(data1, data1, data1, data2)
   yprefix <- c("^", "^", "^", "^observed_")
-  ysuffix <- c("_50$", "_60$", "_70$", "")
+  ysuffix <- c("_50$", "_current$", "_70$", "")
   ypre_suffix <- c("", "", "", "$")
   for (trace_index in 1:4) {
     trace[[trace_index]] <- list(

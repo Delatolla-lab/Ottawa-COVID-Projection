@@ -2,6 +2,16 @@
 title: Changelog
 ---
 
+# V1.5.0
+2020-04-20
+
+- Updated Ottawa hospital census data to 2020-04-15.
+- New dashboard providing current hospitalization data updated daily.
+- Minor changes to model parameters:
+  - Current effective physical distancing set to 63%. Projections made for
+  50%, current, and 70% physical distancing.
+  - Date of physical distancing implementation set to 2020-04-20.
+
 # V1.4.1
 2020-04-17
 

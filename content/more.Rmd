@@ -28,7 +28,7 @@ Creating accurate, long-range projections to predict the spread COVID-19 is diff
 
 We can't reliably forecast the weather six months out, and we can't forecast COVID-19 six months out. However, we can reliably forecast COVID-19 two to four weeks into the future. Those short-term projections give us time to plan and increase health-care resources as needed. 
 
-That being said, hurricanes and COVID-19 are not the same. The path and force of a hurricane can't be influenced, but the worse effects of COVID-19 can be avoided if we follow public health guidelines like staying home and practive physical distancing.  
+That being said, hurricanes and COVID-19 are not the same. The path and force of a hurricane can't be influenced, but the worst effects of COVID-19 can be avoided if we follow public health guidelines like staying home and practive physical distancing.  
 
 Long-range COVID-19 projections provide information on the effectiveness of physical distancing and other preventive measures. 
 
@@ -39,10 +39,6 @@ Physical distancing and other preventive measures are the most important factors
 Public Health Ontario projected 100,000 COVID-19 Ontario deaths with no preventative measures and a lower estimate of 3,000 deaths with preventive measures This wide range of estimates (100,000 to 3,000 deaths) reflects different levels of physical distancing.  
 
 A high level of physical distancing will achieve a **97% reduction in deaths** compared to a scenario of no preventive action (100,000 deaths). The wide range in projections is why we need to monitor and update Ottawa projections to reflect how well we achieve COVID-19 prevention. 
-
- 
-A definition and description of physical distancing is [here](/more). 
-
 
 ## What is physical distancing {#distancing}
 
@@ -69,7 +65,7 @@ See [model](/model) for a technical discussion about how physical distancing aff
 </div>
 
 
-## Flatten the curve 
+## Flattening the curve {#flatten-curve}
 
 Flattening the curve means preventing a sharp peak in the number of cases, and spreading the infection rate over a longer period of time so that the health-care system is not overwhelmed. To understand how to flatten the curve, we first need to understand how the curve develops.  
 

@@ -66,39 +66,92 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Visualizations
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="viz-dropdown">
-                    <a class="dropdown-item" href="/#acute-care-hospitalization-projections">
-                        Acute Care Projections
+            
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                
+            
+                
+                <li class="nav-item dropdown">
+                    <a 
+                        class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Visualizations
                     </a>
-                    <a class="dropdown-item" href="/#icu-projections">ICU Projections</a>
-                    <a class="dropdown-item" href="/#ventilator-projections">Ventilator Projections</a>
-                </div>
-            </li>
+                    <div 
+                        class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdownMenuLink" id="viz-dropdown">
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/#peak-hosp-projections">
+                            Peak hospitalization projections
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/#acute-care-projections">
+                            Acute Care Projections
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/#icu-projections">
+                            ICU Projections
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/#ventilator-projections">
+                            Ventilator Projections
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/#deaths">
+                            Mortality Projections
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/more/#distancing">
+                            Physical distancing
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/more/#flatten-curve">
+                            Flattening the curve
+                        </a>
+                    
+                    </div>
+                </li>
+                
             
-            <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-            </li>
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/model/">Model</a>
+                    </li>
+                
             
-            <li class="nav-item">
-                <a class="nav-link" href="/model/">Model</a>
-            </li>
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/more/">More</a>
+                    </li>
+                
             
-            <li class="nav-item">
-                <a class="nav-link" href="/more/">More</a>
-            </li>
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact/">Contact</a>
+                    </li>
+                
             
-            <li class="nav-item">
-                <a class="nav-link" href="/contact/">Contact</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/change-log/">Changelog</a>
-            </li>
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/change-log/">Changelog</a>
+                    </li>
+                
             
         </ul>
     </div>
@@ -130,7 +183,7 @@
 <h2>Model accuracy</h2>
 <p>Creating accurate, long-range projections to predict the spread COVID-19 is difficult. It’s akin to forecasting when a hurricane will make landfall when it is still thousands of kilometers out at sea. Forecasts are more accurate for a shorter time range. Projections are updated with the latest data, including local data to help understand when and where the hurricane will reach landfall.</p>
 <p>We can’t reliably forecast the weather six months out, and we can’t forecast COVID-19 six months out. However, we can reliably forecast COVID-19 two to four weeks into the future. Those short-term projections give us time to plan and increase health-care resources as needed.</p>
-<p>That being said, hurricanes and COVID-19 are not the same. The path and force of a hurricane can’t be influenced, but the worse effects of COVID-19 can be avoided if we follow public health guidelines like staying home and practive physical distancing.</p>
+<p>That being said, hurricanes and COVID-19 are not the same. The path and force of a hurricane can’t be influenced, but the worst effects of COVID-19 can be avoided if we follow public health guidelines like staying home and practive physical distancing.</p>
 <p>Long-range COVID-19 projections provide information on the effectiveness of physical distancing and other preventive measures.</p>
 </div>
 <div id="scenarios-of-physical-distancing" class="section level2">
@@ -138,7 +191,6 @@
 <p>Physical distancing and other preventive measures are the most important factors for projecting long-range (1 to 10 months) COVID-19 cases and hospital use.</p>
 <p>Public Health Ontario projected 100,000 COVID-19 Ontario deaths with no preventative measures and a lower estimate of 3,000 deaths with preventive measures This wide range of estimates (100,000 to 3,000 deaths) reflects different levels of physical distancing.</p>
 <p>A high level of physical distancing will achieve a <strong>97% reduction in deaths</strong> compared to a scenario of no preventive action (100,000 deaths). The wide range in projections is why we need to monitor and update Ottawa projections to reflect how well we achieve COVID-19 prevention.</p>
-<p>A definition and description of physical distancing is <a href="/more">here</a>.</p>
 </div>
 <div id="distancing" class="section level2">
 <h2>What is physical distancing</h2>
@@ -160,8 +212,8 @@ Original source: <a href="https://www.visualcapitalist.com/the-math-behind-socia
 </figccaption>
 </div>
 </div>
-<div id="flatten-the-curve" class="section level2">
-<h2>Flatten the curve</h2>
+<div id="flatten-curve" class="section level2">
+<h2>Flattening the curve</h2>
 <p>Flattening the curve means preventing a sharp peak in the number of cases, and spreading the infection rate over a longer period of time so that the health-care system is not overwhelmed. To understand how to flatten the curve, we first need to understand how the curve develops.</p>
 <p>There are three parts of the curve:</p>
 <ol style="list-style-type: decimal">
