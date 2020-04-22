@@ -1,108 +1,36 @@
-observed_figure <- function(param_list, title, y_label) {
+observed_figure <- function(param_list,
+                            title,
+                            y_label) {
   data <- param_list[[1]]
   doubling_time <- param_list[[2]]
   expected_values <- param_list[[3]]
+  trace <- list()
+  type <- c("bar", "bar", "scatter", "scatter", "scatter")
+  mode <- c("", "", "line", "line", "line")
+  name <-
+    c(
+      "ICU census",
+      "Acute care census"
+    )
+  x <- list(data$date, data$date, data$date, data$date, data$date)
+  y <- list(
+    data$observed_census_ICU,
+    data$observed_census_acute_care,
+    expected_values[[1]]$expected_val,
+    expected_values[[2]]$expected_val,
+    expected_values[[3]]$expected_val
+    )
+  for (trace_index in 1:5) {
+    trace[[trace_index]] <- list(
+      mode = mode[trace_index],
+      name = name[trace_index],
+      type = type[trace_index],
+      x = x[[trace_index]],
+      y = y[[trace_index]]
+    )
+  }
   library(plotly)
-  trace1 <- list(
-    meta = list(columnNames = list(
-      x = "date", 
-      y = "observed_census_ICU"
-    )), 
-    name = "ICU census", 
-    type = "bar", 
-    xsrc = "wyusuf:11:3cac68", 
-    x = data$date,
-    ysrc = "wyusuf:11:5f8f8c", 
-    y = data$observed_census_ICU,
-    visible = TRUE,
-    showlegend = TRUE,
-    orientation = "v"
-  )
-  trace2 <- list(
-    meta = list(columnNames = list(
-      x = "date", 
-      y = "observed_census_acute_care", 
-      marker = list(color = "observed_census_acute_care")
-    )), 
-    mode = "markers", 
-    name = "Acute care census", 
-    type = "bar", 
-    xsrc = "wyusuf:11:3cac68", 
-    x = data$date,
-    ysrc = "wyusuf:11:5f8f8c", 
-    y = data$observed_census_acute_care,
-    marker = list(
-      meta = list(columnNames = list(color = "observed_census_acute_care")), 
-      color = "#636efa"
-    ), 
-    visible = TRUE, 
-    showlegend = TRUE,
-    orientation = "v"
-  )
-  trace3 <- list(
-    line = list(
-      dash = "dash", 
-      color = "rgb(4, 157, 53)", 
-      width = 5
-    ), 
-    meta = list(columnNames = list(
-      x = "date", 
-      y = "Rate of growth"
-    )), 
-    mode = "lines", 
-    name = paste("Expected values for 3 weeks ago,\nbased on an observed doubling time\nof", round(doubling_time[[1]], 2), "days)"), 
-    type = "scatter", 
-    xsrc = "wyusuf:11:3cac68", 
-    x = data$date,
-    ysrc = "wyusuf:11:c15d89", 
-    y = expected_values[[1]]$expected_val,
-    visible = TRUE,
-    showlegend = FALSE,
-    orientation = "v"
-  )
-  trace4 <- list(
-    line = list(
-      dash = "dash", 
-      color = "rgb(4, 157, 53)", 
-      width = 5
-    ), 
-    meta = list(columnNames = list(
-      x = "date", 
-      y = "previous 7 day"
-    )), 
-    mode = "lines", 
-    name = paste("Expected values for 2 weeks ago,\nbased on an observed doubling time\nof", round(doubling_time[[2]], 2), "days)"),
-    type = "scatter", 
-    xsrc = "wyusuf:11:3cac68", 
-    x = data$date,
-    ysrc = "wyusuf:11:3ea644", 
-    y = expected_values[[2]]$expected_val,
-    visible = TRUE,
-    showlegend = FALSE,
-    orientation = "v"
-  )
-  trace5 <- list(
-    line = list(
-      dash = "dash", 
-      color = "rgb(4, 157, 53)", 
-      width = 5
-    ), 
-    meta = list(columnNames = list(
-      x = "date", 
-      y = "previous previous 7 day"
-    )), 
-    mode = "lines", 
-    type = "scatter",
-    name = paste("Expected values for last week,\nbased on an observed doubling time\nof", round(doubling_time[[3]], 2), "days)"),
-    xsrc = "wyusuf:11:3cac68", 
-    x = data$date,
-    ysrc = "wyusuf:11:51678f", 
-    y = expected_values[[3]]$expected_val,
-    visible = TRUE,
-    showlegend = FALSE,
-    orientation = "v"
-  )
-  data <- list(trace1, trace2, trace3, trace4, trace5)
+  data <- trace 
   layout <- list(
     title = list(text = title, x=0.5), 
     xaxis = list(
@@ -457,15 +385,23 @@ observed_figure <- function(param_list, title, y_label) {
       themeRef = "PLOTLY_WHITE"
     )
   )
-  p <- plot_ly()
-  p <- add_trace(p, meta=trace1$meta, mode=trace1$mode, name=trace1$name, type=trace1$type, xsrc=trace1$xsrc, x=trace1$x, ysrc=trace1$ysrc, y=trace1$y, marker=trace1$marker, visible=trace1$visible, showlegend = trace1$showlegend, orientation=trace1$orientation)
-  p <- add_trace(p, meta=trace2$meta, name=trace2$name, type=trace2$type, xsrc=trace2$xsrc, x=trace2$x, ysrc=trace2$ysrc, y=trace2$y, visible=trace2$visible, showlegend = trace2$showlegend, orientation=trace2$orientation)
-  p <- add_trace(p, line=trace3$line, meta=trace3$meta, mode=trace3$mode, name=trace3$name, type=trace3$type, xsrc=trace3$xsrc, x=trace3$x, ysrc=trace3$ysrc, y=trace3$y, visible=trace3$visible, showlegend = trace3$showlegend, orientation=trace3$orientation)
-  p <- add_trace(p, line=trace4$line, meta=trace4$meta, mode=trace4$mode, name=trace4$name, type=trace4$type, xsrc=trace4$xsrc, x=trace4$x, ysrc=trace4$ysrc, y=trace4$y, y=trace4$y, visible=trace4$visible, showlegend = trace4$showlegend, orientation=trace4$orientation)
-  p <- add_trace(p, line=trace5$line, meta=trace5$meta, mode=trace5$mode, name=trace5$name, type=trace5$type, xsrc=trace5$xsrc, x=trace5$x, ysrc=trace5$ysrc, y=trace5$y, y=trace5$y, visible=trace5$visible, showlegend = trace5$showlegend, orientation=trace5$orientation)
+  p <- plot_ly() %>%
+    for (trace_index in 1:5) {
+      p <-
+        add_trace(
+          p,
+          mode = trace[[trace_index]]$mode,
+          name = trace[[trace_index]]$name,
+          type = trace[[trace_index]]$type,
+          x = trace[[trace_index]]$x,
+          y = trace[[trace_index]]$y
+        )
+      
+    }
   p <- add_annotations(p, x = ifelse(doubling_time[[1]] > 0, min(expected_values[[1]]$date, na.rm = TRUE), max(expected_values[[1]]$date, na.rm = TRUE)), y = median(expected_values[[1]]$expected_val, na.rm = TRUE), text = ifelse(doubling_time[[1]] > 0, (paste("Doubling time:", "\n",as.character(round(doubling_time[[1]], 1)), "days", sep = " ")), (paste("Halving time:", "\n",as.character(round(abs(doubling_time[[1]]), 1)), "days", sep = " "))), xref = "x", yref = "y", showarrow = FALSE)
   p <- add_annotations(p, x = ifelse(doubling_time[[2]] > 0, min(expected_values[[2]]$date, na.rm = TRUE), max(expected_values[[2]]$date, na.rm = TRUE)), y = median(expected_values[[2]]$expected_val, na.rm = TRUE), text = ifelse(doubling_time[[2]] > 0, (paste("Doubling time:", "\n",as.character(round(doubling_time[[2]], 1)), "days", sep = " ")), (paste("Halving time:", "\n",as.character(round(abs(doubling_time[[2]]), 1)), "days", sep = " "))), xref = "x", yref = "y", showarrow = FALSE)
   p <- add_annotations(p, x = ifelse(doubling_time[[3]] > 0, min(expected_values[[3]]$date, na.rm = TRUE), max(expected_values[[3]]$date, na.rm = TRUE)), y = median(expected_values[[3]]$expected_val, na.rm = TRUE), text = ifelse(doubling_time[[3]] > 0, (paste("Doubling time:", "\n",as.character(round(doubling_time[[3]], 1)), "days", sep = " ")), (paste("Halving time:", "\n",as.character(round(abs(doubling_time[[3]]), 1)), "days", sep = " "))), xref = "x", yref = "y", showarrow = FALSE)
   p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, barmode=layout$barmode, autosize=TRUE, template=layout$template, legend = list(x = 0.05, y = 1))
-  p
+  
+  return(p)
 }
