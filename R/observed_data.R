@@ -7,6 +7,25 @@ observed_figure <- function(param_list,
   trace <- list()
   type <- c("bar", "bar", "scatter", "scatter", "scatter")
   mode <- c("", "", "line", "line", "line")
+  line <- c(
+    FALSE,
+    FALSE,
+    list(
+      dash = "dash",
+      color = "rgb(4, 157, 53)",
+      width = 5
+    ),
+    list(
+      dash = "dash",
+      color = "rgb(4, 157, 53)",
+      width = 5
+    ),
+    list(
+      dash = "dash",
+      color = "rgb(4, 157, 53)",
+      width = 5
+    )
+  )
   name <-
     c(
       "ICU census",
@@ -20,11 +39,14 @@ observed_figure <- function(param_list,
     expected_values[[2]]$expected_val,
     expected_values[[3]]$expected_val
     )
+  showlegend <- c(TRUE, TRUE, FALSE, FALSE, FALSE)
   for (trace_index in 1:5) {
     trace[[trace_index]] <- list(
       mode = mode[trace_index],
       name = name[trace_index],
       type = type[trace_index],
+      showlegend = showlegend[trace_index],
+      line = line[[trace_index]],
       x = x[[trace_index]],
       y = y[[trace_index]]
     )
@@ -393,6 +415,8 @@ observed_figure <- function(param_list,
         mode = trace[[trace_index]]$mode,
         name = trace[[trace_index]]$name,
         type = trace[[trace_index]]$type,
+        showlegend = trace[[trace_index]]$showlegend,
+        line = trace[[trace_index]]$line,
         x = trace[[trace_index]]$x,
         y = trace[[trace_index]]$y
       )
