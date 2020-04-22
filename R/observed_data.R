@@ -7,7 +7,7 @@ observed_figure <- function(param_list,
   trace <- list()
   type <- c("bar", "bar", "scatter", "scatter", "scatter")
   mode <- c("", "", "line", "line", "line")
-  line <- c(
+  line <- list(
     FALSE,
     FALSE,
     list(
@@ -45,7 +45,7 @@ observed_figure <- function(param_list,
       mode = mode[trace_index],
       name = name[trace_index],
       type = type[trace_index],
-      showlegend = showlegend[trace_index],
+      showlegend = showlegend[[trace_index]],
       line = line[[trace_index]],
       x = x[[trace_index]],
       y = y[[trace_index]]
