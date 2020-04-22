@@ -385,19 +385,19 @@ observed_figure <- function(param_list,
       themeRef = "PLOTLY_WHITE"
     )
   )
-  p <- plot_ly() %>%
-    for (trace_index in 1:5) {
-      p <-
-        add_trace(
-          p,
-          mode = trace[[trace_index]]$mode,
-          name = trace[[trace_index]]$name,
-          type = trace[[trace_index]]$type,
-          x = trace[[trace_index]]$x,
-          y = trace[[trace_index]]$y
-        )
-      
-    }
+  p <- plot_ly()
+  for (trace_index in 1:5) {
+    p <-
+      add_trace(
+        p,
+        mode = trace[[trace_index]]$mode,
+        name = trace[[trace_index]]$name,
+        type = trace[[trace_index]]$type,
+        x = trace[[trace_index]]$x,
+        y = trace[[trace_index]]$y
+      )
+    
+  }
   p <- add_annotations(p, x = ifelse(doubling_time[[1]] > 0, min(expected_values[[1]]$date, na.rm = TRUE), max(expected_values[[1]]$date, na.rm = TRUE)), y = median(expected_values[[1]]$expected_val, na.rm = TRUE), text = ifelse(doubling_time[[1]] > 0, (paste("Doubling time:", "\n",as.character(round(doubling_time[[1]], 1)), "days", sep = " ")), (paste("Halving time:", "\n",as.character(round(abs(doubling_time[[1]]), 1)), "days", sep = " "))), xref = "x", yref = "y", showarrow = FALSE)
   p <- add_annotations(p, x = ifelse(doubling_time[[2]] > 0, min(expected_values[[2]]$date, na.rm = TRUE), max(expected_values[[2]]$date, na.rm = TRUE)), y = median(expected_values[[2]]$expected_val, na.rm = TRUE), text = ifelse(doubling_time[[2]] > 0, (paste("Doubling time:", "\n",as.character(round(doubling_time[[2]], 1)), "days", sep = " ")), (paste("Halving time:", "\n",as.character(round(abs(doubling_time[[2]]), 1)), "days", sep = " "))), xref = "x", yref = "y", showarrow = FALSE)
   p <- add_annotations(p, x = ifelse(doubling_time[[3]] > 0, min(expected_values[[3]]$date, na.rm = TRUE), max(expected_values[[3]]$date, na.rm = TRUE)), y = median(expected_values[[3]]$expected_val, na.rm = TRUE), text = ifelse(doubling_time[[3]] > 0, (paste("Doubling time:", "\n",as.character(round(doubling_time[[3]], 1)), "days", sep = " ")), (paste("Halving time:", "\n",as.character(round(abs(doubling_time[[3]]), 1)), "days", sep = " "))), xref = "x", yref = "y", showarrow = FALSE)
