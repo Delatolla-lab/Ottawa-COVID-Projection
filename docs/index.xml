@@ -42,9 +42,8 @@ Short-term projections (2 to 4 weeks) to inform the immediate need for hospital 
       
       <guid>/change-log/</guid>
       <description>Updates involving only data updates will no longer be documented.
-V1.5.0 2020-04-20
- Updated Ottawa hospital census data to 2020-04-19. New dashboard providing current hospitalization data updated daily. Minor changes to model parameters:  Current effective physical distancing set to 63%. Projections made for 50%, current, and 70% physical distancing. Date of physical distancing implementation set to 2020-04-20.    V1.4.1 2020-04-17
- Updated Ottawa hospital census data to 2020-04-16.</description>
+V1.5.1 2020-04-23
+ Updated Ottawa hospital census data to 2020-04-19. Updated parameters based on observed hospitalization at the Ottawa Hospital from April 8 to 18. This time period was chosen because it represented a period of steady state when admissions equaled discharges. Estimates based on the proportion of hospital census in ICU or ventilated.  ICU % changed from 0.</description>
     </item>
     
     <item>

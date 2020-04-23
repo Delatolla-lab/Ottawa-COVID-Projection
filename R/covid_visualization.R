@@ -174,6 +174,6 @@ death_visualization <- function(data1,
   }
   p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=TRUE,
               width = 700, height = 500,
-              legend = list(x = 0.05, y = 0.9))
+              legend = list(x = 0.05, y = 1))
   return(p)
 }
