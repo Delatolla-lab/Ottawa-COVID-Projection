@@ -42,13 +42,23 @@ A high level of physical distancing will achieve a **97% reduction in deaths** c
 
 ## What is physical distancing {#distancing}
 
-Physical distancing is the reduction of close contacts between people. Close contact is defined as being within two meters of another person.  
+<div class="more-info-images">
+<figure>
+<img src="/images/Physicalsocialdistancing_webbanner_updated.jpg"
+  alt="2 meters, no groups, stay in your house, stay away from vulnerable people, keep social using video, stay with your family" />
+<figcaption>
+  Original source: [Ottawa Public Health](https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx)
+</figure>
+</figccaption>
+</div>
+
+Physical distancing is the reduction of close contacts between people. Close contact is defined as being within two meters of another person. See [Ottawa Public Health](https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx) for more information on recommendations. 
 
 If a person who had close contact with 10 people per day before the COVID-19 pandemic now has close contact with three people per day, their physical distancing score is 70 percent. If they have contact with five people per day, their score is 50 percent.   
 
 In these projection models, a 70 percent physical distancing scenario means that on average the people of Ottawa have reduced their close contacts by 70 percent. Some people, like essential workers, cannot reduce their number of close contacts.
 
-See [model](/model) for a technical discussion about how physical distancing affects COVID-19 infectivity.
+See [model](/model#distancing) for a technical discussion about how physical distancing affects COVID-19 spread.
 
 <div class="more-info-images">
 <figure>
@@ -64,6 +74,23 @@ See [model](/model) for a technical discussion about how physical distancing aff
 </figccaption>
 </div>
 
+## Physical distancing effectiveness
+
+Physical distancing effectiveness describes how fast COVID-19 spreads in Ottawa compared to if there was no physical distancing. It is a mathematical calculation based on the observed doubling time (growth) of the hospital census for the previous week.
+
+Physical distancing effectiveness is different from other measures that describe the level of physical distancing, including [surveys](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/la-maladie-coronavirus-covid-19.aspx) or [community movement statistics](https://www.gstatic.com/covid19/mobility/2020-04-17_CA_Mobility_Report_en.pdf). 
+
+At the beginning of COVID-19 in Ottawa, new cases (and hospitalizations) doubled every 3 to 4 days. This means that five patients in the hospital on Monday for COVID-19 would increase to 10 patients on Thursday or Friday and then to 20 patients the following week. 
+
+As people in Ottawa began to physical distance, the spread of COVID-19 slowed. Less illness meant fewer patients were admitted to the hospital. There was a slower growth or doubling time of patients in hospitals. 
+
+If there is perfect or 100% physical distancing effectiveness, there would be no COVID-19 spread. A person with COVID-19 illness would not contact people who can become ill and their infection would not spread past their illness. After a few weeks, COVID-19 would be eliminated from Ottawa; no new patients would be admitted to hospital. The hospital census would gradually decrease as currently admitted patients recovered and were discharged.
+
+Currently, hospital admissions are slower than the initial 3 to 4 days doubling time, but we have not yet eliminated all COVID-19 growth. Physical distancing effectiveness reflects the hospital census that we expect given the observed doubling time. 
+
+Note that there is a lag of several weeks between the level of physical distancing and its effect on slowing the growth of COVID-19 illness. There is a further time difference between the onset of illness and hospitalization. Physical distance effectiveness has the same time lag from the onset of distancing to the benefit of distancing showing results in the calculation of physical distancing effectiveness. 
+
+See [model](model#distancing).
 
 ## Flattening the curve {#flatten-curve}
 
