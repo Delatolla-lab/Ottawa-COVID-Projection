@@ -72,7 +72,7 @@ or,
 $$g_0 = 2^\frac{1}{T_d} - 1$$
 or,
 
-$$g_0 = \beta - \gamma$$
+$$g_0 = \beta_0 - \gamma$$
 
 
 ## Input parameters {#parameters}
