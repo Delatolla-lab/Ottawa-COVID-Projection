@@ -76,11 +76,11 @@ See [model](/model#distancing) for a technical discussion about how physical dis
 
 ## Physical distancing effectiveness
 
-Physical distancing effectiveness describes how fast COVID-19 spreads in Ottawa compared if there was no physical distancing. It is a mathematical calculation based on the observed doubling time (growth) of the hospital census for the previous week.
+Physical distancing effectiveness describes how fast COVID-19 spreads in Ottawa compared to if there was no physical distancing. It is a mathematical calculation based on the observed doubling time (growth) of the hospital census for the previous week.
 
-Physical distancing effectiveness is different from other measures the describe the level of physical distancing, including [surveys](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/la-maladie-coronavirus-covid-19.aspx) or [community movement statistics](https://www.gstatic.com/covid19/mobility/2020-04-17_CA_Mobility_Report_en.pdf). 
+Physical distancing effectiveness is different from other measures that describe the level of physical distancing, including [surveys](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/la-maladie-coronavirus-covid-19.aspx) or [community movement statistics](https://www.gstatic.com/covid19/mobility/2020-04-17_CA_Mobility_Report_en.pdf). 
 
-At the beginning of COVID-19 in Ottawa, new cases (and hospitalization) doubled every 3 to 4 days. The increase means that five patients in the hospital on Monday for COVID-19 would increase to 10 patients on Thursday or Friday and then to 20 patients the following week. 
+At the beginning of COVID-19 in Ottawa, new cases (and hospitalizations) doubled every 3 to 4 days. This means that five patients in the hospital on Monday for COVID-19 would increase to 10 patients on Thursday or Friday and then to 20 patients the following week. 
 
 As people in Ottawa began to physical distance, the spread of COVID-19 slowed. Less illness meant fewer patients were admitted to the hospital. There was a slower growth or doubling time of patients in hospitals. 
 
