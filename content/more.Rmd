@@ -58,7 +58,7 @@ If a person who had close contact with 10 people per day before the COVID-19 pan
 
 In these projection models, a 70 percent physical distancing scenario means that on average the people of Ottawa have reduced their close contacts by 70 percent. Some people, like essential workers, cannot reduce their number of close contacts.
 
-See [model](/model) for a technical discussion about how physical distancing affects COVID-19 spread.
+See [model](/model#distancing) for a technical discussion about how physical distancing affects COVID-19 spread.
 
 <div class="more-info-images">
 <figure>
