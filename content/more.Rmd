@@ -14,7 +14,7 @@ output:
   word_document: default
   pdf_document: default
 ---
-## Model use 
+## Model use {#use}
 
 There are two main uses of the projections:
 
@@ -22,7 +22,7 @@ There are two main uses of the projections:
 
 2) Long-term projections (6 weeks to 10 months) to assess how to 'flatten the curve'.  
 
-## Model accuracy 
+## Model accuracy {#accuracy}
 
 Creating accurate, long-range projections to predict the spread COVID-19 is difficult. It's akin to forecasting when a hurricane will make landfall when it is still thousands of kilometers out at sea. Forecasts are more accurate for a shorter time range. Projections are updated with the latest data, including local data to help understand when and where the hurricane will reach landfall.  
 
@@ -32,7 +32,7 @@ That being said, hurricanes and COVID-19 are not the same. The path and force of
 
 Long-range COVID-19 projections provide information on the effectiveness of physical distancing and other preventive measures. 
 
-## Scenarios of physical distancing 
+## Scenarios of physical distancing {#scenarios}
 
 Physical distancing and other preventive measures are the most important factors for projecting long-range (1 to 10 months) COVID-19 cases and hospital use.  
 
@@ -40,7 +40,7 @@ Public Health Ontario projected 100,000 COVID-19 Ontario deaths with no preventa
 
 A high level of physical distancing will achieve a **97% reduction in deaths** compared to a scenario of no preventive action (100,000 deaths). The wide range in projections is why we need to monitor and update Ottawa projections to reflect how well we achieve COVID-19 prevention. 
 
-## What is physical distancing {#distancing}
+## Physical distancing {#distancing}
 
 <div class="more-info-images">
 <figure>
@@ -74,7 +74,7 @@ See [model](/model#distancing) for a technical discussion about how physical dis
 </figccaption>
 </div>
 
-## Physical distancing effectiveness
+## Physical distancing effectiveness {#distancing-effectiveness}
 
 Physical distancing effectiveness describes how fast COVID-19 spreads in Ottawa compared to if there was no physical distancing. It is a mathematical calculation based on the observed doubling time (growth) of the hospital census for the previous week.
 

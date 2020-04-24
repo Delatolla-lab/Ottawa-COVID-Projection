@@ -72,6 +72,42 @@ publishDir = "./docs"
     name = "More"
     url = "/more/"
     weight = 4
+    
+[[menu.main]]
+    name = "Model use"
+    url = "/more/#use"
+    parent = "More"
+    weight = 1
+
+[[menu.main]]
+    name = "Model accuracy"
+    url = "/more/#accuracy"
+    parent = "More"
+    weight = 2   
+    
+[[menu.main]]
+    name = "Scenarios of physical disrtancing"
+    url = "/more/#scenarios"
+    parent = "More"
+    weight = 3  
+    
+[[menu.main]]
+    name = "Physical distancing"
+    url = "/more/#distancing"
+    parent = "More"
+    weight = 4 
+    
+[[menu.main]]
+    name = "Physical distancing effectiveness"
+    url = "/more/#distancing-effectiveness"
+    parent = "More"
+    weight = 5 
+    
+[[menu.main]]
+    name = "Flatten the curve"
+    url = "/more/#flatten-curve"
+    parent = "More"
+    weight = 6  
 
 [[menu.main]]
     name = "Contact"
