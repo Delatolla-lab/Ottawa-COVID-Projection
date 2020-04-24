@@ -28,13 +28,13 @@ Ottawa COVID-19 projections augment the projections of Public Health Ontario and
 
 The use of local hospitalization rates follows the analogy of forecasting hurricanes. We monitor the local hospital COVID-19 use and then project the trend into the future based on the knowledge of COVID-19 and how it spreads in communities. 
 
-## Why is doubling time so important?
+## The importance of physical distancing
 
 The trend of COVID-19 hospital use is summarized as “doubling time.” Doubling time — and the weekly change in doubling time — are the most important parameters in COVID-19 projections that vary between communities. 
 
 An exponential growth in hosptial census (doubling time of less than 4 days) will occur unless one of two situations occurs:  
 
-1) The number of people susceptible to infection decreases. As an epidemic progresses, there will be fewer people left in the community who can become infected. However, as of  `r format(Sys.Date()-1, '%b %d, %Y')` only a small proportion of people living in Ottawa are currently infected or are recovered from COVID-19 -- likely less than 1%. This means that the current reduction in susceptible people has a negiligble effect effect on changes to hospital infection doubling times. Approximately 50 to 60% of people need to be immune to COVID-19 (infected or recovered) before doubling time becomes negative -- meaning there is a weekly decrease in the patients in hospital.
+1) The number of people susceptible to infection decreases. As an epidemic progresses, there will be fewer people left in the community who can become infected. However, as of  `r format(Sys.Date()-1, '%b %d, %Y')` only a small proportion of people living in Ottawa are currently infected or are recovered from COVID-19 -- likely less than 1%. This means that the current reduction in susceptible people has a negligible effect effect on changes to hospital infection doubling times. Approximately 50 to 60% of people need to be immune to COVID-19 (infected or recovered) before doubling time becomes negative -- meaning there is a weekly decrease in the patients in hospital.
 
 2) Preventive measures slow the spread of infection. 
 
@@ -42,7 +42,7 @@ The first situation — how doubling time decreases as the number of susceptible
 
 The second situation — the effectiveness of preventive measures — is more difficult to estimate accurately. Prevention and control measures depend not only on what  measures are in place over the last 2-4 weeks, but also how well people follow the measures. Current hospital use and trends in hosptial use provide important information on physical distancing effectiveness and other measures to control the spread of COVID-19 infection.
 
-## How physical distancing affects COVID-19 projections - the math
+## How physical distancing affects COVID-19 projections - the math 
 
 The projections of hospital cases uses an $SIR$ model ($S$ = susceptible, $I$ = infected, $R$ = recovered people). Within an SIR model, 
 new infections at time ($t+1$) are equal to:
@@ -50,9 +50,30 @@ new infections at time ($t+1$) are equal to:
 $$I_{t+1} = \beta S_t I_t $$
 Where $\beta$ is commonly referred as the "force of infection" because it describes how quickly a disease can move through a population. $\beta$ is a probability or risk that ranges from 0 to 1. $\beta$ value = 0.5 means 50% of susceptible people ($S_t$) who are in contact with an infected person ($I_t$) will become infected ($I_{t+1}$). 
 
-Physical distancing is a 'control measure' to reduce the effective force of infection, $\beta$. A control measure, $\lambda$ reduces new infections, where $\lambda = 1$ results in a complete disruption in new infections (conversly, $\lambda = 0$ has no effect for reducing new infections). The projections presented on this website assume physical distancing is directly related to effective control. This means 50% physical distancing is the same as $\lambda = 0.5$. @daughton2017approach
+Physical distancing is a 'control measure' to reduce the effective force of infection, $\beta$. A control measure, $\lambda$ reduces new infections, where $\lambda = 1$ results in a complete disruption in new infections (conversely, $\lambda = 0$ has no effect for reducing new infections). The projections presented on this website assume physical distancing is directly related to effective control. This means 50% physical distancing is the same as $\lambda = 0.5$. @daughton2017approach
 
 Note that $\beta$ is related to the epidemiology measure $R_0$ - the basic reproductive number that describes the expected number of people who become infected with from each person with COVID-19 at the beginning of an outbreak. $R_0 = \frac{\beta}{\gamma}$, where $\gamma$ is the reciprocal of the infectious period ($\psi$).
+
+## Calculating physical distancing effectiveness {#distancing}
+
+Physical distancing effectiveness is equal to $\lambda$, for the calculations on this website. In practice, contract tracing and isolation is the other main control measure. The effect of contract tracing was not separated from physical distancing. 
+
+Physical distancing effectiveness, $\lambda$:
+
+$$\lambda = 1 - \frac{(g + \gamma)}{\beta_0}$$
+Where,
+
+$g$ is the observed growth rate, expressed the rate of new COVID-19 cases each day.
+$\beta_0$ is the force of infection at the beginning of the outbreak. $\beta_0 = 0.332$ when doubling time $D_t = 4$ days (or growth rate at the beginning of the outbreak, $g_0 = 0.189$). In turn, $g_0$ is derived from a basic reproduction number ($R_0$) of 2.32 and mean generation interval ($T_c$) of 7 days, where,
+
+$$g_0 = \frac{R_0 - 1}{T_c}$$
+or, 
+
+$$g_0 = 2^\frac{1}{T_d} - 1$$
+or,
+
+$$g_0 = \beta_0 - \gamma$$
+
 
 ## Input parameters {#parameters}
 
