@@ -25,7 +25,7 @@ data_column_standardisation <- function(data, strata, date_column, new_columns_p
   all_dates <- seq.Date(from = min(data[[date_column]]), to = max(data[[date_column]]), by = "day")
   
   case_types <- unique(data[[strata]])
-  new_out_data <- data.frame()
+  new_out_data <- data.frame(matrix(ncol = (length(case_types)+1), nrow = 0))
   # Match all rows containing date
   for (single_day in all_dates) {
     new_row <- c()
@@ -35,7 +35,10 @@ data_column_standardisation <- function(data, strata, date_column, new_columns_p
       type_count <- nrow(events[events[[strata]]==value,])
       new_row[[paste(new_columns_prefix, value, sep = "_")]] <- type_count
     }
-    new_out_data <- rbind(new_out_data, new_row)
+    if(nrow(new_out_data)==0){
+      colnames(new_out_data) <- names(new_row)
+    }
+    new_out_data <- rbind(new_out_data,as.data.frame(t(new_row)))
   }
   
   new_out_data[["Date"]] <- as.Date(new_out_data[["Date"]], format =  "%Y-%m-%d", origin = "1970-01-01")
