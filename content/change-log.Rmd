@@ -12,9 +12,10 @@ title: Changelog
 from April 8 to 18. This time period was chosen because it represented a period
 of steady state when admissions equaled discharges. Estimates based on the
 proportion of hospital census in ICU or ventilated.
-  - ICU % changed from 0.75 to 0.96 (based on 37% of observed hospitalizations)
+  - ICU % changed from 0.75 to 0.96 (based on 37% of observed hospitalizations).
   - Ventilated % changed from 0.5 to 0.73 (based on 28% of observed
-  hospitalizations)
+  hospitalizations).
+  - ICU length of stay changed from 16 to 10 days.
 
 # V1.5.0
 2020-04-20
