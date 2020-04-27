@@ -32,7 +32,8 @@ hosp_visualization <-
     name <-
       c(
         "50% physical distancing",
-        "Current distancing effectiveness",
+        paste("Current distancing effectiveness (", round(effective_pd, 0), "%)",
+              sep=""),
         "70% physical distancing",
         "Reported # of patients",
         "Hospital capacity"
@@ -115,7 +116,8 @@ death_visualization <- function(data1,
   name <-
     c(
       "50% physical distancing",
-      "Current distancing effectiveness",
+      paste("Current distancing effectiveness (", round(effective_pd, 0), "%)",
+            sep=""),
       "70% physical distancing",
       "Reported # of deaths"
     )
