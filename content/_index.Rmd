@@ -102,8 +102,16 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 ## Observed Hospital census {#doubling-time}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/observed_data.R")
+tmp <- figure_input_creation_line_listing(data = outbreak_LL_institutions, sort_date_column = "Accurate Episode Date", strata = list("Exposure Setting Type Desc" = c("RH","LTCH"), "Exposure Setting Comments" = c("FACILITY WIDE")))
+test <- data_column_standardisation(tmp, "Exposure Setting Type Desc","Accurate Episode Date","observed_new")
 
 observed_figure(exp_census, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
+
+reworked_figure(xaxis = "date", yaxis = list(list(type = "observed_data", y_column = "observed_census_ICU", name = "ICU census"), list(type = "observed_data", y_column = "observed_census_acute_care", name = "Acute care census")), titles = c(y = "Census (# of patients)", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa"), data = exp_census[[1]])
+
+reworked_figure(xaxis = "Date", yaxis = list(list(type = "observed_data", y_column = "observed_new_RH", name = "RH"), list(type = "observed_data", y_column = "observed_new_LTCH", name = "LTCH")), titles = c(y = "Daily Observed cases", x = "Date", title = "YEEE"), data = test)
+
 ```
 
 Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days translates to current physical distancing effectiveness of approximately **`r round(effective_pd, 0)`%**. 
