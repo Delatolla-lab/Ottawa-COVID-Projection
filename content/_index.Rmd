@@ -109,10 +109,69 @@ test <- data_column_standardisation(tmp, "Exposure Setting Type Desc","Accurate 
 
 observed_figure(exp_census, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
 
-reworked_figure(xaxis = "date", yaxis = list(list(type = "observed_data", y_column = "observed_census_ICU", name = "ICU census"), list(type = "observed_data", y_column = "observed_census_acute_care", name = "Acute care census")), titles = c(y = "Census (# of patients)", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa"), data = exp_census[[1]])
+DT_TEST_DATA <- exp_census[[1]]
+DT_TEST_DATA$DT1 <- exp_census[[3]][[1]]$expected_val
+DT_TEST_DATA$DT2 <- exp_census[[3]][[2]]$expected_val
+DT_TEST_DATA$DT3 <- exp_census[[3]][[3]]$expected_val
 
-reworked_figure(xaxis = "Date", yaxis = list(list(type = "observed_data", y_column = "observed_new_RH", name = "RH"), list(type = "observed_data", y_column = "observed_new_LTCH", name = "LTCH")), titles = c(y = "Daily Observed cases", x = "Date", title = "YEEE"), data = test)
+icu_call <- list(type = "observed_data", y_column = "observed_census_ICU", name = "ICU census")
+acute_care <- list(type = "observed_data", y_column = "observed_census_acute_care", name = "Acute care census")
+DT1 <- list(type = "doubling_time", y_column = "DT1")
+DT2 <- list(type = "doubling_time", y_column = "DT2")
+DT3 <- list(type = "doubling_time", y_column = "DT3")
 
+ottawa_hosp <-
+  reworked_figure(
+    xaxis = "date",
+    yaxis = list(icu_call, acute_care, DT1, DT2, DT3),
+    titles = c(y = "Census (# of patients)", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa"),
+    data = DT_TEST_DATA
+  )
+
+reworked_figure(
+  xaxis = "Date",
+  yaxis = list(
+    list(
+      type = "observed_data",
+      y_column = "observed_new_RH",
+      name = "RH"
+    ),
+    list(
+      type = "observed_data",
+      y_column = "observed_new_LTCH",
+      name = "LTCH"
+    )
+  ),
+  titles = c(y = "Daily Observed cases", x = "Date", title = "YEEE"),
+  data = test
+)
+
+doubling_time <- exp_census[[2]]
+expected_values <- exp_census[[3]]
+
+for (i in 1:3) {
+    ottawa_hosp <-
+      add_annotations(
+        ottawa_hosp,
+        x = ifelse(
+          doubling_time[[i]] > 0,
+          min(expected_values[[i]]$date, na.rm = TRUE),
+          max(expected_values[[i]]$date, na.rm = TRUE)
+        ),
+        y = median(expected_values[[i]]$expected_val, na.rm = TRUE),
+        text = ifelse(doubling_time[[i]] > 0, (
+          paste("Doubling time:", "\n", as.character(round(doubling_time[[i]], 1)), "days", sep = " ")
+        ), (
+          paste("Halving time:", "\n", as.character(round(
+            abs(doubling_time[[i]]), 1
+          )), "days", sep = " ")
+        )),
+        xref = "x",
+        yref = "y",
+        showarrow = FALSE
+      )
+}
+ottawa_hosp
 ```
 
 Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days translates to current physical distancing effectiveness of approximately **`r round(effective_pd, 0)`%**. 
