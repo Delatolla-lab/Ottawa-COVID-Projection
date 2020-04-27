@@ -42,6 +42,7 @@ source("../R/estimate_scripts.R")
 source("../R/lag_replacement.R")
 source("../R/observed_data.R")
 source("../R/effective_physical_distancing.R")
+source("../R/data_conversion.R")
 
 # data for dashboard and figures
 
@@ -103,7 +104,7 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/observed_data.R")
-tmp <- figure_input_creation_line_listing(data = outbreak_LL_institutions, sort_date_column = "Accurate Episode Date", strata = list("Exposure Setting Type Desc" = c("RH","LTCH"), "Exposure Setting Comments" = c("FACILITY WIDE")))
+tmp <- figure_input_creation_line_listing(data = outbreak_LL_institutions, sort_date_column = "Accurate Episode Date", strata = list("Exposure Setting Type Desc" = c("RH","LTCH", "Group Home"), "Exposure Setting Comments" = c("FACILITY WIDE")))
 test <- data_column_standardisation(tmp, "Exposure Setting Type Desc","Accurate Episode Date","observed_new")
 
 observed_figure(exp_census, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
