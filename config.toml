@@ -17,96 +17,144 @@ publishDir = "./docs"
     weight = 1
 
 [[menu.main]]
-    name = "Visualizations"
+    name = " Visualizations"
     url = ""
     weight = 2
 
 [[menu.main]]
     name = "Peak hospitalization projections"
     url = "/#peak-hosp-projections"
-    parent = "Visualizations"
+    parent = " Visualizations"
     weight = 1
     
 [[menu.main]]
     name = "Acute Care Projections"
     url = "/#acute-care-projections"
-    parent = "Visualizations"
+    parent = " Visualizations"
     weight = 2
 
 [[menu.main]]
     name = "ICU Projections"
     url = "/#icu-projections"
-    parent = "Visualizations"
+    parent = " Visualizations"
     weight = 3
 
 [[menu.main]]
     name = "Ventilator Projections"
     url = "/#ventilator-projections"
-    parent = "Visualizations"
+    parent = " Visualizations"
     weight = 4
     
 [[menu.main]]
     name = "Physical distancing"
     url = "/more/#distancing"
-    parent = "Visualizations"
+    parent = " Visualizations"
     weight = 5
 
 [[menu.main]]
     name = "Flattening the curve"
     url = "/more/#flatten-curve"
-    parent = "Visualizations"
+    parent = " Visualizations"
     weight = 6
 
 [[menu.main]]
     name = "Mortality Projections"
     url = "/#deaths"
-    parent = "Visualizations"
+    parent = " Visualizations"
     weight = 5
 
 [[menu.main]]
-    name = "Model"
+    name = " Model"
     url = "/model/"
+    weight = 3
+    
+[[menu.main]]
+    name = "Model parameters"
+    url = "/model/"
+    parent = " Model"
+    weight = 1
+    
+[[menu.main]]
+    name = "Hospital data"
+    url = "/model/#hospital-census"
+    parent = " Model"
+    weight = 2
+
+[[menu.main]]
+    name = "Physical distancing"
+    url = "/model/#physical-distancing"
+    parent = " Model"
     weight = 3
 
 [[menu.main]]
-    name = "More"
+    name = "Physical distancing"
+    url = "/model/#distancing-math"
+    parent = " Model"
+    weight = 4
+    
+[[menu.main]]
+    name = "Physical distancing"
+    url = "/model/#distancing"
+    parent = " Model"
+    weight = 5
+    
+[[menu.main]]
+    name = "Input parameters"
+    url = "/model/#parameters"
+    parent = " Model"
+    weight = 6
+
+[[menu.main]]
+    name = "Input parameters"
+    url = "/model/#plot-data"
+    parent = " Model"
+    weight = 7
+    
+[[menu.main]]
+    name = "References"
+    url = "/model/#references"
+    parent = " Model"
+    weight = 8
+
+[[menu.main]]
+    name = " More"
     url = "/more/"
     weight = 4
     
 [[menu.main]]
     name = "Model use"
     url = "/more/#use"
-    parent = "More"
+    parent = " More"
     weight = 1
 
 [[menu.main]]
     name = "Model accuracy"
     url = "/more/#accuracy"
-    parent = "More"
+    parent = " More"
     weight = 2   
     
 [[menu.main]]
     name = "Scenarios of physical disrtancing"
     url = "/more/#scenarios"
-    parent = "More"
+    parent = " More"
     weight = 3  
     
 [[menu.main]]
     name = "Physical distancing"
     url = "/more/#distancing"
-    parent = "More"
+    parent = " More"
     weight = 4 
     
 [[menu.main]]
     name = "Physical distancing effectiveness"
     url = "/more/#distancing-effectiveness"
-    parent = "More"
+    parent = " More"
     weight = 5 
     
 [[menu.main]]
     name = "Flatten the curve"
     url = "/more/#flatten-curve"
-    parent = "More"
+    parent = " More"
     weight = 6  
 
 [[menu.main]]

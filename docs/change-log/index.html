@@ -78,7 +78,7 @@
                     <a 
                         class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Visualizations
+                         Visualizations
                     </a>
                     <div 
                         class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdownMenuLink" id="viz-dropdown">
@@ -115,12 +115,6 @@
                     
                         <a 
                             class="dropdown-item" 
-                            href="/more/#distancing">
-                            Physical distancing
-                        </a>
-                    
-                        <a 
-                            class="dropdown-item" 
                             href="/more/#flatten-curve">
                             Flattening the curve
                         </a>
@@ -130,9 +124,47 @@
                 
             
                 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/model/">Model</a>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a 
+                        class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Model
+                    </a>
+                    <div 
+                        class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdownMenuLink" id="viz-dropdown">
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/model/">
+                            Model parameters
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/model/#hospital-census">
+                            Hospital data
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/model/#distancing">
+                            Physical distancing
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/model/#plot-data">
+                            Input parameters
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/model/#references">
+                            References
+                        </a>
+                    
+                    </div>
+                </li>
                 
             
                 
@@ -140,7 +172,7 @@
                     <a 
                         class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        More
+                         More
                     </a>
                     <div 
                         class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdownMenuLink" id="viz-dropdown">
@@ -210,11 +242,26 @@
 
 
 <p><strong>Updates involving only data updates will no longer be documented.</strong></p>
+<div id="v1.5.2" class="section level1">
+<h1>V1.5.2</h1>
+<p>2020-04-27</p>
+<ul>
+<li>Updated Ottawa hospital census data to 2020-04-26.</li>
+<li>Changes to model parameters:
+<ul>
+<li>Initial doubling time set to 4 days.</li>
+<li>Physical distancing implementation set to 50-70% (Current effective physical
+distancing set to 58%).</li>
+</ul></li>
+<li>Current effective physical distancing value added to projection legends.</li>
+<li>Note added regarding observed deaths in Ottawa</li>
+</ul>
+</div>
 <div id="v1.5.1" class="section level1">
 <h1>V1.5.1</h1>
 <p>2020-04-23</p>
 <ul>
-<li>Updated Ottawa hospital census data to 2020-04-19.</li>
+<li>Updated Ottawa hospital census data to 2020-04-22.</li>
 <li>Updated parameters based on observed hospitalization at the Ottawa Hospital
 from April 8 to 18. This time period was chosen because it represented a period
 of steady state when admissions equaled discharges. Estimates based on the
