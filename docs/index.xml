@@ -43,7 +43,7 @@ Short-term projections (2 to 4 weeks) to inform the immediate need for hospital 
       <guid>/change-log/</guid>
       <description>Updates involving only data updates will no longer be documented.
 V1.5.2 2020-04-27
- Updated Ottawa hospital census data to 2020-04-26. Changes to model parameters:  Initial doubling time set to 4 days. Physical distancing implementation set to 50-70% (Current effective physical distancing set to 58%).  Current effective physical distancing value added to projection legends. Note added regarding observed deaths in Ottawa   V1.5.1 2020-04-23
+ Updated Ottawa hospital census data to 2020-04-26. Changes to model parameters:  Initial doubling time set to 4 days. Physical distancing implementation set to 50-70% (Current effective physical distancing set to 58%).  Current effective physical distancing value added to projection legends. Note added regarding observed deaths in Ottawa.   V1.5.1 2020-04-23
  Updated Ottawa hospital census data to 2020-04-22.</description>
     </item>
     

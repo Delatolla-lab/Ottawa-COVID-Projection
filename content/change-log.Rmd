@@ -13,7 +13,7 @@ title: Changelog
   - Physical distancing implementation set to 50-70% (Current effective physical
   distancing set to 58%).
 - Current effective physical distancing value added to projection legends.
-- Note added regarding observed deaths in Ottawa
+- Note added regarding observed deaths in Ottawa.
 
 # V1.5.1
 2020-04-23
