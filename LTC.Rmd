@@ -1,0 +1,113 @@
+---
+title: "LTC"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Observed COVID-19 incidence in long-term care facilities
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# libraries
+library(plotly)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# data
+outbreak_LL_institutions <- read_csv("Data/Observed data/outbreak_LL_institutions.csv")
+
+# source R scripts
+source("R/lag_replacement.R")
+source("R/data_conversion.R")
+
+# Convert and group LL data
+tmp <- figure_input_creation_line_listing(data = outbreak_LL_institutions, sort_date_column = "Accurate Episode Date", strata = list("Exposure Setting Type Desc" = c("RH","LTCH", "Group Home"), "Exposure Setting Comments" = c("FACILITY WIDE")))
+test <- data_column_standardisation(tmp, "Exposure Setting Type Desc","Accurate Episode Date","observed_new")
+
+# Create daily incidence column
+test$incidence <- apply(test[2:4], 1, sum)
+
+# Create cumulative_incidence
+test$cumulative_incidence <- cumsum(test$incidence)
+
+# Graph selection list
+
+RH_list <- list(
+      type = "observed_data",
+      y_column = "observed_new_RH",
+      name = "RH"
+    )
+LTCH_list <- list(
+      type = "observed_data",
+      y_column = "observed_new_LTCH",
+      name = "LTCH"
+    )
+Group_home_list <- list(
+  type = "observed_data",
+  y_column = "observed_new_Group Home",
+  name = "Group Home"
+)
+
+ltc_daily_plot <- reworked_figure(
+  xaxis = "Date",
+  yaxis = list(RH_list, LTCH_list, Group_home_list),
+  titles = c(y = "Daily observed cases", x = "Date", title = "Daily incidence of COVID-19 in Ottawa long-term care facilities"),
+  data = test
+)
+
+ltc_cumulative_excpec <- calc_expected_values_for_n_weeks(test, number_weeks = 3, observed_columns_name = "cumulative_incidence", first_day = 5, date_column = "Date")
+
+ltc_cumulative_excpec[[1]]$DT1 <- ltc_cumulative_excpec[[3]][[1]]$expected_val
+ltc_cumulative_excpec[[1]]$DT2 <- ltc_cumulative_excpec[[3]][[2]]$expected_val
+ltc_cumulative_excpec[[1]]$DT3 <- ltc_cumulative_excpec[[3]][[3]]$expected_val
+
+doubling_time <- ltc_cumulative_excpec[[2]]
+expected_values <- ltc_cumulative_excpec[[3]]
+
+cumulative_list <- list(
+      type = "observed_data",
+      y_column = "cumulative_incidence",
+      name = "total number of COVID-19 cases in LTC facilities"
+    )
+
+DT1 <- list(type = "doubling_time", y_column = "DT1")
+DT2 <- list(type = "doubling_time", y_column = "DT2")
+DT3 <- list(type = "doubling_time", y_column = "DT3")
+
+ltc_cumulative_plot <- reworked_figure(
+  xaxis = "Date",
+  yaxis = list(cumulative_list,DT1, DT2, DT3),
+  titles = c(y = "Cumulative observed cases", x = "Date", title = "Cumulative incidence of COVID-19 in Ottawa long-term care facilities"),
+  data = ltc_cumulative_excpec[[1]]
+)
+
+for (i in 1:3) {
+    ltc_cumulative_plot <-
+      add_annotations(
+        ltc_cumulative_plot,
+        x = ifelse(
+          doubling_time[[i]] > 0,
+          min(expected_values[[i]]$Date, na.rm = TRUE),
+          max(expected_values[[i]]$Date, na.rm = TRUE)
+        ),
+        y = max(expected_values[[i]]$expected_val, na.rm = TRUE),
+        text = ifelse(doubling_time[[i]] > 0, (
+          paste("Doubling time:", "\n", as.character(round(doubling_time[[i]], 1)), "days", sep = " ")
+        ), (
+          paste("Halving time:", "\n", as.character(round(
+            abs(doubling_time[[i]]), 1
+          )), "days", sep = " ")
+        )),
+        xref = "x",
+        yref = "y",
+        showarrow = FALSE
+      )
+}
+ltc_daily_plot
+ltc_cumulative_plot
+
+```
