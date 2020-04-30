@@ -34,10 +34,10 @@ calc_growth <- function(doubling_time){
   return(growth)
 }
 
-calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
-  all_days <- na.omit(data[, "observed_census_ICU_p_acute_care"])
+calc_expected_values_for_n_weeks <- function(data, number_weeks = 1, observed_columns_name = "observed_census_ICU_p_acute_care", first_day = 2, date_column = "date"){
+  all_days <- na.omit(data[, observed_columns_name])
   # Numeric representation of all_days[[1]] as a day of the week
-  first_day <- 2
+  first_day <- first_day
   # TODO Use dates to verify no skipped days
   start_of_first_full_week_index <- (7 - first_day)+2
   max_number_of_weeks <- floor((length(all_days)-(start_of_first_full_week_index-1))/7)
@@ -70,10 +70,10 @@ calc_expected_values_for_n_weeks <- function(data, number_weeks = 1){
     # This is done to preserve row numbers
     expected_sub_data <- as.data.frame(data[,0])
     expected_sub_data[,"expected_val"] <- NA
-    expected_sub_data[,"date"] <- NA
+    expected_sub_data[,date_column] <- NA
     expected_sub_data[start_of_calculation_week:(start_of_calculation_week+6),"expected_val"] <- expected_value
-    expected_sub_data[start_of_calculation_week:(start_of_calculation_week+6),"date"] <- 
-      as.character(data[start_of_calculation_week:(start_of_calculation_week+6),"date"])
+    expected_sub_data[start_of_calculation_week:(start_of_calculation_week+6),date_column] <- 
+      as.character(data[start_of_calculation_week:(start_of_calculation_week+6),date_column])
     expected_out[[week]] <- expected_sub_data
     #doubling_time[[week]] <- calc_doubling_time(observed_input_for_week)
   }
