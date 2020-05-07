@@ -1,8 +1,5 @@
-TOH_projections <- read.csv("Data/TOH_projection_estimates.csv")
-TOH_observed <- read.csv("Data/Observed data/TOH_Observed_Hospital_Use.csv")
-
 library(plotly)
-TOH_fun <- function(data1, data2, parameter) {
+TOH_fun <- function(data1, parameter, title, y) {
   trace1 <- list(
     fill = "none", 
     line = list(
@@ -130,16 +127,16 @@ TOH_fun <- function(data1, data2, parameter) {
     name = "Observed hospital census", 
     type = "bar", 
     xsrc = "wyusuf:13:d5d66b", 
-    x = data2$date,
+    x = data1$date,
     ysrc = "wyusuf:13:5e5262", 
-    y = data2[,grepl(paste(paste("^",as.character(parameter),sep = ""),
-                           "observed", sep = "_"), names(data2))],
+    y = data1[,grepl(paste(paste("^",as.character(parameter),sep = ""),
+                           "observed", sep = "_"), names(data1))],
     stackgroup = NULL, 
     orientation = "v"
   )
   data <- list(trace1, trace2, trace3, trace4, trace5, trace6, trace7)
   layout <- list(
-    title = list(text = "Projected census of COVID-19 hospitalizations at The Ottawa Hospital"), 
+    title = list(text = as.character(title)), 
     xaxis = list(
       type = "date", 
       range = c("2020-03-23 12:00", "2020-10-09"), 
@@ -149,7 +146,7 @@ TOH_fun <- function(data1, data2, parameter) {
     yaxis = list(
       type = "linear", 
       range = c(-75.35262219872224, 1438.0468001157224), 
-      title = list(text = "Census (# of patients)"), 
+      title = list(text = as.character(y)), 
       autorange = TRUE
     ), 
     autosize = TRUE, 

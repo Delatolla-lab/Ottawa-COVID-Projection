@@ -36,6 +36,8 @@ library(dplyr)
 ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
 ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
 peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
+TOH_projections <- read.csv(file.path(getwd(),"../Data/TOH_projection_estimates.csv"))
+TOH_observed <- read.csv(file.path(getwd(),"../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
 
 # scripts
 source("../R/estimate_scripts.R")
@@ -43,6 +45,7 @@ source("../R/lag_replacement.R")
 source("../R/observed_data.R")
 source("../R/effective_physical_distancing.R")
 source("../R/data_conversion.R")
+source("../R/toh_projections.R")
 
 # data for dashboard and figures
 
@@ -85,7 +88,7 @@ Data to `r format(Sys.Date()-1, '%b %d, %Y')`
 
 ### Current
 
-**`r last(na.omit(ott_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in The Ottawa Hospital.
+**`r last(na.omit(ott_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in hospital.
 
 Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute care patients. **`r last(na.omit(ott_observed$observed_census_ICU))`** ICU patients.
 
@@ -100,6 +103,8 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 **`r paste(current, "to", reduction_20)`** peak patients in hospital between **`r paste(current_date, "&", reduction_20_date)`**. 
 
 ## Observed Hospital census {#doubling-time}
+
+**NOTE:** Ottawa hospitalization data is missing from 2020-04-29 to 2020-05-04. Observed hospitalization data from The Ottawa Hospital will be added shortly.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Ottawa Hospital data section @Warsame
@@ -122,7 +127,7 @@ ottawa_hosp <-
   reworked_figure(
     xaxis = "date",
     yaxis = list(icu_call, acute_care, DT1, DT2, DT3),
-    titles = c(y = "Census (# of patients)", x = "Date", title = "Observed census of COVID-19 hospitalizations in The Ottawa Hospital"),
+    titles = c(y = "Census (# of patients)", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa"),
     data = exp_census[[1]]
   )
 
@@ -189,22 +194,22 @@ The forecast of `r round(current, -1)` patients in hospital in `r paste(current_
 
 A further explanation of effective physical distancing will be added to the [More](/more) page soon.
 
-## Acute care hospitalization projections {#acute-care-projections}
+## Hospitalization projections {#hospitalization-projections}
 
 <!--See [here](/model#parameters) for all input parameters. -->
 
 ### Census projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "census_acute_care", title = "Projected census of acute care COVID-19 hospitalizations in Ottawa", y_label = "Census (# of patients)", annote = TRUE)
+source("../R/toh_projections.R")
+TOH_fun(TOH_projections, "hosp_census", title = "Projected census of COVID-19 hospitalizations at The Ottawa Hospital", y = "Census (# of patients)")
 ```
 
 ### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Projected daily acute care COVID-19 hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
+source("../R/toh_projections.R")
+TOH_fun(TOH_projections, "hosp_admits", title = "Projected daily COVID-19 hospitalizations at The Ottawa Hospital", y = "New admissions (# of patients)")
 ```
 
 ## Ventilator projections {#ventilator-projections}
@@ -212,15 +217,15 @@ hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Pro
 ### Census projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "census_vents", title = "Projected census of COVID-19 ventilator use in Ottawa", y_label = "Census (# of patients)")
+source("../R/toh_projections.R")
+TOH_fun(TOH_projections, "vent_census", title = "Projected census of COVID-19 hospitalizations at The Ottawa Hospital", y = "Census (# of patients)")
 ```
 
 ### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projected daily COVID-19 ventilator use in Ottawa", y_label = "Newly ventilated (# of patients)")
+source("../R/toh_projections.R")
+TOH_fun(TOH_projections, "vent_admits", title = "Projected daily COVID-19 hospitalizations at The Ottawa Hospital", y = "New admissions (# of patients)")
 ```
 
 ## Death projections {#deaths}
