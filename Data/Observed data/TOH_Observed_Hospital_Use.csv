@@ -1,4 +1,4 @@
-﻿date,observed_new_acute_care,observed_new_ICU,observed_new_ICU_p_acute_care,observed_new_vents,observed_census_acute_care,observed_census_ICU,observed_census_ICU_p_acute_care,observed_census_vents,daily_discharges,observed_new_deaths,observed_cumulative_deaths,capacity_census_ICU_p_acute_care,capacity_census_acute_care,capacity_census_ICU,capacity_census_vents,capacity_new_ICU_p_acute_care,capacity_new_acute_care,capacity_new_ICU,capacity_new_vents
+﻿date,observed_new_acute_care,observed_new_ICU,observed_new_ICU_p_acute_care,observed_new_vents,observed_census_acute_care,observed_census_ICU,hosp_census_observed,vent_census_observed,daily_discharges,observed_new_deaths,observed_cumulative_deaths,capacity_census_ICU_p_acute_care,capacity_census_acute_care,capacity_census_ICU,capacity_census_vents,capacity_new_ICU_p_acute_care,capacity_new_acute_care,capacity_new_ICU,capacity_new_vents
 2020-03-24,,,,,4,2,6,0,,1,1,,,,,,,,
 2020-03-25,,,,,3,5,8,0,,0,1,,,,,,,,
 2020-03-26,,,,,3,5,8,0,,0,1,,,,,,,,
@@ -41,7 +41,7 @@
 2020-05-02,,,,,29,6,35,2,,0,78,,,,,,,,
 2020-05-03,,,,,28,8,36,4,,35,127,,,,,,,,
 2020-05-04,,,,,23,7,30,2,,11,138,,,,,,,,
-2020-05-05,,,,,,,,,,,,,,,,,,,
+2020-05-05,,,,,23,4,27,2,,1,139,,,,,,,,
 2020-05-06,,,,,,,,,,,,,,,,,,,
 2020-05-07,,,,,,,,,,,,,,,,,,,
 2020-05-08,,,,,,,,,,,,,,,,,,,
