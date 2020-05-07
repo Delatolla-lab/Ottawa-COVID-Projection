@@ -84,6 +84,8 @@ reduction_100_date <- peak_projections[3,4]
 
 # Dashboard
 
+**NOTE:** Ottawa hospitalization data is missing from 2020-04-29 to 2020-05-04. Observed hospitalization data from The Ottawa Hospital will be added shortly to replace hospitalization data from all Ottawa hospitals.
+
 Data to `r format(Sys.Date()-1, '%b %d, %Y')`
 
 ### Current
@@ -96,15 +98,13 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 
 ### Short-range forecast
 
-**`r more_less`** patients in hospital the this week, reflecting a current `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days (daily growth of `r round(100*exp_census[[4]][[3]], 2)`%).
+**`r more_less`** patients in the following week, reflecting a current `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days (daily growth of `r round(100*exp_census[[4]][[3]], 2)`%).
 
 ### Long-range forecast
 
-**`r paste(current, "to", reduction_20)`** peak patients in hospital between **`r paste(current_date, "&", reduction_20_date)`**. 
+**`r paste(current, "to", reduction_20)`** peak patients in The Ottawa Hospital between **`r paste(current_date, "&", reduction_20_date)`**. 
 
 ## Observed Hospital census {#doubling-time}
-
-**NOTE:** Ottawa hospitalization data is missing from 2020-04-29 to 2020-05-04. Observed hospitalization data from The Ottawa Hospital will be added shortly.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Ottawa Hospital data section @Warsame

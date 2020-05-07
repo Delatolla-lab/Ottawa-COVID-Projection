@@ -13,7 +13,8 @@ TOH_fun <- function(data1, parameter, title, y) {
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             "95_current", sep = "_"), names(data1))],
-    visible = TRUE
+    visible = TRUE,
+    showlegend = FALSE
   )
   trace2 <- list(
     fill = "tonexty",
@@ -26,7 +27,8 @@ TOH_fun <- function(data1, parameter, title, y) {
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             "5_current", sep = "_"), names(data1))],
-    visible = TRUE
+    visible = TRUE,
+    showlegend = FALSE
   )
   trace3 <- list(
     line = list(color = "rgb(57, 157, 195)",
@@ -37,7 +39,8 @@ TOH_fun <- function(data1, parameter, title, y) {
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             "median_current", sep = "_"), names(data1))],
-    visible = TRUE
+    visible = TRUE,
+    showlegend = TRUE
   )
   trace4 <- list(
     line = list(color = "rgb(214, 39, 40)",
@@ -48,7 +51,8 @@ TOH_fun <- function(data1, parameter, title, y) {
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             "95_reduction_20", sep = "_"), names(data1))],
-    stackgroup = NULL
+    stackgroup = NULL,
+    showlegend = FALSE
   )
   trace5 <- list(
     fill = "tonexty",
@@ -61,7 +65,8 @@ TOH_fun <- function(data1, parameter, title, y) {
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             "5_reduction_20", sep = "_"), names(data1))],
-    stackgroup = NULL
+    stackgroup = NULL,
+    showlegend = FALSE
   )
   trace6 <- list(
     line = list(color = "rgb(214, 39, 40)",
@@ -75,7 +80,8 @@ TOH_fun <- function(data1, parameter, title, y) {
       "median_reduction_20",
       sep = "_"
     ), names(data1))],
-    visible = TRUE
+    visible = TRUE,
+    showlegend = TRUE
   )
   trace7 <- list(
     marker = list(color = 'rgb(254, 203, 82)',
@@ -86,7 +92,8 @@ TOH_fun <- function(data1, parameter, title, y) {
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             "observed", sep = "_"), names(data1))],
-    orientation = "v"
+    orientation = "v",
+    showlegend = TRUE
   )
   layout <- list(
     title = list(text = as.character(title)),
@@ -95,8 +102,7 @@ TOH_fun <- function(data1, parameter, title, y) {
     yaxis = list(title = list(text = as.character(y)), range = c(0,tmp)),
     hovermode = "closest",
     width = 700,
-    height = 500,
-    showlegend = TRUE
+    height = 500
   )
   p <- plot_ly()
   p <-
@@ -109,7 +115,8 @@ TOH_fun <- function(data1, parameter, title, y) {
       type = trace1$type,
       x = trace1$x,
       y = trace1$y,
-      visible = trace1$visible
+      visible = trace1$visible,
+      showlegend = trace1$showlegend
     )
   p <-
     add_trace(
@@ -122,7 +129,8 @@ TOH_fun <- function(data1, parameter, title, y) {
       type = trace2$type,
       x = trace2$x,
       y = trace2$y,
-      visible = trace2$visible
+      visible = trace2$visible,
+      showlegend = trace2$showlegend
     )
   p <-
     add_trace(
@@ -133,7 +141,8 @@ TOH_fun <- function(data1, parameter, title, y) {
       type = trace3$type,
       x = trace3$x,
       y = trace3$y,
-      visible = trace3$visible
+      visible = trace3$visible,
+      showlegend = trace3$showlegend
     )
   p <-
     add_trace(
@@ -143,7 +152,8 @@ TOH_fun <- function(data1, parameter, title, y) {
       name = trace4$name,
       type = trace4$type,
       x = trace4$x,
-      y = trace4$y
+      y = trace4$y,
+      showlegend = trace4$showlegend
     )
   p <-
     add_trace(
@@ -155,8 +165,9 @@ TOH_fun <- function(data1, parameter, title, y) {
       name = trace5$name,
       type = trace5$type,
       x = trace5$x,
-      y = trace5$y
-    )
+      y = trace5$y,
+      showlegend = trace5$showlegend
+      )
   p <-
     add_trace(
       p,
@@ -167,7 +178,8 @@ TOH_fun <- function(data1, parameter, title, y) {
       type = trace6$type,
       x = trace6$x,
       y = trace6$y,
-      visible = trace6$visible
+      visible = trace6$visible,
+      showlegend = trace6$showlegend
     )
   p <-
     add_trace(
@@ -177,7 +189,8 @@ TOH_fun <- function(data1, parameter, title, y) {
       name = trace7$name,
       type = trace7$type,
       x = trace7$x,
-      y = trace7$y
+      y = trace7$y,
+      showlegend = trace7$showlegend
     )
   p <-
     layout(
@@ -187,8 +200,7 @@ TOH_fun <- function(data1, parameter, title, y) {
       yaxis = layout$yaxis,
       hovermode = layout$hovermode,
       width = layout$width,
-      height = layout$height,
-      showlegend = layout$showlegend
+      height = layout$height
     )
   p
 }

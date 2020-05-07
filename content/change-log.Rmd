@@ -15,7 +15,8 @@ data to 2020-05-05.
   hospitalizations and ventilator usage.
   - Model parameters updated and can be viewed [here](/model#parameters).
 - Projections made based on current effective physical distancing and 20%
-reduction in physical distancing from current measures.
+reduction in physical distancing from current measures with confidence
+intervals.
 - ICU and death projections removed.
 
 # V1.5.2
