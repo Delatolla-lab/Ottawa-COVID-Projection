@@ -4,6 +4,20 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V2.0.0
+2020-05-07
+
+- Replaced Ottawa hospital census data with The Ottawa Hospital (TOH) census
+data to 2020-05-05.
+- Projections are now done using the Bayseian SEIR
+[extension](https://github.com/pennsignals/chime_sims) of the CHIME model.
+  - Model uses existing TOH census data to generate simulated projections for
+  hospitalizations and ventilator usage.
+  - Model parameters updated and can be viewed [here](/model#parameters).
+- Projections made based on current effective physical distancing and 20%
+reduction in physical distancing from current measures.
+- ICU and death projections removed.
+
 # V1.5.2
 2020-04-27
 
