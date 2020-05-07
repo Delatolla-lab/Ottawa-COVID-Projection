@@ -12,7 +12,7 @@ bibliography: refs.bib
 
 2) *Model parameters other than Ottawa hospital use are aligned with other models.*
     
-    - Model parameters are described [below}(#parameers). 
+    - Model parameters are described [below}(#parameters). 
     
     - Parameter estimates are from [COVID-19-MC](https://www.covid-19-mc.ca/interactive-model) and [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) models where possible, with updates based on [Verity et al. (Lancet, March 20, 2020)](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)* and [Ferguson et al. (March 16, 2020)](https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf). 
 

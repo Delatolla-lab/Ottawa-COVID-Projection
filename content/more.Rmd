@@ -20,7 +20,8 @@ There are two main uses of the projections:
 
 1) Short-term projections (2 to 4 weeks) to inform the immediate need for hospital and critical care services for COVID-19 patients. 
 
-2) Long-term projections (6 weeks to 10 months) to assess how to 'flatten the curve'.  
+2) Long-term projections (6 weeks onward) to assess the effect of relaxing physical distancing.
+  
 
 ## Model accuracy {#accuracy}
 
