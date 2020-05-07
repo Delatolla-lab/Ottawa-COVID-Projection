@@ -67,15 +67,15 @@ more_less = switch(
 
 ## projections
 peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("No prevention & control", "50% physical distancing", "Current distancing effectiveness"))
+  factor(peak_projections$intervention, levels = c("Current distancing effectiveness", "20% reduction in physical distancing", "100% reduction in physical distancing"))
 
-no_intervention <- peak_projections[1,2]
-intervention_50 <- peak_projections[2,2]
-current_intervention <- peak_projections[3,2]
+current <- peak_projections[1,2]
+reduction_20 <- peak_projections[2,2]
+reduction_100 <- peak_projections[3,2]
 
-no_intervention_date <- peak_projections[1,4]
-intervention_50_date <- peak_projections[2,4]
-current_intervention_date <- peak_projections[3,4]
+current_date <- peak_projections[1,4]
+reduction_20_date <- peak_projections[2,4]
+reduction_100_date <- peak_projections[3,4]
 
 ```
 
@@ -85,11 +85,11 @@ Data to `r format(Sys.Date()-1, '%b %d, %Y')`
 
 ### Current
 
-**`r last(na.omit(ott_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in hospital.
+**`r last(na.omit(ott_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in The Ottawa Hospital.
 
 Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute care patients. **`r last(na.omit(ott_observed$observed_census_ICU))`** ICU patients.
 
-**`r round(effective_pd, 0)`%** physical distance effectiveness (approximate), resulting in a **`r round(((no_intervention - current_intervention)/no_intervention*100), 0)`%** reduction in peak hospitalizations from no prevention & control.
+**`r round(effective_pd, 0)`%** physical distance effectiveness (approximate).
 
 ### Short-range forecast
 
@@ -97,7 +97,7 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 
 ### Long-range forecast
 
-**`r paste(current_intervention, "to", intervention_50)`** peak patients in hospital between **`r paste(current_intervention_date, "&", intervention_50_date)`**. 
+**`r paste(current, "to", reduction_20)`** peak patients in hospital between **`r paste(current_date, "&", reduction_20_date)`**. 
 
 ## Observed Hospital census {#doubling-time}
 
@@ -122,7 +122,7 @@ ottawa_hosp <-
   reworked_figure(
     xaxis = "date",
     yaxis = list(icu_call, acute_care, DT1, DT2, DT3),
-    titles = c(y = "Census (# of patients)", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa"),
+    titles = c(y = "Census (# of patients)", x = "Date", title = "Observed census of COVID-19 hospitalizations in The Ottawa Hospital"),
     data = exp_census[[1]]
   )
 
@@ -172,7 +172,7 @@ t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
                                      xpos=1:n()-0.5,
                                     Diff=End-peak_hospital_census,
                                      Percent=paste(round(Diff/End*100,0),"%")) %>%
-  ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#D62728", "#1F77B4", "#2CA02C")) +
+  ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#2CA02C", "#1F77B4", "#D62728")) +
   labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
        y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_round), vjust = -0.5) +
   theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
@@ -181,7 +181,7 @@ t
 
 ```
 
-The forecast of `r round(current_intervention, -1)` patients in hospital in `r paste(current_intervention_date)` is based on the previous weeks' physical distancing effectiveness of **`r round(effective_pd, 0)`%**.  `r round(effective_pd, 0)`% physical distancing effectiveness will result in an estimated `r round(((no_intervention - current_intervention)/no_intervention*100), 0)`% reduction in peak hospitalizations compared to no prevention & control.
+The forecast of `r round(current, -1)` patients in hospital in `r paste(current_date)` is based on the previous weeks' physical distancing effectiveness of **`r round(effective_pd, 0)`%**.
 
 > **Physical distancing** is the reduction in close contact between people. 
 
@@ -225,4 +225,4 @@ hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projecte
 
 ## Death projections {#deaths}
 
-Death projections have been omitted from the website. With the overwhelming majority of COVID-19 related deaths occurring in residents of LTC or retirement homes, it has been difficult to estimate COVID-19 related deaths in the hospital. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) do not want advanced life support or transfer to the hospital if they have a life threatening illness.
+Death projections have been omitted from the website. With the overwhelming majority of COVID-19 related deaths occurring in residents of LTC or retirement homes, it is difficult to estimate COVID-19 related deaths in the hospital. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) do not want advanced life support or transfer to the hospital if they have a life threatening illness.
