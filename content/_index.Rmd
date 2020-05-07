@@ -70,7 +70,7 @@ more_less = switch(
 
 ## projections
 peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("Current distancing effectiveness", "20% reduction in physical distancing", "100% reduction in physical distancing"))
+  factor(peak_projections$intervention, levels = c("Current distancing effectiveness", "20% reduction in distancing", "100% reduction in distancing"))
 
 current <- peak_projections[1,2]
 reduction_20 <- peak_projections[2,2]

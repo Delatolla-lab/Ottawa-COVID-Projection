@@ -91,6 +91,8 @@ TOH_fun <- function(data1, parameter, title, y) {
                  title = list(text = "Date")),
     yaxis = list(title = list(text = as.character(y))),
     hovermode = "closest",
+    width = 700,
+    height = 500,
     showlegend = TRUE
   )
   p <- plot_ly()
@@ -181,6 +183,8 @@ TOH_fun <- function(data1, parameter, title, y) {
       xaxis = layout$xaxis,
       yaxis = layout$yaxis,
       hovermode = layout$hovermode,
+      width = layout$width,
+      height = layout$height,
       showlegend = layout$showlegend
     )
   p
