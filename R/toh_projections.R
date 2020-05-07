@@ -1,5 +1,8 @@
 library(plotly)
 TOH_fun <- function(data1, parameter, title, y) {
+  tmp <- max(data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
+                                 "95_reduction_20", sep = "_"), names(data1))])
+  tmp <- tmp*0.55
   trace1 <- list(
     fill = "none",
     line = list(color = "rgb(57, 157, 195)",
@@ -89,7 +92,7 @@ TOH_fun <- function(data1, parameter, title, y) {
     title = list(text = as.character(title)),
     xaxis = list(type = "date",
                  title = list(text = "Date")),
-    yaxis = list(title = list(text = as.character(y))),
+    yaxis = list(title = list(text = as.character(y)), range = c(0,tmp)),
     hovermode = "closest",
     width = 700,
     height = 500,
