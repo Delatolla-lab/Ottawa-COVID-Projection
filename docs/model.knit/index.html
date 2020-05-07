@@ -7,8 +7,8 @@
 <meta name="generator" content="Hugo 0.68.3" />
 
 
-<title>Changelog - Ottawa COVID19</title>
-<meta property="og:title" content="Changelog - Ottawa COVID19">
+<title>Model parameters - Ottawa COVID19</title>
+<meta property="og:title" content="Model parameters - Ottawa COVID19">
 
 
 
@@ -232,254 +232,86 @@
   <article class="article">
     
 
-    <h1 class="article-title">Changelog</h1>
+    <h1 class="article-title">Model parameters</h1>
 
     
 
     <div class="article-content">
-      
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
-
-
-<p><strong>Updates involving only data updates will no longer be documented.</strong></p>
-<div id="v2.0.0" class="section level1">
-<h1>V2.0.0</h1>
-<p>2020-05-07</p>
+      <ol>
+<li>
+<p><em>Projections are based on the reported daily hospital census for Ottawa.</em></p>
 <ul>
-<li>Replaced Ottawa hospital census data with The Ottawa Hospital (TOH) census
-data to 2020-05-05.</li>
-<li>Projections are now done using the Bayseian SEIR
-<a href="https://github.com/pennsignals/chime_sims">extension</a> of the CHIME model.
-<ul>
-<li>Model uses existing TOH census data to generate simulated projections for
-hospitalizations and ventilator usage.</li>
-<li>Model parameters updated and can be viewed <a href="/model#parameters">here</a>.</li>
-</ul></li>
-<li>Projections made based on current effective physical distancing and 20%
-reduction in physical distancing from current measures with confidence
-intervals.</li>
-<li>ICU and death projections removed.</li>
+<li>Daily hospital use reported by Ottawa Public Health.</li>
 </ul>
-</div>
-<div id="v1.5.2" class="section level1">
-<h1>V1.5.2</h1>
-<p>2020-04-27</p>
+</li>
+<li>
+<p><em>Model parameters other than Ottawa hospital use are aligned with other models.</em></p>
 <ul>
-<li>Updated Ottawa hospital census data to 2020-04-26.</li>
-<li>Changes to model parameters:
-<ul>
-<li>Initial doubling time set to 4 days.</li>
-<li>Physical distancing implementation set to 50-70% (Current effective physical
-distancing set to 58%).</li>
-</ul></li>
-<li>Current effective physical distancing value added to projection legends.</li>
-<li>Note added regarding observed deaths in Ottawa.</li>
+<li>
+<p>Model parameters are described <a href="#parameters">below</a>.</p>
+</li>
+<li>
+<p>Parameter estimates are from <a href="https://www.covid-19-mc.ca/interactive-model">COVID-19-MC</a> and <a href="https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1">Tuite, Fisman, et al.</a> models where possible, with updates based on <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext">Verity et al. (Lancet, March 20, 2020)</a>* and <a href="https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf">Ferguson et al. (March 16, 2020)</a>.</p>
+</li>
 </ul>
-</div>
-<div id="v1.5.1" class="section level1">
-<h1>V1.5.1</h1>
-<p>2020-04-23</p>
+</li>
+<li>
+<p><em><a href="https://github.com/pennsignals/chime_sims">Bayesian extension to the CHIME model</a> developed by the University of Pennsylvania Health System.</em></p>
 <ul>
-<li>Updated Ottawa hospital census data to 2020-04-22.</li>
-<li>Updated parameters based on observed hospitalization at the Ottawa Hospital
-from April 8 to 18. This time period was chosen because it represented a period
-of steady state when admissions equaled discharges. Estimates based on the
-proportion of hospital census in ICU or ventilated.
-<ul>
-<li>ICU % changed from 0.75 to 0.96 (based on 37% of observed hospitalizations).</li>
-<li>Ventilated % changed from 0.5 to 0.73 (based on 28% of observed
-hospitalizations).</li>
-<li>ICU length of stay changed from 16 to 10 days.</li>
-</ul></li>
+<li>
+<p>CHIME is an SIR model that is initiated on hospital use. A SIR model calculates the projected number of people infected with a contagious illness in a closed population over time.</p>
+</li>
+<li>
+<p>The Bayesian extension to the CHIME model incorporates new hospitalization data to generate a probabilistic forecast of hospital resource use based on best and worst case scenarios.</p>
+</li>
+<li>
+<p>The projections can be updated for other models.</p>
+</li>
 </ul>
-</div>
-<div id="v1.5.0" class="section level1">
-<h1>V1.5.0</h1>
-<p>2020-04-20</p>
-<ul>
-<li>Updated Ottawa hospital census data to 2020-04-19.</li>
-<li>New dashboard providing current hospitalization data updated daily.</li>
-<li>Minor changes to model parameters:
-<ul>
-<li>Current effective physical distancing set to 63%. Projections made for
-50%, current, and 70% physical distancing.</li>
-<li>Date of physical distancing implementation set to 2020-04-20.</li>
-</ul></li>
-</ul>
-</div>
-<div id="v1.4.1" class="section level1">
-<h1>V1.4.1</h1>
-<p>2020-04-17</p>
-<ul>
-<li>Updated Ottawa hospital census data to 2020-04-16.</li>
-<li>Minor changes to model parameters:
-<ul>
-<li>Current # of hospitalized patients changed from 43 to 37.</li>
-<li>Date of physical distancing implementation set to 2020-04-17.</li>
-</ul></li>
-</ul>
-</div>
-<div id="v1.4.0" class="section level1">
-<h1>V1.4.0</h1>
-<p>2020-04-16</p>
-<ul>
-<li>Updated Ottawa hospital census data to 2020-04-15.</li>
-<li>Changes to model parameters:
-<ul>
-<li>Doubling time changed from 5 days to 31.98 days based on observed doubling
-time in the last week.</li>
-<li>Changed physical distancing % from 50-70 to 0-20. Based on current observed
-doubling time, effective physical distancing is currently at 50%; and
-obtaining 60% or 70% physical distancing means an increase in physical
-distancing by 10% or 20% respectively.</li>
-<li>Infectious days changed from 10 days to 7 days.</li>
-</ul></li>
-<li>Edits to documentation.</li>
-</ul>
-</div>
-<div id="v1.3.0" class="section level1">
-<h1>V1.3.0</h1>
-<p>2020-04-15</p>
-<ul>
-<li>Updated Ottawa hospital census data to 2020-04-14</li>
-<li>New figure: Observed census &amp; doubling time
-<ul>
-<li>Figure displays observed acute-care and ICU census in Ottawa</li>
-<li>Figure estimates weekly doubling time based on observed data</li>
-</ul></li>
-</ul>
-</div>
-<div id="v1.2.1" class="section level1">
-<h1>V1.2.1</h1>
-<p>2020-04-14 (12:30pm)</p>
-<ul>
-<li>Updated Ottawa hospital census data to 2020-04-13</li>
-<li>No change in model parameters.</li>
-</ul>
-</div>
-<div id="v1.2.0" class="section level1">
-<h1>V1.2.0</h1>
-<p>2020-04-14 (9:30am)</p>
-<ul>
-<li>Updated Ottawa hospital census data to 2020-04-12</li>
-<li>Changes to model parameters:
-<ul>
-<li>Doubling time changed from 4 days to 5 days</li>
-<li>Date of physical distancing implementation set to 2020-04-12</li>
-<li>Infectious days changed from 14 days to 10 days</li>
-</ul></li>
-<li>Edits to documentation</li>
-</ul>
-</div>
-<div id="v1.1.4" class="section level1">
-<h1>V1.1.4</h1>
-<p>2020-04-11</p>
-<ul>
-<li>Updated Ottawa hospital census data to 2020-04-10</li>
-<li>COVID-19 icon added to navbar.</li>
-<li>No change in model parameters.</li>
-</ul>
-</div>
-<div id="v1.1.3" class="section level1">
-<h1>V1.1.3</h1>
-<p>2020-04-10</p>
-<ul>
-<li>Updated Ottawa hospital census data to 2020-04-09</li>
-<li>No change in model parameters.</li>
-<li>Improvements to figures.</li>
-</ul>
-</div>
-<div id="v1.1.2" class="section level1">
-<h1>V1.1.2</h1>
-<p>2020-04-09</p>
-<ul>
-<li>Updated Ottawa hospital census data to 2020-04-08</li>
-<li>Used doubling time of 4 days as opposed to first hospitalization date to
-generate projections</li>
-<li>Improvements to documentation, including additional figures</li>
-</ul>
-</div>
-<div id="v1.1.1" class="section level1">
-<h1>V1.1.1</h1>
-<p>2020-04-08</p>
-<ul>
-<li>Improvements to mobile version of website</li>
-</ul>
-</div>
-<div id="v1.1.0" class="section level1">
-<h1>V1.1.0</h1>
-<p>2020-04-08</p>
-<ul>
-<li>Projections added:
-<ul>
-<li>Peak hospitalizations</li>
-</ul></li>
-<li>Updates to documentation</li>
-</ul>
-</div>
-<div id="v1.0.0" class="section level1">
-<h1>V1.0.0</h1>
-<p>2020-04-07</p>
-<ul>
-<li>Website now public</li>
-<li>Updated Ottawa hospital census data to 2020-04-06</li>
-</ul>
-</div>
-<div id="v0.3.0" class="section level1">
-<h1>V0.3.0</h1>
-<p>2020-04-06</p>
-<ul>
-<li>Updated Ottawa hospital census data to 2020-04-04</li>
-<li>Projections added:
-<ul>
-<li>Census and daily acute care hospitalizations</li>
-</ul></li>
-<li>Expanded description of documentation</li>
-</ul>
-</div>
-<div id="v0.2.0" class="section level1">
-<h1>V0.2.0</h1>
-<p>2020-04-03</p>
-<ul>
-<li>Updated Ottawa hospital census data to 2020-04-02.</li>
-<li>Projections added:
-<ul>
-<li>Daily admissions.</li>
-<li>Daily and total deaths in hospital (provisional).</li>
-</ul></li>
-<li>Overview updated.</li>
-<li>Improvements to the labels and figures.</li>
-</ul>
-<p>Changes to key parameters:</p>
-<ul>
-<li>Census (acute and ICU) = 24 patients. Ottawa hospital census data to 2020-04-03.</li>
-<li>Hospital bed doubling time = 4 days.</li>
-<li>Model rojections are based on the CHIME model v1.1.2</li>
-</ul>
-</div>
-<div id="v0.1.0" class="section level1">
-<h1>V0.1.0</h1>
-<p>2020-04-01</p>
-<p>Initial projections based on Ottawa hospital census data to 2020-03-29.</p>
-<p>Key parameters:</p>
-<ul>
-<li>Census (acute and ICU) = 21 patients</li>
-<li>Hospital bed doubling time = 4 days</li>
-<li>Model Projections are based on the <a href="https://penn-chime.phl.io/">CHIME model</a> v1.1.0</li>
-</ul>
-</div>
-<div id="roadmap" class="section level1">
-<h1>Roadmap</h1>
-<p>The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.</p>
-<ul>
-<li>Review and update model parameters based on recent published studies. Priories for review:
-<ul>
-<li>ventilated patients</li>
-<li>deaths</li>
-</ul></li>
-<li>Add plot for observed hospital census trend, with estimated doubling time.</li>
-</ul>
-</div>
+</li>
+</ol>
+<h2 id="hospital-census">Projections based on daily hospital census</h2>
+<p>Ottawa COVID-19 projections augment the projections of Public Health Ontario and other models by incorporating local reported hospitalizations since the beginning of the COVID-19 pandemic.</p>
+<p>The use of local hospitalization rates follows the analogy of forecasting hurricanes. We monitor the local hospital COVID-19 use and then project the trend into the future based on the knowledge of COVID-19 and how it spreads in communities.</p>
+<h2 id="physical-distancing">The importance of physical distancing</h2>
+<p>The trend of COVID-19 hospital use is summarized as “doubling time.” Doubling time — and the weekly change in doubling time — are the most important parameters in COVID-19 projections that vary between communities.</p>
+<p>An exponential growth in hosptial census (doubling time of less than 4 days) will occur unless one of two situations occurs:</p>
+<ol>
+<li>
+<p>The number of people susceptible to infection decreases. As an epidemic progresses, there will be fewer people left in the community who can become infected. However, as of  May 06, 2020 only a small proportion of people living in Ottawa are currently infected or are recovered from COVID-19 &ndash; likely less than 1%. This means that the current reduction in susceptible people has a negligible effect effect on changes to hospital infection doubling times. Approximately 50 to 60% of people need to be immune to COVID-19 (infected or recovered) before doubling time becomes negative &ndash; meaning there is a weekly decrease in the patients in hospital.</p>
+</li>
+<li>
+<p>Preventive measures slow the spread of infection.</p>
+</li>
+</ol>
+<p>The first situation — how doubling time decreases as the number of susceptible people decreases — can be easily modelled using mathematical formulas.</p>
+<p>The second situation — the effectiveness of preventive measures — is more difficult to estimate accurately. Prevention and control measures depend not only on what  measures are in place over the last 2-4 weeks, but also how well people follow the measures. Current hospital use and trends in hosptial use provide important information on physical distancing effectiveness and other measures to control the spread of COVID-19 infection.</p>
+<h2 id="distancing-math">How physical distancing affects COVID-19 projections</h2>
+<p>The projections of hospital cases uses an $SIR$ model ($S$ = susceptible, $I$ = infected, $R$ = recovered people). Within an SIR model,
+new infections at time ($t+1$) are equal to:</p>
+<p>$$I_{t+1} = \beta S_t I_t $$
+Where $\beta$ is commonly referred as the &ldquo;force of infection&rdquo; because it describes how quickly a disease can move through a population. $\beta$ is a probability or risk that ranges from 0 to 1. $\beta$ value = 0.5 means 50% of susceptible people ($S_t$) who are in contact with an infected person ($I_t$) will become infected ($I_{t+1}$).</p>
+<p>Physical distancing is a &lsquo;control measure&rsquo; to reduce the effective force of infection, $\beta$. A control measure, $\lambda$ reduces new infections, where $\lambda = 1$ results in a complete disruption in new infections (conversely, $\lambda = 0$ has no effect for reducing new infections). The projections presented on this website assume physical distancing is directly related to effective control. This means 50% physical distancing is the same as $\lambda = 0.5$. @daughton2017approach</p>
+<p>Note that $\beta$ is related to the epidemiology measure $R_0$ - the basic reproductive number that describes the expected number of people who become infected with from each person with COVID-19 at the beginning of an outbreak. $R_0 = \frac{\beta}{\gamma}$, where $\gamma$ is the reciprocal of the infectious period ($\psi$).</p>
+<h2 id="distancing">Calculating physical distancing effectiveness</h2>
+<p>Physical distancing effectiveness is equal to $\lambda$, for the calculations on this website. In practice, contract tracing and isolation is the other main control measure. The effect of contract tracing was not separated from physical distancing.</p>
+<p>Physical distancing effectiveness, $\lambda$:</p>
+<p>$$\lambda = 1 - \frac{(g + \gamma)}{\beta_0}$$
+Where,</p>
+<p>$g$ is the observed growth rate, expressed the rate of new COVID-19 cases each day.
+$\beta_0$ is the force of infection at the beginning of the outbreak. $\beta_0 = 0.332$ when doubling time $D_t = 4$ days (or growth rate at the beginning of the outbreak, $g_0 = 0.189$). In turn, $g_0$ is derived from a basic reproduction number ($R_0$) of 2.32 and mean generation interval ($T_c$) of 7 days, where,</p>
+<p>$$g_0 = \frac{R_0 - 1}{T_c}$$
+or,</p>
+<p>$$g_0 = 2^\frac{1}{T_d} - 1$$
+or,</p>
+<p>$$g_0 = \beta_0 - \gamma$$</p>
+<h2 id="parameters">Input parameters</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="plot-data">Data used to plot visualizations</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h3 id="references">References</h3>
 
     </div>
   </article>
@@ -508,4 +340,7 @@ generate projections</li>
   
 
   
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 

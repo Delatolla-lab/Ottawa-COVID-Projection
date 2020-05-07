@@ -36,6 +36,8 @@ library(dplyr)
 ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
 ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
 peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
+TOH_projections <- read.csv(file.path(getwd(),"../Data/TOH_projection_estimates.csv"))
+TOH_observed <- read.csv(file.path(getwd(),"../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
 
 # scripts
 source("../R/estimate_scripts.R")
@@ -43,6 +45,7 @@ source("../R/lag_replacement.R")
 source("../R/observed_data.R")
 source("../R/effective_physical_distancing.R")
 source("../R/data_conversion.R")
+source("../R/toh_projections.R")
 
 # data for dashboard and figures
 
@@ -67,19 +70,21 @@ more_less = switch(
 
 ## projections
 peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("No prevention & control", "50% physical distancing", "Current distancing effectiveness"))
+  factor(peak_projections$intervention, levels = c("Current distancing effectiveness", "20% reduction in distancing", ">99% reduction in distancing"))
 
-no_intervention <- peak_projections[1,2]
-intervention_50 <- peak_projections[2,2]
-current_intervention <- peak_projections[3,2]
+current <- peak_projections[1,2]
+reduction_20 <- peak_projections[2,2]
+reduction_100 <- peak_projections[3,2]
 
-no_intervention_date <- peak_projections[1,4]
-intervention_50_date <- peak_projections[2,4]
-current_intervention_date <- peak_projections[3,4]
+current_date <- peak_projections[1,4]
+reduction_20_date <- peak_projections[2,4]
+reduction_100_date <- peak_projections[3,4]
 
 ```
 
 # Dashboard
+
+**NOTE:** Ottawa hospitalization data is missing from 2020-04-29 to 2020-05-04. Observed hospitalization data from The Ottawa Hospital will be used in the interim as the COVID-19 Ottawa Database is being developed by Ottawa Public Health.
 
 Data to `r format(Sys.Date()-1, '%b %d, %Y')`
 
@@ -89,15 +94,15 @@ Data to `r format(Sys.Date()-1, '%b %d, %Y')`
 
 Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute care patients. **`r last(na.omit(ott_observed$observed_census_ICU))`** ICU patients.
 
-**`r round(effective_pd, 0)`%** physical distance effectiveness (approximate), resulting in a **`r round(((no_intervention - current_intervention)/no_intervention*100), 0)`%** reduction in peak hospitalizations from no prevention & control.
+**`r round(effective_pd, 0)`%** physical distance effectiveness (approximate).
 
 ### Short-range forecast
 
-**`r more_less`** patients in hospital the this week, reflecting a current `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days (daily growth of `r round(100*exp_census[[4]][[3]], 2)`%).
+**`r more_less`** patients in the following week, reflecting a current `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days (daily growth of `r round(100*exp_census[[4]][[3]], 2)`%).
 
 ### Long-range forecast
 
-**`r paste(current_intervention, "to", intervention_50)`** peak patients in hospital between **`r paste(current_intervention_date, "&", intervention_50_date)`**. 
+**`r paste(current, "to", reduction_20)`** peak patients in The Ottawa Hospital between **`r paste(current_date, "&", reduction_20_date)`**. 
 
 ## Observed Hospital census {#doubling-time}
 
@@ -172,7 +177,7 @@ t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
                                      xpos=1:n()-0.5,
                                     Diff=End-peak_hospital_census,
                                      Percent=paste(round(Diff/End*100,0),"%")) %>%
-  ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#D62728", "#1F77B4", "#2CA02C")) +
+  ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#2CA02C", "#1F77B4", "#D62728")) +
   labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
        y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_round), vjust = -0.5) +
   theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
@@ -181,7 +186,7 @@ t
 
 ```
 
-The forecast of `r round(current_intervention, -1)` patients in hospital in `r paste(current_intervention_date)` is based on the previous weeks' physical distancing effectiveness of **`r round(effective_pd, 0)`%**.  `r round(effective_pd, 0)`% physical distancing effectiveness will result in an estimated `r round(((no_intervention - current_intervention)/no_intervention*100), 0)`% reduction in peak hospitalizations compared to no prevention & control.
+The forecast of `r round(current, -1)` patients in hospital in `r paste(current_date)` is based on the previous weeks' physical distancing effectiveness of **`r round(effective_pd, 0)`%**.
 
 > **Physical distancing** is the reduction in close contact between people. 
 
@@ -189,38 +194,22 @@ The forecast of `r round(current_intervention, -1)` patients in hospital in `r p
 
 A further explanation of effective physical distancing will be added to the [More](/more) page soon.
 
-## Acute care hospitalization projections {#acute-care-projections}
+## Hospitalization projections {#hospitalization-projections}
 
 <!--See [here](/model#parameters) for all input parameters. -->
 
 ### Census projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "census_acute_care", title = "Projected census of acute care COVID-19 hospitalizations in Ottawa", y_label = "Census (# of patients)", annote = TRUE)
+source("../R/toh_projections.R")
+TOH_fun(TOH_projections, "hosp_census", title = "Projected census of COVID-19 hospitalizations at The Ottawa Hospital", y = "Census (# of patients)")
 ```
 
 ### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "new_acute_care", title = "Projected daily acute care COVID-19 hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
-```
-
-## ICU projections {#icu-projections}
-
-### Census projections
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "census_ICU", title = "Projected census of COVID-19 ICU hospitalizations in Ottawa", y_label = "Census (# of patients)")
-```
-
-### Daily projections
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "new_ICU", title = "Projected daily COVID-19 ICU hospitalizations in Ottawa", y_label = "New admissions (# of patients)")
+source("../R/toh_projections.R")
+TOH_fun(TOH_projections, "hosp_admits", title = "Projected daily COVID-19 hospitalizations at The Ottawa Hospital", y = "New admissions (# of patients)")
 ```
 
 ## Ventilator projections {#ventilator-projections}
@@ -228,33 +217,13 @@ hosp_visualization(ott_projections, ott_observed, "new_ICU", title = "Projected 
 ### Census projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "census_vents", title = "Projected census of COVID-19 ventilator use in Ottawa", y_label = "Census (# of patients)")
+source("../R/toh_projections.R")
+TOH_fun(TOH_projections, "vent_census", title = "Projected census of COVID-19 hospitalizations at The Ottawa Hospital", y = "Census (# of patients)")
 ```
 
 ### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-hosp_visualization(ott_projections, ott_observed, "new_vents", title = "Projected daily COVID-19 ventilator use in Ottawa", y_label = "Newly ventilated (# of patients)")
-```
-
-## Death projections {#deaths}
-
-Death projections were made using existing data from Ottawa Public Health and probability data from [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) These projections assume all hospital deaths are in the ICU. Model parameters are [here](/model#parameters). 
-
-Only deaths for hospital patients are included in the projections. Long-term care (LTC, also known as nursing homes) and retirement homes are not included in the projections. As of April 3, 2020, 40 to 60% of COVID-19 related deaths occurred in residents of LTC or retirement homes. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) do not want advanced life support or transfer to the hospital if they have a life threatening illness. The observed deaths, however, **include deaths that occurred outside the hospital in either LTC facilities or the community.**
-
-### Cumulative deaths in hospital
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-death_visualization(ott_projections, ott_observed, "cumulative_deaths", title = "Projected cumulative number of COVID-19 hospital deaths in Ottawa", y_label = "Deaths")
-```
-
-### Daily projections
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-death_visualization(ott_projections, ott_observed, "new_deaths", title = "Projected number of COVID-19 daily hospital deaths in Ottawa", y_label = "Deaths")
+source("../R/toh_projections.R")
+TOH_fun(TOH_projections, "vent_admits", title = "Projected daily COVID-19 hospitalizations at The Ottawa Hospital", y = "New admissions (# of patients)")
 ```
