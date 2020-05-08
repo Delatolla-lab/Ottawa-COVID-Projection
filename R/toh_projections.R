@@ -34,7 +34,7 @@ TOH_fun <- function(data1, parameter, title, y) {
     line = list(color = "rgb(57, 157, 195)",
                 width = 3),
     mode = "lines",
-    name = "Current distancing median estimate",
+    name = "Current distancing",
     type = "scatter",
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
@@ -72,7 +72,7 @@ TOH_fun <- function(data1, parameter, title, y) {
     line = list(color = "rgb(214, 39, 40)",
                 width = 3),
     mode = "lines",
-    name = "20% reduction median estimate",
+    name = "20% distancing reduction",
     type = "scatter",
     x = data1$date,
     y = data1[, grepl(paste(
@@ -102,7 +102,14 @@ TOH_fun <- function(data1, parameter, title, y) {
     yaxis = list(title = list(text = as.character(y)), range = c(0,tmp)),
     hovermode = "closest",
     width = 700,
-    height = 500
+    height = 500,
+    legend = list(x = 0.05, y = 0.9),
+    annotations = list(
+      x = 1, y = -0.09, text = "*Shaded area represents the 90% credible region", 
+      showarrow = F, xref='paper', yref='paper', 
+      xanchor='right', yanchor='auto', xshift=0, yshift=0,
+      font=list(size=10)
+    )
   )
   p <- plot_ly()
   p <-
@@ -200,7 +207,9 @@ TOH_fun <- function(data1, parameter, title, y) {
       yaxis = layout$yaxis,
       hovermode = layout$hovermode,
       width = layout$width,
-      height = layout$height
+      height = layout$height,
+      legend = layout$legend,
+      annotations = layout$annotations
     )
   p
 }
