@@ -70,7 +70,7 @@ more_less = switch(
 
 ## projections
 peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("Current distancing effectiveness", "20% reduction in distancing", ">99% reduction in distancing"))
+  factor(peak_projections$intervention, levels = c("Current distancing effectiveness", "20% reduction in distancing", "No distancing"))
 
 current <- peak_projections[1,2]
 reduction_20 <- peak_projections[2,2]
@@ -81,10 +81,9 @@ reduction_20_date <- peak_projections[2,4]
 reduction_100_date <- peak_projections[3,4]
 
 ```
+**NOTE:** Ottawa hospitalization data is missing from 2020-04-29 to 2020-05-04. Observed hospitalization data from The Ottawa Hospital will be used in the interim as the COVID-19 Ottawa Database is being developed by Ottawa Public Health.
 
 # Dashboard
-
-**NOTE:** Ottawa hospitalization data is missing from 2020-04-29 to 2020-05-04. Observed hospitalization data from The Ottawa Hospital will be used in the interim as the COVID-19 Ottawa Database is being developed by Ottawa Public Health.
 
 Data to `r format(Sys.Date()-1, '%b %d, %Y')`
 
@@ -186,7 +185,7 @@ t
 
 ```
 
-The forecast of `r round(current, -1)` patients in hospital in `r paste(current_date)` is based on the previous weeks' physical distancing effectiveness of **`r round(effective_pd, 0)`%**.
+The forecast of `r signif(current, 2)` patients in hospital in `r paste(current_date)` is based on the previous weeks' physical distancing effectiveness of **`r round(effective_pd, 0)`%**.
 
 > **Physical distancing** is the reduction in close contact between people. 
 

@@ -34,7 +34,7 @@ TOH_fun <- function(data1, parameter, title, y) {
     line = list(color = "rgb(57, 157, 195)",
                 width = 3),
     mode = "lines",
-    name = "Current distancing median estimate",
+    name = "Current distancing",
     type = "scatter",
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
@@ -72,7 +72,7 @@ TOH_fun <- function(data1, parameter, title, y) {
     line = list(color = "rgb(214, 39, 40)",
                 width = 3),
     mode = "lines",
-    name = "20% reduction median estimate",
+    name = "20% distancing reduction",
     type = "scatter",
     x = data1$date,
     y = data1[, grepl(paste(
