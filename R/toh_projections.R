@@ -105,10 +105,10 @@ TOH_fun <- function(data1, parameter, title, y) {
     height = 500,
     legend = list(x = 0.05, y = 0.9),
     annotations = list(
-      x = 0.45, y = -0.09, text = "*Shaded area represents the 90% credible region", 
+      x = 1, y = -0.09, text = "*Shaded area represents the 90% credible region", 
       showarrow = F, xref='paper', yref='paper', 
       xanchor='right', yanchor='auto', xshift=0, yshift=0,
-      font=list(size=12.5)
+      font=list(size=10)
     )
   )
   p <- plot_ly()

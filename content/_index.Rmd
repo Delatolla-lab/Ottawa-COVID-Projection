@@ -200,6 +200,8 @@ source("../R/toh_projections.R")
 TOH_fun(TOH_projections, "hosp_census", title = "Projected census of COVID-19 hospitalizations at The Ottawa Hospital", y = "Census (# of patients)")
 ```
 
+---
+
 ### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -207,12 +209,16 @@ source("../R/toh_projections.R")
 TOH_fun(TOH_projections, "hosp_admits", title = "Projected daily COVID-19 hospitalizations at The Ottawa Hospital", y = "New admissions (# of patients)")
 ```
 
+---
+
 ## Ventilator projections {#ventilator-projections}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/toh_projections.R")
 TOH_fun(TOH_projections, "vent_census", title = "Projected census of COVID-19 ventilator use at The Ottawa Hospital", y = "Census (# of patients)")
 ```
+
+---
 
 ### Daily projections
 
