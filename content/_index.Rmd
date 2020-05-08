@@ -50,7 +50,7 @@ source("../R/toh_projections.R")
 # data for dashboard and figures
 
 ## Observed census
-exp_census <- calc_expected_values_for_n_weeks(ott_observed, number_weeks = 3)
+exp_census <- calc_expected_values_for_n_weeks(TOH_observed, number_weeks = 3)
 
 ## Dt = doubling (or halving) time
 Dt <- exp_census[[2]][[3]]
@@ -89,9 +89,9 @@ Data to `r format(Sys.Date()-1, '%b %d, %Y')`
 
 ### Current
 
-**`r last(na.omit(ott_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in hospital.
+**`r last(na.omit(TOH_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in hospital.
 
-Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute care patients. **`r last(na.omit(ott_observed$observed_census_ICU))`** ICU patients.
+Including: **`r last(na.omit(TOH_observed$observed_census_acute_care))`** acute care patients. **`r last(na.omit(TOH_observed$observed_census_ICU))`** ICU patients.
 
 **`r round(effective_pd, 0)`%** physical distance effectiveness (approximate).
 
