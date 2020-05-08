@@ -191,11 +191,9 @@ The forecast of `r signif(current, 2)` patients in hospital in `r paste(current_
 
 > **Physical distancing effectiveness** is the amount that people without COVID-19 stay away from people who are infectious with COVID-19, compared to the time before COVID-19 control measures. 
 
-A further explanation of effective physical distancing will be added to the [More](/more) page soon.
+See [More](/more) page for more information about physical distancing effectiveness.
 
 ## Hospitalization projections {#hospitalization-projections}
-
-<!--See [here](/model#parameters) for all input parameters. -->
 
 ### Census projections
 
