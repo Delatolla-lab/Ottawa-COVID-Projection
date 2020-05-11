@@ -17,3 +17,5 @@ nu,2.5,gamma,93.9552169,0.02634306,Networked contact structure power-law exponen
 beta,0.33206426,beta,5,10,SEIR beta parameter (force of infection)
 hosp_capacity,,constant,,,Hospital Bed Capacity
 vent_capacity,,constant,,,Ventilator Capacity
+sd_percent_change_current,1,constant,,,Percent change with current distancing measures
+sd_percent_change_reduction_20,0.8,constant,,,Percent change with 20% reduction in distancing

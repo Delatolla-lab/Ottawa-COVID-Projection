@@ -4,6 +4,17 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V2.0.1
+2020-05-11
+
+- Updated TOH census data to 2020-05-10.
+- Minor changes to model parameters:
+  - sd_percent_change_current changed from 1.1 to 1.
+  - sd_percent_change_reduction_20 changed from 0.9 to 0.8.
+  - Previously these parameters were modified to correct for hospitalizations of
+  long-term care home patients.
+- Documentation on why ICU and death projections have been removed.
+
 # V2.0.0
 2020-05-07
 
