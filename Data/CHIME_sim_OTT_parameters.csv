@@ -19,3 +19,4 @@ hosp_capacity,,constant,,,Hospital Bed Capacity
 vent_capacity,,constant,,,Ventilator Capacity
 sd_percent_change_current,1,constant,,,Percent change with current distancing measures
 sd_percent_change_reduction_20,0.8,constant,,,Percent change with 20% reduction in distancing
+reopen_on_days,14,constant,,,Date of reopening from today
