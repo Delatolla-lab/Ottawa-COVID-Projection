@@ -81,9 +81,7 @@ reduction_20_date <- peak_projections[2,4]
 reduction_100_date <- peak_projections[3,4]
 
 ```
-**NOTE:** Ottawa hospitalization data is missing from 2020-04-29 to 2020-05-04. Observed hospitalization data from The Ottawa Hospital will be used in the interim as the COVID-19 Ottawa Database is being developed by Ottawa Public Health.
-
-**Note regarding death projections.** Death & ICU projections have been omitted from the website. With the overwhelming majority of COVID-19 related deaths occurring in residents of long-term care (LTC) or retirement homes, it is difficult to estimate COVID-19 related deaths in the hospital, as hospital death estimates are based on ICU probabilities. Many residents in LTC and retirement homes are in their last years of life and have advanced directives saying they (the resident) do not want advanced life support or transfer to the hospital if they have a life threatening illness. With the situation in LTC and retirement homes stabilizing, we hope to return these projections.
+**NOTE:** Ottawa Public Health is updating their infomation system to the new COVID-19 Ottawa Database. Observed hospitalization data from The Ottawa Hospital will be used in the interim. Death & ICU projections have been omitted. 
 
 # Dashboard
 
