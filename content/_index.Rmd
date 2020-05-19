@@ -43,14 +43,13 @@ TOH_observed <- read.csv(file.path(getwd(),"../Data/Observed data/TOH_Observed_H
 source("../R/estimate_scripts.R")
 source("../R/lag_replacement.R")
 source("../R/observed_data.R")
-source("../R/effective_physical_distancing.R")
 source("../R/data_conversion.R")
 source("../R/toh_projections.R")
 
 # data for dashboard and figures
 
 ## Observed census
-exp_census <- calc_expected_values_for_n_weeks(TOH_observed, number_weeks = 3)
+exp_census <- calc_expected_values_for_n_weeks(data = TOH_observed, number_weeks = 3)
 
 ## Dt = doubling (or halving) time
 Dt <- exp_census[[2]][[3]]
@@ -67,6 +66,24 @@ more_less = switch(
   "About the same",
   "More"
 )
+
+## Physical distancing calculations for previous week
+# Baseline characteristics
+baseline_dt <- 4
+Tc <- 7 
+gamma <- 1/Tc 
+g_baseline <- 2^(1/baseline_dt) - 1
+R_naught <- 1 + g_baseline*Tc
+beta_baseline <- R_naught*gamma
+
+# Observed characteristics for previous week
+observed_dt <- as.numeric(exp_census[[2]][[3]]) 
+g_observed <- 2^(1/observed_dt) - 1 
+Rt <- 1 + g_observed*Tc 
+beta_observed <- Rt*gamma 
+
+# Calculating effective physical distancing
+effective_pd <- (1 - ((g_observed + gamma)/beta_baseline)) * 100
 
 ## projections
 peak_projections$intervention <-
@@ -126,7 +143,7 @@ ottawa_hosp <-
   reworked_figure(
     xaxis = "date",
     yaxis = list(icu_call, acute_care, DT1, DT2, DT3),
-    titles = c(y = "Census (# of patients)", x = "Date", title = "Observed census of COVID-19 hospitalizations at The Ottawa Hospital"),
+    titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations at The Ottawa Hospital"),
     data = exp_census[[1]]
   )
 
@@ -178,7 +195,7 @@ t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
                                      Percent=paste(round(Diff/End*100,0),"%")) %>%
   ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#2CA02C", "#1F77B4", "#D62728")) +
   labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
-       y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_round), vjust = -0.5) +
+       y = "# of patients") + geom_text(aes(label = peak_hospital_round), vjust = -0.5) +
   theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
 
 t
@@ -195,9 +212,13 @@ See [More](/more) page for more information about physical distancing effectiven
 
 ## Hospitalization projections {#hospitalization-projections}
 
+Hospitalization projections predict the number of COVID-19 patients in hospital. The number of patients is based on "bed-days", which are the number of hospital beds occupied by patients on a given day.
+
+---
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/toh_projections.R")
-TOH_fun(TOH_projections, "hosp_census", title = "Projected census of COVID-19 hospitalizations at The Ottawa Hospital", y = "Census (# of patients)")
+TOH_fun(TOH_projections, "hosp_census", title = "Projected # of COVID-19 patients at The Ottawa Hospital", y = "# of patients")
 ```
 
 ---
@@ -215,7 +236,7 @@ TOH_fun(TOH_projections, "hosp_admits", title = "Projected daily COVID-19 hospit
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/toh_projections.R")
-TOH_fun(TOH_projections, "vent_census", title = "Projected census of COVID-19 ventilator use at The Ottawa Hospital", y = "Census (# of patients)")
+TOH_fun(TOH_projections, "vent_census", title = "Projected # of COVID-19 patients on ventilators at The Ottawa Hospital", y = "# of patients")
 ```
 
 ---
