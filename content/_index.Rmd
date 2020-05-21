@@ -33,23 +33,23 @@ library(ggplot2)
 library(dplyr)
 
 # data
-ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
+ott_projections <- read.csv(file.path(getwd(), "../Data/OPH_projection_estimates.csv"))
 ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
 peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
 TOH_projections <- read.csv(file.path(getwd(),"../Data/TOH_projection_estimates.csv"))
 TOH_observed <- read.csv(file.path(getwd(),"../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
 
 # scripts
-source("../R/estimate_scripts.R")
+#source("../R/estimate_scripts.R")
 source("../R/lag_replacement.R")
 source("../R/observed_data.R")
 source("../R/data_conversion.R")
-source("../R/toh_projections.R")
+source("../R/hosp_projections.R")
 
 # data for dashboard and figures
 
 ## Observed census
-exp_census <- calc_expected_values_for_n_weeks(data = TOH_observed, number_weeks = 3)
+exp_census <- calc_expected_values_for_n_weeks(data = ott_observed, number_weeks = 3)
 
 ## Dt = doubling (or halving) time
 Dt <- exp_census[[2]][[3]]
@@ -106,9 +106,9 @@ Data to `r format(Sys.Date()-1, '%b %d, %Y')`
 
 ### Current
 
-**`r last(na.omit(TOH_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in hospital.
+**`r last(na.omit(ott_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in hospital.
 
-Including: **`r last(na.omit(TOH_observed$observed_census_acute_care))`** acute care patients. **`r last(na.omit(TOH_observed$observed_census_ICU))`** ICU patients.
+Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute care patients. **`r last(na.omit(ott_observed$observed_census_ICU))`** ICU patients.
 
 **`r round(effective_pd, 0)`%** physical distance effectiveness (approximate).
 
@@ -143,7 +143,7 @@ ottawa_hosp <-
   reworked_figure(
     xaxis = "date",
     yaxis = list(icu_call, acute_care, DT1, DT2, DT3),
-    titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations at The Ottawa Hospital"),
+    titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa"),
     data = exp_census[[1]]
   )
 
@@ -212,38 +212,79 @@ See [More](/more) page for more information about physical distancing effectiven
 
 ## Hospitalization projections {#hospitalization-projections}
 
-Hospitalization projections predict the number of COVID-19 patients in hospital. The number of patients is based on "bed-days", which are the number of hospital beds occupied by patients on a given day.
+Projection from model in Ottawa-Data branch
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/hosp_projections.R")
+hosp_fun(ott_projections, "hosp_census", title = "Projected census of COVID-19 patients in Ottawa", y = "Census (# of patients)")
+```
 
 ---
 
+Projection from model in sims-update branch
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/toh_projections.R")
-TOH_fun(TOH_projections, "hosp_census", title = "Projected # of COVID-19 patients at The Ottawa Hospital", y = "# of patients")
+source("../R/hosp_projections.R")
+ott_test <- read.csv(file.path(getwd(), "../Data/OPH_projection_test.csv"))
+hosp_fun(ott_test, "hosp_census", title = "Projected census of COVID-19 patients in Ottawa", y = "Census (# of patients)")
 ```
 
 ---
 
 ### Daily projections
 
+Projection from model in Ottawa-Data branch
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/toh_projections.R")
-TOH_fun(TOH_projections, "hosp_admits", title = "Projected daily COVID-19 hospitalizations at The Ottawa Hospital", y = "New admissions (# of patients)")
+source("../R/hosp_projections.R")
+hosp_fun(ott_projections, "hosp_admits", title = "Projected daily COVID-19 hospitalizations in Ottawa", y = "New admissions (# of patients)")
+```
+
+---
+
+Projection from model in sims-update branch
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/hosp_projections.R")
+hosp_fun(ott_test, "hosp_admits", title = "Projected daily COVID-19 hospitalizations in Ottawa", y = "New admissions (# of patients)")
 ```
 
 ---
 
 ## Ventilator projections {#ventilator-projections}
 
+Projection from model in Ottawa-Data branch
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/toh_projections.R")
-TOH_fun(TOH_projections, "vent_census", title = "Projected # of COVID-19 patients on ventilators at The Ottawa Hospital", y = "# of patients")
+source("../R/hosp_projections.R")
+hosp_fun(ott_projections, "vent_census", title = "Projected # of COVID-19 patients on ventilators in Ottawa", y = "# of patients")
+```
+
+---
+
+Projection from model in sims-update branch
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/hosp_projections.R")
+hosp_fun(ott_test, "vent_census", title = "Projected # of COVID-19 patients on ventilators in Ottawa", y = "# of patients")
 ```
 
 ---
 
 ### Daily projections
 
+Projection from model in Ottawa-Data branch
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/toh_projections.R")
-TOH_fun(TOH_projections, "vent_admits", title = "Projected daily COVID-19 ventilator use at The Ottawa Hospital", y = "# of patients")
+source("../R/hosp_projections.R")
+hosp_fun(ott_projections, "vent_admits", title = "Projected daily COVID-19 ventilator use in Ottawa", y = "# of patients")
+```
+
+---
+
+Projection from model in sims-update branch
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/hosp_projections.R")
+hosp_fun(ott_test, "vent_admits", title = "Projected daily COVID-19 ventilator use in Ottawa", y = "# of patients")
 ```
