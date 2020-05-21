@@ -102,7 +102,8 @@ death_visualization <- function(data1,
                                 data2,
                                 parameter,
                                 title,
-                                y_label){
+                                y_label,
+                                showlegend = FALSE){
   trace <- list()
   fill <- c("tozeroy", "tozeroy", "tozeroy", NULL)
   meta <-
@@ -112,7 +113,7 @@ death_visualization <- function(data1,
       param_append(parameter, 70),
       "observed_data"
     )
-  mode <- c("lines", "lines", "lines", "markers+lines")
+  mode <- c("lines", "lines", "lines", "")
   name <-
     c(
       "50% physical distancing",
@@ -121,7 +122,7 @@ death_visualization <- function(data1,
       "70% physical distancing",
       "Reported # of deaths"
     )
-  type <- c("scatter", "scatter", "scatter", "scatter")
+  type <- c("scatter", "scatter", "scatter", "bar")
   x <- list(data1$date, data1$date, data1$date, data2$date)
   ydata <- list(data1, data1, data1, data2)
   yprefix <- c("^", "^", "^", "^observed_")
@@ -155,7 +156,8 @@ death_visualization <- function(data1,
       title = list(text = paste(as.character(y_label))), 
       autorange = TRUE
     ), 
-    autosize = TRUE
+    autosize = TRUE,
+    showlegend = showlegend
   )
   
   p <- 
@@ -174,8 +176,8 @@ death_visualization <- function(data1,
       )
     
   }
-  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=TRUE,
-              width = 700, height = 500,
+  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=layout$autosize,
+              width = 700, height = 500, showlegend = layout$showlegend,
               legend = list(x = 0.05, y = 1))
   return(p)
 }

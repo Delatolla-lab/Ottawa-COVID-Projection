@@ -288,3 +288,19 @@ Projection from model in sims-update branch
 source("../R/hosp_projections.R")
 hosp_fun(ott_test, "vent_admits", title = "Projected daily COVID-19 ventilator use in Ottawa", y = "# of patients")
 ```
+
+---
+
+## Death visualizations
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+death_visualization(data1 = NULL, data2 = ott_observed, parameter = "new_deaths", title = "Observed new deaths in Ottawa", "# of deaths")
+```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+death_visualization(data1 = NULL, data2 = ott_observed, parameter = "cumulative_deaths", title = "Observed cumulative deaths in Ottawa", "# of deaths")
+```
