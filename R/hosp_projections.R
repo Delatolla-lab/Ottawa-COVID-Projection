@@ -1,5 +1,5 @@
 library(plotly)
-TOH_fun <- function(data1, parameter, title, y) {
+hosp_fun <- function(data1, parameter, title, y) {
   tmp <- max(data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                                  "95_reduction_20", sep = "_"), names(data1))])
   tmp <- tmp*0.55
