@@ -102,7 +102,14 @@ death_visualization <- function(data1,
                                 data2,
                                 parameter,
                                 title,
-                                y_label){
+                                y_label,
+                                showlegend = FALSE,
+                                fillcolor){
+  fillcolor_list <- list(
+    red = "rgb(214, 39, 40)",
+    orange = "rgb(255, 127, 14)",
+    blue = "rgb(31, 119, 180)"
+  )
   trace <- list()
   fill <- c("tozeroy", "tozeroy", "tozeroy", NULL)
   meta <-
@@ -112,7 +119,7 @@ death_visualization <- function(data1,
       param_append(parameter, 70),
       "observed_data"
     )
-  mode <- c("lines", "lines", "lines", "markers+lines")
+  mode <- c("lines", "lines", "lines", "")
   name <-
     c(
       "50% physical distancing",
@@ -121,7 +128,7 @@ death_visualization <- function(data1,
       "70% physical distancing",
       "Reported # of deaths"
     )
-  type <- c("scatter", "scatter", "scatter", "scatter")
+  type <- c("scatter", "scatter", "scatter", "bar")
   x <- list(data1$date, data1$date, data1$date, data2$date)
   ydata <- list(data1, data1, data1, data2)
   yprefix <- c("^", "^", "^", "^observed_")
@@ -145,7 +152,7 @@ death_visualization <- function(data1,
     title = list(text = paste(as.character(title)), x = 0.5), 
     xaxis = list(
       type = "date", 
-      range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
+      range = data2$date, 
       title = list(text = "Date"), 
       autorange = TRUE
     ), 
@@ -155,12 +162,13 @@ death_visualization <- function(data1,
       title = list(text = paste(as.character(y_label))), 
       autorange = TRUE
     ), 
-    autosize = TRUE
+    autosize = TRUE,
+    showlegend = showlegend
   )
   
   p <- 
     plot_ly() %>% config(modeBarButtonsToRemove = c("toggleSpikelines", "lasso2d", "select2d"))
-  for (trace_index in 1:4) {
+  for (trace_index in 1:3) {
     p <-
       add_trace(
         p,
@@ -174,8 +182,19 @@ death_visualization <- function(data1,
       )
     
   }
-  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=TRUE,
-              width = 700, height = 500,
+  p <-
+    add_trace(
+      p,
+      marker = list(color = fillcolor_list[[fillcolor]]),
+      meta = trace[[4]]$meta,
+      mode = trace[[4]]$mode,
+      name = trace[[4]]$name,
+      type = trace[[4]]$type,
+      x = trace[[4]]$x,
+      y = trace[[4]]$y
+    )
+  p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=layout$autosize,
+              width = 700, height = 500, showlegend = layout$showlegend,
               legend = list(x = 0.05, y = 1))
   return(p)
 }

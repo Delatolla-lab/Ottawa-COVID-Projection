@@ -1,5 +1,5 @@
 # Load observed data
-tmp <- calc_expected_values_for_n_weeks(ott_observed, number_weeks = 1)
+tmp <- calc_expected_values_for_n_weeks(TOH_observed, number_weeks = 1)
 
 # Baseline parameters
 baseline_dt <- 4

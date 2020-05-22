@@ -1,11 +1,11 @@
 library(plotly)
-TOH_fun <- function(data1, parameter, title, y) {
+hosp_fun <- function(data1, parameter, title, y) {
   tmp <- max(data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                                  "95_reduction_20", sep = "_"), names(data1))])
   tmp <- tmp*0.55
   trace1 <- list(
     fill = "none",
-    line = list(color = "rgb(57, 157, 195)",
+    line = list(color = "rgb(83, 162, 190)",
                 width = 0.5),
     mode = "lines",
     name = "Current distancing upper bound",
@@ -18,8 +18,8 @@ TOH_fun <- function(data1, parameter, title, y) {
   )
   trace2 <- list(
     fill = "tonexty",
-    fillcolor = "rgba(57, 157, 195)",
-    line = list(color = "rgb(57, 157, 195)",
+    fillcolor = "rgba(83, 162, 190)",
+    line = list(color = "rgb(83, 162, 190)",
                 width = 0.5),
     mode = "lines",
     name = "Current distancing lower bound",
@@ -31,7 +31,7 @@ TOH_fun <- function(data1, parameter, title, y) {
     showlegend = FALSE
   )
   trace3 <- list(
-    line = list(color = "rgb(57, 157, 195)",
+    line = list(color = "rgb(83, 162, 190)",
                 width = 3),
     mode = "lines",
     name = "Current distancing",
@@ -43,7 +43,7 @@ TOH_fun <- function(data1, parameter, title, y) {
     showlegend = TRUE
   )
   trace4 <- list(
-    line = list(color = "rgb(214, 39, 40)",
+    line = list(color = "rgb(95, 173, 86)",
                 width = 0.5),
     mode = "lines",
     name = "20% reduction upper bound",
@@ -56,8 +56,8 @@ TOH_fun <- function(data1, parameter, title, y) {
   )
   trace5 <- list(
     fill = "tonexty",
-    fillcolor = "rgba(214, 39, 40)",
-    line = list(color = "rgb(214, 39, 40)",
+    fillcolor = "rgba(95, 173, 86)",
+    line = list(color = "rgb(95, 173, 86)",
                 width = 0.5),
     mode = "lines",
     name = "20% reduction lower bound",
@@ -69,7 +69,7 @@ TOH_fun <- function(data1, parameter, title, y) {
     showlegend = FALSE
   )
   trace6 <- list(
-    line = list(color = "rgb(214, 39, 40)",
+    line = list(color = "rgb(95, 173, 86)",
                 width = 3),
     mode = "lines",
     name = "20% distancing reduction \n(beginning 2 weeks from today)",
@@ -84,7 +84,7 @@ TOH_fun <- function(data1, parameter, title, y) {
     showlegend = TRUE
   )
   trace7 <- list(
-    marker = list(color = 'rgb(254, 203, 82)',
+    marker = list(color = 'rgb(255, 127, 14)',
                   line = list(color = 'rgb(8,48,107)', width = 0)),
     mode = "lines",
     name = "Observed hospital census",

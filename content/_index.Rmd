@@ -33,24 +33,23 @@ library(ggplot2)
 library(dplyr)
 
 # data
-ott_projections <- read.csv(file.path(getwd(), "../Data/Ottawa_hospitalization_estimates_COVID.csv"))
+ott_projections <- read.csv(file.path(getwd(), "../Data/OPH_projection_estimates.csv"))
 ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
 peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
 TOH_projections <- read.csv(file.path(getwd(),"../Data/TOH_projection_estimates.csv"))
 TOH_observed <- read.csv(file.path(getwd(),"../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
 
 # scripts
-source("../R/estimate_scripts.R")
+#source("../R/estimate_scripts.R")
 source("../R/lag_replacement.R")
 source("../R/observed_data.R")
-source("../R/effective_physical_distancing.R")
 source("../R/data_conversion.R")
-source("../R/toh_projections.R")
+source("../R/hosp_projections.R")
 
 # data for dashboard and figures
 
 ## Observed census
-exp_census <- calc_expected_values_for_n_weeks(TOH_observed, number_weeks = 3)
+exp_census <- calc_expected_values_for_n_weeks(data = ott_observed, number_weeks = 3)
 
 ## Dt = doubling (or halving) time
 Dt <- exp_census[[2]][[3]]
@@ -68,6 +67,24 @@ more_less = switch(
   "More"
 )
 
+## Physical distancing calculations for previous week
+# Baseline characteristics
+baseline_dt <- 4
+Tc <- 7 
+gamma <- 1/Tc 
+g_baseline <- 2^(1/baseline_dt) - 1
+R_naught <- 1 + g_baseline*Tc
+beta_baseline <- R_naught*gamma
+
+# Observed characteristics for previous week
+observed_dt <- as.numeric(exp_census[[2]][[3]]) 
+g_observed <- 2^(1/observed_dt) - 1 
+Rt <- 1 + g_observed*Tc 
+beta_observed <- Rt*gamma 
+
+# Calculating effective physical distancing
+effective_pd <- (1 - ((g_observed + gamma)/beta_baseline)) * 100
+
 ## projections
 peak_projections$intervention <-
   factor(peak_projections$intervention, levels = c("Current distancing effectiveness", "20% reduction in distancing", "No distancing"))
@@ -81,7 +98,7 @@ reduction_20_date <- peak_projections[2,4]
 reduction_100_date <- peak_projections[3,4]
 
 ```
-**NOTE:** Ottawa Public Health is updating their infomation system to the new COVID-19 Ottawa Database. Observed hospitalization data from The Ottawa Hospital will be used in the interim. Death & ICU projections have been omitted. 
+**NOTE:** Observed hospitalization data from Ottawa Public Health is now being used as the Ottawa COVID-19 Database is now released.
 
 # Dashboard
 
@@ -89,21 +106,21 @@ Data to `r format(Sys.Date()-1, '%b %d, %Y')`
 
 ### Current
 
-**`r last(na.omit(TOH_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in hospital.
+**`r last(na.omit(ott_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in hospital.
 
-Including: **`r last(na.omit(TOH_observed$observed_census_acute_care))`** acute care patients. **`r last(na.omit(TOH_observed$observed_census_ICU))`** ICU patients.
+Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute care patients. **`r last(na.omit(ott_observed$observed_census_ICU))`** ICU patients.
 
 **`r round(effective_pd, 0)`%** physical distance effectiveness (approximate).
 
 ### Short-range forecast
 
-**`r more_less`** patients in the following week, reflecting a current `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days (daily growth of `r round(100*exp_census[[4]][[3]], 2)`%).
+**`r more_less`** patients in the following week, reflecting a current `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 0)`** days (daily growth of `r round(100*exp_census[[4]][[3]], 0)`%).
 
 ### Long-range forecast
 
 **`r paste(current, "to", reduction_20)`** peak patients in The Ottawa Hospital between **`r paste(current_date, "&", reduction_20_date)`**. 
 
-## Observed Hospital census {#doubling-time}
+## Observed hospital census {#observed-census}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Ottawa Hospital data section @Warsame
@@ -126,7 +143,7 @@ ottawa_hosp <-
   reworked_figure(
     xaxis = "date",
     yaxis = list(icu_call, acute_care, DT1, DT2, DT3),
-    titles = c(y = "Census (# of patients)", x = "Date", title = "Observed census of COVID-19 hospitalizations at The Ottawa Hospital"),
+    titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa"),
     data = exp_census[[1]]
   )
 
@@ -145,10 +162,10 @@ for (i in 1:3) {
         ),
         y = median(expected_values[[i]]$expected_val, na.rm = TRUE),
         text = ifelse(doubling_time[[i]] > 0, (
-          paste("Doubling time:", "\n", as.character(round(doubling_time[[i]], 1)), "days", sep = " ")
+          paste("Doubling time:", "\n", as.character(round(doubling_time[[i]], 0)), "days", sep = " ")
         ), (
           paste("Halving time:", "\n", as.character(round(
-            abs(doubling_time[[i]]), 1
+            abs(doubling_time[[i]]), 0
           )), "days", sep = " ")
         )),
         xref = "x",
@@ -161,13 +178,21 @@ for (i in 1:3) {
 ottawa_hosp
 ```
 
-Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 1)`** days translates to current physical distancing effectiveness of approximately **`r round(effective_pd, 0)`%**. 
+Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 0)`** days translates to current physical distancing effectiveness of approximately **`r round(effective_pd, 0)`%**. 
 
 > **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
 
 > **Doubling time refers** to the time it takes for the number of hospitalized patients to double in number. 
 
 Halving time is the time it takes to halve the number of hospitalized patients. Doubling/halving time was calculated for each 7 day period (Mon-Sun).
+
+## Observed daily hospital admissions {#observed-admits}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+death_visualization(data1 = NULL, data2 = ott_observed, parameter = "new_ICU_p_acute_care", title = "Observed daily COVID-19 hospitalizations in Ottawa", "# of patients", fillcolor = "orange")
+```
+
+---
 
 ## Peak hospitalization projections {#peak-hosp-projections}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -176,9 +201,9 @@ t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
                                      xpos=1:n()-0.5,
                                     Diff=End-peak_hospital_census,
                                      Percent=paste(round(Diff/End*100,0),"%")) %>%
-  ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#2CA02C", "#1F77B4", "#D62728")) +
+  ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#53A2BE", "#5FAD56", "#A71D31")) +
   labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
-       y = "Census (# of patients)") + geom_text(aes(label = peak_hospital_round), vjust = -0.5) +
+       y = "# of patients") + geom_text(aes(label = peak_hospital_round), vjust = -0.5) +
   theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
 
 t
@@ -196,8 +221,8 @@ See [More](/more) page for more information about physical distancing effectiven
 ## Hospitalization projections {#hospitalization-projections}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/toh_projections.R")
-TOH_fun(TOH_projections, "hosp_census", title = "Projected census of COVID-19 hospitalizations at The Ottawa Hospital", y = "Census (# of patients)")
+source("../R/hosp_projections.R")
+hosp_fun(ott_projections, "hosp_census", title = "Projected census of COVID-19 patients in Ottawa", y = "Census (# of patients)")
 ```
 
 ---
@@ -205,8 +230,8 @@ TOH_fun(TOH_projections, "hosp_census", title = "Projected census of COVID-19 ho
 ### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/toh_projections.R")
-TOH_fun(TOH_projections, "hosp_admits", title = "Projected daily COVID-19 hospitalizations at The Ottawa Hospital", y = "New admissions (# of patients)")
+source("../R/hosp_projections.R")
+hosp_fun(ott_projections, "hosp_admits", title = "Projected daily COVID-19 hospitalizations in Ottawa", y = "New admissions (# of patients)")
 ```
 
 ---
@@ -214,8 +239,8 @@ TOH_fun(TOH_projections, "hosp_admits", title = "Projected daily COVID-19 hospit
 ## Ventilator projections {#ventilator-projections}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/toh_projections.R")
-TOH_fun(TOH_projections, "vent_census", title = "Projected census of COVID-19 ventilator use at The Ottawa Hospital", y = "Census (# of patients)")
+source("../R/hosp_projections.R")
+hosp_fun(ott_projections, "vent_census", title = "Projected # of COVID-19 patients on ventilators in Ottawa", y = "# of patients")
 ```
 
 ---
@@ -223,6 +248,19 @@ TOH_fun(TOH_projections, "vent_census", title = "Projected census of COVID-19 ve
 ### Daily projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/toh_projections.R")
-TOH_fun(TOH_projections, "vent_admits", title = "Projected daily COVID-19 ventilator use at The Ottawa Hospital", y = "# of patients")
+source("../R/hosp_projections.R")
+hosp_fun(ott_projections, "vent_admits", title = "Projected daily COVID-19 ventilator use in Ottawa", y = "# of patients")
 ```
+
+---
+
+## Death visualization {#death-visualization}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../R/covid_visualization.R")
+death_visualization(data1 = NULL, data2 = ott_observed, parameter = "new_deaths", title = "Observed new deaths in Ottawa", "# of deaths", fillcolor = "red")
+```
+
+---
+
+**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date.

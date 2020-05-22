@@ -20,36 +20,54 @@ publishDir = "./docs"
     name = " Visualizations"
     url = ""
     weight = 2
+    
+[[menu.main]]
+    name = " Observed hospital census"
+    url = "/#observed-census"
+    parent = " Visualizations"
+    weight = 1
+    
+[[menu.main]]
+    name = " Observed daily hospital admissions"
+    url = "/#observed-admissions"
+    parent = " Visualizations"
+    weight = 2
 
 [[menu.main]]
     name = "Peak hospitalization projections"
     url = "/#peak-hosp-projections"
     parent = " Visualizations"
-    weight = 1
+    weight = 3
     
 [[menu.main]]
     name = "Hospitalization Projections"
     url = "/#hospitalization-projections"
     parent = " Visualizations"
-    weight = 2
+    weight = 4
 
 [[menu.main]]
     name = "Ventilator Projections"
     url = "/#ventilator-projections"
     parent = " Visualizations"
-    weight = 3
+    weight = 5
+    
+[[menu.main]]
+    name = "Death visualization"
+    url = "/#death-visualization"
+    parent = " Visualizations"
+    weight = 6
     
 [[menu.main]]
     name = "Physical distancing"
     url = "/more/#distancing"
     parent = " Visualizations"
-    weight = 4
+    weight = 7
 
 [[menu.main]]
     name = "Flattening the curve"
     url = "/more/#flatten-curve"
     parent = " Visualizations"
-    weight = 5
+    weight = 8
 
 [[menu.main]]
     name = " Model"

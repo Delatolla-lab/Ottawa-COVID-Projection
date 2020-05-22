@@ -1,13 +1,13 @@
 param,base,distribution,p1,p2,description
 n_hosp,1,constant,,,Number of hospitalized COVID-19 patients on day 1
 hosp_prop,0.026,gamma,6.326832789,0.004168888,Proportion of infections requiring hospitalization
-ICU_prop,0.37,beta,52.05931116,96.86741968,Proportion of hospitalizations admitted to ICU
-vent_prop,0.28,beta,5.224029085,3.078885266,Proportion of ICU patients requiring ventilation
-hosp_LOS,10,gamma,47.30432422,0.173610907,Hospital Length of Stay
+ICU_prop,0.214,beta,52.05931116,96.86741968,Proportion of hospitalizations admitted to ICU. Proportion based on Ottawa Public Health 30-day median on hospitalizations in the ICU.
+vent_prop,0.667,beta,5.224029085,3.078885266,Proportion of ICU patients requiring ventilation. Proportion based on Ottawa Public Health 30-day median on ventilated ICU patients.
+hosp_LOS,11.57,gamma,47.30432422,0.173610907,Hospital Length of Stay. Value based on average length of stay at The Ottawa Hospital.
 ICU_LOS,10,gamma,26.48751881,0.341980487,ICU Length of Stay
 vent_LOS,7,gamma,31.75035399,0.305511387,time on vent
-mkt_share,0.75,constant,,,Hospital Market Share (%)
-region_pop,1000000,constant,,,Regional Population
+mkt_share,1,constant,,,Hospital Market Share (%)
+region_pop,1049486,constant,,,Regional Population
 incubation_days,5,gamma,9.514379271,0.513980244,Days from exposure to infectiousness
 recovery_days,7,gamma,9.833457434,1.642265575,Days from infection to recovery
 logistic_k,1,gamma,4.018953794,0.22738215,logistic growth rate
@@ -17,6 +17,10 @@ nu,2.5,gamma,93.9552169,0.02634306,Networked contact structure power-law exponen
 beta,0.33206426,beta,5,10,SEIR beta parameter (force of infection)
 hosp_capacity,,constant,,,Hospital Bed Capacity
 vent_capacity,,constant,,,Ventilator Capacity
+beta_spline_dimension,5,constant,,,number of splines for beta
+beta_spline_power,1,constant,,,polynomial of the truncated power spline
+beta_spline_prior,0,norm,0,0.2,prior on spline terms. Variance of splines is the inverse of an L2 penalty.
+b0,4,norm,-5,2.5,"This is the intercept on the mean of the logistic. It should be large and negative such that 1-logistic(b0+XB) is close to one when X is zero, because the (1-sd) is a coef on beta"
 sd_percent_change_current,1,constant,,,Percent change with current distancing measures
 sd_percent_change_reduction_20,0.8,constant,,,Percent change with 20% reduction in distancing
 reopen_on_days,14,constant,,,Date of reopening from today

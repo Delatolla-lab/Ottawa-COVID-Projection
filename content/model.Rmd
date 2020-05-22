@@ -82,14 +82,14 @@ $$g_0 = \beta_0 - \gamma$$
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(DT)
 CHIME_input_display <- read.csv(file.path(getwd(),"../Data/CHIME_sim_OTT_parameters.csv"))
-TOH_projections <- read.csv(file.path(getwd(), "../Data/TOH_projection_estimates.csv"))
+ott_projections <- read.csv(file.path(getwd(), "../Data/OPH_projection_estimates.csv"))
 datatable(CHIME_input_display)
 ```
 
 ## Data used to plot visualizations {#plot-data}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-datatable(TOH_projections, caption = htmltools::tags$caption("Projected data", style="font-size: 20px"), options = list(scrollX = TRUE))
+datatable(ott_projections, caption = htmltools::tags$caption("Projected data", style="font-size: 20px"), options = list(scrollX = TRUE))
 ```
 
 ### References {#references}
