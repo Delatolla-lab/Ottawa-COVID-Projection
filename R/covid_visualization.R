@@ -103,7 +103,13 @@ death_visualization <- function(data1,
                                 parameter,
                                 title,
                                 y_label,
-                                showlegend = FALSE){
+                                showlegend = FALSE,
+                                fillcolor){
+  fillcolor_list <- list(
+    red = "rgb(214, 39, 40)",
+    orange = "rgb(255, 127, 14)",
+    blue = "rgb(31, 119, 180)"
+  )
   trace <- list()
   fill <- c("tozeroy", "tozeroy", "tozeroy", NULL)
   meta <-
@@ -162,7 +168,7 @@ death_visualization <- function(data1,
   
   p <- 
     plot_ly() %>% config(modeBarButtonsToRemove = c("toggleSpikelines", "lasso2d", "select2d"))
-  for (trace_index in 1:4) {
+  for (trace_index in 1:3) {
     p <-
       add_trace(
         p,
@@ -176,6 +182,17 @@ death_visualization <- function(data1,
       )
     
   }
+  p <-
+    add_trace(
+      p,
+      marker = list(color = fillcolor_list[[fillcolor]]),
+      meta = trace[[4]]$meta,
+      mode = trace[[4]]$mode,
+      name = trace[[4]]$name,
+      type = trace[[4]]$type,
+      x = trace[[4]]$x,
+      y = trace[[4]]$y
+    )
   p <- layout(p, title=layout$title, xaxis=layout$xaxis, yaxis=layout$yaxis, autosize=layout$autosize,
               width = 700, height = 500, showlegend = layout$showlegend,
               legend = list(x = 0.05, y = 1))

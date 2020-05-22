@@ -19,7 +19,7 @@ reworked_figure <-
           showlegend = FALSE,
           line = list(
             dash = "dash",
-            color = "rgb(4, 157, 53)",
+            color = "rgb(39, 62, 71)",
             width = 5
           )
         ),
