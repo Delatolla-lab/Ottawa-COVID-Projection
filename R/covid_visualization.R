@@ -146,7 +146,7 @@ death_visualization <- function(data1,
     title = list(text = paste(as.character(title)), x = 0.5), 
     xaxis = list(
       type = "date", 
-      range = c("2020-03-05 14:13:30.5106", "2020-10-16"), 
+      range = data2$date, 
       title = list(text = "Date"), 
       autorange = TRUE
     ), 

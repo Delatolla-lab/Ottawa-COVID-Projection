@@ -127,7 +127,7 @@ observed_figure <- function(param_list,
         ),
         y = median(expected_values[[i]]$expected_val, na.rm = TRUE),
         text = ifelse(doubling_time[[i]] > 0, (
-          paste("Doubling time:", "\n", as.character(round(doubling_time[[i]], 1)), "days", sep = " ")
+          paste("Doubling time:", "\n", as.character(round(doubling_time[[i]], 0)), "days", sep = " ")
         ), (
           paste("Halving time:", "\n", as.character(round(
             abs(doubling_time[[i]]), 1
