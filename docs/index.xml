@@ -42,9 +42,8 @@ Short-term projections (2 to 4 weeks) to inform the immediate need for hospital 
       
       <guid>/change-log/</guid>
       <description>Updates involving only data updates will no longer be documented.
-V2.0.1 2020-05-11
- Updated TOH census data to 2020-05-10. Minor changes to model parameters:  sd_percent_change_current changed from 1.1 to 1. sd_percent_change_reduction_20 changed from 0.9 to 0.8. Previously these parameters were modified to correct for hospitalizations of long-term care home patients.  Documentation on why ICU and death projections have been removed.   V2.0.0 2020-05-07
- Replaced Ottawa hospital census data with The Ottawa Hospital (TOH) census data to 2020-05-05.</description>
+V2.1.0 2020-05-22
+ Hospitalization data switched from TOH to entire Ottawa region to 2020-05-20 Changes to model parameters:  ICU_prop set to 0.214 vent_prop set to 0.667 hosp_LOS set to 11.57 mkt_share set to 1 region_pop set to 1049486  New plots added:  Observed daily hospital admissions Observed daily deaths  Changes to the colour scheme of plots   V2.</description>
     </item>
     
     <item>
