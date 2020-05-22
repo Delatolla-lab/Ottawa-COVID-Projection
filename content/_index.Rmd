@@ -120,7 +120,7 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 
 **`r paste(current, "to", reduction_20)`** peak patients in The Ottawa Hospital between **`r paste(current_date, "&", reduction_20_date)`**. 
 
-## Observed hospital census {#doubling-time}
+## Observed hospital census {#observed-census}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Ottawa Hospital data section @Warsame
@@ -260,4 +260,7 @@ hosp_fun(ott_projections, "vent_admits", title = "Projected daily COVID-19 venti
 source("../R/covid_visualization.R")
 death_visualization(data1 = NULL, data2 = ott_observed, parameter = "new_deaths", title = "Observed new deaths in Ottawa", "# of deaths", fillcolor = "red")
 ```
+
+---
+
 **Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date.
