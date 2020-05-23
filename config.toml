@@ -29,7 +29,7 @@ publishDir = "./docs"
     
 [[menu.main]]
     name = " Observed daily hospital admissions"
-    url = "/#observed-admissions"
+    url = "/#observed-admits"
     parent = " Visualizations"
     weight = 2
 
