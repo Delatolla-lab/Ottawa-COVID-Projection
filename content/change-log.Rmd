@@ -7,6 +7,8 @@ title: Changelog
 # V2.1.1
 2020-05-25
 
+- Updated OPH hospital data to 2020-05-24.
+  - Data is specific to Ottawa residents currently hospitalized.
 - Added definitions on homepage.
 - Change in terminology from distancing to transmission in projection plots.
 - Update to figures in [more](/more).
