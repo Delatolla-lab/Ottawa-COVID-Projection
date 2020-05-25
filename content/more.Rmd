@@ -63,11 +63,11 @@ See [model](/model#distancing) for a technical discussion about how physical dis
 
 <div class="more-info-images">
 <figure>
-<img src="/images/176989- infographic 50 percent.png"
+<img src="/images/infographic 50 percent.png"
   alt="50% reduction in physical distanicng. One person infects 1.25 people on day 5 and 15 people on day 30" />
-<img src="/images/176989- infographic 75 percent.png"
+<img src="/images/infographic 75 percent.png"
   alt="75% reduction in physical distanicng. One person infects 0.625 people on day 2.5 and 15 people on day 30" />
-<img src="/images/176989- infographic No.png"
+<img src="/images/infographic No.png"
   alt="No reduction in physical distanicng. One person infects 5.5 people on day 5 and 406 people on day 30"/>
 <figcaption>
   Original source: [visualcapitalist.com](https://www.visualcapitalist.com/the-math-behind-social-distancing/)
