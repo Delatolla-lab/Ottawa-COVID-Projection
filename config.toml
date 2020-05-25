@@ -155,13 +155,7 @@ publishDir = "./docs"
     name = "Physical distancing effectiveness"
     url = "/more/#distancing-effectiveness"
     parent = " More"
-    weight = 5 
-    
-[[menu.main]]
-    name = "Flatten the curve"
-    url = "/more/#flatten-curve"
-    parent = " More"
-    weight = 6  
+    weight = 5
 
 [[menu.main]]
     name = "Contact"
