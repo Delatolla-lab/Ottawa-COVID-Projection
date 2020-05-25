@@ -1,5 +1,5 @@
 ---
-title: "Ottawa COVID Projections"
+title: "Ottawa COVID-19 Projections"
 ---
 
 ---
@@ -194,7 +194,7 @@ death_visualization(data1 = NULL, data2 = ott_observed, parameter = "new_ICU_p_a
 
 ---
 
-## Peak hospitalization projections {#peak-hosp-projections}
+## Peak hospitalization projections for reopening {#peak-hosp-projections}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
@@ -210,7 +210,13 @@ t
 
 ```
 
-The forecast of `r signif(current, 2)` patients in hospital in `r paste(current_date)` is based on the previous weeks' physical distancing effectiveness of **`r round(effective_pd, 0)`%**.
+The hospital census forecast of:
+
+- `r signif(current, 2)` patients on `r paste(current_date)` is based on the previous weeks' physical distancing effectiveness of **`r round(effective_pd, 0)`%**.
+
+- `r signif(reduction_20, 2)` patient  on `r paste(reduction_20_date)` is based on a 20% increase in COVID-19 transmission. 
+
+- `r signif(5000, 2)` patients on June 2020 is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020.
 
 > **Physical distancing** is the reduction in close contact between people. 
 
