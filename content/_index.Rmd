@@ -164,7 +164,7 @@ ottawa_hosp <-
   reworked_figure(
     xaxis = "date",
     yaxis = list(icu_call, acute_care, DT1, DT2, DT3),
-    titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa"),
+    titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations of Ottawa residents"),
     data = exp_census[[1]]
   )
 
@@ -201,10 +201,12 @@ ottawa_hosp
 
 Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 0)`** days translates to current physical distancing effectiveness of approximately **`r round(effective_pd, 0)`%**. 
 
+**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period. 
+
 ## Observed daily hospital admissions {#observed-admits}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/covid_visualization.R")
-death_visualization(data1 = NULL, data2 = ott_observed, parameter = "new_ICU_p_acute_care", title = "Observed daily COVID-19 hospitalizations in Ottawa", "# of patients", fillcolor = "orange")
+death_visualization(data1 = NULL, data2 = ott_observed, parameter = "new_ICU_p_acute_care", title = "Observed daily COVID-19 hospitalizations of Ottawa residents", "# of patients", fillcolor = "orange")
 ```
 
 ---
