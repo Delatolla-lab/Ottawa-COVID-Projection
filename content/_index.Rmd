@@ -87,7 +87,7 @@ effective_pd <- (1 - ((g_observed + gamma)/beta_baseline)) * 100
 
 ## projections
 peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("Current distancing effectiveness", "20% reduction in distancing", "No distancing"))
+  factor(peak_projections$intervention, levels = c("Current transmission", "20% increase in transmission", "Early outbreak transmission"))
 
 # Values from peak_projections.csv
 current <- peak_projections[1,2] # peak with current distancing
@@ -200,8 +200,6 @@ ottawa_hosp
 ```
 
 Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 0)`** days translates to current physical distancing effectiveness of approximately **`r round(effective_pd, 0)`%**. 
-
-Halving time is the time it takes to halve the number of hospitalized patients. Doubling/halving time was calculated for each 7 day period (Mon-Sun).
 
 ## Observed daily hospital admissions {#observed-admits}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
