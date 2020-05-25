@@ -120,6 +120,26 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 
 **`r paste(current, "to", reduction_20)`** peak patients in The Ottawa Hospital between **`r paste(current_date, "&", reduction_20_date)`**. 
 
+## Definitions
+
+> **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
+
+> **Transmission** is the risk that a person becomes infected when they come in contact with a person with COVID-19. 
+
+> **Doubling time refers** to the time it takes for the number of hospitalized patients to double in number.
+
+> **Daily growth** is the rate of change in the hospitalization from day-to-day.
+
+> **Physical distancing** is a reduction in close contact between people. 
+
+> **Physical distancing effectiveness** is the reduction in the transmission of COVID-19 between an infected person and someone who has never had COVID-19, compared to the beginning of the pandemic in March 2020.
+
+> **Safe socializing** is ensuring you don't become a link in a COVID-19 transmission chain that ends in a person becoming hospitalized or dying.
+
+> **Safe reopening** is lifting lockdown measures while ensuring a low risk of COVID-19 hospitalization and death. Safe reopening includes safe socializing, safe work and safe businesses - reopening while ensure we all ensure transmissions chains do not lead to hospitalization and death. 
+
+See [More](/more) page for more information about the terms used.
+
 ## Observed hospital census {#observed-census}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -147,7 +167,7 @@ ottawa_hosp <-
     data = exp_census[[1]]
   )
 
-# Adding Anotations
+# Adding Annotations
 doubling_time <- exp_census[[2]]
 expected_values <- exp_census[[3]]
 
@@ -180,10 +200,6 @@ ottawa_hosp
 
 Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 0)`** days translates to current physical distancing effectiveness of approximately **`r round(effective_pd, 0)`%**. 
 
-> **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
-
-> **Doubling time refers** to the time it takes for the number of hospitalized patients to double in number. 
-
 Halving time is the time it takes to halve the number of hospitalized patients. Doubling/halving time was calculated for each 7 day period (Mon-Sun).
 
 ## Observed daily hospital admissions {#observed-admits}
@@ -212,17 +228,12 @@ t
 
 The hospital census forecast of:
 
-- `r signif(current, 2)` patients on `r paste(current_date)` is based on the previous weeks' physical distancing effectiveness of **`r round(effective_pd, 0)`%**.
+- `r signif(current, 2)` patients on `r paste(current_date)` is based on the previous week's growth rate of `r round(100*exp_census[[4]][[3]], 0)`%.
 
 - `r signif(reduction_20, 2)` patient  on `r paste(reduction_20_date)` is based on a 20% increase in COVID-19 transmission. 
 
-- `r signif(5000, 2)` patients on June 2020 is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020.
+- `r signif(reduction_100, 2)` patients on `r paste(reduction_100_date)` is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020.
 
-> **Physical distancing** is the reduction in close contact between people. 
-
-> **Physical distancing effectiveness** is the amount that people without COVID-19 stay away from people who are infectious with COVID-19, compared to the time before COVID-19 control measures. 
-
-See [More](/more) page for more information about physical distancing effectiveness.
 
 ## Hospitalization projections {#hospitalization-projections}
 
