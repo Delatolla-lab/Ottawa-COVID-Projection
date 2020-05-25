@@ -4,6 +4,13 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V2.1.1
+2020-05-25
+
+- Added definitions on homepage.
+- Change in terminology from distancing to transmission in projection plots.
+- Update to figures in [more](/more).
+
 # V2.1.0
 2020-05-22
 

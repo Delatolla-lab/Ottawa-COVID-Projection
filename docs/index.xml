@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ottawa COVID Projections on Ottawa COVID19</title>
+    <title>Ottawa COVID-19 Projections on Ottawa COVID19</title>
     <link>/</link>
-    <description>Recent content in Ottawa COVID Projections on Ottawa COVID19</description>
+    <description>Recent content in Ottawa COVID-19 Projections on Ottawa COVID19</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 05 May 2016 21:48:51 -0700</lastBuildDate>
@@ -42,7 +42,8 @@ Short-term projections (2 to 4 weeks) to inform the immediate need for hospital 
       
       <guid>/change-log/</guid>
       <description>Updates involving only data updates will no longer be documented.
-V2.1.0 2020-05-22
+V2.1.1 2020-05-25
+ Added definitions on homepage. Change in terminology from distancing to transmission in projection plots. Update to figures in more.   V2.1.0 2020-05-22
  Hospitalization data switched from TOH to entire Ottawa region to 2020-05-20 Changes to model parameters:  ICU_prop set to 0.214 vent_prop set to 0.667 hosp_LOS set to 11.57 mkt_share set to 1 region_pop set to 1049486  New plots added:  Observed daily hospital admissions Observed daily deaths  Changes to the colour scheme of plots   V2.</description>
     </item>
     

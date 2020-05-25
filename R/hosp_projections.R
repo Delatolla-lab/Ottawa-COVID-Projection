@@ -34,7 +34,7 @@ hosp_fun <- function(data1, parameter, title, y) {
     line = list(color = "rgb(83, 162, 190)",
                 width = 3),
     mode = "lines",
-    name = "Current distancing",
+    name = "Current transmission",
     type = "scatter",
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
@@ -72,7 +72,7 @@ hosp_fun <- function(data1, parameter, title, y) {
     line = list(color = "rgb(95, 173, 86)",
                 width = 3),
     mode = "lines",
-    name = "20% distancing reduction \n(beginning 2 weeks from today)",
+    name = "20% transmission increase \n(beginning 2 weeks from today)",
     type = "scatter",
     x = data1$date,
     y = data1[, grepl(paste(
