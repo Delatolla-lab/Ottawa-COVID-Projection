@@ -64,12 +64,6 @@ publishDir = "./docs"
     weight = 7
 
 [[menu.main]]
-    name = "Flattening the curve"
-    url = "/more/#flatten-curve"
-    parent = " Visualizations"
-    weight = 8
-
-[[menu.main]]
     name = " Model"
     url = "/model/"
     weight = 3
