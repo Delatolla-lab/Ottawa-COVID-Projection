@@ -212,7 +212,7 @@ observed_daily_ICU_p_acute_care <- list(type = "observed_data", y_column = "obse
 ICU_p_acute_care <-
   reworked_figure(
     xaxis = "date",
-    yaxis = list(observed_daily_hospitalizations),
+    yaxis = list(observed_daily_ICU_p_acute_care),
     titles = c(y = "# of patients", x = "Date", title = "Observed daily COVID-19 hospitalizations of Ottawa residents"),
     data = ott_observed
   )
