@@ -1,0 +1,8 @@
+﻿Parameter,Value,Description
+R-naught,2.32,Starting reproductive number.
+Population,1045494,Estimated population for the Ottawa region.
+Transmission time (days),5,Length of incubation.
+Infectious days,7,Duration of time patient is infectious.
+Number of initial infections,1,Number of infected patients at day 0.
+Hospitalization rate,2.60%,Percentage of infected patients that are hospitalized. Based on observed Ottawa hospital data.
+Infection fatality rate,0.46%,Percentage of infected patients (including asymptomatic and undiagnosed) that die. Value derived by Public Health Agency of Canada
