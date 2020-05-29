@@ -4,6 +4,12 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V2.1.2
+2020-05-29
+
+- Updated OPH hospital data to 2020-05-28.
+- Updated figures in [more](/more).
+
 # V2.1.1
 2020-05-25
 
