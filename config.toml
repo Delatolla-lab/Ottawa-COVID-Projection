@@ -134,7 +134,7 @@ publishDir = "./docs"
     weight = 2   
     
 [[menu.main]]
-    name = "Scenarios of physical disrtancing"
+    name = "Scenarios of physical distancing"
     url = "/more/#scenarios"
     parent = " More"
     weight = 3  

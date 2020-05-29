@@ -42,7 +42,8 @@ Short-term projections (2 to 4 weeks) to inform the immediate need for hospital 
       
       <guid>/change-log/</guid>
       <description>Updates involving only data updates will no longer be documented.
-V2.1.1 2020-05-25
+V2.1.2 2020-05-29
+ Updated OPH hospital data to 2020-05-28. Updated figures in more.   V2.1.1 2020-05-25
  Updated OPH hospital data to 2020-05-24.  Data is specific to Ottawa residents currently hospitalized.  Added definitions on homepage. Change in terminology from distancing to transmission in projection plots. Update to figures in more.   V2.1.0 2020-05-22
  Hospitalization data switched from TOH to entire Ottawa region to 2020-05-20 Changes to model parameters:  ICU_prop set to 0.</description>
     </item>
