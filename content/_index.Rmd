@@ -205,8 +205,20 @@ Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 0)`** days
 
 ## Observed daily hospital admissions {#observed-admits}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-death_visualization(data1 = NULL, data2 = ott_observed, parameter = "new_ICU_p_acute_care", title = "Observed daily COVID-19 hospitalizations of Ottawa residents", "# of patients", fillcolor = "orange")
+observed_daily_ICU_p_acute_care <- list(type = "observed_data", y_column = "observed_new_ICU_p_acute_care", name = "Reported # of patients", color = "rgb(255, 127, 14)")
+
+
+
+ICU_p_acute_care <-
+  reworked_figure(
+    xaxis = "date",
+    yaxis = list(observed_daily_ICU_p_acute_care),
+    titles = c(y = "# of patients", x = "Date", title = "Observed daily COVID-19 hospitalizations of Ottawa residents"),
+    data = ott_observed
+  )
+
+ICU_p_acute_care
+
 ```
 
 ---
@@ -272,8 +284,18 @@ hosp_fun(ott_projections, "vent_admits", title = "Projected daily COVID-19 venti
 ## Deaths {#death-visualization}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/covid_visualization.R")
-death_visualization(data1 = NULL, data2 = ott_observed, parameter = "new_deaths", title = "Observed new COVID-19 deaths in Ottawa", "# of deaths", fillcolor = "red")
+observed_daily_new_deaths <- list(type = "observed_data", y_column = "observed_new_deaths", name = "Reported # of patients", color = "rgb(214, 39, 40)")
+
+new_deaths <-
+  reworked_figure(
+    xaxis = "date",
+    yaxis = list(observed_daily_new_deaths),
+    titles = c(y = "# of patients", x = "Date", title = "Observed daily COVID-19 hospitalizations of Ottawa residents"),
+    data = ott_observed
+  )
+
+new_deaths
+
 ```
 
 ---
