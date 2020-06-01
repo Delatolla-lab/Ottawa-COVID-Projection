@@ -1,12 +1,13 @@
 library(plotly)
-hosp_fun <- function(data1, parameter, title, y) {
+hosp_fun <- function(data1, parameter, title, current_color, current_shade,
+                     reduction_color, reduction_shade, y, observed_name) {
   tmp <- max(data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                                  "95_reduction_20", sep = "_"), names(data1))])
   tmp <- tmp*0.55
   trace1 <- list(
     fill = "none",
-    line = list(color = "rgb(83, 162, 190)",
-                width = 0.5),
+    line = list(color = as.character(current_color),
+                width = 0.05),
     mode = "lines",
     name = "Current distancing upper bound",
     type = "scatter",
@@ -18,9 +19,9 @@ hosp_fun <- function(data1, parameter, title, y) {
   )
   trace2 <- list(
     fill = "tonexty",
-    fillcolor = "rgba(83, 162, 190)",
-    line = list(color = "rgb(83, 162, 190)",
-                width = 0.5),
+    fillcolor = as.character(current_shade),
+    line = list(color = as.character(current_color),
+                width = 0.05),
     mode = "lines",
     name = "Current distancing lower bound",
     type = "scatter",
@@ -31,7 +32,7 @@ hosp_fun <- function(data1, parameter, title, y) {
     showlegend = FALSE
   )
   trace3 <- list(
-    line = list(color = "rgb(83, 162, 190)",
+    line = list(color = as.character(current_color),
                 width = 3),
     mode = "lines",
     name = "Current transmission",
@@ -43,8 +44,8 @@ hosp_fun <- function(data1, parameter, title, y) {
     showlegend = TRUE
   )
   trace4 <- list(
-    line = list(color = "rgb(95, 173, 86)",
-                width = 0.5),
+    line = list(color = as.character(reduction_color),
+                width = 0.05),
     mode = "lines",
     name = "20% reduction upper bound",
     type = "scatter",
@@ -56,9 +57,9 @@ hosp_fun <- function(data1, parameter, title, y) {
   )
   trace5 <- list(
     fill = "tonexty",
-    fillcolor = "rgba(95, 173, 86)",
-    line = list(color = "rgb(95, 173, 86)",
-                width = 0.5),
+    fillcolor = as.character(reduction_shade),
+    line = list(color = as.character(reduction_color),
+                width = 0.05),
     mode = "lines",
     name = "20% reduction lower bound",
     type = "scatter",
@@ -69,7 +70,7 @@ hosp_fun <- function(data1, parameter, title, y) {
     showlegend = FALSE
   )
   trace6 <- list(
-    line = list(color = "rgb(95, 173, 86)",
+    line = list(color = as.character(reduction_color),
                 width = 3),
     mode = "lines",
     name = "20% transmission increase \n(beginning 2 weeks from today)",
@@ -84,10 +85,11 @@ hosp_fun <- function(data1, parameter, title, y) {
     showlegend = TRUE
   )
   trace7 <- list(
-    marker = list(color = 'rgb(255, 127, 14)',
-                  line = list(color = 'rgb(8,48,107)', width = 0)),
+    marker = list(color = as.character(current_color),
+                  line = list(color = paste("rgb", as.character(current_color),
+                                            sep = ""), width = 0)),
     mode = "lines",
-    name = "Observed hospital census",
+    name = as.character(observed_name),
     type = "bar",
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
