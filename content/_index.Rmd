@@ -304,7 +304,7 @@ hosp_fun(ott_projections, "vent_admits", title = "Projected COVID-19 daily new v
 
 ---
 
-## {#death-visualization}
+## Past deaths {#death-visualization}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 observed_daily_new_deaths <- list(type = "observed_data", y_column = "observed_new_deaths", name = "Reported # of patients", color = death_col)
