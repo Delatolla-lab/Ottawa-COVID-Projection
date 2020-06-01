@@ -164,7 +164,7 @@ Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute 
 
 See [More](/more) page for more information about the terms used.
 
-## {#observed-census}
+## Past hospital use {#observed-census}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Ottawa Hospital data section @Warsame
@@ -246,7 +246,7 @@ ICU_p_acute_care
 
 ---
 
-## {#peak-hosp-projections}
+## Projected hospital use {#peak-hosp-projections}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
