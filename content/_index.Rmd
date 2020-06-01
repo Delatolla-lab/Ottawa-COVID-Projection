@@ -100,9 +100,9 @@ reduction_100_date <- peak_projections[3,4] # date of peak with no distancing
 
 
 # Colors
-acute_col <- "rgb(32, 99, 155)"
-acute_shade <- "rgba(32, 99, 155, 0.3)"
-acute_hex <- "#20639B"
+acute_col <- "rgb(72, 137, 194)"
+acute_shade <- "rgba(72, 137, 194, 0.3)"
+acute_hex <- "#488AC2"
 
 vent_col <- "rgb(23, 63, 95)"
 vent_shade <- "rgba(23, 63, 95, 0.3)"
