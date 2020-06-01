@@ -98,6 +98,29 @@ current_date <- peak_projections[1,4] # date of peak with current distancing
 reduction_20_date <- peak_projections[2,4] # date of peak with 20% reduction of distancing
 reduction_100_date <- peak_projections[3,4] # date of peak with no distancing
 
+
+# Colors
+acute_col <- "rgb(32, 99, 155)"
+acute_shade <- "rgba(32, 99, 155, 0.3)"
+acute_hex <- "#20639B"
+
+vent_col <- "rgb(23, 63, 95)"
+vent_shade <- "rgba(23, 63, 95, 0.3)"
+
+icu_col <- "rgb(60, 174, 163)"
+icu_shade <- "rgba(60, 174, 163)"
+
+reduction_col <- "rgb(243, 213, 86)"
+reduction_shade <- "rgba(243, 213, 86, 0.3)"
+reduction_hex <- "#F6D556"
+
+no_dist_col <- "rgb(237, 85, 59)"
+no_dist_shade <- "rgba(237, 85, 59)"
+no_dist_hex <- "#ED553B"
+
+death_col <- "rgb(0,0,0)"
+death_hex <- "#000000"
+
 ```
 **NOTE:** Observed hospitalization data from Ottawa Public Health is now being used as the Ottawa COVID-19 Database is now released.
 
@@ -153,8 +176,8 @@ exp_census[[1]]$DT3 <- exp_census[[3]][[3]]$expected_val
 #observed_figure(exp_census, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
 
 # Graph selection list
-icu_call <- list(type = "observed_data", y_column = "observed_census_ICU", name = "ICU census")
-acute_care <- list(type = "observed_data", y_column = "observed_census_acute_care", name = "Acute care census")
+icu_call <- list(type = "observed_data", y_column = "observed_census_ICU", name = "ICU census", color = icu_col)
+acute_care <- list(type = "observed_data", y_column = "observed_census_acute_care", name = "Acute care census", color = acute_col)
 DT1 <- list(type = "doubling_time", y_column = "DT1")
 DT2 <- list(type = "doubling_time", y_column = "DT2")
 DT3 <- list(type = "doubling_time", y_column = "DT3")
@@ -205,7 +228,7 @@ Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 0)`** days
 
 ## Observed daily hospital admissions {#observed-admits}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-observed_daily_ICU_p_acute_care <- list(type = "observed_data", y_column = "observed_new_ICU_p_acute_care", name = "Reported # of patients", color = "rgb(255, 127, 14)")
+observed_daily_ICU_p_acute_care <- list(type = "observed_data", y_column = "observed_new_ICU_p_acute_care", name = "Reported # of patients", color = acute_col)
 
 
 
@@ -230,7 +253,7 @@ t<- as.tbl(peak_projections) %>% mutate(End = lag(peak_hospital_census),
                                      xpos=1:n()-0.5,
                                     Diff=End-peak_hospital_census,
                                      Percent=paste(round(Diff/End*100,0),"%")) %>%
-  ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c("#53A2BE", "#5FAD56", "#A71D31")) +
+  ggplot(aes(intervention, peak_hospital_census)) + geom_col(fill = c(as.character(acute_hex), as.character(reduction_hex), as.character(no_dist_hex))) +
   labs(title = "Projected peak hospitalization census in Ottawa by scenario", x = "Scenario",
        y = "# of patients") + geom_text(aes(label = peak_hospital_round), vjust = -0.5) +
   theme(panel.background = element_rect(fill = 'white'), plot.title = element_text(hjust = 0.5)) 
@@ -252,7 +275,7 @@ The hospital census forecast of:
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_census", title = "Projected census of COVID-19 patients in Ottawa", y = "Census (# of patients)")
+hosp_fun(ott_projections, "hosp_census", title = "Projected census of COVID-19 patients in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_color = reduction_col, reduction_shade = reduction_shade)
 ```
 
 ---
@@ -260,7 +283,7 @@ hosp_fun(ott_projections, "hosp_census", title = "Projected census of COVID-19 p
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_admits", title = "Projected daily COVID-19 hospitalizations in Ottawa", y = "New admissions (# of patients)")
+hosp_fun(ott_projections, "hosp_admits", title = "Projected daily COVID-19 hospitalizations in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_color = reduction_col, reduction_shade = reduction_shade)
 ```
 
 ---
@@ -269,14 +292,14 @@ hosp_fun(ott_projections, "hosp_admits", title = "Projected daily COVID-19 hospi
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "vent_census", title = "Projected # of COVID-19 patients on ventilators in Ottawa", y = "# of patients")
+hosp_fun(ott_projections, "vent_census", title = "Projected # of COVID-19 patients on ventilators in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_color = reduction_col, reduction_shade = reduction_shade)
 ```
 
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "vent_admits", title = "Projected daily COVID-19 ventilator use in Ottawa", y = "# of patients")
+hosp_fun(ott_projections, "vent_admits", title = "Projected daily COVID-19 ventilator use in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_color = reduction_col, reduction_shade = reduction_shade)
 ```
 
 ---
@@ -284,7 +307,7 @@ hosp_fun(ott_projections, "vent_admits", title = "Projected daily COVID-19 venti
 ## Deaths {#death-visualization}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-observed_daily_new_deaths <- list(type = "observed_data", y_column = "observed_new_deaths", name = "Reported # of patients", color = "rgb(214, 39, 40)")
+observed_daily_new_deaths <- list(type = "observed_data", y_column = "observed_new_deaths", name = "Reported # of patients", color = death_col)
 
 new_deaths <-
   reworked_figure(
