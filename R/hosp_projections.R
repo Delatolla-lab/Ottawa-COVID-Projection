@@ -1,6 +1,6 @@
 library(plotly)
 hosp_fun <- function(data1, parameter, title, current_color, current_shade,
-                     reduction_color, reduction_shade, y) {
+                     reduction_color, reduction_shade, y, observed_name) {
   tmp <- max(data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                                  "95_reduction_20", sep = "_"), names(data1))])
   tmp <- tmp*0.55
@@ -89,7 +89,7 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
                   line = list(color = paste("rgb", as.character(current_color),
                                             sep = ""), width = 0)),
     mode = "lines",
-    name = "Observed hospital census",
+    name = as.character(observed_name),
     type = "bar",
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
