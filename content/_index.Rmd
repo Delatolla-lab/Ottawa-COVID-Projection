@@ -275,7 +275,7 @@ The hospital census forecast of:
 
 - `r signif(current, 2)` patients on `r paste(current_date)` is based on the previous week's growth rate of `r round(100*exp_census[[4]][[3]], 0)`%.
 
-- `r signif(reduction_20, 2)` patient  on `r paste(reduction_20_date)` is based on a 20% increase in COVID-19 transmission. 
+- `r signif(reduction_20, 2)` patients  on `r paste(reduction_20_date)` is based on a 20% increase in COVID-19 transmission. 
 
 - `r signif(reduction_100, 2)` patients on `r paste(reduction_100_date)` is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020.
 
