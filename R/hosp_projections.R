@@ -2,8 +2,8 @@ library(plotly)
 hosp_fun <- function(data1, parameter, title, current_color, current_shade,
                      reduction_color, reduction_shade, y, observed_name) {
   tmp <- max(data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
-                                 "95_reduction_20", sep = "_"), names(data1))])
-  tmp <- tmp*0.55
+                                 "median_reduction_20", sep = "_"), names(data1))])
+  tmp <- tmp*1.15
   trace1 <- list(
     fill = "none",
     line = list(color = as.character(current_color),
