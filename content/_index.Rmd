@@ -18,7 +18,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-_Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST._
+_Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST. Updates are done Monday's and Thursday's._
 
 La version française de ce contenu sera publiée sous peu.
 
