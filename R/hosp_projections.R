@@ -1,8 +1,11 @@
 library(plotly)
 hosp_fun <- function(data1, parameter, title, current_color, current_shade,
-                     reduction_color, reduction_shade, y, observed_name) {
+                     reduction_value, reduction_color, reduction_shade, y,
+                     observed_name) {
   tmp <- max(data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
-                                 "median_reduction_20", sep = "_"), names(data1))])
+                                 paste("median_reduction",
+                                      as.character(reduction_value), sep = "_"),
+                                 sep = "_"), names(data1))])
   tmp <- tmp*1.15
   trace1 <- list(
     fill = "none",
@@ -51,7 +54,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     type = "scatter",
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
-                            "95_reduction_20", sep = "_"), names(data1))],
+                            paste("95_reduction", as.character(reduction_value),
+                                  sep = "_"), sep = "_"), names(data1))],
     stackgroup = NULL,
     showlegend = FALSE
   )
@@ -65,7 +69,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     type = "scatter",
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
-                            "5_reduction_20", sep = "_"), names(data1))],
+                            paste("5_reduction", as.character(reduction_value),
+                                  sep = "_"), sep = "_"), names(data1))],
     stackgroup = NULL,
     showlegend = FALSE
   )
@@ -73,12 +78,12 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     line = list(color = as.character(reduction_color),
                 width = 3),
     mode = "lines",
-    name = "20% transmission increase \n(beginning 2 weeks from today)",
+    name = paste(as.character(reduction_value), "% transmission increase \n(beginning 2 weeks from today)", sep = ""),
     type = "scatter",
     x = data1$date,
     y = data1[, grepl(paste(
       paste("^", as.character(parameter), sep = ""),
-      "median_reduction_20",
+      paste("median_reduction", as.character(reduction_value), sep = "_"),
       sep = "_"
     ), names(data1))],
     visible = TRUE,
