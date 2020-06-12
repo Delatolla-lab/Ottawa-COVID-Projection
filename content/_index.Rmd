@@ -18,7 +18,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-_Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST. Updates are done Monday's and Thursday's._
+_Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST. Updates are done Mondays and Thursdays._
 
 La version française de ce contenu sera publiée sous peu.
 
@@ -126,7 +126,7 @@ death_hex <- "#000000"
 
 # Dashboard
 
-Data to `r format(Sys.Date()-1, '%b %d, %Y')`
+Data to `r as.character(tail(ott_observed$date, n=1))` 
 
 ### Current
 
@@ -285,14 +285,14 @@ The hospital census forecast of:
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
+hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
 ```
 
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of daily admissions")
+hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of daily admissions")
 ```
 
 ---
@@ -301,14 +301,14 @@ hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospi
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "vent_census", title = "Projected COVID-19 patients on ventilators in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of patients on ventilators")
+hosp_fun(ott_projections, "vent_census", title = "Projected COVID-19 patients on ventilators in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of patients on ventilators")
 ```
 
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "vent_admits", title = "Projected COVID-19 daily new ventilator use in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed daily ventilator usage")
+hosp_fun(ott_projections, "vent_admits", title = "Projected COVID-19 daily new ventilator use in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed daily ventilator usage")
 ```
 
 ---
