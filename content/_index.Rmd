@@ -87,7 +87,7 @@ effective_pd <- (1 - ((g_observed + gamma)/beta_baseline)) * 100
 
 ## projections
 peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("Current transmission", "20% increase in transmission", "Early outbreak transmission"))
+  factor(peak_projections$intervention, levels = c("Current transmission", "10% increase in transmission", "Early outbreak transmission"))
 
 # Values from peak_projections.csv
 current <- peak_projections[1,2] # peak with current distancing
@@ -275,7 +275,7 @@ The hospital census forecast of:
 
 - `r signif(current, 2)` patients in `r paste(current_date)` is based on the previous week's growth rate of `r round(100*exp_census[[4]][[3]], 0)`%.
 
-- `r signif(reduction_20, 2)` patients  in `r paste(reduction_20_date)` is based on a 20% increase in COVID-19 transmission. 
+- `r signif(reduction_20, 2)` patients  in `r paste(reduction_20_date)` is based on a 10% increase in COVID-19 transmission. 
 
 - `r signif(reduction_100, 2)` patients in `r paste(reduction_100_date)` is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020.
 
@@ -324,7 +324,7 @@ new_deaths <-
   reworked_figure(
     xaxis = "date",
     yaxis = list(observed_daily_new_deaths),
-    titles = c(y = "# of patients", x = "Date", title = "Observed COVID-19 daily deaths of Ottawa residents"),
+    titles = c(y = "# of deaths", x = "Date", title = "Observed COVID-19 daily deaths of Ottawa residents"),
     data = ott_observed
   )
 
