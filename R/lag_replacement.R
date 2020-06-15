@@ -34,13 +34,21 @@ calc_growth <- function(doubling_time){
   return(growth)
 }
 
+
 calc_expected_values_for_n_weeks <- function(data, number_weeks = 1, observed_columns_name = "observed_census_ICU_p_acute_care", first_day = 2, date_column = "date"){
   all_days <- na.omit(data[, observed_columns_name])
   # Numeric representation of all_days[[1]] as a day of the week
   first_day <- first_day
   # TODO Use dates to verify no skipped days
   start_of_first_full_week_index <- (7 - first_day)+2
-  max_number_of_weeks <- floor((length(all_days)-(start_of_first_full_week_index-1))/7)
+  #Validate Start Week
+  while(is.na(data[start_of_first_full_week_index, observed_columns_name])){
+    start_of_first_full_week_index <- start_of_first_full_week_index+7
+  }
+  data <- data[start_of_first_full_week_index:nrow(data),]
+  start_of_first_full_week_index <- 1
+  all_days <- na.omit(data[, observed_columns_name])
+  max_number_of_weeks <- floor(length(all_days)/7)
   if (number_weeks > max_number_of_weeks){
     stop(paste("The requested number of weeks is above the maximum number of complete weeks. The last incomplete week starts at row number:", start_of_first_full_week_index+(7*max_number_of_weeks)))
   }

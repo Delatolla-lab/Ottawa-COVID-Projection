@@ -6,7 +6,7 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
                                  paste("median_reduction",
                                       as.character(reduction_value), sep = "_"),
                                  sep = "_"), names(data1))])
-  tmp <- tmp*1.15
+  tmp <- tmp*1.5
   trace1 <- list(
     fill = "none",
     line = list(color = as.character(current_color),

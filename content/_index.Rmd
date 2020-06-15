@@ -87,7 +87,7 @@ effective_pd <- (1 - ((g_observed + gamma)/beta_baseline)) * 100
 
 ## projections
 peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("Current transmission", "20% increase in transmission", "Early outbreak transmission"))
+  factor(peak_projections$intervention, levels = c("Current transmission", "10% increase in transmission", "Early outbreak transmission"))
 
 # Values from peak_projections.csv
 current <- peak_projections[1,2] # peak with current distancing
@@ -191,7 +191,7 @@ ottawa_hosp <-
   reworked_figure(
     xaxis = "date",
     yaxis = list(icu_call, acute_care, DT1, DT2, DT3),
-    titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations of Ottawa residents"),
+    titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa hospitals"),
     data = exp_census[[1]]
   )
 
@@ -208,7 +208,7 @@ for (i in 1:3) {
           min(expected_values[[i]]$date, na.rm = TRUE),
           max(expected_values[[i]]$date, na.rm = TRUE)
         ),
-        y = median(expected_values[[i]]$expected_val, na.rm = TRUE),
+        y = max(expected_values[[i]]$expected_val, na.rm = TRUE),
         text = ifelse(doubling_time[[i]] > 0, (
           paste("Doubling time:", "\n", as.character(round(doubling_time[[i]], 0)), "days", sep = " ")
         ), (
@@ -275,7 +275,7 @@ The hospital census forecast of:
 
 - `r signif(current, 2)` patients in `r paste(current_date)` is based on the previous week's growth rate of `r round(100*exp_census[[4]][[3]], 0)`%.
 
-- `r signif(reduction_20, 2)` patients  in `r paste(reduction_20_date)` is based on a 20% increase in COVID-19 transmission. 
+- `r signif(reduction_20, 2)` patients  in `r paste(reduction_20_date)` is based on a 10% increase in COVID-19 transmission. 
 
 - `r signif(reduction_100, 2)` patients in `r paste(reduction_100_date)` is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020.
 
@@ -285,14 +285,14 @@ The hospital census forecast of:
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
+hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
 ```
 
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of daily admissions")
+hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of daily admissions")
 ```
 
 ---
@@ -301,14 +301,14 @@ hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospi
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "vent_census", title = "Projected COVID-19 patients on ventilators in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of patients on ventilators")
+hosp_fun(ott_projections, "vent_census", title = "Projected COVID-19 patients on ventilators in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of patients on ventilators")
 ```
 
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "vent_admits", title = "Projected COVID-19 daily new ventilator use in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed daily ventilator usage")
+hosp_fun(ott_projections, "vent_admits", title = "Projected COVID-19 daily new ventilator use in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed daily ventilator usage")
 ```
 
 ---
@@ -324,7 +324,7 @@ new_deaths <-
   reworked_figure(
     xaxis = "date",
     yaxis = list(observed_daily_new_deaths),
-    titles = c(y = "# of patients", x = "Date", title = "Observed COVID-19 daily deaths of Ottawa residents"),
+    titles = c(y = "# of deaths", x = "Date", title = "Observed COVID-19 daily deaths of Ottawa residents"),
     data = ott_observed
   )
 
