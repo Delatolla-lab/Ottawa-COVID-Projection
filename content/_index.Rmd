@@ -208,7 +208,7 @@ for (i in 1:3) {
           min(expected_values[[i]]$date, na.rm = TRUE),
           max(expected_values[[i]]$date, na.rm = TRUE)
         ),
-        y = median(expected_values[[i]]$expected_val, na.rm = TRUE),
+        y = max(expected_values[[i]]$expected_val, na.rm = TRUE),
         text = ifelse(doubling_time[[i]] > 0, (
           paste("Doubling time:", "\n", as.character(round(doubling_time[[i]], 0)), "days", sep = " ")
         ), (
