@@ -1,15 +1,7 @@
-
 ---
-site: blogdown:::blogdown_site
+title: "Ottawa COVID-19 Projections"
 params: 
   lang: "fr"
-output:
-  html_document:
-    includes:
-       in_header: GA_script.html
-    theme: cosmo
-  word_document: default
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
