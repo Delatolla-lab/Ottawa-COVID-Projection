@@ -1,0 +1,9 @@
+---
+title: "Roadmap"
+---
+
+The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
+
+- Review and update model parameters based on recent published studies. Priories for review:
+    - ventilated patients
+    - deaths

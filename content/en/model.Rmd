@@ -81,8 +81,8 @@ $$g_0 = \beta_0 - \gamma$$
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(DT)
-CHIME_input_display <- read.csv(file.path(getwd(),"../Data/CHIME_sim_OTT_parameters.csv"))
-ott_projections <- read.csv(file.path(getwd(), "../Data/OPH_projection_estimates.csv"))
+CHIME_input_display <- read.csv(file.path(getwd(),"../../Data/CHIME_sim_OTT_parameters.csv"))
+ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
 datatable(CHIME_input_display)
 ```
 

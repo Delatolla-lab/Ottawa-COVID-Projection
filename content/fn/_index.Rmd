@@ -1,7 +1,7 @@
 ---
-title: "Ottawa COVID-19 Projections"
+title: "Projections relatives à la COVID-19 à Ottawa"
 params: 
-  lang: "en"
+  lang: "fr"
 ---
 
 ```{r setup, include=FALSE}
@@ -11,8 +11,8 @@ lang <- params$lang
 
 ```{r include=FALSE}
 ##Load localization file
-source("../R/localization.R")
-localization_data <- read.csv(file.path(getwd(),"../Data/Covid Localization - Home Page.csv"))
+source("../../R/localization.R")
+localization_data <- read.csv(file.path(getwd(),"../../Data/Covid Localization - Home Page.csv"))
 ```
 
 ```{r, results='hold', echo=FALSE, comment=NA}
@@ -44,18 +44,18 @@ library(ggplot2)
 library(dplyr)
 
 # data
-ott_projections <- read.csv(file.path(getwd(), "../Data/OPH_projection_estimates.csv"))
-ott_observed <- read.csv(file.path(getwd(), "../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
-peak_projections <- read.csv(file.path(getwd(), "../Data/peak_projections.csv"))
-TOH_projections <- read.csv(file.path(getwd(),"../Data/TOH_projection_estimates.csv"))
-TOH_observed <- read.csv(file.path(getwd(),"../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
+ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
+ott_observed <- read.csv(file.path(getwd(), "../../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
+peak_projections <- read.csv(file.path(getwd(), "../../Data/peak_projections.csv"))
+TOH_projections <- read.csv(file.path(getwd(),"../../Data/TOH_projection_estimates.csv"))
+TOH_observed <- read.csv(file.path(getwd(),"../../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
 
 # scripts
-#source("../R/estimate_scripts.R")
-source("../R/lag_replacement.R")
-source("../R/observed_data.R")
-source("../R/data_conversion.R")
-source("../R/hosp_projections.R")
+#source("../../R/estimate_scripts.R")
+source("../../R/lag_replacement.R")
+source("../../R/observed_data.R")
+source("../../R/data_conversion.R")
+source("../../R/hosp_projections.R")
 
 # data for dashboard and figures
 
@@ -304,14 +304,14 @@ t
 `r hosp_projections`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/hosp_projections.R")
+source("../../R/hosp_projections.R")
 hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
 ```
 
 `r line_break`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/hosp_projections.R")
+source("../../R/hosp_projections.R")
 hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of daily admissions")
 ```
 
@@ -320,7 +320,7 @@ hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospi
 `r vent_projections`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/hosp_projections.R")
+source("../../R/hosp_projections.R")
 hosp_fun(ott_projections, "vent_census", title = "Projected COVID-19 patients on ventilators in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of patients on ventilators")
 ```
 
