@@ -4,21 +4,6 @@ params:
   lang: "fr"
 ---
 
- 
-
----
-site: blogdown:::blogdown_site
-title: "Ottawa COVID-19 Projections"
-date: "Last updated `r format(Sys.time(), '%d %B, %Y, %X EST.')`"
-output:
-  html_document:
-    includes:
-       in_header: GA_script.html
-    theme: cosmo
-  word_document: default
-  pdf_document: default
----
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 lang <- params$lang
