@@ -1,11 +1,7 @@
----
-title: "Ottawa COVID-19 Projections"
----
 
 ---
 site: blogdown:::blogdown_site
-title: "Ottawa COVID-19 Projections"
-date: "Last updated `r format(Sys.time(), '%d %B, %Y, %X EST.')`"
+lang: "FR"
 output:
   html_document:
     includes:
@@ -17,13 +13,31 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+lang <- "FR"
 ```
-_Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST. Updates are done Mondays and Thursdays._
 
-La version française de ce contenu sera publiée sous peu.
+```{r include=FALSE}
+source("../R/localization.R")
+localization_data <- read.csv(file.path(getwd(),"../Data/Covid Localization - Home Page.csv"))
+```
 
-Current of forecast hospital use for COVID-19 patients in the Ottawa area. Created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at the Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health.
+```{r, results='hold', echo=FALSE, comment=NA}
+tmp<- insert_translation(localization_data, lang, "Intro", c(format(Sys.time(), '%d %B, %Y, %X')))
+#cat(tmp)
+#cheat <- print(tmp)
+```
+`r tmp`
 
+
+
+```{r echo=FALSE}
+#_Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST. Updates are done Mondays and Thursdays._
+
+
+#La version française de ce contenu sera publiée sous peu.
+
+#Current of forecast hospital use for COVID-19 patients in the Ottawa area. Created by the team behind #[ProjectBigLife.ca](https://www.projectbiglife.ca) at the Ottawa Hospital and the University of Ottawa with input and data from Ottawa #Public Health.
+```
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 # libraries
