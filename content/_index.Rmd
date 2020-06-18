@@ -1,7 +1,8 @@
 
 ---
 site: blogdown:::blogdown_site
-lang: "FR"
+params: 
+  lang: "fr"
 output:
   html_document:
     includes:
@@ -13,7 +14,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-lang <- "fr"
+lang <- params$lang
 ```
 
 ```{r include=FALSE}
