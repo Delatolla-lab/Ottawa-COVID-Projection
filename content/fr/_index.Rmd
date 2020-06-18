@@ -255,7 +255,7 @@ for (i in 1:3) {
 ottawa_hosp
 ```
 
-`r past_hospital_use`
+`r past_hospital_text`
 
 `r line_break`
 

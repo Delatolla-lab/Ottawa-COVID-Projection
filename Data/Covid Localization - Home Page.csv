@@ -1,11 +1,11 @@
 Key,en,fr
-Intro,"Last updated on {{1}}.
+Intro,"_Last updated on {{1}}. Updates are done Mondays and Thursdays._
 
-Current forecast of hospital use for COVID-19 patients in the Ottawa area. Created by the team behind ProjectBigLife.ca at The Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health. 
+Current forecast of hospital use for COVID-19 patients in the Ottawa area. Created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at The Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health. 
 
-**NOTE:** Observed hospitalization data from Ottawa Public Health is now being used as the Ottawa COVID-19 Database is now released. ","Dernière mise à jour : {{1}}. 
+**NOTE:** Observed hospitalization data from Ottawa Public Health is now being used as the Ottawa COVID-19 Database is now released. ","_Dernière mise à jour : {{1}}._
 
-Prévisions actuelles de l’occupation des hôpitaux par des patients atteints de la COVID-19 dans la région d’Ottawa. Une réalisation de l’équipe de ProjectBigLife.ca à L’Hôpital d’Ottawa et à l’Université d’Ottawa, avec la contribution de Santé publique Ottawa, qui fournit notamment les données.
+Prévisions actuelles de l’occupation des hôpitaux par des patients atteints de la COVID-19 dans la région d’Ottawa. Une réalisation de l’équipe de [ProjectBigLife.ca](https://www.projectbiglife.ca) à L’Hôpital d’Ottawa et à l’Université d’Ottawa, avec la contribution de Santé publique Ottawa, qui fournit notamment les données.
 
 **REMARQUE :** Les données de Santé publique Ottawa sur le nombre observé d’hospitalisations sont désormais utilisées, puisque la Base de données d’Ottawa sur la COVID-19 a été rendue publique."
 DT_label_half,halving time,temps de division
@@ -14,7 +14,7 @@ DT_label_no_change,no growth (flat),pas de croissance
 more,More,Plus
 fewer,Fewer,Moins
 the_same,About the same,À peu près la même
-Dashboard,"## Dashboard
+Dashboard,"# Dashboard
 
 Data to {{1}}
 
@@ -25,7 +25,7 @@ Data to {{1}}
 Including **{{3}}** acute care patients. **{{4}}** ICU patients.
  
 **{{5}}%** physical distance effectiveness (approximate).
-","## Tableau de bord
+","# Tableau de bord
 
 Données en date du {{1}}
 
@@ -89,10 +89,10 @@ Consultez la section Plus d’infos pour en savoir plus sur les termes employés
 
 ---"
 PastHospital_title,## Past hospital use ,## Occupation antérieure des hôpitaux
-PastHospital_text,"Hospital census {{1}} of {{2}} days translates to current physical distancing effectiveness of approximately {{3}}. 
+PastHospital_text,"Hospital census {{1}} of **{{2}}** days translates to current physical distancing effectiveness of approximately **{{3}}%**. 
 
 **Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period. 
-","{{1}} par deux de {{2}} jours du recensement des hospitalisations signifie que l’efficacité de la distanciation physique se situe à environ {{3}}%. 
+","{{1}} par deux de **{{2}}** jours du recensement des hospitalisations signifie que l’efficacité de la distanciation physique se situe à environ **{{3}}%**. 
 
 **Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours. "
 observed_admits,"## {#observed-admits} 
