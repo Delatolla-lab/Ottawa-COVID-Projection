@@ -13,22 +13,26 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-lang <- "FR"
+lang <- "fr"
 ```
 
 ```{r include=FALSE}
+##Load localization file
 source("../R/localization.R")
 localization_data <- read.csv(file.path(getwd(),"../Data/Covid Localization - Home Page.csv"))
 ```
 
 ```{r, results='hold', echo=FALSE, comment=NA}
-tmp<- insert_translation(localization_data, lang, "Intro", c(format(Sys.time(), '%d %B, %Y, %X')))
-#cat(tmp)
-#cheat <- print(tmp)
+
+intro<- insert_translation(localization_data, lang, "Intro", c(format(Sys.time(), '%d %B, %Y, %X')))
+dt_label_half <- insert_translation(localization_data, lang, "DT_label_half")
+dt_label_double <- insert_translation(localization_data, lang, "DT_label_double")
+dt_label_no_change <- insert_translation(localization_data, lang, "DT_label_no_change")
+more <- insert_translation(localization_data, lang, "more")
+fewer <- insert_translation(localization_data, lang, "fewer")
+the_same <- insert_translation(localization_data, lang, "the_same")
 ```
-`r tmp`
-
-
+`r intro`
 
 ```{r echo=FALSE}
 #_Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST. Updates are done Mondays and Thursdays._
@@ -70,15 +74,15 @@ Dt <- exp_census[[2]][[3]]
 
 Dt_label = switch( 
   (sign(Dt) + 2),
-  "halving time",
-  "no growth (flat)",
-  "doubling time")
+  dt_label_half,
+  dt_label_no_change,
+  dt_label_double)
 
 more_less = switch(
   (sign(Dt) + 2),
-  "Fewer",
-  "About the same",
-  "More"
+  fewer,
+  the_same,
+  more
 )
 
 ## Physical distancing calculations for previous week
@@ -136,53 +140,70 @@ death_col <- "rgb(0,0,0)"
 death_hex <- "#000000"
 
 ```
-**NOTE:** Observed hospitalization data from Ottawa Public Health is now being used as the Ottawa COVID-19 Database is now released.
 
-# Dashboard
+```{r, results='hold', echo=FALSE, comment=NA}
+line_break <- insert_translation(localization_data, lang, "break")
+dashboard <- insert_translation(localization_data, lang, "Dashboard",
+                                c(as.character(tail(ott_observed$date, n=1)),
+                                  last(na.omit(ott_observed$observed_census_ICU_p_acute_care)),
+                                  last(na.omit(ott_observed$observed_census_acute_care)),
+                                  last(na.omit(ott_observed$observed_census_ICU)),
+                                  round(effective_pd, 0)))
 
-Data to `r as.character(tail(ott_observed$date, n=1))` 
+definitions <- insert_translation(localization_data, lang, "Definitions")
 
-### Current
+short_range_forecast <- insert_translation(localization_data, lang, "ShortRangeForecast", 
+                                           c(more_less,
+                                             Dt_label,
+                                             round(abs(exp_census[[2]][[3]]), 0),
+                                             round(100*exp_census[[4]][[3]], 0)))
 
-**`r last(na.omit(ott_observed$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in hospital.
+long_range_forecast <- insert_translation(localization_data, lang, "LongRangeForecast",
+                                          c(current,
+                                            reduction_20,
+                                            current_date,
+                                            reduction_20_date)
+                                            )
 
-Including: **`r last(na.omit(ott_observed$observed_census_acute_care))`** acute care patients. **`r last(na.omit(ott_observed$observed_census_ICU))`** ICU patients.
+defintions <- insert_translation(localization_data, lang, "Definitions")
 
-**`r round(effective_pd, 0)`%** physical distance effectiveness (approximate).
+past_hospital_use <- insert_translation(localization_data, lang, "PastHospital_title") 
 
-### Short-range forecast
+past_hospital_text <- insert_translation(localization_data, lang, "PastHospital_text",
+                                         c(Dt_label,
+                                           round(abs(exp_census[[2]][[3]]), 0),
+                                           round(effective_pd, 0))) 
 
-**`r more_less`** patients in the following week, reflecting a current `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 0)`** days (daily growth of `r round(100*exp_census[[4]][[3]], 0)`%).
+observed_admits <- insert_translation(localization_data, lang, "observed_admits")
 
-### Long-range forecast
+projected_hospital_title <- insert_translation(localization_data, lang, "ProjectedHospital_title")
 
-**`r paste(current, "to", reduction_20)`** peak patients in The Ottawa Hospital between **`r paste(current_date, "&", reduction_20_date)`**. 
+projected_hospital_text <- insert_translation(localization_data, lang, "ProjectedHospital_text", 
+                                              c(signif(current, 2),
+                                                paste(current_date),
+                                                signif(reduction_20, 2),
+                                                paste(reduction_20_date),
+                                                signif(reduction_100, 2),
+                                                paste(reduction_100_date)))
 
-## Definitions
+hosp_projections <- insert_translation(localization_data, lang, "hosp_projections")
 
-> **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
+vent_projections <- insert_translation(localization_data, lang, "vent_projections")
 
-> **Transmission** is the risk that a person becomes infected when they come in contact with a person with COVID-19. 
+death_title <- insert_translation(localization_data, lang, "death_title")
 
-> **Doubling time** refers to the time it takes for the number of hospitalized patients to double in number. Conversely, **halving time** refers to the time it takes for the number of hospitalized patients to halve in number.
+death_text <- insert_translation(localization_data, lang, "Death_text") 
+```
 
-> **Daily growth** is the rate of change in the hospitalization from day-to-day.
+`r dashboard`
 
-> **Physical distancing** is a reduction in close contact between people. 
+`r short_range_forecast`
 
-> **Physical distancing effectiveness** is the reduction in the transmission of COVID-19 between an infected person and someone who has never had COVID-19, compared to the beginning of the pandemic in March 2020.
+`r long_range_forecast`
 
-> **Safe socializing** is ensuring you don't become a link in a COVID-19 transmission chain that ends in a person becoming hospitalized or dying.
+`r definitions`
 
-> **Safe reopening** is lifting lockdown measures while ensuring a low risk of COVID-19 hospitalization and death. Safe reopening includes safe socializing, safe work and safe businesses - reopening while ensure we all ensure transmissions chains do not lead to hospitalization and death. 
-
-See [More](/more) page for more information about the terms used.
-
----
-
-## Past hospital use {#observed-census}
-
----
+`r past_hospital_use`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Ottawa Hospital data section @Warsame
@@ -240,13 +261,12 @@ for (i in 1:3) {
 ottawa_hosp
 ```
 
-Hospital census `r Dt_label` of **`r round(abs(exp_census[[2]][[3]]), 0)`** days translates to current physical distancing effectiveness of approximately **`r round(effective_pd, 0)`%**. 
+`r past_hospital_use`
 
-**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period. 
+`r line_break`
 
----
+`r observed_admits`
 
-## {#observed-admits}
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 observed_daily_ICU_p_acute_care <- list(type = "observed_data", y_column = "observed_new_ICU_p_acute_care", name = "Reported # of patients", color = acute_col)
 
@@ -264,11 +284,9 @@ ICU_p_acute_care
 
 ```
 
----
+`r line_break`
 
-## Projected hospital use {#peak-hosp-projections}
-
----
+`r projected_hospital_title`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -285,51 +303,38 @@ t
 
 ```
 
-The hospital census forecast of:
+`r projected_hospital_text`
 
-- `r signif(current, 2)` patients in `r paste(current_date)` is based on the previous week's growth rate of `r round(100*exp_census[[4]][[3]], 0)`%.
+`r line_break`
 
-- `r signif(reduction_20, 2)` patients  in `r paste(reduction_20_date)` is based on a 10% increase in COVID-19 transmission. 
-
-- `r signif(reduction_100, 2)` patients in `r paste(reduction_100_date)` is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020.
-
----
-
-## {#hospitalization-projections}
+`r hosp_projections`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
 hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
 ```
 
----
+`r line_break`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
 hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of daily admissions")
 ```
 
----
+`r line_break`
 
-## {#ventilator-projections}
+`r vent_projections`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../R/hosp_projections.R")
 hosp_fun(ott_projections, "vent_census", title = "Projected COVID-19 patients on ventilators in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of patients on ventilators")
 ```
 
----
+`r line_break`
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../R/hosp_projections.R")
-hosp_fun(ott_projections, "vent_admits", title = "Projected COVID-19 daily new ventilator use in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed daily ventilator usage")
-```
+`r death_title`
 
----
-
-## Past deaths {#death-visualization}
-
----
+`r line_break`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 observed_daily_new_deaths <- list(type = "observed_data", y_column = "observed_new_deaths", name = "Reported # of patients", color = death_col)
@@ -346,6 +351,6 @@ new_deaths
 
 ```
 
----
+`r line_break`
 
-**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date.
+`r death_text`
