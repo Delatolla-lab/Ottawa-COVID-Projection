@@ -1,8 +1,15 @@
+---
+title: "Ottawa COVID-19 Projections"
+params: 
+  lang: "fr"
+---
+
+ 
 
 ---
 site: blogdown:::blogdown_site
-params: 
-  lang: "fr"
+title: "Ottawa COVID-19 Projections"
+date: "Last updated `r format(Sys.time(), '%d %B, %Y, %X EST.')`"
 output:
   html_document:
     includes:
@@ -162,8 +169,8 @@ short_range_forecast <- insert_translation(localization_data, lang, "ShortRangeF
 long_range_forecast <- insert_translation(localization_data, lang, "LongRangeForecast",
                                           c(current,
                                             reduction_20,
-                                            current_date,
-                                            reduction_20_date)
+                                            paste(current_date),
+                                            paste(reduction_20_date))
                                             )
 
 defintions <- insert_translation(localization_data, lang, "Definitions")
@@ -182,6 +189,7 @@ projected_hospital_title <- insert_translation(localization_data, lang, "Project
 projected_hospital_text <- insert_translation(localization_data, lang, "ProjectedHospital_text", 
                                               c(signif(current, 2),
                                                 paste(current_date),
+                                                round(100*exp_census[[4]][[3]], 0),
                                                 signif(reduction_20, 2),
                                                 paste(reduction_20_date),
                                                 signif(reduction_100, 2),

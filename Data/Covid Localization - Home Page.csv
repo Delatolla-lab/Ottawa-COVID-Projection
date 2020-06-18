@@ -1,10 +1,16 @@
 Key,en,fr
 Intro,"<h1>Ottawa COVID-19 Projections</h1>
+
 Last updated on {{1}}.
+
 Current forecast of hospital use for COVID-19 patients in the Ottawa area. Created by the team behind ProjectBigLife.ca at The Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health. 
+
 **NOTE:** Observed hospitalization data from Ottawa Public Health is now being used as the Ottawa COVID-19 Database is now released. ","<h1>Projections relatives à la COVID-19 à Ottawa</h1>
+
 Dernière mise à jour : {{1}}. 
+
 Prévisions actuelles de l’occupation des hôpitaux par des patients atteints de la COVID-19 dans la région d’Ottawa. Une réalisation de l’équipe de ProjectBigLife.ca à L’Hôpital d’Ottawa et à l’Université d’Ottawa, avec la contribution de Santé publique Ottawa, qui fournit notamment les données.
+
 **REMARQUE :** Les données de Santé publique Ottawa sur le nombre observé d’hospitalisations sont désormais utilisées, puisque la Base de données d’Ottawa sur la COVID-19 a été rendue publique."
 DT_label_half,halving time,temps de division
 DT_label_double,doubling time,temps de doublement 
@@ -18,29 +24,33 @@ Data to {{1}}
 
 ### Current
 
-{{2}} confirmed COVID-19 patients in hospital. 
-Including {{3}} acute care patients. {{4}} ICU patients. 
-{{5}}% physical distance effectiveness (approximate).
+**{{2}}** confirmed COVID-19 patients in hospital.
+ 
+Including **{{3}}** acute care patients. **{{4}}** ICU patients.
+ 
+**{{5}}%** physical distance effectiveness (approximate).
 ","## Tableau de bord
 
 Données en date du {{1}}
 
 ### Situation actuelle
 
-{{2}} patient(s) atteint(s) de la COVID-19 sont hospitalisés. 
-De ce nombre : {{3}} patient(s) en soins actifs, {{4}} patient(s) aux Soins intensifs. 
-Efficacité de la distanciation physique de {{5}}% (approximativement). 
+**{{2}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés. 
+
+De ce nombre : **{{3}}** patient(s) en soins actifs, **{{4}}** patient(s) aux soins intensifs. 
+
+Efficacité de la distanciation physique de **{{5}}%** (approximativement). 
 "
 ShortRangeForecast,"### Short-range forecast
 
-{{1}} patients in the following week, reflecting a current {{2}} of {{3}} days (daily growth of {{4}}%).","### Prévisions à court terme
+**{{1}}** patients in the following week, reflecting a current {{2}} of **{{3}} days** (daily growth of {{4}}%).","### Prévisions à court terme
 
-{{1}} de patients au cours de la semaine suivante, ce qui reflète un {{2}} par deux actuel de {{3}} jours (croissance quotidienne de {{4}} %). "
+**{{1}}** de patients au cours de la semaine suivante, ce qui reflète un {{2}} par deux actuel de **{{3}}  jours** (croissance quotidienne de {{4}} %). "
 LongRangeForecast,"### Long-range forecast 
 
-{{1}} to {{2}} peak patients in The Ottawa Hospital between {{3}} & {{4}}. ","### Prévisions à long terme 
+**{{1}} to {{2}}** peak patients in The Ottawa Hospital between **{{3}} & {{4}}**. ","### Prévisions à long terme 
 
-Sommet de {{1}} à {{2}} patients à L’Hôpital d’Ottawa entre {{3}} et {{4}}. "
+Sommet de **{{1}} à {{2}}** patients à L’Hôpital d’Ottawa entre **{{3}} et {{4}}**. "
 Definitions,"## Definitions
 
 > **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
@@ -73,7 +83,7 @@ See [More](/more) page for more information about the terms used.
 
 > **La distanciation physique** est la réduction du nombre de contacts étroits entre les personnes. 
 
-> **L’efficacité de la distanciation physique** reflète la diminution de la transmission de la COVID-19 entre une personne infectée et une personne qui n’a jamais été infectée, comparativement à ce qu’elle était au début de la pandémie en mars 2020. 
+> **L’efficacité de la distanciation physique** reflète la diminution de la transmission de la COVID-19 entre une personne infectée et une personne qui n’a jamais été infectée, comparativement à ce qu’elle était au début de la pandémie en mars 2020. 
 
 > **L’établissement de contacts sociaux sécuritaire** consiste à éviter de devenir soi-même un maillon d’une chaîne de transmission de la COVID-19 qui entraînerait l’hospitalisation ou le décès de quelqu’un. 
 
@@ -96,17 +106,23 @@ ProjectedHospital_title,"## Projected hospital use {#peak-hosp-projections}
 ","## Occupation projetée des hôpitaux {#peak-hosp-projections}
 "
 ProjectedHospital_text,"The hospital census forecast of: 
+
 {{1}} patients on {{2}} is based on the previous week’s growth rate of {{3}}%. 
+
 {{4}} patients on {{5}} is based on a 10% increase in COVID-19 transmission. 
+
 {{6}} patients on {{7}} is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020. ","Explication des prévisions relatives au recensement des hospitalisations : 
+
 {{1}} patients en {{2}} en fonction d’un taux de croissance de {{3}}% la semaine précédente. 
+
 {{4}} patients en {{5}} en fonction d’une augmentation de 10 % de la transmission de la COVID-19. 
+
 {{6}} patients en {{7}} en fonction d’un retour au niveau de transmission du début de la pandémie en mars 2020.  "
 hosp_projections,## {#hospitalization-projections},## {#hospitalization-projections}
 vent_projections,## {#ventilator-projections},## {#ventilator-projections}
 break,---,--- 
 death_title,## Past deaths {#death-visualization},## Décès antérieurs {#death-visualization}
-Death_text,Note: The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date. ,Remarque : Il est possible que le nombre de décès des 3 à 5 derniers jours ne reflète pas le nombre réel de décès attribuables à la COVID-19 puisque certains cas sont encore à l’étude afin de déterminer la date la plus récente d’apparition. 
+Death_text,**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date. ,**Remarque:** Il est possible que le nombre de décès des 3 à 5 derniers jours ne reflète pas le nombre réel de décès attribuables à la COVID-19 puisque certains cas sont encore à l’étude afin de déterminer la date la plus récente d’apparition. 
 Contact,"##Contact 
 Media contact: Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, mschreiter@toh.ca ph: 613-222-7674 
 Science contacts: Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca, Alan Forster 
