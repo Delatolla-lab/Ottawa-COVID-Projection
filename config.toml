@@ -1,4 +1,5 @@
 baseURL = "https://613covid.ca"
+DefaultContentLanguage = "en"
 languageCode = "en-us"
 title = "Ottawa COVID19"
 theme = "hugo-lithium"
@@ -6,6 +7,17 @@ googleAnalytics = ""
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 publishDir = "./docs"
+
+[languages]
+  [languages.en]
+    contentDir = "./content/en"
+    languageName = "English"
+    weight = 1
+  [languages.fr]
+    contentDir = "./content/fr"
+    languageName = "French"
+    weight = 2
+
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
