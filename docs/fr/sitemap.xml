@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/fr/model/</loc>
+    <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/model/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/model/"
+                />
+  </url>
+  
+  <url>
+    <loc>/fr/</loc>
+    <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/"
+                />
+  </url>
+  
+  <url>
+    <loc>/fr/more/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/more/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/more/"
+                />
+  </url>
+  
+  <url>
+    <loc>/fr/categories/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>/fr/change-log/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/change-log/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/change-log/"
+                />
+  </url>
+  
+  <url>
+    <loc>/fr/contact/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/contact/"
+                />
+  </url>
+  
+  <url>
+    <loc>/fr/roadmap/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/roadmap/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/roadmap/"
+                />
+  </url>
+  
+  <url>
+    <loc>/fr/tags/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/tags/"
+                />
+  </url>
+  
+</urlset>
