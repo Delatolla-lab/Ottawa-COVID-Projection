@@ -26,10 +26,7 @@ Data to {{1}}
 
 **{{2}}** confirmed COVID-19 patients in hospital.
  
-Including **{{3}}** acute care patients. **{{4}}** ICU patients.
- 
-**{{5}}%** physical distance effectiveness (approximate).
-","# Tableau de bord
+Including **{{3}}** acute care patients. **{{4}}** ICU patients.","# Tableau de bord
 
 Données en date du {{1}}
 
@@ -38,8 +35,6 @@ Données en date du {{1}}
 **{{2}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés. 
 
 De ce nombre : **{{3}}** patient(s) en soins actifs, **{{4}}** patient(s) aux soins intensifs. 
-
-Efficacité de la distanciation physique de **{{5}}%** (approximativement). 
 "
 ShortRangeForecast,"### Short-range forecast
 
@@ -93,12 +88,8 @@ Consultez la section Plus d’infos pour en savoir plus sur les termes employés
 
 ---"
 PastHospital_title,## Past hospital use ,## Occupation antérieure des hôpitaux
-PastHospital_text,"Hospital census {{1}} of **{{2}}** days translates to current physical distancing effectiveness of approximately **{{3}}%**. 
-
-**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period. 
-","{{1}} par deux de **{{2}}** jours du recensement des hospitalisations signifie que l’efficacité de la distanciation physique se situe à environ **{{3}}%**. 
-
-**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours. "
+PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period. 
+","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours. "
 observed_admits,"## {#observed-admits} 
 ","## {#observed-admits}
 "
