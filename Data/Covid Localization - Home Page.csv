@@ -1,9 +1,13 @@
 Key,en,fr
 Intro,"_Last updated on {{1}}. Updates are done Mondays and Thursdays._
 
+Pour le français cliquez [ici](https://613covid.ca/fr/)
+
 Current forecast of hospital use for COVID-19 patients in the Ottawa area. Created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at The Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health. 
 
 **NOTE:** Observed hospitalization data from Ottawa Public Health is now being used as the Ottawa COVID-19 Database is now released. ","_Dernière mise à jour : {{1}}._
+
+For English click [here](https://613covid.ca/)
 
 Prévisions actuelles de l’occupation des hôpitaux par des patients atteints de la COVID-19 dans la région d’Ottawa. Une réalisation de l’équipe de [ProjectBigLife.ca](https://www.projectbiglife.ca) à L’Hôpital d’Ottawa et à l’Université d’Ottawa, avec la contribution de Santé publique Ottawa, qui fournit notamment les données.
 
