@@ -114,14 +114,20 @@ vent_projections,## {#ventilator-projections},## {#ventilator-projections}
 break,---,--- 
 death_title,## Past deaths {#death-visualization},## Décès antérieurs {#death-visualization}
 Death_text,**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date. ,**Remarque:** Il est possible que le nombre de décès des 3 à 5 derniers jours ne reflète pas le nombre réel de décès attribuables à la COVID-19 puisque certains cas sont encore à l’étude afin de déterminer la date la plus récente d’apparition. 
-Contact,"##Contact 
-Media contact: Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, mschreiter@toh.ca ph: 613-222-7674 
-Science contacts: Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca, Alan Forster 
-Acknowledgements for website and content: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches, and others on Big Life Lab team. 
-Supporting Ottawa Public Health epidemiologist: Amira Ali, Jacqueline Willmore, Dara Spatz 
-Attribution: COVID-19 icons made by surang from www.flaticon.com. ","##Nous joindre 
-Personne-ressource pour les médias : Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel : mschreiter@lho.ca Téléphone : 613-222-7674 
-Personnes-ressources scientifiques : Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca, Alan Forster 
-Remerciements pour le site Web et le contenu : Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches et les autres membres de l’équipe de Big Life Lab. 
-Avec le soutien des épidémiologistes de Santé publique Ottawa : Amira Ali, Jacqueline Willmore, Dara Spatz 
-Propriété intellectuelle : Icônes relatives à la COVID-19 créées par surang, de www.flaticon.com. "
+Contact,"**Media contact:** Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, [mschreiter@toh.ca](mailto:mschreiter@toh.ca) ph: 613-222-7674 
+
+**Science contacts:** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster 
+
+**Acknowledgements for website and content:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches, and others on Big Life Lab team. 
+
+**Supporting Ottawa Public Health epidemiologists:** Amira Ali, Jacqueline Willmore, Dara Spatz 
+
+**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com). ","**Personne-ressource pour les médias :** Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: [mschreiter@toh.ca](mailto:mschreiter@toh.ca) Téléphone : 613-222-7674 
+
+**Personnes-ressources scientifiques :** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster 
+
+**Remerciements pour le site Web et le contenu :** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches et les autres membres de l’équipe de Big Life Lab. 
+
+**Avec le soutien des épidémiologistes de Santé publique Ottawa :** Amira Ali, Jacqueline Willmore, Dara Spatz 
+
+**Propriété intellectuelle :** Icônes relatives à la COVID-19 créées par [surang](https://www.flaticon.com/authors/surang), de [www.flaticon.com](https://www.flaticon.com/authors/surang). "
