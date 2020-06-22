@@ -26,10 +26,7 @@ Data to {{1}}
 
 **{{2}}** confirmed COVID-19 patients in hospital.
  
-Including **{{3}}** acute care patients. **{{4}}** ICU patients.
- 
-**{{5}}%** physical distance effectiveness (approximate).
-","# Tableau de bord
+Including **{{3}}** acute care patients. **{{4}}** ICU patients.","# Tableau de bord
 
 Données en date du {{1}}
 
@@ -38,8 +35,6 @@ Données en date du {{1}}
 **{{2}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés. 
 
 De ce nombre : **{{3}}** patient(s) en soins actifs, **{{4}}** patient(s) aux soins intensifs. 
-
-Efficacité de la distanciation physique de **{{5}}%** (approximativement). 
 "
 ShortRangeForecast,"### Short-range forecast
 
@@ -93,12 +88,8 @@ Consultez la section Plus d’infos pour en savoir plus sur les termes employés
 
 ---"
 PastHospital_title,## Past hospital use ,## Occupation antérieure des hôpitaux
-PastHospital_text,"Hospital census {{1}} of **{{2}}** days translates to current physical distancing effectiveness of approximately **{{3}}%**. 
-
-**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period. 
-","{{1}} par deux de **{{2}}** jours du recensement des hospitalisations signifie que l’efficacité de la distanciation physique se situe à environ **{{3}}%**. 
-
-**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours. "
+PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period. 
+","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours. "
 observed_admits,"## {#observed-admits} 
 ","## {#observed-admits}
 "
@@ -123,14 +114,20 @@ vent_projections,## {#ventilator-projections},## {#ventilator-projections}
 break,---,--- 
 death_title,## Past deaths {#death-visualization},## Décès antérieurs {#death-visualization}
 Death_text,**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date. ,**Remarque:** Il est possible que le nombre de décès des 3 à 5 derniers jours ne reflète pas le nombre réel de décès attribuables à la COVID-19 puisque certains cas sont encore à l’étude afin de déterminer la date la plus récente d’apparition. 
-Contact,"##Contact 
-Media contact: Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, mschreiter@toh.ca ph: 613-222-7674 
-Science contacts: Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca, Alan Forster 
-Acknowledgements for website and content: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches, and others on Big Life Lab team. 
-Supporting Ottawa Public Health epidemiologist: Amira Ali, Jacqueline Willmore, Dara Spatz 
-Attribution: COVID-19 icons made by surang from www.flaticon.com. ","##Nous joindre 
-Personne-ressource pour les médias : Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel : mschreiter@lho.ca Téléphone : 613-222-7674 
-Personnes-ressources scientifiques : Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca, Alan Forster 
-Remerciements pour le site Web et le contenu : Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches et les autres membres de l’équipe de Big Life Lab. 
-Avec le soutien des épidémiologistes de Santé publique Ottawa : Amira Ali, Jacqueline Willmore, Dara Spatz 
-Propriété intellectuelle : Icônes relatives à la COVID-19 créées par surang, de www.flaticon.com. "
+Contact,"**Media contact:** Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, [mschreiter@toh.ca](mailto:mschreiter@toh.ca) ph: 613-222-7674 
+
+**Science contacts:** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster 
+
+**Acknowledgements for website and content:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches, and others on Big Life Lab team. 
+
+**Supporting Ottawa Public Health epidemiologists:** Amira Ali, Jacqueline Willmore, Dara Spatz 
+
+**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com). ","**Personne-ressource pour les médias :** Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: [mschreiter@toh.ca](mailto:mschreiter@toh.ca) Téléphone : 613-222-7674 
+
+**Personnes-ressources scientifiques :** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster 
+
+**Remerciements pour le site Web et le contenu :** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches et les autres membres de l’équipe de Big Life Lab. 
+
+**Avec le soutien des épidémiologistes de Santé publique Ottawa :** Amira Ali, Jacqueline Willmore, Dara Spatz 
+
+**Propriété intellectuelle :** Icônes relatives à la COVID-19 créées par [surang](https://www.flaticon.com/authors/surang), de [www.flaticon.com](https://www.flaticon.com/authors/surang). "

@@ -4,6 +4,12 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V2.2.0
+2020-06-22
+
+- Homepage and contact page available in French.
+- Physical distancing data removed.
+
 # V2.1.4
 2020-06-15
 
