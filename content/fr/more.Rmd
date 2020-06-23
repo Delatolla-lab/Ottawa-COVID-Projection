@@ -45,10 +45,14 @@ A high level of physical distancing will achieve a **97% reduction in deaths** c
 
 <div class="more-info-images">
 <figure>
-<img src="/images/Physicalsocialdistancing_webbanner_updated.jpg"
-  alt="2 meters, no groups, stay in your house, stay away from vulnerable people, keep social using video, stay with your family" />
+<img src="/images/176989- infographic No.png"
+  alt="No reduction in physical distanicng. One person infects 5.5 people on day 5 and 406 people on day 30"/>
+<img src="/images/176989- infographic 50 percent.png"
+  alt="50% reduction in physical distanicng. One person infects 1.25 people on day 5 and 15 people on day 30" />
+<img src="/images/176989- infographic 75 percent.png"
+  alt="75% reduction in physical distanicng. One person infects 0.625 people on day 2.5 and 15 people on day 30" />
 <figcaption>
-  Original source: [Ottawa Public Health](https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx)
+  Original source: [visualcapitalist.com](https://www.visualcapitalist.com/the-math-behind-social-distancing/)
 </figure>
 </figccaption>
 </div>
