@@ -138,6 +138,7 @@ There are two main uses of the projections:
 1) Short-term projections (2 to 4 weeks) to inform the immediate need for hospital and critical care services for COVID-19 patients. 
 
 2) Long-term projections (6 weeks onward) to assess the effect of relaxing physical distancing.
+
 ## Model accuracy {#accuracy}
 
 Creating accurate, long-range projections to predict the spread COVID-19 is difficult. It's akin to forecasting when a hurricane will make landfall when it is still thousands of kilometers out at sea. Forecasts are more accurate for a shorter time range. Projections are updated with the latest data, including local data to help understand when and where the hurricane will reach landfall.  
@@ -156,14 +157,46 @@ Public Health Ontario projected 100,000 COVID-19 Ontario deaths with no preventa
 
 A high level of physical distancing will achieve a **97% reduction in deaths** compared to a scenario of no preventive action (100,000 deaths). The wide range in projections is why we need to monitor and update Ottawa projections to reflect how well we achieve COVID-19 prevention. 
 
-## Physical distancing {#distancing}",
+## Physical distancing {#distancing}","## Utilisation des modèles {#use}
+
+Les projections s’utilisent principalement de deux manières : 
+
+Les projections à court terme (2 à 4 semaines) servent à connaître les besoins immédiats en services hospitaliers et en soins critiques pour les patients atteints de la COVID-19. 
+
+Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet d’un relâchement de la distanciation physique. 
+
+## Précision des modèles {#accuracy}
+
+Il est difficile de faire des projections précises à long terme sur la propagation de la COVID-19. C’est un peu comme tenter de prévoir le moment où un ouragan touchera terre alors qu’il est encore à des milliers de kilomètres de la côte. Les prévisions à court terme sont plus précises. Il faut mettre à jour les projections à partir des données les plus récentes, notamment les données locales, pour avoir une meilleure idée du moment et de l’endroit où l’ouragan touchera terre. 
+
+Tout comme la météo, il est impossible de prédire l’évolution de la COVID-19 avec fiabilité six mois d’avance. Par contre, nous pouvons prédire de façon fiable l’évolution de la COVID-19 pour les deux à quatre prochaines semaines. Grâce à ces projections à court terme, nous avons le temps de prévoir les besoins en ressources pour offrir des soins de santé et d’augmenter ces ressources si nécessaires. 
+
+Cela dit, la COVID-19 et un ouragan sont deux choses différentes. Nous ne pouvons pas modifier la trajectoire ni la force d’un ouragan, mais nous pouvons éviter les conséquences les plus graves de la COVID-19 si nous suivons les directives de santé publique, comme rester à la maison et pratiquer la distanciation physique. 
+
+Quant aux projections à long terme relatives à la COVID-19, elles nous informent sur l’efficacité de la distanciation physique et des autres mesures de prévention. 
+
+## Scénarios de distanciation physique {#scenarios}
+
+La distanciation physique et les autres mesures préventives sont les facteurs les plus importants qui servent à prédire à long terme (de 1 à 10 mois d’avance) le nombre de cas de COVID-19 et l’occupation des hôpitaux. 
+
+Selon les projections de Santé publique Ontario, l’absence de mesures de prévention pourrait entraîner 100 000 décès attribuables à la COVID-19 en Ontario, tandis qu’avec des mesures de prévention, le nombre estimé de décès est réduit à 3 000. L’écart important entre les estimations (100 000 décès comparativement à 3 000) reflète les différents degrés de distanciation physique envisagés dans les scénarios. 
+
+Un degré élevé de distanciation physique permettrait de réduire de 97 % le nombre de décès par rapport à un scénario sans aucune mesure préventive (100 000 décès). Compte tenu des grandes différences entre ces projections, nous devons surveiller et mettre à jour les projections d’Ottawa afin qu’elles reflètent l’efficacité de nos mesures de prévention. 
+
+## Distanciation physique {#distancing}"
 Physical_distancing_middle,"Physical distancing is the reduction of close contacts between people. Close contact is defined as being within two meters of another person. See [Ottawa Public Health](https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx) for more information on recommendations. 
 
 If a person who had close contact with 10 people per day before the COVID-19 pandemic now has close contact with three people per day, their physical distancing score is 70 percent. If they have contact with five people per day, their score is 50 percent.   
 
 In these projection models, a 70 percent physical distancing scenario means that on average the people of Ottawa have reduced their close contacts by 70 percent. Some people, like essential workers, cannot reduce their number of close contacts.
 
-See [model](/model#distancing) for a technical discussion about how physical distancing affects COVID-19 spread.",
+See [model](/model#distancing) for a technical discussion about how physical distancing affects COVID-19 spread.","La distanciation physique consiste à réduire le nombre de contacts étroits entre les personnes. Se trouver à moins de deux mètres d’une autre personne constitue un contact étroit. Consultez le site Web de [Santé publique Ottawa](https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx) pour en savoir plus sur les recommandations. 
+
+Si une personne qui avait des contacts étroits avec 10 autres personnes par jour avant la pandémie de COVID-19 se limite maintenant à des contacts étroits avec trois personnes par jour, sa note de distanciation physique est alors de 70 %. Si elle a maintenant des contacts étroits avec cinq personnes par jour, sa note est de 50 %. 
+
+Dans ces modèles de projection, un scénario fondé sur une distanciation physique de 70 % signifie que la population d’Ottawa a réduit ses contacts étroits de 70 % en moyenne. Certaines personnes, comme les travailleurs essentiels, ne peuvent pas limiter leur nombre de contacts étroits. 
+
+Consultez la section [Modèle](/model#distancing) pour un exposé technique des effets de la distanciation physique sur la propagation de la COVID-19. "
 Physical_distancing_effectiveness,"## Physical distancing effectiveness {#distancing-effectiveness}
 
 Physical distancing effectiveness describes how fast COVID-19 spreads in Ottawa compared to if there was no physical distancing. It is a mathematical calculation based on the observed doubling time (growth) of the hospital census for the previous week.
@@ -180,4 +213,20 @@ Currently, hospital admissions are slower than the initial 3 to 4 days doubling 
 
 Note that there is a lag of several weeks between the level of physical distancing and its effect on slowing the growth of COVID-19 illness. There is a further time difference between the onset of illness and hospitalization. Physical distance effectiveness has the same time lag from the onset of distancing to the benefit of distancing showing results in the calculation of physical distancing effectiveness. 
 
-See [model](model#distancing).",
+See [model](model#distancing).","## Efficacité de la distanciation physique 
+
+L’efficacité de la distanciation physique représente la vitesse à laquelle la COVID-19 se propage à Ottawa par rapport à ce qu’elle serait sans distanciation physique. Pour déterminer cette efficacité, il faut effectuer un calcul mathématique à partir du temps de doublement observé (croissance) indiqué dans le recensement des hospitalisations de la semaine précédente. 
+
+L’efficacité de la distanciation physique est différente des autres indicateurs qui reflètent le degré de distanciation physique, comme les [sondages](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/la-maladie-coronavirus-covid-19.aspx) ou les [statistiques sur la mobilité de la population](https://www.gstatic.com/covid19/mobility/2020-04-17_CA_Mobility_Report_en.pdf). 
+
+Au début de l’éclosion de COVID-19 à Ottawa, le nombre de nouveaux cas (et d’hospitalisations) doublait tous les 3 ou 4 jours. Cela signifie que s’il y avait cinq patients atteints de la COVID-19 à l’hôpital le lundi, ce nombre augmentait pour atteindre 10 patients le jeudi ou le vendredi, et 20 patients la semaine suivante. 
+
+Quand la population d’Ottawa a commencé à pratiquer la distanciation physique, la propagation du virus a ralenti. La diminution de la propagation s’est traduite par une baisse du nombre de patients admis à l’hôpital. La croissance, ou le temps de doublement, du nombre de patients hospitalisés a donc ralenti aussi. 
+
+Si l’efficacité de la distanciation physique était parfaite, c’est-à-dire de 100 %, il n’y aurait aucune propagation de la COVID-19. Une personne atteinte de la COVID-19 n’aurait aucun contact avec d’autres personnes qui pourraient contracter la maladie. Par conséquent, l’infection ne se propagerait pas au-delà de la personne atteinte. Après quelques semaines, la COVID-19 disparaîtrait à Ottawa et aucun nouveau patient ne serait admis à l’hôpital. Les chiffres du recensement des hospitalisations baisseraient graduellement, à mesure que les patients guéris obtiendraient leur congé. 
+
+À l’heure actuelle, l’augmentation des hospitalisations est moins rapide que le temps de doublement initial (qui était de 3 ou 4 jours), mais nous n’avons pas freiné complètement la croissance du nombre de cas de COVID-19. L’efficacité de la distanciation physique reflète le recensement des hospitalisations auquel nous nous attendons en fonction du temps de doublement observé. 
+
+Il est à noter qu’il a un décalage de plusieurs semaines entre l’observation d’un certain degré de distanciation physique et la manifestation de ses effets sur la croissance des cas de COVID-19. Il y a également un délai entre l’apparition de la maladie et l’hospitalisation. Il en va de même pour l’efficacité de la distanciation physique : il faut tenir compte du même décalage entre le début de la distanciation physique et l’apparition des bienfaits de celle-ci dans le calcul de l’efficacité de la distanciation physique. 
+
+Veuillez consulter la section [Modèle](model#distancing). "
