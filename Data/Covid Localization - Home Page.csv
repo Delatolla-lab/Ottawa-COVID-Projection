@@ -213,7 +213,7 @@ Currently, hospital admissions are slower than the initial 3 to 4 days doubling 
 
 Note that there is a lag of several weeks between the level of physical distancing and its effect on slowing the growth of COVID-19 illness. There is a further time difference between the onset of illness and hospitalization. Physical distance effectiveness has the same time lag from the onset of distancing to the benefit of distancing showing results in the calculation of physical distancing effectiveness. 
 
-See [model](model#distancing).","## Efficacité de la distanciation physique 
+See [model](model#distancing).","## Efficacité de la distanciation physique  {#distancing-effectiveness}
 
 L’efficacité de la distanciation physique représente la vitesse à laquelle la COVID-19 se propage à Ottawa par rapport à ce qu’elle serait sans distanciation physique. Pour déterminer cette efficacité, il faut effectuer un calcul mathématique à partir du temps de doublement observé (croissance) indiqué dans le recensement des hospitalisations de la semaine précédente. 
 
