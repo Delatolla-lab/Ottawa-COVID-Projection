@@ -1,0 +1,16 @@
+{{ $translations := getCSV "," "Data/translations/navbar.csv" }}
+{{ $langIndex := 1 }}
+{{range $i, $r := index $translations 0 }}
+    {{ if eq $r $.lang }}
+        {{ $langIndex = $i }}
+    {{ end }}
+{{end}}
+
+{{ $translatedValue := "Error"}}
+{{ range $i, $r := $translations }}
+  {{ if eq (trim (index $r 0) " ") ($.key) }}
+    {{ $translatedValue = (index $r $langIndex) }}
+  {{ end }}
+{{ end }}
+
+{{ return $translatedValue }}
