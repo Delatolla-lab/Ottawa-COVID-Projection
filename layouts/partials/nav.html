@@ -37,6 +37,25 @@
                     </li>
                 {{ end }}
             {{ end }}
+            <li class="nav-item dropdown">
+                <a 
+                    class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ $.Site.Language }}
+                </a>
+                <div 
+                    class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdownMenuLink" id="viz-dropdown">
+                {{ range $i, $lang := .Site.Languages }}
+                    {{ if ne $lang $.Site.Language }}
+                    <a 
+                        class="dropdown-item" 
+                        href="{{ print "/" $lang }}">
+                        {{ $lang }}
+                    </a>
+                    {{ end }}
+                {{ end }}
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
