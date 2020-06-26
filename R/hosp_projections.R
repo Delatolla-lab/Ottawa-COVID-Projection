@@ -78,7 +78,7 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     line = list(color = as.character(reduction_color),
                 width = 3),
     mode = "lines",
-    name = paste(as.character(reduction_value), "% transmission increase \n(beginning 2 weeks from today)", sep = ""),
+    name = paste("What if transmission increased by", paste(as.character(reduction_value), "%", sep = ""), sep = " "),
     type = "scatter",
     x = data1$date,
     y = data1[, grepl(paste(
