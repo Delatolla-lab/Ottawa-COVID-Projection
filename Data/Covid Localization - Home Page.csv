@@ -43,9 +43,9 @@ ShortRangeForecast,"### Short-range forecast
 **{{1}}** de patients au cours de la semaine suivante, ce qui reflète un {{2}} par deux actuel de **{{3}}  jours** (croissance quotidienne de {{4}} %). "
 LongRangeForecast,"### Long-range forecast 
 
-**{{1}} to {{2}}** peak patients in The Ottawa Hospital between **{{3}} & {{4}}**. ","### Prévisions à long terme 
+**{{1}} to {{2}}** peak patients in Ottawa between **{{3}} & {{4}}**. ","### Prévisions à long terme 
 
-Sommet de **{{1}} à {{2}}** patients à L’Hôpital d’Ottawa entre **{{3}} et {{4}}**. "
+Sommet de **{{1}} à {{2}}** patients à Ottawa entre **{{3}} et {{4}}**. "
 Definitions,"## Definitions
 
 > **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
