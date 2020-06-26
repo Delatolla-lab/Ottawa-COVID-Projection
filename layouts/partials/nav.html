@@ -18,22 +18,22 @@
                     <a 
                         class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ .Name }}
+                        {{ partial "translate.html" (dict "lang" site.Language.Lang "key" .Name) }}
                     </a>
                     <div 
                         class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdownMenuLink" id="viz-dropdown">
                     {{ range .Children }}
                         <a 
                             class="dropdown-item" 
-                            href="{{ .URL }}">
-                            {{ .Name }}
+                            href="{{ print site.LanguagePrefix .URL }}">
+                            {{ partial "translate.html" (dict "lang" site.Language.Lang "key" .Name) }}
                         </a>
                     {{ end }}
                     </div>
                 </li>
                 {{ else }}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
+                        <a class="nav-link" href="{{ print site.LanguagePrefix .URL }}">{{ partial "translate.html" (dict "lang" site.Language.Lang "key" .Name) }}</a>
                     </li>
                 {{ end }}
             {{ end }}
