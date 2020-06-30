@@ -65,6 +65,10 @@ exp_census <- calc_expected_values_for_n_weeks(data = ott_observed, number_weeks
 ## Dt = doubling (or halving) time
 Dt <- exp_census[[2]][[3]]
 
+if(Dt == Inf) {
+  Dt <- 0
+}
+
 Dt_label = switch( 
   (sign(Dt) + 2),
   dt_label_half,
