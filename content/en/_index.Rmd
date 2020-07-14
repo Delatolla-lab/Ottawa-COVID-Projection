@@ -215,45 +215,45 @@ exp_census[[1]]$DT3 <- exp_census[[3]][[3]]$expected_val
 # Graph selection list
 icu_call <- list(type = "observed_data", y_column = "observed_census_ICU", name = "ICU census", color = icu_col)
 acute_care <- list(type = "observed_data", y_column = "observed_census_acute_care", name = "Acute care census", color = acute_col)
-DT1 <- list(type = "doubling_time", y_column = "DT1")
-DT2 <- list(type = "doubling_time", y_column = "DT2")
-DT3 <- list(type = "doubling_time", y_column = "DT3")
+#DT1 <- list(type = "doubling_time", y_column = "DT1")
+#DT2 <- list(type = "doubling_time", y_column = "DT2")
+#DT3 <- list(type = "doubling_time", y_column = "DT3")
 
 # Plotly creation 
 ottawa_hosp <-
   reworked_figure(
     xaxis = "date",
-    yaxis = list(icu_call, acute_care, DT1, DT2, DT3),
+    yaxis = list(icu_call, acute_care), #DT1, DT2, DT3),
     titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa hospitals"),
     data = exp_census[[1]]
   )
 
 # Adding Annotations
-doubling_time <- exp_census[[2]]
-expected_values <- exp_census[[3]]
+#doubling_time <- exp_census[[2]]
+#expected_values <- exp_census[[3]]
 
-for (i in 1:3) {
-    ottawa_hosp <-
-      add_annotations(
-        ottawa_hosp,
-        x = ifelse(
-          doubling_time[[i]] > 0,
-          min(expected_values[[i]]$date, na.rm = TRUE),
-          max(expected_values[[i]]$date, na.rm = TRUE)
-        ),
-        y = max(expected_values[[i]]$expected_val, na.rm = TRUE),
-        text = ifelse(doubling_time[[i]] > 0, (
-          paste("Doubling time:", "\n", as.character(round(doubling_time[[i]], 0)), "days", sep = " ")
-        ), (
-          paste("Halving time:", "\n", as.character(round(
-            abs(doubling_time[[i]]), 0
-          )), "days", sep = " ")
-        )),
-        xref = "x",
-        yref = "y",
-        showarrow = FALSE
-      )
-}
+#for (i in 1:3) {
+    #ottawa_hosp <-
+      #add_annotations(
+        #ottawa_hosp,
+        #x = ifelse(
+          #doubling_time[[i]] > 0,
+          #min(expected_values[[i]]$date, na.rm = TRUE),
+          #max(expected_values[[i]]$date, na.rm = TRUE)
+        #),
+        #y = max(expected_values[[i]]$expected_val, na.rm = TRUE),
+        #text = ifelse(doubling_time[[i]] > 0, (
+        #  paste("Doubling time:", "\n", as.character(round(doubling_time[[i]], 0)), "days", sep = " ")
+        #), (
+         # paste("Halving time:", "\n", as.character(round(
+          #  abs(doubling_time[[i]]), 0
+          #)), "days", sep = " ")
+      #  )),
+       # xref = "x",
+        #yref = "y",
+        #showarrow = FALSE
+      #)
+#}
 
 # Display graph
 ottawa_hosp
