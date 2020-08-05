@@ -158,8 +158,8 @@ short_range_forecast <- insert_translation(localization_data, lang, "ShortRangeF
 long_range_forecast <- insert_translation(localization_data, lang, "LongRangeForecast",
                                           c(current,
                                             reduction_20,
-                                            paste(current_date),
-                                            paste(reduction_20_date))
+                                            paste(reduction_20_date),
+                                            paste(current_date))
                                             )
 
 defintions <- insert_translation(localization_data, lang, "Definitions")
@@ -274,7 +274,7 @@ ICU_p_acute_care <-
   reworked_figure(
     xaxis = "date",
     yaxis = list(observed_daily_ICU_p_acute_care),
-    titles = c(y = "# of patients", x = "Date", title = "Observed daily COVID-19 hospitalizations in Ottawa"),
+    titles = c(y = "# of patients", x = "Date", title = "Observed new COVID-19 hospitalizations in Ottawa"),
     data = ott_observed
   )
 
