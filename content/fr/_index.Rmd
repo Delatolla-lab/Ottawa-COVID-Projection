@@ -158,8 +158,8 @@ short_range_forecast <- insert_translation(localization_data, lang, "ShortRangeF
 long_range_forecast <- insert_translation(localization_data, lang, "LongRangeForecast",
                                           c(current,
                                             reduction_20,
-                                            paste(reduction_20_date),
-                                            paste(current_date))
+                                            paste(current_date),
+                                            paste(reduction_20_date))
                                             )
 
 defintions <- insert_translation(localization_data, lang, "Definitions")
