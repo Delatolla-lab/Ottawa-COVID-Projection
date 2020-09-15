@@ -261,10 +261,6 @@ ottawa_hosp
 
 `r past_hospital_text`
 
-`r line_break`
-
-`r observed_admits`
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 observed_daily_ICU_p_acute_care <- list(type = "observed_data", y_column = "observed_new_ICU_p_acute_care", name = "Reported # of patients", color = acute_col)
 
@@ -278,7 +274,7 @@ ICU_p_acute_care <-
     data = ott_observed
   )
 
-ICU_p_acute_care
+#ICU_p_acute_care
 
 ```
 
@@ -312,20 +308,14 @@ source("../../R/hosp_projections.R")
 hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
 ```
 
-`r line_break`
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of daily admissions")
+#hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of daily admissions")
 ```
 
-`r line_break`
-
-`r vent_projections`
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/hosp_projections.R")
-hosp_fun(ott_projections, "vent_census", title = "Projected COVID-19 patients on ventilators in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of patients on ventilators")
+#hosp_fun(ott_projections, "vent_census", title = "Projected COVID-19 patients on ventilators in Ottawa", y = "# of patients", current_color = vent_col, current_shade = vent_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of patients on ventilators")
 ```
 
 `r line_break`
