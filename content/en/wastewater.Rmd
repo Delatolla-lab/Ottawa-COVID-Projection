@@ -1,0 +1,52 @@
+---
+title: "Ottawa wastewater analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# libraries
+library(plotly)
+library(tidyverse)
+library(jsonlite)
+library(ggplot2)
+library(dplyr)
+
+# scripts
+source("../../R/lag_replacement.R")
+source("../../R/observed_data.R")
+source("../../R/data_conversion.R")
+source("../../R/hosp_projections.R")
+source("../../R/open_ottawa_scripts.R")
+
+# Pull JSON objects from OpenOttawa
+ottawa_case_data <-
+  fromJSON("https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Cumulative_Active_Cases_by_Episode_Date,Cumulative_Deaths_by_Date_of_Death,7-day_Average_of_Newly_Reported_cases_by_Reported_Date,Cases_Newly_Admitted_to_Hospital,Cases_Currently_in_Hospital,Cases_Currently_in_ICU,Daily_Cases_by_Episode_Date,Daily_Cases_by_Reported_Date&outSR=4326&f=json")
+ottawa_test_data <-
+  fromJSON("https://opendata.arcgis.com/datasets/26c902bf1da44d3d90b099392b544b81_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Daily_%_Positivity&outSR=4326&f=json")
+
+# data
+ott_observed <- data_creation(ottawa_case_data, ottawa_test_data)
+
+# Colours
+case_col <- "rgb(72, 137, 194)"
+wastewater_col <- "rgb(23, 63, 95)"
+```
+
+## Observed Data
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+case_call <- list(type = "observed_data", y_column = "observed_daily_average_cases", name = "Daily average cases", color = case_col)
+
+wastewater_call <-list(type = "observed_data", y_column = "observed_daily_average_wastewater", name = "Daily average wastewater", color = wastewater_col) 
+
+ottawa_wastewater <-
+  reworked_figure(
+    xaxis = "date",
+    yaxis = list(case_call, wastewater_call),
+    titles = c(y = NULL, x = "Date", title = "Wastewater levels with respect to daily COVID cases"),
+    data = ott_observed
+  )
+```
