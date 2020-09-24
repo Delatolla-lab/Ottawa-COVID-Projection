@@ -40,15 +40,9 @@ the_same <- insert_translation(localization_data, lang, "the_same")
 # libraries
 library(plotly)
 library(tidyverse)
+library(jsonlite)
 library(ggplot2)
 library(dplyr)
-
-# data
-ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
-ott_observed <- read.csv(file.path(getwd(), "../../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
-peak_projections <- read.csv(file.path(getwd(), "../../Data/peak_projections.csv"))
-TOH_projections <- read.csv(file.path(getwd(),"../../Data/TOH_projection_estimates.csv"))
-TOH_observed <- read.csv(file.path(getwd(),"../../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
 
 # scripts
 #source("../../R/estimate_scripts.R")
@@ -56,6 +50,14 @@ source("../../R/lag_replacement.R")
 source("../../R/observed_data.R")
 source("../../R/data_conversion.R")
 source("../../R/hosp_projections.R")
+source("../../R/open_ottawa_scripts.R")
+
+# data
+ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
+ott_observed <- data_creation(ottawa_case_data, ottawa_test_data)
+peak_projections <- read.csv(file.path(getwd(), "../../Data/peak_projections.csv"))
+TOH_projections <- read.csv(file.path(getwd(),"../../Data/TOH_projection_estimates.csv"))
+TOH_observed <- read.csv(file.path(getwd(),"../../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
 
 # data for dashboard and figures
 
