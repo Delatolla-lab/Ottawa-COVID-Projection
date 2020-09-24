@@ -27,14 +27,6 @@ the_same <- insert_translation(localization_data, lang, "the_same")
 ```
 `r intro`
 
-```{r echo=FALSE}
-#_Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST. Updates are done Mondays and Thursdays._
-
-
-#La version française de ce contenu sera publiée sous peu.
-
-#Current of forecast hospital use for COVID-19 patients in the Ottawa area. Created by the team behind #[ProjectBigLife.ca](https://www.projectbiglife.ca) at the Ottawa Hospital and the University of Ottawa with input and data from Ottawa #Public Health.
-```
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 # libraries
@@ -52,6 +44,12 @@ source("../../R/data_conversion.R")
 source("../../R/hosp_projections.R")
 source("../../R/open_ottawa_scripts.R")
 
+# Pull JSON objects from OpenOttawa
+ottawa_case_data <-
+  fromJSON("https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Cumulative_Active_Cases_by_Episode_Date,Cumulative_Deaths_by_Date_of_Death,7-day_Average_of_Newly_Reported_cases_by_Reported_Date,Cases_Newly_Admitted_to_Hospital,Cases_Currently_in_Hospital,Cases_Currently_in_ICU,Daily_Cases_by_Episode_Date,Daily_Cases_by_Reported_Date&outSR=4326&f=json")
+ottawa_test_data <-
+  fromJSON("https://opendata.arcgis.com/datasets/26c902bf1da44d3d90b099392b544b81_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Daily_%_Positivity&outSR=4326&f=json")
+
 # data
 ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
 ott_observed <- data_creation(ottawa_case_data, ottawa_test_data)
@@ -59,7 +57,8 @@ peak_projections <- read.csv(file.path(getwd(), "../../Data/peak_projections.csv
 TOH_projections <- read.csv(file.path(getwd(),"../../Data/TOH_projection_estimates.csv"))
 TOH_observed <- read.csv(file.path(getwd(),"../../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
 
-# data for dashboard and figures
+# Save ott_observed as csv
+write.csv(ott_observed, "../../Data/Observed data/OPH_Observed_COVID_Data.csv")
 
 ## Observed census
 exp_census <- calc_expected_values_for_n_weeks(data = ott_observed, number_weeks = 3)
