@@ -14,6 +14,7 @@ library(tidyverse)
 library(jsonlite)
 library(ggplot2)
 library(dplyr)
+library(tidyr)
 
 # scripts
 source("../../R/lag_replacement.R")
@@ -21,6 +22,7 @@ source("../../R/observed_data.R")
 source("../../R/data_conversion.R")
 source("../../R/hosp_projections.R")
 source("../../R/open_ottawa_scripts.R")
+source("../../R/wastewater.R")
 
 # Pull JSON objects from OpenOttawa
 ottawa_case_data <-
@@ -29,7 +31,12 @@ ottawa_test_data <-
   fromJSON("https://opendata.arcgis.com/datasets/26c902bf1da44d3d90b099392b544b81_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Daily_%_Positivity&outSR=4326&f=json")
 
 # data
-ott_observed <- data_creation(ottawa_case_data, ottawa_test_data)
+ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)
+ott_observed_waste <- read.csv("Data/Observed data/Ottawa_Wastewater_Data.csv")
+
+# functions to integrate waste & covid data together
+waste_clean <- wastewater_prep(ott_observed_waste)
+ott_covid_waste <- merge_data(ott_observed_covid, waste_clean)
 
 # Colours
 case_col <- "rgb(72, 137, 194)"
@@ -47,6 +54,6 @@ ottawa_wastewater <-
     xaxis = "date",
     yaxis = list(case_call, wastewater_call),
     titles = c(y = NULL, x = "Date", title = "Wastewater levels with respect to daily COVID cases"),
-    data = ott_observed
+    data = ott_covid_waste
   )
 ```
