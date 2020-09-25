@@ -22,5 +22,6 @@ wastewater_prep <- function(data){
 # Script to merge wastewater data into covid data
 merge_data <- function(data1, data2){
   data1 %>%
-    full_join(data2, by = "date")
+    full_join(data2, by = "date") %>%
+    filter(date >= "2020-04-08")
 }

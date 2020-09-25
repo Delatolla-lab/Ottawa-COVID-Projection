@@ -5,6 +5,7 @@
 reworked_figure <-
   function(xaxis,
            yaxis,
+           yaxis2 = NULL,
            titles,
            data) {
     # ---------- PRESETS ----------
@@ -26,12 +27,28 @@ reworked_figure <-
         line = NULL,
         mode = NULL
         #marker = list(color = "rgb(204, 102, 255)")
+      ),
+      signal_data = list(
+        type = "scatter",
+        showlegend = TRUE
+      ),
+      avg_data = list(
+        type = "scatter",
+        mode = "line",
+        showlegend = TRUE,
+        line = list(
+          width = 4
+        )
       )
     )
     attr(trace_presets$doubling_time, "class") <-
       "doubling_time"
     attr(trace_presets$observed_data, "class") <-
       "observed_data"
+    attr(trace_presets$signal_data, "class") <-
+      "signal_data"
+    attr(trace_presets$avg_data, "class") <-
+      "avg_data"
     
     library(plotly)
     p <- plot_ly()
@@ -57,6 +74,30 @@ reworked_figure <-
       #   y = data[, var_to_map$y_column]
       # )
     }
+    
+    for (var_to_map in yaxis2) {
+      curr_temp <- trace_presets[[var_to_map$type]]
+      if (!is_null(var_to_map$color)) {
+        curr_temp <-
+          change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
+      }
+      p <-
+        do.call(add_trace, c(
+          list(p = p, name = var_to_map$name),
+          curr_temp,
+          list(x = data[, xaxis],
+               y = data[, var_to_map$y_column],
+               yaxis = "y2")
+        ))
+      # p <- add_trace(
+      #   p,
+      #   name = var_to_map$name,
+      #   unlist(curr_temp),
+      #   x = data[, xaxis],
+      #   y = data[, var_to_map$y_column]
+      # )
+    }
+    
     p <-
       layout(
         p,
@@ -64,6 +105,11 @@ reworked_figure <-
         xaxis = list(type = "date",
                      title = list(text = as.character(titles[["x"]]))),
         yaxis = list(title = list(text = as.character(titles[["y"]]))),
+        yaxis2 = list(
+          overlaying = "y",
+          side = "right",
+          title = list(text = as.character(titles[["y2"]]))
+          ),
         barmode =  "relative",
         autosize = TRUE,
         legend = list(x = 0.05, y = 1)
@@ -98,6 +144,26 @@ change_color.observed_data <- function(template, color) {
     type = "bar",
     showlegend = TRUE,
     marker = list(color = color)
+  ))
+}
+
+change_color.signal_data <- function(template, color) {
+  return(list(
+    type = "scatter",
+    showlegend = TRUE,
+    marker = list(color = color)
+  ))
+}
+
+change_color.avg_data <- function(template, color){
+  return(list(
+    type = "scatter",
+    mode = "line",
+    showlegend = TRUE,
+    line = list(
+      color = color,
+      width = 4
+    )
   ))
 }
 

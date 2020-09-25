@@ -32,7 +32,7 @@ ottawa_test_data <-
 
 # data
 ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)
-ott_observed_waste <- read.csv("Data/Observed data/Ottawa_Wastewater_Data.csv")
+ott_observed_waste <- read.csv("../../Data/Observed data/Ottawa_Wastewater_Data.csv")
 
 # functions to integrate waste & covid data together
 waste_clean <- wastewater_prep(ott_observed_waste)
@@ -40,20 +40,32 @@ ott_covid_waste <- merge_data(ott_observed_covid, waste_clean)
 
 # Colours
 case_col <- "rgb(72, 137, 194)"
-wastewater_col <- "rgb(23, 63, 95)"
+n1_col <- "rgb(23, 63, 95)"
+n2_col <- "rgb(60, 174, 163)"
+n1_n2_col <- "rgb(243, 213, 86)"
+rolling_avg_col <- "rgb(237, 85, 59)"
 ```
 
 ## Observed Data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 case_call <- list(type = "observed_data", y_column = "observed_daily_average_cases", name = "Daily average cases", color = case_col)
 
-wastewater_call <-list(type = "observed_data", y_column = "observed_daily_average_wastewater", name = "Daily average wastewater", color = wastewater_col) 
+n1_call <- list(type = "signal_data", y_column = "N1", name = "N1 RNA signal", color = n1_col, yaxis = "y2") 
+
+n2_call <- list(type = "signal_data", y_column = "N2", name = "N2 RNA signal", color = n2_col, yaxis = "y2")
+
+n1_n2_call <- list(type = "avg_data", y_column = "N1_N2", name = "Avg. viral signal", color = n1_n2_col, yaxis = "y2")
+
+rolling_avg_call <- list(type = "avg_data", y_column = "rolling_avg", name = "5-day rolling avg. viral signal", color = rolling_avg_col, yaxis = "y2")
 
 ottawa_wastewater <-
   reworked_figure(
     xaxis = "date",
-    yaxis = list(case_call, wastewater_call),
-    titles = c(y = NULL, x = "Date", title = "Wastewater levels with respect to daily COVID cases"),
+    yaxis = list(case_call),
+    yaxis2 = list(n1_call, n2_call, n1_n2_call, rolling_avg_call),
+    titles = c(y = "# of new cases", y2 = "Copies per Copies PMMV", x = "Date", title = "Daily COVID-19 viral signal in wastewater with respect to daily new COVID cases"),
     data = ott_covid_waste
   )
+
+ottawa_wastewater
 ```
