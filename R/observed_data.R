@@ -98,26 +98,42 @@ reworked_figure <-
       # )
     }
     
-    p <-
-      layout(
-        p,
-        title = list(text = titles[["title"]], x = 0.5),
-        xaxis = list(type = "date",
-                     title = list(text = as.character(titles[["x"]])),
-                     automargin = TRUE),
-        yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                     automargin = TRUE),
-        yaxis2 = list(
-          overlaying = "y",
-          side = "right",
-          title = list(text = as.character(titles[["y2"]])),
-          automargin = TRUE
+    if(is.null(yaxis2)){
+      p <-
+        layout(
+          p,
+          title = list(text = titles[["title"]], x = 0.5),
+          xaxis = list(type = "date",
+                       title = list(text = as.character(titles[["x"]])),
+                       automargin = TRUE),
+          yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                       automargin = TRUE),
+          barmode =  "relative",
+          autosize = TRUE,
+          legend = list(x = 0.05, y = 1)
+        )
+    }
+    else{
+      p <-
+        layout(
+          p,
+          title = list(text = titles[["title"]], x = 0.5),
+          xaxis = list(type = "date",
+                       title = list(text = as.character(titles[["x"]])),
+                       automargin = TRUE),
+          yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                       automargin = TRUE),
+          yaxis2 = list(
+            overlaying = "y",
+            side = "right",
+            title = list(text = as.character(titles[["y2"]])),
+            automargin = TRUE
           ),
-        barmode =  "relative",
-        autosize = TRUE,
-        legend = list(x = 0.05, y = 1)
-      )
-    
+          barmode =  "relative",
+          autosize = TRUE,
+          legend = list(x = 0.05, y = 1)
+        )
+    }
     return(p)
     
   }
