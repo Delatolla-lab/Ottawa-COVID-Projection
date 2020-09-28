@@ -103,12 +103,15 @@ reworked_figure <-
         p,
         title = list(text = titles[["title"]], x = 0.5),
         xaxis = list(type = "date",
-                     title = list(text = as.character(titles[["x"]]))),
-        yaxis = list(title = list(text = as.character(titles[["y"]]))),
+                     title = list(text = as.character(titles[["x"]])),
+                     automargin = TRUE),
+        yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                     automargin = TRUE),
         yaxis2 = list(
           overlaying = "y",
           side = "right",
-          title = list(text = as.character(titles[["y2"]]))
+          title = list(text = as.character(titles[["y2"]])),
+          automargin = TRUE
           ),
         barmode =  "relative",
         autosize = TRUE,
