@@ -52,7 +52,7 @@ ottawa_test_data <-
 
 # data
 ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
-ott_observed <- data_creation(ottawa_case_data, ottawa_test_data)
+ott_observed <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
 peak_projections <- read.csv(file.path(getwd(), "../../Data/peak_projections.csv"))
 TOH_projections <- read.csv(file.path(getwd(),"../../Data/TOH_projection_estimates.csv"))
 TOH_observed <- read.csv(file.path(getwd(),"../../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
@@ -103,7 +103,7 @@ effective_pd <- (1 - ((g_observed + gamma)/beta_baseline)) * 100
 
 ## projections
 peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("Current transmission", "20% increase in transmission", "Early outbreak transmission"))
+  factor(peak_projections$intervention, levels = c("Current transmission", "10% increase in transmission", "Early outbreak transmission"))
 
 # Values from peak_projections.csv
 current <- peak_projections[1,2] # peak with current distancing
@@ -129,6 +129,10 @@ icu_shade <- "rgba(60, 174, 163)"
 reduction_col <- "rgb(243, 213, 86)"
 reduction_shade <- "rgba(243, 213, 86, 0.3)"
 reduction_hex <- "#F6D556"
+
+increase_col <- "rgb(133, 194, 43)"
+increase_shade <- "rgba(133, 194, 43)"
+increase_hex <- "#85c22b"
 
 no_dist_col <- "rgb(237, 85, 59)"
 no_dist_shade <- "rgba(237, 85, 59)"
@@ -311,14 +315,14 @@ t
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
+hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed census of patients")
 ```
 
 `r line_break`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of daily admissions")
+hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed # of daily admissions")
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
