@@ -89,6 +89,10 @@
   </url>
   
   <url>
+    <loc>/wastewater/</loc>
+  </url>
+  
+  <url>
     <loc>/roadmap/</loc>
     <xhtml:link
                 rel="alternate"

@@ -27,28 +27,14 @@ the_same <- insert_translation(localization_data, lang, "the_same")
 ```
 `r intro`
 
-```{r echo=FALSE}
-#_Last updated on `r format(Sys.time(), '%d %B, %Y, %X')` EST. Updates are done Mondays and Thursdays._
-
-
-#La version française de ce contenu sera publiée sous peu.
-
-#Current of forecast hospital use for COVID-19 patients in the Ottawa area. Created by the team behind #[ProjectBigLife.ca](https://www.projectbiglife.ca) at the Ottawa Hospital and the University of Ottawa with input and data from Ottawa #Public Health.
-```
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 # libraries
 library(plotly)
 library(tidyverse)
+library(jsonlite)
 library(ggplot2)
 library(dplyr)
-
-# data
-ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
-ott_observed <- read.csv(file.path(getwd(), "../../Data/Observed data/Ottawa_Observed_COVID_Hospital_Use.csv"))
-peak_projections <- read.csv(file.path(getwd(), "../../Data/peak_projections.csv"))
-TOH_projections <- read.csv(file.path(getwd(),"../../Data/TOH_projection_estimates.csv"))
-TOH_observed <- read.csv(file.path(getwd(),"../../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
 
 # scripts
 #source("../../R/estimate_scripts.R")
@@ -56,8 +42,23 @@ source("../../R/lag_replacement.R")
 source("../../R/observed_data.R")
 source("../../R/data_conversion.R")
 source("../../R/hosp_projections.R")
+source("../../R/open_ottawa_scripts.R")
 
-# data for dashboard and figures
+# Pull JSON objects from OpenOttawa
+ottawa_case_data <-
+  fromJSON("https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=Cumulative_Active_Cases_by_Episode_Date,7-day_Average_of_Newly_Reported_cases_by_Reported_Date,Daily_Cases_Linked_to_a_Community_Outbreak_by_Episode_Date,Daily_Cases_Not_Linked_to_an_Outbreak_ie_Sporadic_Cases_by_Episode_Date,Daily_Cases_Linked_to_an_Institutional_Outbreak_by_Episode_Date,Cumulative_Deaths_by_Date_of_Death,_Date,Daily_Cases_by_Reported_Date,Daily_Cases_by_Episode_Date,Cases_Newly_Admitted_to_Hospital,Cases_Currently_in_Hospital,Cases_Currently_in_ICU&outSR=4326&f=json")
+ottawa_test_data <-
+  fromJSON("https://opendata.arcgis.com/datasets/26c902bf1da44d3d90b099392b544b81_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Daily_%_Positivity&outSR=4326&f=json")
+
+# data
+ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
+ott_observed <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
+peak_projections <- read.csv(file.path(getwd(), "../../Data/peak_projections.csv"))
+TOH_projections <- read.csv(file.path(getwd(),"../../Data/TOH_projection_estimates.csv"))
+TOH_observed <- read.csv(file.path(getwd(),"../../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
+
+# Save ott_observed as csv
+write.csv(ott_observed, "../../Data/Observed data/OPH_Observed_COVID_Data.csv")
 
 ## Observed census
 exp_census <- calc_expected_values_for_n_weeks(data = ott_observed, number_weeks = 3)
@@ -102,7 +103,7 @@ effective_pd <- (1 - ((g_observed + gamma)/beta_baseline)) * 100
 
 ## projections
 peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("Current transmission", "20% increase in transmission", "Early outbreak transmission"))
+  factor(peak_projections$intervention, levels = c("Current transmission", "10% increase in transmission", "Early outbreak transmission"))
 
 # Values from peak_projections.csv
 current <- peak_projections[1,2] # peak with current distancing
@@ -128,6 +129,10 @@ icu_shade <- "rgba(60, 174, 163)"
 reduction_col <- "rgb(243, 213, 86)"
 reduction_shade <- "rgba(243, 213, 86, 0.3)"
 reduction_hex <- "#F6D556"
+
+increase_col <- "rgb(133, 194, 43)"
+increase_shade <- "rgba(133, 194, 43)"
+increase_hex <- "#85c22b"
 
 no_dist_col <- "rgb(237, 85, 59)"
 no_dist_shade <- "rgba(237, 85, 59)"
@@ -310,14 +315,14 @@ t
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
+hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed census of patients")
 ```
 
 `r line_break`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed # of daily admissions")
+hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed # of daily admissions")
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
