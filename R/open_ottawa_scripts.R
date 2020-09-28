@@ -4,13 +4,19 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
   # Prep Ottawa testing data
   test_prep <- function(ottawa_test_data) {
     ottawa_test <- ottawa_test_data[[8]][[1]]
+    if(is.numeric(ottawa_test[["_Date"]])){
+      ottawa_test[["_Date"]] <- 
+        as.Date(as.POSIXct(ottawa_test[["_Date"]]/1000, origin = "1970-01-01"))
+    }
+    else{
+      ottawa_test[["_Date"]] <- as.Date(ottawa_test[["_Date"]])
+    }
     ottawa_test %>%
       rename(
         date = "_Date",
         observed_pct_positivity = "Daily_%_Positivity"
       ) %>%
-      mutate(date = as.Date(date),
-             observed_pct_positivity = observed_pct_positivity/100) %>%
+      mutate(observed_pct_positivity = observed_pct_positivity/100) %>%
       filter(date >= "2020-03-17")
   }
   ottawa_test <- test_prep(ottawa_test_data)
@@ -18,6 +24,13 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
   # Prep Ottawa case data & merge with testing data
   case_prep <- function(ottawa_case_data, ottawa_test){
     ottawa_data <- ottawa_case_data[[8]][[1]]
+    if(is.numeric(ottawa_data[["_Date"]])){
+      ottawa_data[["_Date"]] <- 
+        as.Date(as.POSIXct(ottawa_data[["_Date"]]/1000, origin = "1970-01-01"))
+    }
+    else{
+      ottawa_data[["_Date"]] <- as.Date(ottawa_data[["_Date"]])
+    }
     ottawa_data %>%
       replace(is.na(.),0) %>%
       rename(
@@ -39,8 +52,7 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
           "Daily_Cases_Not_Linked_to_an_Outbreak_ie_Sporadic_Cases_by_Episode_Date"
       ) %>%
       arrange(date) %>%
-      mutate(date = as.Date(date), 
-             observed_census_acute_care =
+      mutate(observed_census_acute_care =
                observed_census_ICU_p_acute_care - observed_census_ICU,
              observed_new_deaths = 
                observed_cumulative_deaths - lag(observed_cumulative_deaths),
