@@ -74,16 +74,15 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
         observed_new_community_cases*observed_pct_positivity,
       data = ottawa_data
     )
-    alpha <- (ott_regression[[1]][[3]]/ott_regression[[1]][[1]])
-    multiplier <- 1 + (alpha*ottawa_data[["observed_pct_positivity"]])
-    ottawa_data[["alpha"]] <- alpha
-    ottawa_data[["multiplier"]] <- multiplier
-    return(ottawa_data)
+    return(ott_regression)
   }
-  ottawa_data <- regression(ottawa_data)
+  ott_regression <- regression(ottawa_data)
+  
+  alpha <- (ott_regression[[1]][[3]]/ott_regression[[1]][[1]])
+  multiplier <- 1 + (alpha*ottawa_data[["observed_pct_positivity"]])
   
   # Use multiplier value to generate adjusted new cases & active cases
-  adjusted <- function(ottawa_data){
+  adjusted <- function(ottawa_data, alpha, multiplier){
     ottawa_data %>%
       mutate(
         adjusted_new_episodes = (multiplier*observed_new_community_cases) + 
@@ -91,6 +90,8 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
         adjusted_active_cases = (multiplier*observed_active_cases)
       )
   }
-  ottawa_data <- adjusted(ottawa_data)
-  return(ottawa_data)
+  ottawa_data <- adjusted(ottawa_data, alpha, multiplier)
+  list <- list(ottawa_data, ott_regression, alpha, multiplier)
+  names(list) <- c("data", "regression", "alpha", "multiplier")
+  return(list)
 }

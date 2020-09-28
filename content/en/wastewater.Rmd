@@ -33,7 +33,7 @@ ottawa_test_data <-
   fromJSON("https://opendata.arcgis.com/datasets/26c902bf1da44d3d90b099392b544b81_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Daily_%_Positivity&outSR=4326&f=json")
 
 # data
-ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)
+ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
 ott_observed_waste <- read.csv("../../Data/Observed data/Ottawa_Wastewater_Data.csv")
 
 # functions to integrate waste & covid data together
