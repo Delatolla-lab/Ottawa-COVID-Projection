@@ -92,13 +92,13 @@ ProjectedHospital_text,"The hospital census forecast of:
 
 {{1}} patients on {{2}} is based on the previous week’s growth rate of {{3}}%. 
 
-{{4}} patients on {{5}} is based on a 20% increase in COVID-19 transmission. 
+{{4}} patients on {{5}} is based on a 10% increase in COVID-19 transmission. 
 
 {{6}} patients on {{7}} is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020. ","Explication des prévisions relatives au recensement des hospitalisations : 
 
 {{1}} patients en {{2}} en fonction d’un taux de croissance de {{3}}% la semaine précédente. 
 
-{{4}} patients en {{5}} en fonction d’une augmentation de 20% de la transmission de la COVID-19. 
+{{4}} patients en {{5}} en fonction d’une augmentation de 10% de la transmission de la COVID-19. 
 
 {{6}} patients en {{7}} en fonction d’un retour au niveau de transmission du début de la pandémie en mars 2020.  "
 hosp_projections,## {#hospitalization-projections},## {#hospitalization-projections}
