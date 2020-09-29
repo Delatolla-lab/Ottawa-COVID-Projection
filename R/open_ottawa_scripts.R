@@ -14,7 +14,8 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
     ottawa_test %>%
       rename(
         date = "_Date",
-        observed_pct_positivity = "Daily_%_Positivity"
+        observed_pct_positivity = "Daily_%_Positivity",
+        observed_num_tests = "Number_of_Tests"
       ) %>%
       mutate(observed_pct_positivity = observed_pct_positivity/100) %>%
       filter(date >= "2020-03-17")
@@ -70,7 +71,7 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
   # Run linear regression to generate multiplier value
   regression <- function(ottawa_data){
     ott_regression <- lm(
-      cumulative_hosp ~ 0 + observed_new_community_cases + # set y-intercept to 0
+      observed_new_cases ~ 0 + observed_new_community_cases + # set y-intercept to 0
         observed_new_community_cases*observed_pct_positivity,
       data = ottawa_data
     )
