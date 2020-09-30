@@ -4,11 +4,13 @@ wastewater_prep <- function(data){
   names(data)[1] <- "date"
   names(data)[2] <- "N1"
   names(data)[3] <- "N1_stdev"
-  names(data)[4] <- "N2"
-  names(data)[5] <- "N2_stdev"
-  names(data)[6] <- "N1_N2"
-  names(data)[7] <- "rolling_avg"
-  names(data)[8] <- "pct_change"
+  names(data)[5] <- "N2"
+  names(data)[6] <- "N2_stdev"
+  names(data)[7] <- "N1_N2"
+  names(data)[8] <- "rolling_avg"
+  names(data)[9] <- "pct_change"
+  # Remove second date header
+  data <- data[,-4]
   # Remove rows beyond current date
   data %>%
     mutate(date = as.Date(parse_date_time(date, c('dm', 'dmy')))) %>%
