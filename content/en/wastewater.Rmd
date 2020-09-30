@@ -44,11 +44,11 @@ ott_covid_waste <- merge_data(ott_observed_covid, waste_clean)
 case_col <- "rgb(72, 137, 194)"
 n1_col <- "rgb(23, 63, 95)"
 n2_col <- "rgb(60, 174, 163)"
-n1_n2_col <- "rgb(243, 213, 86)"
-rolling_avg_col <- "rgb(237, 85, 59)"
+n1_n2_col <- "rgb(237, 85, 59)"
+rolling_avg_col <- "rgb(243, 213, 86)"
 ```
 
-## Observed Data
+### Observed Data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Initialize calls for each parameter
 new_case_call <- list(type = "observed_data", y_column = "observed_daily_average_cases", name = "Daily average cases", color = case_col)
@@ -66,15 +66,17 @@ n1_n2_call <- list(type = "avg_data", y_column = "N1_N2", name = "Avg. viral sig
 rolling_avg_call <- list(type = "avg_data", y_column = "rolling_avg", name = "5-day rolling avg. viral signal", color = rolling_avg_col, yaxis = "y2")
 ```
 
+Data to `r as.character(tail(ott_covid_waste$date, n=1))`
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(new_case_call), yaxis2 = list(rolling_avg_call), titles = c(y = "# of new cases", y2 = "Copies per Copies PMMV", x = "Date", title = "Average COVID-19 viral signal in wastewater with respect to daily new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(new_case_call), yaxis2 = list(n1_n2_call), titles = c(y = "# of new cases", y2 = "Copies per Copies PMMV", x = "Date", title = "Average COVID-19 viral signal in wastewater with respect to daily new cases"), data = ott_covid_waste)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(active_case_call), yaxis2 = list(rolling_avg_call), titles = c(y = "# of active cases", y2 = "Copies per Copies PMMV", x = "Date", title = "Average COVID-19 viral signal in wastewater with respect to active cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(active_case_call), yaxis2 = list(n1_n2_call), titles = c(y = "# of active cases", y2 = "Copies per Copies PMMV", x = "Date", title = "Average COVID-19 viral signal in wastewater with respect to active cases"), data = ott_covid_waste)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(hosp_call), yaxis2 = list(rolling_avg_call), titles = c(y = "# of patients", y2 = "Copies per Copies PMMV", x = "Date", title = "Average COVID-19 viral signal in wastewater with respect to hospital census"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(hosp_call), yaxis2 = list(n1_n2_call), titles = c(y = "# of patients", y2 = "Copies per Copies PMMV", x = "Date", title = "Average COVID-19 viral signal in wastewater with respect to hospital census"), data = ott_covid_waste)
 ```
 
