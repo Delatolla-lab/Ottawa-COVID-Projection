@@ -35,11 +35,36 @@ ottawa_test_data <-
 
 # data
 ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
-ott_observed_covid <- ott_observed_covid[ott_observed_covid$date >= "2020-03-01",] # Date when sustained new cases began
-# cut-off last 7 days
-ott_observed_covid <- as.data.frame(ott_observed_covid[1:(nrow(ott_observed_covid) - 7),])
+ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
+
+# data for dashboard and figures
+## Observed census
+exp_census <- calc_expected_values_for_n_weeks(data = ott_observed_covid, number_weeks = 3)
+## Dt = doubling (or halving) time
+Dt <- exp_census[[2]][[3]]
+Dt_label = switch( 
+  (sign(Dt) + 2),
+  "halving time",
+  "no growth (flat)",
+  "doubling time")
+more_less = switch(
+  (sign(Dt) + 2),
+  "Fewer",
+  "About the same",
+  "More"
+)
 
 # Colors
+acute_col <- "rgb(72, 137, 194)"
+acute_shade <- "rgba(72, 137, 194, 0.3)"
+acute_hex <- "#488AC2"
+
+vent_col <- "rgb(23, 63, 95)"
+vent_shade <- "rgba(23, 63, 95, 0.3)"
+
+icu_col <- "rgb(60, 174, 163)"
+icu_shade <- "rgba(60, 174, 163)"
+
 current_col <- "rgb(72, 137, 194)"
 current_shade <- "rgba(72, 137, 194, 0.3)"
 current_hex <- "#488AC2"
@@ -51,10 +76,51 @@ reduction_hex <- "#F6D556"
 increase_col <- "rgb(133, 194, 43)"
 increase_shade <- "rgba(133, 194, 43)"
 increase_hex <- "#85c22b"
+
+death_col <- "rgb(0,0,0)"
+death_hex <- "#000000"
 ```
 
+# Dashboard
+
+Data to `r as.character(tail(ott_observed_covid$date, n=1))`
+
+### Current
+
+**`r last(na.omit(ott_observed_covid$observed_active_cases))`** active cases in Ottawa.
+
+**`r last(na.omit(ott_observed_covid$observed_census_ICU_p_acute_care))`** confirmed COVID-19 patients in hospital.
+
+Including: **`r last(na.omit(ott_observed_covid$observed_census_acute_care))`** acute care patients. **`r last(na.omit(ott_observed_covid$observed_census_ICU))`** ICU patients.
+
+## Definitions
+
+> **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
+
+> **Transmission** is the risk that a person becomes infected when they come in contact with a person with COVID-19. 
+
+> **Doubling time** refers to the time it takes for the number of hospitalized patients to double in number. Conversely, **halving time** refers to the time it takes for the number of hospitalized patients to halve in number.
+
+> **Daily growth** is the rate of change in the hospitalization from day-to-day.
+
+> **Physical distancing** is a reduction in close contact between people. 
+
+> **Physical distancing effectiveness** is the reduction in the transmission of COVID-19 between an infected person and someone who has never had COVID-19, compared to the beginning of the pandemic in March 2020.
+
+> **Safe socializing** is ensuring you don't become a link in a COVID-19 transmission chain that ends in a person becoming hospitalized or dying.
+
+> **Safe reopening** is lifting lockdown measures while ensuring a low risk of COVID-19 hospitalization and death. Safe reopening includes safe socializing, safe work and safe businesses - reopening while ensure we all ensure transmissions chains do not lead to hospitalization and death. 
+
+See [More](/more) page for more information about the terms used.
+
+---
+
+## Observed data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Set up SEIR model
+## cut-off last 7 days
+ott_observed_covid <- as.data.frame(ott_observed_covid[1:(nrow(ott_observed_covid) - 7),])
+
 ## Set up sampling fractions
 samp_frac <- c(rep(0.14, 13), rep(0.21, 38))
 samp_frac <- c(samp_frac, rep(0.37, nrow(ott_observed_covid) - length(samp_frac)))
@@ -66,10 +132,6 @@ f_seg[seq(day_new_f, length(f_seg))] <- 2
 day_ch <- which(ott_observed_covid$date == ymd("2020-06-12")) # Date of phase 2 reopening
 f_seg[seq(day_ch, length(f_seg))] <- 3
 ```
-
-## Observed case data
-
-Data to `r as.character(tail(ott_observed_covid$date, n=1))`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE}
 # Fit SEIR model of observed new cases in Ottawa
@@ -104,6 +166,26 @@ case_projection_plot(tidy_proj, obs_dat = ott_observed_covid, current_col = curr
 ```
 *Shaded area represents the 95% credible region
 
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+observed_daily_ICU_p_acute_care <- list(type = "observed_data", y_column = "observed_new_ICU_p_acute_care", name = "Reported # of patients", color = acute_col)
+
+
+
+ICU_p_acute_care <-
+  reworked_figure(
+    xaxis = "date",
+    yaxis = list(observed_daily_ICU_p_acute_care),
+    titles = c(y = "# of patients", x = "Date", title = "Observed new COVID-19 hospitalizations of Ottawa residents"),
+    data = ott_observed_covid
+  )
+
+ICU_p_acute_care
+```
+
+---
+
 ## Projected case data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Generate projections for SEIR model fit
@@ -116,3 +198,35 @@ projection_data <- case_projection_data(ott_case_projections)
 case_projection_plot(projection_data, ott_observed_covid, current_col = current_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Projected daily COVID-19 cases in Ottawa", pct_change = 10)
 ```
 *Shaded area represents the 95% credible region
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../../R/hosp_projections.R")
+hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed census of patients")
+```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../../R/hosp_projections.R")
+hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed # of daily admissions")
+```
+
+--- 
+
+## Past deaths
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+observed_daily_new_deaths <- list(type = "observed_data", y_column = "observed_new_deaths", name = "Reported # of patients", color = death_col)
+
+new_deaths <-
+  reworked_figure(
+    xaxis = "date",
+    yaxis = list(observed_daily_new_deaths),
+    titles = c(y = "# of deaths", x = "Date", title = "Observed COVID-19 daily deaths of Ottawa residents"),
+    data = ott_observed_covid
+  )
+
+new_deaths
+
+```
