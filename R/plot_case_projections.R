@@ -52,45 +52,29 @@ proj_generation <- function(fit, lut, days_project, day_start_reduction,
 }
 
 # Prepare projection data for visualization
-case_projection_data <- function(proj_list, obs_data){
-  for(i in 1:length(proj_list)){
-    proj_list[[i]] <- proj_list[[i]][c("mu_0.05", "mu_mean", "mu_0.95", "date")]
-  }
+case_projection_data <- function(proj_list){
   proj_current <- proj_list[[1]] %>%
-    rename(new_cases_5_current = "mu_0.05",
-           new_cases_95_current = "mu_0.95",
-           new_cases_median_current = "mu_mean"
-           ) %>%
-    relocate(new_cases_median_current, .after = new_cases_95_current)
+    rename_at(vars(-date), function(x) paste0(x, "_current"))
   proj_reduction <- proj_list[[2]] %>%
-    rename(
-      new_cases_5_reduction_10 = "mu_0.05",
-      new_cases_median_reduction_10 = "mu_mean",
-      new_cases_95_reduction_10 = "mu_0.95"
-      )%>%
-    relocate(new_cases_median_reduction_10, .after = new_cases_95_reduction_10)
+    rename_at(vars(-date), function(x) paste0(x, "_reduction"))
   proj_increase <- proj_list[[3]] %>%
-    rename(
-      new_cases_5_increase_10 = "mu_0.05",
-      new_cases_median_increase_10 = "mu_mean",
-      new_cases_95_increase_10 = "mu_0.95"
-    )%>%
-    relocate(new_cases_median_increase_10, .after = new_cases_95_increase_10)
-  obs_data <- obs_data[c("date", "observed_new_episodes")] %>%
-    rename(new_cases_observed = "observed_new_episodes")
+    rename_at(vars(-date), function(x) paste0(x, "_increase"))
   proj_all <- proj_current %>%
     full_join(proj_increase, by = "date") %>%
     full_join(proj_reduction, by = "date") %>%
-    full_join(obs_data, by = "date") %>%
     select(date, everything())
   return(as.data.frame(proj_all))
 }
 
-case_projection_plot <- function(pred_dat, obs_dat, col = "#488AC2",
-                            value_column = "value", date_column = "day",
-                            xlab = "Date",
-                            ylab = "Daily cases", 
-                            title) {
+# Visualize projections
+case_projection_plot <- function(pred_dat, obs_dat, current_col, 
+                                 reduction_col = NULL, increase_col = NULL,
+                                 pct_change = NULL,
+                                 value_column = "value",
+                                 date_column = "day",
+                                 xlab = "Date",
+                                 ylab = "Daily cases", 
+                                 title) {
   if (!value_column %in% names(obs_dat)) {
     stop(glue("`obs_dat` must contain a column `{value_column}` that contains the reported case counts."), call. = FALSE)
   }
@@ -100,27 +84,76 @@ case_projection_plot <- function(pred_dat, obs_dat, col = "#488AC2",
   if (!date_column %in% names(pred_dat)) {
     stop(glue("`pred_dat` must contain a column named `{date_column}` that contains the numeric day (or date)."), call. = FALSE)
   }
-  g <- ggplot(pred_dat, aes_string(x = date_column)) +
-    geom_ribbon(aes_string(ymin = "y_rep_0.05", ymax = "y_rep_0.95"),
-                alpha = 0.2, fill = col
-    ) +
-    geom_ribbon(aes_string(ymin = "y_rep_0.25", ymax = "y_rep_0.75"),
-                alpha = 0.2, fill = col
-    ) +
-    geom_line(aes_string(y = "mu_0.50"), lwd = 0.9, col = col) +
-    coord_cartesian(expand = FALSE, xlim = range(pred_dat[[date_column]])) +
-    ylab(ylab) +
-    xlab(xlab) +
-    ggtitle(title) +
-    theme(
-      plot.title = element_text(hjust = 0.5),
-      panel.background = element_blank(),
-      panel.grid.major.y = element_line(colour = "grey"),
-      axis.line.x = element_line(colour = "grey")
-    ) +
-    scale_x_date(
-      date_breaks = "1 month",
-      date_labels = "%b %Y")
+  if(!is.null(reduction_col) & !is.null(increase_col) & !is.null(pct_change)){
+    g <- ggplot(pred_dat, aes_string(x = date_column)) +
+      geom_ribbon(aes_string(ymin = "y_rep_0.05_current", ymax = "y_rep_0.95_current"),
+                  alpha = 0.2, fill = current_col
+      ) +
+      geom_ribbon(aes_string(ymin = "y_rep_0.25_current", ymax = "y_rep_0.75_current"),
+                  alpha = 0.2, fill = current_col
+      ) +
+      geom_ribbon(aes_string(ymin = "y_rep_0.05_reduction", ymax = "y_rep_0.95_reduction"),
+                  alpha = 0.2, fill = reduction_col
+      ) +
+      geom_ribbon(aes_string(ymin = "y_rep_0.25_reduction", ymax = "y_rep_0.75_reduction"),
+                  alpha = 0.2, fill = reduction_col
+      ) +
+      geom_ribbon(aes_string(ymin = "y_rep_0.05_increase", ymax = "y_rep_0.95_increase"),
+                  alpha = 0.2, fill = increase_col
+      ) +
+      geom_ribbon(aes_string(ymin = "y_rep_0.25_increase", ymax = "y_rep_0.75_increase"),
+                  alpha = 0.2, fill = increase_col
+      ) +
+      geom_line(aes_string(y = "mu_0.50_current"),
+                lwd = 0.9,
+                color = current_col) +
+      geom_line(aes_string(y = "mu_0.50_reduction"),
+                lwd = 0.9,
+                color = reduction_col) +
+      geom_line(aes_string(y = "mu_0.50_increase"),
+                lwd = 0.9,
+                color = increase_col) +
+      coord_cartesian(expand = FALSE, xlim = range(pred_dat[[date_column]])) +
+      ylab(ylab) +
+      xlab(xlab) +
+      ggtitle(title) +
+      theme(
+        plot.title = element_text(hjust = 0.5),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey"),
+        axis.line.x = element_line(colour = "grey")
+      ) +
+      scale_x_date(
+        date_breaks = "1 month",
+        date_labels = "%b %Y")  +
+      scale_color_manual(values = c(current_col = "Current transmission",
+                                    reduction_col = paste("What if transmission decreased by", paste(pct_change, "%?", sep = "")),
+                                    increase_col = paste("What if transmission increased by", paste(pct_change, "%?", sep = "")))
+      )
+  }
+  else{
+    g <- ggplot(pred_dat, aes_string(x = date_column)) +
+      geom_ribbon(aes_string(ymin = "y_rep_0.05", ymax = "y_rep_0.95"),
+                alpha = 0.2, fill = current_col,
+                ) +
+      geom_ribbon(aes_string(ymin = "y_rep_0.25", ymax = "y_rep_0.75"),
+                  alpha = 0.2, fill = current_col,
+                ) +
+      geom_line(aes_string(y = "mu_0.50"), lwd = 0.9, col = current_col) +
+      coord_cartesian(expand = FALSE, xlim = range(pred_dat[[date_column]])) +
+      ylab(ylab) +
+      xlab(xlab) +
+      ggtitle(title) +
+      theme(
+        plot.title = element_text(hjust = 0.5),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey"),
+        axis.line.x = element_line(colour = "grey")
+      ) +
+      scale_x_date(
+        date_breaks = "1 month",
+        date_labels = "%b %Y")
+  }
     
   g <- g +
     geom_line(
