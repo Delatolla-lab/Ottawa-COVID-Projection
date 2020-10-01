@@ -35,12 +35,14 @@ ottawa_test_data <-
 
 # data
 ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
-ott_observed_covid <- ott_observed_covid[ott_observed_covid$date >= "2020-03-01",]
+ott_observed_covid <- ott_observed_covid[ott_observed_covid$date >= "2020-03-01",] # Date when sustained new cases began
+# cut-off last 7 days
+ott_observed_covid <- as.data.frame(ott_observed_covid[1:(nrow(ott_observed_covid) - 7),])
 
 # Colors
-acute_col <- "rgb(72, 137, 194)"
-acute_shade <- "rgba(72, 137, 194, 0.3)"
-acute_hex <- "#488AC2"
+current_col <- "rgb(72, 137, 194)"
+current_shade <- "rgba(72, 137, 194, 0.3)"
+current_hex <- "#488AC2"
 
 reduction_col <- "rgb(243, 213, 86)"
 reduction_shade <- "rgba(243, 213, 86, 0.3)"
@@ -97,7 +99,7 @@ lut <- tibble(
   date = seq(first_day, first_day + length(day) - 1, by = "1 day")
 )
 tidy_proj <- left_join(tidy_proj, lut, by = "day")
-case_projection_plot(tidy_proj, obs_dat = ott_observed_covid,
+case_projection_plot(tidy_proj, obs_dat = ott_observed_covid, current_col = current_hex,
   value_column = "observed_new_episodes", date_column = "date", title = "Observed daily COVID-19 cases in Ottawa")
 ```
 *Shaded area represents the 95% credible region
@@ -105,12 +107,12 @@ case_projection_plot(tidy_proj, obs_dat = ott_observed_covid,
 ## Projected case data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Generate projections for SEIR model fit
-ott_projections <- proj_generation(fit, lut, days_project = 100, day_start_reduction = 14, pct_change = 10)
+ott_case_projections <- proj_generation(fit, lut, days_project = 60, day_start_reduction = 7, pct_change = 10)
 
 # Create data set to visualize projections
-projection_data <- case_projection_data(ott_projections, ott_observed_covid)
+projection_data <- case_projection_data(ott_case_projections)
 
 # Visualize projections
-hosp_fun(projection_data, "new_cases", title = "Projected COVID-19 daily cases in Ottawa", y = "Daily cases", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed daily cases")
+case_projection_plot(projection_data, ott_observed_covid, current_col = current_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Projected daily COVID-19 cases in Ottawa", pct_change = 10)
 ```
 *Shaded area represents the 95% credible region
