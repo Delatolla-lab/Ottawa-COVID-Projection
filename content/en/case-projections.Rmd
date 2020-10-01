@@ -44,9 +44,9 @@ samp_frac <- c(samp_frac, rep(0.37, nrow(ott_observed_covid) - length(samp_frac)
 
 ## Set up contact rate breakpoints
 f_seg <- c(0, rep(1, nrow(ott_observed_covid) - 1))
-day_new_f <- which(ott_observed_covid$date == ymd("2020-05-01"))
+day_new_f <- which(ott_observed_covid$date == ymd("2020-05-19")) # Date of phase 1 reopening
 f_seg[seq(day_new_f, length(f_seg))] <- 2
-day_ch <- which(ott_observed_covid$date == ymd("2020-06-01"))
+day_ch <- which(ott_observed_covid$date == ymd("2020-06-12")) # Date of phase 2 reopening
 f_seg[seq(day_ch, length(f_seg))] <- 3
 ```
 
@@ -61,11 +61,11 @@ fit <- fit_seir(
   samp_frac_fixed = samp_frac, 
   f_seg = f_seg,
   i0_prior = c(log(8), 1),
-  e_prior = c(0.8, 0.05),
-  start_decline_prior = c(log(15), 0.1),
-  end_decline_prior = c(log(22), 0.1),
+  e_prior = c(0.8, 0.05), # 85% of residents social distancing
+  start_decline_prior = c(log(15), 0.1), # Starting date of closing of non-essential businesses (March 24th, 2020)
+  end_decline_prior = c(log(25), 0.1), # 10 day buffer to ramp in social distancing
   f_prior = cbind(c(0.4, 0.5, 0.6), c(0.2, 0.2, 0.2)),
-  R0_prior = c(log(2.6), 0.2),
+  R0_prior = c(log(2.6), 0.2), # Starting R0 value
   N_pop = 1049486, # Ottawa population
   iter = 500, # number of posterior samples
   fit_type = "optimizing" # for speed only
