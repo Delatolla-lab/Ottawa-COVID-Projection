@@ -1,4 +1,92 @@
-case_projection <- function(pred_dat, obs_dat, col = "#488AC2",
+# Generate case projections
+proj_generation <- function(fit, lut, days_project, day_start_reduction,
+                            pct_change){
+  current <- 1
+  reduction <- 1 - (pct_change/100)
+  increase <- 1 + (pct_change/100)
+  
+  # Run projection for current transmission
+  proj_current <- project_seir(
+    fit,
+    iter = 1:50,
+    forecast_days = days_project,
+    f_fixed_start = max(fit$days) + day_start_reduction,
+    f_multi = rep(current, days_project - day_start_reduction + 1), 
+    # Change from current transmission (1.1 = 10% increase in transmission, 0.9 = 10% decrease in transmission)
+    f_multi_seg = 3 # which f segment to use
+  )
+  tidy_proj_current <- tidy_seir(proj_current, resample_y_rep = 30)
+  tidy_proj_current <- left_join(tidy_proj_current, lut, by = "day")
+  
+  # Run projection for reduced transmission
+  proj_reduction <- project_seir(
+    fit,
+    iter = 1:50,
+    forecast_days = days_project,
+    f_fixed_start = max(fit$days) + day_start_reduction,
+    f_multi = rep(reduction, days_project - day_start_reduction + 1), 
+    # Change from current transmission (1.1 = 10% increase in transmission, 0.9 = 10% decrease in transmission)
+    f_multi_seg = 3 # which f segment to use
+  )
+  tidy_proj_reduction <- tidy_seir(proj_reduction, resample_y_rep = 30)
+  tidy_proj_reduction <- left_join(tidy_proj_reduction, lut, by = "day")
+  
+  # Run projection for increase transmission
+  proj_increase <- project_seir(
+    fit,
+    iter = 1:50,
+    forecast_days = days_project,
+    f_fixed_start = max(fit$days) + day_start_reduction,
+    f_multi = rep(increase, days_project - day_start_reduction + 1), 
+    # Change from current transmission (1.1 = 10% increase in transmission, 0.9 = 10% decrease in transmission)
+    f_multi_seg = 3 # which f segment to use
+  )
+  tidy_proj_increase <- tidy_seir(proj_increase, resample_y_rep = 30)
+  tidy_proj_increase <- left_join(tidy_proj_increase, lut, by = "day")
+  
+  # Generate list of projections
+  proj_list <- list(tidy_proj_current,
+                    tidy_proj_reduction,
+                    tidy_proj_increase)
+  return(proj_list)
+}
+
+# Prepare projection data for visualization
+case_projection_data <- function(proj_list, obs_data){
+  for(i in 1:length(proj_list)){
+    proj_list[[i]] <- proj_list[[i]][c("mu_0.05", "mu_mean", "mu_0.95", "date")]
+  }
+  proj_current <- proj_list[[1]] %>%
+    rename(new_cases_5_current = "mu_0.05",
+           new_cases_95_current = "mu_0.95",
+           new_cases_median_current = "mu_mean"
+           ) %>%
+    relocate(new_cases_median_current, .after = new_cases_95_current)
+  proj_reduction <- proj_list[[2]] %>%
+    rename(
+      new_cases_5_reduction_10 = "mu_0.05",
+      new_cases_median_reduction_10 = "mu_mean",
+      new_cases_95_reduction_10 = "mu_0.95"
+      )%>%
+    relocate(new_cases_median_reduction_10, .after = new_cases_95_reduction_10)
+  proj_increase <- proj_list[[3]] %>%
+    rename(
+      new_cases_5_increase_10 = "mu_0.05",
+      new_cases_median_increase_10 = "mu_mean",
+      new_cases_95_increase_10 = "mu_0.95"
+    )%>%
+    relocate(new_cases_median_increase_10, .after = new_cases_95_increase_10)
+  obs_data <- obs_data[c("date", "observed_new_episodes")] %>%
+    rename(new_cases_observed = "observed_new_episodes")
+  proj_all <- proj_current %>%
+    full_join(proj_increase, by = "date") %>%
+    full_join(proj_reduction, by = "date") %>%
+    full_join(obs_data, by = "date") %>%
+    select(date, everything())
+  return(as.data.frame(proj_all))
+}
+
+case_projection_plot <- function(pred_dat, obs_dat, col = "#488AC2",
                             value_column = "value", date_column = "day",
                             xlab = "Date",
                             ylab = "Daily cases", 
