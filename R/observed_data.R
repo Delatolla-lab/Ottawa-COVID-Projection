@@ -109,6 +109,7 @@ reworked_figure <-
           yaxis = list(title = list(text = as.character(titles[["y"]])), 
                        automargin = TRUE),
           barmode =  "relative",
+          bargap = 0,
           autosize = TRUE,
           legend = list(x = 0.05, y = 1)
         )
@@ -130,6 +131,7 @@ reworked_figure <-
             automargin = TRUE
           ),
           barmode =  "relative",
+          bargap = 0,
           autosize = TRUE,
           legend = list(x = 0.05, y = 1)
         )

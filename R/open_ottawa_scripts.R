@@ -62,7 +62,6 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
              observed_new_community_cases =
                observed_new_cases_community_outbreak +
                observed_new_cases_sporadic) %>%
-      filter(date >= "2020-03-17") %>%
       full_join(ottawa_test, by = "date") %>%
       select(date, everything())
   }
