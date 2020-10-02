@@ -52,16 +52,17 @@ proj_generation <- function(fit, lut, days_project, day_start_reduction,
 }
 
 # Prepare projection data for visualization
-case_projection_data <- function(proj_list){
+case_projection_data <- function(proj_list, pct_change){
   proj_current <- proj_list[[1]] %>%
-    rename_at(vars(-date), function(x) paste0(x, "_current"))
+    mutate(Transmission =
+             rep("Current transmission", n()))
   proj_reduction <- proj_list[[2]] %>%
-    rename_at(vars(-date), function(x) paste0(x, "_reduction"))
+    mutate(Transmission = paste(paste(pct_change, "%", sep = ""),"reduction in transmission", sep = " "), n())
   proj_increase <- proj_list[[3]] %>%
-    rename_at(vars(-date), function(x) paste0(x, "_increase"))
+    mutate(Transmission = paste(paste(pct_change, "%", sep = ""),"increase in transmission", sep = " "), n())
   proj_all <- proj_current %>%
-    full_join(proj_increase, by = "date") %>%
-    full_join(proj_reduction, by = "date") %>%
+    bind_rows(proj_increase) %>%
+    bind_rows(proj_reduction) %>%
     select(date, everything())
   return(as.data.frame(proj_all))
 }
@@ -85,34 +86,37 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
     stop(glue("`pred_dat` must contain a column named `{date_column}` that contains the numeric day (or date)."), call. = FALSE)
   }
   if(!is.null(reduction_col) & !is.null(increase_col) & !is.null(pct_change)){
-    g <- ggplot(pred_dat, aes_string(x = date_column)) +
-      geom_ribbon(aes_string(ymin = "y_rep_0.05_current", ymax = "y_rep_0.95_current"),
+    g <- ggplot(data = pred_dat, aes_string(x = date_column)) +
+      geom_ribbon(data = pred_dat[pred_dat$Transmission == "Current transmission", ],
+                  aes_string(ymin = "y_rep_0.05", ymax = "y_rep_0.95"),
+                  alpha = 0.2, fill = current_col
+      )  +
+      geom_ribbon(data = pred_dat[pred_dat$Transmission == "Current transmission", ],
+                  aes_string(ymin = "y_rep_0.25", ymax = "y_rep_0.75"),
                   alpha = 0.2, fill = current_col
       ) +
-      geom_ribbon(aes_string(ymin = "y_rep_0.25_current", ymax = "y_rep_0.75_current"),
-                  alpha = 0.2, fill = current_col
-      ) +
-      geom_ribbon(aes_string(ymin = "y_rep_0.05_reduction", ymax = "y_rep_0.95_reduction"),
+      geom_ribbon(data = pred_dat[pred_dat$Transmission == paste(paste(pct_change, "%", sep = ""),"reduction in transmission", sep = " "), ],
+                  aes_string(ymin = "y_rep_0.05", ymax = "y_rep_0.95"),
                   alpha = 0.2, fill = reduction_col
       ) +
-      geom_ribbon(aes_string(ymin = "y_rep_0.25_reduction", ymax = "y_rep_0.75_reduction"),
+      geom_ribbon(data = pred_dat[pred_dat$Transmission == paste(paste(pct_change, "%", sep = ""),"reduction in transmission", sep = " "), ],
+                  aes_string(ymin = "y_rep_0.25", ymax = "y_rep_0.75"),
                   alpha = 0.2, fill = reduction_col
       ) +
-      geom_ribbon(aes_string(ymin = "y_rep_0.05_increase", ymax = "y_rep_0.95_increase"),
+      geom_ribbon(data = pred_dat[pred_dat$Transmission == paste(paste(pct_change, "%", sep = ""),"increase in transmission", sep = " "), ],
+                  aes_string(ymin = "y_rep_0.05", ymax = "y_rep_0.95"),
                   alpha = 0.2, fill = increase_col
       ) +
-      geom_ribbon(aes_string(ymin = "y_rep_0.25_increase", ymax = "y_rep_0.75_increase"),
+      geom_ribbon(data = pred_dat[pred_dat$Transmission == paste(paste(pct_change, "%", sep = ""),"increase in transmission", sep = " "), ],
+                  aes_string(ymin = "y_rep_0.25", ymax = "y_rep_0.75"),
                   alpha = 0.2, fill = increase_col
-      ) +
-      geom_line(aes_string(y = "mu_0.50_current"),
-                lwd = 0.9,
-                color = current_col) +
-      geom_line(aes_string(y = "mu_0.50_reduction"),
-                lwd = 0.9,
-                color = reduction_col) +
-      geom_line(aes_string(y = "mu_0.50_increase"),
-                lwd = 0.9,
-                color = increase_col) +
+      )
+    g <- g +
+      geom_line(
+        data = pred_dat,
+        aes_string(y = "mu_0.50",
+                   color = "Transmission"),
+        lwd = 0.9) +
       coord_cartesian(expand = FALSE, xlim = range(pred_dat[[date_column]])) +
       ylab(ylab) +
       xlab(xlab) +
@@ -125,11 +129,13 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
       ) +
       scale_x_date(
         date_breaks = "1 month",
-        date_labels = "%b %Y")  +
-      scale_color_manual(values = c(current_col = "Current transmission",
-                                    reduction_col = paste("What if transmission decreased by", paste(pct_change, "%?", sep = "")),
-                                    increase_col = paste("What if transmission increased by", paste(pct_change, "%?", sep = "")))
-      )
+        date_labels = "%b %Y") +
+      scale_color_manual(
+        name = "Transmission",
+        values = c(current_col,
+                   reduction_col,
+                   increase_col)
+      )  
   }
   else{
     g <- ggplot(pred_dat, aes_string(x = date_column)) +
@@ -148,11 +154,12 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
         plot.title = element_text(hjust = 0.5),
         panel.background = element_blank(),
         panel.grid.major.y = element_line(colour = "grey"),
-        axis.line.x = element_line(colour = "grey")
+        axis.line.x = element_line(colour = "grey"),
+        legend.title = element_blank()
       ) +
       scale_x_date(
         date_breaks = "1 month",
-        date_labels = "%b %Y")
+        date_labels = "%b %Y") 
   }
     
   g <- g +
@@ -170,6 +177,13 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
     )
   
   if (max(pred_dat[["data_type"]]) > 1) g <- g + facet_wrap(~data_type)
-  g_plot <- ggplotly(g)
+  g_plot <- ggplotly(g) %>%
+    layout(legend = list(x = 0.02, y = 1),
+           annotations = list(
+             x = 1, y = -0.12, text = "*Shaded area represents the 95% credible region", 
+             showarrow = F, xref='paper', yref='paper', 
+             xanchor='right', yanchor='auto', xshift=0, yshift=0,
+             font=list(size=10)
+           ))
   return(g_plot)
 }

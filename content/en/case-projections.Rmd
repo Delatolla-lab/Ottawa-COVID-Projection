@@ -118,25 +118,25 @@ See [More](/more) page for more information about the terms used.
 ## Observed data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Set up SEIR model
-## cut-off last 7 days
-ott_observed_covid <- as.data.frame(ott_observed_covid[1:(nrow(ott_observed_covid) - 7),])
+## Create observed data object that cuts off last 7 days
+ott_observed_covid_episodes <- as.data.frame(ott_observed_covid[1:(nrow(ott_observed_covid) - 7),])
 
 ## Set up sampling fractions
 samp_frac <- c(rep(0.14, 13), rep(0.21, 38))
-samp_frac <- c(samp_frac, rep(0.37, nrow(ott_observed_covid) - length(samp_frac)))
+samp_frac <- c(samp_frac, rep(0.37, nrow(ott_observed_covid_episodes) - length(samp_frac)))
 
 ## Set up contact rate breakpoints
-f_seg <- c(0, rep(1, nrow(ott_observed_covid) - 1))
-day_new_f <- which(ott_observed_covid$date == ymd("2020-05-19")) # Date of phase 1 reopening
+f_seg <- c(0, rep(1, nrow(ott_observed_covid_episodes) - 1))
+day_new_f <- which(ott_observed_covid_episodes$date == ymd("2020-05-19")) # Date of phase 1 reopening
 f_seg[seq(day_new_f, length(f_seg))] <- 2
-day_ch <- which(ott_observed_covid$date == ymd("2020-06-12")) # Date of phase 2 reopening
+day_ch <- which(ott_observed_covid_episodes$date == ymd("2020-06-12")) # Date of phase 2 reopening
 f_seg[seq(day_ch, length(f_seg))] <- 3
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE}
 # Fit SEIR model of observed new cases in Ottawa
 fit <- fit_seir(
-  daily_cases = ott_observed_covid$observed_new_episodes,
+  daily_cases = ott_observed_covid_episodes$observed_new_episodes,
   samp_frac_fixed = samp_frac, 
   f_seg = f_seg,
   i0_prior = c(log(7), 1), # 7 total cases on March 1st, 2020
@@ -154,17 +154,18 @@ fit <- fit_seir(
 # Visualize model fit
 proj <- project_seir(fit, iter = 1:50)
 tidy_proj <- tidy_seir(proj, resample_y_rep = 20)
-first_day <- min(ott_observed_covid$date)
+first_day <- min(ott_observed_covid_episodes$date)
 last_day <- 500 # how many days to create dates for
 lut <- tibble(
   day = seq_len(last_day),
   date = seq(first_day, first_day + length(day) - 1, by = "1 day")
 )
+```
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 tidy_proj <- left_join(tidy_proj, lut, by = "day")
-case_projection_plot(tidy_proj, obs_dat = ott_observed_covid, current_col = current_hex,
+case_projection_plot(tidy_proj, obs_dat = ott_observed_covid_episodes, current_col = current_hex,
   value_column = "observed_new_episodes", date_column = "date", title = "Observed daily COVID-19 cases in Ottawa")
 ```
-*Shaded area represents the 95% credible region
 
 ---
 
@@ -192,12 +193,12 @@ ICU_p_acute_care
 ott_case_projections <- proj_generation(fit, lut, days_project = 60, day_start_reduction = 7, pct_change = 10)
 
 # Create data set to visualize projections
-projection_data <- case_projection_data(ott_case_projections)
-
-# Visualize projections
-case_projection_plot(projection_data, ott_observed_covid, current_col = current_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Projected daily COVID-19 cases in Ottawa", pct_change = 10)
+projection_data <- case_projection_data(ott_case_projections, 10)
 ```
-*Shaded area represents the 95% credible region
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualize projections
+case_projection_plot(projection_data, ott_observed_covid_episodes, current_col = current_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Projected daily COVID-19 cases in Ottawa", pct_change = 10)
+```
 
 ---
 
