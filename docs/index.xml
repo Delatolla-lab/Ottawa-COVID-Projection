@@ -63,6 +63,20 @@ Attribution: COVID-19 icons made by surang from www.flaticon.com.</description>
     </item>
     
     <item>
+      <title>Ottawa COVID-19 Case Projections</title>
+      <link>/case-projections/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/case-projections/</guid>
+      <description>Dashboard Data to 2020-10-01
+Current 767 active cases in Ottawa.
+24 confirmed COVID-19 patients in hospital.
+Including: 20 acute care patients. 4 ICU patients.
+ Definitions  Hospital census is the count of patients in all Ottawa hospitals at midnight on the previous day.
+  Transmission is the risk that a person becomes infected when they come in contact with a person with COVID-19.</description>
+    </item>
+    
+    <item>
       <title>Ottawa wastewater analysis</title>
       <link>/wastewater/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
