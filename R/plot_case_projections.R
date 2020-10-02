@@ -1,6 +1,10 @@
-# Generate case projections
+# Generate case projections based on model fit, days to project from last observation,
+# days from last observation where transmission changes, and percentage change in transmission
 proj_generation <- function(fit, lut, days_project, day_start_reduction,
                             pct_change){
+  
+  # Change from current transmission (1.1 = 10% increase in transmission,
+  # 0.9 = 10% decrease in transmission)
   current <- 1
   reduction <- 1 - (pct_change/100)
   increase <- 1 + (pct_change/100)
@@ -12,7 +16,6 @@ proj_generation <- function(fit, lut, days_project, day_start_reduction,
     forecast_days = days_project,
     f_fixed_start = max(fit$days) + day_start_reduction,
     f_multi = rep(current, days_project - day_start_reduction + 1), 
-    # Change from current transmission (1.1 = 10% increase in transmission, 0.9 = 10% decrease in transmission)
     f_multi_seg = 3 # which f segment to use
   )
   tidy_proj_current <- tidy_seir(proj_current, resample_y_rep = 30)
@@ -24,8 +27,7 @@ proj_generation <- function(fit, lut, days_project, day_start_reduction,
     iter = 1:50,
     forecast_days = days_project,
     f_fixed_start = max(fit$days) + day_start_reduction,
-    f_multi = rep(reduction, days_project - day_start_reduction + 1), 
-    # Change from current transmission (1.1 = 10% increase in transmission, 0.9 = 10% decrease in transmission)
+    f_multi = rep(reduction, days_project - day_start_reduction + 1),
     f_multi_seg = 3 # which f segment to use
   )
   tidy_proj_reduction <- tidy_seir(proj_reduction, resample_y_rep = 30)
@@ -37,8 +39,7 @@ proj_generation <- function(fit, lut, days_project, day_start_reduction,
     iter = 1:50,
     forecast_days = days_project,
     f_fixed_start = max(fit$days) + day_start_reduction,
-    f_multi = rep(increase, days_project - day_start_reduction + 1), 
-    # Change from current transmission (1.1 = 10% increase in transmission, 0.9 = 10% decrease in transmission)
+    f_multi = rep(increase, days_project - day_start_reduction + 1),
     f_multi_seg = 3 # which f segment to use
   )
   tidy_proj_increase <- tidy_seir(proj_increase, resample_y_rep = 30)
@@ -53,6 +54,8 @@ proj_generation <- function(fit, lut, days_project, day_start_reduction,
 
 # Prepare projection data for visualization
 case_projection_data <- function(proj_list, pct_change){
+  # Create transmission column to specify if it's current transmission,
+  # increase, or reduction in transmission
   proj_current <- proj_list[[1]] %>%
     mutate(Transmission =
              rep("Current transmission", n()))

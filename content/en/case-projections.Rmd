@@ -151,17 +151,18 @@ fit <- fit_seir(
 )
 ```
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Visualize model fit
+# Prepare visualization of model fit
 proj <- project_seir(fit, iter = 1:50)
 tidy_proj <- tidy_seir(proj, resample_y_rep = 20)
-first_day <- min(ott_observed_covid_episodes$date)
+first_day <- min(ott_observed_covid_episodes$date) # first observation date
 last_day <- 500 # how many days to create dates for
-lut <- tibble(
+lut <- tibble( # Create look-up table (lut)
   day = seq_len(last_day),
   date = seq(first_day, first_day + length(day) - 1, by = "1 day")
 )
 ```
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualize model fit
 tidy_proj <- left_join(tidy_proj, lut, by = "day")
 case_projection_plot(tidy_proj, obs_dat = ott_observed_covid_episodes, current_col = current_hex,
   value_column = "observed_new_episodes", date_column = "date", title = "Observed daily COVID-19 cases in Ottawa")
