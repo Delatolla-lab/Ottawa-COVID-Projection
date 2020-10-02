@@ -65,20 +65,17 @@ vent_shade <- "rgba(23, 63, 95, 0.3)"
 icu_col <- "rgb(60, 174, 163)"
 icu_shade <- "rgba(60, 174, 163)"
 
-current_col <- "rgb(72, 137, 194)"
-current_shade <- "rgba(72, 137, 194, 0.3)"
-current_hex <- "#488AC2"
+current_case_col <- "rgb(237, 194, 19)"
+current_case_shade <- "rgba(237, 194, 19)"
+current_case_hex <- "#EDC213"
 
-reduction_col <- "rgb(243, 213, 86)"
-reduction_shade <- "rgba(243, 213, 86, 0.3)"
-reduction_hex <- "#F6D556"
+increase_col <- "rgb(214, 39, 40)"
+increase_shade <- "rgba(214, 39, 40)"
+increase_hex <- "#D62728"
 
-increase_col <- "rgb(133, 194, 43)"
-increase_shade <- "rgba(133, 194, 43)"
-increase_hex <- "#85c22b"
-
-death_col <- "rgb(0,0,0)"
-death_hex <- "#000000"
+reduction_col <- "rgb(133, 194, 43)"
+reduction_shade <- "rgba(133, 194, 43)"
+reduction_hex <- "#85c22b"
 ```
 
 # Dashboard
@@ -151,7 +148,7 @@ fit <- fit_seir(
 )
 ```
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Prepare visualization of model fit
+# Prepare model fit
 proj <- project_seir(fit, iter = 1:50)
 tidy_proj <- tidy_seir(proj, resample_y_rep = 20)
 first_day <- min(ott_observed_covid_episodes$date) # first observation date
@@ -160,12 +157,18 @@ lut <- tibble( # Create look-up table (lut)
   day = seq_len(last_day),
   date = seq(first_day, first_day + length(day) - 1, by = "1 day")
 )
+tidy_proj <- left_join(tidy_proj, lut, by = "day")
 ```
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Visualize model fit
-tidy_proj <- left_join(tidy_proj, lut, by = "day")
-case_projection_plot(tidy_proj, obs_dat = ott_observed_covid_episodes, current_col = current_hex,
-  value_column = "observed_new_episodes", date_column = "date", title = "Observed daily COVID-19 cases in Ottawa")
+# Visualize current daily cases
+observed_new_episodes <- list(type = "observed_data", y_column = "observed_new_cases", name = "New cases by episode date", color = current_case_hex)
+
+reworked_figure(
+    xaxis = "date",
+    yaxis = list(observed_new_episodes),
+    titles = c(y = "Daily cases", x = "Date", title = "Observed daily COVID-19 cases in Ottawa by episode date"),
+    data = ott_observed_covid
+  )
 ```
 
 ---
@@ -188,7 +191,7 @@ ICU_p_acute_care
 
 ---
 
-## Projected case data
+## Projections
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Generate projections for SEIR model fit
 ott_case_projections <- proj_generation(fit, lut, days_project = 60, day_start_reduction = 7, pct_change = 10)
@@ -198,7 +201,7 @@ projection_data <- case_projection_data(ott_case_projections, 10)
 ```
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualize projections
-case_projection_plot(projection_data, ott_observed_covid_episodes, current_col = current_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Projected daily COVID-19 cases in Ottawa", pct_change = 10)
+case_projection_plot(projection_data, ott_observed_covid_episodes, current_col = current_case_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Projected daily COVID-19 cases in Ottawa", pct_change = 10)
 ```
 
 ---
@@ -216,19 +219,3 @@ hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospi
 ```
 
 --- 
-
-## Past deaths
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-observed_daily_new_deaths <- list(type = "observed_data", y_column = "observed_new_deaths", name = "Reported # of patients", color = death_col)
-
-new_deaths <-
-  reworked_figure(
-    xaxis = "date",
-    yaxis = list(observed_daily_new_deaths),
-    titles = c(y = "# of deaths", x = "Date", title = "Observed COVID-19 daily deaths of Ottawa residents"),
-    data = ott_observed_covid
-  )
-
-new_deaths
-
-```
