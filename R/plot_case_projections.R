@@ -97,6 +97,8 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
   if (!date_column %in% names(pred_dat)) {
     stop(glue("`pred_dat` must contain a column named `{date_column}` that contains the numeric day (or date)."), call. = FALSE)
   }
+  tmp_data <- pred_dat[pred_dat$Transmission == "Current transmission", ]
+  tmp <- 0.95*max(tmp_data$mu_0.50)
     g <- ggplot(data = pred_dat, aes_string(x = date_column)) +
       geom_ribbon(data = pred_dat[pred_dat$Transmission == "Current transmission", ],
                   aes_string(ymin = "y_rep_0.05", ymax = "y_rep_0.95"),
@@ -128,7 +130,8 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
         aes(y = mu_0.50,
             color = Transmission),
         lwd = 0.9) +
-      coord_cartesian(expand = FALSE, xlim = range(pred_dat[[date_column]])) +
+      coord_cartesian(expand = FALSE, xlim = range(pred_dat[[date_column]]),
+                      ylim = range(c(0,tmp))) +
       ylab(ylab) +
       xlab(xlab) +
       ggtitle(title) +
@@ -136,7 +139,8 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
         plot.title = element_text(hjust = 0.5),
         panel.background = element_blank(),
         panel.grid.major.y = element_line(colour = "grey"),
-        axis.line.x = element_line(colour = "grey")
+        axis.line.x = element_line(colour = "grey"),
+        legend.title = element_blank()
       ) +
       scale_x_date(
         date_breaks = "1 month",

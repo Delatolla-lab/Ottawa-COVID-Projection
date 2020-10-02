@@ -65,13 +65,13 @@ vent_shade <- "rgba(23, 63, 95, 0.3)"
 icu_col <- "rgb(60, 174, 163)"
 icu_shade <- "rgba(60, 174, 163)"
 
-current_case_col <- "rgb(237, 194, 19)"
-current_case_shade <- "rgba(237, 194, 19)"
-current_case_hex <- "#EDC213"
+current_case_col <- "rgb(0, 128, 128)"
+current_case_shade <- "rgba(0, 128, 128)"
+current_case_hex <- "#008080"
 
-increase_col <- "rgb(214, 39, 40)"
-increase_shade <- "rgba(214, 39, 40)"
-increase_hex <- "#D62728"
+increase_col <- "rgb(246, 213, 86)"
+increase_shade <- "rgba(246, 213, 86)"
+increase_hex <- "#F6D556"
 
 reduction_col <- "rgb(133, 194, 43)"
 reduction_shade <- "rgba(133, 194, 43)"
@@ -194,7 +194,7 @@ ICU_p_acute_care
 ## Projections
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Generate projections for SEIR model fit
-ott_case_projections <- proj_generation(fit, lut, days_project = 60, day_start_reduction = 7, pct_change = 10)
+ott_case_projections <- proj_generation(fit, lut, days_project = 100, day_start_reduction = 7, pct_change = 10)
 
 # Create data set to visualize projections
 projection_data <- case_projection_data(ott_case_projections, 10)
