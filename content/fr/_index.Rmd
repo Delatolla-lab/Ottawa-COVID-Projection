@@ -52,6 +52,7 @@ ottawa_test_data <-
 # data
 ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
 ott_observed <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
+ott_observed <- ott_observed[ott_observed$date >= "2020-03-17",]
 peak_projections <- read.csv(file.path(getwd(), "../../Data/peak_projections.csv"))
 TOH_projections <- read.csv(file.path(getwd(),"../../Data/TOH_projection_estimates.csv"))
 TOH_observed <- read.csv(file.path(getwd(),"../../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
