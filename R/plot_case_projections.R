@@ -1,6 +1,7 @@
 # Generate case projections based on model fit, days to project from last observation,
 # days from last observation where transmission changes, and percentage change in transmission
-proj_generation <- function(fit, lut, days_project, day_start_reduction,
+proj_generation <- function(fit, lut, episode_data, project_to,
+                            day_start_reduction,
                             pct_change){
   
   # Change from current transmission (1.1 = 10% increase in transmission,
@@ -8,6 +9,9 @@ proj_generation <- function(fit, lut, days_project, day_start_reduction,
   current <- 1
   reduction <- 1 - (pct_change/100)
   increase <- 1 + (pct_change/100)
+  
+  # Set days to project based on episode data & projection end date
+  days_project <- as.numeric(as.Date(project_to) - last(episode_data$date))
   
   # Run projection for current transmission
   proj_current <- project_seir(
