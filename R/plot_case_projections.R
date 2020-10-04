@@ -71,7 +71,14 @@ case_projection_data <- function(proj_list, pct_change){
   proj_all <- proj_current %>%
     bind_rows(proj_increase) %>%
     bind_rows(proj_reduction) %>%
-    select(date, everything())
+    select(date, everything() )%>%
+    rename(
+      estimate_0.05 = "y_rep_0.05",
+      estimate_0.25 = "y_rep_0.25",
+      estimate_0.75 = "y_rep_0.75",
+      estimate_0.95 = "y_rep_0.95",
+      median_estimate = "mu_0.50"
+    )
   proj_all <- as.data.frame(proj_all)
   proj_all$Transmission <-
     factor(proj_all$Transmission,
@@ -92,6 +99,8 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
                                  xlab = "Date",
                                  ylab = "Daily cases", 
                                  title) {
+  
+  # Create error messages for incorrect input parameters
   if (!value_column %in% names(obs_dat)) {
     stop(glue("`obs_dat` must contain a column `{value_column}` that contains the reported case counts."), call. = FALSE)
   }
@@ -101,67 +110,74 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
   if (!date_column %in% names(pred_dat)) {
     stop(glue("`pred_dat` must contain a column named `{date_column}` that contains the numeric day (or date)."), call. = FALSE)
   }
+  
+  # Create temporary range limit object
   tmp_data <- pred_dat[pred_dat$Transmission == "Current transmission", ]
-  tmp <- 0.95*max(tmp_data$mu_0.50)
-    g <- ggplot(data = pred_dat, aes_string(x = date_column)) +
-      geom_ribbon(data = pred_dat[pred_dat$Transmission == "Current transmission", ],
-                  aes_string(ymin = "y_rep_0.05", ymax = "y_rep_0.95"),
-                  alpha = 0.2, fill = current_col
-      )  +
-      geom_ribbon(data = pred_dat[pred_dat$Transmission == "Current transmission", ],
-                  aes_string(ymin = "y_rep_0.25", ymax = "y_rep_0.75"),
-                  alpha = 0.2, fill = current_col
-      ) +
-      geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission decreased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
-                  aes_string(ymin = "y_rep_0.05", ymax = "y_rep_0.95"),
-                  alpha = 0.2, fill = reduction_col
-      ) +
-      geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission decreased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
-                  aes_string(ymin = "y_rep_0.25", ymax = "y_rep_0.75"),
-                  alpha = 0.2, fill = reduction_col
-      ) +
-      geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission increased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
-                  aes_string(ymin = "y_rep_0.05", ymax = "y_rep_0.95"),
-                  alpha = 0.2, fill = increase_col
-      ) +
-      geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission increased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
-                  aes_string(ymin = "y_rep_0.25", ymax = "y_rep_0.75"),
-                  alpha = 0.2, fill = increase_col
-      )
-    g <- g +
-      geom_line(
-        data = pred_dat,
-        aes(y = mu_0.50,
-            color = Transmission),
-        lwd = 0.9) +
-      coord_cartesian(expand = FALSE, xlim = range(pred_dat[[date_column]]),
-                      ylim = range(c(0,tmp))) +
-      ylab(ylab) +
-      xlab(xlab) +
-      ggtitle(title) +
-      theme(
-        plot.title = element_text(hjust = 0.5),
-        panel.background = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey"),
-        axis.line.x = element_line(colour = "grey"),
-        legend.title = element_blank()
-      ) +
-      scale_x_date(
-        date_breaks = "1 month",
-        date_labels = "%b %Y") +
-      scale_color_manual(
-        name = "Transmission",
-        values = c(current_col,
-                   reduction_col,
-                   increase_col)
-      )
-    g <- g +
-      geom_col(
-        data = obs_dat,
-        fill = current_col, inherit.aes = FALSE,
-        aes_string(x = date_column, y = value_column),
-        width = 1
-      ) +
+  tmp <- 0.95*max(tmp_data$median_estimate)
+  
+  g <- ggplot(data = pred_dat, aes_string(x = date_column)) +
+    geom_ribbon(data = pred_dat[pred_dat$Transmission == "Current transmission", ],
+                aes(ymin = estimate_0.05, ymax = estimate_0.95, text = "Current transmission"),
+                alpha = 0.2, fill = current_col
+    )  +
+    geom_ribbon(data = pred_dat[pred_dat$Transmission == "Current transmission", ],
+                aes(ymin = estimate_0.25, ymax = estimate_0.75, text = "Current transmission"),
+                alpha = 0.2, fill = current_col
+    ) +
+    geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission decreased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
+                aes(ymin = estimate_0.05, ymax = estimate_0.95, text = paste(paste(pct_change, "%", sep = ""),"reduction",
+                                                                       sep = " ")),
+                alpha = 0.2, fill = reduction_col
+    ) +
+    geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission decreased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
+                aes(ymin = estimate_0.25, ymax = estimate_0.75, text = paste(paste(pct_change, "%", sep = ""),"reduction",
+                                                                       sep = " ")),
+                alpha = 0.2, fill = reduction_col
+    ) +
+    geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission increased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
+                aes(ymin = estimate_0.05, ymax = estimate_0.95, text = paste(paste(pct_change, "%", sep = ""),"increase",
+                                                                       sep = " ")),
+                alpha = 0.2, fill = increase_col
+    ) +
+    geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission increased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
+                aes(ymin = estimate_0.25, ymax = estimate_0.75, text = paste(paste(pct_change, "%", sep = ""),"increase",
+                                                                       sep = " ")),
+                alpha = 0.2, fill = increase_col
+    )
+  g <- g +
+    geom_line(
+      data = pred_dat,
+      aes(y = median_estimate,
+          color = Transmission),
+      lwd = 0.9) +
+    coord_cartesian(expand = FALSE, xlim = range(pred_dat[[date_column]]),
+                    ylim = range(c(0,tmp))) +
+    ylab(ylab) +
+    xlab(xlab) +
+    ggtitle(title) +
+    theme(
+      plot.title = element_text(hjust = 0.5),
+      panel.background = element_blank(),
+      panel.grid.major.y = element_line(colour = "grey"),
+      axis.line.x = element_line(colour = "grey"),
+      legend.title = element_blank()
+    ) +
+    scale_x_date(
+      date_breaks = "1 month",
+      date_labels = "%b %Y") +
+    scale_color_manual(
+      name = "Transmission",
+      values = c(current_col,
+                 reduction_col,
+                 increase_col)
+    )
+  g <- g +
+    geom_col(
+      data = obs_dat,
+      fill = current_col, inherit.aes = FALSE,
+      aes_string(x = date_column, y = value_column),
+      width = 1
+    )
   
   if (max(pred_dat[["data_type"]]) > 1) g <- g + facet_wrap(~data_type)
   g_plot <- ggplotly(g) %>%

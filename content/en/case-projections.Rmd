@@ -159,6 +159,24 @@ lut <- tibble( # Create look-up table (lut)
 )
 tidy_proj <- left_join(tidy_proj, lut, by = "day")
 ```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Graph selection list
+icu_call <- list(type = "observed_data", y_column = "observed_census_ICU", name = "ICU census", color = icu_col)
+acute_care <- list(type = "observed_data", y_column = "observed_census_acute_care", name = "Acute care census", color = acute_col)
+
+# Plotly creation 
+ottawa_hosp <-
+  reworked_figure(
+    xaxis = "date",
+    yaxis = list(icu_call, acute_care), #DT1, DT2, DT3),
+    titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa hospitals"),
+    data = ott_observed_covid
+  )
+
+ottawa_hosp
+```
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualize current daily cases
 observed_new_episodes <- list(type = "observed_data", y_column = "observed_new_cases", name = "New cases by episode date", color = current_case_hex)
