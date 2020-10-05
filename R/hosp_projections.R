@@ -2,11 +2,13 @@ library(plotly)
 hosp_fun <- function(data1, parameter, title, current_color, current_shade,
                      reduction_value, reduction_color, reduction_shade,
                      increase_value, increase_color, increase_shade, y,
-                     observed_name) {
+                     observed_name, project_to) {
   tmp <- max(data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                                  paste("median_increase",
                                       as.character(increase_value), sep = "_"),
                                  sep = "_"), names(data1))])
+  data1 <- data1[as.Date(data1$date) <= (project_to), ]
+  tickvals <- floor_date(as.Date(data1$date), 'month')
   tmp <- tmp*0.90
   trace1 <- list(
     fill = "none",
@@ -150,8 +152,14 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
   layout <- list(
     title = list(text = as.character(title)),
     xaxis = list(type = "date",
-                 title = list(text = "Date")),
-    yaxis = list(title = list(text = as.character(y)), range = c(0,tmp)),
+                 title = list(text = "Date"),
+                 automargin = T,
+                 tickformat = "%b %Y",
+                 tickvals = tickvals,
+                 tickangle = 0,
+                 tickfont = list(size = 11)),
+    yaxis = list(title = list(text = as.character(y)),
+                 range = c(0,tmp)),
     hovermode = "closest",
     width = 700,
     height = 500,

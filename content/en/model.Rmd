@@ -23,10 +23,16 @@ bibliography: refs.bib
     - The Bayesian extension to the CHIME model incorporates new hospitalization data to generate a probabilistic forecast of hospital resource use based on best and worst case scenarios.
 
     - The projections can be updated for other models. 
+    
+4) *[Bayesian SEIR model](https://github.com/seananderson/covidseir) developed by Simon Fraser University.*
+
+    - This model uses reported new cases (by episode date) to estimate the reduction in contact among individuals that are physically distancing.
+    
+    - This reduction in contact is then used to generate a forecast of new cases based on various transmission scenarios.
 
 ## Projections based on daily hospital census {#hospital-census}
 
-Ottawa COVID-19 projections augment the projections of Public Health Ontario and other models by incorporating local reported hospitalizations since the beginning of the COVID-19 pandemic.  
+Ottawa COVID-19 projections augment the projections of Public Health Ontario and other models by incorporating local reported hospitalizations & case episodes since the beginning of the COVID-19 pandemic.  
 
 The use of local hospitalization rates follows the analogy of forecasting hurricanes. We monitor the local hospital COVID-19 use and then project the trend into the future based on the knowledge of COVID-19 and how it spreads in communities. 
 

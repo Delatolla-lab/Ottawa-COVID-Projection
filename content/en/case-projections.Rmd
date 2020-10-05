@@ -116,7 +116,7 @@ See [More](/more) page for more information about the terms used.
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Set up SEIR model
 ## Create observed data object that cuts off last 7 days
-ott_observed_covid_episodes <- as.data.frame(ott_observed_covid[1:(nrow(ott_observed_covid) - 7),])
+ott_observed_covid_episodes <- as.data.frame(ott_observed_covid[1:(nrow(ott_observed_covid) - 6),])
 
 ## Set up sampling fractions
 samp_frac <- c(rep(0.14, 13), rep(0.21, 38))
@@ -159,6 +159,24 @@ lut <- tibble( # Create look-up table (lut)
 )
 tidy_proj <- left_join(tidy_proj, lut, by = "day")
 ```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Graph selection list
+icu_call <- list(type = "observed_data", y_column = "observed_census_ICU", name = "ICU census", color = icu_col)
+acute_care <- list(type = "observed_data", y_column = "observed_census_acute_care", name = "Acute care census", color = acute_col)
+
+# Plotly creation 
+ottawa_hosp <-
+  reworked_figure(
+    xaxis = "date",
+    yaxis = list(icu_call, acute_care), #DT1, DT2, DT3),
+    titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa hospitals"),
+    data = ott_observed_covid
+  )
+
+ottawa_hosp
+```
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualize current daily cases
 observed_new_episodes <- list(type = "observed_data", y_column = "observed_new_cases", name = "New cases by episode date", color = current_case_hex)
@@ -194,7 +212,7 @@ ICU_p_acute_care
 ## Projections
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Generate projections for SEIR model fit
-ott_case_projections <- proj_generation(fit, lut, days_project = 100, day_start_reduction = 7, pct_change = 10)
+ott_case_projections <- proj_generation(fit, lut, ott_observed_covid_episodes, project_to = "2020-12-31", day_start_reduction = 7, pct_change = 10)
 
 # Create data set to visualize projections
 projection_data <- case_projection_data(ott_case_projections, 10)
@@ -208,14 +226,14 @@ case_projection_plot(projection_data, ott_observed_covid_episodes, current_col =
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed census of patients")
+hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed census of patients", project_to = "2020-12-31")
 ```
 
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed # of daily admissions")
+hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed # of daily admissions", project_to = "2020-12-31")
 ```
 
 --- 
