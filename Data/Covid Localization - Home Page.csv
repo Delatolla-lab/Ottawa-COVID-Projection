@@ -24,9 +24,11 @@ Data to {{1}}
 
 ### Current
 
-**{{2}}** confirmed COVID-19 patients in hospital.
+**{{2}}** active cases in Ottawa
+
+**{{3}}** confirmed COVID-19 patients in hospital.
  
-Including **{{3}}** acute care patients. **{{4}}** ICU patients.","# Tableau de bord
+Including **{{4}}** acute care patients. **{{5}}** ICU patients.","# Tableau de bord
 
 Données en date du {{1}}
 
@@ -38,7 +40,9 @@ De ce nombre : **{{3}}** patient(s) en soins actifs, **{{4}}** patient(s) aux 
 "
 ShortRangeForecast,"### Short-range forecast
 
-**{{1}}** patients in the following week, reflecting a current {{2}} of **{{3}} days** (daily growth of {{4}}%).","### Prévisions à court terme
+**{{1}}** active cases in the following week, reflecting a current {{2}} of **{{3}} days** (daily growth of {{4}}%).
+
+**{{5}}** patients in the following week, reflecting a current {{6}} of **{{7}} days** (daily growth of {{8}}%).","### Prévisions à court terme
 
 **{{1}}** de patients au cours de la semaine suivante, ce qui reflète un {{2}} par deux actuel de **{{3}}  jours** (croissance quotidienne de {{4}} %). "
 LongRangeForecast,"### Long-range forecast 
@@ -85,8 +89,8 @@ PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecti
 observed_admits,"## {#observed-admits} 
 ","## {#observed-admits}
 "
-ProjectedHospital_title,"## Projected hospital use {#peak-hosp-projections}
-","## Occupation projetée des hôpitaux {#peak-hosp-projections}
+ProjectedHospital_title,"## Projections {#projections}
+","## Projections {#projections}
 "
 ProjectedHospital_text,"The hospital census forecast of: 
 
