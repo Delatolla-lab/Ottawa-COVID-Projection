@@ -6,7 +6,7 @@ wastewater_prep <- function(data){
   names(data)[3] <- "N1_stdev"
   names(data)[5] <- "N2"
   names(data)[6] <- "N2_stdev"
-  names(data)[7] <- "N1_N2"
+  names(data)[7] <- "N1_N2_avg"
   names(data)[8] <- "rolling_avg"
   names(data)[9] <- "pct_change"
   # Remove second date header
