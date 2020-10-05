@@ -42,7 +42,11 @@ ShortRangeForecast,"### Short-range forecast
 
 **{{1}}** active cases in the following week, reflecting a current {{2}} of **{{3}} days** (daily growth of {{4}}%).
 
-**{{5}}** patients in the following week, reflecting a current {{6}} of **{{7}} days** (daily growth of {{8}}%).","### Prévisions à court terme
+**{{5}}** new cases* in the following week, reflecting a current {{6}} of **{{7}} days** (daily growth of {{8}}%).
+
+**{{9}}** patients in the following week, reflecting a current {{10}} of **{{11}} days** (daily growth of {{12}}%).
+
+*New cases are based on approximate date of episode. Case data in the last 7 days are omitted as public health investigators determine earliest onset date.","### Prévisions à court terme
 
 **{{1}}** de patients au cours de la semaine suivante, ce qui reflète un {{2}} par deux actuel de **{{3}}  jours** (croissance quotidienne de {{4}} %). "
 LongRangeForecast,"### Long-range forecast 
@@ -83,15 +87,15 @@ See [More](/more) page for more information about the terms used.
 Consultez la section Plus d’infos pour en savoir plus sur les termes employés. 
 
 ---"
-PastHospital_title,## Past hospital use ,## Occupation antérieure des hôpitaux
+PastData_title,## Observed cases & hospital use,## Occupation antérieure des hôpitaux
+observed_cases,## {#observed-cases},## {#observed-cases}
+observed_census,## {#observed-census},## {#observed-census}
 PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period. 
 ","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours. "
 observed_admits,"## {#observed-admits} 
 ","## {#observed-admits}
 "
-ProjectedHospital_title,"## Projections {#projections}
-","## Projections {#projections}
-"
+ProjectedHospital_title,## Projections,## Projections
 ProjectedHospital_text,"The hospital census forecast of: 
 
 {{1}} patients on {{2}} is based on the previous week’s growth rate of {{3}}%. 
@@ -105,6 +109,7 @@ ProjectedHospital_text,"The hospital census forecast of:
 {{4}} patients en {{5}} en fonction d’une augmentation de 10% de la transmission de la COVID-19. 
 
 {{6}} patients en {{7}} en fonction d’un retour au niveau de transmission du début de la pandémie en mars 2020.  "
+case_projections,## {#case-projections},## {#case-projections}
 hosp_projections,## {#hospitalization-projections},## {#hospitalization-projections}
 vent_projections,## {#ventilator-projections},## {#ventilator-projections}
 break,---,--- 

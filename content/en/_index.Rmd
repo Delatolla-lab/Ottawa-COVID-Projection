@@ -57,9 +57,6 @@ ottawa_test_data <-
 # data
 ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
 ott_observed <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
-peak_projections <- read.csv(file.path(getwd(), "../../Data/peak_projections.csv"))
-TOH_projections <- read.csv(file.path(getwd(),"../../Data/TOH_projection_estimates.csv"))
-TOH_observed <- read.csv(file.path(getwd(),"../../Data/Observed data/TOH_Observed_Hospital_Use.csv"))
 
 # Save ott_observed as csv
 write.csv(ott_observed, "../../Data/Observed data/OPH_Observed_COVID_Data.csv")
@@ -87,6 +84,35 @@ more_less_census = switch(
   more
 )
 
+## Observed new cases by episode date (excluding past 7 days)
+ott_observed_episodes <- as.data.frame(ott_observed[1:(nrow(ott_observed) - 6),])
+
+exp_new_episodes <- calc_expected_values_for_n_weeks(data = ott_observed_episodes,
+                                                     number_weeks = 3,
+                                                     observed_columns_name = "observed_new_cases",
+                                                     first_day = 1)
+
+## Dt = doubling (or halving) time
+Dt_new_episodes <- exp_new_episodes[[2]][[3]]
+
+if(Dt_new_episodes == Inf) {
+  Dt_active_cases <- 0
+}
+
+Dt_label_new_episodes = switch( 
+  (sign(Dt_new_episodes) + 2),
+  dt_label_half,
+  dt_label_no_change,
+  dt_label_double)
+
+more_less_new_episodes = switch(
+  (sign(Dt_new_episodes) + 2),
+  fewer,
+  the_same,
+  more
+)
+
+
 ## Observed active cases
 exp_active_cases <- calc_expected_values_for_n_weeks(data = ott_observed,
                                                      number_weeks = 3,
@@ -112,19 +138,6 @@ more_less_active_cases = switch(
   the_same,
   more
 )
-
-## projections
-peak_projections$intervention <-
-  factor(peak_projections$intervention, levels = c("Current transmission", "10% increase in transmission", "Early outbreak transmission"))
-
-# Values from peak_projections.csv
-current <- peak_projections[1,2] # peak with current distancing
-reduction_20 <- peak_projections[2,2] # peak with 20% decrease in distancing
-reduction_100 <- peak_projections[3,2] # peak with no distancing (pre-covid distancing)
-
-current_date <- peak_projections[1,4] # date of peak with current distancing
-reduction_20_date <- peak_projections[2,4] # date of peak with 20% reduction of distancing
-reduction_100_date <- peak_projections[3,4] # date of peak with no distancing
 
 
 # Colors
@@ -167,67 +180,62 @@ short_range_forecast <- insert_translation(localization_data, lang, "ShortRangeF
                                              Dt_label_active_cases,
                                              round(abs(exp_active_cases[[2]][[3]]), 0),
                                              round(100*exp_active_cases[[4]][[3]], 0),
+                                             more_less_new_episodes,
+                                             Dt_label_new_episodes,
+                                             round(abs(exp_new_episodes[[2]][[3]]), 0),
+                                             round(100*exp_new_episodes[[4]][[3]], 0),
                                              more_less_census,
                                              Dt_label_census,
                                              round(abs(exp_census[[2]][[3]]), 0),
                                              round(100*exp_census[[4]][[3]], 0)))
 
-long_range_forecast <- insert_translation(localization_data, lang, "LongRangeForecast",
-                                          c(current,
-                                            reduction_20,
-                                            paste(current_date),
-                                            paste(reduction_20_date))
-                                            )
-
 defintions <- insert_translation(localization_data, lang, "Definitions")
 
-past_hospital_use <- insert_translation(localization_data, lang, "PastHospital_title") 
+past_data_title <- insert_translation(localization_data, lang, "PastData_title") 
 
 past_hospital_text <- insert_translation(localization_data, lang, "PastHospital_text",
                                          c(Dt_label,
                                            round(abs(exp_census[[2]][[3]]), 0),
                                            round(effective_pd, 0))) 
 
+observed_cases <- insert_translation(localization_data, lang, "observed_cases") 
+
 observed_admits <- insert_translation(localization_data, lang, "observed_admits")
 
 projected_hospital_title <- insert_translation(localization_data, lang, "ProjectedHospital_title")
 
-projected_hospital_text <- insert_translation(localization_data, lang, "ProjectedHospital_text", 
-                                              c(signif(current, 2),
-                                                paste(current_date),
-                                                round(100*exp_census[[4]][[3]], 0),
-                                                signif(reduction_20, 2),
-                                                paste(reduction_20_date),
-                                                signif(reduction_100, 2),
-                                                paste(reduction_100_date)))
+case_projections <- insert_translation(localization_data, lang, "case_projections")
 
 hosp_projections <- insert_translation(localization_data, lang, "hosp_projections")
-
-vent_projections <- insert_translation(localization_data, lang, "vent_projections")
-
-death_title <- insert_translation(localization_data, lang, "death_title")
-
-death_text <- insert_translation(localization_data, lang, "Death_text") 
 ```
 
 `r dashboard`
 
 `r short_range_forecast`
 
-`r long_range_forecast`
-
 `r definitions`
 
-`r past_hospital_use`
+`r past_data_title`
+
+`r observed_cases`
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualize current daily cases
+observed_new_episodes <- list(type = "observed_data", y_column = "observed_new_cases", name = "New cases by episode date", color = current_case_hex)
+
+reworked_figure(
+    xaxis = "date",
+    yaxis = list(observed_new_episodes),
+    titles = c(y = "Daily cases", x = "Date", title = "Observed daily COVID-19 cases in Ottawa by episode date"),
+    data = ott_observed
+  )
+```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Ottawa Hospital data section @Warsame
 exp_census[[1]]$DT1 <- exp_census[[3]][[1]]$expected_val
 exp_census[[1]]$DT2 <- exp_census[[3]][[2]]$expected_val
 exp_census[[1]]$DT3 <- exp_census[[3]][[3]]$expected_val
-
-#Old depricated call
-#observed_figure(exp_census, "Observed census of COVID-19 hospitalizations in Ottawa", "Census (# of patients)")
 
 # Graph selection list
 icu_call <- list(type = "observed_data", y_column = "observed_census_ICU", name = "ICU census", color = icu_col)
@@ -252,7 +260,6 @@ ottawa_hosp
 
 `r observed_admits`
 
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 observed_daily_ICU_p_acute_care <- list(type = "observed_data", y_column = "observed_new_ICU_p_acute_care", name = "Reported # of patients", color = acute_col)
 
@@ -271,6 +278,69 @@ ICU_p_acute_care
 ```
 
 `r line_break`
+
+`r projected_hospital_title`
+
+`r case_projections`
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Set up SEIR model
+
+## Set up sampling fractions
+samp_frac <- c(rep(0.14, 13), rep(0.21, 38))
+samp_frac <- c(samp_frac, rep(0.37, nrow(ott_observed_episodes) - length(samp_frac)))
+
+## Set up contact rate breakpoints
+f_seg <- c(0, rep(1, nrow(ott_observed_episodes) - 1))
+day_new_f <- which(ott_observed_episodes$date == ymd("2020-05-19")) # Date of phase 1 reopening
+f_seg[seq(day_new_f, length(f_seg))] <- 2
+day_ch <- which(ott_observed_episodes$date == ymd("2020-06-12")) # Date of phase 2 reopening
+f_seg[seq(day_ch, length(f_seg))] <- 3
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE}
+# Fit SEIR model of observed new cases in Ottawa
+fit <- fit_seir(
+  daily_cases = ott_observed_episodes$observed_new_episodes,
+  samp_frac_fixed = samp_frac, 
+  f_seg = f_seg,
+  i0_prior = c(log(7), 1), # 7 total cases on March 1st, 2020
+  e_prior = c(0.85, 0.05), # 85% of residents social distancing
+  start_decline_prior = c(log(24), 0.1), # Starting date of closing of non-essential businesses (March 24th, 2020)
+  end_decline_prior = c(log(34), 0.1), # 10 day buffer to ramp in social distancing
+  f_prior = cbind(c(0.4, 0.5, 0.6), c(0.2, 0.2, 0.2)),
+  R0_prior = c(log(2.5), 0.2), # Starting R0 value
+  N_pop = 1049486, # Ottawa population
+  iter = 500, # number of posterior samples
+  fit_type = "optimizing" # for speed only
+)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Prepare model fit
+proj <- project_seir(fit, iter = 1:50)
+tidy_proj <- tidy_seir(proj, resample_y_rep = 20)
+first_day <- min(ott_observed_episodes$date) # first observation date
+last_day <- 500 # how many days to create dates for
+lut <- tibble( # Create look-up table (lut)
+  day = seq_len(last_day),
+  date = seq(first_day, first_day + length(day) - 1, by = "1 day")
+)
+tidy_proj <- left_join(tidy_proj, lut, by = "day")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Generate projections for SEIR model fit
+ott_case_projections <- proj_generation(fit, lut, ott_observed_episodes, project_to = "2020-12-31", day_start_reduction = 7, pct_change = 10)
+
+# Create data set to visualize projections
+projection_data <- case_projection_data(ott_case_projections, 10)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualize projections
+case_projection_plot(projection_data, ott_observed_episodes, current_col = current_case_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Projected daily COVID-19 cases in Ottawa", pct_change = 10)
+```
 
 `r hosp_projections`
 
