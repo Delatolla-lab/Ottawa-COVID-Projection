@@ -30,7 +30,7 @@ bibliography: refs.bib
     
     - This reduction in contact is then used to generate a forecast of new cases based on various transmission scenarios.
 
-## Projections based on daily hospital census {#hospital-census}
+## Projections based on daily hospital & case data {#hospital-census}
 
 Ottawa COVID-19 projections augment the projections of Public Health Ontario and other models by incorporating local reported hospitalizations & case episodes since the beginning of the COVID-19 pandemic.  
 
