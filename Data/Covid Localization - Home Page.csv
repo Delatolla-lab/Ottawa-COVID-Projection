@@ -1,17 +1,19 @@
 Key,en,fr
 Intro,"_Last updated on {{1}}. Updates are done Tuesdays._
 
+French text to be updated shortly.
+
 Pour le français cliquez [ici](https://613covid.ca/fr/).
 
-Current forecast of covid-19 cases and hospital use in the Ottawa area. Created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at The Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health. 
+Current forecast of COVID-19 cases and hospital use in the Ottawa area. Created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at The Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health.
 
-**Click [here](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/daily-covid19-dashboard.aspx)** to access the COVID-19 Daily Dashboard created by Ottawa Public Health","_Dernière mise à jour : {{1}}._
+**Click [here](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/daily-covid19-dashboard.aspx)** to access the COVID-19 Daily Dashboard created by Ottawa Public Health.","_Dernière mise à jour : {{1}}._
 
 For English click [here](https://613covid.ca/)
 
 Prévisions actuelles de l’occupation des hôpitaux par des patients atteints de la COVID-19 dans la région d’Ottawa. Une réalisation de l’équipe de [ProjectBigLife.ca](https://www.projectbiglife.ca) à L’Hôpital d’Ottawa et à l’Université d’Ottawa, avec la contribution de Santé publique Ottawa, qui fournit notamment les données."
 DT_label_half,halving time,temps de division
-DT_label_double,doubling time,temps de doublement 
+DT_label_double,doubling time,temps de doublement
 DT_label_no_change,no growth (flat),pas de croissance
 more,More,Plus
 fewer,Fewer,Moins
@@ -32,9 +34,9 @@ Données en date du {{1}}
 
 ### Situation actuelle
 
-**{{2}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés. 
+**{{2}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés.
 
-De ce nombre : **{{3}}** patient(s) en soins actifs, **{{4}}** patient(s) aux soins intensifs. 
+De ce nombre : **{{3}}** patient(s) en soins actifs, **{{4}}** patient(s) aux soins intensifs.
 "
 ShortRangeForecast,"### Short-range forecast
 
@@ -47,62 +49,62 @@ ShortRangeForecast,"### Short-range forecast
 *New cases are based on approximate date of episode. Case data in the last 7 days are omitted as public health investigators determine earliest onset date.","### Prévisions à court terme
 
 **{{1}}** de patients au cours de la semaine suivante, ce qui reflète un {{2}} par deux actuel de **{{3}}  jours** (croissance quotidienne de {{4}} %). "
-LongRangeForecast,"### Long-range forecast 
+LongRangeForecast,"### Long-range forecast
 
-**{{1}} to {{2}}** peak patients in Ottawa between **{{3}} & {{4}}**. ","### Prévisions à long terme 
+**{{1}} to {{2}}** peak patients in Ottawa between **{{3}} & {{4}}**. ","### Prévisions à long terme
 
 Sommet de **{{1}} à {{2}}** patients à Ottawa entre **{{3}} et {{4}}**. "
 Definitions,"## Definitions
 
 > **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
 
-> **Transmission** is the risk that a person becomes infected when they come in contact with a person with COVID-19. 
+> **Transmission** is the risk that a person becomes infected when they come in contact with a person with COVID-19.
 
 > **Doubling time** refers to the time it takes for the number of hospitalized patients to double in number. Conversely, **halving time** refers to the time it takes for the number of hospitalized patients to halve in number.
 
 > **Daily growth** is the rate of change in the hospitalization from day-to-day.
 
-> **Physical distancing** is a reduction in close contact between people. 
+> **Physical distancing** is a reduction in close contact between people.
 
-> **Wise socializing** is ensuring you don't become a link in a COVID-19 transmission chain that ends in a person becoming hospitalized or dying. This involves wearing a mask in indoor spaces, isolating yourself from others when sick, staying 2 meters apart from people outside your household, and exercising proper hand hygiene. Click [here](https://www.ottawapublichealth.ca/en/public-health-topics/be-covidwise.aspx) for more details on being COVIDWise. 
+> **Wise socializing** is ensuring you don't become a link in a COVID-19 transmission chain that ends in a person becoming hospitalized or dying. This involves wearing a mask in indoor spaces, isolating yourself from others when sick, staying 2 meters apart from people outside your household, and exercising proper hand hygiene. Click [here](https://www.ottawapublichealth.ca/en/public-health-topics/be-covidwise.aspx) for more details on being COVIDWise.
 
 See [More](/more) page for more information about the terms used.
 
----","## Définitions 
+---","## Définitions
 
-> **Le recensement des hospitalisations** correspond au nombre de patients recensés dans l’ensemble des hôpitaux d’Ottawa à minuit, le jour précédent. 
+> **Le recensement des hospitalisations** correspond au nombre de patients recensés dans l’ensemble des hôpitaux d’Ottawa à minuit, le jour précédent.
 
-> **La transmission** désigne le risque qu’une personne devienne infectée si elle est en contact avec une personne atteinte de la COVID-19. 
+> **La transmission** désigne le risque qu’une personne devienne infectée si elle est en contact avec une personne atteinte de la COVID-19.
 
-> **Le temps de doublement** correspond au temps nécessaire pour que le nombre de patients hospitalisés double. À l’inverse, **le temps de division** par deux indique le temps nécessaire pour que le nombre de patients hospitalisés diminue de moitié. 
+> **Le temps de doublement** correspond au temps nécessaire pour que le nombre de patients hospitalisés double. À l’inverse, **le temps de division** par deux indique le temps nécessaire pour que le nombre de patients hospitalisés diminue de moitié.
 
-> **La croissance quotidienne** désigne le taux de variation du nombre d’hospitalisations jour après jour. 
+> **La croissance quotidienne** désigne le taux de variation du nombre d’hospitalisations jour après jour.
 
-> **La distanciation physique** est la réduction du nombre de contacts étroits entre les personnes. 
+> **La distanciation physique** est la réduction du nombre de contacts étroits entre les personnes.
 
-> **L’établissement de contacts sociaux sécuritaire** consiste à éviter de devenir soi-même un maillon d’une chaîne de transmission de la COVID-19 qui entraînerait l’hospitalisation ou le décès de quelqu’un. 
+> **L’établissement de contacts sociaux sécuritaire** consiste à éviter de devenir soi-même un maillon d’une chaîne de transmission de la COVID-19 qui entraînerait l’hospitalisation ou le décès de quelqu’un.
 
-Consultez la section Plus d’infos pour en savoir plus sur les termes employés. 
+Consultez la section Plus d’infos pour en savoir plus sur les termes employés.
 
 ---"
 PastData_title,## Observed cases & hospital use,## Occupation antérieure des hôpitaux
 observed_cases,## {#observed-cases},## {#observed-cases}
 observed_census,## {#observed-census},## {#observed-census}
-PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period. 
+PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.
 ","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours. "
-observed_admits,"## {#observed-admits} 
+observed_admits,"## {#observed-admits}
 ","## {#observed-admits}
 "
 ProjectedHospital_title,## Projections,## Projections
-ProjectedHospital_text,"The hospital census forecast of: 
+ProjectedHospital_text,"The hospital census forecast of:
 
-{{1}} patients on {{2}} is based on the previous week’s growth rate of {{3}}%. 
+{{1}} patients on {{2}} is based on the previous week’s growth rate of {{3}}%.
 
-{{4}} patients on {{5}} is based on a 10% increase in COVID-19 transmission. 
+{{4}} patients on {{5}} is based on a 10% increase in COVID-19 transmission.
 
-{{6}} patients on {{7}} is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020. ","Explication des prévisions relatives au recensement des hospitalisations : 
+{{6}} patients on {{7}} is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020. ","Explication des prévisions relatives au recensement des hospitalisations :
 
-{{1}} patients en {{2}} en fonction d’un taux de croissance de {{3}}% la semaine précédente. 
+{{1}} patients en {{2}} en fonction d’un taux de croissance de {{3}}% la semaine précédente.
 
 {{4}} patients en {{5}} en fonction d’une augmentation de 10% de la transmission de la COVID-19. 
 
@@ -110,24 +112,24 @@ ProjectedHospital_text,"The hospital census forecast of:
 case_projections,## {#case-projections},## {#case-projections}
 hosp_projections,## {#hospitalization-projections},## {#hospitalization-projections}
 vent_projections,## {#ventilator-projections},## {#ventilator-projections}
-break,---,--- 
+break,---,---
 death_title,## Past deaths {#death-visualization},## Décès antérieurs {#death-visualization}
-Death_text,**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date. ,**Remarque:** Il est possible que le nombre de décès des 3 à 5 derniers jours ne reflète pas le nombre réel de décès attribuables à la COVID-19 puisque certains cas sont encore à l’étude afin de déterminer la date la plus récente d’apparition. 
-Contact,"**Media contact:** Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, [mschreiter@toh.ca](mailto:mschreiter@toh.ca) ph: 613-222-7674 
+Death_text,**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date. ,**Remarque:** Il est possible que le nombre de décès des 3 à 5 derniers jours ne reflète pas le nombre réel de décès attribuables à la COVID-19 puisque certains cas sont encore à l’étude afin de déterminer la date la plus récente d’apparition.
+Contact,"**Media contact:** Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, [mschreiter@toh.ca](mailto:mschreiter@toh.ca) ph: 613-222-7674
 
-**Science contacts:** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster 
+**Science contacts:** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster
 
-**Acknowledgements for website and content:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches, and others on Big Life Lab team. 
+**Acknowledgements for website and content:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches, and others on Big Life Lab team.
 
-**Supporting Ottawa Public Health epidemiologists:** Amira Ali, Jacqueline Willmore, Dara Spatz 
+**Supporting Ottawa Public Health epidemiologists:** Amira Ali, Jacqueline Willmore, Dara Spatz
 
-**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com). ","**Personne-ressource pour les médias :** Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: [mschreiter@toh.ca](mailto:mschreiter@toh.ca) Téléphone : 613-222-7674 
+**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com). ","**Personne-ressource pour les médias :** Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: [mschreiter@toh.ca](mailto:mschreiter@toh.ca) Téléphone : 613-222-7674
 
-**Personnes-ressources scientifiques :** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster 
+**Personnes-ressources scientifiques :** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster
 
-**Remerciements pour le site Web et le contenu :** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches et les autres membres de l’équipe de Big Life Lab. 
+**Remerciements pour le site Web et le contenu :** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
 
-**Avec le soutien des épidémiologistes de Santé publique Ottawa :** Amira Ali, Jacqueline Willmore, Dara Spatz 
+**Avec le soutien des épidémiologistes de Santé publique Ottawa :** Amira Ali, Jacqueline Willmore, Dara Spatz
 
 **Propriété intellectuelle :** Icônes relatives à la COVID-19 créées par [surang](https://www.flaticon.com/authors/surang), de [www.flaticon.com](https://www.flaticon.com/authors/surang). "
 More_intro,"## Model use {#use}

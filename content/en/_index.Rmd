@@ -67,6 +67,13 @@ exp_census <- calc_expected_values_for_n_weeks(data = ott_observed, number_weeks
 ## Dt = doubling (or halving) time
 Dt_census <- exp_census[[2]][[3]]
 
+diff <- (last(na.omit(exp_census[[3]][[3]][[1]])) -
+           first(na.omit(exp_census[[3]][[3]][[1]])))/first(na.omit(exp_census[[3]][[3]][[1]]))
+
+if(abs(diff) <= 0.05){
+  Dt_census <- 0
+}
+
 if(Dt_census == Inf) {
   Dt_census <- 0
 }
