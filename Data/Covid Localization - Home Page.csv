@@ -1,9 +1,9 @@
 Key,en,fr
 Intro,"_Last updated on {{1}}. Updates are done Tuesdays._
 
-Pour le français cliquez [ici](https://613covid.ca/fr/)
+Pour le français cliquez [ici](https://613covid.ca/fr/).
 
-Current forecast of hospital use for COVID-19 patients in the Ottawa area. Created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at The Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health. 
+Current forecast of covid-19 cases and hospital use in the Ottawa area. Created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at The Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health. 
 
 **Click [here](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/daily-covid19-dashboard.aspx)** to access the COVID-19 Daily Dashboard created by Ottawa Public Health","_Dernière mise à jour : {{1}}._
 
@@ -22,7 +22,7 @@ Data to {{1}}
 
 ### Current
 
-**{{2}}** active cases in Ottawa
+**{{2}}** active cases in Ottawa.
 
 **{{3}}** confirmed COVID-19 patients in hospital.
  
@@ -42,7 +42,7 @@ ShortRangeForecast,"### Short-range forecast
 
 **{{5}}** new cases* in the following week, reflecting a current {{6}} of **{{7}} days** (daily growth of {{8}}%).
 
-**{{9}}** patients in the following week, reflecting a current {{10}} of **{{11}} days** (daily growth of {{12}}%).
+**{{9}}** hospital patients in the following week, reflecting a current {{10}} of **{{11}} days** (daily growth of {{12}}%).
 
 *New cases are based on approximate date of episode. Case data in the last 7 days are omitted as public health investigators determine earliest onset date.","### Prévisions à court terme
 
