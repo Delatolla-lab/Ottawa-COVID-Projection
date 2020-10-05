@@ -20,6 +20,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             "95_current", sep = "_"), names(data1))],
+    hovertemplate = paste('Date: %{x|%Y-%m-%d}',
+                          '%{y}'),
     visible = TRUE,
     showlegend = FALSE
   )
@@ -34,6 +36,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             "5_current", sep = "_"), names(data1))],
+    hovertemplate = paste('Date: %{x|%Y-%m-%d}',
+                          '%{y}'),
     visible = TRUE,
     showlegend = FALSE
   )
@@ -46,6 +50,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             "median_current", sep = "_"), names(data1))],
+    hovertemplate = paste('Date: %{x|%Y-%m-%d}',
+                          '%{y}'),
     visible = TRUE,
     showlegend = TRUE
   )
@@ -59,6 +65,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             paste("95_reduction", as.character(reduction_value),
                                   sep = "_"), sep = "_"), names(data1))],
+    hovertemplate = paste('Date: %{x|%Y-%m-%d}',
+                          '%{y}'),
     stackgroup = NULL,
     showlegend = FALSE
   )
@@ -74,6 +82,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             paste("5_reduction", as.character(reduction_value),
                                   sep = "_"), sep = "_"), names(data1))],
+    hovertemplate = paste('Date: %{x|%Y-%m-%d}',
+                          '%{y}'),
     stackgroup = NULL,
     showlegend = FALSE
   )
@@ -89,6 +99,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       paste("median_reduction", as.character(reduction_value), sep = "_"),
       sep = "_"
     ), names(data1))],
+    hovertemplate = paste('Date: %{x|%Y-%m-%d}',
+                          '%{y}'),
     visible = TRUE,
     showlegend = TRUE
   )
@@ -102,6 +114,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             paste("95_increase", as.character(increase_value),
                                   sep = "_"), sep = "_"), names(data1))],
+    hovertemplate = paste('Date: %{x|%Y-%m-%d}',
+                          '%{y}'),
     stackgroup = NULL,
     showlegend = FALSE
   )
@@ -117,6 +131,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             paste("5_increase", as.character(increase_value),
                                   sep = "_"), sep = "_"), names(data1))],
+    hovertemplate = paste('Date: %{x|%Y-%m-%d}',
+                          '%{y}'),
     stackgroup = NULL,
     showlegend = FALSE
   )
@@ -132,6 +148,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       paste("median_increase", as.character(increase_value), sep = "_"),
       sep = "_"
     ), names(data1))],
+    hovertemplate = paste('Date: %{x|%Y-%m-%d}',
+                          '%{y}'),
     visible = TRUE,
     showlegend = TRUE
   )
@@ -146,6 +164,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     x = data1$date,
     y = data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
                             "observed", sep = "_"), names(data1))],
+    hovertemplate = paste('Date: %{x|%Y-%m-%d}',
+                          '%{y}'),
     orientation = "v",
     showlegend = TRUE
   )
@@ -160,7 +180,7 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
                  tickfont = list(size = 11)),
     yaxis = list(title = list(text = as.character(y)),
                  range = c(0,tmp)),
-    hovermode = "closest",
+    #hovermode = "closest",
     width = 700,
     height = 500,
     legend = list(x = 0.05, y = 0.9),
@@ -183,7 +203,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       x = trace1$x,
       y = trace1$y,
       visible = trace1$visible,
-      showlegend = trace1$showlegend
+      showlegend = trace1$showlegend,
+      hovertemplate = trace1$hovertemplate
     )
   p <-
     add_trace(
@@ -197,7 +218,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       x = trace2$x,
       y = trace2$y,
       visible = trace2$visible,
-      showlegend = trace2$showlegend
+      showlegend = trace2$showlegend,
+      hovertemplate = trace2$hovertemplate
     )
   p <-
     add_trace(
@@ -209,7 +231,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       x = trace3$x,
       y = trace3$y,
       visible = trace3$visible,
-      showlegend = trace3$showlegend
+      showlegend = trace3$showlegend,
+      hovertemplate = trace3$hovertemplate
     )
   p <-
     add_trace(
@@ -220,7 +243,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       type = trace4$type,
       x = trace4$x,
       y = trace4$y,
-      showlegend = trace4$showlegend
+      showlegend = trace4$showlegend,
+      hovertemplate = trace4$hovertemplate
     )
   p <-
     add_trace(
@@ -233,7 +257,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       type = trace5$type,
       x = trace5$x,
       y = trace5$y,
-      showlegend = trace5$showlegend
+      showlegend = trace5$showlegend,
+      hovertemplate = trace5$hovertemplate
       )
   p <-
     add_trace(
@@ -246,7 +271,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       x = trace6$x,
       y = trace6$y,
       visible = trace6$visible,
-      showlegend = trace6$showlegend
+      showlegend = trace6$showlegend,
+      hovertemplate = trace5$hovertemplate
     )
   p <-
     add_trace(
@@ -257,7 +283,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       type = trace7$type,
       x = trace7$x,
       y = trace7$y,
-      showlegend = trace7$showlegend
+      showlegend = trace7$showlegend,
+      hovertemplate = trace7$hovertemplate
     )
   p <-
     add_trace(
@@ -270,7 +297,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       type = trace8$type,
       x = trace8$x,
       y = trace8$y,
-      showlegend = trace8$showlegend
+      showlegend = trace8$showlegend,
+      hovertemplate = trace8$hovertemplate
     )
   p <-
     add_trace(
@@ -283,7 +311,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       x = trace9$x,
       y = trace9$y,
       visible = trace9$visible,
-      showlegend = trace9$showlegend
+      showlegend = trace9$showlegend,
+      hovertemplate = trace9$hovertemplate
     )
   p <-
     add_trace(
@@ -294,7 +323,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       type = trace10$type,
       x = trace10$x,
       y = trace10$y,
-      showlegend = trace10$showlegend
+      showlegend = trace10$showlegend,
+      hovertemplate = trace10$hovertemplate
     )
   p <-
     layout(
@@ -302,7 +332,7 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       title = layout$title,
       xaxis = layout$xaxis,
       yaxis = layout$yaxis,
-      hovermode = layout$hovermode,
+      #hovermode = layout$hovermode,
       width = layout$width,
       height = layout$height,
       legend = layout$legend,
