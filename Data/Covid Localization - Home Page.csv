@@ -134,9 +134,9 @@ More_intro,"## Model use {#use}
 
 There are two main uses of the projections:
 
-1) Short-term projections (2 to 4 weeks) to inform the immediate need for hospital and critical care services for COVID-19 patients. 
+1) Short-term projections (2 to 4 weeks) inform the current level of covid-19 transmssion. In turn, current covid-19 transmission reflects effectivess of ongoing covid-19 prevention and control. Short-term projections the immediate need health care such hospital and critical care services for COVID-19 patients. 
 
-2) Long-term projections (6 weeks onward) to assess the effect of relaxing physical distancing.
+2) Long-term projections (6 weeks onward) to assess the potential effect of changes in covid-19 transmission. In turn, future covid-19 transmission reflects potential changes to covid-19 re-opening stages and the effectiveness of cvoid prevention and control.
 
 ## Model accuracy {#accuracy}
 
@@ -146,11 +146,9 @@ We can't reliably forecast the weather six months out, and we can't forecast COV
 
 That being said, hurricanes and COVID-19 are not the same. The path and force of a hurricane can't be influenced, but the worst effects of COVID-19 can be avoided if we follow public health guidelines like staying home and practive physical distancing.  
 
-Long-range COVID-19 projections provide information on the effectiveness of physical distancing and other preventive measures. 
-
 ## Scenarios of physical distancing {#scenarios}
 
-Physical distancing and other preventive measures are the most important factors for projecting long-range (1 to 10 months) COVID-19 cases and hospital use.  
+Physical distancing and other preventive measures susch as wearing masks are the most important factors for projecting long-range (1 to 4 months) COVID-19 cases and hospital use.  
 
 Public Health Ontario projected 100,000 COVID-19 Ontario deaths with no preventative measures and a lower estimate of 3,000 deaths with preventive measures This wide range of estimates (100,000 to 3,000 deaths) reflects different levels of physical distancing.  
 
