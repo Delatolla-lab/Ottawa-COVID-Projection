@@ -23,140 +23,140 @@ publishDir = "./docs"
     post = "/:year/:month/:day/:slug/"
 
 [[menu.main]]
-    name = " Home"
+    name = "home"
     url = "/"
     weight = 1
 
 [[menu.main]]
-    name = " Visualizations"
+    name = "viz"
     url = ""
     weight = 2
     
 [[menu.main]]
-    name = " Observed cases"
+    name = "obs_cases"
     url = "/#observed-cases"
-    parent = " Visualizations"
+    parent = "viz"
     weight = 1
 
 [[menu.main]]
-    name = " Observed hospital census"
+    name = "obs_hosp_census"
     url = "/#observed-census"
-    parent = " Visualizations"
+    parent = "viz"
     weight = 2
     
 [[menu.main]]
-    name = " Observed daily hospital admissions"
+    name = "obs_daily_hosp_adms"
     url = "/#observed-admits"
-    parent = " Visualizations"
+    parent = "viz"
     weight = 3
     
 [[menu.main]]
-    name = " Case projections"
+    name = "case_proj"
     url = "/#case-projections"
-    parent = " Visualizations"
+    parent = "viz"
     weight = 4
     
 [[menu.main]]
-    name = " Hospitalization projections"
+    name = "hosp_projs"
     url = "/#hospitalization-projections"
-    parent = " Visualizations"
+    parent = "viz"
     weight = 5
     
 [[menu.main]]
-    name = " Model"
+    name = "model"
     url = "/model/"
     weight = 3
     
 [[menu.main]]
-    name = " Model parameters"
+    name = "model_params"
     url = "/model/"
-    parent = " Model"
+    parent = "model"
     weight = 1
     
 [[menu.main]]
-    name = " Hospital data"
+    name = "hosp_data"
     url = "/model/#hospital-census"
-    parent = " Model"
+    parent = "model"
     weight = 2
 
 [[menu.main]]
-    name = " Physical distancing"
+    name = "phys_dist"
     url = "/model/#physical-distancing"
-    parent = " Model"
+    parent = "model"
     weight = 3
 
 [[menu.main]]
-    name = " Physical distancing"
+    name = "phys_dist"
     url = "/model/#distancing-math"
-    parent = " Model"
+    parent = "model"
     weight = 4
     
 [[menu.main]]
-    name = " Physical distancing"
+    name = "phys_dist"
     url = "/model/#distancing"
-    parent = " Model"
+    parent = "model"
     weight = 5
     
 [[menu.main]]
-    name = " Input parameters"
+    name = "inp_params"
     url = "/model/#parameters"
-    parent = " Model"
+    parent = "model"
     weight = 6
 
 [[menu.main]]
-    name = " Input parameters"
+    name = "inp_params"
     url = "/model/#plot-data"
-    parent = " Model"
+    parent = "model"
     weight = 7
     
 [[menu.main]]
-    name = " References"
+    name = "refs"
     url = "/model/#references"
-    parent = " Model"
+    parent = "model"
     weight = 8
 
 [[menu.main]]
-    name = " More"
+    name = "more"
     url = "/more/"
     weight = 4
     
 [[menu.main]]
-    name = " Model use"
+    name = "model_use"
     url = "/more/#use"
-    parent = " More"
+    parent = "more"
     weight = 1
 
 [[menu.main]]
-    name = " Model accuracy"
+    name = "model_acc"
     url = "/more/#accuracy"
-    parent = " More"
+    parent = "more"
     weight = 2   
     
 [[menu.main]]
-    name = " Scenarios of physical distancing"
+    name = "scens_phys_dist"
     url = "/more/#scenarios"
-    parent = " More"
+    parent = "more"
     weight = 3  
     
 [[menu.main]]
-    name = " Physical distancing"
+    name = "phys_dist"
     url = "/more/#distancing"
-    parent = " More"
+    parent = "more"
     weight = 4 
     
 [[menu.main]]
-    name = " Physical distancing effectiveness"
+    name = "phys_dist_effect"
     url = "/more/#distancing-effectiveness"
-    parent = " More"
+    parent = "more"
     weight = 5
 
 [[menu.main]]
-    name = " Contact"
+    name = "contact"
     url = "/contact/"
     weight = 5
 
 [[menu.main]]
-    name = " Changelog"
+    name = "changelog"
     url = "/change-log/"
     weight = 6
 
