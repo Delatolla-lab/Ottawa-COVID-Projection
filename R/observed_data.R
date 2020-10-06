@@ -102,7 +102,7 @@ reworked_figure <-
       p <-
         layout(
           p,
-          title = list(text = titles[["title"]], x = 0.5),
+          title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
           xaxis = list(type = "date",
                        title = list(text = as.character(titles[["x"]])),
                        automargin = TRUE),
@@ -118,7 +118,7 @@ reworked_figure <-
       p <-
         layout(
           p,
-          title = list(text = titles[["title"]], x = 0.5),
+          title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
           xaxis = list(type = "date",
                        title = list(text = as.character(titles[["x"]])),
                        automargin = TRUE),
@@ -133,7 +133,7 @@ reworked_figure <-
           barmode =  "relative",
           bargap = 0,
           autosize = TRUE,
-          legend = list(x = 0.05, y = 1)
+          legend = list(x = 0.05, y = 0.9)
         )
     }
     return(p)

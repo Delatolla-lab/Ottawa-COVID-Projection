@@ -53,9 +53,13 @@ rolling_avg_col <- "rgb(243, 213, 86)"
 # Initialize calls for each parameter
 new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Daily reported new cases", color = case_col)
 
+new_case_5_day_call <- list(type = "observed_data", y_column = "observed_new_cases_5_day", name = "5 day rolling avg. \nin reported new cases", color = case_col)
+
 hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Hospital census", color = case_col)
 
 active_case_call <- list(type = "observed_data", y_column = "observed_active_cases", name = "Active cases", color = case_col)
+
+active_case_5_day_call <- list(type = "observed_data", y_column = "observed_active_cases_5_day", name = "5 day rolling avg. \nin active cases", color = case_col)
 
 n1_call <- list(type = "signal_data", y_column = "N1", name = "N1 RNA signal", color = n1_col, yaxis = "y2") 
 
@@ -63,20 +67,22 @@ n2_call <- list(type = "signal_data", y_column = "N2", name = "N2 RNA signal", c
 
 n1_n2_call <- list(type = "avg_data", y_column = "N1_N2_avg", name = "Avg. viral signal", color = n1_n2_col, yaxis = "y2")
 
-rolling_avg_call <- list(type = "avg_data", y_column = "rolling_avg", name = "5-day rolling avg. viral signal", color = rolling_avg_col, yaxis = "y2")
+viral_roc_call <- list(type = "avg_data", y_column = "viral_roc_daily", name = "Daily rate of change in viral signal", color = n1_n2_col, yaxis = "y2")
+
+viral_rolling_avg_call <- list(type = "avg_data", y_column = "avg_viral_roc_5_day", name = "5-day rolling avg. daily \nchange in viral signal", color = rolling_avg_col, yaxis = "y2")
 ```
 
 Data to `r as.character(tail(ott_covid_waste$date, n=1))`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(new_case_call), yaxis2 = list(n1_n2_call), titles = c(y = "# of reported new cases", y2 = "Copies per Copies PMMV", x = "Date", title = "Average COVID-19 viral signal in wastewater with respect to daily new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(new_case_5_day_call), yaxis2 = list(viral_rolling_avg_call), titles = c(y = "# of reported new cases", y2 = "Copies per Copies PMMV", x = "Date", title = "Average daily rate of change in \nCOVID-19 viral signal with respect to average new cases"), data = ott_covid_waste)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(active_case_call), yaxis2 = list(n1_n2_call), titles = c(y = "# of active cases", y2 = "Copies per Copies PMMV", x = "Date", title = "Average COVID-19 viral signal in wastewater with respect to active cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(active_case_5_day_call), yaxis2 = list(viral_rolling_avg_call), titles = c(y = "# of active cases", y2 = "Copies per Copies PMMV", x = "Date", title = "Average daily rate of change in \nCOVID-19 viral signal with respect to average active cases"), data = ott_covid_waste)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(hosp_call), yaxis2 = list(n1_n2_call), titles = c(y = "# of patients", y2 = "Copies per Copies PMMV", x = "Date", title = "Average COVID-19 viral signal in wastewater with respect to hospital census"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(new_case_5_day_call), yaxis2 = list(viral_roc_call), titles = c(y = "# of patients", y2 = "Copies per Copies PMMV", x = "Date", title = "Daily rate of change in COVID-19 \nviral signal with respect to average new cases"), data = ott_covid_waste)
 ```
 
