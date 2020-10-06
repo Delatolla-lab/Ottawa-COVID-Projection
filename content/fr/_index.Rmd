@@ -234,8 +234,6 @@ hosp_projections <- insert_translation(localization_data, lang, "hosp_projection
 
 `r dashboard`
 
-`r short_range_forecast`
-
 `r definitions`
 
 `r past_data_title`

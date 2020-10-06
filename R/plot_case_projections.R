@@ -170,6 +170,9 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
       values = c(current_col,
                  reduction_col,
                  increase_col)
+    ) +
+    scale_y_continuous(
+      breaks = seq(0, tmp, by = 100)
     )
   g <- g +
     geom_col(
