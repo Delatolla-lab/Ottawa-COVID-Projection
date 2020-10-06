@@ -96,7 +96,7 @@ ott_observed_episodes <- as.data.frame(ott_observed[1:(nrow(ott_observed) - 6),]
 
 exp_new_episodes <- calc_expected_values_for_n_weeks(data = ott_observed_episodes,
                                                      number_weeks = 3,
-                                                     observed_columns_name = "observed_new_cases",
+                                                     observed_columns_name = "observed_new_episodes",
                                                      first_day = 1)
 
 diff_new_episodes <- (last(na.omit(exp_new_episodes[[3]][[3]][[1]])) -
@@ -244,7 +244,7 @@ hosp_projections <- insert_translation(localization_data, lang, "hosp_projection
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualize current daily cases
-observed_new_episodes <- list(type = "observed_data", y_column = "observed_new_cases", name = "New cases by episode date", color = current_case_hex)
+observed_new_episodes <- list(type = "observed_data", y_column = "observed_new_episodes", name = "New cases by episode date", color = current_case_hex)
 
 reworked_figure(
     xaxis = "date",
