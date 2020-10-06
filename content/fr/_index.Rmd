@@ -67,10 +67,10 @@ exp_census <- calc_expected_values_for_n_weeks(data = ott_observed, number_weeks
 ## Dt = doubling (or halving) time
 Dt_census <- exp_census[[2]][[3]]
 
-diff <- (last(na.omit(exp_census[[3]][[3]][[1]])) -
+diff_census <- (last(na.omit(exp_census[[3]][[3]][[1]])) -
            first(na.omit(exp_census[[3]][[3]][[1]])))/first(na.omit(exp_census[[3]][[3]][[1]]))
 
-if(abs(diff) <= 0.05){
+if(abs(diff_census) <= 0.05){
   Dt_census <- 0
 }
 
@@ -99,6 +99,13 @@ exp_new_episodes <- calc_expected_values_for_n_weeks(data = ott_observed_episode
                                                      observed_columns_name = "observed_new_cases",
                                                      first_day = 1)
 
+diff_new_episodes <- (last(na.omit(exp_new_episodes[[3]][[3]][[1]])) -
+           first(na.omit(exp_new_episodes[[3]][[3]][[1]])))/first(na.omit(exp_new_episodes[[3]][[3]][[1]]))
+
+if(abs(diff_new_episodes) <= 0.05){
+  Dt_new_episodes <- 0
+}
+
 ## Dt = doubling (or halving) time
 Dt_new_episodes <- exp_new_episodes[[2]][[3]]
 
@@ -125,6 +132,13 @@ exp_active_cases <- calc_expected_values_for_n_weeks(data = ott_observed,
                                                      number_weeks = 3,
                                                      observed_columns_name = "observed_active_cases",
                                                      first_day = 1)
+
+diff_active_cases <- (last(na.omit(exp_active_cases[[3]][[3]][[1]])) -
+           first(na.omit(exp_active_cases[[3]][[3]][[1]])))/first(na.omit(exp_active_cases[[3]][[3]][[1]]))
+
+if(abs(diff_active_cases) <= 0.05){
+  Dt_active_cases <- 0
+}
 
 ## Dt = doubling (or halving) time
 Dt_active_cases <- exp_active_cases[[2]][[3]]
@@ -207,6 +221,8 @@ past_hospital_text <- insert_translation(localization_data, lang, "PastHospital_
 
 observed_cases <- insert_translation(localization_data, lang, "observed_cases") 
 
+observed_cases_text <- insert_translation(localization_data, lang, "observed_cases_text")
+
 observed_admits <- insert_translation(localization_data, lang, "observed_admits")
 
 projected_hospital_title <- insert_translation(localization_data, lang, "ProjectedHospital_title")
@@ -237,6 +253,8 @@ reworked_figure(
     data = ott_observed
   )
 ```
+
+`r observed_cases_text`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Ottawa Hospital data section @Warsame

@@ -48,7 +48,7 @@ ShortRangeForecast,"### Short-range forecast
 
 **{{9}}** hospital patients in the following week, reflecting a current {{10}} of **{{11}} days** (daily growth of {{12}}%).
 
-*New cases are based on approximate date of episode. Case data in the last 7 days are omitted as public health investigators determine earliest onset date.","### Prévisions à court terme
+*New cases are based on approximate date of episode. Case data in the last 7 days are omitted in growth calculations as public health investigators determine earliest onset date.","### Prévisions à court terme
 
 **{{1}}** de patients au cours de la semaine suivante, ce qui reflète un {{2}} par deux actuel de **{{3}}  jours** (croissance quotidienne de {{4}} %). "
 LongRangeForecast,"### Long-range forecast
@@ -86,11 +86,12 @@ See [More](/more) page for more information about the terms used.
 
 > **L’établissement de contacts sociaux sécuritaire** consiste à éviter de devenir soi-même un maillon d’une chaîne de transmission de la COVID-19 qui entraînerait l’hospitalisation ou le décès de quelqu’un.
 
-Consultez la section Plus d’infos pour en savoir plus sur les termes employés.
+Consultez la section [Plus](/more) d’infos pour en savoir plus sur les termes employés.
 
 ---"
 PastData_title,## Observed cases & hospital use,## Occupation antérieure des hôpitaux
 observed_cases,## {#observed-cases},## {#observed-cases}
+observed_cases_text, "**Note:** New cases are based on approximate date of episode. Case data in the last 7 days should be considered preliminary as as public health investigators determine earliest onset date.", 
 observed_census,## {#observed-census},## {#observed-census}
 PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.
 ","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours. "
