@@ -33,47 +33,35 @@ publishDir = "./docs"
     weight = 2
     
 [[menu.main]]
+    name = "obs_cases"
+    url = "/#observed-cases"
+    parent = "viz"
+    weight = 1
+
+[[menu.main]]
     name = "obs_hosp_census"
     url = "/#observed-census"
     parent = "viz"
-    weight = 1
+    weight = 2
     
 [[menu.main]]
     name = "obs_daily_hosp_adms"
     url = "/#observed-admits"
     parent = "viz"
-    weight = 2
-
-[[menu.main]]
-    name = "peak_hosp_projs"
-    url = "/#peak-hosp-projections"
-    parent = "viz"
     weight = 3
+    
+[[menu.main]]
+    name = "case_proj"
+    url = "/#case-projections"
+    parent = "viz"
+    weight = 4
     
 [[menu.main]]
     name = "hosp_projs"
     url = "/#hospitalization-projections"
     parent = "viz"
-    weight = 4
-
-[[menu.main]]
-    name = "vent_projs"
-    url = "/#ventilator-projections"
-    parent = "viz"
     weight = 5
     
-[[menu.main]]
-    name = "death_viz"
-    url = "/#death-visualization"
-    parent = "viz"
-    weight = 6
-    
-[[menu.main]]
-    name = "phys_dist"
-    url = "/more/#distancing"
-    parent = "viz"
-    weight = 7
-
 [[menu.main]]
     name = "model"
     url = "/model/"

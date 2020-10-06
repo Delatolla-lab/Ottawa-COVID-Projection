@@ -7,8 +7,8 @@
 <meta name="generator" content="Hugo 0.68.3" />
 
 
-<title>Categories - Ottawa COVID19</title>
-<meta property="og:title" content="Categories - Ottawa COVID19">
+<title>Model parameters - Ottawa COVID19</title>
+<meta property="og:title" content="Model parameters - Ottawa COVID19">
 
 
 
@@ -41,8 +41,6 @@
 
 
 
-
-<link href="/fr/categories/index.xml" rel="alternate" type="application/rss+xml" title="Ottawa COVID19" />
 
 
 
@@ -240,12 +238,106 @@
 
 <main class="content" role="main">
 
+  <article class="article">
+    
+
+    <h1 class="article-title">Model parameters</h1>
+
+    
+
+    <div class="article-content">
+      <ol>
+<li>
+<p><em>Projections are based on the reported daily hospital census for Ottawa.</em></p>
+<ul>
+<li>Daily hospital use reported by Ottawa Public Health.</li>
+</ul>
+</li>
+<li>
+<p><em>Model parameters other than Ottawa hospital use are aligned with other models.</em></p>
+<ul>
+<li>
+<p>Model parameters are described <a href="#parameters">below</a>.</p>
+</li>
+<li>
+<p>Parameter estimates are from <a href="https://www.covid-19-mc.ca/interactive-model">COVID-19-MC</a> and <a href="https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1">Tuite, Fisman, et al.</a> models where possible, with updates based on <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext">Verity et al. (Lancet, March 20, 2020)</a>* and <a href="https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf">Ferguson et al. (March 16, 2020)</a>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><em><a href="https://github.com/pennsignals/chime_sims">Bayesian extension to the CHIME model</a> developed by the University of Pennsylvania Health System.</em></p>
+<ul>
+<li>
+<p>CHIME is an SIR model that is initiated on hospital use. A SIR model calculates the projected number of people infected with a contagious illness in a closed population over time.</p>
+</li>
+<li>
+<p>The Bayesian extension to the CHIME model incorporates new hospitalization data to generate a probabilistic forecast of hospital resource use based on best and worst case scenarios.</p>
+</li>
+<li>
+<p>The projections can be updated for other models.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><em><a href="https://github.com/seananderson/covidseir">Bayesian SEIR model</a> developed by Simon Fraser University.</em></p>
+<ul>
+<li>
+<p>This model uses reported new cases (by episode date) to estimate the reduction in contact among individuals that are physically distancing.</p>
+</li>
+<li>
+<p>This reduction in contact is then used to generate a forecast of new cases based on various transmission scenarios.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="hospital-census">Projections based on daily hospital &amp; case data</h2>
+<p>Ottawa COVID-19 projections augment the projections of Public Health Ontario and other models by incorporating local reported hospitalizations &amp; case episodes since the beginning of the COVID-19 pandemic.</p>
+<p>The use of local hospitalization rates follows the analogy of forecasting hurricanes. We monitor the local hospital COVID-19 use and then project the trend into the future based on the knowledge of COVID-19 and how it spreads in communities.</p>
+<h2 id="physical-distancing">The importance of physical distancing</h2>
+<p>The trend of COVID-19 hospital use is summarized as “doubling time.” Doubling time — and the weekly change in doubling time — are the most important parameters in COVID-19 projections that vary between communities.</p>
+<p>An exponential growth in hosptial census (doubling time of less than 4 days) will occur unless one of two situations occurs:</p>
+<ol>
+<li>
+<p>The number of people susceptible to infection decreases. As an epidemic progresses, there will be fewer people left in the community who can become infected. However, as of  Oct 05, 2020 only a small proportion of people living in Ottawa are currently infected or are recovered from COVID-19 &ndash; likely less than 1%. This means that the current reduction in susceptible people has a negligible effect effect on changes to hospital infection doubling times. Approximately 50 to 60% of people need to be immune to COVID-19 (infected or recovered) before doubling time becomes negative &ndash; meaning there is a weekly decrease in the patients in hospital.</p>
+</li>
+<li>
+<p>Preventive measures slow the spread of infection.</p>
+</li>
+</ol>
+<p>The first situation — how doubling time decreases as the number of susceptible people decreases — can be easily modelled using mathematical formulas.</p>
+<p>The second situation — the effectiveness of preventive measures — is more difficult to estimate accurately. Prevention and control measures depend not only on what  measures are in place over the last 2-4 weeks, but also how well people follow the measures. Current hospital use and trends in hosptial use provide important information on physical distancing effectiveness and other measures to control the spread of COVID-19 infection.</p>
+<h2 id="distancing-math">How physical distancing affects COVID-19 projections</h2>
+<p>The projections of hospital cases uses an $SIR$ model ($S$ = susceptible, $I$ = infected, $R$ = recovered people). Within an SIR model,
+new infections at time ($t+1$) are equal to:</p>
+<p>$$I_{t+1} = \beta S_t I_t $$
+Where $\beta$ is commonly referred as the &ldquo;force of infection&rdquo; because it describes how quickly a disease can move through a population. $\beta$ is a probability or risk that ranges from 0 to 1. $\beta$ value = 0.5 means 50% of susceptible people ($S_t$) who are in contact with an infected person ($I_t$) will become infected ($I_{t+1}$).</p>
+<p>Physical distancing is a &lsquo;control measure&rsquo; to reduce the effective force of infection, $\beta$. A control measure, $\lambda$ reduces new infections, where $\lambda = 1$ results in a complete disruption in new infections (conversely, $\lambda = 0$ has no effect for reducing new infections). The projections presented on this website assume physical distancing is directly related to effective control. This means 50% physical distancing is the same as $\lambda = 0.5$. @daughton2017approach</p>
+<p>Note that $\beta$ is related to the epidemiology measure $R_0$ - the basic reproductive number that describes the expected number of people who become infected with from each person with COVID-19 at the beginning of an outbreak. $R_0 = \frac{\beta}{\gamma}$, where $\gamma$ is the reciprocal of the infectious period ($\psi$).</p>
+<h2 id="distancing">Calculating physical distancing effectiveness</h2>
+<p>Physical distancing effectiveness is equal to $\lambda$, for the calculations on this website. In practice, contract tracing and isolation is the other main control measure. The effect of contract tracing was not separated from physical distancing.</p>
+<p>Physical distancing effectiveness, $\lambda$:</p>
+<p>$$\lambda = 1 - \frac{(g + \gamma)}{\beta_0}$$
+Where,</p>
+<p>$g$ is the observed growth rate, expressed the rate of new COVID-19 cases each day.
+$\beta_0$ is the force of infection at the beginning of the outbreak. $\beta_0 = 0.332$ when doubling time $D_t = 4$ days (or growth rate at the beginning of the outbreak, $g_0 = 0.189$). In turn, $g_0$ is derived from a basic reproduction number ($R_0$) of 2.32 and mean generation interval ($T_c$) of 7 days, where,</p>
+<p>$$g_0 = \frac{R_0 - 1}{T_c}$$
+or,</p>
+<p>$$g_0 = 2^\frac{1}{T_d} - 1$$
+or,</p>
+<p>$$g_0 = \beta_0 - \gamma$$</p>
+<h2 id="parameters">Input parameters</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="plot-data">Data used to plot visualizations</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h3 id="references">References</h3>
+
+    </div>
+  </article>
+
   
-  <div class="archive">
-    
-    
-    
-  </div>
+
 
 </main>
 
@@ -268,4 +360,7 @@
   
 
   
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 

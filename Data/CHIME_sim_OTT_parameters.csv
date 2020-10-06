@@ -21,6 +21,14 @@ beta_spline_dimension,5,constant,,,number of splines for beta
 beta_spline_power,1,constant,,,polynomial of the truncated power spline
 beta_spline_prior,0,norm,0,0.2,prior on spline terms. Variance of splines is the inverse of an L2 penalty.
 b0,4,norm,-5,2.5,"This is the intercept on the mean of the logistic. It should be large and negative such that 1-logistic(b0+XB) is close to one when X is zero, because the (1-sd) is a coef on beta"
+day_new_f,2020-05-19,constant,,,Date of first distancing policy change (i.e. Date of phase 1 reopening)
+day_ch,2020-06-12,constant,,,Date of second distancing policy change (i.e. Date of phase 2 reopening)
+i0_prior,7,lognormal,,,"Initial number of cases (March 1, 2020)"
+e_prior,0.85,beta,,,Percentage of residents physical distancing
+start_decline_prior,24,lognormal,,,Starting date of closing of non-essential businesses
+end_decline_prior,34,lognormal,,,Ending date of physical distancing measures to be ramped in
+R0_prior,2.5,lognormal,,,Starting R0 value
 sd_percent_change_current,1,constant,,,Percent change with current distancing measures
-sd_percent_change_reduction_20,0.8,constant,,,Percent change with 20% reduction in distancing
-reopen_on_days,14,constant,,,Date of reopening from today
+sd_percent_change_reduction_10,0.9,constant,,,Percent change with 10% reduction in transmission
+sd_percent_change_increase_10,1.1,constant,,,Percent change with 10% increase in transmission
+reopen_on_days,14,constant,,,Date of change in transmission from today

@@ -4,6 +4,15 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V3.0.0
+2020-10-05
+
+- Case data & projections have been added to the website. See [model](/model)
+for more details on how projections for cases were created including input
+parameters.
+- Ventilator & peak projections removed from website.
+- Death figure removed from website.
+
 # V2.3.0
 2020-08-05
 

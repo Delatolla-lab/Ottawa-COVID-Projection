@@ -51,7 +51,7 @@ rolling_avg_col <- "rgb(243, 213, 86)"
 ### Observed Data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Initialize calls for each parameter
-new_case_call <- list(type = "observed_data", y_column = "observed_daily_average_cases", name = "Daily average cases", color = case_col)
+new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Daily reported new cases", color = case_col)
 
 hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Hospital census", color = case_col)
 
@@ -61,7 +61,7 @@ n1_call <- list(type = "signal_data", y_column = "N1", name = "N1 RNA signal", c
 
 n2_call <- list(type = "signal_data", y_column = "N2", name = "N2 RNA signal", color = n2_col, yaxis = "y2")
 
-n1_n2_call <- list(type = "avg_data", y_column = "N1_N2", name = "Avg. viral signal", color = n1_n2_col, yaxis = "y2")
+n1_n2_call <- list(type = "avg_data", y_column = "N1_N2_avg", name = "Avg. viral signal", color = n1_n2_col, yaxis = "y2")
 
 rolling_avg_call <- list(type = "avg_data", y_column = "rolling_avg", name = "5-day rolling avg. viral signal", color = rolling_avg_col, yaxis = "y2")
 ```
@@ -69,7 +69,7 @@ rolling_avg_call <- list(type = "avg_data", y_column = "rolling_avg", name = "5-
 Data to `r as.character(tail(ott_covid_waste$date, n=1))`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(new_case_call), yaxis2 = list(n1_n2_call), titles = c(y = "# of new cases", y2 = "Copies per Copies PMMV", x = "Date", title = "Average COVID-19 viral signal in wastewater with respect to daily new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(new_case_call), yaxis2 = list(n1_n2_call), titles = c(y = "# of reported new cases", y2 = "Copies per Copies PMMV", x = "Date", title = "Average COVID-19 viral signal in wastewater with respect to daily new cases"), data = ott_covid_waste)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
