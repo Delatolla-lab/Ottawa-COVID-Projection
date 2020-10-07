@@ -128,7 +128,8 @@ reworked_figure <-
             yaxis2 = list(
               side = "right",
               title = list(text = as.character(titles[["y2"]])),
-              automargin = TRUE
+              automargin = TRUE, 
+              showgrid = FALSE
             ),
             barmode =  "relative",
             bargap = 0,
