@@ -73,7 +73,9 @@ n2_call <- list(type = "signal_data", y_column = "N2", name = "N2 RNA signal", c
 
 n1_n2_call <- list(type = "avg_data", y_column = "N1_N2_avg", name = "Avg. viral signal", color = n1_n2_col, yaxis = "y2", opacity = 0.15)
 
-n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day mean change \nin viral signal", color = rolling_avg_col, yaxis = "y2")
+n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day mean change\nin viral signal", color = rolling_avg_col, yaxis = "y2")
+
+n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day mean change\nin viral signal", color = rolling_avg_col, yaxis = "y2")
 
 viral_roc_call <- list(type = "avg_data", y_column = "viral_roc_daily", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2")
 
@@ -81,7 +83,9 @@ rolling_avg <- list(type = "avg_data", y_column = "rolling_avg", name = "Daily r
 
 viral_rolling_avg_call <- list(type = "avg_data", y_column = "avg_viral_roc_5_day", name = "5-day rolling avg. daily \nchange in viral signal", color = rolling_avg_col, yaxis = "y2")
 
-change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_10_day", name = "Percent change in rolling avg \n over 10 days", color = rolling_avg_col, yaxis = "y2")
+change_N1_N2_5_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_day", name = "Percent change in rolling avg \nover 5 days", color = rolling_avg_col, yaxis = "y2")
+
+change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_day", name = "Percent change in rolling avg \nover 10 days", color = rolling_avg_col, yaxis = "y2")
 ```
 
 Data to `r as.character(tail(ott_covid_waste$date, n=1))`
@@ -92,11 +96,16 @@ reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(n
 * PMMV = pepper mild mottle virus. See methods for more details.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(active_case_5_day_call), titles = c(y = "SARS-CoV-2 wastewater copies per PMMV* copy", y2 = "# of active cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to active cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(active_case_5_day_call), titles = c(y = "SARS-CoV-2 wastewater copies per PMMV* copy", y2 = "# of active cases", x = "Date", title = "10 day average COVID-19 viral signal \nin wastewater with respect to active cases"), data = ott_covid_waste)
 ```
 * PMMV = pepper mild mottle virus. See methods for more details.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_10_day_call), yaxis2 = list(new_case_5_day_call), titles = c(y = "Percentage change (%)", y2 = "# of reported new cases", x = "Date", title = "Daily rate of change in COVID-19 \nviral signal with respect to new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_5_day_call), yaxis2 = list(active_case_5_day_call), titles = c(y = "SARS-CoV-2 wastewater copies per PMMV* copy", y2 = "# of active cases", x = "Date", title = "5 day average COVID-19 viral signal \nin wastewater with respect to active cases"), data = ott_covid_waste)
+```
+* PMMV = pepper mild mottle virus. See methods for more details.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_10_day_call), yaxis2 = list(new_case_5_day_call), titles = c(y = "Percentage change (%)", y2 = "# of reported new cases", x = "Date", title = "Percentage change in average COVID-19 \nviral signal with respect to new cases"), data = ott_covid_waste)
 ```
 * PMMV = pepper mild mottle virus. See methods for more details.
