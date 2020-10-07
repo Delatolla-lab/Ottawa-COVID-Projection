@@ -54,8 +54,6 @@ The figures below were created by the CHEO RI and uOttawa. Learn more about wast
 
 The science supporting wastewater surveillance is rapidly evolving. The plots are currently for research only and presented to the public for discussion only. Wastewater and public health scientists have noted the strong wastewater covid-19 signal increase in mid-July that preceded Ottawa summer and fall case resurgence.
 
-{uOttawa, CHEO and OPH logos here}
-
 ### Observed Data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Initialize calls for each parameter
