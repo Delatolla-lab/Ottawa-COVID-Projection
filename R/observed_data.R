@@ -87,7 +87,8 @@ reworked_figure <-
           curr_temp,
           list(x = data[, xaxis],
                y = data[, var_to_map$y_column],
-               yaxis = "y2")
+               yaxis = "y2"),
+          opacity = var_to_map$opacity
         ))
       # p <- add_trace(
       #   p,
@@ -99,42 +100,42 @@ reworked_figure <-
     }
     
     if(is.null(yaxis2)){
-      p <-
-        layout(
-          p,
-          title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-          xaxis = list(type = "date",
-                       title = list(text = as.character(titles[["x"]])),
-                       automargin = TRUE),
-          yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                       automargin = TRUE),
-          barmode =  "relative",
-          bargap = 0,
-          autosize = TRUE,
-          legend = list(x = 0.05, y = 1)
-        )
+        p <-
+          layout(
+            p,
+            title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+            xaxis = list(type = "date",
+                         title = list(text = as.character(titles[["x"]])),
+                         automargin = TRUE),
+            yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                         automargin = TRUE),
+            barmode =  "relative",
+            bargap = 0,
+            autosize = TRUE,
+            legend = list(x = 0.05, y = 1)
+          )
     }
     else{
-      p <-
-        layout(
-          p,
-          title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-          xaxis = list(type = "date",
-                       title = list(text = as.character(titles[["x"]])),
-                       automargin = TRUE),
-          yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                       automargin = TRUE),
-          yaxis2 = list(
-            overlaying = "y",
-            side = "right",
-            title = list(text = as.character(titles[["y2"]])),
-            automargin = TRUE
-          ),
-          barmode =  "relative",
-          bargap = 0,
-          autosize = TRUE,
-          legend = list(x = 0.05, y = 0.9)
-        )
+        p <-
+          layout(
+            p,
+            title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+            xaxis = list(type = "date",
+                         title = list(text = as.character(titles[["x"]])),
+                         automargin = TRUE),
+            yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                         automargin = TRUE),
+            yaxis2 = list(
+              overlaying = "y",
+              side = "right",
+              title = list(text = as.character(titles[["y2"]])),
+              automargin = TRUE
+            ),
+            barmode =  "relative",
+            bargap = 0,
+            autosize = TRUE,
+            legend = list(x = 0.05, y = 0.9)
+          )
     }
     return(p)
     
