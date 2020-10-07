@@ -1,5 +1,5 @@
 ---
-title: "Ottawa wastewater analysis"
+title: "Ottawa covid-19 wastewater surveillance"
 output: html_document
 ---
 
@@ -47,6 +47,13 @@ n2_col <- "rgb(60, 174, 163)"
 n1_n2_col <- "rgb(237, 85, 59)"
 rolling_avg_col <- "rgb(243, 213, 86)"
 ```
+The National Capital Region is one of the first communities in Canada to conduct daily wastewater readings to help inform its community response in the fight against COVID-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa). 
+
+The figures below were created by the CHEO RI and uOttawa. Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health's [website](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/statistics-on-coronavirus-19-covid-19-in-ottawa.aspx). 
+
+The science supporting wastewater surveillance is rapidly evolving. The plots are currently for research only and presented to the public for discussion only. Wastewater and public health scientists have noted the strong wastewater covid-19 signal increase in mid-July that preceded Ottawa summer and fall case resurgence.
+
+{uOttawa, CHEO and OPH logos here}
 
 ### Observed Data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
