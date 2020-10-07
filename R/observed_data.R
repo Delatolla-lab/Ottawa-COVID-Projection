@@ -21,6 +21,14 @@ reworked_figure <-
             width = 5
           )
         ),
+      avg_data = list(
+        type = "scatter",
+        mode = "line",
+        showlegend = TRUE,
+        line = list(
+          width = 4
+        )
+      ),
       observed_data = list(
         type = "bar",
         showlegend = TRUE,
@@ -31,24 +39,16 @@ reworked_figure <-
       signal_data = list(
         type = "scatter",
         showlegend = TRUE
-      ),
-      avg_data = list(
-        type = "scatter",
-        mode = "line",
-        showlegend = TRUE,
-        line = list(
-          width = 4
-        )
       )
     )
     attr(trace_presets$doubling_time, "class") <-
       "doubling_time"
+    attr(trace_presets$avg_data, "class") <-
+      "avg_data"
     attr(trace_presets$observed_data, "class") <-
       "observed_data"
     attr(trace_presets$signal_data, "class") <-
       "signal_data"
-    attr(trace_presets$avg_data, "class") <-
-      "avg_data"
     
     library(plotly)
     p <- plot_ly()
@@ -124,9 +124,8 @@ reworked_figure <-
                          title = list(text = as.character(titles[["x"]])),
                          automargin = TRUE),
             yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                         automargin = TRUE),
+                         automargin = TRUE, overlaying = "y2"),
             yaxis2 = list(
-              overlaying = "y",
               side = "right",
               title = list(text = as.character(titles[["y2"]])),
               automargin = TRUE
@@ -161,6 +160,18 @@ change_color.doubling_time <- function(template, color) {
   ))
 }
 
+change_color.avg_data <- function(template, color){
+  return(list(
+    type = "scatter",
+    mode = "line",
+    showlegend = TRUE,
+    line = list(
+      color = color,
+      width = 4
+    )
+  ))
+}
+
 change_color.observed_data <- function(template, color) {
   return(list(
     type = "bar",
@@ -174,18 +185,6 @@ change_color.signal_data <- function(template, color) {
     type = "scatter",
     showlegend = TRUE,
     marker = list(color = color)
-  ))
-}
-
-change_color.avg_data <- function(template, color){
-  return(list(
-    type = "scatter",
-    mode = "line",
-    showlegend = TRUE,
-    line = list(
-      color = color,
-      width = 4
-    )
   ))
 }
 
