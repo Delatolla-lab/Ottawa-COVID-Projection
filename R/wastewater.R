@@ -75,5 +75,11 @@ merge_data <- function(data1, data2){
           FUN=function(x) mean(x, na.rm=TRUE),
           by=1, by.column=TRUE, partial=TRUE,
           fill=NA, align="right"),
+      observed_new_cases_10_day =
+        rollapply(
+          observed_new_cases, width=10,
+          FUN=function(x) mean(x, na.rm=TRUE),
+          by=1, by.column=TRUE, partial=TRUE,
+          fill=NA, align="right")
     )
 }
