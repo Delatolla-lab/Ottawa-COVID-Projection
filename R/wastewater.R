@@ -27,6 +27,14 @@ merge_data <- function(data1, data2){
   data1 %>%
     full_join(data2, by = "date") %>%
     filter(date >= "2020-04-08") %>%
+    # create 5 day rolling avg of viral signal
+    mutate(
+      N1_N2_5_day =
+        rollapply(N1_N2_avg, width=5,
+                  FUN=function(x) mean(x, na.rm=TRUE),
+                  by=1, by.column=TRUE, partial=TRUE,
+                  fill=NA, align="center")
+    ) %>%
     # create 10 day rolling avg of viral signal
     mutate(
       N1_N2_10_day =
@@ -42,6 +50,11 @@ merge_data <- function(data1, data2){
                   FUN=function(x) mean(x, na.rm=TRUE),
                   by=1, by.column=TRUE, partial=TRUE,
                   fill=NA, align="center")
+    ) %>%
+    # create change in 5 day rolling avg from 10 day rolling avg 10 days ago
+    mutate(
+      change_N1_N2_5_day =
+        (N1_N2_5_day - lag(N1_N2_5_day, 5))/lag(N1_N2_5_day, 5) * 100
     ) %>%
     # create change in 10 day rolling avg from 10 day rolling avg 10 days ago
     mutate(
@@ -62,5 +75,11 @@ merge_data <- function(data1, data2){
           FUN=function(x) mean(x, na.rm=TRUE),
           by=1, by.column=TRUE, partial=TRUE,
           fill=NA, align="right"),
+      observed_new_cases_10_day =
+        rollapply(
+          observed_new_cases, width=10,
+          FUN=function(x) mean(x, na.rm=TRUE),
+          by=1, by.column=TRUE, partial=TRUE,
+          fill=NA, align="right")
     )
 }

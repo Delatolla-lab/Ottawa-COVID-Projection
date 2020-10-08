@@ -29,7 +29,7 @@ source("../../R/wastewater.R")
 
 # Pull JSON objects from OpenOttawa
 ottawa_case_data <-
-  fromJSON("https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=Cumulative_Active_Cases_by_Episode_Date,7-day_Average_of_Newly_Reported_cases_by_Reported_Date,Daily_Cases_Linked_to_a_Community_Outbreak_by_Episode_Date,Daily_Cases_Not_Linked_to_an_Outbreak_ie_Sporadic_Cases_by_Episode_Date,Daily_Cases_Linked_to_an_Institutional_Outbreak_by_Episode_Date,Cumulative_Deaths_by_Date_of_Death,_Date,Daily_Cases_by_Reported_Date,Daily_Cases_by_Episode_Date,Cases_Newly_Admitted_to_Hospital,Cases_Currently_in_Hospital,Cases_Currently_in_ICU&outSR=4326&f=json")
+  fromJSON("https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Cumulative_Cases_by_Episode_Date,Cumulative_Active_Cases_by_Episode_Date,Daily_Cases_by_Reported_Date,7-day_Average_of_Newly_Reported_cases_by_Reported_Date,Daily_Cases_by_Episode_Date,Daily_Cases_Linked_to_a_Community_Outbreak_by_Episode_Date,Daily_Cases_Linked_to_an_Institutional_Outbreak_by_Episode_Date,Daily_Cases_Not_Linked_to_an_Outbreak_ie_Sporadic_Cases_by_Episode_Date,Cases_Newly_Admitted_to_Hospital,Cases_Currently_in_Hospital,Cases_Currently_in_ICU,Cumulative_Deaths_by_Date_of_Death&outSR=4326&f=json")
 ottawa_test_data <-
   fromJSON("https://opendata.arcgis.com/datasets/26c902bf1da44d3d90b099392b544b81_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Number_of_Tests,Daily_%_Positivity&outSR=4326&f=json")
 
@@ -50,9 +50,9 @@ rolling_avg_col <- "rgb(226, 127, 88)"
 ```
 The National Capital Region is one of the first communities in Canada to conduct daily wastewater readings to help inform its community response in the fight against COVID-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa). 
 
-The figures below were created by the CHEO RI and uOttawa. Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health's [website](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/statistics-on-coronavirus-19-covid-19-in-ottawa.aspx). 
+The figures below were created by researchers at CHEO RI and uOttawa. Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health's [website](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/statistics-on-coronavirus-19-covid-19-in-ottawa.aspx). 
 
-The science supporting wastewater surveillance is rapidly evolving. The plots are currently for research only and presented to the public for discussion only. Wastewater and public health scientists have noted the strong wastewater covid-19 signal increase in mid-July that preceded Ottawa summer and fall case resurgence.
+The science supporting wastewater surveillance is rapidly evolving. The plots are currently for research only and presented to the public for discussion only. Wastewater and public health scientists have noted the early wastewater covid-19 signal increase in mid-July that preceded Ottawa summer and fall case resurgence.
 
 ### Observed Data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -60,6 +60,8 @@ The science supporting wastewater surveillance is rapidly evolving. The plots ar
 new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Daily reported new cases", color = case_col)
 
 new_case_5_day_call <- list(type = "observed_data", y_column = "observed_new_cases_5_day", name = "5 day mean \nin reported new cases", color = case_col, opacity = 0.15)
+
+new_case_10_day_call <- list(type = "observed_data", y_column = "observed_new_cases_10_day", name = "10 day mean \nin reported new cases", color = case_col, opacity = 0.15)
 
 hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Hospital census", color = case_col)
 
@@ -73,7 +75,9 @@ n2_call <- list(type = "signal_data", y_column = "N2", name = "N2 RNA signal", c
 
 n1_n2_call <- list(type = "avg_data", y_column = "N1_N2_avg", name = "Avg. viral signal", color = n1_n2_col, yaxis = "y2", opacity = 0.15)
 
-n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day mean change \nin viral signal", color = rolling_avg_col, yaxis = "y2")
+n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day mean change\nin viral signal", color = rolling_avg_col, yaxis = "y2")
+
+n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day mean change\nin viral signal", color = rolling_avg_col, yaxis = "y2")
 
 viral_roc_call <- list(type = "avg_data", y_column = "viral_roc_daily", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2")
 
@@ -81,22 +85,28 @@ rolling_avg <- list(type = "avg_data", y_column = "rolling_avg", name = "Daily r
 
 viral_rolling_avg_call <- list(type = "avg_data", y_column = "avg_viral_roc_5_day", name = "5-day rolling avg. daily \nchange in viral signal", color = rolling_avg_col, yaxis = "y2")
 
-change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_10_day", name = "Percent change in rolling avg \n over 10 days", color = rolling_avg_col, yaxis = "y2")
+change_N1_N2_5_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_day", name = "Percent change in rolling avg \nover 5 days", color = rolling_avg_col, yaxis = "y2")
+
+change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_day", name = "Percent change in rolling avg \nover 10 days", color = rolling_avg_col, yaxis = "y2")
 ```
 
 Data to `r as.character(tail(ott_covid_waste$date, n=1))`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(new_case_5_day_call), titles = c(y = "SARS-CoV-2 wastewater copies per PMMV* copy", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(new_case_5_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
 ```
-* PMMV = pepper mild mottle virus. See methods for more details.
+* Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See methods for more details.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(active_case_5_day_call), titles = c(y = "SARS-CoV-2 wastewater copies per PMMV* copy", y2 = "# of active cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to active cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(active_case_5_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of active cases", x = "Date", title = "10 day average COVID-19 viral signal \nin wastewater with respect to active cases"), data = ott_covid_waste)
 ```
-* PMMV = pepper mild mottle virus. See methods for more details.
+* Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See methods for more details.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_10_day_call), yaxis2 = list(new_case_5_day_call), titles = c(y = "Percentage change (%)", y2 = "# of reported new cases", x = "Date", title = "Daily rate of change in COVID-19 \nviral signal with respect to new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_5_day_call), yaxis2 = list(active_case_5_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of active cases", x = "Date", title = "5 day average COVID-19 viral signal \nin wastewater with respect to active cases"), data = ott_covid_waste)
 ```
-* PMMV = pepper mild mottle virus. See methods for more details.
+* Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See methods for more details.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_10_day_call), yaxis2 = list(new_case_10_day_call), titles = c(y = "Percentage change (%)", y2 = "# of reported new cases", x = "Date", title = "Percentage change in average COVID-19 \nviral signal with respect to new cases"), data = ott_covid_waste)
+```

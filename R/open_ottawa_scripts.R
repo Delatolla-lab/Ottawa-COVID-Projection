@@ -40,6 +40,7 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
         observed_census_ICU_p_acute_care = "Cases_Currently_in_Hospital",
         observed_census_ICU = "Cases_Currently_in_ICU",
         observed_cumulative_deaths = "Cumulative_Deaths_by_Date_of_Death",
+        observed_cumulative_cases = "Cumulative_Cases_by_Episode_Date",
         observed_new_cases = "Daily_Cases_by_Reported_Date",
         observed_new_episodes = "Daily_Cases_by_Episode_Date",
         observed_active_cases = "Cumulative_Active_Cases_by_Episode_Date",
