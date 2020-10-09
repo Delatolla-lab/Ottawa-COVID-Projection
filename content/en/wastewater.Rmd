@@ -65,6 +65,12 @@ new_case_10_day_call <- list(type = "observed_data", y_column = "observed_new_ca
 
 new_case_7_day_call <- list(type = "observed_data", y_column = "observed_new_cases_7_day", name = "7 day mean \nin reported new cases", color = case_col, opacity = 0.15)
 
+new_community_case_5_day_call <- list(type = "observed_data", y_column = "observed_new_community_cases_5_day", name = "5 day mean \nin reported new community cases", color = case_col, opacity = 0.15)
+
+new_community_case_10_day_call <- list(type = "observed_data", y_column = "observed_new_community_cases_7_day", name = "10 day mean \nin reported new community cases", color = case_col, opacity = 0.15)
+
+new_community_case_7_day_call <- list(type = "observed_data", y_column = "observed_new_community_cases_10_day", name = "7 day mean \nin reported new community cases", color = case_col, opacity = 0.15)
+
 hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Hospital census", color = case_col)
 
 active_case_call <- list(type = "observed_data", y_column = "observed_active_cases", name = "Active cases", color = case_col)
@@ -101,20 +107,20 @@ change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_d
 Data to `r as.character(tail(ott_covid_waste$date, n=1))`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_community_case_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new community cases"), data = ott_covid_waste)
 ```
 * Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See methods for more details.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(new_case_10_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of active cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(new_community_case_10_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of active cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new community cases"), data = ott_covid_waste)
 ```
 * Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See methods for more details.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_10_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of active cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_community_case_10_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of active cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new community cases"), data = ott_covid_waste)
 ```
 * Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See methods for more details.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(new_case_7_day_call), titles = c(y = "Percentage change (%)", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(new_community_case_7_day_call), titles = c(y = "Percentage change (%)", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new community cases"), data = ott_covid_waste)
 ```

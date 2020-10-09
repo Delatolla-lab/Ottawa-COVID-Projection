@@ -66,7 +66,7 @@ merge_data <- function(data1, data2){
       change_N1_N2_10_day =
         (N1_N2_10_day - lag(N1_N2_10_day, 10))/lag(N1_N2_10_day, 10) * 100
     ) %>%
-    # create 5, 7, 10 day rolling avgs of reported new cases & active cases
+    # create 5, 7, 10 day rolling avgs of reported new cases, new community cases, & active cases
     mutate(
       observed_new_cases_5_day =
         rollapply(
@@ -83,6 +83,24 @@ merge_data <- function(data1, data2){
       observed_new_cases_10_day =
         rollapply(
           observed_new_cases, width=10,
+          FUN=function(x) mean(x, na.rm=TRUE),
+          by=1, by.column=TRUE, partial=TRUE,
+          fill=NA, align="right"),
+      observed_new_community_cases_5_day =
+        rollapply(
+          observed_new_community_cases, width=5,
+          FUN=function(x) mean(x, na.rm=TRUE),
+          by=1, by.column=TRUE, partial=TRUE,
+          fill=NA, align="right"),
+      observed_new_community_cases_7_day =
+        rollapply(
+          observed_new_community_cases, width=7,
+          FUN=function(x) mean(x, na.rm=TRUE),
+          by=1, by.column=TRUE, partial=TRUE,
+          fill=NA, align="right"),
+      observed_new_community_cases_10_day =
+        rollapply(
+          observed_new_community_cases, width=10,
           FUN=function(x) mean(x, na.rm=TRUE),
           by=1, by.column=TRUE, partial=TRUE,
           fill=NA, align="right"),
