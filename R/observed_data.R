@@ -53,6 +53,20 @@ reworked_figure <-
     library(plotly)
     p <- plot_ly()
     
+    # base parameters for buttons
+    base_params <- 'list(
+  list(
+  active = -1,
+  type= "buttons",
+  direction = "right",
+  xanchor = "center",
+  yanchor = "top",
+  pad = list("r"= 0, "t"= -25, "b" = 0),
+  buttons = list(
+  %s)
+  )
+  )'
+    
     for (var_to_map in yaxis) {
       curr_temp <- trace_presets[[var_to_map$type]]
       if (!is_null(var_to_map$color)) {
@@ -66,6 +80,7 @@ reworked_figure <-
           list(x = data[, xaxis],
                y = data[, var_to_map$y_column])
         ))
+      
       # p <- add_trace(
       #   p,
       #   name = var_to_map$name,
@@ -134,7 +149,8 @@ reworked_figure <-
             barmode =  "relative",
             bargap = 0,
             autosize = TRUE,
-            legend = list(x = 0.05, y = 0.9)
+            legend = list(x = 0.05, y = 0.9),
+            updatemenus = updated
           )
     }
     return(p)

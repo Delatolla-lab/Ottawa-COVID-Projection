@@ -93,7 +93,7 @@ change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_d
 Data to `r as.character(tail(ott_covid_waste$date, n=1))`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(new_case_5_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call, n1_n2_5_day_call), yaxis2 = list(new_case_5_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
 ```
 * Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See methods for more details.
 
