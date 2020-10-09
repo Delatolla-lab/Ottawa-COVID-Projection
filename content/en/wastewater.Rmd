@@ -55,7 +55,6 @@ The figures below were created by researchers at CHEO RI and uOttawa. Learn more
 
 The science supporting wastewater surveillance is rapidly evolving. The plots are currently for research only and presented to the public for discussion only. Wastewater and public health scientists have noted the early wastewater covid-19 signal increase in mid-July that preceded Ottawa summer and fall case resurgence.
 
-### Observed Data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Initialize calls for each parameter
 new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Daily reported new cases", color = case_col)
@@ -105,9 +104,8 @@ change_N1_N2_5_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_da
 change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_day", name = "Percent change in rolling avg \nover 10 days", color = rolling_avg_col, yaxis = "y2")
 ```
 
-Data to `r as.character(tail(ott_covid_waste$date, n=1))`
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "Number of reported new cases", x = "Date", title = "Ottawa covid-19 viral signal in wastewater"), data = ott_covid_waste)
 ```
 * Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](#/model) for more details.
+Data to `r as.character(tail(ott_covid_waste$date, n=1))`
