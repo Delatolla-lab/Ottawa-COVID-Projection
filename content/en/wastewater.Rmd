@@ -35,7 +35,7 @@ ottawa_test_data <-
 
 # data
 ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
-ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/Ottawa_Wastewater_Data.csv")
+ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
 
 # functions to integrate waste & covid data together
 waste_clean <- wastewater_prep(ott_observed_waste)
@@ -63,11 +63,17 @@ new_case_5_day_call <- list(type = "observed_data", y_column = "observed_new_cas
 
 new_case_10_day_call <- list(type = "observed_data", y_column = "observed_new_cases_10_day", name = "10 day mean \nin reported new cases", color = case_col, opacity = 0.15)
 
+new_case_7_day_call <- list(type = "observed_data", y_column = "observed_new_cases_7_day", name = "7 day mean \nin reported new cases", color = case_col, opacity = 0.15)
+
 hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Hospital census", color = case_col)
 
 active_case_call <- list(type = "observed_data", y_column = "observed_active_cases", name = "Active cases", color = case_col)
 
 active_case_5_day_call <- list(type = "observed_data", y_column = "observed_active_cases_5_day", name = "5 day mean \nin active cases", color = case_col, opacity = 0.15)
+
+active_case_7_day_call <- list(type = "observed_data", y_column = "observed_active_cases_7_day", name = "7 day mean \nin active cases", color = case_col, opacity = 0.15)
+
+active_case_10_day_call <- list(type = "observed_data", y_column = "observed_active_cases_10_day", name = "10 day mean \nin active cases", color = case_col, opacity = 0.15)
 
 n1_call <- list(type = "signal_data", y_column = "N1", name = "N1 RNA signal", color = n1_col, yaxis = "y2") 
 
@@ -75,9 +81,11 @@ n2_call <- list(type = "signal_data", y_column = "N2", name = "N2 RNA signal", c
 
 n1_n2_call <- list(type = "avg_data", y_column = "N1_N2_avg", name = "Avg. viral signal", color = n1_n2_col, yaxis = "y2", opacity = 0.15)
 
-n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day mean change\nin viral signal", color = rolling_avg_col, yaxis = "y2")
+n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day mean viral signal", color = rolling_avg_col, yaxis = "y2")
 
-n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day mean change\nin viral signal", color = rolling_avg_col, yaxis = "y2")
+n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day mean viral signal", color = rolling_avg_col, yaxis = "y2")
+
+n1_n2_7_day_call <- list(type = "avg_data", y_column = "N1_N2_7_day", name = "7-day mean viral signal", color = rolling_avg_col, yaxis = "y2")
 
 viral_roc_call <- list(type = "avg_data", y_column = "viral_roc_daily", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2")
 
@@ -93,20 +101,20 @@ change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_d
 Data to `r as.character(tail(ott_covid_waste$date, n=1))`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(new_case_5_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
 ```
 * Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See methods for more details.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(active_case_5_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of active cases", x = "Date", title = "10 day average COVID-19 viral signal \nin wastewater with respect to active cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(new_case_10_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of active cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
 ```
 * Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See methods for more details.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_5_day_call), yaxis2 = list(active_case_5_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of active cases", x = "Date", title = "5 day average COVID-19 viral signal \nin wastewater with respect to active cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_10_day_call), titles = c(y = "Normalized viral copies*", y2 = "# of active cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
 ```
 * Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See methods for more details.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_10_day_call), yaxis2 = list(new_case_10_day_call), titles = c(y = "Percentage change (%)", y2 = "# of reported new cases", x = "Date", title = "Percentage change in average COVID-19 \nviral signal with respect to new cases"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_10_day_call), yaxis2 = list(new_case_7_day_call), titles = c(y = "Percentage change (%)", y2 = "# of reported new cases", x = "Date", title = "Average COVID-19 viral signal \nin wastewater with respect to new cases"), data = ott_covid_waste)
 ```
