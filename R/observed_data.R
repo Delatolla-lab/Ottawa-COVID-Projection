@@ -129,7 +129,8 @@ reworked_figure <-
               side = "right",
               title = list(text = as.character(titles[["y2"]])),
               automargin = TRUE, 
-              showgrid = FALSE
+              showgrid = FALSE,
+              zeroline = FALSE
             ),
             barmode =  "relative",
             bargap = 0,
