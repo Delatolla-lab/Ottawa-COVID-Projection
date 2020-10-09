@@ -67,12 +67,16 @@ reworked_figure <-
   )
   )'
     
-    for (var_to_map in yaxis) {
+    for (i in 1:length(yaxis)) {
+      var_to_map <- yaxis[i]
       curr_temp <- trace_presets[[var_to_map$type]]
       if (!is_null(var_to_map$color)) {
         curr_temp <-
           change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
       }
+      vis_logical <- c(F, rep(NA, length(yaxis)))
+      vis_logical[i] <- T
+      vis_logical[is.na(vis_logical)] <- F
       p <-
         do.call(add_trace, c(
           list(p = p, name = var_to_map$name),
