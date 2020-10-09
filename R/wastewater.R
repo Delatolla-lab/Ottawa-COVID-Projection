@@ -23,7 +23,6 @@ wastewater_prep <- function(data){
 merge_data <- function(data1, data2){
   data1 %>%
     full_join(data2, by = "date") %>%
-    filter(date >= "2020-04-08") %>%
     # create 5 day rolling avg of viral signal
     mutate(
       N1_N2_5_day =
