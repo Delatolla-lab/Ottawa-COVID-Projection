@@ -6,6 +6,8 @@ reworked_figure <-
   function(xaxis,
            yaxis,
            yaxis2 = NULL,
+           yaxis_button = FALSE,
+           yaxis2_button = FALSE,
            titles,
            data) {
     # ---------- PRESETS ----------
@@ -66,17 +68,38 @@ reworked_figure <-
   %s)
   )
   )'
-    
+    updated <- NULL
     for (i in 1:length(yaxis)) {
-      var_to_map <- yaxis[i]
+      var_to_map <- yaxis[[i]]
       curr_temp <- trace_presets[[var_to_map$type]]
       if (!is_null(var_to_map$color)) {
         curr_temp <-
           change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
       }
-      vis_logical <- c(F, rep(NA, length(yaxis)))
-      vis_logical[i] <- T
-      vis_logical[is.na(vis_logical)] <- F
+      if (isTRUE(yaxis_button)){
+        vis_logical <- c(rep(NA, length(yaxis)), rep(T, length(yaxis2)))
+        vis_logical[i] <- T
+        vis_logical[is.na(vis_logical)] <- F
+        vis_logical <- paste0("c(",stringr::str_flatten(vis_logical, ","),")")
+        menu <- ""
+        menu_item <- sprintf('
+      list(
+        label = "%s",
+        method = "update",
+        args = list(list(visible = %s),
+                    list(title = "%s")))',yaxis[[i]][["y_column"]],
+                             vis_logical,
+                             yaxis[[i]][["y_column"]])
+        
+        if (i < length(yaxis)){
+          menu <- stringr::str_glue(stringr::str_glue(menu,menu_item),",")
+        } else {
+          menu <- stringr::str_glue(menu,menu_item)
+        }
+        
+        updated <- sprintf(base_params, menu)
+      }
+      
       p <-
         do.call(add_trace, c(
           list(p = p, name = var_to_map$name),
@@ -93,6 +116,8 @@ reworked_figure <-
       #   y = data[, var_to_map$y_column]
       # )
     }
+    
+    updated <- eval(parse(text = updated))
     
     for (var_to_map in yaxis2) {
       curr_temp <- trace_presets[[var_to_map$type]]
