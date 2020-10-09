@@ -1,10 +1,12 @@
 ---
 date: "2016-05-05T21:48:51-07:00"
-title: Model parameters
+title: Methods
 link-citations: true
 bibliography: refs.bib
 ---
+This page has a brief description of methods used at 613covid with references for more information. Also included are all parameters used in projection models and links to all plot data. 
 
+## Projection models
 1) *Projections are based on the reported daily hospital census for Ottawa.*  
 
     - Daily hospital use reported by Ottawa Public Health.
@@ -35,6 +37,14 @@ bibliography: refs.bib
 Ottawa COVID-19 projections augment the projections of Public Health Ontario and other models by incorporating local reported hospitalizations & case episodes since the beginning of the COVID-19 pandemic.  
 
 The use of local hospitalization rates follows the analogy of forecasting hurricanes. We monitor the local hospital COVID-19 use and then project the trend into the future based on the knowledge of COVID-19 and how it spreads in communities. 
+
+## Wastewater covid-19 surveillance
+ 
+See [Ottawa Public Health webiste](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx) for an overview of the wastewater surveillance program and its role in covid-19 surveillance. Detail laboratory methods are published [here](https://www.medrxiv.org/content/10.1101/2020.08.11.20173062v3). The surveillance program is under development. Results and interpretation are publicly-presented for discussion.
+ 
+Wastewater samples are from the Robert O. Pickard Environmental Centre (ROPEC) which collects and treats wastewater from ~91.6% of Ottawa’s population. Currently samples covid-19 surveillance are collected hourly for a period of 24 hours, five days a week from sludge (directly from the primary clarifiers). The assay method has been validated in a national cross-laboratory study. Two viral regions of SARS-CoV-2 (N1 and N2) are assayed and standardized using the viral levels of Pepper Mild Mottle Virus (PMMoV). The reported measure is the sample mean of N1 + N2 copies per copy of PMMoV.
+
+Ottawa's wastewater data available [here](https://github.com/Big-Life-Lab/covid-19-wastewater).
 
 ## The importance of physical distancing {#physical-distancing}
 

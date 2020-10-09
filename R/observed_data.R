@@ -9,6 +9,7 @@ reworked_figure <-
            titles,
            data) {
     # ---------- PRESETS ----------
+    tickvals <- floor_date(as_date(data$date), "month")
     trace_presets <- list(
       doubling_time =
         list(
@@ -64,7 +65,9 @@ reworked_figure <-
           list(p = p, name = var_to_map$name),
           curr_temp,
           list(x = data[, xaxis],
-               y = data[, var_to_map$y_column])
+               y = data[, var_to_map$y_column]),
+          hovertemplate = paste('%{x|%b %d, %Y}:',
+                                '%{y}')
         ))
       # p <- add_trace(
       #   p,
@@ -88,7 +91,9 @@ reworked_figure <-
           list(x = data[, xaxis],
                y = data[, var_to_map$y_column],
                yaxis = "y2"),
-          opacity = var_to_map$opacity
+          opacity = var_to_map$opacity,
+          hovertemplate = paste('%{x|%b %d, %Y}:',
+                                '%{y}')
         ))
       # p <- add_trace(
       #   p,
@@ -106,7 +111,8 @@ reworked_figure <-
             title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
             xaxis = list(type = "date",
                          title = list(text = as.character(titles[["x"]])),
-                         automargin = TRUE),
+                         automargin = TRUE, tickvals = tickvals, 
+                         tickformat = "%b %Y"),
             yaxis = list(title = list(text = as.character(titles[["y"]])), 
                          automargin = TRUE),
             barmode =  "relative",
@@ -122,14 +128,16 @@ reworked_figure <-
             title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
             xaxis = list(type = "date",
                          title = list(text = as.character(titles[["x"]])),
-                         automargin = TRUE),
+                         automargin = TRUE, tickvals = tickvals, 
+                         tickformat = "%b %Y"),
             yaxis = list(title = list(text = as.character(titles[["y"]])), 
                          automargin = TRUE, overlaying = "y2"),
             yaxis2 = list(
               side = "right",
               title = list(text = as.character(titles[["y2"]])),
               automargin = TRUE, 
-              showgrid = FALSE
+              showgrid = FALSE,
+              zeroline = FALSE
             ),
             barmode =  "relative",
             bargap = 0,
