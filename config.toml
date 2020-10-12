@@ -63,9 +63,14 @@ publishDir = "./docs"
     weight = 5
     
 [[menu.main]]
+    name = "wastewater"
+    url = "/wastewater/"
+    weight = 3
+
+[[menu.main]]
     name = "model"
     url = "/model/"
-    weight = 3
+    weight = 4
     
 [[menu.main]]
     name = "model_params"
@@ -118,7 +123,7 @@ publishDir = "./docs"
 [[menu.main]]
     name = "more"
     url = "/more/"
-    weight = 4
+    weight = 5
     
 [[menu.main]]
     name = "model_use"
@@ -153,12 +158,12 @@ publishDir = "./docs"
 [[menu.main]]
     name = "contact"
     url = "/contact/"
-    weight = 5
+    weight = 6
 
 [[menu.main]]
     name = "changelog"
     url = "/change-log/"
-    weight = 6
+    weight = 7
 
 [params]
     description = "Ottawa COVID-19 hospital projections."
