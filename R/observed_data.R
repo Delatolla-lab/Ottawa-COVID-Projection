@@ -131,13 +131,13 @@ reworked_figure <-
                          automargin = TRUE, tickvals = tickvals, 
                          tickformat = "%b %Y"),
             yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                         automargin = TRUE, overlaying = "y2"),
+                         automargin = TRUE, overlaying = "y2",
+                         zeroline = FALSE),
             yaxis2 = list(
               side = "right",
               title = list(text = as.character(titles[["y2"]])),
               automargin = TRUE, 
-              showgrid = FALSE,
-              zeroline = FALSE
+              showgrid = FALSE
             ),
             barmode =  "relative",
             bargap = 0,
