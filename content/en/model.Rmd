@@ -6,7 +6,7 @@ bibliography: refs.bib
 ---
 Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references. 
 
-## Projection models
+## Projection models {#projection-models}
 
 All data used to create projection models can be accessed at [Open Ottawa](https://open.ottawa.ca/datasets/covid-19-cases-and-deaths-in-ottawa). See 'COVID-19 cases and deaths`.
     
@@ -24,9 +24,9 @@ All data used to create projection models can be accessed at [Open Ottawa](https
     
     - Model parameters other than Ottawa hospital use are aligned with other models,  described [below](#parameters). 
 
-## Wastewater covid-19 surveillance
+## Wastewater covid-19 surveillance {#wastewater}
 
-Ottawa's wastewater data available [here](https://github.com/Big-Life-Lab/covid-19-wastewater).
+Ottawa's wastewater data is available [here](https://github.com/Big-Life-Lab/covid-19-wastewater).
  
 See [Ottawa Public Health webiste](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx) for an overview of the wastewater surveillance program and its role in covid-19 surveillance. Detail laboratory methods are published [here](https://www.medrxiv.org/content/10.1101/2020.08.11.20173062v3). The surveillance program is under development. Results and interpretation are publicly-presented for discussion.
  
@@ -36,7 +36,7 @@ Wastewater samples are from the Robert O. Pickard Environmental Centre (ROPEC) w
 
 The trend of COVID-19 cases and hospital use is summarized as “doubling time.” Doubling time — and the weekly change in doubling time — are the most important parameters in COVID-19 projections that vary between communities. 
 
-An exponential growth in covid-19 cases and hosptialization (doubling time of less than 4 days) will occur unless one of two situations occurs:  
+An exponential growth in covid-19 cases and hospitalization (doubling time of less than 4 days) will occur unless one of two situations occurs:  
 
 1) The number of people susceptible to infection decreases. As an epidemic progresses, there will be fewer people left in the community who can become infected. However, as of  `r format(Sys.Date()-1, '%b %d, %Y')` only a small proportion of people living in Ottawa are currently infected or are recovered from COVID-19 -- likely less than 5%. This means that the current reduction in susceptible people has a negligible effect effect on changes to hospital infection doubling times.
 
@@ -58,7 +58,7 @@ Physical distancing is a 'control measure' to reduce the effective force of infe
 
 Note that $\beta$ is related to the epidemiology measure $R_0$ - the basic reproductive number that describes the expected number of people who become infected with from each person with COVID-19 at the beginning of an outbreak. $R_0 = \frac{\beta}{\gamma}$, where $\gamma$ is the reciprocal of the infectious period ($\psi$).
 
-## Calculating physical distancing effectiveness {#distancing}
+## Calculating physical distancing effectiveness {#distancing-effectiveness}
 
 Physical distancing effectiveness is equal to $\lambda$, for the calculations on this website. In practice, contract tracing and isolation is the other main control measure. The effect of contract tracing was not separated from physical distancing. 
 
