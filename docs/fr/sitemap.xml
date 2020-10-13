@@ -89,6 +89,20 @@
   </url>
   
   <url>
+    <loc>/fr/wastewater/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/wastewater/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/wastewater/"
+                />
+  </url>
+  
+  <url>
     <loc>/fr/roadmap/</loc>
     <xhtml:link
                 rel="alternate"
