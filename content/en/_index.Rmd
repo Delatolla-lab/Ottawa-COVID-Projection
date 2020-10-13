@@ -234,8 +234,6 @@ hosp_projections <- insert_translation(localization_data, lang, "hosp_projection
 
 `r dashboard`
 
-`r definitions`
-
 `r past_data_title`
 
 `r observed_cases`
@@ -380,3 +378,5 @@ hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospi
 ```
 
 `r line_break`
+
+`r definitions`
