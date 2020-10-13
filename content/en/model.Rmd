@@ -4,61 +4,47 @@ title: Methods
 link-citations: true
 bibliography: refs.bib
 ---
-This page has a brief description of methods used at 613covid with references for more information. Also included are all parameters used in projection models and links to all plot data. 
+Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references. 
 
-## Projection models
-1) *Projections are based on the reported daily hospital census for Ottawa.*  
+## Projection models {#projection-models}
 
-    - Daily hospital use reported by Ottawa Public Health.
+All data used to create projection models can be accessed at [Open Ottawa](https://open.ottawa.ca/datasets/covid-19-cases-and-deaths-in-ottawa). See 'COVID-19 cases and deaths`.
     
+1) *Covid-19 case projections created using the [Bayesian SEIR model](https://github.com/seananderson/covidseir) developed by Simon Fraser University.*
 
-2) *Model parameters other than Ottawa hospital use are aligned with other models.*
+    - Projections are based on observed covid-19 cases by episode date. Episode date reflects the date closest to the onset of symptoms. Projections exclude the most recent week of cases, reflecting a lag time in detecting and reporting recent covid-19 infections.
     
-    - Model parameters are described [below](#parameters). 
+    - Covid-19 transmission is estimated within the SEIR model. 
     
-    - Parameter estimates are from [COVID-19-MC](https://www.covid-19-mc.ca/interactive-model) and [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) models where possible, with updates based on [Verity et al. (Lancet, March 20, 2020)](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)* and [Ferguson et al. (March 16, 2020)](https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf). 
+2) *Hospital projections created using the [Bayesian extension to the CHIME model](https://github.com/pennsignals/chime_sims) developed by the University of Pennsylvania Health System.*  
 
-3) *[Bayesian extension to the CHIME model](https://github.com/pennsignals/chime_sims) developed by the University of Pennsylvania Health System.*  
-
-    - CHIME is an SIR model that is initiated on hospital use. A SIR model calculates the projected number of people infected with a contagious illness in a closed population over time. 
+    - Projections are based on the observed covid-19 hospitalization census for each day for the five Ottawa hospitals who treat covid-19 patients. 
     
-    - The Bayesian extension to the CHIME model incorporates new hospitalization data to generate a probabilistic forecast of hospital resource use based on best and worst case scenarios.
-
-    - The projections can be updated for other models. 
+    - Hospitalization is used to estimate covid-19 transmission in Ottawa population that results in hospitalization. 
     
-4) *[Bayesian SEIR model](https://github.com/seananderson/covidseir) developed by Simon Fraser University.*
+    - Model parameters other than Ottawa hospital use are aligned with other models,  described [below](#parameters). 
 
-    - This model uses reported new cases (by episode date) to estimate the reduction in contact among individuals that are physically distancing.
-    
-    - This reduction in contact is then used to generate a forecast of new cases based on various transmission scenarios.
+## Wastewater covid-19 surveillance {#wastewater}
 
-## Projections based on daily hospital & case data {#hospital-census}
-
-Ottawa COVID-19 projections augment the projections of Public Health Ontario and other models by incorporating local reported hospitalizations & case episodes since the beginning of the COVID-19 pandemic.  
-
-The use of local hospitalization rates follows the analogy of forecasting hurricanes. We monitor the local hospital COVID-19 use and then project the trend into the future based on the knowledge of COVID-19 and how it spreads in communities. 
-
-## Wastewater covid-19 surveillance
+Ottawa's wastewater data is available [here](https://github.com/Big-Life-Lab/covid-19-wastewater).
  
 See [Ottawa Public Health webiste](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx) for an overview of the wastewater surveillance program and its role in covid-19 surveillance. Detail laboratory methods are published [here](https://www.medrxiv.org/content/10.1101/2020.08.11.20173062v3). The surveillance program is under development. Results and interpretation are publicly-presented for discussion.
  
-Wastewater samples are from the Robert O. Pickard Environmental Centre (ROPEC) which collects and treats wastewater from ~91.6% of Ottawa’s population. Currently samples covid-19 surveillance are collected hourly for a period of 24 hours, five days a week from sludge (directly from the primary clarifiers). The assay method has been validated in a national cross-laboratory study. Two viral regions of SARS-CoV-2 (N1 and N2) are assayed and standardized using the viral levels of Pepper Mild Mottle Virus (PMMoV). The reported measure is the sample mean of N1 + N2 copies per copy of PMMoV.
-
-Ottawa's wastewater data available [here](https://github.com/Big-Life-Lab/covid-19-wastewater).
+Wastewater samples are from the Robert O. Pickard Environmental Centre (ROPEC) which collects and treats wastewater from ~91.6% of Ottawa’s population. Samples for covid-19 surveillance are collected hourly for a period of 24 hours, five days a week from sludge (directly from the primary clarifiers). The assay method has been validated in a national cross-laboratory study. Two viral regions of SARS-CoV-2 (N1 and N2) are assayed and standardized using the viral levels of Pepper Mild Mottle Virus (PMMoV). The reported measure is the sample mean of N1 + N2 copies per copy of PMMoV.
 
 ## The importance of physical distancing {#physical-distancing}
 
-The trend of COVID-19 hospital use is summarized as “doubling time.” Doubling time — and the weekly change in doubling time — are the most important parameters in COVID-19 projections that vary between communities. 
+The trend of COVID-19 cases and hospital use is summarized as “doubling time.” Doubling time — and the weekly change in doubling time — are the most important parameters in COVID-19 projections that vary between communities. 
 
-An exponential growth in hosptial census (doubling time of less than 4 days) will occur unless one of two situations occurs:  
+An exponential growth in covid-19 cases and hospitalization (doubling time of less than 4 days) will occur unless one of two situations occurs:  
 
-1) The number of people susceptible to infection decreases. As an epidemic progresses, there will be fewer people left in the community who can become infected. However, as of  `r format(Sys.Date()-1, '%b %d, %Y')` only a small proportion of people living in Ottawa are currently infected or are recovered from COVID-19 -- likely less than 1%. This means that the current reduction in susceptible people has a negligible effect effect on changes to hospital infection doubling times. Approximately 50 to 60% of people need to be immune to COVID-19 (infected or recovered) before doubling time becomes negative -- meaning there is a weekly decrease in the patients in hospital.
+1) The number of people susceptible to infection decreases. As an epidemic progresses, there will be fewer people left in the community who can become infected. However, as of  `r format(Sys.Date()-1, '%b %d, %Y')` only a small proportion of people living in Ottawa are currently infected or are recovered from COVID-19 -- likely less than 5%. This means that the current reduction in susceptible people has a negligible effect effect on changes to hospital infection doubling times.
 
 2) Preventive measures slow the spread of infection. 
 
 The first situation — how doubling time decreases as the number of susceptible people decreases — can be easily modelled using mathematical formulas. 
 
-The second situation — the effectiveness of preventive measures — is more difficult to estimate accurately. Prevention and control measures depend not only on what  measures are in place over the last 2-4 weeks, but also how well people follow the measures. Current hospital use and trends in hosptial use provide important information on physical distancing effectiveness and other measures to control the spread of COVID-19 infection.
+The second situation — the effectiveness of preventive measures — is more difficult to estimate accurately. Prevention and control measures depend not only on what measures are in place over the last 2-4 weeks, but also how well people follow the measures.
 
 ## How physical distancing affects COVID-19 projections {#distancing-math}
 
@@ -72,7 +58,7 @@ Physical distancing is a 'control measure' to reduce the effective force of infe
 
 Note that $\beta$ is related to the epidemiology measure $R_0$ - the basic reproductive number that describes the expected number of people who become infected with from each person with COVID-19 at the beginning of an outbreak. $R_0 = \frac{\beta}{\gamma}$, where $\gamma$ is the reciprocal of the infectious period ($\psi$).
 
-## Calculating physical distancing effectiveness {#distancing}
+## Calculating physical distancing effectiveness {#distancing-effectiveness}
 
 Physical distancing effectiveness is equal to $\lambda$, for the calculations on this website. In practice, contract tracing and isolation is the other main control measure. The effect of contract tracing was not separated from physical distancing. 
 
@@ -95,6 +81,9 @@ $$g_0 = \beta_0 - \gamma$$
 
 ## Input parameters {#parameters}
 
+  Parameter estimates for hospital projections are based on covid-19 patients from the Ottawa Hospital and from the [COVID-19-MC](https://www.covid-19-mc.ca/interactive-model) and [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) models, with updates based on [Verity et al. (Lancet, March 20, 2020)](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)* and [Ferguson et al. (March 16, 2020)](https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf).
+ 
+  
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(DT)
 CHIME_input_display <- read.csv(file.path(getwd(),"../../Data/CHIME_sim_OTT_parameters.csv"))
