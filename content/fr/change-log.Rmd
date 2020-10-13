@@ -4,6 +4,12 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V3.1.0
+2020-10-13
+
+- [Wastewater](/wastewater) page added describing covid-19 wastewater
+surveillance.
+
 # V3.0.0
 2020-10-05
 

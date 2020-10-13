@@ -10,10 +10,16 @@ hosp_projs,Hospitalization Projections,Projections d'hospitalisation
 vent_projs,Ventilator Projections,Projections de ventilateur
 death_viz,Death visualization,Visualisation de la mort
 phys_dist,Physical distancing,Distanciation physique
-model,Model,Modèle
+wastewater, Wastewater, Wastewater
+ww_viz, Wastewater visualization, Wastewater visualization
+model,Methods,Méthodes
 model_params,Model parameters,Paramètres du modèle
+proj_models, Projection models, Projection models
+ww_surv, Wastewater surveillance, Wastewater surveillance
+phys_math, How physical distancing affects projections, How physical distancing affects projections
 hosp_data,Hospital data,Données hospitalières
 inp_params,Input parameters,Paramètres d'entrée
+plot_data, Plot data, Plot data
 refs,References,Références
 more,More,Plus
 model_use,Model use,Utilisation du modèle

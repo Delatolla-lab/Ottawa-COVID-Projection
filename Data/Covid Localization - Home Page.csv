@@ -3,9 +3,9 @@ Intro,"_Last updated on {{1}}. Updates are done Tuesdays._
 
 Pour le français cliquez [ici](https://613covid.ca/fr/).
 
-Current forecast of covid-19 cases and hospital use in the Ottawa area. Created by the team behind [ProjectBigLife.ca](https://www.projectbiglife.ca) at The Ottawa Hospital and the University of Ottawa with input and data from Ottawa Public Health.
+This website has forecasts of covid-19 cases and hospital use for the Ottawa area. Also included is covid-19 wastewater surveillance. 
 
-**Click [here](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/daily-covid19-dashboard.aspx)** to access the COVID-19 Daily Dashboard created by Ottawa Public Health. The Ottawa Public Health dashboard provides the key metrics that inform projections presented on this website.","_Dernière mise à jour : {{1}}._
+**Click [here](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/daily-covid19-dashboard.aspx)** to access the COVID-19 Daily Dashboard created by Ottawa Public Health. The Ottawa Public Health dashboard provides up to date covid-19 metrics that inform projections presented on this website.","_Dernière mise à jour : {{1}}._
 
 For English click [here](https://613covid.ca/)
 
@@ -22,21 +22,17 @@ Data to {{1}}
 
 ### Current
 
-**{{2}}** active cases in Ottawa.
-
-**{{3}}** confirmed COVID-19 patients in hospital.
+**{{2}}** confirmed COVID-19 patients in hospital.
  
-Including **{{4}}** acute care patients. **{{5}}** ICU patients.","# Tableau de bord
+Including **{{3}}** acute care patients. **{{4}}** ICU patients.","# Tableau de bord
 
 Données en date du {{1}}
 
 ### Situation actuelle
 
-**{{2}} cas actifs à Ottawa
+**{{2}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés.
 
-**{{3}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés.
-
-De ce nombre : **{{4}}** patient(s) en soins actifs, **{{5}}** patient(s) aux soins intensifs."
+De ce nombre : **{{3}}** patient(s) en soins actifs, **{{4}}** patient(s) aux soins intensifs."
 ShortRangeForecast,"### Short-range forecast
 
 **{{1}}** active cases in the following week, reflecting a current {{2}} of **{{3}} days** (daily growth of {{4}}%).
@@ -67,7 +63,7 @@ Definitions,"## Definitions
 
 > **Wise socializing** is ensuring you don't become a link in a COVID-19 transmission chain that ends in a person becoming hospitalized or dying. This involves wearing a mask in indoor spaces, isolating yourself from others when sick, staying 2 meters apart from people outside your household, and exercising proper hand hygiene. Click [here](https://www.ottawapublichealth.ca/en/public-health-topics/be-covidwise.aspx) for more details on being COVIDWise.
 
-See [More](/more) page for more information about the terms used.
+See the [More](/more) page for more definitions and more information about the terms used.
 
 ---","## Définitions
 
@@ -88,7 +84,7 @@ Consultez la section [Plus](/more) d’infos pour en savoir plus sur les termes 
 ---"
 PastData_title,## Observed cases & hospital use,## Cas observés et occupation des hôpitaux
 observed_cases,## {#observed-cases},## {#observed-cases}
-observed_cases_text,"""**Note:** New cases are based on approximate date of episode. Case data in the last 7 days should be considered preliminary as as public health investigators determine earliest onset date.""",**Remarque:** Les nouveaux cas sont basés sur la date d’épisode approximative. Les données sur les cas des 7 derniers jours doivent être considérées comme préliminaires puisque ce sont les enquêteurs de la santé publique qui déterminent la date d’apparition des premiers symptômes.
+observed_cases_text,""**Note:** New cases are based on approximate date of episode. Case data in the last 7 days should be considered preliminary as as public health investigators determine earliest onset date."",**Remarque:** Les nouveaux cas sont basés sur la date d’épisode approximative. Les données sur les cas des 7 derniers jours doivent être considérées comme préliminaires puisque ce sont les enquêteurs de la santé publique qui déterminent la date d’apparition des premiers symptômes.
 observed_census,## {#observed-census},## {#observed-census}
 PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
 observed_admits,## {#observed-admits},## {#observed-admits}
@@ -120,13 +116,21 @@ Contact,"**Media contact:** Michaela Schreiter, Media Relations Officer, The Ott
 
 **Supporting Ottawa Public Health epidemiologists:** Amira Ali, Jacqueline Willmore, Dara Spatz
 
+**uOttawa – CHEO SARS-CoV-2 research group** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber
+
+**Colour consultant:** Toby Barker
+
 **Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).","**Personne-ressource pour les médias :** Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: [mschreiter@toh.ca](mailto:mschreiter@toh.ca) Téléphone : 613-222-7674
 
-**Personnes-ressources scientifiques :** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster
+**Personnes-ressources scientifiques:** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Warsame Yusuf [waryusuf@ohri.ca](mailto:waryusuf@ohri.ca), Alan Forster
 
 **Remerciements pour le site Web et le contenu :** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
 
 **Avec le soutien des épidémiologistes de Santé publique Ottawa :** Amira Ali, Jacqueline Willmore, Dara Spatz
+
+**Groupe de recherche uOttawa – CHEO SARS-CoV-2:** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber.\
+
+**Consultant couleur:** Toby Barker
 
 **Propriété intellectuelle :** Icônes relatives à la COVID-19 créées par [surang](https://www.flaticon.com/authors/surang), de [www.flaticon.com](https://www.flaticon.com/authors/surang)."
 More_intro,"## Model use {#use}

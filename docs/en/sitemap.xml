@@ -89,11 +89,17 @@
   </url>
   
   <url>
-    <loc>/case-projections/</loc>
-  </url>
-  
-  <url>
     <loc>/wastewater/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/wastewater/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/wastewater/"
+                />
   </url>
   
   <url>

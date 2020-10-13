@@ -61,21 +61,32 @@ publishDir = "./docs"
     url = "/#hospitalization-projections"
     parent = "viz"
     weight = 5
+
+[[menu.main]]
+    name = "ww_viz"
+    url = "/wastewater/#ww-visualization"
+    parent = "viz"
+    weight = 6
     
+[[menu.main]]
+    name = "wastewater"
+    url = "/wastewater/"
+    weight = 3
+
 [[menu.main]]
     name = "model"
     url = "/model/"
-    weight = 3
+    weight = 4
     
 [[menu.main]]
-    name = "model_params"
-    url = "/model/"
+    name = "proj_models"
+    url = "/model/#projection-models"
     parent = "model"
     weight = 1
     
 [[menu.main]]
-    name = "hosp_data"
-    url = "/model/#hospital-census"
+    name = "ww_surv"
+    url = "/model/#wastewater"
     parent = "model"
     weight = 2
 
@@ -86,14 +97,14 @@ publishDir = "./docs"
     weight = 3
 
 [[menu.main]]
-    name = "phys_dist"
+    name = "phys_math"
     url = "/model/#distancing-math"
     parent = "model"
     weight = 4
     
 [[menu.main]]
-    name = "phys_dist"
-    url = "/model/#distancing"
+    name = "phys_dist_effect"
+    url = "/model/#distancing-effectiveness"
     parent = "model"
     weight = 5
     
@@ -104,7 +115,7 @@ publishDir = "./docs"
     weight = 6
 
 [[menu.main]]
-    name = "inp_params"
+    name = "plot_data"
     url = "/model/#plot-data"
     parent = "model"
     weight = 7
@@ -118,7 +129,7 @@ publishDir = "./docs"
 [[menu.main]]
     name = "more"
     url = "/more/"
-    weight = 4
+    weight = 5
     
 [[menu.main]]
     name = "model_use"
@@ -153,12 +164,12 @@ publishDir = "./docs"
 [[menu.main]]
     name = "contact"
     url = "/contact/"
-    weight = 5
+    weight = 6
 
 [[menu.main]]
     name = "changelog"
     url = "/change-log/"
-    weight = 6
+    weight = 7
 
 [params]
     description = "Ottawa COVID-19 hospital projections."
