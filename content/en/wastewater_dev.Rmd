@@ -108,7 +108,7 @@ change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_10_
 # {#ww-visualization}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_5_day_call, n1_n2_7_day_call, n1_n2_10_day_call), yaxis2 = list(new_case_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "Number of reported new cases", x = "Date", title = "Ottawa covid-19 viral signal in wastewater"), data = ott_covid_waste, yaxis_button = TRUE)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_5_day_call, n1_n2_7_day_call, n1_n2_10_day_call), yaxis2 = list(new_case_7_day_call, new_case_10_day_call), titles = c(y = "Normalized viral copies*", y2 = "Number of reported new cases", x = "Date", title = "Ottawa covid-19 viral signal in wastewater"), data = ott_covid_waste, yaxis_button = TRUE, yaxis2_button = TRUE)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}

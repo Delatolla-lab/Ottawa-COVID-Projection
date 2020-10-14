@@ -73,7 +73,7 @@ reworked_figure <-
     base_params_y2 <- 'list(
   list(
   active = -1,
-  x = -0.2,
+  x = 1.2,
   type= "buttons",
   direction = "down",
   xanchor = "center",
