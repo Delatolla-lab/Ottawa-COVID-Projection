@@ -131,35 +131,37 @@ reworked_figure <-
     updated <- sprintf(base_params, menu)
     updated <- eval(parse(text = updated))
     
-    for (i in 1:length(yaxis2)) {
-      var_to_map <- yaxis2[[i]]
-      curr_temp <- trace_presets[[var_to_map$type]]
-      if (!is_null(var_to_map$color)) {
-        curr_temp <-
-          change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
-      }
-      
-      if (isTRUE(yaxis2_button)){
-        vis_logical2 <- c(rep(NA, length(yaxis2)))
-        vis_logical2[i] <- T
-        vis_logical2[is.na(vis_logical2)] <- F
-        vis_logical2 <- paste0("c(",stringr::str_flatten(vis_logical2, ","),")")
-        menu_item2 <- sprintf('
+    if(!is.null(yaxis2)){
+      for (i in 1:length(yaxis2)) {
+        var_to_map <- yaxis2[[i]]
+        curr_temp <- trace_presets[[var_to_map$type]]
+        if (!is_null(var_to_map$color)) {
+          curr_temp <-
+            change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
+        }
+        
+        if (isTRUE(yaxis2_button)){
+          vis_logical2 <- c(rep(NA, length(yaxis2)))
+          vis_logical2[i] <- T
+          vis_logical2[is.na(vis_logical2)] <- F
+          vis_logical2 <- paste0("c(",stringr::str_flatten(vis_logical2, ","),")")
+          menu_item2 <- sprintf('
       list(
         label = "%s",
         method = "update",
         args = list(list(visible = %s),
                     list(title = "%s")))',
-                             yaxis2[[i]][["short_name"]],
-                             vis_logical2,
-                             titles[["title"]])
-        
-        if (i < length(yaxis2)){
-          menu_y2 <- stringr::str_glue(stringr::str_glue(menu_y2,menu_item2),",")
-        } else {
-          menu_y2 <- stringr::str_glue(menu_y2,menu_item2)
+                                yaxis2[[i]][["short_name"]],
+                                vis_logical2,
+                                titles[["title"]])
+          
+          if (i < length(yaxis2)){
+            menu_y2 <- stringr::str_glue(stringr::str_glue(menu_y2,menu_item2),",")
+          } else {
+            menu_y2 <- stringr::str_glue(menu_y2,menu_item2)
+          }
         }
-      }
+    }
       
       p <-
         do.call(add_trace, c(
@@ -178,6 +180,7 @@ reworked_figure <-
     updated_y2 <- eval(parse(text = updated_y2))
     
     if(is.null(yaxis2)){
+      if(is.null(yaxis_button)){
         p <-
           layout(
             p,
@@ -193,6 +196,25 @@ reworked_figure <-
             autosize = TRUE,
             legend = list(x = 0.05, y = 1)
           )
+      }
+      else{
+        p <-
+          layout(
+            p,
+            title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+            xaxis = list(type = "date",
+                         title = list(text = as.character(titles[["x"]])),
+                         automargin = TRUE, tickvals = tickvals, 
+                         tickformat = "%b %Y"),
+            yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                         automargin = TRUE),
+            barmode =  "relative",
+            bargap = 0,
+            autosize = TRUE,
+            legend = list(x = 0.05, y = 1),
+            updatemenus = updated
+          )
+      }
     }
     else{
         p <-
@@ -216,7 +238,7 @@ reworked_figure <-
             bargap = 0,
             autosize = TRUE,
             legend = list(x = 0.05, y = 0.9),
-            updatemenus = c(updated, updated_y2)
+            updatemenus = updated_y2
           )
     }
     return(p)
