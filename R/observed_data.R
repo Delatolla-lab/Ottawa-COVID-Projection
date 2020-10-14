@@ -70,8 +70,24 @@ reworked_figure <-
   %s)
   )
   )'
+    base_params_y2 <- 'list(
+  list(
+  active = -1,
+  x = -0.2,
+  type= "buttons",
+  direction = "down",
+  xanchor = "center",
+  yanchor = "top",
+  pad = list("r"= 0, "t"= -25, "b" = 0),
+  buttons = list(
+  %s)
+  )
+  )'
     updated <- NULL
     menu <- ""
+    updated_y2 <- NULL
+    menu_y2 <- ""
+    
     for (i in 1:length(yaxis)) {
       var_to_map <- yaxis[[i]]
       curr_temp <- trace_presets[[var_to_map$type]]
@@ -80,7 +96,7 @@ reworked_figure <-
           change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
       }
       if (isTRUE(yaxis_button)){
-          vis_logical <- c(rep(NA, length(yaxis)), rep(T, length(yaxis2)))
+          vis_logical <- c(rep(NA, length(yaxis)))
           vis_logical[i] <- T
           vis_logical[is.na(vis_logical)] <- F
           vis_logical <- paste0("c(",stringr::str_flatten(vis_logical, ","),")")
@@ -110,25 +126,41 @@ reworked_figure <-
           hovertemplate = paste('%{x|%b %d, %Y}:',
                                 '%{y}')
         ))
-      
-      # p <- add_trace(
-      #   p,
-      #   name = var_to_map$name,
-      #   unlist(curr_temp),
-      #   x = data[, xaxis],
-      #   y = data[, var_to_map$y_column]
-      # )
     }
     
     updated <- sprintf(base_params, menu)
     updated <- eval(parse(text = updated))
     
-    for (var_to_map in yaxis2) {
+    for (i in length(yaxis2)) {
+      var_to_map <- yaxis2[[i]]
       curr_temp <- trace_presets[[var_to_map$type]]
       if (!is_null(var_to_map$color)) {
         curr_temp <-
           change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
       }
+      
+      if (isTRUE(yaxis2_button)){
+        vis_logical2 <- c(rep(NA, length(yaxis2)))
+        vis_logical2[i] <- T
+        vis_logical2[is.na(vis_logical2)] <- F
+        vis_logical2 <- paste0("c(",stringr::str_flatten(vis_logical2, ","),")")
+        menu_item2 <- sprintf('
+      list(
+        label = "%s",
+        method = "update",
+        args = list(list(visible = %s),
+                    list(title = "%s")))',
+                             yaxis2[[i]][["short_name"]],
+                             vis_logical2,
+                             titles[["title"]])
+        
+        if (i < length(yaxis2)){
+          menu_y2 <- stringr::str_glue(stringr::str_glue(menu_y2,menu_item2),",")
+        } else {
+          menu_y2 <- stringr::str_glue(menu_y2,menu_item2)
+        }
+      }
+      
       p <-
         do.call(add_trace, c(
           list(p = p, name = var_to_map$name),
@@ -140,14 +172,10 @@ reworked_figure <-
           hovertemplate = paste('%{x|%b %d, %Y}:',
                                 '%{y}')
         ))
-      # p <- add_trace(
-      #   p,
-      #   name = var_to_map$name,
-      #   unlist(curr_temp),
-      #   x = data[, xaxis],
-      #   y = data[, var_to_map$y_column]
-      # )
     }
+    
+    updated_y2 <- sprintf(base_params_y2, menu_y2)
+    updated_y2 <- eval(parse(text = updated_y2))
     
     if(is.null(yaxis2)){
         p <-
@@ -188,7 +216,7 @@ reworked_figure <-
             bargap = 0,
             autosize = TRUE,
             legend = list(x = 0.05, y = 0.9),
-            updatemenus = updated
+            updatemenus = list(updated, updated_y2)
           )
     }
     return(p)
