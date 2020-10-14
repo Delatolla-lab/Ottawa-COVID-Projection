@@ -12,15 +12,15 @@
     
     
     <item>
-      <title>Model parameters</title>
+      <title>Methods</title>
       <link>/fr/model/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
       <guid>/fr/model/</guid>
-      <description>Projections are based on the reported daily hospital census for Ottawa.
- Daily hospital use reported by Ottawa Public Health.  Model parameters other than Ottawa hospital use are aligned with other models.
- Model parameters are described below.
- Parameter estimates are from COVID-19-MC and Tuite, Fisman, et al. models where possible, with updates based on Verity et al. (Lancet, March 20, 2020)* and Ferguson et al.</description>
+      <description>Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references.
+Projection models All data used to create projection models can be accessed at Open Ottawa. See ’COVID-19 cases and deaths`.
+Covid-19 case projections created using the Bayesian SEIR model developed by Simon Fraser University.
+ Projections are based on observed covid-19 cases by episode date.</description>
     </item>
     
     <item>
@@ -54,10 +54,10 @@ V3.1.0 2020-10-13
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/fr/contact/</guid>
-      <description>Personne-ressource pour les médias : Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: mschreiter@toh.ca Téléphone : 613-222-7674
-Personnes-ressources scientifiques : Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca, Alan Forster
-Remerciements pour le site Web et le contenu : Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
-Avec le soutien des épidémiologistes de Santé publique Ottawa : Amira Ali, Jacqueline Willmore, Dara Spatz</description>
+      <description>Personne-ressource pour les médias: Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: mschreiter@toh.ca Téléphone: 613-222-7674
+Personnes-ressources scientifiques: Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca, Alan Forster
+Remerciements pour le site Web et le contenu: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
+Avec le soutien des épidémiologistes de Santé publique Ottawa: Amira Ali, Jacqueline Willmore, Dara Spatz</description>
     </item>
     
     <item>
