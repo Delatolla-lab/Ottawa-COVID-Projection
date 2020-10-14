@@ -60,8 +60,9 @@ reworked_figure <-
     base_params <- 'list(
   list(
   active = -1,
+  x = -0.2,
   type= "buttons",
-  direction = "right",
+  direction = "down",
   xanchor = "center",
   yanchor = "top",
   pad = list("r"= 0, "t"= -25, "b" = 0),
@@ -79,7 +80,6 @@ reworked_figure <-
           change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
       }
       if (isTRUE(yaxis_button)){
-        for(i in 1:length(yaxis)){
           vis_logical <- c(rep(NA, length(yaxis)), rep(T, length(yaxis2)))
           vis_logical[i] <- T
           vis_logical[is.na(vis_logical)] <- F
@@ -90,7 +90,7 @@ reworked_figure <-
         method = "update",
         args = list(list(visible = %s),
                     list(title = "%s")))',
-                               yaxis[[i]][["name"]],
+                               yaxis[[i]][["short_name"]],
                                vis_logical,
                                titles[["title"]])
           
@@ -99,7 +99,6 @@ reworked_figure <-
           } else {
             menu <- stringr::str_glue(menu,menu_item)
           }
-        }
       }
       
       p <-

@@ -58,13 +58,13 @@ The science supporting wastewater surveillance is rapidly evolving. The plots ar
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Initialize calls for each parameter
-new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Daily reported new cases", color = case_col)
+new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Daily reported new cases", short_name = "Daily cases", color = case_col)
 
-new_case_5_day_call <- list(type = "observed_data", y_column = "observed_new_cases_5_day", name = "5 day mean in \nreported new cases", color = case_col, opacity = 0.15)
+new_case_5_day_call <- list(type = "observed_data", y_column = "observed_new_cases_5_day", name = "5 day mean in \nreported new cases", short_name = "5 day", color = case_col, opacity = 0.15)
 
-new_case_10_day_call <- list(type = "observed_data", y_column = "observed_new_cases_10_day", name = "10 day mean in \nreported new cases", color = case_col, opacity = 0.15)
+new_case_10_day_call <- list(type = "observed_data", y_column = "observed_new_cases_10_day", name = "10 day mean in \nreported new cases", short_name = "10 day", color = case_col, opacity = 0.15)
 
-new_case_7_day_call <- list(type = "observed_data", y_column = "observed_new_cases_7_day", name = "7 day mean in \nreported new cases", color = case_col, opacity = 0.15)
+new_case_7_day_call <- list(type = "observed_data", y_column = "observed_new_cases_7_day", name = "7 day mean in \nreported new cases", short_name = "7 day", color = case_col, opacity = 0.15)
 
 new_community_case_5_day_call <- list(type = "observed_data", y_column = "observed_new_community_cases_5_day", name = "5 day mean \nin reported new community cases", color = case_col, opacity = 0.15)
 
@@ -88,11 +88,11 @@ n2_call <- list(type = "signal_data", y_column = "N2", name = "N2 RNA signal", c
 
 n1_n2_call <- list(type = "avg_data", y_column = "N1_N2_avg", name = "Avg. viral signal", color = n1_n2_col, yaxis = "y2", opacity = 0.15)
 
-n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day mean viral signal", color = rolling_avg_col, yaxis = "y2")
+n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day mean viral signal", short_name = "10 day", color = rolling_avg_col, yaxis = "y2")
 
-n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day mean viral signal", color = rolling_avg_col, yaxis = "y2")
+n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day mean viral signal", short_name = "5 day", color = rolling_avg_col, yaxis = "y2")
 
-n1_n2_7_day_call <- list(type = "avg_data", y_column = "N1_N2_7_day", name = "7-day mean viral signal", color = rolling_avg_col, yaxis = "y2")
+n1_n2_7_day_call <- list(type = "avg_data", y_column = "N1_N2_7_day", name = "7-day mean viral signal", short_name = "7 day", color = rolling_avg_col, yaxis = "y2")
 
 viral_roc_call <- list(type = "avg_data", y_column = "viral_roc_daily", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2")
 
@@ -108,7 +108,7 @@ change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_d
 # {#ww-visualization}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call, n1_n2_10_day_call), yaxis2 = list(new_case_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "Number of reported new cases", x = "Date", title = "Ottawa covid-19 viral signal in wastewater"), data = ott_covid_waste, yaxis_button = TRUE)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_5_day_call, n1_n2_7_day_call, n1_n2_10_day_call), yaxis2 = list(new_case_10_day_call), titles = c(y = "Normalized viral copies*", y2 = "Number of reported new cases", x = "Date", title = "Ottawa covid-19 viral signal in wastewater"), data = ott_covid_waste, yaxis_button = TRUE)
 ```
 * Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](#/model) for more details.
 
