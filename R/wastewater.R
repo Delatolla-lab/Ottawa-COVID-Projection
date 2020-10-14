@@ -55,7 +55,7 @@ merge_data <- function(data1, data2){
                   by=1, by.column=TRUE, partial=TRUE,
                   fill=NA, align="right")
     ) %>%
-    # create change in 5 day rolling avg from 10 day rolling avg 10 days ago
+    # create change in 5 day rolling avg from 5 day rolling avg 5 days ago
     mutate(
       change_N1_N2_5_day =
         (N1_N2_5_day - lag(N1_N2_5_day, 5))/lag(N1_N2_5_day, 5) * 100
