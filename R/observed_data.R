@@ -6,6 +6,8 @@ reworked_figure <-
   function(xaxis,
            yaxis,
            yaxis2 = NULL,
+           yaxis_button = FALSE,
+           yaxis2_button = FALSE,
            titles,
            data) {
     # ---------- PRESETS ----------
@@ -54,12 +56,51 @@ reworked_figure <-
     library(plotly)
     p <- plot_ly()
     
-    for (var_to_map in yaxis) {
+    # base parameters for buttons
+    base_params <- 'list(
+  list(
+  active = -1,
+  x = -0.2,
+  type= "buttons",
+  direction = "down",
+  xanchor = "center",
+  yanchor = "top",
+  pad = list("r"= 0, "t"= -25, "b" = 0),
+  buttons = list(
+  %s)
+  )
+  )'
+    updated <- NULL
+    menu <- ""
+    for (i in 1:length(yaxis)) {
+      var_to_map <- yaxis[[i]]
       curr_temp <- trace_presets[[var_to_map$type]]
       if (!is_null(var_to_map$color)) {
         curr_temp <-
           change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
       }
+      if (isTRUE(yaxis_button)){
+          vis_logical <- c(rep(NA, length(yaxis)), rep(T, length(yaxis2)))
+          vis_logical[i] <- T
+          vis_logical[is.na(vis_logical)] <- F
+          vis_logical <- paste0("c(",stringr::str_flatten(vis_logical, ","),")")
+          menu_item <- sprintf('
+      list(
+        label = "%s",
+        method = "update",
+        args = list(list(visible = %s),
+                    list(title = "%s")))',
+                               yaxis[[i]][["short_name"]],
+                               vis_logical,
+                               titles[["title"]])
+          
+          if (i < length(yaxis)){
+            menu <- stringr::str_glue(stringr::str_glue(menu,menu_item),",")
+          } else {
+            menu <- stringr::str_glue(menu,menu_item)
+          }
+      }
+      
       p <-
         do.call(add_trace, c(
           list(p = p, name = var_to_map$name),
@@ -69,6 +110,7 @@ reworked_figure <-
           hovertemplate = paste('%{x|%b %d, %Y}:',
                                 '%{y}')
         ))
+      
       # p <- add_trace(
       #   p,
       #   name = var_to_map$name,
@@ -77,6 +119,9 @@ reworked_figure <-
       #   y = data[, var_to_map$y_column]
       # )
     }
+    
+    updated <- sprintf(base_params, menu)
+    updated <- eval(parse(text = updated))
     
     for (var_to_map in yaxis2) {
       curr_temp <- trace_presets[[var_to_map$type]]
@@ -142,7 +187,8 @@ reworked_figure <-
             barmode =  "relative",
             bargap = 0,
             autosize = TRUE,
-            legend = list(x = 0.05, y = 0.9)
+            legend = list(x = 0.05, y = 0.9),
+            updatemenus = updated
           )
     }
     return(p)
