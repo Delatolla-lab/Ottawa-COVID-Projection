@@ -131,7 +131,7 @@ reworked_figure <-
     updated <- sprintf(base_params, menu)
     updated <- eval(parse(text = updated))
     
-    for (i in length(yaxis2)) {
+    for (i in 1:length(yaxis2)) {
       var_to_map <- yaxis2[[i]]
       curr_temp <- trace_presets[[var_to_map$type]]
       if (!is_null(var_to_map$color)) {
