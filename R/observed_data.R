@@ -70,6 +70,7 @@ reworked_figure <-
   )
   )'
     updated <- NULL
+    menu <- ""
     for (i in 1:length(yaxis)) {
       var_to_map <- yaxis[[i]]
       curr_temp <- trace_presets[[var_to_map$type]]
@@ -78,27 +79,27 @@ reworked_figure <-
           change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
       }
       if (isTRUE(yaxis_button)){
-        vis_logical <- c(rep(NA, length(yaxis)), rep(T, length(yaxis2)))
-        vis_logical[i] <- T
-        vis_logical[is.na(vis_logical)] <- F
-        vis_logical <- paste0("c(",stringr::str_flatten(vis_logical, ","),")")
-        menu <- ""
-        menu_item <- sprintf('
+        for(i in 1:length(yaxis)){
+          vis_logical <- c(rep(NA, length(yaxis)), rep(T, length(yaxis2)))
+          vis_logical[i] <- T
+          vis_logical[is.na(vis_logical)] <- F
+          vis_logical <- paste0("c(",stringr::str_flatten(vis_logical, ","),")")
+          menu_item <- sprintf('
       list(
         label = "%s",
         method = "update",
         args = list(list(visible = %s),
-                    list(title = "%s")))',yaxis[[i]][["y_column"]],
-                             vis_logical,
-                             yaxis[[i]][["y_column"]])
-        
-        if (i < length(yaxis)){
-          menu <- stringr::str_glue(stringr::str_glue(menu,menu_item),",")
-        } else {
-          menu <- stringr::str_glue(menu,menu_item)
+                    list(title = "%s")))',
+                               yaxis[[i]][["name"]],
+                               vis_logical,
+                               titles[["title"]])
+          
+          if (i < length(yaxis)){
+            menu <- stringr::str_glue(stringr::str_glue(menu,menu_item),",")
+          } else {
+            menu <- stringr::str_glue(menu,menu_item)
+          }
         }
-        
-        updated <- sprintf(base_params, menu)
       }
       
       p <-
@@ -120,6 +121,7 @@ reworked_figure <-
       # )
     }
     
+    updated <- sprintf(base_params, menu)
     updated <- eval(parse(text = updated))
     
     for (var_to_map in yaxis2) {
