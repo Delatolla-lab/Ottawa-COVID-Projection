@@ -216,7 +216,7 @@ reworked_figure <-
             bargap = 0,
             autosize = TRUE,
             legend = list(x = 0.05, y = 0.9),
-            updatemenus = list(updated, updated_y2)
+            updatemenus = c(updated, updated_y2)
           )
     }
     return(p)
