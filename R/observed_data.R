@@ -8,6 +8,8 @@ reworked_figure <-
            yaxis2 = NULL,
            yaxis_button = FALSE,
            yaxis2_button = FALSE,
+           y_button_name = "",
+           y2_button_name = "",
            titles,
            data) {
     # ---------- PRESETS ----------
@@ -59,7 +61,7 @@ reworked_figure <-
     # base parameters for buttons
     base_params <- 'list(
   list(
-  active = -1,
+  active = 0,
   x = -0.2,
   type= "dropdown",
   direction = "down",
@@ -72,8 +74,9 @@ reworked_figure <-
   )'
     base_params_y2 <- 'list(
   list(
-  active = -1,
-  x = 1.1,
+  active = 0,
+  x = 1.2,
+  y = 0.9,
   type= "dropdown",
   direction = "down",
   xanchor = "center",
@@ -162,7 +165,7 @@ reworked_figure <-
           } else {
             menu_y2 <- stringr::str_glue(menu_y2,menu_item2)
           }
-          if(i == length(yaxis2)){
+          if(i == 1){
             p <-
               do.call(add_trace, c(
                 list(p = p, name = var_to_map$name),
@@ -185,7 +188,7 @@ reworked_figure <-
               opacity = var_to_map$opacity,
               hovertemplate = paste('%{x|%b %d, %Y}:',
                                     '%{y}'),
-              visible = "legendonly"
+              visible = FALSE
             ))
           }
           
@@ -293,6 +296,11 @@ reworked_figure <-
             barmode =  "relative",
             bargap = 0,
             autosize = TRUE,
+            annotations = list(
+              x = 1, y = 1.2, text = y2_button_name, 
+              showarrow = F, xref='paper', yref='paper',
+              font=list(size=12)
+            ),
             legend = list(x = 0.05, y = 0.9),
             updatemenus = updated_y2
           )
