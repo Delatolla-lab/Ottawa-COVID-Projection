@@ -118,17 +118,40 @@ reworked_figure <-
           } else {
             menu <- stringr::str_glue(menu,menu_item)
           }
+          if(i == 1){
+            p <-
+              do.call(add_trace, c(
+                list(p = p, name = var_to_map$name),
+                curr_temp,
+                list(x = data[, xaxis],
+                     y = data[, var_to_map$y_column]),
+                hovertemplate = paste('%{x|%b %d, %Y}:',
+                                      '%{y}')
+              ))
+          }else{
+            p <-
+              do.call(add_trace, c(
+                list(p = p, name = var_to_map$name),
+                curr_temp,
+                list(x = data[, xaxis],
+                     y = data[, var_to_map$y_column]),
+                hovertemplate = paste('%{x|%b %d, %Y}:',
+                                      '%{y}'),
+                visible = FALSE
+              ))
+          }
       }
-      
-      p <-
-        do.call(add_trace, c(
-          list(p = p, name = var_to_map$name),
-          curr_temp,
-          list(x = data[, xaxis],
-               y = data[, var_to_map$y_column]),
-          hovertemplate = paste('%{x|%b %d, %Y}:',
-                                '%{y}')
-        ))
+      else{
+        p <-
+          do.call(add_trace, c(
+            list(p = p, name = var_to_map$name),
+            curr_temp,
+            list(x = data[, xaxis],
+                 y = data[, var_to_map$y_column]),
+            hovertemplate = paste('%{x|%b %d, %Y}:',
+                                  '%{y}')
+          ))
+      }
     }
     
     updated <- sprintf(base_params, menu)
