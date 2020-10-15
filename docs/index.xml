@@ -17,9 +17,10 @@
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
       <guid>/model/</guid>
-      <description>This page has a brief description of methods used at 613covid with references for more information. Also included are all parameters used in projection models and links to all plot data.
-Projection models Projections are based on the reported daily hospital census for Ottawa.
- Daily hospital use reported by Ottawa Public Health.  Model parameters other than Ottawa hospital use are aligned with other models.</description>
+      <description>Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references.
+Projection models All data used to create projection models can be accessed at Open Ottawa. See ’COVID-19 cases and deaths`.
+Covid-19 case projections created using the Bayesian SEIR model developed by Simon Fraser University.
+ Projections are based on observed covid-19 cases by episode date.</description>
     </item>
     
     <item>
@@ -66,6 +67,16 @@ uOttawa – CHEO SARS-CoV-2 research group: Robert Delatolla, Alex MacKenzie, Pa
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/wastewater/</guid>
+      <description>The National Capital Region is one of the first communities in Canada to conduct daily wastewater readings to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa).
+The figures below were created by researchers at CHEO RI and uOttawa. Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health’s website.</description>
+    </item>
+    
+    <item>
+      <title>Ottawa covid-19 wastewater surveillance (development page)</title>
+      <link>/wastewater_dev/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/wastewater_dev/</guid>
       <description>The National Capital Region is one of the first communities in Canada to conduct daily wastewater readings to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa).
 The figures below were created by researchers at CHEO RI and uOttawa. Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health’s website.</description>
     </item>

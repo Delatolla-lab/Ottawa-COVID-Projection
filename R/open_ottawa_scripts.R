@@ -17,8 +17,16 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
         observed_pct_positivity = "Daily_%_Positivity",
         observed_num_tests = "Number_of_Tests"
       ) %>%
-      mutate(observed_pct_positivity = observed_pct_positivity/100) %>%
-      filter(date >= "2020-03-17")
+      #mutate(observed_pct_positivity = observed_pct_positivity/100) %>%
+      filter(date >= "2020-03-17") %>%
+      # add moving average for pct positivity
+      mutate(
+        pct_positivity_7_day =
+          rollapply(observed_pct_positivity, width=7,
+                    FUN=function(x) mean(x, na.rm=TRUE),
+                    by=1, by.column=TRUE, partial=TRUE,
+                    fill=NA, align="right")
+      )
   }
   ottawa_test <- test_prep(ottawa_test_data)
   
