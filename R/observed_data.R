@@ -141,9 +141,11 @@ reworked_figure <-
         }
         
         if (isTRUE(yaxis2_button)){
-          vis_logical2 <- c(rep(NA, length(yaxis2)), rep(T, length(yaxis)))
+          vis_logical <- c(rep(T, length(yaxis)))
+          vis_logical2 <- c(rep(NA, length(yaxis2)))
           vis_logical2[i] <- T
           vis_logical2[is.na(vis_logical2)] <- F
+          vis_logical2 <- c(vis_logical, vis_logical2)
           vis_logical2 <- paste0("c(",stringr::str_flatten(vis_logical2, ","),")")
           menu_item2 <- sprintf('
       list(
