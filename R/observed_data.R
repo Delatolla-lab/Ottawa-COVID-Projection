@@ -75,8 +75,8 @@ reworked_figure <-
     base_params_y2 <- 'list(
   list(
   active = 0,
-  x = 1.2,
-  y = 0.9,
+  x = 1.18,
+  y = 0.88,
   type= "dropdown",
   direction = "down",
   xanchor = "center",
@@ -297,9 +297,9 @@ reworked_figure <-
             bargap = 0,
             autosize = TRUE,
             annotations = list(
-              x = 1, y = 1.2, text = y2_button_name, 
+              x = 1.25, y = 1.01, text = y2_button_name, 
               showarrow = F, xref='paper', yref='paper',
-              font=list(size=12)
+              font=list(size=15)
             ),
             legend = list(x = 0.05, y = 0.9),
             updatemenus = updated_y2
