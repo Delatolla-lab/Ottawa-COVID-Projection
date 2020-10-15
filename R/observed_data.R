@@ -73,7 +73,7 @@ reworked_figure <-
     base_params_y2 <- 'list(
   list(
   active = -1,
-  x = 1.2,
+  x = 1.1,
   type= "dropdown",
   direction = "down",
   xanchor = "center",
@@ -162,19 +162,33 @@ reworked_figure <-
           } else {
             menu_y2 <- stringr::str_glue(menu_y2,menu_item2)
           }
+          p <-
+            do.call(add_trace, c(
+              list(p = p, name = var_to_map$name),
+              curr_temp,
+              list(x = data[, xaxis],
+                   y = data[, var_to_map$y_column],
+                   yaxis = "y2"),
+              opacity = var_to_map$opacity,
+              hovertemplate = paste('%{x|%b %d, %Y}:',
+                                    '%{y}'),
+              visible = "legendonly"
+            ))
+          
         }
-      
-      p <-
-        do.call(add_trace, c(
-          list(p = p, name = var_to_map$name),
-          curr_temp,
-          list(x = data[, xaxis],
-               y = data[, var_to_map$y_column],
-               yaxis = "y2"),
-          opacity = var_to_map$opacity,
-          hovertemplate = paste('%{x|%b %d, %Y}:',
-                                '%{y}')
-        ))
+        else{
+          p <-
+            do.call(add_trace, c(
+              list(p = p, name = var_to_map$name),
+              curr_temp,
+              list(x = data[, xaxis],
+                   y = data[, var_to_map$y_column],
+                   yaxis = "y2"),
+              opacity = var_to_map$opacity,
+              hovertemplate = paste('%{x|%b %d, %Y}:',
+                                    '%{y}')
+            ))
+        }
       }
     }
     
