@@ -96,7 +96,7 @@ reworked_figure <-
           change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
       }
       if (isTRUE(yaxis_button)){
-          vis_logical <- c(rep(NA, length(yaxis)))
+          vis_logical <- c(rep(NA, length(yaxis)), rep(T, length(yaxis2)))
           vis_logical[i] <- T
           vis_logical[is.na(vis_logical)] <- F
           vis_logical <- paste0("c(",stringr::str_flatten(vis_logical, ","),")")
@@ -141,7 +141,7 @@ reworked_figure <-
         }
         
         if (isTRUE(yaxis2_button)){
-          vis_logical2 <- c(rep(NA, length(yaxis2)))
+          vis_logical2 <- c(rep(NA, length(yaxis2)), rep(T, length(yaxis)))
           vis_logical2[i] <- T
           vis_logical2[is.na(vis_logical2)] <- F
           vis_logical2 <- paste0("c(",stringr::str_flatten(vis_logical2, ","),")")
@@ -180,7 +180,7 @@ reworked_figure <-
     updated_y2 <- eval(parse(text = updated_y2))
     
     if(is.null(yaxis2)){
-      if(is.null(yaxis_button)){
+      if(!isTRUE(yaxis_button)){
         p <-
           layout(
             p,
@@ -217,6 +217,32 @@ reworked_figure <-
       }
     }
     else{
+      if(isTRUE(yaxis_button)){
+        p <-
+          layout(
+            p,
+            title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+            xaxis = list(type = "date",
+                         title = list(text = as.character(titles[["x"]])),
+                         automargin = TRUE, tickvals = tickvals, 
+                         tickformat = "%b %Y"),
+            yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                         automargin = TRUE, overlaying = "y2",
+                         zeroline = FALSE),
+            yaxis2 = list(
+              side = "right",
+              title = list(text = as.character(titles[["y2"]])),
+              automargin = TRUE, 
+              showgrid = FALSE
+            ),
+            barmode =  "relative",
+            bargap = 0,
+            autosize = TRUE,
+            legend = list(x = 0.05, y = 0.9),
+            updatemenus = updated
+          )
+      }
+      else if(isTRUE(yaxis2_button)){
         p <-
           layout(
             p,
@@ -240,6 +266,31 @@ reworked_figure <-
             legend = list(x = 0.05, y = 0.9),
             updatemenus = updated_y2
           )
+      }
+      else{
+        p <-
+          layout(
+            p,
+            title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+            xaxis = list(type = "date",
+                         title = list(text = as.character(titles[["x"]])),
+                         automargin = TRUE, tickvals = tickvals, 
+                         tickformat = "%b %Y"),
+            yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                         automargin = TRUE, overlaying = "y2",
+                         zeroline = FALSE),
+            yaxis2 = list(
+              side = "right",
+              title = list(text = as.character(titles[["y2"]])),
+              automargin = TRUE, 
+              showgrid = FALSE
+            ),
+            barmode =  "relative",
+            bargap = 0,
+            autosize = TRUE,
+            legend = list(x = 0.05, y = 0.9)
+          )
+      }  
     }
     return(p)
     
