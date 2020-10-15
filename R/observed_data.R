@@ -61,7 +61,7 @@ reworked_figure <-
   list(
   active = -1,
   x = -0.2,
-  type= "buttons",
+  type= "dropdown",
   direction = "down",
   xanchor = "center",
   yanchor = "top",
@@ -74,7 +74,7 @@ reworked_figure <-
   list(
   active = -1,
   x = 1.2,
-  type= "buttons",
+  type= "dropdown",
   direction = "down",
   xanchor = "center",
   yanchor = "top",
@@ -163,7 +163,6 @@ reworked_figure <-
             menu_y2 <- stringr::str_glue(menu_y2,menu_item2)
           }
         }
-    }
       
       p <-
         do.call(add_trace, c(
@@ -176,6 +175,7 @@ reworked_figure <-
           hovertemplate = paste('%{x|%b %d, %Y}:',
                                 '%{y}')
         ))
+      }
     }
     
     updated_y2 <- sprintf(base_params_y2, menu_y2)
