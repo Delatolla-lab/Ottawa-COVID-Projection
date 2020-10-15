@@ -162,6 +162,19 @@ reworked_figure <-
           } else {
             menu_y2 <- stringr::str_glue(menu_y2,menu_item2)
           }
+          if(i == length(yaxis2)){
+            p <-
+              do.call(add_trace, c(
+                list(p = p, name = var_to_map$name),
+                curr_temp,
+                list(x = data[, xaxis],
+                     y = data[, var_to_map$y_column],
+                     yaxis = "y2"),
+                opacity = var_to_map$opacity,
+                hovertemplate = paste('%{x|%b %d, %Y}:',
+                                      '%{y}')
+              ))
+          }else{
           p <-
             do.call(add_trace, c(
               list(p = p, name = var_to_map$name),
@@ -174,6 +187,7 @@ reworked_figure <-
                                     '%{y}'),
               visible = "legendonly"
             ))
+          }
           
         }
         else{
