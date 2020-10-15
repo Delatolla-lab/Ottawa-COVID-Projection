@@ -39,6 +39,7 @@ library(tidyr)
 library(lubridate)
 library(stats)
 library(covidseir)
+library(zoo)
 
 # scripts
 source("../../R/lag_replacement.R")

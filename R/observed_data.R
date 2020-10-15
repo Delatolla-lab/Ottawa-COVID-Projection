@@ -8,6 +8,8 @@ reworked_figure <-
            yaxis2 = NULL,
            yaxis_button = FALSE,
            yaxis2_button = FALSE,
+           y_button_name = "",
+           y2_button_name = "",
            titles,
            data) {
     # ---------- PRESETS ----------
@@ -59,9 +61,23 @@ reworked_figure <-
     # base parameters for buttons
     base_params <- 'list(
   list(
-  active = -1,
+  active = 0,
   x = -0.2,
-  type= "buttons",
+  type= "dropdown",
+  direction = "down",
+  xanchor = "center",
+  yanchor = "top",
+  pad = list("r"= 0, "t"= -25, "b" = 0),
+  buttons = list(
+  %s)
+  )
+  )'
+    base_params_y2 <- 'list(
+  list(
+  active = 0,
+  x = 1.18,
+  y = 0.88,
+  type= "dropdown",
   direction = "down",
   xanchor = "center",
   yanchor = "top",
@@ -72,6 +88,9 @@ reworked_figure <-
   )'
     updated <- NULL
     menu <- ""
+    updated_y2 <- NULL
+    menu_y2 <- ""
+    
     for (i in 1:length(yaxis)) {
       var_to_map <- yaxis[[i]]
       curr_temp <- trace_presets[[var_to_map$type]]
@@ -99,57 +118,125 @@ reworked_figure <-
           } else {
             menu <- stringr::str_glue(menu,menu_item)
           }
+          if(i == 1){
+            p <-
+              do.call(add_trace, c(
+                list(p = p, name = var_to_map$name),
+                curr_temp,
+                list(x = data[, xaxis],
+                     y = data[, var_to_map$y_column]),
+                hovertemplate = paste('%{x|%b %d, %Y}:',
+                                      '%{y}')
+              ))
+          }else{
+            p <-
+              do.call(add_trace, c(
+                list(p = p, name = var_to_map$name),
+                curr_temp,
+                list(x = data[, xaxis],
+                     y = data[, var_to_map$y_column]),
+                hovertemplate = paste('%{x|%b %d, %Y}:',
+                                      '%{y}'),
+                visible = FALSE
+              ))
+          }
       }
-      
-      p <-
-        do.call(add_trace, c(
-          list(p = p, name = var_to_map$name),
-          curr_temp,
-          list(x = data[, xaxis],
-               y = data[, var_to_map$y_column]),
-          hovertemplate = paste('%{x|%b %d, %Y}:',
-                                '%{y}')
-        ))
-      
-      # p <- add_trace(
-      #   p,
-      #   name = var_to_map$name,
-      #   unlist(curr_temp),
-      #   x = data[, xaxis],
-      #   y = data[, var_to_map$y_column]
-      # )
+      else{
+        p <-
+          do.call(add_trace, c(
+            list(p = p, name = var_to_map$name),
+            curr_temp,
+            list(x = data[, xaxis],
+                 y = data[, var_to_map$y_column]),
+            hovertemplate = paste('%{x|%b %d, %Y}:',
+                                  '%{y}')
+          ))
+      }
     }
     
     updated <- sprintf(base_params, menu)
     updated <- eval(parse(text = updated))
     
-    for (var_to_map in yaxis2) {
-      curr_temp <- trace_presets[[var_to_map$type]]
-      if (!is_null(var_to_map$color)) {
-        curr_temp <-
-          change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
+    if(!is.null(yaxis2)){
+      for (i in 1:length(yaxis2)) {
+        var_to_map <- yaxis2[[i]]
+        curr_temp <- trace_presets[[var_to_map$type]]
+        if (!is_null(var_to_map$color)) {
+          curr_temp <-
+            change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
+        }
+        
+        if (isTRUE(yaxis2_button)){
+          vis_logical <- c(rep(T, length(yaxis)))
+          vis_logical2 <- c(rep(NA, length(yaxis2)))
+          vis_logical2[i] <- T
+          vis_logical2[is.na(vis_logical2)] <- F
+          vis_logical2 <- c(vis_logical, vis_logical2)
+          vis_logical2 <- paste0("c(",stringr::str_flatten(vis_logical2, ","),")")
+          menu_item2 <- sprintf('
+      list(
+        label = "%s",
+        method = "update",
+        args = list(list(visible = %s),
+                    list(title = "%s")))',
+                                yaxis2[[i]][["short_name"]],
+                                vis_logical2,
+                                titles[["title"]])
+          
+          if (i < length(yaxis2)){
+            menu_y2 <- stringr::str_glue(stringr::str_glue(menu_y2,menu_item2),",")
+          } else {
+            menu_y2 <- stringr::str_glue(menu_y2,menu_item2)
+          }
+          if(i == 1){
+            p <-
+              do.call(add_trace, c(
+                list(p = p, name = var_to_map$name),
+                curr_temp,
+                list(x = data[, xaxis],
+                     y = data[, var_to_map$y_column],
+                     yaxis = "y2"),
+                opacity = var_to_map$opacity,
+                hovertemplate = paste('%{x|%b %d, %Y}:',
+                                      '%{y}')
+              ))
+          }else{
+          p <-
+            do.call(add_trace, c(
+              list(p = p, name = var_to_map$name),
+              curr_temp,
+              list(x = data[, xaxis],
+                   y = data[, var_to_map$y_column],
+                   yaxis = "y2"),
+              opacity = var_to_map$opacity,
+              hovertemplate = paste('%{x|%b %d, %Y}:',
+                                    '%{y}'),
+              visible = FALSE
+            ))
+          }
+          
+        }
+        else{
+          p <-
+            do.call(add_trace, c(
+              list(p = p, name = var_to_map$name),
+              curr_temp,
+              list(x = data[, xaxis],
+                   y = data[, var_to_map$y_column],
+                   yaxis = "y2"),
+              opacity = var_to_map$opacity,
+              hovertemplate = paste('%{x|%b %d, %Y}:',
+                                    '%{y}')
+            ))
+        }
       }
-      p <-
-        do.call(add_trace, c(
-          list(p = p, name = var_to_map$name),
-          curr_temp,
-          list(x = data[, xaxis],
-               y = data[, var_to_map$y_column],
-               yaxis = "y2"),
-          opacity = var_to_map$opacity,
-          hovertemplate = paste('%{x|%b %d, %Y}:',
-                                '%{y}')
-        ))
-      # p <- add_trace(
-      #   p,
-      #   name = var_to_map$name,
-      #   unlist(curr_temp),
-      #   x = data[, xaxis],
-      #   y = data[, var_to_map$y_column]
-      # )
     }
     
+    updated_y2 <- sprintf(base_params_y2, menu_y2)
+    updated_y2 <- eval(parse(text = updated_y2))
+    
     if(is.null(yaxis2)){
+      if(!isTRUE(yaxis_button)){
         p <-
           layout(
             p,
@@ -165,8 +252,28 @@ reworked_figure <-
             autosize = TRUE,
             legend = list(x = 0.05, y = 1)
           )
+      }
+      else{
+        p <-
+          layout(
+            p,
+            title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+            xaxis = list(type = "date",
+                         title = list(text = as.character(titles[["x"]])),
+                         automargin = TRUE, tickvals = tickvals, 
+                         tickformat = "%b %Y"),
+            yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                         automargin = TRUE),
+            barmode =  "relative",
+            bargap = 0,
+            autosize = TRUE,
+            legend = list(x = 0.05, y = 1),
+            updatemenus = updated
+          )
+      }
     }
     else{
+      if(isTRUE(yaxis_button)){
         p <-
           layout(
             p,
@@ -190,6 +297,61 @@ reworked_figure <-
             legend = list(x = 0.05, y = 0.9),
             updatemenus = updated
           )
+      }
+      else if(isTRUE(yaxis2_button)){
+        p <-
+          layout(
+            p,
+            title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+            xaxis = list(type = "date",
+                         title = list(text = as.character(titles[["x"]])),
+                         automargin = TRUE, tickvals = tickvals, 
+                         tickformat = "%b %Y"),
+            yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                         automargin = TRUE, overlaying = "y2",
+                         zeroline = FALSE),
+            yaxis2 = list(
+              side = "right",
+              title = list(text = as.character(titles[["y2"]])),
+              automargin = TRUE, 
+              showgrid = FALSE
+            ),
+            barmode =  "relative",
+            bargap = 0,
+            autosize = TRUE,
+            annotations = list(
+              x = 1.25, y = 1.01, text = y2_button_name, 
+              showarrow = F, xref='paper', yref='paper',
+              font=list(size=15)
+            ),
+            legend = list(x = 0.05, y = 0.9),
+            updatemenus = updated_y2
+          )
+      }
+      else{
+        p <-
+          layout(
+            p,
+            title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+            xaxis = list(type = "date",
+                         title = list(text = as.character(titles[["x"]])),
+                         automargin = TRUE, tickvals = tickvals, 
+                         tickformat = "%b %Y"),
+            yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                         automargin = TRUE, overlaying = "y2",
+                         zeroline = FALSE),
+            yaxis2 = list(
+              side = "right",
+              title = list(text = as.character(titles[["y2"]])),
+              automargin = TRUE, 
+              showgrid = FALSE
+            ),
+            barmode =  "relative",
+            bargap = 0,
+            autosize = TRUE,
+            legend = list(x = 0.05, y = 0.9)
+          )
+      }  
     }
     return(p)
     
