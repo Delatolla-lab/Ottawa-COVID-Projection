@@ -25,9 +25,8 @@ Covid-19 case projections created using the Bayesian SEIR model developed by Sim
       
       <guid>https://613covid.ca/more/</guid>
       <description>Model use There are two main uses of the projections:
-Short-term projections (2 to 4 weeks) to inform the immediate need for hospital and critical care services for COVID-19 patients.
- Long-term projections (6 weeks onward) to assess the effect of relaxing physical distancing.
-   Model accuracy Creating accurate, long-range projections to predict the spread COVID-19 is difficult. It’s akin to forecasting when a hurricane will make landfall when it is still thousands of kilometers out at sea.</description>
+Short-term projections (2 to 4 weeks) inform the current level of covid-19 transmssion. In turn, current covid-19 transmission reflects effectivess of ongoing covid-19 prevention and control. Short-term projections the immediate need health care such hospital and critical care services for COVID-19 patients.
+ Long-term projections (6 weeks onward) to assess the potential effect of changes in covid-19 transmission. In turn, future covid-19 transmission reflects potential changes to covid-19 re-opening stages and the effectiveness of cvoid prevention and control.</description>
     </item>
     
     <item>
