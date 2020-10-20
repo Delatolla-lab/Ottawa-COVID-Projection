@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://613covid.ca/fr/model/</loc>
+    <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/model/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/model/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://613covid.ca/fr/more/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/more/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/more/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://613covid.ca/fr/categories/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://613covid.ca/fr/change-log/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/change-log/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/change-log/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://613covid.ca/fr/contact/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/contact/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://613covid.ca/fr/wastewater/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/wastewater/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/wastewater/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://613covid.ca/fr/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://613covid.ca/fr/roadmap/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/roadmap/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/roadmap/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://613covid.ca/fr/tags/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/tags/"
+                />
+  </url>
+  
+</urlset>
