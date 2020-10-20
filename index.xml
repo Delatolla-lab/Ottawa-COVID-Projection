@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ottawa COVID-19 Projections on Ottawa COVID19</title>
+    <title>Ottawa COVID19</title>
     <link>https://613covid.ca/</link>
-    <description>Recent content in Ottawa COVID-19 Projections on Ottawa COVID19</description>
+    <description>Recent content on Ottawa COVID19</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://613covid.ca/index.xml" rel="self" type="application/rss+xml" />
     <item>
