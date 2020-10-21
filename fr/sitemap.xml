@@ -74,6 +74,20 @@
   </url>
   
   <url>
+    <loc>https://613covid.ca/fr/wastewater/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/wastewater/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/wastewater/"
+                />
+  </url>
+  
+  <url>
     <loc>https://613covid.ca/fr/</loc>
     <xhtml:link
                 rel="alternate"
