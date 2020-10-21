@@ -1,0 +1,35 @@
+# This is a workflow to automate the deployment of 613covid.ca
+
+name: Website-update
+
+# Runs everyday at 2pm EST (6pm UTC)
+on: 
+  push
+
+jobs:
+  blogdown:
+    name: Render-Blog
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - uses: r-lib/actions/setup-r@v1
+      - uses: r-lib/actions/setup-pandoc@v1
+      - name: Install rmarkdown and blogdown
+        run: Rscript -e 'install.packages(c("rmarkdown","blogdown", "knitr"))'
+      - name: Install rmd packages
+        run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr"))'
+      - name: Install RStan
+        run: Rscript -e 'install.packages("rstan", repos = "https://cloud.r-project.org/", dependencies = TRUE)'
+      - name: Install covidseir
+        run: Rscript -e 'remotes::install_github("seananderson/covidseir")'
+      - name: install hugo
+        run: Rscript -e 'blogdown::install_hugo()'
+      - name: Render website
+        run: Rscript -e 'blogdown::build_site(build_rmd = TRUE)'
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
