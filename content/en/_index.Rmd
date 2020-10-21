@@ -15,7 +15,6 @@ source("../../R/localization.R")
 localization_data <- read.csv(file.path(getwd(),"../../Data/Covid Localization - Home Page.csv"))
 ```
 
-
 ```{r, results='hold', echo=FALSE, comment=NA}
 time <- .POSIXct(Sys.time(), "America/New_York")
 intro<- insert_translation(localization_data, lang, "Intro", c(format(time, '%d %B, %Y, %X')))
