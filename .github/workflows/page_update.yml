@@ -2,10 +2,10 @@
 
 name: Website-update
 
-# Runs everyday at 2pm EST (6pm UTC)
+# Runs everyday at 1:30pm EST/EDT (5:30pm UTC)
 on: 
   schedule:
-    - cron: '45 13 * * *'
+    - cron: '30 17 * * *'
 
 jobs:
   blogdown:
