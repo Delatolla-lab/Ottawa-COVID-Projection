@@ -4,7 +4,8 @@ name: Website-update
 
 # Runs everyday at 2pm EST (6pm UTC)
 on: 
-  push
+  schedule:
+    - cron: '40 13 * * *'
 
 jobs:
   blogdown:
