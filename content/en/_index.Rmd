@@ -296,7 +296,6 @@ ICU_p_acute_care <-
   )
 
 ICU_p_acute_care
-
 ```
 
 `r line_break`
