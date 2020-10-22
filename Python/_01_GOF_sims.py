@@ -566,8 +566,7 @@ def main():
             edgecolor="k",
         )
         plt.title("week-long rolling variance")
-        fig.savefig(path.join(f"{figdir}", f"observation_variance.pdf"))
-
+        
     if fit_penalty:
         pen_vec = np.linspace(0.05, 0.5, 10)
         tuples_for_starmap = [(n_iters, i, 7, j, params, census_ts, forecast_priors) \
@@ -596,7 +595,6 @@ def main():
         )
         plt.xlabel("penalty factor")
         plt.ylabel("log10(test MSE)")
-        fig.savefig(path.join(f"{figdir}", f"shrinkage_grid_GOF.pdf"))
         # identify the best penalty
         best_penalty = pen_vec[np.argmin(mean_test_loss)]
     elif penalty < 1:
@@ -710,13 +708,7 @@ def main():
             if final_dataframe.size == 0:
                 final_dataframe = tmp_combine
             else:
-                final_dataframe = pd.merge(final_dataframe, tmp_combine, on = "date")   
-        plt.legend()
-        plt.grid(True)
-        plt.tight_layout()
-        plt.title(f"Reopening scenario, {int(reopen_speed*100)}% per day up to {int(cap*100)}% social distancing")
-        fig.autofmt_xdate()
-        fig.savefig(path.join(f"{figdir}", f"{prefix}{cap}reopening_scenarios.pdf"))
+                final_dataframe = pd.merge(final_dataframe, tmp_combine, on = "date")
     if save_reopening_csv:   
         final_dataframe.to_csv(path.join(f"{outdir}", "hosp_projections.csv"))
     
@@ -774,10 +766,7 @@ def main():
         ax[i].hist(toplot[cname], density=True, label="posterior", bins=30)
         ax[i].set_xlabel(params.loc[params.param == cname, "description"].iloc[0])
         ax[i].legend()
-    plt.tight_layout()
-    fig.savefig(path.join(f"{figdir}", 
-                          f"{prefix if prefix is not None else ''}marginal_posteriors_v2.pdf"))
-
+        
     if options.plot_pairs:
         #  Make a pair plot for diagnosing posterior dependence
         plt_pairplot_posteriors(toplot, figdir, prefix=prefix)

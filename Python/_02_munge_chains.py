@@ -169,9 +169,6 @@ def plt_predictive(
     )
     axx.legend()
     axx.grid(True)
-    fig.autofmt_xdate()
-    fig.tight_layout()
-    fig.savefig(path.join(f"{figdir}", f"{prefix}forecast_{file_howfar}_day.pdf"))
 
 
 def plt_pairplot_posteriors(df, figdir, n=1000, prefix=""):
@@ -239,7 +236,6 @@ def mk_projection_tables(df, first_day, outdir):
         ],
         1,
     )
-    summary_df.to_csv(path.join(f"{outdir}", "forecast.csv"), index=False)
 
 
 def read_inputs(paramdir):
@@ -297,7 +293,6 @@ def SD_plot(census_ts, params, df, figdir, prefix = ""):
     plt.ylabel(f"Effect of NPI on transmission")
     plt.xlabel(f"Days since {census_ts[census_ts.columns[0]].values[0]}")
     plt.ylim(0, 1)
-    fig.savefig(path.join(f"{figdir}", f"{prefix}effective_soc_dist.pdf"))
 
 
 def SEIR_plot(df, first_day, howfar, figdir, prefix, census_ts, as_of_days_ago):
@@ -321,7 +316,6 @@ def SEIR_plot(df, first_day, howfar, figdir, prefix, census_ts, as_of_days_ago):
     plt.ylabel('Individuals (thousands)')
     fig.autofmt_xdate()
     fig.tight_layout()
-    fig.savefig(path.join(f"{figdir}", f"{prefix}_SEIR_{howfar}_day.pdf"))
 
     
 
@@ -378,7 +372,6 @@ def Rt_plot(df, first_day, howfar, figdir, prefix, params, census_ts):
     plt.axhline(y=1,      
         color="grey",
         ls="--")
-    fig.savefig(path.join(f"{figdir}", f"{prefix}_Rt.pdf"))
 
 
 
@@ -546,7 +539,6 @@ def main():
         ax[i].set_xlabel(params.loc[params.param == cname, "description"].iloc[0])
         ax[i].legend()
     plt.tight_layout()
-    fig.savefig(path.join(f"{figdir}", f"{prefix}marginal_posteriors_v2.pdf"))
 
     if options.plot_pairs:
         #  Make a pair plot for diagnosing posterior dependence
