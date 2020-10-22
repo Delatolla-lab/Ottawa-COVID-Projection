@@ -5,6 +5,7 @@ from os import getcwd, path, makedirs
 from string import ascii_letters, digits
 import json
 import multiprocessing as mp
+import shutil
 
 from configargparse import ArgParser
 from git import Repo
@@ -30,18 +31,15 @@ LET_NUMS = pd.Series(list(ascii_letters) + list(digits))
 # N_ITERS = None
 
 def get_dir_name(options):
-    now = datetime.now()
-    dir = now.strftime("%Y_%m_%d_%H_%M_%S")
+    dir = "output"
     if options.prefix:
         dir = f"{dir}_{options.prefix}"
     if options.out:
         dir = f"{dir}_{options.out}"
-    outdir = path.join(f"{getcwd()}", "output", dir)
-    # In case we're running a few instances in a tight loop, generate a random
-    # output directory
-    if path.isdir(outdir):
-        dir = f"{dir}_{''.join(LET_NUMS.sample(6, replace=True))}"
-        outdir = path.join(f"{getcwd()}", "output", dir)
+    outdir = path.join(f"{getcwd()}", "Python", dir)
+    # Overwrite existing directory
+    if path.exists(outdir):
+        shutil.rmtree(outdir)
     makedirs(outdir)
     return outdir
 
@@ -720,7 +718,7 @@ def main():
         fig.autofmt_xdate()
         fig.savefig(path.join(f"{figdir}", f"{prefix}{cap}reopening_scenarios.pdf"))
     if save_reopening_csv:   
-        final_dataframe.to_csv(path.join(f"{outdir}", "reopen.csv"))
+        final_dataframe.to_csv(path.join(f"{outdir}", "hosp_projections.csv"))
     
 
     mk_projection_tables(df, first_day, outdir)
