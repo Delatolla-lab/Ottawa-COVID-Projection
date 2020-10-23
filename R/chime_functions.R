@@ -4,7 +4,7 @@
 ## Import open Ottawa hospitalization data & export to Python folder for
 ## simulation
 hosp_export <- function(json_address, dest){
-  object <- fromJSON(json_address)
+  object <- jsonlite::fromJSON(json_address)
   data <- data_extract(object) %>%
     rename(
       date = "_Date",
