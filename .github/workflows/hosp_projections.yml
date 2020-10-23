@@ -7,7 +7,7 @@ on: push
 jobs:
   build:
     env:
-      R_LIBS_USER: tempdir/Library
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
