@@ -1,16 +1,22 @@
+# Extract data frame from JSON object
+data_extract <- function(object){
+  dataframe <- object[[8]][[1]]
+  if(is.numeric(dataframe[["_Date"]])){
+    dataframe[["_Date"]] <- 
+      as.Date(as.POSIXct(dataframe[["_Date"]]/1000, origin = "1970-01-01"))
+  }
+  else{
+    dataframe[["_Date"]] <- as.Date(dataframe[["_Date"]])
+  }
+  return(dataframe)
+}
+
+
 # Clean and merge JSON objects as data frame
 data_creation <- function(ottawa_case_data, ottawa_test_data){
-  
   # Prep Ottawa testing data
   test_prep <- function(ottawa_test_data) {
-    ottawa_test <- ottawa_test_data[[8]][[1]]
-    if(is.numeric(ottawa_test[["_Date"]])){
-      ottawa_test[["_Date"]] <- 
-        as.Date(as.POSIXct(ottawa_test[["_Date"]]/1000, origin = "1970-01-01"))
-    }
-    else{
-      ottawa_test[["_Date"]] <- as.Date(ottawa_test[["_Date"]])
-    }
+    ottawa_test <- data_extract(ottawa_test_data)
     ottawa_test %>%
       rename(
         date = "_Date",
@@ -32,14 +38,7 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
   
   # Prep Ottawa case data & merge with testing data
   case_prep <- function(ottawa_case_data, ottawa_test){
-    ottawa_data <- ottawa_case_data[[8]][[1]]
-    if(is.numeric(ottawa_data[["_Date"]])){
-      ottawa_data[["_Date"]] <- 
-        as.Date(as.POSIXct(ottawa_data[["_Date"]]/1000, origin = "1970-01-01"))
-    }
-    else{
-      ottawa_data[["_Date"]] <- as.Date(ottawa_data[["_Date"]])
-    }
+    ottawa_data <- data_extract(ottawa_case_data)
     ottawa_data %>%
       replace(is.na(.),0) %>%
       rename(
