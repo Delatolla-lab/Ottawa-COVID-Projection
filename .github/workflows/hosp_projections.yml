@@ -19,5 +19,5 @@ jobs:
         run: Rscript -e 'install.packages(c("tidyverse", "jsonlite"))'
       - name: Load tidyverse
         run: Rscript -e 'library(tidyverse)'
-      - name: Print environment variable
-        run: Rscript -e 'print($open_ottawa)'
+      - name: Print environment 
+        run: Rscript -e 'lapply(ls(),function(x)get(x))'
