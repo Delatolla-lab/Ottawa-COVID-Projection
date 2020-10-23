@@ -17,8 +17,8 @@ jobs:
       - name: Load tidyverse
         run: Rscript -e 'library(tidyverse)'
       - name: Source open Ottawa functions
-        run: Rscript -e 'source("R/open_ottawa_scripts.R")'
+        run: Rscript -e 'source("R/open_ottawa_scripts.R")' >> $GITHUB_ENV
       - name: Source CHIME processing functions
-        run: Rscript -e 'source("R/chime_functions.R")'
+        run: Rscript -e 'source("R/chime_functions.R")' >> $GITHUB_ENV
       - name: Print environment
         run: Rscript -e 'lapply(ls(),function(x)get(x))'
