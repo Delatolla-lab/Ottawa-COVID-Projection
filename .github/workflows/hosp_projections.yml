@@ -1,0 +1,20 @@
+# This workflow generates hospital projections using the CHIME bayesian simulation
+
+name: Hospital-projections
+
+on: push
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: dev
+      - uses: r-lib/actions/setup-r@v1
+      - name: Install packages
+        uses: Rscript -e 'install.packages(c("tidyverse", "jsonlite"))'
+      - name: Load tidyverse
+        uses: Rscript -e 'library(tidyverse)'
+      - name: Import hospitalization data for simulation
+        uses: Rscript -e 'hosp_export(json_address = "https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Cases_Currently_in_Hospital&outSR=4326&f=json", dest = "Python/data/OTT_ts.csv")'
