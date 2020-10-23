@@ -3,14 +3,16 @@
 
 ## Import open Ottawa hospitalization data & export to Python folder for
 ## simulation
-hosp_export <- function(json_address, dest){
+hosp_export <- function(json_address, starting_date, dest){
   object <- jsonlite::fromJSON(json_address)
   data <- data_extract(object) %>%
     rename(
       date = "_Date",
       hosp = "Cases_Currently_in_Hospital"
-    )
-  data$vent <- NULL
-  data$mort <- NULL
-  write.csv(data, dest)
+    ) %>%
+    add_column(vent = "",
+               mort = "") %>%
+    filter(date >= as.character(starting_date))
+  write.csv(data, dest, row.names = FALSE)
 }
+

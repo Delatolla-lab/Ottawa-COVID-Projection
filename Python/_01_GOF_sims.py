@@ -695,7 +695,10 @@ def main():
                 if cap == 1:
                     tmp_sufix = f'current'
                 else:
-                    tmp_sufix = f'reduction_{math.ceil((1-cap)*100)}'
+                    if cap > 1:
+                        tmp_sufix = f'reduction_{math.floor((cap-1)*100)}'
+                    else:
+                        tmp_sufix = f'increase_{math.ceil((1-cap)*100)}'
             else:
                 tmp_sufix = f'{int(cap*100)}%Reduction_{reopen_days[i]}'
             hosp_census = create_csv_export_dataframe(qmats[i], 3, "hosp_census", dates, 301, tmp_sufix)
@@ -766,7 +769,7 @@ def main():
         ax[i].hist(toplot[cname], density=True, label="posterior", bins=30)
         ax[i].set_xlabel(params.loc[params.param == cname, "description"].iloc[0])
         ax[i].legend()
-        
+
     if options.plot_pairs:
         #  Make a pair plot for diagnosing posterior dependence
         plt_pairplot_posteriors(toplot, figdir, prefix=prefix)
