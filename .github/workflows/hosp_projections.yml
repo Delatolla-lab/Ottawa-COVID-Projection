@@ -36,9 +36,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Commit and push files
         run: |
-          date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add .
-          git commit -m "generated"
+          git add Python/output/output/hosp_projections.csv
+          git commit -m "Update hospitalization projections"
           git push
