@@ -5,6 +5,25 @@ name: Hospital-projections
 on: push
 
 jobs:
+  example-1:
+    name: Ex1 (${{ matrix.python-version }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+        python-version: ["3.7", "2.7"]
+    steps:
+      - uses: conda-incubator/setup-miniconda@v1
+        with:
+          auto-update-conda: true
+          python-version: ${{ matrix.python-version }}
+      - name: Conda info
+        shell: bash -l {0}
+        run: conda info
+      - name: Conda list
+        shell: pwsh
+        run: conda list
   build:
     runs-on: macOS-latest
     steps:
@@ -15,5 +34,5 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install packages
         run: Rscript -e 'install.packages(c("rmarkdown", "knitr", "tidyverse", "jsonlite", "dplyr", "reticulate", "blogdown"))'
-      - name: Run projections
-        run: Rscript -e 'rmarkdown::render_site("Python/hosp-projections.Rmd")'
+      - name: Test condaenv
+        run: Rscript -e 'reticulate::conda_list()'
