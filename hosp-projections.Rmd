@@ -55,4 +55,7 @@ hosp_census <- c(hosp_data$Cases_Currently_in_Hospital, rep(NA, (nrow(hosp_proj)
 
 hosp_proj$hosp_census_observed <- hosp_census
 hosp_proj$hosp_admits_observed <- hosp_admits
+
+# Export projection for visualization
+write.csv(hosp_proj, "Data/OPH_projection_estimates.csv")
 ```
