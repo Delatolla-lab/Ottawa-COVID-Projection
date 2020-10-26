@@ -31,6 +31,9 @@ hosp_export(
 ```
 
 ## Running Python simulation
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+py_run_file("Python/proj_sim.py")
+```
 
 ## Integrate new projections with existing projections and export for visualization
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
