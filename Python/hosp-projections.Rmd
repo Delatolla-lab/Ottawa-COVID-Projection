@@ -18,8 +18,8 @@ library(dplyr)
 library(jsonlite)
 library(reticulate)
 
-source("R/open_ottawa_scripts.R")
-source("R/chime_functions.R")
+source("../R/open_ottawa_scripts.R")
+source("../R/chime_functions.R")
 ```
 
 ## Generate data file for simulation
@@ -27,19 +27,20 @@ source("R/chime_functions.R")
 hosp_export(
   json_address = "https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Cases_Currently_in_Hospital&outSR=4326&f=json", # address for open Ottawa hosp data
   starting_date = "2020-07-07", # starting date of simulation
-  dest = "Python/data/OTT_ts.csv")
+  dest = "data/OTT_ts.csv")
 ```
 
 ## Running Python simulation
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-py_run_file("Python/proj_sim.py")
+use_condaenv(condaenv = "anaconda3", conda = "/opt/anaconda3/bin/python")
+py_run_file("proj_sim.py")
 ```
 
 ## Integrate new projections with existing projections and export for visualization
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Projection data
-old_proj <- read.csv(file.path(getwd(),"Data/OPH_projection_estimates.csv"))
-new_proj <- read.csv(file.path(getwd(),"Python/output/output/hosp_projections.csv"))
+old_proj <- read.csv(file.path(getwd(),"../Data/OPH_projection_estimates.csv"))
+new_proj <- read.csv(file.path(getwd(),"output/output/hosp_projections.csv"))
 
 # Hospital census & daily admissions from open Ottawa
 hosp_object <- fromJSON("https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=Cases_Newly_Admitted_to_Hospital,Cases_Currently_in_Hospital,_Date&outSR=4326&f=json")
@@ -60,5 +61,5 @@ hosp_proj$hosp_census_observed <- hosp_census
 hosp_proj$hosp_admits_observed <- hosp_admits
 
 # Export projection for visualization
-write.csv(hosp_proj, "Data/OPH_projection_estimates.csv")
+write.csv(hosp_proj, "../Data/OPH_projection_estimates.csv")
 ```
