@@ -14,6 +14,9 @@ jobs:
         os: ["ubuntu-latest", "macos-latest", "windows-latest"]
         python-version: ["3.7", "2.7"]
     steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: dev
       - uses: conda-incubator/setup-miniconda@v1
         with:
           auto-update-conda: true
@@ -24,12 +27,6 @@ jobs:
       - name: Conda list
         shell: pwsh
         run: conda list
-  build:
-    runs-on: macOS-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: dev
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install packages
