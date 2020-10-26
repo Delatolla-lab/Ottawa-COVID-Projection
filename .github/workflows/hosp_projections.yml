@@ -33,11 +33,7 @@ jobs:
       - name: Run CHIME simulation
         shell: pwsh
         run: python Python/_01_GOF_sims.py -p Python/data/OTT_parameters.csv -t Python/data/OTT_ts.csv  --reopen_day 14 --reopen_caps 1 1.1 0.9 --save_reopening_csv --one_reopen --reopen_from_today
-      - uses: actions/checkout@v2
-      - name: Commit and push files
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add ./Python/output/output/hosp_projections.csv
-          git commit -m "Update hospitalization projections"
-          git push
+      - uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'dev' #optional defaults to master
