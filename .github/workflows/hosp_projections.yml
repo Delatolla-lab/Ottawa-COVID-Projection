@@ -1,0 +1,44 @@
+# This workflow generates hospital projections using the CHIME bayesian simulation from Open Ottawa hospitalization data
+
+name: Hospital-projections
+
+on: push
+
+jobs:
+  build:
+    runs-on: "macos-latest"
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: dev
+      - uses: conda-incubator/setup-miniconda@v1
+        with:
+          auto-update-conda: true
+          python-version: "3.8"
+      - name: Conda info
+        shell: bash -l {0}
+        run: conda info
+      - name: Conda list
+        shell: pwsh
+        run: conda list
+      - uses: r-lib/actions/setup-r@v1
+      - uses: r-lib/actions/setup-pandoc@v1
+      - name: Install packages
+        run: Rscript -e 'install.packages(c("rmarkdown", "knitr", "tidyverse", "jsonlite", "dplyr", "reticulate", "blogdown"))'
+      - name: Install python dependencies 
+        shell: pwsh
+        run: pip install -r Python/requirements.txt
+      - name: Run CHIME simulation
+        shell: pwsh
+        run: python Python/_01_GOF_sims.py -p Python/data/OTT_parameters.csv -t Python/data/OTT_ts.csv  --reopen_day 14 --reopen_caps 1 1.1 0.9 --save_reopening_csv --one_reopen --reopen_from_today
+      - uses: actions/checkout@v2
+      - name: Commit and push files
+        run: |
+          date > generated.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "generated"
+          git push
