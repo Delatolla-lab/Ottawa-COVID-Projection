@@ -7,27 +7,22 @@ on: push
 jobs:
   data-prep:
     runs-on: "ubuntu-latest"
+    strategy:
+      fail-fast: false
     steps:
       - uses: actions/checkout@v2
         with:
           ref: dev
       - uses: r-lib/actions/setup-r@v1
+      - uses: r-lib/actions/setup-pandoc@v1
       - name: Install packages
-        run: Rscript -e 'install.packages(c("tidyverse", "jsonlite", "dplyr"))'
+        run: Rscript -e 'install.packages(c("rmarkdown", "knitr", "tidyverse", "jsonlite", "dplyr", "blogdown"))'
       - name: Source functions & export data to Python folder
-        run: |
-          Rscript -e 'source("R/open_ottawa_scripts.R")'
-          Rscript -e 'source("R/chime_functions.R")'
-          Rscript -e 'hosp_export(json_address = "https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Cases_Currently_in_Hospital&outSR=4326&f=json", starting_date = "2020-07-07", dest = "Python/data/OTT_ts.csv")'
+        run: Rscript -e 'rmarkdown::render_site("Python/hosp-projections.Rmd")'
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: 'dev' #optional defaults to master
-  simulation:
-    runs-on: "ubuntu-latest"
-    strategy:
-      fail-fast: false
-    steps:
       - uses: actions/checkout@v2
         with:
           ref: dev
