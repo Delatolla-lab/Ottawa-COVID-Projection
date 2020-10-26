@@ -32,7 +32,6 @@ hosp_export(
 
 ## Running Python simulation
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-use_condaenv(condaenv = "anaconda3", conda = "/opt/anaconda3/bin/python")
 py_run_file("proj_sim.py")
 ```
 
