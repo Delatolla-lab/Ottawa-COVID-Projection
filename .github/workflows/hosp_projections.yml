@@ -27,7 +27,9 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install packages
         run: Rscript -e 'install.packages(c("rmarkdown", "knitr", "tidyverse", "jsonlite", "dplyr", "reticulate", "blogdown"))'
-      - name: conda
-        run: conda --install -c anaconda configargparse
-      - name: execute python
+      - name: Install python dependencies 
+        shell: pwsh
+        run: pip install -r Python/requirements.txt
+      - name: Run CHIME simulation
+        shell: pwsh
         run: python Python/_01_GOF_sims.py -p Python/data/OTT_parameters.csv -t Python/data/OTT_ts.csv  --reopen_day 14 --reopen_caps 1 1.1 0.9 --save_reopening_csv --one_reopen --reopen_from_today
