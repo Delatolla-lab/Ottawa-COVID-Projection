@@ -11,8 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This file prepares the time-series dataset needed to generate covid-19 hospitalization projections. This is based on the [Bayesian extension to the CHIME model](https://github.com/pennsignals/chime_sims) developed by the University of Pennsylvania Health System.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# load libraries and localization files
+```{r, warning=FALSE, message=FALSE}
+# load libraries
 library(tidyverse)
 library(dplyr)
 library(jsonlite)
@@ -22,6 +22,6 @@ source("../R/chime_functions.R")
 ```
 
 ## Generate data file for simulation
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE}
 hosp_export(json_address = "https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Cases_Currently_in_Hospital&outSR=4326&f=json", starting_date = "2020-07-07", dest = "data/OTT_ts.csv")
 ```
