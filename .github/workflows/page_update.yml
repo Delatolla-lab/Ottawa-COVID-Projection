@@ -43,7 +43,7 @@ jobs:
   blogdown:
     name: Render-Blog
     needs: dataset-creation
-    runs-on: "ubuntu-latest"
+    runs-on: "macOS-latest"
     steps:
       - uses: actions/checkout@v2
         with:
