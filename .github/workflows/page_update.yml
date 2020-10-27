@@ -2,10 +2,12 @@
 
 name: Website-update
 
-# Runs everyday at 1:30pm EST/EDT (5:30pm UTC)
+# Runs everyday at 1:30pm EST/EDT (5:30pm UTC) or push to master
 on: 
   schedule:
     - cron: '30 17 * * *'
+  push:
+    branches: master
 
 jobs:
   blogdown:
