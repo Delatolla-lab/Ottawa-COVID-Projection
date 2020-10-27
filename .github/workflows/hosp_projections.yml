@@ -21,7 +21,7 @@ jobs:
       - name: setup-r
         uses: r-lib/actions/setup-r@v1
         with:
-          r-version: '4.0.3'
+          r-version: '3.6.3'
       - name: Install renv package
         run: R -e 'install.packages("renv")'
       - name: Cache packages
