@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: R -e 'renv::restore()'
       - name: Prepare data
-        run: Rscript R/dataset-creation.R
+        run: Rscript R/dataset_creation.R
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
