@@ -49,6 +49,8 @@ jobs:
         with:
           ref: dev
       - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: '3.6.3'
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown and blogdown
         run: Rscript -e 'install.packages(c("rmarkdown","blogdown", "knitr"))'
