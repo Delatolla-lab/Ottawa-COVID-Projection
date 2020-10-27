@@ -18,6 +18,21 @@
   </url>
   
   <url>
+    <loc>https://613covid.ca/</loc>
+    <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/"
+                />
+  </url>
+  
+  <url>
     <loc>https://613covid.ca/more/</loc>
     <xhtml:link
                 rel="alternate"
@@ -70,20 +85,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://613covid.ca/contact/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/"
                 />
   </url>
   
