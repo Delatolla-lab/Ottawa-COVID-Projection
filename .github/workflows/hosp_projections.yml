@@ -31,13 +31,9 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
-      - name: Restore packages
-        shell: Rscript {0}
-        run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          renv::restore()
       - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
-      - run: R -e 'renv::restore()'
+      - name: Install dependencies
+        run: R -e 'renv::restore()'
       - name: Prepare data
         run: Rscript R/chime_dataprep.R
       - uses: mikeal/publish-to-github-action@master
