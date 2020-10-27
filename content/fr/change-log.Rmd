@@ -4,6 +4,13 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V4.0.0
+2020-10-27
+
+- [Github repository](https://github.com/Big-Life-Lab/Ottawa-COVID-Projection)
+with source code for website is now available.
+- Updates to [wastewater](/wastewater) page.
+
 # V3.1.0
 2020-10-13
 
