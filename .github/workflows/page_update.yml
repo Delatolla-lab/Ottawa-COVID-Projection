@@ -7,7 +7,7 @@ on:
   schedule:
     - cron: '30 17 * * *'
   push:
-    branches: dev
+    branches: master
 
 jobs:
   dataset-creation:
@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: dev
+          ref: master
       - name: setup-r
         uses: r-lib/actions/setup-r@v1
         with:
@@ -39,7 +39,7 @@ jobs:
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: 'dev' #optional defaults to master
+          BRANCH_NAME: 'master' #optional defaults to master
   blogdown:
     name: Render-Blog
     needs: dataset-creation
