@@ -55,7 +55,7 @@ jobs:
       - name: Install rmarkdown and blogdown
         run: Rscript -e 'install.packages(c("rmarkdown","blogdown", "knitr"))'
       - name: Install rmd packages
-        run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr"))'
+        run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr", "V8"))'
       - name: Install RStan
         run: Rscript -e 'install.packages("rstan", repos = "https://cloud.r-project.org/", dependencies = TRUE)'
       - name: Install covidseir
