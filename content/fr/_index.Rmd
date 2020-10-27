@@ -359,30 +359,6 @@ projection_data <- case_projection_data(ott_case_projections, 10)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Prepare projection datasets for visualization
-# Load datasets
-old_proj <- read.csv(file.path(getwd(),"../../Data/OPH_projection_estimates.csv"))
-new_proj <- read.csv(file.path(getwd(),"../../Python/output/output/hosp_projections.csv"))
-
-# Integrate new projections into old projections
-hosp_proj <- hosp_integrate(
-  old_proj = old_proj, # old projections
-  new_proj = new_proj, # newly generated simulation
-  starting_date = "2020-07-07" # starting date of simulation
-)
-
-# Add hospital data to projections
-hosp_admits <- c(ott_observed$observed_new_ICU_p_acute_care, rep(NA, (nrow(hosp_proj) - nrow(ott_observed))))
-hosp_census <- c(ott_observed$observed_census_ICU_p_acute_care, rep(NA, (nrow(hosp_proj) - nrow(ott_observed))))
-
-hosp_proj$hosp_census_observed <- hosp_census
-hosp_proj$hosp_admits_observed <- hosp_admits
-
-# Export projection for visualization
-write.csv(hosp_proj, "../../Data/OPH_projection_estimates.csv")
-```
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualize projections
 case_projection_plot(projection_data, ott_observed_episodes, current_col = current_case_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Projected daily COVID-19 cases in Ottawa", pct_change = 10)
 ```
