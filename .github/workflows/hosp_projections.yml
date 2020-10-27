@@ -36,6 +36,7 @@ jobs:
         run: |
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
+      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
       - run: R -e 'renv::restore()'
       - name: Prepare data
         run: Rscript R/chime_dataprep.R
