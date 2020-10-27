@@ -1,7 +1,7 @@
 # This file prepares the hospital projection dataset for visualization. This
 # file takes the newly generated hospitalization projections file from 
 # the CHIME simulation and integrates it with the existing projections file
-# to be used in the update of 613covid.ca
+# to be used to update 613covid.ca.
 
 ## Load libraries
 library(tidyverse)
@@ -26,15 +26,13 @@ hosp_proj <- hosp_integrate(
 )
 
 ## Extract hospital census & daily admissions from open Ottawa
-hosp_object <- 
-  fromJSON("https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=Cases_Newly_Admitted_to_Hospital,Cases_Currently_in_Hospital,_Date&outSR=4326&f=json")
-
-hosp_data <- data_extract(hosp_object)
+hosp_data <- 
+  read.csv(file.path(getwd(), "Data/Observed data/OPH_Observed_COVID_Data.csv"))
 
 hosp_admits <- 
-  c(hosp_data$Cases_Newly_Admitted_to_Hospital,
+  c(hosp_data$observed_new_ICU_p_acute_care	,
     rep(NA, (nrow(hosp_proj) - nrow(hosp_data))))
-hosp_census <- c(hosp_data$Cases_Currently_in_Hospital,
+hosp_census <- c(hosp_data$observed_census_ICU_p_acute_care,
                  rep(NA, (nrow(hosp_proj) - nrow(hosp_data))))
 
 ## Integrate hospital data into projections file

@@ -1,8 +1,8 @@
 # Functions to pull hospitalization data from Open Ottawa's API to be used
-# in the CHIME-SIMS simulation
+# in the CHIME-SIMS simulation.
 
 ## Import open Ottawa hospitalization data & export to Python folder for
-## simulation
+## simulation.
 hosp_export <- function(json_address, starting_date, dest){
   object <- jsonlite::fromJSON(json_address)
   data <- data_extract(object) %>%
