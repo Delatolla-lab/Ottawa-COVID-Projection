@@ -2,7 +2,10 @@
 
 name: Hospital-projections
 
-on: push
+# Runs every Tuesday at 12:00pm EST/EDT (1pm UTC)
+on: 
+  schedule:
+    - cron: '0 16 * * 2'
 
 jobs:
   simulation:
@@ -12,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: dev
+          ref: master
       - uses: conda-incubator/setup-miniconda@v1
         with:
           auto-update-conda: true
@@ -32,4 +35,3 @@ jobs:
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: 'dev' #optional defaults to master
