@@ -5,12 +5,7 @@
     <link>https://613covid.ca/</link>
     <description>Recent content in Ottawa COVID-19 Projections on Ottawa COVID19</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 05 May 2016 21:48:51 -0700</lastBuildDate>
-    
-	<atom:link href="https://613covid.ca/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://613covid.ca/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Methods</title>
       <link>https://613covid.ca/model/</link>
