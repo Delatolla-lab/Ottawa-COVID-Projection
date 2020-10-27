@@ -6,8 +6,6 @@ name: Hospital-projections
 on: 
   schedule:
     - cron: '0 16 * * 2'
-  push:
-    branches: dev
 
 jobs:
   data-prep:
