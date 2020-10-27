@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ottawa COVID-19 Projections on Ottawa COVID19</title>
-    <link>/</link>
+    <link>https://613covid.ca/</link>
     <description>Recent content in Ottawa COVID-19 Projections on Ottawa COVID19</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 05 May 2016 21:48:51 -0700</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://613covid.ca/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Methods</title>
-      <link>/model/</link>
+      <link>https://613covid.ca/model/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
-      <guid>/model/</guid>
+      <guid>https://613covid.ca/model/</guid>
       <description>Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references.
 Projection models All data used to create projection models can be accessed at Open Ottawa. See ’COVID-19 cases and deaths`.
 Covid-19 case projections created using the Bayesian SEIR model developed by Simon Fraser University.
@@ -25,10 +25,10 @@ Covid-19 case projections created using the Bayesian SEIR model developed by Sim
     
     <item>
       <title></title>
-      <link>/more/</link>
+      <link>https://613covid.ca/more/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/more/</guid>
+      <guid>https://613covid.ca/more/</guid>
       <description>Model use There are two main uses of the projections:
 Short-term projections (2 to 4 weeks) inform the current level of covid-19 transmssion. In turn, current covid-19 transmission reflects effectivess of ongoing covid-19 prevention and control. Short-term projections the immediate need health care such hospital and critical care services for COVID-19 patients.
  Long-term projections (6 weeks onward) to assess the potential effect of changes in covid-19 transmission. In turn, future covid-19 transmission reflects potential changes to covid-19 re-opening stages and the effectiveness of cvoid prevention and control.</description>
@@ -36,10 +36,10 @@ Short-term projections (2 to 4 weeks) inform the current level of covid-19 trans
     
     <item>
       <title>Changelog</title>
-      <link>/change-log/</link>
+      <link>https://613covid.ca/change-log/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/change-log/</guid>
+      <guid>https://613covid.ca/change-log/</guid>
       <description>Updates involving only data updates will no longer be documented.
 V3.1.0 2020-10-13
  Wastewater page added describing covid-19 wastewater surveillance.   V3.0.0 2020-10-05
@@ -49,10 +49,10 @@ V3.1.0 2020-10-13
     
     <item>
       <title>Contact</title>
-      <link>/contact/</link>
+      <link>https://613covid.ca/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/contact/</guid>
+      <guid>https://613covid.ca/contact/</guid>
       <description>Media contact: Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, mschreiter@toh.ca ph: 613-222-7674
 Science contacts: Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca, Alan Forster
 Acknowledgements for website and content: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches, and others on Big Life Lab team.
@@ -62,30 +62,31 @@ uOttawa – CHEO SARS-CoV-2 research group: Robert Delatolla, Alex MacKenzie, Pa
     
     <item>
       <title>Ottawa covid-19 wastewater surveillance</title>
-      <link>/wastewater/</link>
+      <link>https://613covid.ca/wastewater/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/wastewater/</guid>
+      <guid>https://613covid.ca/wastewater/</guid>
       <description>The National Capital Region is one of the first communities in Canada to conduct daily wastewater readings to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa).
-The figures below were created by researchers at CHEO RI and uOttawa. Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health’s website.</description>
+Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health’s website.
+The science supporting wastewater surveillance is rapidly evolving.</description>
     </item>
     
     <item>
       <title>Ottawa covid-19 wastewater surveillance (development page)</title>
-      <link>/wastewater_dev/</link>
+      <link>https://613covid.ca/wastewater_dev/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/wastewater_dev/</guid>
+      <guid>https://613covid.ca/wastewater_dev/</guid>
       <description>The National Capital Region is one of the first communities in Canada to conduct daily wastewater readings to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa).
 The figures below were created by researchers at CHEO RI and uOttawa. Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health’s website.</description>
     </item>
     
     <item>
       <title>Roadmap</title>
-      <link>/roadmap/</link>
+      <link>https://613covid.ca/roadmap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/roadmap/</guid>
+      <guid>https://613covid.ca/roadmap/</guid>
       <description>  The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
  Review and update model parameters based on recent published studies. Priories for review:  ventilated patients deaths   </description>
     </item>

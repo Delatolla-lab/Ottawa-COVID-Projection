@@ -85,6 +85,24 @@ merge_data <- function(data1, data2){
           FUN=function(x) mean(x, na.rm=TRUE),
           by=1, by.column=TRUE, partial=TRUE,
           fill=NA, align="right"),
+      observed_new_episodes_5_day =
+        rollapply(
+          observed_new_episodes, width=5,
+          FUN=function(x) mean(x, na.rm=TRUE),
+          by=1, by.column=TRUE, partial=TRUE,
+          fill=NA, align="right"),
+      observed_new_episodes_7_day =
+        rollapply(
+          observed_new_episodes, width=7,
+          FUN=function(x) mean(x, na.rm=TRUE),
+          by=1, by.column=TRUE, partial=TRUE,
+          fill=NA, align="right"),
+      observed_new_episodes_10_day =
+        rollapply(
+          observed_new_episodes, width=10,
+          FUN=function(x) mean(x, na.rm=TRUE),
+          by=1, by.column=TRUE, partial=TRUE,
+          fill=NA, align="right"),
       observed_new_community_cases_5_day =
         rollapply(
           observed_new_community_cases, width=5,

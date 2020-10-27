@@ -48,6 +48,7 @@ source("../../R/data_conversion.R")
 source("../../R/hosp_projections.R")
 source("../../R/open_ottawa_scripts.R")
 source("../../R/plot_case_projections.R")
+source("../../R/chime_functions.R")
 
 # Pull JSON objects from OpenOttawa
 ottawa_case_data <-
@@ -56,7 +57,6 @@ ottawa_test_data <-
   fromJSON("https://opendata.arcgis.com/datasets/26c902bf1da44d3d90b099392b544b81_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Number_of_Tests,Daily_%_Positivity&outSR=4326&f=json")
 
 # data
-ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
 ott_observed <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
 
 # Save ott_observed as csv
@@ -359,6 +359,30 @@ projection_data <- case_projection_data(ott_case_projections, 10)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Prepare projection datasets for visualization
+# Load datasets
+old_proj <- read.csv(file.path(getwd(),"../../Data/OPH_projection_estimates.csv"))
+new_proj <- read.csv(file.path(getwd(),"../../Python/output/output/hosp_projections.csv"))
+
+# Integrate new projections into old projections
+hosp_proj <- hosp_integrate(
+  old_proj = old_proj, # old projections
+  new_proj = new_proj, # newly generated simulation
+  starting_date = "2020-07-07" # starting date of simulation
+)
+
+# Add hospital data to projections
+hosp_admits <- c(ott_observed$observed_new_ICU_p_acute_care, rep(NA, (nrow(hosp_proj) - nrow(ott_observed))))
+hosp_census <- c(ott_observed$observed_census_ICU_p_acute_care, rep(NA, (nrow(hosp_proj) - nrow(ott_observed))))
+
+hosp_proj$hosp_census_observed <- hosp_census
+hosp_proj$hosp_admits_observed <- hosp_admits
+
+# Export projection for visualization
+write.csv(hosp_proj, "../../Data/OPH_projection_estimates.csv")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualize projections
 case_projection_plot(projection_data, ott_observed_episodes, current_col = current_case_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Projected daily COVID-19 cases in Ottawa", pct_change = 10)
 ```
@@ -366,6 +390,8 @@ case_projection_plot(projection_data, ott_observed_episodes, current_col = curre
 `r hosp_projections`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Import projections
+ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
 source("../../R/hosp_projections.R")
 hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (Number of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed census of patients", project_to = "2020-12-31")
 ```
