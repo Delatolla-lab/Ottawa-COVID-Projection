@@ -50,7 +50,7 @@ jobs:
           ref: dev
       - uses: r-lib/actions/setup-r@v1
         with:
-          r-version: '4.0.3'
+          r-version: '3.6.3'
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install V8
         run: Rscript -e 'install.packages("V8")'
