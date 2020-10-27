@@ -6,15 +6,48 @@ name: Website-update
 on: 
   schedule:
     - cron: '30 17 * * *'
+  push:
+    branches: dev
 
 jobs:
+  dataset-creation:
+    runs-on: "ubuntu-latest"
+    env:
+      RENV_PATHS_ROOT: ~/.local/share/renv
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: dev
+      - name: setup-r
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: '4.0.3'
+      - name: Install renv package
+        run: R -e 'install.packages("renv")'
+      - name: Cache packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
+      - name: Install dependencies
+        run: R -e 'renv::restore()'
+      - name: Prepare data
+        run: Rscript R/dataset-creation.R
+      - uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'dev' #optional defaults to master
   blogdown:
     name: Render-Blog
+    needs: dataset-creation
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: master
+          ref: dev
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown and blogdown
