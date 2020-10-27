@@ -2,20 +2,47 @@
 
 name: Hospital-projections
 
-# Runs every Tuesday at 12:00pm EST/EDT (1pm UTC)
+# Runs every Tuesday at 12:00pm EST/EDT (1pm UTC) or push
 on: 
   schedule:
     - cron: '0 16 * * 2'
+  push:
+    - branches: dev
 
 jobs:
+  data-prep:
+    runs-on: "ubuntu-latest"
+    env:
+      RENV_PATHS_ROOT: ~/.local/share/renv
+    steps:
+      - name: Cache packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+      - name: Restore packages
+        shell: Rscript {0}
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
+      - run: R -e 'renv::restore()'
+      - name: Prepare data
+        run: Rscript R/chime_dataprep.R
+      - uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'dev' #optional defaults to master
   simulation:
     runs-on: "ubuntu-latest"
+    needs: data-prep
     strategy:
       fail-fast: false
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: master
+          ref: dev
       - uses: conda-incubator/setup-miniconda@v1
         with:
           auto-update-conda: true
@@ -35,3 +62,4 @@ jobs:
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'dev' #optional defaults to master
