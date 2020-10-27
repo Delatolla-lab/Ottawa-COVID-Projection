@@ -11,7 +11,8 @@ proj_generation <- function(fit, lut, episode_data, project_to,
   increase <- 1 + (pct_change/100)
   
   # Set days to project based on episode data & projection end date
-  days_project <- as.numeric(as.Date(project_to) - last(episode_data$date))
+  days_project <- as.numeric(as.Date(project_to) -
+                               last(as.Date(episode_data$date)))
   
   # Run projection for current transmission
   proj_current <- project_seir(
@@ -80,6 +81,7 @@ case_projection_data <- function(proj_list, pct_change){
       median_estimate = "mu_0.50"
     )
   proj_all <- as.data.frame(proj_all)
+  proj_all$date <- as.Date(proj_all$date)
   proj_all$Transmission <-
     factor(proj_all$Transmission,
            levels = c(
@@ -115,7 +117,7 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
   tmp_data <- pred_dat[pred_dat$Transmission == "Current transmission", ]
   tmp <- 0.95*max(tmp_data$median_estimate)
   
-  g <- ggplot(data = pred_dat, aes_string(x = date_column)) +
+  g <- ggplot(data = pred_dat, aes(x = as.Date(date))) +
     geom_ribbon(data = pred_dat[pred_dat$Transmission == "Current transmission", ],
                 aes(ymin = estimate_0.05, ymax = estimate_0.95, text = "Current transmission"),
                 alpha = 0.2, fill = current_col
@@ -174,11 +176,14 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
     scale_y_continuous(
       breaks = seq(0, tmp, by = 100)
     )
+  date <- obs_dat$date
+  y_col <- obs_dat[,grepl(value_column, colnames(obs_dat))]
+  obs_plot <- data.frame(date, y_col)
   g <- g +
     geom_col(
-      data = obs_dat,
+      data = obs_plot,
       fill = current_col, inherit.aes = FALSE,
-      aes_string(x = date_column, y = value_column),
+      aes(x = as.Date(date), y = y_col),
       width = 1
     )
   
