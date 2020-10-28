@@ -37,10 +37,10 @@ Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet
       
       <guid>https://613covid.ca/fr/change-log/</guid>
       <description>Updates involving only data updates will no longer be documented.
-V3.1.0 2020-10-13
+V3.2.0 2020-10-27
+ Updates to wastewater page.   V3.1.0 2020-10-13
  Wastewater page added describing covid-19 wastewater surveillance.   V3.0.0 2020-10-05
- Case data &amp;amp; projections have been added to the website. See model for more details on how projections for cases were created including input parameters. Ventilator &amp;amp; peak projections removed from website. Death figure removed from website.   V2.3.0 2020-08-05
- Projections use OPH hospitalization data from 07/07/2020 onwards.</description>
+ Case data &amp;amp; projections have been added to the website. See model for more details on how projections for cases were created including input parameters. Ventilator &amp;amp; peak projections removed from website. Death figure removed from website.</description>
     </item>
     
     <item>
