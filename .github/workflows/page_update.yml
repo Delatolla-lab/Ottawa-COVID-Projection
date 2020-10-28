@@ -47,7 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: dev
+          ref: master
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: '3.6.3'
