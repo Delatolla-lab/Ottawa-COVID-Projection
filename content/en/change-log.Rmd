@@ -4,6 +4,11 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V3.2.0
+2020-10-27
+
+- Updates to [wastewater](/wastewater) page.
+
 # V3.1.0
 2020-10-13
 

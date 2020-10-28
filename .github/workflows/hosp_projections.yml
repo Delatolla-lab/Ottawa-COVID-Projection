@@ -1,15 +1,46 @@
-# This workflow generates hospital projections using the CHIME bayesian simulation from Open Ottawa hospitalization data
+# This workflow generates hospital projections using the CHIME bayesian simulation from Open Ottawa hospitalization data.
 
 name: Hospital-projections
 
-# Runs every Tuesday at 12:00pm EST/EDT (1pm UTC)
+# Runs every Tuesday & Friday at 12:00pm EST/EDT (1pm UTC)
 on: 
   schedule:
-    - cron: '0 16 * * 2'
+    - cron: '0 16 * * 2,5'
 
 jobs:
+  data-prep:
+    runs-on: "ubuntu-latest"
+    env:
+      RENV_PATHS_ROOT: ~/.local/share/renv
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: setup-r
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: '4.0.3'
+      - name: Install renv package
+        run: R -e 'install.packages("renv")'
+      - name: Cache packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
+      - name: Install dependencies
+        run: R -e 'renv::restore()'
+      - name: Prepare data
+        run: Rscript R/chime_dataprep.R
+      - uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'master' #optional defaults to master
   simulation:
     runs-on: "ubuntu-latest"
+    needs: data-prep
     strategy:
       fail-fast: false
     steps:
@@ -35,3 +66,35 @@ jobs:
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'master' #optional defaults to master
+  postsim:
+    runs-on: "ubuntu-latest"
+    needs: simulation
+    env:
+      RENV_PATHS_ROOT: ~/.local/share/renv
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: setup-r
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: '4.0.3'
+      - name: Install renv package
+        run: R -e 'install.packages("renv")'
+      - name: Cache packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
+      - name: Install dependencies
+        run: R -e 'renv::restore()'
+      - name: Prepare data
+        run: Rscript R/chime_postsim.R
+      - uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'master' #optional defaults to master
