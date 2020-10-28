@@ -14,12 +14,11 @@ jobs:
     runs-on: "ubuntu-latest"
     env:
       RENV_PATHS_ROOT: ~/.local/share/renv
-      GH_PAT: ${{ secrets.GH_PAT }}
     steps:
       - uses: actions/checkout@v2
         with:
           ref: master
-          token: ${{ secrets.GH_PAT }}
+          persist-credentials: false
       - name: setup-r
         uses: r-lib/actions/setup-r@v1
         with:
