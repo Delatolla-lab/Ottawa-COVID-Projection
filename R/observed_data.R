@@ -75,13 +75,13 @@ reworked_figure <-
     base_params_y2 <- 'list(
   list(
   active = 0,
-  x = 1.18,
+  x = 1.20,
   y = 0.88,
   type= "dropdown",
   direction = "down",
   xanchor = "center",
   yanchor = "top",
-  pad = list("r"= 0, "t"= -25, "b" = 0),
+  pad = list("r"= 5, "t"= 0, "b" = 0),
   buttons = list(
   %s)
   )
@@ -183,7 +183,8 @@ reworked_figure <-
                                 yaxis2[[i]][["short_name"]],
                                 vis_logical2,
                                 titles[["title"]],
-                                2*max(data[,yaxis2[[i]][["y_column"]]]))
+                                2*max(data[,yaxis2[[i]][["y_column"]]],
+                                      na.rm = TRUE))
           
           if (i < length(yaxis2)){
             menu_y2 <- stringr::str_glue(stringr::str_glue(menu_y2,menu_item2),",")
@@ -301,7 +302,7 @@ reworked_figure <-
           )
       }
       else if(isTRUE(yaxis2_button)){
-        tmp <- 2*max(data[,yaxis2[[1]][["y_column"]]])
+        tmp <- 2*max(data[,yaxis2[[1]][["y_column"]]], na.rm = TRUE)
         p <-
           layout(
             p,
@@ -324,7 +325,7 @@ reworked_figure <-
             bargap = 0,
             autosize = TRUE,
             annotations = list(
-              x = 1.25, y = 1.01, text = y2_button_name, 
+              x = 1.26, y = 0.95, text = y2_button_name, 
               showarrow = F, xref='paper', yref='paper',
               font=list(size=15)
             ),
@@ -333,7 +334,7 @@ reworked_figure <-
           )
       }
       else{
-        tmp <- 2*max(data[,yaxis2[[1]][["y_column"]]])
+        tmp <- 2*max(data[,yaxis2[[1]][["y_column"]]], na.rm = TRUE)
         p <-
           layout(
             p,
