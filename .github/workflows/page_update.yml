@@ -39,7 +39,7 @@ jobs:
       - uses: mikeal/publish-to-github-action@master
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          BRANCH_NAME: 'master' #optional defaults to master
+          BRANCH_NAME: 'dev' #optional defaults to master
   blogdown:
     name: Render-Blog
     needs: dataset-creation
@@ -47,7 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: master
+          ref: dev
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: '3.6.3'
