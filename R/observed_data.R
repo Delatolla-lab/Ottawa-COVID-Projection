@@ -178,10 +178,12 @@ reworked_figure <-
         label = "%s",
         method = "update",
         args = list(list(visible = %s),
-                    list(title = "%s")))',
+                    list(title = "%s",
+                          yaxis2.range = c(0,"%s"))))',
                                 yaxis2[[i]][["short_name"]],
                                 vis_logical2,
-                                titles[["title"]])
+                                titles[["title"]],
+                                2*max(data[,yaxis2[[i]][["y_column"]]]))
           
           if (i < length(yaxis2)){
             menu_y2 <- stringr::str_glue(stringr::str_glue(menu_y2,menu_item2),",")
@@ -299,6 +301,7 @@ reworked_figure <-
           )
       }
       else if(isTRUE(yaxis2_button)){
+        tmp <- 2*max(data[,yaxis2[[1]][["y_column"]]])
         p <-
           layout(
             p,
@@ -314,7 +317,8 @@ reworked_figure <-
               side = "right",
               title = list(text = as.character(titles[["y2"]])),
               automargin = TRUE, 
-              showgrid = FALSE
+              showgrid = FALSE,
+              range = c(0, tmp)
             ),
             barmode =  "relative",
             bargap = 0,
@@ -329,6 +333,7 @@ reworked_figure <-
           )
       }
       else{
+        tmp <- 2*max(data[,yaxis2[[1]][["y_column"]]])
         p <-
           layout(
             p,
@@ -344,7 +349,8 @@ reworked_figure <-
               side = "right",
               title = list(text = as.character(titles[["y2"]])),
               automargin = TRUE, 
-              showgrid = FALSE
+              showgrid = FALSE,
+              range = c(0, tmp)
             ),
             barmode =  "relative",
             bargap = 0,
