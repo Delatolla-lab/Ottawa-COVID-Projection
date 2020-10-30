@@ -100,4 +100,4 @@ jobs:
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH_NAME: 'dev' #optional defaults to master
+          BRANCH_NAME: 'master' #optional defaults to master
