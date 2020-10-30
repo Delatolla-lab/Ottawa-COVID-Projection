@@ -47,7 +47,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: dev
+          ref: master
+          token: ${{ secrets.ACTION_TOKEN }}
       - uses: conda-incubator/setup-miniconda@v1
         with:
           auto-update-conda: true
@@ -66,8 +67,8 @@ jobs:
         run: python Python/_01_GOF_sims.py -p Python/data/OTT_parameters.csv -t Python/data/OTT_ts.csv  --reopen_day 14 --reopen_caps 1 1.1 0.9 --save_reopening_csv --one_reopen --reopen_from_today
       - uses: mikeal/publish-to-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: 'dev' #optional defaults to master
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
+          BRANCH_NAME: 'master' #optional defaults to master
   postsim:
     runs-on: "ubuntu-latest"
     needs: simulation
@@ -76,7 +77,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: dev
+          ref: master
+          token: ${{ secrets.ACTION_TOKEN }}
       - name: setup-r
         uses: r-lib/actions/setup-r@v1
         with:
@@ -97,5 +99,5 @@ jobs:
         run: Rscript R/chime_postsim.R
       - uses: mikeal/publish-to-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
           BRANCH_NAME: 'dev' #optional defaults to master
