@@ -4,8 +4,8 @@ name: Dataset-creation
 
 # Runs everyday at 12:30pm EST/EDT (4:30pm UTC)
 on: 
-  schedule:
-    - cron: '40 13 * * *'
+  push:
+    branches: master
 jobs:
   dataset-creation:
     runs-on: "ubuntu-latest"
@@ -35,5 +35,5 @@ jobs:
         run: Rscript R/dataset_creation.R
       - uses: mikeal/publish-to-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
           BRANCH_NAME: 'master' #optional defaults to master
