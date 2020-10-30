@@ -5,7 +5,7 @@ name: Hospital-projections
 # Runs every Tuesday & Friday at 12:00pm EST/EDT (1pm UTC)
 on: 
   schedule:
-    - cron: '0 16 * * 2,5'
+    - cron: '35 17 * * 2,5'
 
 jobs:
   data-prep:
