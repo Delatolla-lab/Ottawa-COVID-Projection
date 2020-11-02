@@ -1,0 +1,42 @@
+---
+title: "EpiNow2 modelling"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## EpiNow2 modelling
+
+```{r}
+# load library and packages
+library(EpiNow2)
+library(tidyverse)
+ott_covid_data <- read.csv(file.path(getwd(), "Data/Observed Data/OPH_Observed_COVID_Data.csv"))
+```
+
+```{r}
+# prep data for sim
+reported_cases <- ott_covid_data[, c("date", "observed_new_cases")] %>%
+  mutate(date = as.Date(date)) %>%
+  filter(date >= "2020-09-01") # can remove to test entire timeseries
+colnames(reported_cases)[2] <- "confirm"
+
+# Set reporting delay, generation time, incubation period
+reporting_delay <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
+generation_time <- get_generation_time(disease = "SARS-CoV-2", source = "ganyani")
+incubation_period <- get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
+```
+
+```{r}
+# run epinow sim
+estimates <- epinow(reported_cases = reported_cases, 
+                    generation_time = generation_time,
+                    delays = list(incubation_period, reporting_delay))
+```
+
+```{r}
+# Present summary table
+knitr::kable(estimates$summary[, -c("numeric_estimate")])
+```
