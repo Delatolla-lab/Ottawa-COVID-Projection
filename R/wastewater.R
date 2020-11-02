@@ -60,6 +60,11 @@ merge_data <- function(data1, data2){
       change_N1_N2_5_day =
         (N1_N2_5_day - lag(N1_N2_5_day, 5))/lag(N1_N2_5_day, 5) * 100
     ) %>%
+    # create change in 7 day rolling avg from 7 day rolling avg 5 days ago
+    mutate(
+      change_N1_N2_7_day =
+        (N1_N2_7_day - lag(N1_N2_7_day, 5))/lag(N1_N2_7_day, 5) * 100
+    ) %>%
     # create change in 10 day rolling avg from 10 day rolling avg 10 days ago
     mutate(
       change_N1_N2_10_day =
@@ -139,5 +144,26 @@ merge_data <- function(data1, data2){
           FUN=function(x) mean(x, na.rm=TRUE),
           by=1, by.column=TRUE, partial=TRUE,
           fill=NA, align="right")
+    ) %>%
+    # create change in 5 day rolling avg of new cases from 5 day rolling avg 5 days ago
+    mutate(
+      change_new_cases_5_day =
+        (observed_new_cases_5_day -
+           lag(observed_new_cases_5_day, 5))/lag(observed_new_cases_5_day, 5) *
+        100
+    ) %>%
+    # create change in 7 day rolling avg of new cases from 7 day rolling avg 7 days ago
+    mutate(
+      change_new_cases_7_day =
+        (observed_new_cases_7_day -
+           lag(observed_new_cases_7_day, 7))/lag(observed_new_cases_7_day, 7) *
+        100
+    ) %>%
+    # create change in 7 day rolling avg of new cases from 10 day rolling avg 10 days ago
+    mutate(
+      change_new_cases_10_day =
+        (observed_new_cases_10_day -
+           lag(observed_new_cases_10_day, 10))/lag(observed_new_cases_10_day, 10) *
+        100
     )
 }
