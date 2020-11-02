@@ -116,6 +116,14 @@ viral_rolling_avg_call <- list(type = "avg_data", y_column = "avg_viral_roc_5_da
 change_N1_N2_5_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_day", name = "Percent change in rolling avg \nover 5 days", short_name = "5-day % change", color = rolling_avg_col, yaxis = "y2")
 
 change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_10_day", name = "Percent change in rolling avg \nover 10 days", short_name = "10-day % change", color = rolling_avg_col, yaxis = "y2")
+
+change_N1_N2_7_day_call <- list(type = "avg_data", y_column = "change_N1_N2_7_day", name = "Percent change in viral signal rolling avg \nover 7 days", short_name = "7 day % change", color = rolling_avg_col, yaxis = "y2")
+
+change_new_cases_5_day_call <- list(type = "observed_data", y_column = "change_new_cases_5_day", name = "Percent change in rolling avg \nover 5 days", short_name = "5 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
+
+change_new_cases_10_day_call <- list(type = "observed_data", y_column = "change_new_cases_10_day", name = "Percent change in rolling avg \nover 10 days", short_name = "10 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
+
+change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_new_cases_7_day", name = "Percent change in new case rolling avg \nover 7 days", short_name = "7 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
 ```
 
 # {#ww-visualization}
