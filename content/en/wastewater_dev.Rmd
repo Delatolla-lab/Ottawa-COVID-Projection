@@ -1,5 +1,5 @@
 ---
-title: "Ottawa covid-19 wastewater surveillance (development page)"
+title: "Ottawa covid-19 wastewater surveillance (development page) Open science is awesome"
 output: html_document
 ---
 
