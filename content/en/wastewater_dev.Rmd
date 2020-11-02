@@ -125,17 +125,16 @@ reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(ne
 ```
 
 
-Question: show 5 and 10 day change, or just 10 day change
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_5_day_call, change_N1_N2_10_day_call), yaxis2 = list(new_case_7_day_call), titles = c(y = "Percent change (%)", y2 = "Number of reported new cases", x = "Date", title = "Percent change in 5 or 10-day rolling average.^"), data = ott_covid_waste, yaxis_button = TRUE)
+reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_7_day_call), yaxis2 = list(change_new_cases_7_day_call), titles = c(y = "Percent change (%)", y2 = "Percent change (%)", x = "Date", title = "Percent change^ in 7 day rolling average"), data = ott_covid_waste)
 ```
 
-5, 7 or 10-day averages are rolling averages, calculated using the results for the previous days. The frequency of testing changes over time. Currently, Ottawa wastewater testing is performed 5 days each week.
+7-day averages are rolling averages, calculated using the results for the previous days. The frequency of testing changes over time. Currently, Ottawa wastewater testing is performed 5 days each week.
 
 \* New cases (reported date) is the date reported by the laboratory. New cases (episode date) is the earliest onset, test or reported date.
 
 \* Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](/model/) for more details.
 
-^ Percent change in 5-day average is calculated by comparing the 5-day average (previous day 1 to 5) with a lagged 5-day average (days 6 to 10). Percent change in 10-day average is calculated comparing  1 to 10 days prior with days 11 to 19. 
+^ Percent change in 7-day average is calculated by comparing the 7-day average (previous day 1 to 7) with a lagged 5-day average (days 8 to 14).
 
 Data to `r as.character(tail(ott_covid_waste$date, n=1))`
