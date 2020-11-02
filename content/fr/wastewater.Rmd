@@ -132,12 +132,6 @@ change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_n
 reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day, hosp_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "Ottawa covid-19 viral signal in wastewater"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator")
 ```
 
-# {#ww-visualization}
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day, hosp_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "Ottawa covid-19 viral signal in wastewater"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator")
-```
-
 \* New cases (reported date) is the date reported by the laboratory. New cases (episode date) is the earliest onset, test or reported date.
 
 \* Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](/model/) for more details.
