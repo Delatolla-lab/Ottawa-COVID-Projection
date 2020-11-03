@@ -136,7 +136,7 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_da
 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call, active_case_call, pct_positivity_call_7_day, hosp_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "7-day mean covid-19 wastewater viral signal, Ottawa"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator")
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day, hosp_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "7-day mean covid-19 wastewater viral signal, Ottawa"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator")
 ```
 
 
