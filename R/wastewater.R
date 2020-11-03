@@ -76,73 +76,73 @@ merge_data <- function(data1, data2){
         rollapply(
           observed_new_cases, width=5,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center"),
       observed_new_cases_7_day =
         rollapply(
           observed_new_cases, width=7,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center"),
       observed_new_cases_10_day =
         rollapply(
           observed_new_cases, width=10,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center"),
       observed_new_episodes_5_day =
         rollapply(
           observed_new_episodes, width=5,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center"),
       observed_new_episodes_7_day =
         rollapply(
           observed_new_episodes, width=7,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center"),
       observed_new_episodes_10_day =
         rollapply(
           observed_new_episodes, width=10,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center"),
       observed_new_community_cases_5_day =
         rollapply(
           observed_new_community_cases, width=5,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center"),
       observed_new_community_cases_7_day =
         rollapply(
           observed_new_community_cases, width=7,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center"),
       observed_new_community_cases_10_day =
         rollapply(
           observed_new_community_cases, width=10,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center"),
       observed_active_cases_5_day =
         rollapply(
           observed_active_cases, width=5,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center"),
       observed_active_cases_7_day =
         rollapply(
           observed_active_cases, width=7,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center"),
       observed_active_cases_10_day =
         rollapply(
           observed_active_cases, width=10,
           FUN=function(x) mean(x, na.rm=TRUE),
-          by=1, by.column=TRUE, partial=TRUE,
+          by=1, by.column=TRUE, partial=FALSE,
           fill=NA, align="center")
     ) %>%
     # create change in 5 day rolling avg of new cases from 5 day rolling avg 5 days ago
