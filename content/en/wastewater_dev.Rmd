@@ -153,6 +153,6 @@ reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_7_day_call, change_new
 
 \* Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](/model/) for more details.
 
-^ Percent change in 7-day average is calculated by comparing the 7-day average (previous day 1 to 7) with a lagged 5-day average (days 8 to 14).
+^ Percent change in 7-day average is calculated by comparing the 7-day average (previous day 1 to 7) with a lagged 7-day average (days 8 to 14).
 
 Data to `r as.character(tail(ott_covid_waste$date, n=1))`
