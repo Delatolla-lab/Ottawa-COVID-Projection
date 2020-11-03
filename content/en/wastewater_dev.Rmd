@@ -65,11 +65,11 @@ However, at this time, we recommend caution when interpretation daily and short-
 # Initialize calls for each parameter
 new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Daily reported new cases", short_name = "Daily cases", color = case_col)
 
-new_case_5_day_call <- list(type = "observed_data", y_column = "observed_new_cases_5_day", name = "5-day mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
+new_case_5_day_call <- list(type = "observed_data", y_column = "observed_new_cases_5_day", name = "5-day midpoint mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
 
-new_case_10_day_call <- list(type = "observed_data", y_column = "observed_new_cases_10_day", name = "10-day mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
+new_case_10_day_call <- list(type = "observed_data", y_column = "observed_new_cases_10_day", name = "10-day midpoint mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
 
-new_case_7_day_call <- list(type = "observed_data", y_column = "observed_new_cases_7_day", name = "7-day mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
+new_case_7_day_call <- list(type = "observed_data", y_column = "observed_new_cases_7_day", name = "7-day midpoint mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
 
 new_episode_5_day_call <- list(type = "observed_data", y_column = "observed_new_episodes_5_day", name = "5-day mean in \nreported new cases \n(by episode date)", short_name = "New cases\n(episode date)", color = case_col, opacity = 0.15)
 
@@ -101,11 +101,11 @@ n2_call <- list(type = "signal_data", y_column = "N2", name = "N2 RNA signal", c
 
 n1_n2_call <- list(type = "avg_data", y_column = "N1_N2_avg", name = "Avg. viral signal", short_name = "viral signal", color = n1_n2_col, yaxis = "y2", opacity = 0.15)
 
-n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day mean viral signal", short_name = "10-day", color = rolling_avg_col, yaxis = "y2")
+n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day midpoint mean viral signal", short_name = "10-day", color = rolling_avg_col, yaxis = "y2")
 
-n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day mean viral signal", short_name = "5-day", color = rolling_avg_col, yaxis = "y2")
+n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day midpoint mean viral signal", short_name = "5-day", color = rolling_avg_col, yaxis = "y2")
 
-n1_n2_7_day_call <- list(type = "avg_data", y_column = "N1_N2_7_day", name = "7-day mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2")
+n1_n2_7_day_call <- list(type = "avg_data", y_column = "N1_N2_7_day", name = "7-day midpoint mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2")
 
 viral_roc_call <- list(type = "avg_data", y_column = "viral_roc_daily", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2")
 
@@ -131,7 +131,7 @@ daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg", 
 # {#ww-visualization}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(daily_viral_signal_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "Covid-19 wastewater viral signal, Ottawa"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "Covid-19 wastewater viral signal, Ottawa"), data = ott_covid_waste)
 ```
 
 

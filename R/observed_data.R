@@ -148,6 +148,7 @@ reworked_figure <-
             curr_temp,
             list(x = data[, xaxis],
                  y = data[, var_to_map$y_column]),
+            opacity = var_to_map$opacity,
             hovertemplate = paste('%{x|%b %d, %Y}:',
                                   '%{y}')
           ))
