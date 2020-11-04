@@ -254,7 +254,7 @@ reworked_figure <-
             barmode =  "relative",
             bargap = 0,
             autosize = TRUE,
-            legend = list(x = 0.05, y = 1)
+            legend = list(x = 0.025, y = 0.9)
           )
       }
       else{
