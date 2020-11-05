@@ -253,7 +253,9 @@ reworked_figure <-
                          automargin = TRUE),
             barmode =  "relative",
             bargap = 0,
-            autosize = TRUE,
+            autosize = FALSE,
+            width = 800,
+            height = 500,
             legend = list(x = 0.025, y = 0.9)
           )
       }
@@ -270,7 +272,9 @@ reworked_figure <-
                          automargin = TRUE),
             barmode =  "relative",
             bargap = 0,
-            autosize = TRUE,
+            autosize = FALSE,
+            width = 800,
+            height = 500,
             legend = list(x = 0.05, y = 1),
             updatemenus = updated
           )
@@ -297,7 +301,9 @@ reworked_figure <-
             ),
             barmode =  "relative",
             bargap = 0,
-            autosize = TRUE,
+            autosize = FALSE,
+            width = 800,
+            height = 500,
             legend = list(x = 0.05, y = 0.9),
             updatemenus = updated
           )
@@ -324,7 +330,9 @@ reworked_figure <-
             ),
             barmode =  "relative",
             bargap = 0,
-            autosize = TRUE,
+            autosize = FALSE,
+            width = 800,
+            height = 500,
             annotations = list(
               x = 1.26, y = 0.95, text = y2_button_name, 
               showarrow = F, xref='paper', yref='paper',
@@ -356,7 +364,9 @@ reworked_figure <-
             ),
             barmode =  "relative",
             bargap = 0,
-            autosize = TRUE,
+            autosize = FALSE,
+            width = 800,
+            height = 500,
             legend = list(x = 0.05, y = 0.9)
           )
       }  
