@@ -78,7 +78,7 @@ reworked_figure <-
   list(
   active = 0,
   x = 1.20,
-  y = 0.88,
+  y = 0.86,
   type= "dropdown",
   direction = "down",
   xanchor = "center",

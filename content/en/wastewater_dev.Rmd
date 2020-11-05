@@ -124,9 +124,11 @@ Learn more about wastewater epidemiology and its role in covid-19 surveillance o
 
 The following plots below illustrate daily viral covid-19 wastewater signal in Ottawa. We recommend caution when interpreting daily and short-term variation in the viral signal. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. The accuracy of SARS-CoV-2 testing is improving, as scientists understand the role of factors such as differences in sewage systems and laboratory protocols.
 
+---
+
 # {#ww-visualization}
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
 reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste)
 ```
 
@@ -138,19 +140,23 @@ See the [Methods](/model/) page for more information on how the samples where co
 - Early identification of new cases of covid-19 when there is a low level of covid-19 infection.
 Wastewater surveillance provides a unique population perspective. For example, reported covid-19 cases underrepresents asymptomatic infection and it is subject to changing testing criteria. The following plot illustrates daily covid-19 wasterwater viral signal along with various comparators including reported daily covid-19 cases and hospitalization census. 
 
+---
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.60}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day, hosp_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 400)
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.45}
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day, hosp_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 300)
 ```
 
 ---
 
 Early detection of covid-19 outbreaks and surges results in a quick _change_ in the number of people covid-19 infection. The following plot shows the change in covid-19 infection and the potential of wastewater surveillance to identify outbreaks and surges. Note the 580% increase in signal on July 6 that preceded a covid-19 summer surge.
 
+---
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
 reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_7_day_call, change_new_cases_7_day_call), titles = c(y = "Percent change (%)", x = "Date", title = "<b>Percent change^ in 7 day rolling average</b>"), data = ott_covid_waste)
 ```
+
+---
 
 \* 7-day averages are midpoint rolling averages, calculated using the results from previous and later days. The frequency of testing changes over time. Currently, Ottawa wastewater testing is performed daily.
 
