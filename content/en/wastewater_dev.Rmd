@@ -122,12 +122,7 @@ The National Capital Region is the first community in Canada to conduct daily wa
 
 Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health's [website](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx). 
 
-The science supporting wastewater surveillance is rapidly evolving. See the [Methods](/model/) page for more information on how the samples where collected, access to the data, and how the plots were created. The plots are currently for research only and presented to the public for discussion. Wastewater surveillance has several uses, including:
-
-- A population perspective of covid-19 infection. Everyone uses the toilet, including people with and without covid-19. People with covid-19 shed SARS-CoV-2 in their feces, regardless of whether they receive a covid-19 test or diagnosis. 
-- Early identification of new cases of covid-19 when there is a low level of covid-19 infection.
-
-The following plots below illustrate daily viral covid-19 wastewater signal in Ottawa. However, at this time, we recommend caution when interpreting daily and short-term variation in the viral signal. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. The accuracy of SARS-CoV-2 testing is improving, as scientists understand the role of factors such as differences in sewage systems and laboratory protocols.
+The following plots below illustrate daily viral covid-19 wastewater signal in Ottawa. We recommend caution when interpreting daily and short-term variation in the viral signal. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. The accuracy of SARS-CoV-2 testing is improving, as scientists understand the role of factors such as differences in sewage systems and laboratory protocols.
 
 # {#ww-visualization}
 
@@ -137,6 +132,10 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_da
 
 ---
 
+See the [Methods](/model/) page for more information on how the samples where collected, access to the data, and how the plots were created. The plots are currently for research only and presented to the public for discussion. Wastewater surveillance has several uses, including:
+
+- A population perspective of covid-19 infection. Everyone uses the toilet, including people with and without covid-19. People with covid-19 shed SARS-CoV-2 in their feces, regardless of whether they receive a covid-19 test or diagnosis. 
+- Early identification of new cases of covid-19 when there is a low level of covid-19 infection.
 Wastewater surveillance provides a unique population perspective. For example, reported covid-19 cases underrepresents asymptomatic infection and it is subject to changing testing criteria. The following plot illustrates daily covid-19 wasterwater viral signal along with various comparators including reported daily covid-19 cases and hospitalization census. 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
