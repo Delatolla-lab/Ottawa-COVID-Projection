@@ -118,11 +118,13 @@ change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_n
 daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 ```
 
-The National Capital Region is the first community in Canada to conduct daily wastewater readings to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa).
+The National Capital Region is the first community in Canada to conduct and report daily wastewater readings of Cov-V2 viral signal to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa).
 
-Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health's [website](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx). 
+People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a covid-19 test or ever are diagnosed. Thus, in contrast to assessing community covid-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with covid-19 given that everyone goes to the washroom! In addition to serving as a valuable confirmatory data source for Covid levels, wastewater can also serve as early indicator for possible outbreaks, as described below.
 
-The three plots below illustrate daily viral covid-19 wastewater signal in Ottawa. Unlike the number of active covid-19 cases, which underrepresents asymptomatic infections and may be subject to limited testing availability, wastewater surveillance captures most of the population with covid-19. The accuracy of SARS-CoV-2 testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
+The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
+
+The three plots below illustrate daily viral covid-19 wastewater signal in Ottawa.
 
 ---
 
@@ -134,12 +136,6 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_da
 
 ---
 
-See the [Methods](/model/) page for more information on how the samples where collected, access to the data, and how the plots were created. The plots are currently for research only and presented to the public for discussion. Wastewater surveillance has several uses, including:
-
-- A population perspective of covid-19 infection. Everyone uses the toilet, including people with and without covid-19. People with covid-19 shed SARS-CoV-2 in their feces, regardless of whether they receive a covid-19 test or diagnosis. 
-- Early identification of new cases of covid-19 when there is a low level of covid-19 infection.
-Wastewater surveillance provides a unique population perspective. For example, reported covid-19 cases underrepresents asymptomatic infection and it is subject to changing testing criteria. 
-
 The next plot illustrates the 7 day mean in daily covid-19 wastewater viral signal. This number is the average of a week’s readings; today and the previous 6 days. Also on the graph are various comparators (e.g. reported daily covid-19 cases, hospitalization census), which can be individually selected by toggling the menu on the right.
 
 ---
@@ -150,7 +146,7 @@ reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(ne
 
 ---
 
-Outbreaks often result in significant increases in the number of covid-19 infection.  Wastewater surveillance can help identify, even anticipate such outbreaks; for example note the 580% increase in signal in mid July preceding  the uptick in  covid-19 testing by 3 days in the following plot.
+Outbreaks often result in significant increases in the number of covid-19 infection. Wastewater surveillance can help identify, even anticipate such outbreaks; for example, note the 580% increase in signal in mid-July preceding the uptick in covid-19 testing by 3 days in the following plot.
 
 ---
 
@@ -160,13 +156,17 @@ reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_7_day_call, change_new
 
 ---
 
+See the [Methods](/model/) page for more information on how the samples were collected, access to the data, and how the plots were created. The plots are currently for research only and presented to the public for discussion.
+
+You can learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health's [website](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx).
+
 ## Some definitions
 
-\* A 7-day average is generated by averaging the levels from a given day as well the three previous and three subsequent days. The average is termed “rolling” as it changes each day.  
+\* A 7-day average is generated by averaging the levels from a given day with the three previous and three subsequent days. The average is termed “rolling” as it changes each day.  
 
-\* For new cases, the reported date is the day the test is reported by the laboratory. Episode date is the approximate date of infection. Episode date is an estimate of the date of covid-19 infection. This date is calculated based on either the date of symptom onset, test date, or the date reported to the public health unit by the laboratory.
+\* For new cases, the reported date is the day the test result is reported by the laboratory. Episode date is the approximate date of covid-19 infection estimated from information available: the date of symptom onset, test date, or the reported date.
 
-\* A central question in wastewater epidemiology is determining the proportion of the wastewater that is actually from humans and the proportion that is rain water, snow melt etc. Viral copy data is thus normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](/model/) for more details.
+\* A central question in wastewater epidemiology is determining the proportion of the wastewater that is actually from humans and the proportion that is rain water, snow melt etc. To address this issue, viral copy data is thus normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](/model/) for more details.
 
 ^ Percent change in 7-day average is calculated by comparing the 7-day average (previous day 1 to 7) with a lagged 7-day average (days 8 to 14).
 
