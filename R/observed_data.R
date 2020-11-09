@@ -11,6 +11,8 @@ reworked_figure <-
            y_button_name = "",
            y2_button_name = "",
            titles,
+           width = 800,
+           height = 500,
            data) {
     # ---------- PRESETS ----------
     tickvals <- floor_date(as_date(data$date), "month")
@@ -76,7 +78,7 @@ reworked_figure <-
   list(
   active = 0,
   x = 1.20,
-  y = 0.88,
+  y = 0.86,
   type= "dropdown",
   direction = "down",
   xanchor = "center",
@@ -148,6 +150,7 @@ reworked_figure <-
             curr_temp,
             list(x = data[, xaxis],
                  y = data[, var_to_map$y_column]),
+            opacity = var_to_map$opacity,
             hovertemplate = paste('%{x|%b %d, %Y}:',
                                   '%{y}')
           ))
@@ -247,13 +250,15 @@ reworked_figure <-
             xaxis = list(type = "date",
                          title = list(text = as.character(titles[["x"]])),
                          automargin = TRUE, tickvals = tickvals, 
-                         tickformat = "%b %Y"),
+                         tickformat = "%b"),
             yaxis = list(title = list(text = as.character(titles[["y"]])), 
                          automargin = TRUE),
             barmode =  "relative",
             bargap = 0,
-            autosize = TRUE,
-            legend = list(x = 0.05, y = 1)
+            autosize = FALSE,
+            width = width,
+            height = height,
+            legend = list(x = 0.025, y = 0.9)
           )
       }
       else{
@@ -264,12 +269,14 @@ reworked_figure <-
             xaxis = list(type = "date",
                          title = list(text = as.character(titles[["x"]])),
                          automargin = TRUE, tickvals = tickvals, 
-                         tickformat = "%b %Y"),
+                         tickformat = "%b"),
             yaxis = list(title = list(text = as.character(titles[["y"]])), 
                          automargin = TRUE),
             barmode =  "relative",
             bargap = 0,
-            autosize = TRUE,
+            autosize = FALSE,
+            width = width,
+            height = height,
             legend = list(x = 0.05, y = 1),
             updatemenus = updated
           )
@@ -284,7 +291,7 @@ reworked_figure <-
             xaxis = list(type = "date",
                          title = list(text = as.character(titles[["x"]])),
                          automargin = TRUE, tickvals = tickvals, 
-                         tickformat = "%b %Y"),
+                         tickformat = "%b"),
             yaxis = list(title = list(text = as.character(titles[["y"]])), 
                          automargin = TRUE, overlaying = "y2",
                          zeroline = FALSE),
@@ -296,7 +303,9 @@ reworked_figure <-
             ),
             barmode =  "relative",
             bargap = 0,
-            autosize = TRUE,
+            autosize = FALSE,
+            width = width,
+            height = height,
             legend = list(x = 0.05, y = 0.9),
             updatemenus = updated
           )
@@ -310,7 +319,7 @@ reworked_figure <-
             xaxis = list(type = "date",
                          title = list(text = as.character(titles[["x"]])),
                          automargin = TRUE, tickvals = tickvals, 
-                         tickformat = "%b %Y"),
+                         tickformat = "%b"),
             yaxis = list(title = list(text = as.character(titles[["y"]])), 
                          automargin = TRUE, overlaying = "y2",
                          zeroline = FALSE),
@@ -323,7 +332,9 @@ reworked_figure <-
             ),
             barmode =  "relative",
             bargap = 0,
-            autosize = TRUE,
+            autosize = FALSE,
+            width = width,
+            height = height,
             annotations = list(
               x = 1.26, y = 0.95, text = y2_button_name, 
               showarrow = F, xref='paper', yref='paper',
@@ -342,7 +353,7 @@ reworked_figure <-
             xaxis = list(type = "date",
                          title = list(text = as.character(titles[["x"]])),
                          automargin = TRUE, tickvals = tickvals, 
-                         tickformat = "%b %Y"),
+                         tickformat = "%b"),
             yaxis = list(title = list(text = as.character(titles[["y"]])), 
                          automargin = TRUE, overlaying = "y2",
                          zeroline = FALSE),
@@ -355,7 +366,9 @@ reworked_figure <-
             ),
             barmode =  "relative",
             bargap = 0,
-            autosize = TRUE,
+            autosize = FALSE,
+            width = width,
+            height = height,
             legend = list(x = 0.05, y = 0.9)
           )
       }  
