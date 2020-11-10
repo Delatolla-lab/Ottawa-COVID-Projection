@@ -338,6 +338,7 @@ lut <- tibble( # Create look-up table (lut)
   day = seq_len(last_day),
   date = seq(first_day, first_day + length(day) - 1, by = "1 day")
 )
+
 tidy_proj <- left_join(tidy_proj, lut, by = "day")
 ```
 
