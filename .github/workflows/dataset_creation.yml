@@ -38,3 +38,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
           BRANCH_NAME: 'master' #optional defaults to master
+      - name: Merge master -> hosp-projections
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          from_branch: master
+          target_branch: hosp-projections
+          github_token: ${{ secrets.ACTION_TOKEN }} 
