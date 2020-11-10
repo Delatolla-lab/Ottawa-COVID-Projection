@@ -43,5 +43,5 @@ jobs:
         with:
           type: now
           from_branch: master
-          to_branch: hosp-projections
+          target_branch: hosp-projections
           github_token: ${{ secrets.ACTION_TOKEN }} 
