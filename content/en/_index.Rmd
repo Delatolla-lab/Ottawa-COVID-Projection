@@ -304,9 +304,9 @@ samp_frac <- c(samp_frac, rep(0.37, nrow(ott_observed_episodes) - length(samp_fr
 
 ## Set up contact rate breakpoints
 f_seg <- c(0, rep(1, nrow(ott_observed_episodes) - 1))
-day_new_f <- which(as.character(ott_observed_episodes$date) == ymd("2020-05-19")) # Date of phase 1 reopening
+day_new_f <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-05-19")) # Date of phase 1 reopening
 f_seg[seq(day_new_f, length(f_seg))] <- 2
-day_ch <- which(as.character(ott_observed_episodes$date) == ymd("2020-06-12")) # Date of phase 2 reopening
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-06-12")) # Date of phase 2 reopening
 f_seg[seq(day_ch, length(f_seg))] <- 3
 ```
 
@@ -338,6 +338,7 @@ lut <- tibble( # Create look-up table (lut)
   day = seq_len(last_day),
   date = seq(first_day, first_day + length(day) - 1, by = "1 day")
 )
+
 tidy_proj <- left_join(tidy_proj, lut, by = "day")
 ```
 
