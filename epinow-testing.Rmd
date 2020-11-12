@@ -23,39 +23,45 @@ reported_cases <- ott_covid_data[, c("date", "observed_new_cases")] %>%
   filter(date >= "2020-09-01") # can remove to test entire timeseries
 colnames(reported_cases)[2] <- "confirm"
 
-reported_hosp <- ott_covid_data[, c("date", "observed_census_ICU_p_acute_care")] %>%
+reported_hosp <- ott_covid_data[, c("date", "observed_new_ICU_p_acute_care")] %>%
   mutate(date = as.Date(date)) %>%
   filter(date >= "2020-09-01") # can remove to test entire timeseries
 colnames(reported_hosp)[2] <- "confirm"
+```
+```{r}
+# Set reporting delay, generation time, incubation period for cases and hosp
+reporting_delay_case <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
+generation_time_case <- get_generation_time(disease = "SARS-CoV-2", source = "ganyani")
+incubation_period_case <- get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 
-# Set reporting delay, generation time, incubation period
-reporting_delay <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
-generation_time <- get_generation_time(disease = "SARS-CoV-2", source = "ganyani")
-incubation_period <- get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
+reporting_delay_hosp <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
+generation_time_hosp <- get_generation_time(disease = "SARS-CoV-2", source = "ganyani")
+incubation_period_hosp <- get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 ```
 
 ```{r}
 # run epinow sim for cases
 estimates_cases <- epinow(reported_cases = reported_cases, 
-                    generation_time = generation_time,
-                    delays = list(incubation_period, reporting_delay))
+                    generation_time = generation_time_case,
+                    delays = list(incubation_period_case, reporting_delay_case))
 ```
 
 ```{r}
 # run epinow sim for hosp
 estimates_hosp <- epinow(reported_cases = reported_hosp, 
-                    generation_time = generation_time,
-                    delays = list(incubation_period, reporting_delay))
+                    generation_time = generation_time_hosp,
+                    delays = list(incubation_period_hosp, reporting_delay_hosp))
 ```
 
 ```{r}
-# Present summary table
-knitr::kable(estimates$summary[, -c("numeric_estimate")])
+# Present summary tables
+knitr::kable(estimates_cases$summary[, -c("numeric_estimate")])
+knitr::kable(estimates_hosp$summary[, -c("numeric_estimate")])
 ```
 
 ```{r}
 # Present plots for cases
-estimates$plots$summary
+estimates_cases$plots$summary
 ```
 
 ```{r}
