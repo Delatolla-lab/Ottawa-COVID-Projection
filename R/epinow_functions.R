@@ -23,7 +23,9 @@ short_term_forecast <- function(data,
 
 short_term_plot <- function(projections,
                             obs_data,
-                            start_date = first(as.Date(projections$date))){
+                            start_date = first(as.Date(projections$date)),
+                            ylab,
+                            title){
   # Set up ggplot object
   plot<- 
     ggplot(projections[as.Date(projections$date) >= as.Date(start_date),],
@@ -71,10 +73,11 @@ short_term_plot <- function(projections,
       panel.background = element_blank(),
       panel.grid.major.y = element_line(colour = "grey"),
       axis.line.x = element_line(colour = "grey"),
-      legend.position = "none") +
+      legend.position = "none",
+      plot.title = element_text(hjust = 0.5)) +
     scale_color_brewer(palette = "Dark2") +
     scale_fill_brewer(palette = "Dark2") +
-    labs(y = "New cases by episode date", x = "Date", col = "Type", fill = "Type") +
+    labs(y = ylab, x = "Date", col = "Type", fill = "Type", title = title) +
     expand_limits(y = c(-0.4, 0.8)) + 
     scale_x_date(expand = c(0,0), date_breaks = "1 month", date_labels = "%b %Y") +
     scale_y_continuous(expand = c(0, 0)) 
