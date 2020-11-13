@@ -21,7 +21,9 @@ short_term_forecast <- function(data,
   return(projections)
 }
 
-short_term_plot <- function(projections, obs_data, start_date){
+short_term_plot <- function(projections,
+                            obs_data,
+                            start_date = first(as.Date(projections$date))){
   # Set up ggplot object
   plot<- 
     ggplot(projections[as.Date(projections$date) >= as.Date(start_date),],
