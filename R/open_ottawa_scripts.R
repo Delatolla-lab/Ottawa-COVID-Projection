@@ -18,12 +18,22 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
   test_prep <- function(ottawa_test_data) {
     ottawa_test <- data_extract(ottawa_test_data)
     ottawa_test %>%
+      select(-OBJECTID) %>%
       rename(
         date = "_Date",
-        observed_pct_positivity = "Daily_%_Positivity",
-        observed_num_tests = "Number_of_Tests"
+        num_non_ltch_tests = "Number_of_Tests,_Excluding_LTCH",
+        non_ltch_pct_positivity = "Daily_%_Positivity,_Excluding_LTCH",
+        num_ltch_tests = "Number_of_Tests_in_LTCH",
+        ltch_pct_positivity = "LTCH_Daily_%_Positivity"
       ) %>%
-      #mutate(observed_pct_positivity = observed_pct_positivity/100) %>%
+      mutate(
+        non_ltch_pct_positivity = non_ltch_pct_positivity/100,
+        ltch_pct_positivity = ltch_pct_positivity/100,
+        observed_pct_positivity = (
+          (num_non_ltch_tests*non_ltch_pct_positivity) +
+            (num_ltch_tests * ltch_pct_positivity)
+        )/(num_non_ltch_tests + num_ltch_tests)*100
+      ) %>%
       filter(date >= "2020-03-17") %>%
       # add moving average for pct positivity
       mutate(
