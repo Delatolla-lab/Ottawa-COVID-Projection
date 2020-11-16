@@ -30,11 +30,15 @@ dt_label = switch(
 
 `r dt_label` **`r dt` days**
 
+also growth rate and Rt.
+
 ## Introduction 
 
 (text will go after observed data)
 
-Short-term projections are helpful tools for local health units to enact immediate change in order to mitigate the spread of covid-19 in the community. Similar to a weather forecast, short-term projections predict changes in the immediate future; while long-term projections predict changes further down in the future. Paradoxically, short-term & long-term projections can contradict one another. This is because short-term projections are more sensitive to immediate changes; while long-term projections require sustained changes in order projections to change. The following plots illustrate short-term projections for Ottawa. These plots include projected cases by episode date, projected cases by reporting date, and projected reproduction number.
+Short-term projections are the most accurate estimate current covid-19 transmission in the community. Similar to a weather forecast, short-term projections predict changes in the near future; while long-term projections predict show a more general trend with less accuracy. Sometimes short-term & long-term projections can contradict one another. Short-term projections are more sensitive to immediate changes; while long-term projections require sustained trends before projections change. 
+
+The following plots illustrate short-term projections for Ottawa. These plots include projected cases by episode date, projected cases by reporting date, and projected reproduction number. Following, long-term projections are presented.
 
 ## Short-term projections
 
