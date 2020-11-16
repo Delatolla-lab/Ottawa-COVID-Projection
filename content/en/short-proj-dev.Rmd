@@ -7,8 +7,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Short term projections
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # load library, packages, functions, data
 library(EpiNow2)
@@ -17,12 +15,34 @@ library(ggplot2)
 source("../../R/epinow_functions.R")
 ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed Data/OPH_Observed_COVID_Data.csv"))
 load("../../Data/short_term_forecast.RData")
+ott_projections <- ott_short_forecast[[1]]
+dt <- ott_short_forecast[[2]][[5]][[1]]
+dt_label = switch( 
+  (sign(dt) + 2),
+  "Case halving time:",
+  "No change:",
+  "Case doubling time:")
 ```
+
+## Dashboard 
+
+(part of the main page dashboard)
+
+`r dt_label` **`r dt` days**
+
+## Introduction 
+
+(text will go after observed data)
+
+Short-term projections are helpful tools for local health units to enact immediate change in order to mitigate the spread of covid-19 in the community. Similar to a weather forecast, short-term projections predict changes in the immediate future; while long-term projections predict changes further down in the future. Paradoxically, short-term & long-term projections can contradict one another. This is because short-term projections are more sensitive to immediate changes; while long-term projections require sustained changes in order projections to change. The following plots illustrate short-term projections for Ottawa. These plots include projected cases by episode date, projected cases by reporting date, and projected reproduction number.
+
+## Short-term projections
+
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 short_term_plot(
-  projections = ott_short_forecast,
+  projections = ott_projections,
   obs_data = ott_covid_data,
   forecast_type = "infections",
   ylab = "New cases",
@@ -30,7 +50,7 @@ short_term_plot(
 )
 
 short_term_plot(
-  projections = ott_short_forecast,
+  projections = ott_projections,
   obs_data = ott_covid_data,
   forecast_type = "reported_cases",
   ylab = "New cases",
@@ -38,7 +58,7 @@ short_term_plot(
 )
 
 short_term_plot(
-  projections = ott_short_forecast,
+  projections = ott_projections,
   obs_data = ott_covid_data,
   forecast_type = "R",
   ylab = "Reproduction number",

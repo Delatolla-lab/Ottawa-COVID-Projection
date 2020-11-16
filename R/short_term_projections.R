@@ -16,16 +16,18 @@ generation_time <-
 incubation_period <-
   get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 
-# Run epinow forecast for cases
+# Run epinow forecast
 ott_short_forecast <- short_term_forecast(
   data = ott_covid_data,
   start_date = "2020-08-01", # can be changed
   generation_time = generation_time,
   incubation_period = incubation_period,
-  reporting_delay = reporting_delay
+  reporting_delay = reporting_delay,
+  output = "both"
 )
 
-# Save projections as CSV & .RData
-write.csv(ott_short_forecast,
+# Save projections as CSV 
+ott_projections <- ott_short_forecast[[1]]
+write.csv(ott_projections,
           file = "Data/short_term_forecast.csv", row.names=FALSE)
 save(ott_short_forecast, file = "Data/short_term_forecast.RData")

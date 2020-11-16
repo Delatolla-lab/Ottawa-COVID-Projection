@@ -2,7 +2,8 @@ short_term_forecast <- function(data,
                                 start_date,
                                 generation_time,
                                 incubation_period,
-                                reporting_delay){
+                                reporting_delay,
+                                output = "projections"){
   # Format dataset
   data_formatted <- data %>%
     filter(as.Date(date) >= as.Date(start_date)) %>%
@@ -10,14 +11,27 @@ short_term_forecast <- function(data,
     rename(confirm = observed_new_episodes) %>%
     mutate(date = as.Date(date))
   # Run epinow2 sim 
-    projections <-
+  projections <-
       EpiNow2::epinow(reported_cases = data_formatted, 
                       generation_time = generation_time,
                       delays = list(incubation_period, reporting_delay))
-    projections <-
-      projections[[1]][[2]] # Obtain summarized estimates
+  # Extract output
+  if(output == as.character("projections")){
+    forecast <-
+      projections[[1]][[2]] # Obtain summarized projections
+  }  
+  else if(output == as.character("estimates")){
+    forecast <-
+      projections[[3]][[2]] # Obtain numeric estimates
+  }
+  else if(output == as.character("both")){
+    forecast <- list(
+      projections[[1]][[2]],
+      projections[[3]][[3]]
+    )
+  }  
 
-  return(projections)
+  return(forecast)
 }
 
 short_term_plot <- function(projections,
