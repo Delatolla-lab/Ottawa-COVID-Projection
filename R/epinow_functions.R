@@ -22,7 +22,7 @@ short_term_forecast <- function(data,
   }  
   else if(output == as.character("estimates")){
     forecast <-
-      projections[[3]][[2]] # Obtain numeric estimates
+      projections[[3]][[3]] # Obtain numeric estimates
   }
   else if(output == as.character("both")){
     forecast <- list(
