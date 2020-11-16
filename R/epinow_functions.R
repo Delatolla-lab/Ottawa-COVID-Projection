@@ -15,36 +15,41 @@ short_term_forecast <- function(data,
                       generation_time = generation_time,
                       delays = list(incubation_period, reporting_delay))
     projections <-
-      projections[[1]][[2]] %>% # Obtain summarized estimates
-      filter(variable == "infections") # Filter for infections by episode date
+      projections[[1]][[2]] # Obtain summarized estimates
 
   return(projections)
 }
 
 short_term_plot <- function(projections,
                             obs_data,
+                            forecast_type,
                             start_date = first(as.Date(projections$date)),
                             ylab,
                             title){
+  # Filter data based on forecast type
+  projections <- projections %>%
+    filter(variable == as.character(forecast_type))
   # Set up ggplot object
   plot<- 
     ggplot(projections[as.Date(projections$date) >= as.Date(start_date),],
            aes(x = date, col = type, fill = type))
   
-  # Add observed data
-  plot <- plot +
-    geom_col(data = 
-               obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
-             aes(x = as.Date(date),
-                 y = observed_new_episodes),
-             fill = "#008080", col = "white", alpha = 0.25,
-             show.legend = FALSE, na.rm = TRUE)
+  # Add observed data if R is not specified
+  if(forecast_type != as.character("R")){
+    plot <- plot +
+      geom_col(data = 
+                 obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
+               aes(x = as.Date(date),
+                   y = observed_new_episodes),
+               fill = "#008080", col = "white", alpha = 0.25,
+               show.legend = FALSE, na.rm = TRUE)
+  }
   
   # plot estimates
   plot <- plot +
     geom_vline(
       xintercept = 
-        as.numeric(projections[type == "estimate based on partial data"][date == max(date)]$date),
+        as.numeric(projections[projections$type == "estimate based on partial data"][date == max(date)]$date),
       linetype = 2)
   
   # plot CrIs

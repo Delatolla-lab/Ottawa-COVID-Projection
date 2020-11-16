@@ -24,7 +24,24 @@ load("../../Data/short_term_forecast.RData")
 short_term_plot(
   projections = ott_short_forecast,
   obs_data = ott_covid_data,
-  ylab = "New cases by episode date",
-  title = "Short term case projections"
+  forecast_type = "infections",
+  ylab = "New cases",
+  title = "Projections for new cases by episode date"
+)
+
+short_term_plot(
+  projections = ott_short_forecast,
+  obs_data = ott_covid_data,
+  forecast_type = "reported_cases",
+  ylab = "New cases",
+  title = "Projections for new cases by reported date"
+)
+
+short_term_plot(
+  projections = ott_short_forecast,
+  obs_data = ott_covid_data,
+  forecast_type = "R",
+  ylab = "Reproduction number",
+  title = "Reproduction number projections"
 )
 ```
