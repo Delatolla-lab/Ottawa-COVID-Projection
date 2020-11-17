@@ -55,7 +55,7 @@ short_term_plot <- function(projections,
                  obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
                    y = observed_new_episodes),
-               fill = "#008080", col = "white", alpha = 0.25,
+               fill = "#008080", col = "white", alpha = 0.5,
                show.legend = FALSE, na.rm = TRUE)
   }
   
@@ -103,6 +103,13 @@ short_term_plot <- function(projections,
   
   # Convert to plotly object
   plot <- plotly::ggplotly(plot)
+  
+  # Set date display constraints 
+  a <- as.numeric(as.Date(last(projections$date) - 40)) 
+  b <- as.numeric(as.Date(last(projections$date)))
+  
+  plot <- plotly::layout(plot,
+                         xaxis = list(range = c(a, b)))
   
   return(plot)
 }
