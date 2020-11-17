@@ -98,7 +98,7 @@ short_term_plot <- function(projections,
     scale_fill_brewer(palette = "Dark2") +
     labs(y = ylab, x = "Date", col = "Type", fill = "Type", title = title) +
     expand_limits(y = c(-0.4, 0.8)) + 
-    scale_x_date(expand = c(0,0), date_breaks = "1 month", date_labels = "%b %Y") +
+    scale_x_date(expand = c(0,0), date_breaks = "1 week", date_labels = "%b %d") +
     scale_y_continuous(expand = c(0, 0)) 
   
   # Convert to plotly object
