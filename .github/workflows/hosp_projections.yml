@@ -51,11 +51,11 @@ jobs:
         with:
           ref: hosp-projections
           token: ${{ secrets.ACTION_TOKEN }}
-      - run: echo "mypath" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       - uses: conda-incubator/setup-miniconda@v1
         with:
           auto-update-conda: true
           python-version: "3.8"
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       - name: Conda info
         shell: bash -l {0}
         run: conda info
