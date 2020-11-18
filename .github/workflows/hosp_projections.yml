@@ -4,6 +4,8 @@ name: Hospital-projections
 
 # Runs every Tuesday & Friday at 12:00pm EST/EDT (1pm UTC)
 on: 
+  push:
+    branches: master
   schedule:
     - cron: '0 16 * * 2,5'
 
@@ -49,6 +51,7 @@ jobs:
         with:
           ref: hosp-projections
           token: ${{ secrets.ACTION_TOKEN }}
+      - run: echo "mypath" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       - uses: conda-incubator/setup-miniconda@v1
         with:
           auto-update-conda: true
