@@ -357,6 +357,8 @@ case_projection_plot(projection_data, ott_observed_episodes, current_col = curre
 
 `r hosp_projections`
 
+**Note:** Hospitalization projections have been temporarily taken down as OPH updates hospital data.
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Import projections
 ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
