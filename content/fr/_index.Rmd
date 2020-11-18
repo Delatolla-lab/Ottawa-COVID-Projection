@@ -27,6 +27,7 @@ the_same <- insert_translation(localization_data, lang, "the_same")
 ```
 `r intro`
 
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 # libraries
