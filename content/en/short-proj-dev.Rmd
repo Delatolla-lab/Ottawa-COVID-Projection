@@ -42,6 +42,7 @@ The following plots illustrate short-term projections for Ottawa. These plots in
 
 ## Short-term projections
 
+## run ott_projections() in short_term_projections.R to generate data for plots
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
