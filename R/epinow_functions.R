@@ -49,12 +49,21 @@ short_term_plot <- function(projections,
            aes(x = date, col = type, fill = type))
   
   # Add observed data if R is not specified
-  if(forecast_type != as.character("R")){
+  if(forecast_type == as.character("infections")){
     plot <- plot +
       geom_col(data = 
                  obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
                    y = observed_new_episodes),
+               fill = "#008080", col = "white", alpha = 0.5,
+               show.legend = FALSE, na.rm = TRUE)
+  }
+  else if(forecast_type == as.character("reported_cases")){
+    plot <- plot +
+      geom_col(data = 
+                 obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
+               aes(x = as.Date(date),
+                   y = observed_new_cases),
                fill = "#008080", col = "white", alpha = 0.5,
                show.legend = FALSE, na.rm = TRUE)
   }
