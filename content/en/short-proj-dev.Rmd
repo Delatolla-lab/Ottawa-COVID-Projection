@@ -16,7 +16,13 @@ library(ggplot2)
 source("../../R/epinow_functions.R")
 ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed Data/OPH_Observed_COVID_Data.csv"))
 load("../../Data/short_term_forecast.RData")
+load("../../Data/oct_1_forecast.RData")
+load("../../Data/oct_8_forecast.RData")
+load("../../Data/oct_15_forecast.RData")
 ott_projections <- ott_short_forecast[[1]]
+oct_1_forecast <- oct_1_forecast[[1]]
+oct_8_forecast <- oct_8_forecast[[1]]
+oct_15_forecast <- oct_15_forecast[[1]]
 dt <- ott_short_forecast[[2]][[5]][[1]]
 dt_label = switch( 
   (sign(dt) + 2),
