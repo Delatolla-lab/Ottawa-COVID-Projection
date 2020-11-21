@@ -20,9 +20,9 @@ load("../../Data/oct_1_forecast.RData")
 load("../../Data/oct_8_forecast.RData")
 load("../../Data/oct_15_forecast.RData")
 ott_projections <- ott_short_forecast[[1]]
-oct_1_forecast <- oct_1_forecast[[1]]
-oct_8_forecast <- oct_8_forecast[[1]]
-oct_15_forecast <- oct_15_forecast[[1]]
+ott_projections <- oct_1_forecast[[1]]
+ott_projections <- oct_8_forecast[[1]]
+ott_projections <- oct_15_forecast[[1]]
 dt <- ott_short_forecast[[2]][[5]][[1]]
 dt_label = switch( 
   (sign(dt) + 2),
@@ -30,6 +30,13 @@ dt_label = switch(
   "No change:",
   "Case doubling time:")
 ```
+
+```{r}
+
+min(ott_projections$date, na.rm = TRUE)
+max(ott_projections$date, na.rm = TRUE)
+```
+
 
 ## Dashboard 
 
