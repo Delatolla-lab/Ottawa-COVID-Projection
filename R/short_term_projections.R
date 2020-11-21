@@ -19,7 +19,8 @@ incubation_period <-
 # Run epinow forecast
 ott_short_forecast <- short_term_forecast(
   data = ott_covid_data,
-  start_date = "2020-08-01", # can be changed
+  start_date = "2020-11-01", # can be changed
+ # end_date = "2020-11-24", # can be changed, if missing will default to last day
   generation_time = generation_time,
   incubation_period = incubation_period,
   reporting_delay = reporting_delay,

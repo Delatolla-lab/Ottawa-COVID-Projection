@@ -1,15 +1,22 @@
 short_term_forecast <- function(data,
                                 start_date,
+                                end_date,
                                 generation_time,
                                 incubation_period,
                                 reporting_delay,
                                 output = "projections"){
   # Format dataset
+  if(missing(end_date)) {
+    end_date <- max(d$date, na.rm = TRUE)
+  }
+  
   data_formatted <- data %>%
     filter(as.Date(date) >= as.Date(start_date)) %>%
+    filter(as.Date(date) <= as.Date(end_date)) %>%
     select(date, observed_new_episodes) %>%
     rename(confirm = observed_new_episodes) %>%
     mutate(date = as.Date(date))
+
   # Run epinow2 sim 
   projections <-
       EpiNow2::epinow(reported_cases = data_formatted, 
