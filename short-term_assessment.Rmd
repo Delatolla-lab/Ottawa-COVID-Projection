@@ -1,0 +1,82 @@
+---
+title: "Assessment of short-term projections"
+author: "Doug Manuel"
+date: "22/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load}
+# load library, packages, functions
+library(EpiNow2)
+library(tidyverse)
+source("R/epinow_functions.R")
+
+# load covid data
+ott_covid_data <-
+  read.csv(file.path(getwd(), "Data/Observed Data/OPH_Observed_COVID_Data.csv"))
+
+# Set reporting delay, generation time, incubation period
+reporting_delay <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
+generation_time <-
+  get_generation_time(disease = "SARS-CoV-2", source = "ganyani")
+incubation_period <-
+  get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
+```
+
+
+```{r}
+
+# the last date for projections
+last_date = "2020-11-20" 
+
+# create this many projections. Each iterations ends one week 
+# before the previous iteration
+iterations = 8 
+
+# the number of weeks of data that are used for each iteration
+weeks_of_data = 16
+
+# Initialize a list to store the projections for each iteration
+ott_projections_collection <- vector(mode = "list", length = iterations)
+
+for (i in 0:(iterations - 1)) {
+ end_date = as.Date(last_date) - 7 * i
+ start_date = end_date - weeks_of_data * 7
+ 
+ forecast <- short_term_forecast(
+  data = ott_covid_data,
+  start_date = start_date, # can be changed
+ end_date =  end_date, # can be changed, if missing will default to last day
+  generation_time = generation_time,
+  incubation_period = incubation_period,
+  reporting_delay = reporting_delay,
+  output = "both"
+  )
+ print(start_date)
+ print(end_date)
+ 
+# Save each projection interation as CSV
+file_name_csv <- paste("Data/short_term_forecast_", 
+                       start_date, "_to_", 
+                       end_date, ".csv", 
+                       sep = "", collaplse = NULL)
+
+write.csv(forecast[[1]], file = file_name_csv, row.names = FALSE)
+
+# collect all iterations and save as one .Rdata file
+ott_projections_collection[i] <- forecast[[1]]
+}
+
+file_name_RData <- paste("Data/short_term_forecast_to_", last_date, 
+                         "_i", iterations, 
+                         "_weeks", weeks_of_data,
+                         ".Rdata",
+                         sep = "", collapse = NULL)
+
+save(ott_projections_collection, file = file_name_RData)
+
+```
