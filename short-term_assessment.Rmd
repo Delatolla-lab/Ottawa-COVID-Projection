@@ -58,19 +58,12 @@ for (i in 1:iterations) {
   )
  print(start_date)
  print(end_date)
- 
-# Save each projection interation as CSV
-file_name_csv <- paste("Data/short_term_forecast_", 
-                       start_date, "_to_", 
-                       end_date, ".csv", 
-                       sep = "", collaplse = NULL)
 
-write.csv(forecast[[1]], file = file_name_csv, row.names = FALSE)
-
-# collect all iterations and save as one .Rdata file
+# collect all iterations into one list
 ott_projections_collection[[i]] <- forecast[[1]]
 }
 
+# Save list as .RData file
 file_name_RData <- paste("Data/short_term_forecast_to_", last_date, 
                          "_i", iterations, 
                          "_weeks", weeks_of_data,
