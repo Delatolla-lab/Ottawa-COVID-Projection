@@ -35,7 +35,7 @@ last_date = "2020-11-20"
 
 # create this many projections. Each iterations ends one week 
 # before the previous iteration
-iterations = 8 
+iterations = 8
 
 # the number of weeks of data that are used for each iteration
 weeks_of_data = 16
@@ -43,7 +43,7 @@ weeks_of_data = 16
 # Initialize a list to store the projections for each iteration
 ott_projections_collection <- vector(mode = "list", length = iterations)
 
-for (i in 0:(iterations - 1)) {
+for (i in 1:iterations) {
  end_date = as.Date(last_date) - 7 * i
  start_date = end_date - weeks_of_data * 7
  
@@ -68,7 +68,7 @@ file_name_csv <- paste("Data/short_term_forecast_",
 write.csv(forecast[[1]], file = file_name_csv, row.names = FALSE)
 
 # collect all iterations and save as one .Rdata file
-ott_projections_collection[i] <- forecast[[1]]
+ott_projections_collection[[i]] <- forecast[[1]]
 }
 
 file_name_RData <- paste("Data/short_term_forecast_to_", last_date, 
