@@ -35,8 +35,6 @@ growth_rate <- ott_short_forecast[[2]][[4]][[1]]
 
 `r dt_label` **`r dt` days**
 
-Rate of growth: **`r growth_rate`**
-
 ## Introduction 
 
 (text will go after observed data)
