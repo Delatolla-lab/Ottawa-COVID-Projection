@@ -13,8 +13,8 @@ short_term_forecast <- function(data,
   data_formatted <- data %>%
     filter(as.Date(date) >= as.Date(start_date)) %>%
     filter(as.Date(date) <= as.Date(end_date)) %>%
-    select(date, observed_new_episodes) %>%
-    rename(confirm = observed_new_episodes) %>%
+    select(date, observed_new_cases) %>%
+    rename(confirm = observed_new_cases) %>%
     mutate(date = as.Date(date))
 
   # Run epinow2 sim 
