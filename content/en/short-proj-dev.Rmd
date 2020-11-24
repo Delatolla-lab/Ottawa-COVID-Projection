@@ -1,0 +1,69 @@
+---
+title: "Short-term case projections for Ottawa (development page)"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+## run ott_projections() in short_term_projections.R to generate data for plots
+# load library, packages, functions, data
+library(EpiNow2)
+library(tidyverse)
+library(ggplot2)
+source("../../R/epinow_functions.R")
+ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed Data/OPH_Observed_COVID_Data.csv"))
+load("../../Data/short_term_forecast.RData")
+
+ott_projections <- ott_short_forecast[[1]]
+
+dt <- ott_short_forecast[[2]][[5]][[1]]
+dt_label = switch( 
+  (sign(dt) + 2),
+  "Case halving time:",
+  "No change:",
+  "Case doubling time:")
+
+growth_rate <- ott_short_forecast[[2]][[4]][[1]]
+```
+
+## Dashboard 
+
+(part of the main page dashboard)
+
+`r dt_label` **`r dt` days**
+
+Rate of growth: **`r growth_rate`**
+
+## Introduction 
+
+(text will go after observed data)
+
+Short-term projections are the most accurate estimate current covid-19 transmission in the community. Similar to a weather forecast, short-term projections predict changes in the near future; while long-term projections predict show a more general trend with less accuracy. Sometimes short-term & long-term projections can contradict one another. Short-term projections are more sensitive to immediate changes; while long-term projections require sustained trends before projections change. 
+
+The following plots illustrate short-term projections for Ottawa. These plots include projected cases by episode date, projected cases by reporting date, and projected reproduction number. Following, long-term projections are presented.
+
+## Short-term projections
+
+Projections from `r min(ott_projections$date, na.rm = TRUE)` to `r max(ott_projections$date, na.rm = TRUE)`
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# visualize epinow forecast
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_covid_data,
+  forecast_type = "infections",
+  ylab = "New cases",
+  title = "Projections for new cases by episode date"
+)
+
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_covid_data,
+  forecast_type = "reported_cases",
+  ylab = "New cases",
+  title = "Projections for new cases by reported date"
+)
+```
