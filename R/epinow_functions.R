@@ -21,7 +21,9 @@ short_term_forecast <- function(data,
   projections <-
       EpiNow2::epinow(reported_cases = data_formatted, 
                       generation_time = generation_time,
-                      delays = list(incubation_period, reporting_delay))
+                      delays = delay_opts(incubation_period, reporting_delay),
+                      rt = rt_opts(prior = list(mean = 2, sd = 0.2)),
+                      stan = stan_opts(cores = 4))
   # Extract output
   if(output == as.character("projections")){
     forecast <-
