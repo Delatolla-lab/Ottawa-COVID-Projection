@@ -66,4 +66,12 @@ short_term_plot(
   ylab = "New cases",
   title = "Projections for new cases by reported date"
 )
+
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_covid_data,
+  forecast_type = "R",
+  ylab = "R",
+  title = "Rt projections"
+)
 ```
