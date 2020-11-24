@@ -7,7 +7,7 @@ short_term_forecast <- function(data,
                                 output = "projections"){
   # Format dataset
   if(missing(end_date)) {
-    end_date <- max(data$date, na.rm = TRUE)
+    end_date <- max(as.Date(data$date), na.rm = TRUE)
   }
   
   data_formatted <- data %>%
