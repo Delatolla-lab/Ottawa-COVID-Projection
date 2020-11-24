@@ -118,7 +118,7 @@ short_term_plot <- function(projections,
     scale_y_continuous(expand = c(0, 0)) 
   
   # Convert to plotly object
-  plot <- plotly::ggplotly(plot)
+  plot <- plotly::ggplotly(plot, tooltip = c("date", "y"))
   
   # Set date display constraints 
   a <- as.numeric(as.Date(last(projections$date) - 40)) 

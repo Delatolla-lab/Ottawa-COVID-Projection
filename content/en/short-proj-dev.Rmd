@@ -25,14 +25,9 @@ dt_label = switch(
   "Case halving time:",
   "No change:",
   "Case doubling time:")
+
+growth_rate <- ott_short_forecast[[2]][[4]][[1]]
 ```
-
-```{r}
-
-min(ott_projections$date, na.rm = TRUE)
-max(ott_projections$date, na.rm = TRUE)
-```
-
 
 ## Dashboard 
 
@@ -40,7 +35,7 @@ max(ott_projections$date, na.rm = TRUE)
 
 `r dt_label` **`r dt` days**
 
-also growth rate and Rt.
+Rate of growth: **`r growth_rate`**
 
 ## Introduction 
 
@@ -51,6 +46,8 @@ Short-term projections are the most accurate estimate current covid-19 transmiss
 The following plots illustrate short-term projections for Ottawa. These plots include projected cases by episode date, projected cases by reporting date, and projected reproduction number. Following, long-term projections are presented.
 
 ## Short-term projections
+
+Projections from `r min(ott_projections$date, na.rm = TRUE)` to `r max(ott_projections$date, na.rm = TRUE)`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
@@ -68,13 +65,5 @@ short_term_plot(
   forecast_type = "reported_cases",
   ylab = "New cases",
   title = "Projections for new cases by reported date"
-)
-
-short_term_plot(
-  projections = ott_projections,
-  obs_data = ott_covid_data,
-  forecast_type = "R",
-  ylab = "Reproduction number",
-  title = "Reproduction number projections"
 )
 ```
