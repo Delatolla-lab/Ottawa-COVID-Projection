@@ -61,7 +61,9 @@ short_term_plot <- function(projections,
       geom_col(data = 
                  obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
-                   y = observed_new_episodes),
+                   y = observed_new_episodes,
+                   text = paste("Observed cases:",
+                                observed_new_episodes)),
                fill = "#008080", col = "white", alpha = 0.5,
                show.legend = FALSE, na.rm = TRUE)
   }
@@ -70,7 +72,9 @@ short_term_plot <- function(projections,
       geom_col(data = 
                  obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
-                   y = observed_new_cases),
+                   y = observed_new_cases,
+                   text = paste("Observed cases:",
+                                observed_new_cases)),
                fill = "#008080", col = "white", alpha = 0.5,
                show.legend = FALSE, na.rm = TRUE)
   }
@@ -114,18 +118,29 @@ short_term_plot <- function(projections,
     scale_fill_brewer(palette = "Dark2") +
     labs(y = ylab, x = "Date", col = "Type", fill = "Type", title = title) +
     expand_limits(y = c(-0.4, 0.8)) + 
-    scale_x_date(expand = c(0,0), date_breaks = "1 week", date_labels = "%b %d") +
+    scale_x_date(expand = c(0,0), date_breaks = "1 week",
+                 date_labels = "%b %d") +
     scale_y_continuous(expand = c(0, 0)) 
   
   # Convert to plotly object
-  plot <- plotly::ggplotly(plot, tooltip = c("date", "y"))
+  plot <- plotly::ggplotly(plot, tooltip = c("date", "text",
+                                             "lower_90", "upper_90"))
+  
+  # Add hover labels for upper and lower 90% confidence interval
+  #text_upper_90 <-
   
   # Set date display constraints 
   a <- as.numeric(as.Date(last(projections$date) - 40)) 
   b <- as.numeric(as.Date(last(projections$date)))
   
   plot <- plotly::layout(plot,
-                         xaxis = list(range = c(a, b)))
+                         xaxis = list(range = c(a, b)),
+                         annotations = list(
+                           x = 1, y = -0.12, text = "*Shaded area represents the 90% credible region", 
+                           showarrow = F, xref='paper', yref='paper', 
+                           xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                           font=list(size=10)
+                         ))
   
   return(plot)
 }
