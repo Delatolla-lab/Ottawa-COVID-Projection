@@ -16,13 +16,9 @@ library(ggplot2)
 source("../../R/epinow_functions.R")
 ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed Data/OPH_Observed_COVID_Data.csv"))
 load("../../Data/short_term_forecast.RData")
-load("../../Data/oct_1_forecast.RData")
-load("../../Data/oct_8_forecast.RData")
-load("../../Data/oct_15_forecast.RData")
+
 ott_projections <- ott_short_forecast[[1]]
-ott_projections <- oct_1_forecast[[1]]
-ott_projections <- oct_8_forecast[[1]]
-ott_projections <- oct_15_forecast[[1]]
+
 dt <- ott_short_forecast[[2]][[5]][[1]]
 dt_label = switch( 
   (sign(dt) + 2),
@@ -55,8 +51,6 @@ Short-term projections are the most accurate estimate current covid-19 transmiss
 The following plots illustrate short-term projections for Ottawa. These plots include projected cases by episode date, projected cases by reporting date, and projected reproduction number. Following, long-term projections are presented.
 
 ## Short-term projections
-
-
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
