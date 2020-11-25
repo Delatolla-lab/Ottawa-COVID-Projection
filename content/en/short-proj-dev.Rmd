@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(ggplot2)
 source("../../R/epinow_functions.R")
-ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed Data/OPH_Observed_COVID_Data.csv"))
+ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
 load("../../Data/short_term_forecast.RData")
 
 ott_projections <- ott_short_forecast[[1]]
