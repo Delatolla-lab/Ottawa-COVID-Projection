@@ -1,10 +1,7 @@
-short_term_forecast <- function(data,
-                                start_date,
-                                end_date,
-                                generation_time,
-                                incubation_period,
-                                reporting_delay,
-                                output = "projections"){
+epinow_data_prep <- function(data,
+                             start_date,
+                             end_date,
+                             parameter){
   # Format dataset
   if(missing(end_date)) {
     end_date <- max(as.Date(data$date), na.rm = TRUE)
@@ -13,13 +10,22 @@ short_term_forecast <- function(data,
   data_formatted <- data %>%
     filter(as.Date(date) >= as.Date(start_date)) %>%
     filter(as.Date(date) <= as.Date(end_date)) %>%
-    select(date, observed_new_cases) %>%
-    rename(confirm = observed_new_cases) %>%
+    select(date, as.character(parameter)) %>%
+    rename(confirm = as.character(parameter)) %>%
     mutate(date = as.Date(date))
+  
+  return(data_formatted)
+}
 
+short_term_forecast <- function(data,
+                                generation_time,
+                                incubation_period,
+                                reporting_delay,
+                                output = "projections"){
+  
   # Run epinow2 sim 
   projections <-
-      EpiNow2::epinow(reported_cases = data_formatted, 
+      EpiNow2::epinow(reported_cases = data, 
                       generation_time = generation_time,
                       delays = delay_opts(incubation_period, reporting_delay),
                       rt = rt_opts(prior = list(mean = 2, sd = 0.2)),
