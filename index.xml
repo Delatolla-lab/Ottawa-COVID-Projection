@@ -85,5 +85,17 @@ People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardl
  Review and update model parameters based on recent published studies. Priories for review:  ventilated patients deaths   </description>
     </item>
     
+    <item>
+      <title>Short-term case projections for Ottawa (development page)</title>
+      <link>https://613covid.ca/short-proj-dev/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://613covid.ca/short-proj-dev/</guid>
+      <description>Dashboard (part of the main page dashboard)
+Case halving time: -7.1 days
+ Introduction (text will go after observed data)
+Short-term projections are the most accurate estimate current covid-19 transmission in the community. Similar to a weather forecast, short-term projections predict changes in the near future; while long-term projections predict show a more general trend with less accuracy. Sometimes short-term &amp;amp; long-term projections can contradict one another.</description>
+    </item>
+    
   </channel>
 </rss>
