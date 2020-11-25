@@ -13,15 +13,17 @@ short_term_forecast <- function(data,
   data_formatted <- data %>%
     filter(as.Date(date) >= as.Date(start_date)) %>%
     filter(as.Date(date) <= as.Date(end_date)) %>%
-    select(date, observed_new_episodes) %>%
-    rename(confirm = observed_new_episodes) %>%
+    select(date, observed_new_cases) %>%
+    rename(confirm = observed_new_cases) %>%
     mutate(date = as.Date(date))
 
   # Run epinow2 sim 
   projections <-
       EpiNow2::epinow(reported_cases = data_formatted, 
                       generation_time = generation_time,
-                      delays = list(incubation_period, reporting_delay))
+                      delays = delay_opts(incubation_period, reporting_delay),
+                      rt = rt_opts(prior = list(mean = 2, sd = 0.2)),
+                      stan = stan_opts(cores = 4))
   # Extract output
   if(output == as.character("projections")){
     forecast <-
