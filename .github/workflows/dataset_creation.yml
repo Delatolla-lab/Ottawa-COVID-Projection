@@ -3,9 +3,7 @@
 name: Dataset-creation
 
 # Runs everyday at 12:30pm EST/EDT (5:30pm UTC)
-on: 
-  push:
-    branches: master
+on:
   schedule:
     - cron: '30 17 * * *'
 jobs:
