@@ -22,9 +22,11 @@ Data to {{1}}
 
 ### Current
 
-**{{2}}** confirmed COVID-19 patients in hospital.
+{{2}} **{{3}}** days
+
+**{{4}}** confirmed COVID-19 patients in hospital.
  
-Including **{{3}}** acute care patients. **{{4}}** ICU patients.","# Tableau de bord
+Including **{{5}}** acute care patients. **{{6}}** ICU patients.","# Tableau de bord
 
 Données en date du {{1}}
 
@@ -89,6 +91,9 @@ observed_census,## {#observed-census},## {#observed-census}
 PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
 observed_admits,## {#observed-admits},## {#observed-admits}
 ProjectedHospital_title,## Projections,## Projections
+case_projections_text, "Short-term and long-term covid-19 projections are presented below. See [More](more) for a discussion about model interpretation and [Methods](methods) for how the projections where created. Short-term projections reflect current covid-19 transmission; while long-term projections reflect sustained transmission trends. Short-term and long-term projections can trend in different directions when there are changing patterns of community covid-19 transmission.
+
+Projections from {{1}} to {{2}}", "Projections from {{1}} to {{2}}" 
 ProjectedHospital_text,"The hospital census forecast of:
 
 {{1}} patients on {{2}} is based on the previous week’s growth rate of {{3}}%.
@@ -118,6 +123,8 @@ Contact,"**Media contact:** Michaela Schreiter, Media Relations Officer, The Ott
 
 **uOttawa – CHEO SARS-CoV-2 research group:** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber
 
+**Computing infrastructure:** Indoc Research - Open Data Environment
+
 **Colour consultant:** Toby Barker
 
 **Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).","**Personne-ressource pour les médias:** Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: [mschreiter@toh.ca](mailto:mschreiter@toh.ca) Téléphone: 613-222-7674
@@ -129,6 +136,8 @@ Contact,"**Media contact:** Michaela Schreiter, Media Relations Officer, The Ott
 **Avec le soutien des épidémiologistes de Santé publique Ottawa:** Amira Ali, Jacqueline Willmore, Dara Spatz
 
 **Groupe de recherche uOttawa – CHEO SARS-CoV-2:** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber.\
+
+**Computing infrastructure:** Indoc Research - Open Data Environment
 
 **Consultant couleur:** Toby Barker
 

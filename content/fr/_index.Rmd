@@ -27,7 +27,6 @@ the_same <- insert_translation(localization_data, lang, "the_same")
 ```
 `r intro`
 
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 # libraries
@@ -41,6 +40,7 @@ library(lubridate)
 library(stats)
 library(covidseir)
 library(zoo)
+library(EpiNow2)
 
 # scripts
 source("../../R/lag_replacement.R")
@@ -50,9 +50,12 @@ source("../../R/hosp_projections.R")
 source("../../R/open_ottawa_scripts.R")
 source("../../R/plot_case_projections.R")
 source("../../R/chime_functions.R")
+source("../../R/epinow_functions.R")
 
 # data
 ott_observed <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
+load("../../Data/short_term_forecast.RData")
+ott_projections <- ott_short_forecast[[1]]
 
 ## Observed census
 exp_census <- calc_expected_values_for_n_weeks(data = ott_observed, number_weeks = 3, first_day = 1)
@@ -83,6 +86,13 @@ more_less_census = switch(
   the_same,
   more
 )
+
+dt <- ott_short_forecast[[2]][[5]][[1]]
+dt_label = switch( 
+  (sign(dt) + 2),
+  "Case halving time:",
+  "No change:",
+  "Case doubling time:")
 
 ## Observed new cases by episode date (excluding past 7 days)
 ott_observed_episodes <- as.data.frame(ott_observed[1:(nrow(ott_observed) - 6),])
@@ -182,6 +192,8 @@ reduction_hex <- "#85c22b"
 line_break <- insert_translation(localization_data, lang, "break")
 dashboard <- insert_translation(localization_data, lang, "Dashboard",
                                 c(as.character(tail(ott_observed$date, n=1)),
+                                  dt_label,
+                                  dt,
                                   #last(na.omit(ott_observed$observed_active_cases)),
                                   last(na.omit(ott_observed$observed_census_ICU_p_acute_care)),
                                   last(na.omit(ott_observed$observed_census_acute_care)),
@@ -221,6 +233,10 @@ observed_admits <- insert_translation(localization_data, lang, "observed_admits"
 projected_hospital_title <- insert_translation(localization_data, lang, "ProjectedHospital_title")
 
 case_projections <- insert_translation(localization_data, lang, "case_projections")
+
+case_projections_text <- insert_translation(localization_data, lang, "case_projections_text",
+                                            c(min(ott_projections$date, na.rm = TRUE),
+                                              max(ott_projections$date, na.rm = TRUE)))
 
 hosp_projections <- insert_translation(localization_data, lang, "hosp_projections")
 ```
@@ -296,6 +312,20 @@ ICU_p_acute_care
 
 `r case_projections`
 
+`r case_projections_text`
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# visualize epinow forecast
+
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_observed,
+  forecast_type = "reported_cases",
+  ylab = "New cases",
+  title = "Short-term daily COVID-19 cases in Ottawa"
+)
+```
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Set up SEIR model
 
@@ -352,7 +382,7 @@ projection_data <- case_projection_data(ott_case_projections, 10)
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualize projections
-case_projection_plot(projection_data, ott_observed_episodes, current_col = current_case_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Projected daily COVID-19 cases in Ottawa", pct_change = 10)
+case_projection_plot(projection_data, ott_observed_episodes, current_col = current_case_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Long-term daily COVID-19 cases in Ottawa", pct_change = 10)
 ```
 
 `r hosp_projections`
