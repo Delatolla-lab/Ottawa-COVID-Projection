@@ -95,17 +95,10 @@ short_term_plot <- function(projections,
   for (CrI in CrIs) {
     bottom <- paste0("lower_", CrI)
     top <-  paste0("upper_", CrI)
-    if (index == 1) {
       plot <- plot +
         geom_ribbon(ggplot2::aes(ymin = .data[[bottom]], ymax = .data[[top]]), 
                              alpha = 0.2, size = 0.05)
-    }else{
-      plot <- plot +
-        geom_ribbon(ggplot2::aes(ymin = .data[[bottom]], ymax = .data[[top]],
-                                          col = NULL), 
-                             alpha = alpha_per_CrI)
-    }
-    index <- index + 1
+    
   }
   
   # add plot theming
@@ -114,7 +107,8 @@ short_term_plot <- function(projections,
       panel.background = element_blank(),
       panel.grid.major.y = element_line(colour = "grey"),
       axis.line.x = element_line(colour = "grey"),
-      legend.position = "none",
+      legend.position = "bottom",
+      legend.title = element_blank(),
       plot.title = element_text(hjust = 0.5)) +
     scale_color_brewer(palette = "Dark2") +
     scale_fill_brewer(palette = "Dark2") +
@@ -128,15 +122,18 @@ short_term_plot <- function(projections,
   plot <- plotly::ggplotly(plot, tooltip = c("date", "text",
                                              "lower_90", "upper_90"))
   
-  # Add hover labels for upper and lower 90% confidence interval
-  #text_upper_90 <-
   
   # Set date display constraints 
   a <- as.numeric(as.Date(last(projections$date) - 40)) 
   b <- as.numeric(as.Date(last(projections$date)))
   
+  # Format legend layout & add annotation
   plot <- plotly::layout(plot,
                          xaxis = list(range = c(a, b)),
+                         legend = list(
+                           orientation = "h",
+                           x = 0, y = -0.16
+                         ),
                          annotations = list(
                            x = 1, y = -0.12, text = "*Shaded area represents the 90% credible region", 
                            showarrow = F, xref='paper', yref='paper', 
