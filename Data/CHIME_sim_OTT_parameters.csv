@@ -32,3 +32,6 @@ sd_percent_change_current,1,constant,,,Percent change with current distancing me
 sd_percent_change_reduction_10,0.9,constant,,,Percent change with 10% reduction in transmission
 sd_percent_change_increase_10,1.1,constant,,,Percent change with 10% increase in transmission
 reopen_on_days,14,constant,,,Date of change in transmission from today
+reporting_delay,1.16,lognormal,,,Delay (in days) between testing and reporting of results to health units
+generation_time,3.64,gamma,,,Time duration between an infection onset in a primary case to an infection onset in a secondary case
+incubation_period,1.621,gamma,,,Time period between infection onset and symptom onset
