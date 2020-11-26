@@ -14,8 +14,8 @@
       <guid>https://613covid.ca/model/</guid>
       <description>Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references.
 Projection models All data used to create projection models can be accessed at Open Ottawa. See ’COVID-19 cases and deaths`.
-Covid-19 case projections created using the Bayesian SEIR model developed by Simon Fraser University.
- Projections are based on observed covid-19 cases by episode date.</description>
+Covid-19 short-term projections are created using the Bayesian EpiNow2 model developed by the EpiForecasts team.
+ Projections are based on observed covid-19 cases by reporting date, which is, in turn, estimated using reported incubation period and consideration for reporting delays.</description>
     </item>
     
     <item>
@@ -25,8 +25,8 @@ Covid-19 case projections created using the Bayesian SEIR model developed by Sim
       
       <guid>https://613covid.ca/more/</guid>
       <description>Model use There are two main uses of the projections:
-Short-term projections (2 to 4 weeks) inform the current level of covid-19 transmssion. In turn, current covid-19 transmission reflects effectivess of ongoing covid-19 prevention and control. Short-term projections the immediate need health care such hospital and critical care services for COVID-19 patients.
- Long-term projections (6 weeks onward) to assess the potential effect of changes in covid-19 transmission. In turn, future covid-19 transmission reflects potential changes to covid-19 re-opening stages and the effectiveness of cvoid prevention and control.</description>
+Short-term projections (1 to 4 weeks) reflect the current level of covid-19 transmssion and current effectivess of ongoing covid-19 prevention and control. Short-term projections the immediate need health care such hospital and critical care services for COVID-19 patients.
+ Long-term projections (6 weeks onward) reflect sustain trends in covid-19 transmissions. Long-term projections are helpful to assess the potiential effect of covid-19 re-opening or the need of increased restrictions to control surges.</description>
     </item>
     
     <item>
@@ -36,10 +36,11 @@ Short-term projections (2 to 4 weeks) inform the current level of covid-19 trans
       
       <guid>https://613covid.ca/change-log/</guid>
       <description>Updates involving only data updates will no longer be documented.
-V3.2.0 2020-10-27
+V3.3.0 2020-11-26
+ Short-term case projections added to the homepage. See More for a discussion about model interpretation and Methods for how the projections where created.   V3.2.0 2020-10-27
  Updates to wastewater page.   V3.1.0 2020-10-13
  Wastewater page added describing covid-19 wastewater surveillance.   V3.0.0 2020-10-05
- Case data &amp;amp; projections have been added to the website. See model for more details on how projections for cases were created including input parameters. Ventilator &amp;amp; peak projections removed from website. Death figure removed from website.</description>
+ Case data &amp;amp; projections have been added to the website.</description>
     </item>
     
     <item>
@@ -92,9 +93,9 @@ People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardl
       
       <guid>https://613covid.ca/short-proj-dev/</guid>
       <description>Dashboard (part of the main page dashboard)
-Case halving time: -7 days
+Case halving time: -6.7 days
  Introduction (text will go after observed data)
-Short-term projections are the most accurate estimate current covid-19 transmission in the community. Similar to a weather forecast, short-term projections predict changes in the near future; while long-term projections predict show a more general trend with less accuracy. Sometimes short-term &amp;amp; long-term projections can contradict one another.</description>
+Short-term and long-term covid-19 projections are presented below. See More for a discussion about model interpretation and Methods for how the projections where created. Short-term projections reflect current covid-19 transmission; while long-term projections reflect sustained transmission trends. Short-term and long-term projections can trend in different directions when there are changing patterns of community covid-19 transmission.</description>
     </item>
     
   </channel>

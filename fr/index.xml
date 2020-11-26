@@ -14,8 +14,8 @@
       <guid>https://613covid.ca/fr/model/</guid>
       <description>Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references.
 Projection models All data used to create projection models can be accessed at Open Ottawa. See ’COVID-19 cases and deaths`.
-Covid-19 case projections created using the Bayesian SEIR model developed by Simon Fraser University.
- Projections are based on observed covid-19 cases by episode date.</description>
+Covid-19 short-term projections are created using the Bayesian EpiNow2 model developed by the EpiForecasts team.
+ Projections are based on observed covid-19 cases by reporting date, which is, in turn, estimated using reported incubation period and consideration for reporting delays.</description>
     </item>
     
     <item>
@@ -37,10 +37,11 @@ Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet
       
       <guid>https://613covid.ca/fr/change-log/</guid>
       <description>Updates involving only data updates will no longer be documented.
-V3.2.0 2020-10-27
+V3.3.0 2020-11-26
+ Short-term case projections added to the homepage. See More for a discussion about model interpretation and Methods for how the projections where created.   V3.2.0 2020-10-27
  Updates to wastewater page.   V3.1.0 2020-10-13
  Wastewater page added describing covid-19 wastewater surveillance.   V3.0.0 2020-10-05
- Case data &amp;amp; projections have been added to the website. See model for more details on how projections for cases were created including input parameters. Ventilator &amp;amp; peak projections removed from website. Death figure removed from website.</description>
+ Case data &amp;amp; projections have been added to the website.</description>
     </item>
     
     <item>
