@@ -9,6 +9,10 @@ Described below is a brief description of methods, data and model parameters use
 ## Projection models {#projection-models}
 
 All data used to create projection models can be accessed at [Open Ottawa](https://open.ottawa.ca/datasets/covid-19-cases-and-deaths-in-ottawa). See 'COVID-19 cases and deaths`.
+
+1) *Covid-19 short-term projections are created using the [Bayesian EpiNow2 model](https://epiforecasts.io/EpiNow2/) developed by the EpiForecasts team.*
+
+    - Projections are based on observed covid-19 cases by reporting date. Time varying reproduction number are based on predicted date of infection, which is, in turn, estimated using reported incubation period and consideration for reporting delays. Future updates on 613covid.ca will cosider observed episode date for Ottawa cases.
     
 1) *Covid-19 case projections created using the [Bayesian SEIR model](https://github.com/seananderson/covidseir) developed by Simon Fraser University.*
 
