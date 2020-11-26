@@ -131,8 +131,8 @@ short_term_plot <- function(projections,
   plot <- plotly::layout(plot,
                          xaxis = list(range = c(a, b)),
                          legend = list(
-                           orientation = "h",
-                           x = 0, y = -0.16
+                           #orientation = "h",
+                           x = 0.02, y = 1
                          ),
                          annotations = list(
                            x = 1, y = -0.12, text = "*Shaded area represents the 90% credible region", 
