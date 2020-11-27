@@ -362,7 +362,7 @@ fit <- fit_seir(
   e_prior = c(0.85, 0.05), # 85% of residents social distancing
   start_decline_prior = c(log(24), 0.1), # Starting date of closing of non-essential businesses (March 24th, 2020)
   end_decline_prior = c(log(34), 0.1), # 10 day buffer to ramp in social distancing
-  f_prior = cbind(c(0.4, 0.5, 0.6, 0.65, 0.6, 0.6), c(0.2, 0.2, 0.2, 0.2, 0.2)),
+  f_prior = cbind(c(0.4, 0.5, 0.6, 0.65, 0.6, 0.6), c(0.2, 0.2, 0.2, 0.2, 0.2, 0.2)),
   R0_prior = c(log(2.5), 0.2), # Starting R0 value
   N_pop = 1049486, # Ottawa population
   iter = 500, # number of posterior samples
