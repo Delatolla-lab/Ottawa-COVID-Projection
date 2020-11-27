@@ -341,6 +341,15 @@ day_new_f <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-05
 f_seg[seq(day_new_f, length(f_seg))] <- 2
 day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-06-12")) # Date of phase 2 reopening
 f_seg[seq(day_ch, length(f_seg))] <- 3
+
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-07-17")) # Date of phase 3 reopening
+f_seg[seq(day_ch, length(f_seg))] <- 4
+
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-10-09")) # Date of modified phase 2
+f_seg[seq(day_ch, length(f_seg))] <- 5
+
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-11-09")) # End date of modified phase 2
+f_seg[seq(day_ch, length(f_seg))] <- 6
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE}
@@ -353,7 +362,7 @@ fit <- fit_seir(
   e_prior = c(0.85, 0.05), # 85% of residents social distancing
   start_decline_prior = c(log(24), 0.1), # Starting date of closing of non-essential businesses (March 24th, 2020)
   end_decline_prior = c(log(34), 0.1), # 10 day buffer to ramp in social distancing
-  f_prior = cbind(c(0.4, 0.5, 0.6), c(0.2, 0.2, 0.2)),
+  f_prior = cbind(c(0.4, 0.5, 0.6, 0.65, 0.6, 0.6), c(0.2, 0.2, 0.2, 0.2, 0.2)),
   R0_prior = c(log(2.5), 0.2), # Starting R0 value
   N_pop = 1049486, # Ottawa population
   iter = 500, # number of posterior samples
@@ -377,7 +386,7 @@ tidy_proj <- left_join(tidy_proj, lut, by = "day")
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Generate projections for SEIR model fit
-ott_case_projections <- proj_generation(fit, lut, ott_observed_episodes, project_to = "2020-12-31", day_start_reduction = 7, pct_change = 10)
+ott_case_projections <- proj_generation(fit, lut, ott_observed_episodes, project_to = "2021-01-31", day_start_reduction = 7, pct_change = 10)
 
 # Create data set to visualize projections
 projection_data <- case_projection_data(ott_case_projections, 10)
