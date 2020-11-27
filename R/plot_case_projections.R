@@ -21,7 +21,7 @@ proj_generation <- function(fit, lut, episode_data, project_to,
     forecast_days = days_project,
     f_fixed_start = max(fit$days) + day_start_reduction,
     f_multi = rep(current, days_project - day_start_reduction + 1), 
-    f_multi_seg = 3 # which f segment to use
+    f_multi_seg = nrow(fit[["f_prior"]]) # which f segment to use
   )
   tidy_proj_current <- tidy_seir(proj_current, resample_y_rep = 30)
   tidy_proj_current <- left_join(tidy_proj_current, lut, by = "day")
@@ -33,7 +33,7 @@ proj_generation <- function(fit, lut, episode_data, project_to,
     forecast_days = days_project,
     f_fixed_start = max(fit$days) + day_start_reduction,
     f_multi = rep(reduction, days_project - day_start_reduction + 1),
-    f_multi_seg = 3 # which f segment to use
+    f_multi_seg = nrow(fit[["f_prior"]]) # which f segment to use
   )
   tidy_proj_reduction <- tidy_seir(proj_reduction, resample_y_rep = 30)
   tidy_proj_reduction <- left_join(tidy_proj_reduction, lut, by = "day")
@@ -45,7 +45,7 @@ proj_generation <- function(fit, lut, episode_data, project_to,
     forecast_days = days_project,
     f_fixed_start = max(fit$days) + day_start_reduction,
     f_multi = rep(increase, days_project - day_start_reduction + 1),
-    f_multi_seg = 3 # which f segment to use
+    f_multi_seg = nrow(fit[["f_prior"]]) # use last f segment
   )
   tidy_proj_increase <- tidy_seir(proj_increase, resample_y_rep = 30)
   tidy_proj_increase <- left_join(tidy_proj_increase, lut, by = "day")
