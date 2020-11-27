@@ -52,6 +52,16 @@ short_term_plot <- function(projections,
   # Filter data based on forecast type
   projections <- projections %>%
     filter(variable == as.character(forecast_type))
+  
+  # set up CrI index
+  CrIs <- extract_CrIs(projections)
+  index <- 1
+  alpha_per_CrI <- 0.6 / (length(CrIs) - 1)
+  
+  # Modify CI column names in dataset
+  colnames(projections) <- reduce2(c("_", "0"), c(" ", "0%"),
+                                   .init = colnames(projections),
+                                   str_replace)
   # Set up ggplot object
   plot<- 
     ggplot(projections[as.Date(projections$date) >= as.Date(start_date),],
@@ -89,12 +99,9 @@ short_term_plot <- function(projections,
       linetype = 2)
   
   # plot CrIs
-  CrIs <- extract_CrIs(projections)
-  index <- 1
-  alpha_per_CrI <- 0.6 / (length(CrIs) - 1)
   for (CrI in CrIs) {
-    bottom <- paste0("lower_", CrI)
-    top <-  paste0("upper_", CrI)
+    bottom <- paste("lower", paste0(CrI, "%"))
+    top <-  paste("upper", paste0(CrI, "%"))
       plot <- plot +
         geom_ribbon(ggplot2::aes(ymin = .data[[bottom]], ymax = .data[[top]]), 
                              alpha = 0.2, size = 0.05)
@@ -120,7 +127,9 @@ short_term_plot <- function(projections,
   
   # Convert to plotly object
   plot <- plotly::ggplotly(plot, tooltip = c("date", "text",
-                                             "lower_90", "upper_90"))
+                                             "lower 90%", "lower 50%",
+                                             "lower 20%", "upper 20%",
+                                             "upper 50%", "upper 90%"))
   
   
   # Set date display constraints 
@@ -131,8 +140,8 @@ short_term_plot <- function(projections,
   plot <- plotly::layout(plot,
                          xaxis = list(range = c(a, b)),
                          legend = list(
-                           orientation = "h",
-                           x = 0, y = -0.16
+                           #orientation = "h",
+                           x = 0.02, y = 1
                          ),
                          annotations = list(
                            x = 1, y = -0.12, text = "*Shaded area represents the 90% credible region", 

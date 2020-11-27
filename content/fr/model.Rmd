@@ -6,17 +6,21 @@ bibliography: refs.bib
 ---
 Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references. 
 
-## Projection models
+## Projection models {#projection-models}
 
 All data used to create projection models can be accessed at [Open Ottawa](https://open.ottawa.ca/datasets/covid-19-cases-and-deaths-in-ottawa). See 'COVID-19 cases and deaths`.
     
-1) *Covid-19 case projections created using the [Bayesian SEIR model](https://github.com/seananderson/covidseir) developed by Simon Fraser University.*
+1) *Covid-19 short-term projections are created using the [Bayesian EpiNow2 model](https://epiforecasts.io/EpiNow2/) developed by the EpiForecasts team.*
+
+    - Projections are based on observed covid-19 cases by reporting date, which is, in turn, estimated using reported incubation period and consideration for reporting delays. Future updates on 613covid.ca will consider observed episode date for Ottawa cases.
+    
+2) *Covid-19 case projections created using the [Bayesian SEIR model](https://github.com/seananderson/covidseir) developed by Simon Fraser University.*
 
     - Projections are based on observed covid-19 cases by episode date. Episode date reflects the date closest to the onset of symptoms. Projections exclude the most recent week of cases, reflecting a lag time in detecting and reporting recent covid-19 infections.
     
     - Covid-19 transmission is estimated within the SEIR model. 
     
-2) *Hospital projections created using the [Bayesian extension to the CHIME model](https://github.com/pennsignals/chime_sims) developed by the University of Pennsylvania Health System.*  
+3) *Hospital projections created using the [Bayesian extension to the CHIME model](https://github.com/pennsignals/chime_sims) developed by the University of Pennsylvania Health System.*  
 
     - Projections are based on the observed covid-19 hospitalization census for each day for the five Ottawa hospitals who treat covid-19 patients. 
     

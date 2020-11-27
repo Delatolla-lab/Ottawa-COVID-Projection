@@ -4,6 +4,11 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V3.3.0
+2020-11-26
+
+- Short-term case projections added to the homepage. See [More](more) for a discussion about model interpretation and [Methods](methods) for how the projections where created.
+
 # V3.2.0
 2020-10-27
 
