@@ -95,7 +95,7 @@ case_projections_text, "Short-term and long-term covid-19 projections are presen
 
 Projections from {{1}} to {{2}}
 
-Dashed line represents the last date of observation", "Projections from {{1}} to {{2}}" 
+Dashed line represents the last date of observed cases", "Projections from {{1}} to {{2}}" 
 ProjectedHospital_text,"The hospital census forecast of:
 
 {{1}} patients on {{2}} is based on the previous week’s growth rate of {{3}}%.
