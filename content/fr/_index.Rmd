@@ -41,6 +41,8 @@ library(stats)
 library(covidseir)
 library(zoo)
 library(EpiNow2)
+library(stringr)
+library(purrr)
 
 # scripts
 source("../../R/lag_replacement.R")
