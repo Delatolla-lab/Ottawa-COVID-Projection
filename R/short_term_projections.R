@@ -7,7 +7,7 @@ source("R/epinow_functions.R")
 
 # load covid data
 ott_covid_data <-
-  read.csv(file.path(getwd(), "Data/Observed Data/OPH_Observed_COVID_Data.csv"))
+  read.csv(file.path(getwd(), "Data/Observed data/OPH_Observed_COVID_Data.csv"))
 
 # Set reporting delay, generation time, incubation period
 reporting_delay <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
