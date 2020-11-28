@@ -132,7 +132,7 @@ short_term_plot <- function(projections,
     scale_y_continuous(expand = c(0, 0)) 
   
   # Convert to plotly object
-  plot <- plotly::ggplotly(plot, tooltip = c("date", "text", "mean",
+  plot <- plotly::ggplotly(plot, tooltip = c("date", "text", "median",
                                              "lower 90%", "upper 90%"))
   
   

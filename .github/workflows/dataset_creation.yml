@@ -1,4 +1,5 @@
-# This is a workflow to automate the dataset creation for 613covid.ca
+# This is a workflow to automate the dataset creation for 613covid.ca and 
+# run short-term hospitalization projections
 
 name: Dataset-creation
 
@@ -44,6 +45,8 @@ jobs:
         run: R -e 'renv::restore()'
       - name: Prepare data
         run: Rscript R/dataset_creation.R
+      - name: Run short term projections 
+        run: Rscript R/short_term_projections.R
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
