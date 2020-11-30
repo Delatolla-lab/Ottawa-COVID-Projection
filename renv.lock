@@ -32,10 +32,10 @@
     },
     "EpiNow2": {
       "Package": "EpiNow2",
-      "Version": "1.2.1",
+      "Version": "1.3.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ea8696a4a02c36fe2cb23ec2b852f02d"
+      "Hash": "bc10cddbfe0ba4977951871ba451b57e"
     },
     "MASS": {
       "Package": "MASS",
