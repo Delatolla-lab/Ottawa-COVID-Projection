@@ -49,9 +49,10 @@ short_term_plot <- function(projections,
                             start_date = first(as.Date(projections$date)),
                             ylab,
                             title){
-  # Filter data based on forecast type
+  # Filter data based on forecast type and remove 50% CI
   projections <- projections %>%
-    filter(variable == as.character(forecast_type))
+    filter(variable == as.character(forecast_type)) %>%
+    select(-c(lower_50, upper_50, lower_20, upper_20))
   
   # set up CrI index
   CrIs <- extract_CrIs(projections)
@@ -98,6 +99,11 @@ short_term_plot <- function(projections,
         as.numeric(projections[projections$type == "estimate based on partial data"][date == max(date)]$date),
       linetype = 2)
   
+  # plot median line
+  plot <- plot +
+    geom_line(aes(y = median),
+              lwd = 0.9)
+  
   # plot CrIs
   for (CrI in CrIs) {
     bottom <- paste("lower", paste0(CrI, "%"))
@@ -126,10 +132,8 @@ short_term_plot <- function(projections,
     scale_y_continuous(expand = c(0, 0)) 
   
   # Convert to plotly object
-  plot <- plotly::ggplotly(plot, tooltip = c("date", "text",
-                                             "lower 90%", "lower 50%",
-                                             "lower 20%", "upper 20%",
-                                             "upper 50%", "upper 90%"))
+  plot <- plotly::ggplotly(plot, tooltip = c("date", "text", "median",
+                                             "lower 90%", "upper 90%"))
   
   
   # Set date display constraints 
