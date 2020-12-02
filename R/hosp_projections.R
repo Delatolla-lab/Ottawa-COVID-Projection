@@ -4,12 +4,12 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
                      increase_value, increase_color, increase_shade, y,
                      observed_name, project_to) {
   tmp <- max(data1[, grepl(paste(paste("^", as.character(parameter), sep = ""),
-                                 paste("median_increase",
+                                 paste("95_increase",
                                       as.character(increase_value), sep = "_"),
-                                 sep = "_"), names(data1))])
+                                 sep = "_"), names(data1))], na.rm = TRUE)
   data1 <- data1[as.Date(data1$date) <= (project_to), ]
   tickvals <- floor_date(as.Date(data1$date), 'month')
-  tmp <- tmp*0.90
+  tmp <- tmp*0.5
   trace1 <- list(
     fill = "none",
     line = list(color = as.character(current_color),
@@ -169,10 +169,15 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
     orientation = "v",
     showlegend = TRUE
   )
+  # Set date contraints
+  a <- last(as.Date(data1$date)) - 350 
+  b <- last(as.Date(data1$date))
+  
   layout <- list(
     title = list(text = as.character(title)),
     xaxis = list(type = "date",
                  title = list(text = "Date"),
+                 range = c(a, b),
                  automargin = T,
                  tickformat = "%b %Y",
                  tickvals = tickvals,
