@@ -23,6 +23,10 @@ library(plotly)
 source("../R/plot_case_projections.R")
 ott_covid_data <- read.csv(file.path(getwd(), "../Data/Observed data/OPH_Observed_COVID_Data.csv"))
 ott_observed_episodes <- as.data.frame(ott_covid_data[1:(nrow(ott_covid_data) - 6),])
+
+current_case_hex <- "#008080"
+reduction_hex <- "#85c22b"
+increase_hex <- "#F6D556"
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}

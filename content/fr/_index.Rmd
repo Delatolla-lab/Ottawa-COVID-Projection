@@ -237,8 +237,7 @@ projected_hospital_title <- insert_translation(localization_data, lang, "Project
 case_projections <- insert_translation(localization_data, lang, "case_projections")
 
 case_projections_text <- insert_translation(localization_data, lang, "case_projections_text",
-                                            c(min(ott_projections$date, na.rm = TRUE),
-                                              max(ott_projections$date, na.rm = TRUE)))
+                                            c(max(ott_projections$date, na.rm = TRUE)))
 
 hosp_projections <- insert_translation(localization_data, lang, "hosp_projections")
 ```
@@ -328,6 +327,8 @@ short_term_plot(
 )
 ```
 
+`r line_break`
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Set up SEIR model
 
@@ -341,6 +342,15 @@ day_new_f <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-05
 f_seg[seq(day_new_f, length(f_seg))] <- 2
 day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-06-12")) # Date of phase 2 reopening
 f_seg[seq(day_ch, length(f_seg))] <- 3
+
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-07-17")) # Date of phase 3 reopening
+f_seg[seq(day_ch, length(f_seg))] <- 4
+
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-10-09")) # Date of modified phase 2
+f_seg[seq(day_ch, length(f_seg))] <- 5
+
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-11-09")) # End date of modified phase 2
+f_seg[seq(day_ch, length(f_seg))] <- 6
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE}
@@ -386,6 +396,8 @@ projection_data <- case_projection_data(ott_case_projections, 10)
 # Visualize projections
 case_projection_plot(projection_data, ott_observed_episodes, current_col = current_case_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Long-term daily COVID-19 cases in Ottawa", pct_change = 10)
 ```
+
+`r line_break`
 
 `r hosp_projections`
 

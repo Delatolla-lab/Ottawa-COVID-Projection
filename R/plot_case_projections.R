@@ -176,10 +176,7 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
       values = c(current_col,
                  reduction_col,
                  increase_col)
-    ) +
-    scale_y_continuous(
-      breaks = seq(0, tmp, by = 100)
-    )
+    ) 
   date <- obs_dat$date
   y_col <- obs_dat[,grepl(value_column, colnames(obs_dat))]
   obs_plot <- data.frame(date, y_col)
@@ -202,7 +199,7 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
                                     "lower 95%", "lower 75%",
                                     "upper 75%", "upper 95%")) %>%
     layout(xaxis = list(range = c(a, b)),
-           legend = list(x = 0.02, y = 1),
+           legend = list(x = 0.02, y = 1.01),
            annotations = list(
              x = 1, y = -0.12, text = "*Shaded area represents the 95% credible region", 
              showarrow = F, xref='paper', yref='paper', 
