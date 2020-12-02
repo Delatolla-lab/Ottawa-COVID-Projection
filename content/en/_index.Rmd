@@ -237,8 +237,7 @@ projected_hospital_title <- insert_translation(localization_data, lang, "Project
 case_projections <- insert_translation(localization_data, lang, "case_projections")
 
 case_projections_text <- insert_translation(localization_data, lang, "case_projections_text",
-                                            c(min(ott_projections$date, na.rm = TRUE),
-                                              max(ott_projections$date, na.rm = TRUE)))
+                                            c(max(ott_projections$date, na.rm = TRUE)))
 
 hosp_projections <- insert_translation(localization_data, lang, "hosp_projections")
 ```
@@ -328,6 +327,8 @@ short_term_plot(
 )
 ```
 
+`r line_break`
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Set up SEIR model
 
@@ -396,6 +397,8 @@ projection_data <- case_projection_data(ott_case_projections, 10)
 # Visualize projections
 case_projection_plot(projection_data, ott_observed_episodes, current_col = current_case_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Long-term daily COVID-19 cases in Ottawa", pct_change = 10)
 ```
+
+`r line_break`
 
 `r hosp_projections`
 
