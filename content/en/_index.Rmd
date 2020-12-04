@@ -43,6 +43,7 @@ library(zoo)
 library(EpiNow2)
 library(stringr)
 library(purrr)
+library(RColorBrewer)
 
 # scripts
 source("../../R/lag_replacement.R")

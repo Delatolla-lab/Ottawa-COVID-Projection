@@ -49,10 +49,15 @@ short_term_plot <- function(projections,
                             start_date = first(as.Date(projections$date)),
                             ylab,
                             title){
+  
   # Filter data based on forecast type and remove 50% CI
   projections <- projections %>%
     filter(variable == as.character(forecast_type)) %>%
     select(-c(lower_50, upper_50, lower_20, upper_20))
+  
+  # Convert estimate based on partial data to estimate
+  projections$type[projections$type == "estimate based on partial data"] <-
+    "estimate"
   
   # set up CrI index
   CrIs <- extract_CrIs(projections)
@@ -96,7 +101,7 @@ short_term_plot <- function(projections,
   plot <- plot +
     geom_vline(
       xintercept = 
-        as.numeric(projections[projections$type == "estimate based on partial data"][date == max(date)]$date),
+        as.numeric(projections[projections$type == "estimate"][date == max(date)]$date),
       linetype = 2)
   
   # plot median line
@@ -114,6 +119,9 @@ short_term_plot <- function(projections,
     
   }
   
+  # Set custom palette
+  palette <- brewer.pal(name = "Dark2", n = 8)[c(1,3)]
+  
   # add plot theming
   plot <- plot +
     theme(
@@ -123,8 +131,8 @@ short_term_plot <- function(projections,
       legend.position = "bottom",
       legend.title = element_blank(),
       plot.title = element_text(hjust = 0.5)) +
-    scale_color_brewer(palette = "Dark2") +
-    scale_fill_brewer(palette = "Dark2") +
+    scale_color_manual(values = palette) +
+    scale_fill_manual(values = palette) +
     labs(y = ylab, x = "Date", col = "Type", fill = "Type", title = title) +
     expand_limits(y = c(-0.4, 0.8)) + 
     scale_x_date(expand = c(0,0), date_breaks = "1 week",
