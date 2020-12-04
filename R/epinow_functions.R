@@ -55,9 +55,14 @@ short_term_plot <- function(projections,
     filter(variable == as.character(forecast_type)) %>%
     select(-c(lower_50, upper_50, lower_20, upper_20))
   
-  # Convert estimate based on partial data to estimate
+  # Convert estimates & estimate based on partial data to historic
+  projections$type[projections$type == "estimate"] <-
+    "historic"
   projections$type[projections$type == "estimate based on partial data"] <-
-    "estimate"
+    "historic"
+  
+  projections$type <- factor(projections$type, levels = c("historic",
+                                                          "forecast"))
   
   # set up CrI index
   CrIs <- extract_CrIs(projections)
@@ -101,7 +106,7 @@ short_term_plot <- function(projections,
   plot <- plot +
     geom_vline(
       xintercept = 
-        as.numeric(projections[projections$type == "estimate"][date == max(date)]$date),
+        as.numeric(projections[projections$type == "historic"][date == max(date)]$date),
       linetype = 2)
   
   # plot median line
