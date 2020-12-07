@@ -10,11 +10,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ## run ott_projections() in short_term_projections.R to generate data for plots
 # load library, packages, functions, data
-library(EpiNow2)
 library(tidyverse)
 library(ggplot2)
+library(EpiNow2)
+library(stringr)
+library(purrr)
+library(lubridate)
+library(plotly)
+library(RColorBrewer)
 source("../../R/epinow_functions.R")
-ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed Data/OPH_Observed_COVID_Data.csv"))
+ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
 load("../../Data/short_term_forecast.RData")
 
 ott_projections <- ott_short_forecast[[1]]
@@ -39,9 +44,7 @@ growth_rate <- ott_short_forecast[[2]][[4]][[1]]
 
 (text will go after observed data)
 
-Short-term projections are the most accurate estimate current covid-19 transmission in the community. Similar to a weather forecast, short-term projections predict changes in the near future; while long-term projections predict show a more general trend with less accuracy. Sometimes short-term & long-term projections can contradict one another. Short-term projections are more sensitive to immediate changes; while long-term projections require sustained trends before projections change. 
-
-The following plots illustrate short-term projections for Ottawa. These plots include projected cases by episode date, projected cases by reporting date, and projected reproduction number. Following, long-term projections are presented.
+Short-term and long-term covid-19 projections are presented below. See [More](more) for a discussion about model interpretation and [Methods](methods) for how the projections where created. Short-term projections reflect current covid-19 transmission; while long-term projections reflect sustained transmission trends. Short-term and long-term projections can trend in different directions when there are changing patterns of community covid-19 transmission. 
 
 ## Short-term projections
 
@@ -49,13 +52,13 @@ Projections from `r min(ott_projections$date, na.rm = TRUE)` to `r max(ott_proje
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
-#short_term_plot(
-  #projections = ott_projections,
-  #obs_data = ott_covid_data,
-  #forecast_type = "infections",
-  #ylab = "New cases",
-  #title = "Projections for new cases by episode date"
-#)
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_covid_data,
+  forecast_type = "infections",
+  ylab = "New cases",
+  title = "Projections for new cases by episode date"
+)
 
 short_term_plot(
   projections = ott_projections,
@@ -65,11 +68,11 @@ short_term_plot(
   title = "Projections for new cases by reported date"
 )
 
-#short_term_plot(
-  #projections = ott_projections,
-  #obs_data = ott_covid_data,
-  #forecast_type = "R",
-  #ylab = "R",
-  #title = "Rt projections"
-#)
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_covid_data,
+  forecast_type = "R",
+  ylab = "R",
+  title = "Rt projections"
+)
 ```

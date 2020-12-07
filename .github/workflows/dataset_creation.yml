@@ -1,9 +1,10 @@
-# This is a workflow to automate the dataset creation for 613covid.ca
+# This is a workflow to automate the dataset creation for 613covid.ca and 
+# run short-term hospitalization projections
 
 name: Dataset-creation
 
 # Runs everyday at 12:30pm EST/EDT (5:30pm UTC)
-on: 
+on:
   schedule:
     - cron: '30 17 * * *'
 jobs:
@@ -20,6 +21,16 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: '4.0.3'
+      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
+      - name: Install libnode-dev
+        run: |
+          sudo add-apt-repository ppa:cran/v8
+          sudo apt-get update
+          sudo apt-get install libnode-dev
+      - name: Install snap version of nodejs
+        run: sudo snap install node --classic --channel=14
+      - name: Install V8
+        run: Rscript -e 'install.packages("V8")'
       - name: Install renv package
         run: R -e 'install.packages("renv")'
       - name: Cache packages
@@ -34,6 +45,8 @@ jobs:
         run: R -e 'renv::restore()'
       - name: Prepare data
         run: Rscript R/dataset_creation.R
+      - name: Run short term projections 
+        run: Rscript R/short_term_projections.R
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}

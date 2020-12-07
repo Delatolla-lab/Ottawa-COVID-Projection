@@ -55,9 +55,30 @@ short_term_plot <- function(projections,
                             start_date = first(as.Date(projections$date)),
                             ylab,
                             title){
-  # Filter data based on forecast type
+  
+  # Filter data based on forecast type and remove 50% CI
   projections <- projections %>%
-    filter(variable == as.character(forecast_type))
+    filter(variable == as.character(forecast_type)) %>%
+    select(-c(lower_50, upper_50, lower_20, upper_20))
+  
+  # Convert estimates & estimate based on partial data to historic
+  projections$type[projections$type == "estimate"] <-
+    "historic"
+  projections$type[projections$type == "estimate based on partial data"] <-
+    "historic"
+  
+  projections$type <- factor(projections$type, levels = c("historic",
+                                                          "forecast"))
+  
+  # set up CrI index
+  CrIs <- extract_CrIs(projections)
+  index <- 1
+  alpha_per_CrI <- 0.6 / (length(CrIs) - 1)
+  
+  # Modify CI column names in dataset
+  colnames(projections) <- reduce2(c("_", "0"), c(" ", "0%"),
+                                   .init = colnames(projections),
+                                   str_replace)
   # Set up ggplot object
   plot<- 
     ggplot(projections[as.Date(projections$date) >= as.Date(start_date),],
@@ -91,28 +112,26 @@ short_term_plot <- function(projections,
   plot <- plot +
     geom_vline(
       xintercept = 
-        as.numeric(projections[projections$type == "estimate based on partial data"][date == max(date)]$date),
+        as.numeric(projections[projections$type == "historic"][date == max(date)]$date),
       linetype = 2)
   
+  # plot median line
+  plot <- plot +
+    geom_line(aes(y = median),
+              lwd = 0.9)
+  
   # plot CrIs
-  CrIs <- extract_CrIs(projections)
-  index <- 1
-  alpha_per_CrI <- 0.6 / (length(CrIs) - 1)
   for (CrI in CrIs) {
-    bottom <- paste0("lower_", CrI)
-    top <-  paste0("upper_", CrI)
-    if (index == 1) {
+    bottom <- paste("lower", paste0(CrI, "%"))
+    top <-  paste("upper", paste0(CrI, "%"))
       plot <- plot +
         geom_ribbon(ggplot2::aes(ymin = .data[[bottom]], ymax = .data[[top]]), 
                              alpha = 0.2, size = 0.05)
-    }else{
-      plot <- plot +
-        geom_ribbon(ggplot2::aes(ymin = .data[[bottom]], ymax = .data[[top]],
-                                          col = NULL), 
-                             alpha = alpha_per_CrI)
-    }
-    index <- index + 1
+    
   }
+  
+  # Set custom palette
+  palette <- brewer.pal(name = "Dark2", n = 8)[c(1,3)]
   
   # add plot theming
   plot <- plot +
@@ -120,10 +139,11 @@ short_term_plot <- function(projections,
       panel.background = element_blank(),
       panel.grid.major.y = element_line(colour = "grey"),
       axis.line.x = element_line(colour = "grey"),
-      legend.position = "none",
+      legend.position = "bottom",
+      legend.title = element_blank(),
       plot.title = element_text(hjust = 0.5)) +
-    scale_color_brewer(palette = "Dark2") +
-    scale_fill_brewer(palette = "Dark2") +
+    scale_color_manual(values = palette) +
+    scale_fill_manual(values = palette) +
     labs(y = ylab, x = "Date", col = "Type", fill = "Type", title = title) +
     expand_limits(y = c(-0.4, 0.8)) + 
     scale_x_date(expand = c(0,0), date_breaks = "1 week",
@@ -131,18 +151,21 @@ short_term_plot <- function(projections,
     scale_y_continuous(expand = c(0, 0)) 
   
   # Convert to plotly object
-  plot <- plotly::ggplotly(plot, tooltip = c("date", "text",
-                                             "lower_90", "upper_90"))
+  plot <- plotly::ggplotly(plot, tooltip = c("date", "text", "median",
+                                             "lower 90%", "upper 90%"))
   
-  # Add hover labels for upper and lower 90% confidence interval
-  #text_upper_90 <-
   
   # Set date display constraints 
   a <- as.numeric(as.Date(last(projections$date) - 40)) 
   b <- as.numeric(as.Date(last(projections$date)))
   
+  # Format legend layout & add annotation
   plot <- plotly::layout(plot,
                          xaxis = list(range = c(a, b)),
+                         legend = list(
+                           #orientation = "h",
+                           x = 0.02, y = 1
+                         ),
                          annotations = list(
                            x = 1, y = -0.12, text = "*Shaded area represents the 90% credible region", 
                            showarrow = F, xref='paper', yref='paper', 

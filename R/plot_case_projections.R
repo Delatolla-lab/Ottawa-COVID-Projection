@@ -21,7 +21,7 @@ proj_generation <- function(fit, lut, episode_data, project_to,
     forecast_days = days_project,
     f_fixed_start = max(fit$days) + day_start_reduction,
     f_multi = rep(current, days_project - day_start_reduction + 1), 
-    f_multi_seg = 3 # which f segment to use
+    f_multi_seg = nrow(fit[["f_prior"]]) # which f segment to use
   )
   tidy_proj_current <- tidy_seir(proj_current, resample_y_rep = 30)
   tidy_proj_current <- left_join(tidy_proj_current, lut, by = "day")
@@ -33,7 +33,7 @@ proj_generation <- function(fit, lut, episode_data, project_to,
     forecast_days = days_project,
     f_fixed_start = max(fit$days) + day_start_reduction,
     f_multi = rep(reduction, days_project - day_start_reduction + 1),
-    f_multi_seg = 3 # which f segment to use
+    f_multi_seg = nrow(fit[["f_prior"]]) # which f segment to use
   )
   tidy_proj_reduction <- tidy_seir(proj_reduction, resample_y_rep = 30)
   tidy_proj_reduction <- left_join(tidy_proj_reduction, lut, by = "day")
@@ -45,7 +45,7 @@ proj_generation <- function(fit, lut, episode_data, project_to,
     forecast_days = days_project,
     f_fixed_start = max(fit$days) + day_start_reduction,
     f_multi = rep(increase, days_project - day_start_reduction + 1),
-    f_multi_seg = 3 # which f segment to use
+    f_multi_seg = nrow(fit[["f_prior"]]) # use last f segment
   )
   tidy_proj_increase <- tidy_seir(proj_increase, resample_y_rep = 30)
   tidy_proj_increase <- left_join(tidy_proj_increase, lut, by = "day")
@@ -74,11 +74,11 @@ case_projection_data <- function(proj_list, pct_change){
     bind_rows(proj_reduction) %>%
     select(date, everything() )%>%
     rename(
-      estimate_0.05 = "y_rep_0.05",
-      estimate_0.25 = "y_rep_0.25",
-      estimate_0.75 = "y_rep_0.75",
-      estimate_0.95 = "y_rep_0.95",
-      median_estimate = "mu_0.50"
+      "lower 95%" = "y_rep_0.05",
+      "lower 75%" = "y_rep_0.25",
+      "upper 75%" = "y_rep_0.75",
+      "upper 95%" = "y_rep_0.95",
+      median = "mu_0.50"
     )
   proj_all <- as.data.frame(proj_all)
   proj_all$date <- as.Date(proj_all$date)
@@ -113,43 +113,47 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
     stop(glue("`pred_dat` must contain a column named `{date_column}` that contains the numeric day (or date)."), call. = FALSE)
   }
   
+  # Coerce date columns as date values
+  pred_dat$date <- as.Date(pred_dat$date)
+  obs_dat$date <- as.Date(obs_dat$date)
+  
   # Create temporary range limit object
   tmp_data <- pred_dat[pred_dat$Transmission == "Current transmission", ]
-  tmp <- 0.95*max(tmp_data$median_estimate)
+  tmp <- 0.95*max(tmp_data$median)
   
-  g <- ggplot(data = pred_dat, aes(x = as.Date(date))) +
+  g <- ggplot(data = pred_dat, aes(x = date)) +
     geom_ribbon(data = pred_dat[pred_dat$Transmission == "Current transmission", ],
-                aes(ymin = estimate_0.05, ymax = estimate_0.95, text = "Current transmission"),
+                aes(ymin = .data[["lower 95%"]], ymax = .data[["upper 95%"]], text = "Current transmission"),
                 alpha = 0.2, fill = current_col
     )  +
     geom_ribbon(data = pred_dat[pred_dat$Transmission == "Current transmission", ],
-                aes(ymin = estimate_0.25, ymax = estimate_0.75, text = "Current transmission"),
+                aes(ymin = .data[["lower 75%"]], ymax = .data[["upper 75%"]], text = "Current transmission"),
                 alpha = 0.2, fill = current_col
     ) +
     geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission decreased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
-                aes(ymin = estimate_0.05, ymax = estimate_0.95, text = paste(paste(pct_change, "%", sep = ""),"reduction",
+                aes(ymin = .data[["lower 95%"]], ymax = .data[["upper 95%"]], text = paste(paste(pct_change, "%", sep = ""),"reduction",
                                                                        sep = " ")),
                 alpha = 0.2, fill = reduction_col
     ) +
     geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission decreased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
-                aes(ymin = estimate_0.25, ymax = estimate_0.75, text = paste(paste(pct_change, "%", sep = ""),"reduction",
+                aes(ymin = .data[["lower 75%"]], ymax = .data[["upper 75%"]], text = paste(paste(pct_change, "%", sep = ""),"reduction",
                                                                        sep = " ")),
                 alpha = 0.2, fill = reduction_col
     ) +
     geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission increased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
-                aes(ymin = estimate_0.05, ymax = estimate_0.95, text = paste(paste(pct_change, "%", sep = ""),"increase",
+                aes(ymin = .data[["lower 95%"]], ymax = .data[["upper 95%"]], text = paste(paste(pct_change, "%", sep = ""),"increase",
                                                                        sep = " ")),
                 alpha = 0.2, fill = increase_col
     ) +
     geom_ribbon(data = pred_dat[pred_dat$Transmission == paste("What if transmission increased by", paste(pct_change, "%?", sep = ""), sep = " "), ],
-                aes(ymin = estimate_0.25, ymax = estimate_0.75, text = paste(paste(pct_change, "%", sep = ""),"increase",
+                aes(ymin = .data[["lower 75%"]], ymax = .data[["upper 75%"]], text = paste(paste(pct_change, "%", sep = ""),"increase",
                                                                        sep = " ")),
                 alpha = 0.2, fill = increase_col
     )
   g <- g +
     geom_line(
       data = pred_dat,
-      aes(y = median_estimate,
+      aes(y = median,
           color = Transmission),
       lwd = 0.9) +
     coord_cartesian(expand = FALSE, xlim = range(pred_dat[[date_column]]),
@@ -172,10 +176,7 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
       values = c(current_col,
                  reduction_col,
                  increase_col)
-    ) +
-    scale_y_continuous(
-      breaks = seq(0, tmp, by = 100)
-    )
+    ) 
   date <- obs_dat$date
   y_col <- obs_dat[,grepl(value_column, colnames(obs_dat))]
   obs_plot <- data.frame(date, y_col)
@@ -183,13 +184,22 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
     geom_col(
       data = obs_plot,
       fill = current_col, inherit.aes = FALSE,
-      aes(x = as.Date(date), y = y_col),
+      aes(x = date, y = y_col,
+          text = paste("Observed cases:",
+                       y_col)),
       width = 1
     )
   
+  # Set date contraints
+  a <- as.numeric(as.Date(last(pred_dat$date) - 350)) 
+  b <- as.numeric(as.Date(last(pred_dat$date)))
+  
   if (max(pred_dat[["data_type"]]) > 1) g <- g + facet_wrap(~data_type)
-  g_plot <- ggplotly(g) %>%
-    layout(legend = list(x = 0.02, y = 1),
+  g_plot <- ggplotly(g, tooltip = c("date", "text", "median",
+                                    "lower 95%", "lower 75%",
+                                    "upper 75%", "upper 95%")) %>%
+    layout(xaxis = list(range = c(a, b)),
+           legend = list(x = 0.02, y = 1.01),
            annotations = list(
              x = 1, y = -0.12, text = "*Shaded area represents the 95% credible region", 
              showarrow = F, xref='paper', yref='paper', 
