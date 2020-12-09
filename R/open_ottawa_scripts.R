@@ -11,6 +11,17 @@ data_extract <- function(object){
   return(dataframe)
 }
 
+# Extract adjusted cases by episode date
+adjusted_function <- function(url){
+  adjusted_data <- read.csv(url) %>%
+    select(Date, Nowcasting.Adjusted.Cases.by.Episode.Date) %>%
+    rename(date = "Date",
+           adjusted_episode_cases =
+             "Nowcasting.Adjusted.Cases.by.Episode.Date") %>%
+    mutate(date = as.Date(date))
+  return(adjusted_data)
+}
+
 
 # Clean and merge JSON objects as data frame
 data_creation <- function(ottawa_case_data, ottawa_test_data){
