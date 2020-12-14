@@ -1,5 +1,6 @@
 short_term_forecast <- function(data,
                                 parameter,
+                                parameter_weight = 1,
                                 start_date,
                                 end_date,
                                 generation_time,
@@ -16,7 +17,8 @@ short_term_forecast <- function(data,
     filter(as.Date(date) <= as.Date(end_date)) %>%
     select(date, as.character(parameter)) %>%
     rename(confirm = as.character(parameter)) %>%
-    mutate(date = as.Date(date))
+    mutate(date = as.Date(date),
+           confirm = as.integer(confirm * parameter_weight))
 
   # Run epinow2 sim 
   projections <-
@@ -46,6 +48,7 @@ short_term_forecast <- function(data,
 
 short_term_plot <- function(projections,
                             obs_data,
+                            obs_data_column,
                             forecast_type,
                             start_date = first(as.Date(projections$date)),
                             ylab,
@@ -85,9 +88,9 @@ short_term_plot <- function(projections,
       geom_col(data = 
                  obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
-                   y = observed_new_episodes,
+                   y = obs_data_column,
                    text = paste("Observed cases:",
-                                observed_new_episodes)),
+                                obs_data_column)),
                fill = "#008080", col = "white", alpha = 0.5,
                show.legend = FALSE, na.rm = TRUE)
   }
@@ -96,9 +99,9 @@ short_term_plot <- function(projections,
       geom_col(data = 
                  obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
-                   y = observed_new_cases,
+                   y = obs_data_column,
                    text = paste("Observed cases:",
-                                observed_new_cases)),
+                                obs_data_column)),
                fill = "#008080", col = "white", alpha = 0.5,
                show.legend = FALSE, na.rm = TRUE)
   }
