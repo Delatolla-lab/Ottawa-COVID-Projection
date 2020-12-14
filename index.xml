@@ -82,7 +82,7 @@ People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardl
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/roadmap/</guid>
-      <description>  The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
+      <description> The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
  Review and update model parameters based on recent published studies. Priories for review:  ventilated patients deaths   </description>
     </item>
     
@@ -93,7 +93,7 @@ People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardl
       
       <guid>https://613covid.ca/short-proj-dev/</guid>
       <description>Dashboard (part of the main page dashboard)
-Case doubling time: 53.9 days
+Case doubling time: 150.3 days
  Introduction (text will go after observed data)
 Short-term and long-term covid-19 projections are presented below. See More for a discussion about model interpretation and Methods for how the projections where created. Short-term projections reflect current covid-19 transmission; while long-term projections reflect sustained transmission trends. Short-term and long-term projections can trend in different directions when there are changing patterns of community covid-19 transmission.</description>
     </item>
