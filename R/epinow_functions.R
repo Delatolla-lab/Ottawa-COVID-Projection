@@ -33,24 +33,33 @@ short_term_forecast <- function(data,
       # Obtain summarized projections
       projections[[1]][[2]] %>%
       # Divide by the parameter weight
-        mutate(median = ifelse(variable == "infections" | variable == "prior_infections",
-                               median/parameter_weight, median),
-               mean = ifelse(variable == "infections" | variable == "prior_infections",
-                             mean/parameter_weight, mean),
-               sd = ifelse(variable == "infections" | variable == "prior_infections",
-                           sd/parameter_weight, sd),
-               lower_90 = ifelse(variable == "infections" | variable == "prior_infections",
-                                 lower_90/parameter_weight, lower_90),
-               lower_50 = ifelse(variable == "infections" | variable == "prior_infections",
-                                 lower_50/parameter_weight, lower_50),
-               lower_20 = ifelse(variable == "infections" | variable == "prior_infections",
-                                 lower_20/parameter_weight, lower_20),
-               upper_90 = ifelse(variable == "infections" | variable == "prior_infections",
-                                 upper_90/parameter_weight, upper_90),
-               upper_50 = ifelse(variable == "infections" | variable == "prior_infections",
-                                 upper_50/parameter_weight, upper_50),
-               upper_20 = ifelse(variable == "infections" | variable == "prior_infections",
-                                 upper_20/parameter_weight, upper_20))
+      mutate(median = ifelse(variable == "infections" | variable == "prior_infections" |
+                               variable == "reported_cases",
+                             median/parameter_weight, median),
+             mean = ifelse(variable == "infections" | variable == "prior_infections" |
+                             variable == "reported_cases",
+                           mean/parameter_weight, mean),
+             sd = ifelse(variable == "infections" | variable == "prior_infections" |
+                           variable == "reported_cases",
+                         sd/parameter_weight, sd),
+             lower_90 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               lower_90/parameter_weight, lower_90),
+             lower_50 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               lower_50/parameter_weight, lower_50),
+             lower_20 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               lower_20/parameter_weight, lower_20),
+             upper_90 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               upper_90/parameter_weight, upper_90),
+             upper_50 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               upper_50/parameter_weight, upper_50),
+             upper_20 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               upper_20/parameter_weight, upper_20))
   }  
   else if(output == as.character("estimates")){
     forecast <-
@@ -60,23 +69,32 @@ short_term_forecast <- function(data,
     forecast <- list(
       projections[[1]][[2]] %>%
         # Divide by the parameter weight
-        mutate(median = ifelse(variable == "infections" | variable == "prior_infections",
+        mutate(median = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
                                median/parameter_weight, median),
-               mean = ifelse(variable == "infections" | variable == "prior_infections",
+               mean = ifelse(variable == "infections" | variable == "prior_infections" |
+                               variable == "reported_cases",
                              mean/parameter_weight, mean),
-               sd = ifelse(variable == "infections" | variable == "prior_infections",
+               sd = ifelse(variable == "infections" | variable == "prior_infections" |
+                             variable == "reported_cases",
                            sd/parameter_weight, sd),
-               lower_90 = ifelse(variable == "infections" | variable == "prior_infections",
+               lower_90 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
                                  lower_90/parameter_weight, lower_90),
-               lower_50 = ifelse(variable == "infections" | variable == "prior_infections",
+               lower_50 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
                                  lower_50/parameter_weight, lower_50),
-               lower_20 = ifelse(variable == "infections" | variable == "prior_infections",
+               lower_20 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
                                  lower_20/parameter_weight, lower_20),
-               upper_90 = ifelse(variable == "infections" | variable == "prior_infections",
+               upper_90 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
                                  upper_90/parameter_weight, upper_90),
-               upper_50 = ifelse(variable == "infections" | variable == "prior_infections",
+               upper_50 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
                                  upper_50/parameter_weight, upper_50),
-               upper_20 = ifelse(variable == "infections" | variable == "prior_infections",
+               upper_20 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
                                  upper_20/parameter_weight, upper_20)),
       projections[[3]][[3]]
     )
@@ -122,7 +140,7 @@ short_term_plot <- function(projections,
            aes(x = date, col = type, fill = type))
   
   # Add observed data if R is not specified
-  obs_data <- filter(obs_data, date >= start_date)
+  obs_data <- filter(obs_data, as.Date(date) >= start_date)
   y_col <- obs_data[,grepl(obs_column, colnames(obs_data))]
   if(forecast_type == as.character("infections")){
     plot <- plot +
