@@ -30,7 +30,27 @@ short_term_forecast <- function(data,
   # Extract output
   if(output == as.character("projections")){
     forecast <-
-      projections[[1]][[2]] # Obtain summarized projections
+      # Obtain summarized projections
+      projections[[1]][[2]] %>%
+      # Divide by the parameter weight
+        mutate(median = ifelse(variable == "infections" | variable == "prior_infections",
+                               median/parameter_weight, median),
+               mean = ifelse(variable == "infections" | variable == "prior_infections",
+                             mean/parameter_weight, mean),
+               sd = ifelse(variable == "infections" | variable == "prior_infections",
+                           sd/parameter_weight, sd),
+               lower_90 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 lower_90/parameter_weight, lower_90),
+               lower_50 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 lower_50/parameter_weight, lower_50),
+               lower_20 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 lower_20/parameter_weight, lower_20),
+               upper_90 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 upper_90/parameter_weight, upper_90),
+               upper_50 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 upper_50/parameter_weight, upper_50),
+               upper_20 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 upper_20/parameter_weight, upper_20))
   }  
   else if(output == as.character("estimates")){
     forecast <-
@@ -38,7 +58,26 @@ short_term_forecast <- function(data,
   }
   else if(output == as.character("both")){
     forecast <- list(
-      projections[[1]][[2]],
+      projections[[1]][[2]] %>%
+        # Divide by the parameter weight
+        mutate(median = ifelse(variable == "infections" | variable == "prior_infections",
+                               median/parameter_weight, median),
+               mean = ifelse(variable == "infections" | variable == "prior_infections",
+                             mean/parameter_weight, mean),
+               sd = ifelse(variable == "infections" | variable == "prior_infections",
+                           sd/parameter_weight, sd),
+               lower_90 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 lower_90/parameter_weight, lower_90),
+               lower_50 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 lower_50/parameter_weight, lower_50),
+               lower_20 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 lower_20/parameter_weight, lower_20),
+               upper_90 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 upper_90/parameter_weight, upper_90),
+               upper_50 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 upper_50/parameter_weight, upper_50),
+               upper_20 = ifelse(variable == "infections" | variable == "prior_infections",
+                                 upper_20/parameter_weight, upper_20)),
       projections[[3]][[3]]
     )
   }  
@@ -48,7 +87,7 @@ short_term_forecast <- function(data,
 
 short_term_plot <- function(projections,
                             obs_data,
-                            obs_data_column,
+                            obs_column,
                             forecast_type,
                             start_date = first(as.Date(projections$date)),
                             ylab,
@@ -83,14 +122,16 @@ short_term_plot <- function(projections,
            aes(x = date, col = type, fill = type))
   
   # Add observed data if R is not specified
+  obs_data <- filter(obs_data, date >= start_date)
+  y_col <- obs_data[,grepl(obs_column, colnames(obs_data))]
   if(forecast_type == as.character("infections")){
     plot <- plot +
       geom_col(data = 
                  obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
-                   y = obs_data_column,
+                   y = y_col,
                    text = paste("Observed cases:",
-                                obs_data_column)),
+                                y_col)),
                fill = "#008080", col = "white", alpha = 0.5,
                show.legend = FALSE, na.rm = TRUE)
   }
@@ -99,9 +140,9 @@ short_term_plot <- function(projections,
       geom_col(data = 
                  obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
-                   y = obs_data_column,
+                   y = y_col,
                    text = paste("Observed cases:",
-                                obs_data_column)),
+                                y_col)),
                fill = "#008080", col = "white", alpha = 0.5,
                show.legend = FALSE, na.rm = TRUE)
   }
