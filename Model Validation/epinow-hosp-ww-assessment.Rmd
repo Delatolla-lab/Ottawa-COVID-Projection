@@ -95,7 +95,7 @@ ott_ww_forecast <- short_term_forecast(
   data = waste_clean,
   parameter = "N1_N2_avg",
   parameter_weight = 100000,
-  start_date = "2020-04-01", # can be changed
+  start_date = "2020-04-08", # can be changed
  # end_date = "2020-11-24", # can be changed, if missing will default to last day
   generation_time = generation_time,
   incubation_period = incubation_period,
