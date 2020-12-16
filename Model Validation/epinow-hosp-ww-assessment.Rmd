@@ -44,6 +44,11 @@ incubation_period <-
 
 ## Hospitalizations
 ```{r}
+# To load existing hosp forecast data
+load("hosp_forecast.RData")
+```
+
+```{r}
 # Run projections for admits
 ott_admit_forecast <- short_term_forecast(
   data = ott_covid_data,
@@ -89,6 +94,10 @@ short_term_plot(
 ```
 
 ## Wastewater
+```{r}
+# To load existing ww forecast data
+load("ww_forecast.RData")
+```
 ```{r}
 # Run projections for admits
 ott_ww_forecast <- short_term_forecast(
