@@ -165,11 +165,12 @@ short_term_plot <- function(projections,
                show.legend = FALSE, na.rm = TRUE)
   }
   
-  # plot estimates
+  # plot v line for last observed date
+  historic <- projections[projections$type == "historic",]
   plot <- plot +
     geom_vline(
       xintercept = 
-        as.numeric(projections[projections$type == "historic"][date == max(date)]$date),
+        as.numeric(last(historic$date)),
       linetype = 2)
   
   # plot median line
