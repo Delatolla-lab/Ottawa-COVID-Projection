@@ -1,0 +1,144 @@
+---
+title: "epinow-hosp-ww-assessment"
+author: "Warsame Yusuf"
+date: "15/12/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load}
+# load library, packages, functions
+library(EpiNow2)
+library(tidyverse)
+library(plotly)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(stats)
+library(zoo)
+library(stringr)
+library(RColorBrewer)
+
+source("../R/epinow_functions.R")
+source("../R/open_ottawa_scripts.R")
+source("../R/wastewater.R")
+
+# load covid & ww data
+ott_covid_data <-
+  read.csv(file.path(getwd(), "../Data/Observed Data/OPH_Observed_COVID_Data.csv"))
+
+ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
+waste_clean <- wastewater_prep(ott_observed_waste)
+
+# Set reporting delay, generation time, incubation period
+reporting_delay <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
+generation_time <-
+  get_generation_time(disease = "SARS-CoV-2", source = "ganyani")
+incubation_period <-
+  get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
+```
+
+## Hospitalizations
+```{r}
+# To load existing hosp forecast data
+load("hosp_forecast.RData")
+```
+
+```{r}
+# Run projections for admits
+ott_admit_forecast <- short_term_forecast(
+  data = ott_covid_data,
+  parameter = "observed_new_ICU_p_acute_care",
+  parameter_weight = 1/0.027,
+  start_date = "2020-04-01", # can be changed
+ # end_date = "2020-11-24", # can be changed, if missing will default to last day
+  generation_time = generation_time,
+  incubation_period = incubation_period,
+  reporting_delay = reporting_delay,
+  output = "projections"
+)
+```
+
+```{r}
+# plot projections
+short_term_plot(
+  projections = ott_admit_forecast,
+  obs_data = ott_covid_data,
+  obs_column = "observed_new_ICU_p_acute_care",
+  forecast_type = "infections",
+  ylab = "New cases",
+  title = "Projections for new admits by episode date"
+)
+
+short_term_plot(
+  projections = ott_admit_forecast,
+  obs_data = ott_covid_data,
+  obs_column = "observed_new_ICU_p_acute_care",
+  forecast_type = "reported_cases",
+  ylab = "New cases",
+  title = "Projections for new admits by reported date"
+)
+
+short_term_plot(
+  projections = ott_admit_forecast,
+  obs_data = ott_covid_data,
+  obs_column = "observed_new_ICU_p_acute_care",
+  forecast_type = "R",
+  ylab = "R",
+  title = "Rt projections"
+)
+```
+
+## Wastewater
+```{r}
+# To load existing ww forecast data
+load("ww_forecast.RData")
+```
+```{r}
+# Run projections for admits
+ott_ww_forecast <- short_term_forecast(
+  data = waste_clean,
+  parameter = "N1_N2_avg",
+  parameter_weight = 100000,
+  start_date = "2020-04-08", # can be changed
+ # end_date = "2020-11-24", # can be changed, if missing will default to last day
+  generation_time = generation_time,
+  incubation_period = incubation_period,
+  reporting_delay = reporting_delay,
+  output = "projections"
+)
+```
+
+```{r}
+# plot projections
+short_term_plot(
+  projections = ott_ww_forecast,
+  obs_data = waste_clean,
+  obs_column = "N1_N2_avg",
+  forecast_type = "infections",
+  ylab = "New cases",
+  title = "Projections for viral signal by episode date"
+)
+
+short_term_plot(
+  projections = ott_ww_forecast,
+  obs_data = waste_clean,
+  obs_column = "N1_N2_avg",
+  forecast_type = "reported_cases",
+  ylab = "New cases",
+  title = "Projections for viral signal by reported date"
+)
+
+short_term_plot(
+  projections = ott_ww_forecast,
+  obs_data = waste_clean,
+  obs_column = "N1_N2_avg",
+  forecast_type = "R",
+  ylab = "R",
+  title = "Rt projections"
+)
+```
