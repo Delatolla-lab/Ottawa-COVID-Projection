@@ -322,6 +322,7 @@ ICU_p_acute_care
 short_term_plot(
   projections = ott_projections,
   obs_data = ott_observed,
+  obs_column = "observed_new_cases",
   forecast_type = "reported_cases",
   ylab = "New cases",
   title = "Short-term daily COVID-19 cases in Ottawa"

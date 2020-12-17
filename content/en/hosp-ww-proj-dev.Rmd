@@ -1,0 +1,104 @@
+---
+title: "Hospital & wastewater projections (development)"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# load library, packages, functions
+library(EpiNow2)
+library(tidyverse)
+library(plotly)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(stats)
+library(zoo)
+library(stringr)
+library(RColorBrewer)
+
+source("../../R/epinow_functions.R")
+source("../../R/open_ottawa_scripts.R")
+source("../../R/wastewater.R")
+
+# load covid & ww data
+ott_covid_data <-
+  read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
+
+ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
+waste_clean <- wastewater_prep(ott_observed_waste)
+
+# load projection data
+load("../../Data/hosp_forecast.RData")
+load("../../Data/ww_forecast.RData")
+```
+
+## Hospital projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# plot projections
+short_term_plot(
+  projections = ott_admit_forecast,
+  obs_data = ott_covid_data,
+  obs_column = "observed_new_ICU_p_acute_care",
+  forecast_type = "infections",
+  ylab = "New cases",
+  title = "Projections for new admits by episode date"
+)
+
+short_term_plot(
+  projections = ott_admit_forecast,
+  obs_data = ott_covid_data,
+  obs_column = "observed_new_ICU_p_acute_care",
+  forecast_type = "reported_cases",
+  ylab = "New cases",
+  title = "Projections for new admits by reported date"
+)
+
+short_term_plot(
+  projections = ott_admit_forecast,
+  obs_data = ott_covid_data,
+  obs_column = "observed_new_ICU_p_acute_care",
+  forecast_type = "R",
+  ylab = "R",
+  title = "Rt projections"
+)
+```
+
+---
+
+## Wastewater projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# plot projections
+short_term_plot(
+  projections = ott_ww_forecast,
+  obs_data = waste_clean,
+  obs_column = "N1_N2_avg",
+  forecast_type = "infections",
+  ylab = "New cases",
+  title = "Projections for viral signal by episode date"
+)
+
+short_term_plot(
+  projections = ott_ww_forecast,
+  obs_data = waste_clean,
+  obs_column = "N1_N2_avg",
+  forecast_type = "reported_cases",
+  ylab = "New cases",
+  title = "Projections for viral signal by reported date"
+)
+
+short_term_plot(
+  projections = ott_ww_forecast,
+  obs_data = waste_clean,
+  obs_column = "N1_N2_avg",
+  forecast_type = "R",
+  ylab = "R",
+  title = "Rt projections"
+)
+```

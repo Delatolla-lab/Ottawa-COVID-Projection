@@ -55,6 +55,7 @@ Projections from `r min(ott_projections$date, na.rm = TRUE)` to `r max(ott_proje
 short_term_plot(
   projections = ott_projections,
   obs_data = ott_covid_data,
+  obs_column = "observed_new_episodes",
   forecast_type = "infections",
   ylab = "New cases",
   title = "Projections for new cases by episode date"
@@ -64,6 +65,7 @@ short_term_plot(
   projections = ott_projections,
   obs_data = ott_covid_data,
   forecast_type = "reported_cases",
+  obs_column = "observed_new_cases",
   ylab = "New cases",
   title = "Projections for new cases by reported date"
 )
@@ -71,6 +73,7 @@ short_term_plot(
 short_term_plot(
   projections = ott_projections,
   obs_data = ott_covid_data,
+  obs_column = "observed_new_cases",
   forecast_type = "R",
   ylab = "R",
   title = "Rt projections"
