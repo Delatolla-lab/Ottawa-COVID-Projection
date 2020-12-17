@@ -141,7 +141,7 @@ short_term_plot <- function(projections,
   
   # Add observed data if R is not specified
   obs_data <- filter(obs_data, as.Date(date) >= start_date)
-  y_col <- obs_data[,grepl(obs_column, colnames(obs_data))]
+  y_col <- obs_data[,grepl(paste(obs_column, "$", sep = ""), colnames(obs_data))]
   if(forecast_type == as.character("infections")){
     plot <- plot +
       geom_col(data = 
