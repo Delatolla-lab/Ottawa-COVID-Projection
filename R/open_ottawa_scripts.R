@@ -23,8 +23,12 @@ adjusted_function <- function(url){
     select(Date, Nowcasting.Adjusted.Cases.by.Episode.Date) %>%
     rename(date = "Date",
            adjusted_episode_cases =
-             "Nowcasting.Adjusted.Cases.by.Episode.Date") %>%
-    mutate(date = as.Date(date))
+             "Nowcasting.Adjusted.Cases.by.Episode.Date")
+  
+  adjusted_data[[1]] <- adjusted_data[[1]] %>%
+    strtrim(8) %>%
+    str_replace("20-", "2020-") %>%
+    as.Date()
   return(adjusted_data)
 }
 
