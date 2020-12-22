@@ -1,12 +1,18 @@
 # Extract data frame from JSON object
 data_extract <- function(object){
   dataframe <- object[[8]][[1]]
-  if(is.numeric(dataframe[["_Date"]])){
-    dataframe[["_Date"]] <- 
-      as.Date(as.POSIXct(dataframe[["_Date"]]/1000, origin = "1970-01-01"))
+  if(is.numeric(dataframe[[1]])){
+    dataframe[[1]] <- 
+      as.Date(as.POSIXct(dataframe[[1]]/1000, origin = "1970-01-01"))
+  }
+  else if(is.character(dataframe[[1]])){
+    dataframe[[1]] <- dataframe[[1]] %>%
+      strtrim(8) %>%
+      str_replace("20-", "2020-") %>%
+      as.Date()
   }
   else{
-    dataframe[["_Date"]] <- as.Date(dataframe[["_Date"]])
+    dataframe[[1]] <- as.Date(dataframe[[1]])
   }
   return(dataframe)
 }
@@ -17,8 +23,12 @@ adjusted_function <- function(url){
     select(Date, Nowcasting.Adjusted.Cases.by.Episode.Date) %>%
     rename(date = "Date",
            adjusted_episode_cases =
-             "Nowcasting.Adjusted.Cases.by.Episode.Date") %>%
-    mutate(date = as.Date(date))
+             "Nowcasting.Adjusted.Cases.by.Episode.Date")
+  
+  adjusted_data[[1]] <- adjusted_data[[1]] %>%
+    strtrim(8) %>%
+    str_replace("20-", "2020-") %>%
+    as.Date()
   return(adjusted_data)
 }
 
@@ -63,7 +73,7 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
     ottawa_data %>%
       replace(is.na(.),0) %>%
       rename(
-        date = "_Date",
+        date = "Date",
         observed_new_ICU_p_acute_care = "Cases_Newly_Admitted_to_Hospital",
         observed_census_ICU_p_acute_care = "Cases_Currently_in_Hospital",
         observed_census_ICU = "Cases_Currently_in_ICU",

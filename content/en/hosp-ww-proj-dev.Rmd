@@ -81,7 +81,8 @@ short_term_plot(
   obs_column = "N1_N2_avg",
   forecast_type = "infections",
   ylab = "New cases",
-  title = "Projections for viral signal by episode date"
+  title = "Projections for viral signal by episode date",
+  scale = TRUE
 )
 
 short_term_plot(
@@ -90,7 +91,8 @@ short_term_plot(
   obs_column = "N1_N2_avg",
   forecast_type = "reported_cases",
   ylab = "New cases",
-  title = "Projections for viral signal by reported date"
+  title = "Projections for viral signal by reported date",
+  scale = TRUE
 )
 
 short_term_plot(
@@ -99,6 +101,7 @@ short_term_plot(
   obs_column = "N1_N2_avg",
   forecast_type = "R",
   ylab = "R",
-  title = "Rt projections"
+  title = "Rt projections",
+  scale = TRUE
 )
 ```

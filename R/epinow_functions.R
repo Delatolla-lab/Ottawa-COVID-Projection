@@ -109,7 +109,8 @@ short_term_plot <- function(projections,
                             forecast_type,
                             start_date = first(as.Date(projections$date)),
                             ylab,
-                            title){
+                            title,
+                            scale = FALSE){
   
   # Filter data based on forecast type and remove 50% CI
   projections <- projections %>%
@@ -230,6 +231,12 @@ short_term_plot <- function(projections,
                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
                            font=list(size=10)
                          ))
+  
+  if(isTRUE(scale)){
+    tmp <- 1.75*max(projections$mean, na.rm = TRUE)
+    plot <- layout(plot, 
+                   yaxis = list(range = c(0, tmp)))
+  }
   
   return(plot)
 }
