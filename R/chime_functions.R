@@ -7,7 +7,7 @@ hosp_export <- function(json_address, starting_date, dest){
   object <- jsonlite::fromJSON(json_address)
   data <- data_extract(object) %>%
     rename(
-      date = "_Date",
+      date = "Date",
       hosp = "Cases_Currently_in_Hospital"
     ) %>%
     add_column(vent = "",
