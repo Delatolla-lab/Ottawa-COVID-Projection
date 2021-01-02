@@ -7,8 +7,7 @@ wastewater_prep <- function(data){
   
   data %>%
     select(date, N1, N2) %>%
-    # Remove rows beyond current date
-    mutate(date = as.Date(parse_date_time(date, c('dm', 'dmy')))) %>%
+    mutate(date = as.Date(date)) %>%
     filter(!is.na(date)) %>%
     # Create mean value of N1 and N2
     mutate(N1_N2_avg = (N1 + N2)/2) %>%
