@@ -9,6 +9,7 @@ data_extract <- function(object){
     dataframe[[1]] <- dataframe[[1]] %>%
       strtrim(8) %>%
       str_replace("20-", "2020-") %>%
+      str_replace("21-", "2021-") %>%
       as.Date()
   }
   else{
