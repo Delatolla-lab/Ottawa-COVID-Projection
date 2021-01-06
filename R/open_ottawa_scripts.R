@@ -6,7 +6,7 @@ data_extract <- function(object){
       as.Date(as.POSIXct(dataframe[[1]]/1000, origin = "1970-01-01"))
   }
   else if(is.character(dataframe[[1]])){
-    if(grepl("20-", dataframe[[1]]) == TRUE || grepl("21-", dataframe[[1]]) == TRUE){
+    if(grepl("^20-", dataframe[[1]]) == TRUE || grepl("^21-", dataframe[[1]]) == TRUE){
       dataframe[[1]] <- dataframe[[1]] %>%
         strtrim(8) %>%
         str_replace("20-", "2020-") %>%
@@ -28,11 +28,16 @@ adjusted_function <- function(url){
     rename(date = "Date",
            adjusted_episode_cases =
              "Nowcasting.Adjusted.Cases.by.Episode.Date")
-  
-  adjusted_data[[1]] <- adjusted_data[[1]] %>%
-    strtrim(8) %>%
-    str_replace("20-", "2020-") %>%
-    as.Date()
+  if(grepl("^20-", adjusted_data[[1]]) == TRUE || grepl("^21-", adjusted_data[[1]]) == TRUE){
+    adjusted_data[[1]] <- adjusted_data[[1]] %>%
+      strtrim(8) %>%
+      str_replace("20-", "2020-") %>%
+      as.Date()
+  }
+  else{
+    adjusted_data[[1]] <- adjusted_data[[1]] %>%
+      as.Date()
+  }
   return(adjusted_data)
 }
 
