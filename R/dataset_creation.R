@@ -32,3 +32,5 @@ ott_observed <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]] %>%
 
 ## Export data as csv file
 write.csv(ott_observed, "Data/Observed data/OPH_Observed_COVID_Data.csv")
+
+
