@@ -32,9 +32,11 @@ Données en date du {{1}}
 
 ### Situation actuelle
 
-**{{2}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés.
+{{2}} **{{3}}** days
 
-De ce nombre : **{{3}}** patient(s) en soins actifs, **{{4}}** patient(s) aux soins intensifs."
+**{{4}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés.
+
+De ce nombre : **{{5}}** patient(s) en soins actifs, **{{6}}** patient(s) aux soins intensifs."
 ShortRangeForecast,"### Short-range forecast
 
 **{{1}}** active cases in the following week, reflecting a current {{2}} of **{{3}} days** (daily growth of {{4}}%).
