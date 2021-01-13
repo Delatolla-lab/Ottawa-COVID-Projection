@@ -97,6 +97,8 @@ dt_label = switch(
   "No change:",
   "Case doubling time:")
 
+dt_abs <- abs(dt)
+
 ## Observed new cases by episode date (excluding past 7 days)
 ott_observed_episodes <- as.data.frame(ott_observed[1:(nrow(ott_observed) - 6),])
 
@@ -196,7 +198,7 @@ line_break <- insert_translation(localization_data, lang, "break")
 dashboard <- insert_translation(localization_data, lang, "Dashboard",
                                 c(as.character(tail(ott_observed$date, n=1)),
                                   dt_label,
-                                  dt,
+                                  dt_abs,
                                   #last(na.omit(ott_observed$observed_active_cases)),
                                   last(na.omit(ott_observed$observed_census_ICU_p_acute_care)),
                                   last(na.omit(ott_observed$observed_census_acute_care)),
