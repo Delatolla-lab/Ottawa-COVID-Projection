@@ -6,7 +6,7 @@ name: Dataset-creation
 # Runs everyday at 12:30pm EST/EDT (5:30pm UTC)
 on:
   schedule:
-    - cron: '30 17 * * *'
+    - cron: '30 16 * * *'
 jobs:
   dataset-creation:
     runs-on: "ubuntu-latest"
