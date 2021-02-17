@@ -258,7 +258,8 @@ reworked_figure <-
             autosize = FALSE,
             width = width,
             height = height,
-            legend = list(x = 0.025, y = 0.9)
+            legend = list(x = 0.025, y = 0.9),
+            dragmode = "pan"
           )
       }
       else{
