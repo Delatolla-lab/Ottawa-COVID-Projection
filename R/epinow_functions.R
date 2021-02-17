@@ -230,7 +230,8 @@ short_term_plot <- function(projections,
                            showarrow = F, xref='paper', yref='paper', 
                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
                            font=list(size=10)
-                         ))
+                         ),
+                         dragmode = "pan")
   
   if(isTRUE(scale)){
     tmp <- 1.75*max(projections$mean, na.rm = TRUE)

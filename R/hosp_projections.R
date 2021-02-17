@@ -194,7 +194,8 @@ hosp_fun <- function(data1, parameter, title, current_color, current_shade,
       showarrow = F, xref='paper', yref='paper', 
       xanchor='right', yanchor='auto', xshift=0, yshift=0,
       font=list(size=10)
-    )
+    ),
+    dragmode = "pan"
   )
   p <- plot_ly()
   p <-
