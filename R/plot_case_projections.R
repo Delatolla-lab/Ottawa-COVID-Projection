@@ -204,7 +204,7 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
              x = 1, y = -0.12, text = "*Shaded area represents the 95% credible region", 
              showarrow = F, xref='paper', yref='paper', 
              xanchor='right', yanchor='auto', xshift=0, yshift=0,
-             font=list(size=10),
+             font=list(size=10)
            ),
            dragmode = "pan")
   return(g_plot)
