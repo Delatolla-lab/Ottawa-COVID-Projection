@@ -139,6 +139,8 @@ The three plots below illustrate daily viral covid-19 wastewater signal in Ottaw
 
 # {#ww-visualization}
 
+For mobile users, dragging the plot while in landscape mode will allow you to view current data.
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste)
 ```

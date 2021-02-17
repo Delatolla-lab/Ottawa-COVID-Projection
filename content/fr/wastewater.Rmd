@@ -120,6 +120,14 @@ The National Capital Region is the first community in Canada to conduct and repo
 
 People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a covid-19 test or ever are diagnosed. Thus, in contrast to assessing community covid-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with covid-19 given that everyone goes to the washroom. In addition to serving as a valuable confirmatory data source for covid-19 levels, wastewater can also serve as early indicator for possible outbreaks, as described below.
 
+### Status of variants
+
+B.1.1.7: not detected as of `r as.character(tail(ott_covid_waste$date, n=1))`
+
+B.1.351: not tested
+
+P.1: not tested
+
 The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
 
 The three plots below illustrate daily viral covid-19 wastewater signal in Ottawa.
@@ -128,6 +136,8 @@ The three plots below illustrate daily viral covid-19 wastewater signal in Ottaw
 
 
 # {#ww-visualization}
+
+For mobile users, dragging the plot while in landscape mode will allow you to view current data.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day, hosp_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "Ottawa covid-19 viral signal in wastewater"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator")
