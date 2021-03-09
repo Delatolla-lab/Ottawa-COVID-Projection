@@ -7,6 +7,8 @@ name: Dataset-creation
 on:
   schedule:
     - cron: '30 16 * * *'
+  workflow_dispatch:
+  
 jobs:
   dataset-creation:
     runs-on: "macOS-latest"
@@ -32,7 +34,6 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
-      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
       - name: Install dependencies
         run: R -e 'renv::restore()'
       - name: Prepare data
