@@ -37,10 +37,10 @@ jobs:
         run: R -e 'renv::restore()'
       - name: Prepare data
         run: Rscript R/chime_dataprep.R
-      - uses: mikeal/publish-to-github-action@master
+      - uses: ad-m/github-push-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH_NAME: 'hosp-projections' #optional defaults to master
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'hosp-projections'
   simulation:
     runs-on: "macOS-latest"
     needs: data-prep
@@ -69,10 +69,10 @@ jobs:
       - name: Run CHIME simulation
         shell: pwsh
         run: python Python/_01_GOF_sims.py -p Python/data/OTT_parameters.csv -t Python/data/OTT_ts.csv  --reopen_day 14 --reopen_caps 1 1.1 0.9 --save_reopening_csv --one_reopen --reopen_from_today
-      - uses: mikeal/publish-to-github-action@master
+      - uses: ad-m/github-push-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH_NAME: 'hosp-projections' #optional defaults to master
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'hosp-projections'
   postsim:
     runs-on: "macOS-latest"
     needs: simulation
@@ -102,10 +102,10 @@ jobs:
         run: R -e 'renv::restore()'
       - name: Prepare data
         run: Rscript R/chime_postsim.R
-      - uses: mikeal/publish-to-github-action@master
+      - uses: ad-m/github-push-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH_NAME: 'hosp-projections' #optional defaults to master
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'hosp-projections'
       - name: Push branch to master
         uses: devmasx/merge-branch@v1.3.1
         with:
