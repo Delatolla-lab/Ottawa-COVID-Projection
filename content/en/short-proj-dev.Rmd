@@ -31,6 +31,8 @@ dt_label = switch(
   "No change:",
   "Case doubling time:")
 
+dt_abs <- abs(dt)
+
 growth_rate <- ott_short_forecast[[2]][[4]][[1]]
 ```
 
@@ -38,7 +40,7 @@ growth_rate <- ott_short_forecast[[2]][[4]][[1]]
 
 (part of the main page dashboard)
 
-`r dt_label` **`r dt` days**
+`r dt_label` **`r dt_abs` days**
 
 ## Introduction 
 
@@ -55,6 +57,7 @@ Projections from `r min(ott_projections$date, na.rm = TRUE)` to `r max(ott_proje
 short_term_plot(
   projections = ott_projections,
   obs_data = ott_covid_data,
+  obs_column = "observed_new_episodes",
   forecast_type = "infections",
   ylab = "New cases",
   title = "Projections for new cases by episode date"
@@ -64,6 +67,7 @@ short_term_plot(
   projections = ott_projections,
   obs_data = ott_covid_data,
   forecast_type = "reported_cases",
+  obs_column = "observed_new_cases",
   ylab = "New cases",
   title = "Projections for new cases by reported date"
 )
@@ -71,6 +75,7 @@ short_term_plot(
 short_term_plot(
   projections = ott_projections,
   obs_data = ott_covid_data,
+  obs_column = "observed_new_cases",
   forecast_type = "R",
   ylab = "R",
   title = "Rt projections"

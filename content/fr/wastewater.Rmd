@@ -30,9 +30,10 @@ source("../../R/wastewater.R")
 
 # Pull JSON objects from OpenOttawa
 ottawa_case_data <-
-  fromJSON("https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=_Date,Cumulative_Cases_by_Episode_Date,Cumulative_Active_Cases_by_Episode_Date,Daily_Cases_by_Reported_Date,7-day_Average_of_Newly_Reported_cases_by_Reported_Date,Daily_Cases_by_Episode_Date,Daily_Cases_Linked_to_a_Community_Outbreak_by_Episode_Date,Daily_Cases_Linked_to_an_Institutional_Outbreak_by_Episode_Date,Daily_Cases_Not_Linked_to_an_Outbreak_ie_Sporadic_Cases_by_Episode_Date,Cases_Newly_Admitted_to_Hospital,Cases_Currently_in_Hospital,Cases_Currently_in_ICU,Cumulative_Deaths_by_Date_of_Death&outSR=4326&f=json")
+  fromJSON("https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=Date,Cumulative_Cases_by_Episode_Date,Cumulative_Active_Cases_by_Episode_Date,Daily_Cases_by_Reported_Date,7-day_Average_of_Newly_Reported_cases_by_Reported_Date,Daily_Cases_by_Episode_Date,Daily_Cases_Linked_to_a_Community_Outbreak_by_Episode_Date,Daily_Cases_Linked_to_an_Institutional_Outbreak_by_Episode_Date,Daily_Cases_Not_Linked_to_an_Outbreak_ie_Sporadic_Cases_by_Episode_Date,Cases_Newly_Admitted_to_Hospital,Cases_Currently_in_Hospital,Cases_Currently_in_ICU,Cumulative_Deaths_by_Date_of_Death&outSR=4326&f=json")
 ottawa_test_data <-
   fromJSON("https://opendata.arcgis.com/datasets/26c902bf1da44d3d90b099392b544b81_0/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
+
 # data
 ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
 ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
@@ -49,16 +50,6 @@ n2_col <- "rgb(60, 174, 163)"
 n1_n2_col <- "rgb(237, 85, 59)"
 rolling_avg_col <- "rgb(226, 127, 88)"
 ```
-The National Capital Region is the first community in Canada to conduct daily wastewater readings to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa).
-
-Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health's [website](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx). 
-
-The science supporting wastewater surveillance is rapidly evolving. See the [Methods](/model/) page for information on how the samples where collected, access to the data, and how the plots were created. The plots are currently for research only and presented to the public for discussion. Wastewater surveillance is currently viewed as having several uses, including:
-
-- Early identification of new cases of covid-19 when there is a low level of covid-19 infection.
-- A population perspective of covid-19 infection that is not influenced by the level of covid-19 testing. Everyone pees and poos, including people with and without covid-19. People with covid-19 shed SARS-CoV-2 in their feces, regardless of whether they receive a covid-19 test or diagnosis. 
-
-However, at this time, we recommend caution when interpretation daily and short-term variation in the viral signal. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into considerations of the strengths and limitations of each measure. The accuracy of SARS-CoV-2 testing is improving, as scientists understand the role of factors such differences in sewage systems and laboratory protocols.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Initialize calls for each parameter
@@ -123,16 +114,75 @@ change_new_cases_5_day_call <- list(type = "observed_data", y_column = "change_n
 change_new_cases_10_day_call <- list(type = "observed_data", y_column = "change_new_cases_10_day", name = "Percent change in rolling avg \nover 10 days", short_name = "10 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
 
 change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_new_cases_7_day", name = "Percent change in new case rolling avg \nover 7 days", short_name = "7 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
+
+daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 ```
+
+The National Capital Region is the first community in Canada to conduct and report daily wastewater readings of SARS-CoV-2 viral signal to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute and the University of Ottawa.
+
+People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a covid-19 test or ever are diagnosed. Thus, in contrast to assessing community covid-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with covid-19 given that everyone goes to the washroom. In addition to serving as a valuable confirmatory data source for covid-19 levels, wastewater can also serve as early indicator for possible outbreaks, as described below.
+
+### Status of variants
+
+B.1.1.7: **detected** as of 2021-03-02
+
+B.1.351: not tested
+
+P.1: not tested
+
+SARS-CoV-2 variant testing is performed two times per week.
+
+### Interpretation
+
+The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
+
+The three plots below illustrate daily viral covid-19 wastewater signal in Ottawa.
+
+---
+
 
 # {#ww-visualization}
 
+For mobile users, dragging the plot while in landscape mode will allow you to view current data.
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day, hosp_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "Ottawa covid-19 viral signal in wastewater"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator")
+reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste)
 ```
 
-\* New cases (reported date) is the date reported by the laboratory. New cases (episode date) is the earliest onset, test or reported date.
+---
 
-\* Viral copies data is normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](/model/) for more details.
+The next plot illustrates the 7-day midpoint mean in daily covid-19 wastewater viral signal. This number is the average of a week’s readings; today's reading, the previous 3 days, and the subsequent 3 days. Also on the graph are various comparators (e.g. reported daily covid-19 cases, hospitalization census), which can be individually selected by toggling the menu on the right.
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.45}
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day, hosp_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 300)
+```
+
+---
+
+Outbreaks often result in significant increases in the number of covid-19 infection. Wastewater surveillance can help identify, even anticipate such outbreaks; for example, note the 580% increase in signal in mid-July preceding the uptick in covid-19 testing by 3 days in the following plot.
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
+reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_7_day_call, change_new_cases_7_day_call), titles = c(y = "Percent change (%)", x = "Date", title = "<b>Percent change^ in 7 day rolling average</b>"), data = ott_covid_waste)
+```
+
+---
+
+See the [Methods](/model/) page for more information on how the samples were collected, access to the data, and how the plots were created. The plots are currently for research only and presented to the public for discussion.
+
+You can learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health's [website](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx).
+
+## Definitions
+
+\* A 7-day average is generated by averaging the levels from a given day with the three previous and three subsequent days. The average is termed “rolling” as it changes each day.  
+
+\* For new cases, the reported date is the day the test result is reported by the laboratory. Episode date is the approximate date of covid-19 infection estimated from information available: the date of symptom onset, test date, or the reported date.
+
+\* A central question in wastewater epidemiology is determining the proportion of the wastewater that is actually from humans and the proportion that is rain water, snow melt etc. To address this issue, viral copy data is thus normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](/model/) for more details.
+
+^ Percent change in 7-day average is calculated by comparing the 7-day average (previous day 1 to 7) with a lagged 7-day average (days 8 to 14).
 
 Data to `r as.character(tail(ott_covid_waste$date, n=1))`

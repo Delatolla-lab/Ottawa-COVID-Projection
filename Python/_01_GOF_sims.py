@@ -623,7 +623,7 @@ def main():
     ## SEIR plot
     SEIR_plot(df=df, 
               first_day = census_ts[census_ts.columns[0]].values[0], 
-              howfar = 300, 
+              howfar = 500, 
               figdir = figdir, 
               prefix = prefix if prefix is not None else "",
               as_of_days_ago = as_of_days_ago,
@@ -634,7 +634,7 @@ def main():
     ## Rt plot
     Rt_plot(df=df, 
               first_day = census_ts[census_ts.columns[0]].values[0], 
-              howfar = 300, 
+              howfar = 500, 
               figdir = figdir, 
               prefix = prefix if prefix is not None else "",
               params = params,
@@ -667,11 +667,11 @@ def main():
     final_dataframe = pd.DataFrame()
     for cap in reopen_caps:
         cap = float(cap)
-        if reopen_day >= 299:
+        if reopen_day >= 499:
             reopen_day_gap = 25
         else:
-            reopen_day_gap = math.ceil((300-reopen_day)/len(colors))
-        reopen_days = np.arange(reopen_day, 299, reopen_day_gap)
+            reopen_day_gap = math.ceil((500-reopen_day)/len(colors))
+        reopen_days = np.arange(reopen_day, 499, reopen_day_gap)
         if one_reopen:
             reopen_days = [reopen_day]
         qmats = []    
@@ -682,7 +682,7 @@ def main():
             reop = np.stack(reop)
             reopq = np.quantile(reop, [.05, .25, .5, .75, .95], axis = 0)
             qmats.append(reopq)
-        dates = pd.date_range(f"{first_day}", periods=301, freq="d")
+        dates = pd.date_range(f"{first_day}", periods=501, freq="d")
         fig = plt.figure()
         for i in range(len(reopen_days)):
             plt.plot_date(dates, qmats[i][2, :,3], "-", 
@@ -701,10 +701,10 @@ def main():
                         tmp_sufix = f'increase_{math.ceil((1-cap)*100)}'
             else:
                 tmp_sufix = f'{int(cap*100)}%Reduction_{reopen_days[i]}'
-            hosp_census = create_csv_export_dataframe(qmats[i], 3, "hosp_census", dates, 301, tmp_sufix)
-            vent_census = create_csv_export_dataframe(qmats[i], 5, "vent_census", dates, 301, tmp_sufix)
-            hosp_admits = create_csv_export_dataframe(qmats[i], 0, "hosp_admits", dates, 301, tmp_sufix)
-            vent_admits = create_csv_export_dataframe(qmats[i], 2, "vent_admits", dates, 301, tmp_sufix)
+            hosp_census = create_csv_export_dataframe(qmats[i], 3, "hosp_census", dates, 501, tmp_sufix)
+            vent_census = create_csv_export_dataframe(qmats[i], 5, "vent_census", dates, 501, tmp_sufix)
+            hosp_admits = create_csv_export_dataframe(qmats[i], 0, "hosp_admits", dates, 501, tmp_sufix)
+            vent_admits = create_csv_export_dataframe(qmats[i], 2, "vent_admits", dates, 501, tmp_sufix)
             tmp_combine_census = pd.merge(hosp_census,vent_census, on = "date")
             tmp_combine_admits = pd.merge(hosp_admits,vent_admits, on = "date")
             tmp_combine = pd.merge(tmp_combine_census,tmp_combine_admits, on = "date")

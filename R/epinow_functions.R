@@ -1,7 +1,12 @@
-epinow_data_prep <- function(data,
-                             start_date,
-                             end_date,
-                             parameter){
+short_term_forecast <- function(data,
+                                parameter,
+                                parameter_weight = 1,
+                                start_date,
+                                end_date,
+                                generation_time,
+                                incubation_period,
+                                reporting_delay,
+                                output = "projections"){
   # Format dataset
   if(missing(end_date)) {
     end_date <- max(as.Date(data$date), na.rm = TRUE)
@@ -12,10 +17,8 @@ epinow_data_prep <- function(data,
     filter(as.Date(date) <= as.Date(end_date)) %>%
     select(date, as.character(parameter)) %>%
     rename(confirm = as.character(parameter)) %>%
-    mutate(date = as.Date(date))
-  
-  return(data_formatted)
-}
+    mutate(date = as.Date(date),
+           confirm = as.integer(confirm * parameter_weight))
 
 short_term_forecast <- function(data,
                                 generation_time,
@@ -33,7 +36,36 @@ short_term_forecast <- function(data,
   # Extract output
   if(output == as.character("projections")){
     forecast <-
-      projections[[1]][[2]] # Obtain summarized projections
+      # Obtain summarized projections
+      projections[[1]][[2]] %>%
+      # Divide by the parameter weight
+      mutate(median = ifelse(variable == "infections" | variable == "prior_infections" |
+                               variable == "reported_cases",
+                             median/parameter_weight, median),
+             mean = ifelse(variable == "infections" | variable == "prior_infections" |
+                             variable == "reported_cases",
+                           mean/parameter_weight, mean),
+             sd = ifelse(variable == "infections" | variable == "prior_infections" |
+                           variable == "reported_cases",
+                         sd/parameter_weight, sd),
+             lower_90 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               lower_90/parameter_weight, lower_90),
+             lower_50 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               lower_50/parameter_weight, lower_50),
+             lower_20 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               lower_20/parameter_weight, lower_20),
+             upper_90 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               upper_90/parameter_weight, upper_90),
+             upper_50 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               upper_50/parameter_weight, upper_50),
+             upper_20 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               upper_20/parameter_weight, upper_20))
   }  
   else if(output == as.character("estimates")){
     forecast <-
@@ -41,7 +73,35 @@ short_term_forecast <- function(data,
   }
   else if(output == as.character("both")){
     forecast <- list(
-      projections[[1]][[2]],
+      projections[[1]][[2]] %>%
+        # Divide by the parameter weight
+        mutate(median = ifelse(variable == "infections" | variable == "prior_infections" |
+                                 variable == "reported_cases",
+                               median/parameter_weight, median),
+               mean = ifelse(variable == "infections" | variable == "prior_infections" |
+                               variable == "reported_cases",
+                             mean/parameter_weight, mean),
+               sd = ifelse(variable == "infections" | variable == "prior_infections" |
+                             variable == "reported_cases",
+                           sd/parameter_weight, sd),
+               lower_90 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
+                                 lower_90/parameter_weight, lower_90),
+               lower_50 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
+                                 lower_50/parameter_weight, lower_50),
+               lower_20 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
+                                 lower_20/parameter_weight, lower_20),
+               upper_90 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
+                                 upper_90/parameter_weight, upper_90),
+               upper_50 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
+                                 upper_50/parameter_weight, upper_50),
+               upper_20 = ifelse(variable == "infections" | variable == "prior_infections" |
+                                   variable == "reported_cases",
+                                 upper_20/parameter_weight, upper_20)),
       projections[[3]][[3]]
     )
   }  
@@ -51,10 +111,12 @@ short_term_forecast <- function(data,
 
 short_term_plot <- function(projections,
                             obs_data,
+                            obs_column,
                             forecast_type,
                             start_date = first(as.Date(projections$date)),
                             ylab,
-                            title){
+                            title,
+                            scale = FALSE){
   
   # Filter data based on forecast type and remove 50% CI
   projections <- projections %>%
@@ -85,14 +147,16 @@ short_term_plot <- function(projections,
            aes(x = date, col = type, fill = type))
   
   # Add observed data if R is not specified
+  obs_data <- filter(obs_data, as.Date(date) >= start_date)
+  y_col <- obs_data[,grepl(paste(obs_column, "$", sep = ""), colnames(obs_data))]
   if(forecast_type == as.character("infections")){
     plot <- plot +
       geom_col(data = 
                  obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
-                   y = observed_new_episodes,
+                   y = y_col,
                    text = paste("Observed cases:",
-                                observed_new_episodes)),
+                                y_col)),
                fill = "#008080", col = "white", alpha = 0.5,
                show.legend = FALSE, na.rm = TRUE)
   }
@@ -101,18 +165,19 @@ short_term_plot <- function(projections,
       geom_col(data = 
                  obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
-                   y = observed_new_cases,
+                   y = y_col,
                    text = paste("Observed cases:",
-                                observed_new_cases)),
+                                y_col)),
                fill = "#008080", col = "white", alpha = 0.5,
                show.legend = FALSE, na.rm = TRUE)
   }
   
-  # plot estimates
+  # plot v line for last observed date
+  historic <- projections[projections$type == "historic",]
   plot <- plot +
     geom_vline(
       xintercept = 
-        as.numeric(projections[projections$type == "historic"][date == max(date)]$date),
+        as.numeric(last(historic$date)),
       linetype = 2)
   
   # plot median line
@@ -171,7 +236,14 @@ short_term_plot <- function(projections,
                            showarrow = F, xref='paper', yref='paper', 
                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
                            font=list(size=10)
-                         ))
+                         ),
+                         dragmode = "pan")
+  
+  if(isTRUE(scale)){
+    tmp <- 1.75*max(projections$mean, na.rm = TRUE)
+    plot <- layout(plot, 
+                   yaxis = list(range = c(0, tmp)))
+  }
   
   return(plot)
 }

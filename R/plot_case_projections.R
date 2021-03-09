@@ -205,6 +205,7 @@ case_projection_plot <- function(pred_dat, obs_dat, current_col,
              showarrow = F, xref='paper', yref='paper', 
              xanchor='right', yanchor='auto', xshift=0, yshift=0,
              font=list(size=10)
-           ))
+           ),
+           dragmode = "pan")
   return(g_plot)
 }
