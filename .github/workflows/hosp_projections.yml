@@ -32,7 +32,6 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
-      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
       - name: Install dependencies
         run: R -e 'renv::restore()'
       - name: Prepare data
@@ -98,7 +97,6 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
-      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
       - name: Install dependencies
         run: R -e 'renv::restore()'
       - name: Prepare data
