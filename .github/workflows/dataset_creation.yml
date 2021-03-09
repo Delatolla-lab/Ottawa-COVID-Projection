@@ -40,10 +40,10 @@ jobs:
         run: Rscript R/dataset_creation.R
       - name: Run short term projections 
         run: Rscript R/short_term_projections.R
-      - uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH_NAME: 'master' #optional defaults to master
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'master' #optional defaults to master
       - name: Merge master -> hosp-projections
         uses: devmasx/merge-branch@v1.3.1
         with:
