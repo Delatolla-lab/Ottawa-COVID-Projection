@@ -90,7 +90,7 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
         observed_cumulative_cases = "Cumulative_Cases_by_Episode_Date",
         observed_new_cases = "Daily_Cases_by_Reported_Date",
         observed_new_episodes = "Daily_Cases_by_Episode_Date",
-        observed_active_cases = "Cumulative_Active_Cases_by_Episode_Date",
+        observed_active_cases = "Total_Active_Cases_by_Date",
         observed_daily_average_cases =
           "7-day_Average_of_Newly_Reported_cases_by_Reported_Date",
         observed_new_cases_community_outbreak =
