@@ -6,10 +6,11 @@ name: Hospital-projections
 on: 
   schedule:
     - cron: '0 16 * * 2,5'
+  workflow_dispatch:
 
 jobs:
   data-prep:
-    runs-on: "ubuntu-latest"
+    runs-on: "macOS-latest"
     env:
       RENV_PATHS_ROOT: ~/.local/share/renv
     steps:
@@ -21,14 +22,6 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: '4.0.3'
-      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
-      - name: Install libnode-dev
-        run: |
-          sudo add-apt-repository ppa:cran/v8
-          sudo apt-get update
-          sudo apt-get install libnode-dev
-      - name: Install snap version of nodejs
-        run: sudo snap install node --classic --channel=14
       - name: Install V8
         run: Rscript -e 'install.packages("V8")'
       - name: Install renv package
@@ -40,17 +33,21 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
-      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
       - name: Install dependencies
         run: R -e 'renv::restore()'
       - name: Prepare data
         run: Rscript R/chime_dataprep.R
-      - uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH_NAME: 'hosp-projections' #optional defaults to master
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'hosp-projections'
   simulation:
-    runs-on: "ubuntu-latest"
+    runs-on: "macOS-latest"
     needs: data-prep
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
@@ -77,12 +74,17 @@ jobs:
       - name: Run CHIME simulation
         shell: pwsh
         run: python Python/_01_GOF_sims.py -p Python/data/OTT_parameters.csv -t Python/data/OTT_ts.csv  --reopen_day 14 --reopen_caps 1 1.1 0.9 --save_reopening_csv --one_reopen --reopen_from_today
-      - uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH_NAME: 'hosp-projections' #optional defaults to master
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'hosp-projections'
   postsim:
-    runs-on: "ubuntu-latest"
+    runs-on: "macOS-latest"
     needs: simulation
     env:
       RENV_PATHS_ROOT: ~/.local/share/renv
@@ -95,14 +97,6 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: '4.0.3'
-      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
-      - name: Install libnode-dev
-        run: |
-          sudo add-apt-repository ppa:cran/v8
-          sudo apt-get update
-          sudo apt-get install libnode-dev
-      - name: Install snap version of nodejs
-        run: sudo snap install node --classic --channel=14
       - name: Install V8
         run: Rscript -e 'install.packages("V8")'
       - name: Install renv package
@@ -114,19 +108,21 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
-      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
       - name: Install dependencies
         run: R -e 'renv::restore()'
       - name: Prepare data
         run: Rscript R/chime_postsim.R
-      - uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH_NAME: 'hosp-projections' #optional defaults to master
-      - name: Push branch to master
-        uses: devmasx/merge-branch@v1.3.1
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a
+      - uses: ad-m/github-push-action@master
         with:
-          type: now
-          from_branch: hosp-projections
-          target_branch: master
-          github_token: ${{ secrets.ACTION_TOKEN }} 
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'hosp-projections'
+      - name: Push branch to master
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'master'

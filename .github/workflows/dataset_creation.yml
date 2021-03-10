@@ -7,9 +7,11 @@ name: Dataset-creation
 on:
   schedule:
     - cron: '30 16 * * *'
+  workflow_dispatch:
+  
 jobs:
   dataset-creation:
-    runs-on: "ubuntu-latest"
+    runs-on: "macOS-latest"
     env:
       RENV_PATHS_ROOT: ~/.local/share/renv
     steps:
@@ -21,14 +23,6 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: '4.0.3'
-      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
-      - name: Install libnode-dev
-        run: |
-          sudo add-apt-repository ppa:cran/v8
-          sudo apt-get update
-          sudo apt-get install libnode-dev
-      - name: Install snap version of nodejs
-        run: sudo snap install node --classic --channel=14
       - name: Install V8
         run: Rscript -e 'install.packages("V8")'
       - name: Install renv package
@@ -40,17 +34,16 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
-      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
       - name: Install dependencies
         run: R -e 'renv::restore()'
       - name: Prepare data
         run: Rscript R/dataset_creation.R
       - name: Run short term projections 
         run: Rscript R/short_term_projections.R
-      - uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH_NAME: 'master' #optional defaults to master
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'master' #optional defaults to master
       - name: Merge master -> hosp-projections
         uses: devmasx/merge-branch@v1.3.1
         with:
