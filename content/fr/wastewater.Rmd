@@ -124,7 +124,7 @@ People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardl
 
 ### Status of variants
 
-B.1.1.7: **detected** as of 2021-03-02
+B.1.1.7: **not detected** beyond 2021-03-09
 
 B.1.351: not tested
 
@@ -146,8 +146,10 @@ The three plots below illustrate daily viral covid-19 wastewater signal in Ottaw
 For mobile users, dragging the plot while in landscape mode will allow you to view current data.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, vline = TRUE, vline_date = "2021-03-09")
 ```
+
+*Dashed vertical line represents a change to automated extraction of wastewater samples.
 
 ---
 
