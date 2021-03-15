@@ -2,10 +2,10 @@
 
 name: Hospital-projections
 
-# Runs every Tuesday & Friday at 12:00pm EST/EDT (1pm UTC)
+# Runs every Tuesday & Friday at 9am EST/EDT (1pm UTC)
 on: 
   schedule:
-    - cron: '0 16 * * 2,5'
+    - cron: '0 13 * * 2,5'
   workflow_dispatch:
 
 jobs:
