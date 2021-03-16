@@ -150,6 +150,7 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_da
 ```
 
 *Dashed vertical line represents a change to automated extraction of wastewater samples.
+
 ---
 
 The next plot illustrates the 7-day midpoint mean in daily covid-19 wastewater viral signal. This number is the average of a week’s readings; today's reading, the previous 3 days, and the subsequent 3 days. Also on the graph are various comparators (e.g. reported daily covid-19 cases, hospitalization census), which can be individually selected by toggling the menu on the right.
