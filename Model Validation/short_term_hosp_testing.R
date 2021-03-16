@@ -31,3 +31,19 @@ cases_to_hosp <- estimate_secondary(train_data,
 
 # Forecast using relationship and test data
 hosp_forecast <- forecast_secondary(cases_to_hosp, copy(test_data)[, .(date, value = primary)])
+
+# Forecast cases & hospitalizations
+reporting_delay <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
+generation_time <-
+  get_generation_time(disease = "SARS-CoV-2", source = "ganyani")
+incubation_period <-
+  get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
+
+case_forecast <- epinow(reported_cases = copy(train_data)[, .(date, confirm = primary)], 
+                        generation_time = generation_time,
+                        delays = delay_opts(incubation_period, reporting_delay),
+                        rt = rt_opts(prior = list(mean = 1.5, sd = 0.5), rw = 7),
+                        gp = NULL, horizon = 21)
+
+hosp_unknown_case_forecast <- forecast_secondary(cases_to_hosp, case_forecast$estimates)
+plot(hosp_unknown_case_forecast, new_obs = data)
