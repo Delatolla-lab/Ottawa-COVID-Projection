@@ -30,7 +30,7 @@ source("../../R/wastewater.R")
 
 # Pull JSON objects from OpenOttawa
 ottawa_case_data <-
-  fromJSON("https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=Date,Cumulative_Cases_by_Episode_Date,Cumulative_Active_Cases_by_Episode_Date,Daily_Cases_by_Reported_Date,7-day_Average_of_Newly_Reported_cases_by_Reported_Date,Daily_Cases_by_Episode_Date,Daily_Cases_Linked_to_a_Community_Outbreak_by_Episode_Date,Daily_Cases_Linked_to_an_Institutional_Outbreak_by_Episode_Date,Daily_Cases_Not_Linked_to_an_Outbreak_ie_Sporadic_Cases_by_Episode_Date,Cases_Newly_Admitted_to_Hospital,Cases_Currently_in_Hospital,Cases_Currently_in_ICU,Cumulative_Deaths_by_Date_of_Death&outSR=4326&f=json")
+  fromJSON("https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=Date,Cumulative_Cases_by_Episode_Date,Total_Active_Cases_by_Date,Cumulative_Deaths_by_Date_of_Death,Daily_Cases_by_Reported_Date,7-day_Average_of_Newly_Reported_cases_by_Reported_Date,Daily_Cases_by_Episode_Date,Daily_Cases_Linked_to_a_Community_Outbreak_by_Episode_Date,Daily_Cases_Linked_to_an_Institutional_Outbreak_by_Episode_Date,Daily_Cases_Not_Linked_to_an_Outbreak_ie_Sporadic_Cases_by_Episode_Date,Cases_Newly_Admitted_to_Hospital,Cases_Currently_in_ICU,Cases_Currently_in_Hospital&outSR=4326&f=json")
 ottawa_test_data <-
   fromJSON("https://opendata.arcgis.com/datasets/26c902bf1da44d3d90b099392b544b81_0/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
 
@@ -124,7 +124,7 @@ People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardl
 
 ### Status of variants
 
-B.1.1.7: **detected** as of 2021-03-02
+B.1.1.7: **not detected** beyond 2021-03-09
 
 B.1.351: not tested
 
@@ -146,8 +146,10 @@ The three plots below illustrate daily viral covid-19 wastewater signal in Ottaw
 For mobile users, dragging the plot while in landscape mode will allow you to view current data.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, vline = TRUE, vline_date = "2021-03-09")
 ```
+
+*Dashed vertical line represents a change to automated extraction of wastewater samples.
 
 ---
 

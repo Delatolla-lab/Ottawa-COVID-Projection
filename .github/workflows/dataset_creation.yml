@@ -3,10 +3,12 @@
 
 name: Dataset-creation
 
-# Runs everyday at 12:30pm EST/EDT (5:30pm UTC)
+# Runs everyday at 12:00pm EST/EDT (4:00pm UTC)
 on:
   schedule:
-    - cron: '30 16 * * *'
+    - cron: '0 16 * * *'
+  workflow_dispatch:
+  
 jobs:
   dataset-creation:
     runs-on: "macOS-latest"
@@ -32,21 +34,24 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
-      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
       - name: Install dependencies
         run: R -e 'renv::restore()'
       - name: Prepare data
         run: Rscript R/dataset_creation.R
       - name: Run short term projections 
         run: Rscript R/short_term_projections.R
-      - uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH_NAME: 'master' #optional defaults to master
-      - name: Merge master -> hosp-projections
-        uses: devmasx/merge-branch@v1.3.1
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a || echo "Nothing to update"
+      - uses: ad-m/github-push-action@master
         with:
-          type: now
-          from_branch: master
-          target_branch: hosp-projections
-          github_token: ${{ secrets.ACTION_TOKEN }} 
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'master' #optional defaults to master
+      - name: Merge master -> hosp-projections
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'hosp-projections'
+          force: true
