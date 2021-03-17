@@ -47,3 +47,9 @@ case_forecast <- epinow(reported_cases = copy(train_data)[, .(date, confirm = pr
 
 hosp_unknown_case_forecast <- forecast_secondary(cases_to_hosp, case_forecast$estimates)
 plot(hosp_unknown_case_forecast, new_obs = data)
+
+hosp_proj <- hosp_unknown_case_forecast[[2]]
+
+hosp_proj$variable <- "reported_cases"
+
+hosp_proj$type <- ifelse(hosp_proj$date <= max(data$date), "estimate", "forecast")
