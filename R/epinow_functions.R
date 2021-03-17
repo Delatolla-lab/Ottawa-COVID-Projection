@@ -19,16 +19,10 @@ short_term_forecast <- function(data,
     rename(confirm = as.character(parameter)) %>%
     mutate(date = as.Date(date),
            confirm = as.integer(confirm * parameter_weight))
-
-short_term_forecast <- function(data,
-                                generation_time,
-                                incubation_period,
-                                reporting_delay,
-                                output = "projections"){
   
   # Run epinow2 sim 
   projections <-
-      EpiNow2::epinow(reported_cases = data, 
+      EpiNow2::epinow(reported_cases = data_formatted, 
                       generation_time = generation_time,
                       delays = delay_opts(incubation_period, reporting_delay),
                       rt = rt_opts(prior = list(mean = 2, sd = 0.2)),
@@ -148,25 +142,14 @@ short_term_plot <- function(projections,
   
   # Add observed data if R is not specified
   obs_data <- filter(obs_data, as.Date(date) >= start_date)
-  y_col <- obs_data[,grepl(paste(obs_column, "$", sep = ""), colnames(obs_data))]
-  if(forecast_type == as.character("infections")){
+  y_col <- obs_data[[as.character(obs_column)]]
+  if(forecast_type != as.character("R")){
     plot <- plot +
       geom_col(data = 
                  obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
                    y = y_col,
-                   text = paste("Observed cases:",
-                                y_col)),
-               fill = "#008080", col = "white", alpha = 0.5,
-               show.legend = FALSE, na.rm = TRUE)
-  }
-  else if(forecast_type == as.character("reported_cases")){
-    plot <- plot +
-      geom_col(data = 
-                 obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
-               aes(x = as.Date(date),
-                   y = y_col,
-                   text = paste("Observed cases:",
+                   text = paste("Observed:",
                                 y_col)),
                fill = "#008080", col = "white", alpha = 0.5,
                show.legend = FALSE, na.rm = TRUE)
@@ -220,8 +203,13 @@ short_term_plot <- function(projections,
                                              "lower 90%", "upper 90%"))
   
   
-  # Set date display constraints 
-  a <- as.numeric(as.Date(last(projections$date) - 40)) 
+  # Set date display constraints
+  if(as.numeric(as.Date(first(projections$date))) > 40){
+    a <- as.numeric(as.Date(first(projections$date)))
+  }
+  else{
+    a <- as.numeric(as.Date(last(projections$date) - 40)) 
+  }
   b <- as.numeric(as.Date(last(projections$date)))
   
   # Format legend layout & add annotation
