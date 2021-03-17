@@ -54,7 +54,10 @@ time_frame <- c(12, 24, 36, 48)
 
 ```{r}
 # Run a for loop for short term projections based on various time frames
+plots <- list()
+x <- 0 
 for(i in time_frame){
+  x <- x + 1
   # Prep existing data
 hosp_data <- ott_covid_data %>%
   select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
@@ -97,8 +100,12 @@ hosp_proj$variable <- "reported_cases"
 hosp_proj$type <- ifelse(hosp_proj$date <= max(ott_covid_data$date), "estimate", "forecast")
 
 # Plot forecasted data
-short_term_plot(projections = hosp_proj, obs_data = ott_covid_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = paste(paste("Hospital census projections for", i, sep = " "), "weeks", sep = " "))
+plot <- short_term_plot(projections = hosp_proj, obs_data = ott_covid_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = paste(paste("Hospital census projections for", i, sep = " "), "weeks", sep = " "))
+
+plots[[x]] <- plot
 }
+
+save(plots, "plots.RData")
 ```
 
 ## Wastewater
