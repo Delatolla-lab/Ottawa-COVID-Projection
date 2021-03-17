@@ -48,12 +48,19 @@ incubation_period <-
 # no benefit on runtime if cores > chains which is set to 4 by default
 options(mc.cores = 4)
 
-# Prep existing data
+# Create vector of time frame in weeks
+time_frame <- c(12, 24, 36, 48)
+```
+
+```{r}
+# Run a for loop for short term projections based on various time frames
+for(i in time_frame){
+  # Prep existing data
 hosp_data <- ott_covid_data %>%
   select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
   mutate(date = as.Date(date)) %>%
   rename(primary = "observed_new_cases", secondary = "observed_census_ICU_p_acute_care") %>%
-  filter(date >= (max(as.Date(date)) - 12*7))
+  filter(date >= (max(as.Date(date)) - i*7))
 
 # Create training and testing data
 train_data <- hosp_data %>%
@@ -64,9 +71,7 @@ test_data <- hosp_data %>%
 
 train_data <- data.table::setDT(train_data)
 test_data <- data.table::setDT(test_data)
-```
 
-```{r}
 # Estimate relationship between cases and hospitalization
 cases_to_hosp <- estimate_secondary(train_data, 
                                     delays = delay_opts(list(mean = 2.5, mean_sd = 0.2, 
@@ -74,9 +79,7 @@ cases_to_hosp <- estimate_secondary(train_data,
                                     secondary = secondary_opts(type = "prevalence"),
                                     obs = obs_opts(scale = list(mean = 0.01, sd = 0.0025)),
                                     control = list(adapt_delta = 0.95))
-```
 
-```{r}
 # Forecast hospitalizations using case data
 case_forecast <- epinow(reported_cases = copy(train_data)[, .(date, confirm = primary)], 
                         generation_time = generation_time,
@@ -85,19 +88,20 @@ case_forecast <- epinow(reported_cases = copy(train_data)[, .(date, confirm = pr
                         gp = NULL, horizon = 21)
 
 hosp_forecast <- forecast_secondary(cases_to_hosp, case_forecast$estimates)
-```
 
-```{r}
 # Prep data to be visualized
 hosp_proj <- hosp_forecast[[2]]
 
 hosp_proj$variable <- "reported_cases"
 
 hosp_proj$type <- ifelse(hosp_proj$date <= max(ott_covid_data$date), "estimate", "forecast")
+
+# Plot forecasted data
+short_term_plot(projections = hosp_proj, obs_data = ott_covid_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = paste(paste("Hospital census projections for", i, sep = " "), "weeks", sep = " "))
+}
 ```
 
-```{r}
-# Plot both forecasted data
-short_term_plot(projections = hosp_proj, obs_data = ott_covid_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "test", title = "test1")
-```
 ## Wastewater
+```{r}
+
+```
