@@ -53,3 +53,5 @@ hosp_proj <- hosp_unknown_case_forecast[[2]]
 hosp_proj$variable <- "reported_cases"
 
 hosp_proj$type <- ifelse(hosp_proj$date <= max(data$date), "estimate", "forecast")
+
+save(hosp_proj, file = "Data/short_term_hosp_proj.RData")
