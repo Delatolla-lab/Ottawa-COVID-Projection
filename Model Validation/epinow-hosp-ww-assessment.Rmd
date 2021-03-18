@@ -42,103 +42,73 @@ incubation_period <-
   get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 ```
 
-## Hospitalizations
+## Short term hospitalizations
 ```{r}
-# To load existing hosp forecast data
-load("hosp_forecast.RData")
+# set number of cores to use fitting the model
+# no benefit on runtime if cores > chains which is set to 4 by default
+options(mc.cores = 4)
+
+# Create vector of time frame in weeks
+time_frame <- c(12, 24, 36, 48)
 ```
 
 ```{r}
-# Run projections for admits
-ott_admit_forecast <- short_term_forecast(
-  data = ott_covid_data,
-  parameter = "observed_new_ICU_p_acute_care",
-  parameter_weight = 1/0.027,
-  start_date = "2020-04-01", # can be changed
- # end_date = "2020-11-24", # can be changed, if missing will default to last day
-  generation_time = generation_time,
-  incubation_period = incubation_period,
-  reporting_delay = reporting_delay,
-  output = "projections"
-)
-```
+# Run a for loop for short term projections based on various time frames
+plots <- list()
+x <- 0 
+for(i in time_frame){
+  x <- x + 1
+  # Prep existing data
+hosp_data <- ott_covid_data %>%
+  select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
+  mutate(date = as.Date(date)) %>%
+  rename(primary = "observed_new_cases", secondary = "observed_census_ICU_p_acute_care") %>%
+  filter(date >= (max(as.Date(date)) - i*7))
 
-```{r}
-# plot projections
-short_term_plot(
-  projections = ott_admit_forecast,
-  obs_data = ott_covid_data,
-  obs_column = "observed_new_ICU_p_acute_care",
-  forecast_type = "infections",
-  ylab = "New cases",
-  title = "Projections for new admits by episode date"
-)
+# Create training and testing data
+train_data <- hosp_data %>%
+  filter(date < (max(as.Date(date)) - 7*2))
 
-short_term_plot(
-  projections = ott_admit_forecast,
-  obs_data = ott_covid_data,
-  obs_column = "observed_new_ICU_p_acute_care",
-  forecast_type = "reported_cases",
-  ylab = "New cases",
-  title = "Projections for new admits by reported date"
-)
+test_data <- hosp_data %>%
+  filter(date >= (max(as.Date(date)) - 7*2))
 
-short_term_plot(
-  projections = ott_admit_forecast,
-  obs_data = ott_covid_data,
-  obs_column = "observed_new_ICU_p_acute_care",
-  forecast_type = "R",
-  ylab = "R",
-  title = "Rt projections"
-)
+train_data <- data.table::setDT(train_data)
+test_data <- data.table::setDT(test_data)
+
+# Estimate relationship between cases and hospitalization
+cases_to_hosp <- estimate_secondary(train_data, 
+                                    delays = delay_opts(list(mean = 2.5, mean_sd = 0.2, 
+                                                               sd = 0.47, sd_sd = 0.1, max = 21)),
+                                    secondary = secondary_opts(type = "prevalence"),
+                                    obs = obs_opts(scale = list(mean = 0.01, sd = 0.0025)),
+                                    control = list(adapt_delta = 0.95))
+
+# Forecast hospitalizations using case data
+case_forecast <- epinow(reported_cases = copy(train_data)[, .(date, confirm = primary)], 
+                        generation_time = generation_time,
+                        delays = delay_opts(incubation_period, reporting_delay),
+                        rt = rt_opts(prior = list(mean = 1.5, sd = 0.5), rw = 7),
+                        gp = NULL, horizon = 21)
+
+hosp_forecast <- forecast_secondary(cases_to_hosp, case_forecast$estimates)
+
+# Prep data to be visualized
+hosp_proj <- hosp_forecast[[2]]
+
+hosp_proj$variable <- "reported_cases"
+
+hosp_proj$type <- ifelse(hosp_proj$date <= max(ott_covid_data$date), "estimate", "forecast")
+
+# Plot forecasted data
+plot <- short_term_plot(projections = hosp_proj, obs_data = ott_covid_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = paste(paste("Hospital census projections for", i, sep = " "), "weeks", sep = " "))
+
+plots[[x]] <- plot
+}
+
+save(plots, "plots.RData")
 ```
 
 ## Wastewater
 ```{r}
-# To load existing ww forecast data
-load("ww_forecast.RData")
-```
-```{r}
-# Run projections for admits
-ott_ww_forecast <- short_term_forecast(
-  data = waste_clean,
-  parameter = "N1_N2_avg",
-  parameter_weight = 100000,
-  start_date = "2020-04-08", # can be changed
- # end_date = "2020-11-24", # can be changed, if missing will default to last day
-  generation_time = generation_time,
-  incubation_period = incubation_period,
-  reporting_delay = reporting_delay,
-  output = "projections"
-)
-```
 
-```{r}
-# plot projections
-short_term_plot(
-  projections = ott_ww_forecast,
-  obs_data = waste_clean,
-  obs_column = "N1_N2_avg",
-  forecast_type = "infections",
-  ylab = "New cases",
-  title = "Projections for viral signal by episode date"
-)
-
-short_term_plot(
-  projections = ott_ww_forecast,
-  obs_data = waste_clean,
-  obs_column = "N1_N2_avg",
-  forecast_type = "reported_cases",
-  ylab = "New cases",
-  title = "Projections for viral signal by reported date"
-)
-
-short_term_plot(
-  projections = ott_ww_forecast,
-  obs_data = waste_clean,
-  obs_column = "N1_N2_avg",
-  forecast_type = "R",
-  ylab = "R",
-  title = "Rt projections"
-)
 ```

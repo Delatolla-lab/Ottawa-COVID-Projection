@@ -21,6 +21,7 @@ library(RColorBrewer)
 source("../../R/epinow_functions.R")
 ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
 load("../../Data/short_term_forecast.RData")
+load("../../Data/short_term_hosp_proj.RData")
 
 ott_projections <- ott_short_forecast[[1]]
 
@@ -48,7 +49,7 @@ growth_rate <- ott_short_forecast[[2]][[4]][[1]]
 
 Short-term and long-term covid-19 projections are presented below. See [More](more) for a discussion about model interpretation and [Methods](methods) for how the projections where created. Short-term projections reflect current covid-19 transmission; while long-term projections reflect sustained transmission trends. Short-term and long-term projections can trend in different directions when there are changing patterns of community covid-19 transmission. 
 
-## Short-term projections
+## Short-term case projections
 
 Projections from `r min(ott_projections$date, na.rm = TRUE)` to `r max(ott_projections$date, na.rm = TRUE)`
 
@@ -71,13 +72,19 @@ short_term_plot(
   ylab = "New cases",
   title = "Projections for new cases by reported date"
 )
+```
 
+## Short-term hospitalization projections
+
+Projections from `r min(hosp_proj$date, na.rm = TRUE)` to `r max(hosp_proj$date, na.rm = TRUE)`
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# visualize epinow forecast
 short_term_plot(
-  projections = ott_projections,
+  projections = hosp_proj,
   obs_data = ott_covid_data,
-  obs_column = "observed_new_cases",
-  forecast_type = "R",
-  ylab = "R",
-  title = "Rt projections"
+  obs_column = "observed_census_ICU_p_acute_care",
+  forecast_type = "reported_cases",
+  ylab = "Hospital census",
+  title = "Projections for hospital census"
 )
 ```
