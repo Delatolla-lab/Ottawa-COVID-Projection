@@ -204,7 +204,7 @@ short_term_plot <- function(projections,
   
   
   # Set date display constraints
-  if(as.numeric(as.Date(first(projections$date))) > 40){
+  if(as.numeric(as.Date(first(projections$date))) > as.Date(last(projections$date) - 40)){
     a <- as.numeric(as.Date(first(projections$date)))
   }
   else{
