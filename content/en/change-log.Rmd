@@ -4,6 +4,11 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V3.3.1
+2021-03-19
+
+- Long term case and hospitalization projections removed from the homepage. Short-term hospitalization projections to be added in next update.
+
 # V3.3.0
 2020-11-26
 

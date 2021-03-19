@@ -393,15 +393,15 @@ tidy_proj <- left_join(tidy_proj, lut, by = "day")
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Generate projections for SEIR model fit
-ott_case_projections <- proj_generation(fit, lut, ott_observed_episodes, project_to = "2021-05-31", day_start_reduction = 7, pct_change = 10)
+#ott_case_projections <- proj_generation(fit, lut, ott_observed_episodes, project_to = "2021-05-31", day_start_reduction = 7, pct_change = 10)
 
 # Create data set to visualize projections
-projection_data <- case_projection_data(ott_case_projections, 10)
+#projection_data <- case_projection_data(ott_case_projections, 10)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualize projections
-case_projection_plot(projection_data, ott_observed_episodes, current_col = current_case_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Long-term daily COVID-19 cases in Ottawa", pct_change = 10)
+#case_projection_plot(projection_data, ott_observed_episodes, current_col = current_case_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = "Long-term daily COVID-19 cases in Ottawa", pct_change = 10)
 ```
 
 `r line_break`
@@ -412,16 +412,12 @@ case_projection_plot(projection_data, ott_observed_episodes, current_col = curre
 # Import projections
 ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
 source("../../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed census of patients", project_to = "2021-05-31")
+#hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed census of patients", project_to = "2021-05-31")
 ```
-
-`r line_break`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/hosp_projections.R")
-hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed # of daily admissions", project_to = "2021-05-31")
+#hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed # of daily admissions", project_to = "2021-05-31")
 ```
-
-`r line_break`
 
 `r definitions`
