@@ -10,7 +10,7 @@ data <- read.csv(file.path(getwd(),"Data/Observed data/OPH_Observed_COVID_Data.c
   select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
   mutate(date = as.Date(date)) %>%
   rename(primary = "observed_new_cases", secondary = "observed_census_ICU_p_acute_care") %>%
-  filter(date >= (max(as.Date(date)) - 12*7))
+  filter(date >= (max(as.Date(date)) - 24*7))
 
 train_data <- data %>%
   filter(date < (max(as.Date(date)) - 7*2))
@@ -29,9 +29,6 @@ cases_to_hosp <- estimate_secondary(train_data,
                                     obs = obs_opts(scale = list(mean = 0.01, sd = 0.0025)),
                                     control = list(adapt_delta = 0.95))
 
-# Forecast using relationship and test data
-hosp_forecast <- forecast_secondary(cases_to_hosp, copy(test_data)[, .(date, value = primary)])
-
 # Forecast cases & hospitalizations
 reporting_delay <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
 generation_time <-
@@ -46,7 +43,6 @@ case_forecast <- epinow(reported_cases = copy(train_data)[, .(date, confirm = pr
                         gp = NULL, horizon = 21)
 
 hosp_unknown_case_forecast <- forecast_secondary(cases_to_hosp, case_forecast$estimates)
-plot(hosp_unknown_case_forecast, new_obs = data)
 
 hosp_proj <- hosp_unknown_case_forecast[[2]]
 
