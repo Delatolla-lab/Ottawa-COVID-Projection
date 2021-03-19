@@ -233,18 +233,6 @@
       "Repository": "CRAN",
       "Hash": "abea3384649ef37f60ef51ce002f3547"
     },
-    "covidseir": {
-      "Package": "covidseir",
-      "Version": "0.0.1.9001",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "covidseir",
-      "RemoteUsername": "seananderson",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "4de2abb30b311167b7e7c3a2e523f62f6043864a",
-      "Hash": "a5ff570accdc70cda2ae0ce128c1712a"
-    },
     "cowplot": {
       "Package": "cowplot",
       "Version": "1.1.0",
