@@ -4,6 +4,7 @@ options(mc.cores = 4)
 
 library(ggplot2)
 library(EpiNow2)
+library(tidyverse)
 
 # Data Prep
 data <- read.csv(file.path(getwd(),"Data/Observed data/OPH_Observed_COVID_Data.csv")) %>%
