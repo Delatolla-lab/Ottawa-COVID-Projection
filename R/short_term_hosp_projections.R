@@ -10,19 +10,12 @@ data <- read.csv(file.path(getwd(),"Data/Observed data/OPH_Observed_COVID_Data.c
   select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
   mutate(date = as.Date(date)) %>%
   rename(primary = "observed_new_cases", secondary = "observed_census_ICU_p_acute_care") %>%
-  filter(date >= (max(as.Date(date)) - 24*7))
+  filter(date >= (max(as.Date(date)) - 12*7))
 
-train_data <- data %>%
-  filter(date < (max(as.Date(date)) - 7*2))
-
-test_data <- data %>%
-  filter(date >= (max(as.Date(date)) - 7*2))
-
-train_data <- data.table::setDT(train_data)
-test_data <- data.table::setDT(test_data)
+data <- data.table::setDT(data)
 
 # Estimate relationship between cases and hospitalization
-cases_to_hosp <- estimate_secondary(train_data, 
+cases_to_hosp <- estimate_secondary(data, 
                                     delays = delay_opts(list(mean = 2.5, mean_sd = 0.2, 
                                                                sd = 0.47, sd_sd = 0.1, max = 21)),
                                     secondary = secondary_opts(type = "prevalence"),
@@ -36,13 +29,13 @@ generation_time <-
 incubation_period <-
   get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 
-case_forecast <- epinow(reported_cases = copy(train_data)[, .(date, confirm = primary)], 
+case_forecast <- epinow(reported_cases = copy(data)[, .(date, confirm = primary)], 
                         generation_time = generation_time,
                         delays = delay_opts(incubation_period, reporting_delay),
                         rt = rt_opts(prior = list(mean = 1.5, sd = 0.5), rw = 7),
-                        gp = NULL, horizon = 21)
+                        gp = NULL, horizon = 7)
 
-hosp_unknown_case_forecast <- forecast_secondary(cases_to_hosp, case_forecast$estimates)
+hosp_unknown_case_forecast <- forecast_secondary(cases_to_hosp, case_forecast$estimates, all_dates = TRUE)
 
 hosp_proj <- hosp_unknown_case_forecast[[2]]
 
