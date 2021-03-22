@@ -4,8 +4,6 @@ name: Hospital-projections
 
 # Runs every Tuesday & Friday at 9am EST/EDT (1pm UTC)
 on: 
-  schedule:
-    - cron: '0 13 * * 2,5'
   workflow_dispatch:
 
 jobs:
