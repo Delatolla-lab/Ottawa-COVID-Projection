@@ -34,7 +34,7 @@ case_forecast <- epinow(reported_cases = copy(data)[, .(date, confirm = primary)
                         generation_time = generation_time,
                         delays = delay_opts(incubation_period, reporting_delay),
                         rt = rt_opts(prior = list(mean = 1.5, sd = 0.5), rw = 7),
-                        gp = NULL, horizon = 7)
+                        gp = NULL, horizon = 14)
 
 hosp_unknown_case_forecast <- forecast_secondary(cases_to_hosp, case_forecast$estimates, all_dates = TRUE)
 

@@ -26,7 +26,8 @@ short_term_forecast <- function(data,
                       generation_time = generation_time,
                       delays = delay_opts(incubation_period, reporting_delay),
                       rt = rt_opts(prior = list(mean = 2, sd = 0.2)),
-                      stan = stan_opts(cores = 4))
+                      stan = stan_opts(cores = 4),
+                      gp = NULL, horizon = 14)
   # Extract output
   if(output == as.character("projections")){
     forecast <-
