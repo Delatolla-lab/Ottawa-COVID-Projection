@@ -90,7 +90,7 @@ hosp_proj$variable <- "reported_cases"
 hosp_proj$type <- ifelse(hosp_proj$date <= max(ott_covid_data$date), "estimate", "forecast")
 
 # Plot forecasted data
-plot <- short_term_plot(projections = hosp_proj, obs_data = ott_covid_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = paste(paste("Hospital census projections for", i, sep = " "), "weeks", sep = " "))
+plot <- short_term_plot(projections = hosp_proj, obs_data = ott_covid_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Hospital census projections")
 
 plot
 ```
@@ -119,8 +119,8 @@ ww_data <- data.table::setDT(ww_data)
 ```{r}
 # Estimate relationship between cases and ww
 cases_to_ww <- estimate_secondary(ww_data, 
-                                  delays = delay_opts(list(mean = 2.5, mean_sd = 0.2, 
-                                                           sd = 0.47, sd_sd = 0.1, max = 21)),
+                                  delays = delay_opts(list(mean = -5, mean_sd = 0.2, 
+                                                           sd = 0.47, sd_sd = 0.1, max = 0)),
                                   secondary = secondary_opts(type = "prevalence"),
                                   obs = obs_opts(scale = list(mean = 0.01, sd = 0.0025)),
                                   control = list(adapt_delta = 0.95))
