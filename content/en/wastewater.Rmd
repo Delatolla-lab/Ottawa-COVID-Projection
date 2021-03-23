@@ -124,7 +124,7 @@ People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardl
 
 ### Status of variants
 
-B.1.1.7: **not detected** beyond 2021-03-09
+B.1.1.7: **detected** in samples from 2021-03-18
 
 B.1.351: not tested
 
