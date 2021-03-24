@@ -50,6 +50,7 @@ n1_col <- "rgb(23, 63, 95)"
 n2_col <- "rgb(60, 174, 163)"
 n1_n2_col <- "rgb(237, 85, 59)"
 rolling_avg_col <- "rgb(226, 127, 88)"
+smooth_col <- "rgb(34, 140, 34)"
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -125,7 +126,7 @@ People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardl
 
 The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
 
-The three plots below illustrate daily viral covid-19 wastewater signal in Ottawa.
+The four plots below illustrate daily viral covid-19 wastewater signal in Ottawa.
 
 ---
 
@@ -135,6 +136,9 @@ The three plots below illustrate daily viral covid-19 wastewater signal in Ottaw
 reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste)
 ```
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp= 0.75}
+reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, smooth = TRUE, smooth_y = "N1_N2_7_day", smooth_bandwidth = 20, smooth_name = "Smoothed 7-day rolling avg", smooth_colour = smooth_col)
+```
 ---
 
 The next plot illustrates the 7 day mean in daily covid-19 wastewater viral signal. This number is the average of a week’s readings; today and the previous 6 days. Also on the graph are various comparators (e.g. reported daily covid-19 cases, hospitalization census), which can be individually selected by toggling the menu on the right.
