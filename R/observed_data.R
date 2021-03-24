@@ -13,6 +13,11 @@ reworked_figure <-
            titles,
            vline = FALSE,
            vline_date = NULL,
+           smooth = FALSE,
+           smooth_y = NULL,
+           smooth_bandwidth = NULL,
+           smooth_name = NULL,
+           smooth_colour = NULL,
            width = 800,
            height = 500,
            data) {
@@ -242,6 +247,16 @@ reworked_figure <-
     
     updated_y2 <- sprintf(base_params_y2, menu_y2)
     updated_y2 <- eval(parse(text = updated_y2))
+    
+    if(isTRUE(smooth)){
+      curve <- ksmooth(x = data$date, y = data[[as.character(smooth_y)]],
+                       kernel = "normal", bandwidth = smooth_bandwidth,
+                       x.points = data$date)
+      p <- add_trace(p, x=curve$x, y=curve$y, name=as.character(smooth_name),
+                     mode = "lines", 
+                     line = list(color = as.character(smooth_colour),
+                                 width = 2.5))
+    }
     
     if(is.null(yaxis2)){
       if(!isTRUE(yaxis_button)){
