@@ -147,9 +147,36 @@ save(hist_proj, file = "hist_proj.RData")
 ```
 
 ```{r}
+# Viewing historic projections without running model
+# Load packages and functions
+library(EpiNow2)
+library(tidyverse)
+library(plotly)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(stats)
+library(zoo)
+library(stringr)
+library(RColorBrewer)
+source("../R/epinow_functions.R")
+source("../R/open_ottawa_scripts.R")
+
 # Load hist_proj .RData
 load("hist_proj.RData")
 hist_projections <- bind_rows(hist_proj)
+
+# Load test data used to generate historic projections
+ott_covid_data <-
+  read.csv(file.path(getwd(), "../Data/Observed Data/OPH_Observed_COVID_Data.csv"))
+ott_covid_test <- ott_covid_data %>%
+  mutate(date = as.Date(date)) %>%
+  filter(date >= as.Date("2020-09-01"))
+
+hist_projections$type <- ifelse(hist_projections$date <= max(ott_covid_test$date), "estimate", "forecast")
+
+short_term_plot(projections = hist_projections, obs_data = ott_covid_test, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Examining historic hospital projections with hospital census data")
 ```
 
 ## Wastewater
