@@ -100,7 +100,7 @@ plot
 ```{r}
 hist_proj <- list()
 # Filter for data beyond Sept 1
-ott_covid_data <- ott_covid_data %>%
+ott_covid_test <- ott_covid_data %>%
   mutate(date = as.Date(date)) %>%
   filter(date >= as.Date("2020-09-01"))
 
@@ -109,12 +109,12 @@ x <- 0
 
 for(i in time_frame){
   x <- x + 1
-  hosp_i <- ott_covid_data %>%
+  hosp_i <- ott_covid_test %>%
   select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
   mutate(date = as.Date(date)) %>%
   rename(primary = "observed_new_cases", secondary = "observed_census_ICU_p_acute_care") %>%
-  filter(date >= (first(as.Date(ott_covid_data$date)) + i) &
-           date <= (first(as.Date(ott_covid_data$date)) + i + 90))
+  filter(date >= (first(as.Date(ott_covid_test$date)) + i) &
+           date <= (first(as.Date(ott_covid_test$date)) + i + 90))
   
   hosp_i <- data.table::setDT(hosp_i)
   
