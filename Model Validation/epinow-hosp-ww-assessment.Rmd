@@ -101,9 +101,10 @@ plot
 hist_proj <- list()
 # Filter for data beyond Sept 1
 ott_covid_data <- ott_covid_data %>%
+  mutate(date = as.Date(date)) %>%
   filter(date >= as.Date("2020-09-01"))
 
-time_frame <- c(0, 21, 42, 63, 84, 105, 126, 147, 168, 189)
+time_frame <- c(0, 21, 42, 63, 84, 105, 126, 147, 168)
 x <- 0
 
 for(i in time_frame){
