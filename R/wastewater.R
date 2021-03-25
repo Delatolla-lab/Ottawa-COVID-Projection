@@ -29,7 +29,7 @@ merge_data <- function(data1, data2){
     # create 5 day rolling avg of viral signal
     mutate(
       N1_N2_5_day =
-        rollapply(N1_N2_avg, width=5,
+        rollapply(N1_N2_avg_clean, width=5,
                   FUN=function(x) mean(x, na.rm = TRUE),
                   by=1, by.column=TRUE, partial=FALSE,
                   fill=NA, align="center")
@@ -37,7 +37,7 @@ merge_data <- function(data1, data2){
     # create 7 day rolling avg of viral signal
     mutate(
       N1_N2_7_day =
-        rollapply(N1_N2_avg, width=7,
+        rollapply(N1_N2_avg_clean, width=7,
                   FUN=function(x) mean(x, na.rm = TRUE),
                   by=1, by.column=TRUE, partial=FALSE,
                   fill=NA, align="center")
@@ -45,7 +45,7 @@ merge_data <- function(data1, data2){
     # create 10 day rolling avg of viral signal
     mutate(
       N1_N2_10_day =
-        rollapply(N1_N2_avg, width=10,
+        rollapply(N1_N2_avg_clean, width=10,
                   FUN=function(x) mean(x, na.rm = TRUE),
                   by=1, by.column=TRUE, partial=FALSE,
                   fill=NA, align="center")
