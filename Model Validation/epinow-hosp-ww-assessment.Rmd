@@ -99,7 +99,11 @@ plot
 
 ```{r}
 hist_proj <- list()
-time_frame <- c(0, 90, 180, 270)
+# Filter for data beyond Sept 1
+ott_covid_data <- ott_covid_data %>%
+  filter(date >= as.Date("2020-09-01"))
+
+time_frame <- c(0, 21, 42, 63, 84, 105, 126, 147, 168, 189)
 x <- 0
 
 for(i in time_frame){
