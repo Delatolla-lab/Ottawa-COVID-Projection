@@ -33,7 +33,7 @@ ott_covid_data <-
 
 ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
 waste_clean <- wastewater_prep(ott_observed_waste)
-ott_covid_waste <- merge_data(ott_observed_covid, waste_clean)
+#ott_covid_waste <- merge_data(ott_covid_data, waste_clean)
 
 # Set reporting delay, generation time, incubation period
 reporting_delay <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
@@ -100,8 +100,10 @@ plot
 ```{r}
 hist_proj <- list()
 time_frame <- c(0, 90, 180, 270)
+x <- 0
 
 for(i in time_frame){
+  x <- x + 1
   hosp_i <- ott_covid_data %>%
   select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
   mutate(date = as.Date(date)) %>%
@@ -109,7 +111,7 @@ for(i in time_frame){
   filter(date >= (first(as.Date(ott_covid_data$date)) + i) &
            date <= (first(as.Date(ott_covid_data$date)) + i + 90))
   
-  hosp_i <- data.table::setDT(hosp_test_i)
+  hosp_i <- data.table::setDT(hosp_i)
   
   cases_to_hosp_i <- estimate_secondary(hosp_i, 
                                     delays = delay_opts(list(mean = 2.5, mean_sd = 0.2, 
@@ -133,10 +135,10 @@ for(i in time_frame){
   
   hosp_proj_i$type <- ifelse(hosp_proj_i$date <= max(hosp_i$date), "estimate", "forecast")
   
-  hist_proj[[i]] <- hosp_proj_i
+  hist_proj[[x]] <- hosp_proj_i
 }
 
-save(hist_proj, "hist_proj.RData")
+save(hist_proj, file = "hist_proj.RData")
 ```
 
 ## Wastewater
