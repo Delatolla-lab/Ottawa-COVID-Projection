@@ -98,37 +98,45 @@ plot
 ## Assessing performance of projections on previous data
 
 ```{r}
-hosp_test <- ott_covid_data %>%
+hist_proj <- list()
+time_frame <- c(0, 90, 180, 270)
+
+for(i in time_frame){
+  hosp_i <- ott_covid_data %>%
   select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
   mutate(date = as.Date(date)) %>%
   rename(primary = "observed_new_cases", secondary = "observed_census_ICU_p_acute_care") %>%
-  filter(date >= "2020-12-01" & date <= "2021-02-28")
-
-hosp_test <- data.table::setDT(hosp_test)
-
-cases_to_hosp_test <- estimate_secondary(hosp_test, 
+  filter(date >= (first(as.Date(ott_covid_data$date)) + i) &
+           date <= (first(as.Date(ott_covid_data$date)) + i + 90))
+  
+  hosp_i <- data.table::setDT(hosp_test_i)
+  
+  cases_to_hosp_i <- estimate_secondary(hosp_i, 
                                     delays = delay_opts(list(mean = 2.5, mean_sd = 0.2, 
                                                                sd = 0.47, sd_sd = 0.1, max = 21)),
                                     secondary = secondary_opts(type = "prevalence"),
                                     obs = obs_opts(scale = list(mean = 0.01, sd = 0.0025)),
                                     control = list(adapt_delta = 0.95))
-
-case_forecast_test <- epinow(reported_cases = copy(hosp_test)[, .(date, confirm = primary)], 
+  
+  case_forecast_i <- epinow(reported_cases = copy(hosp_i)[, .(date, confirm = primary)], 
                         generation_time = generation_time,
                         delays = delay_opts(incubation_period, reporting_delay),
                         rt = rt_opts(prior = list(mean = 1.5, sd = 0.5), rw = 7),
                         gp = NULL, horizon = 21)
+  
+  hosp_forecast_i <- forecast_secondary(cases_to_hosp_i, case_forecast_i$estimates)
+  
+  # Prep data to be visualized
+  hosp_proj_i <- hosp_forecast_i[[2]]
+  
+  hosp_proj_i$variable <- "reported_cases"
+  
+  hosp_proj_i$type <- ifelse(hosp_proj_i$date <= max(hosp_i$date), "estimate", "forecast")
+  
+  hist_proj[[i]] <- hosp_proj_i
+}
 
-hosp_forecast_test <- forecast_secondary(cases_to_hosp_test, case_forecast_test$estimates)
-
-# Prep data to be visualized
-hosp_proj_test <- hosp_forecast_test[[2]]
-
-hosp_proj_test$variable <- "reported_cases"
-
-hosp_proj_test$type <- ifelse(hosp_proj_test$date <= max(hosp_test$date), "estimate", "forecast")
-
-short_term_plot(projections = hosp_proj_test, obs_data = ott_covid_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Hospital census projections")
+save(hist_proj, "hist_proj.RData")
 ```
 
 ## Wastewater
