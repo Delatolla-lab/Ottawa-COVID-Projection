@@ -104,7 +104,7 @@ ott_covid_data <- ott_covid_data %>%
   mutate(date = as.Date(date)) %>%
   filter(date >= as.Date("2020-09-01"))
 
-time_frame <- c(0, 21, 42, 63, 84, 105, 126, 147, 168)
+time_frame <- c(0, 21, 42, 63, 84, 105)
 x <- 0
 
 for(i in time_frame){
@@ -144,6 +144,12 @@ for(i in time_frame){
 }
 
 save(hist_proj, file = "hist_proj.RData")
+```
+
+```{r}
+# Load hist_proj .RData
+load("hist_proj.RData")
+hist_projections <- bind_rows(hist_proj)
 ```
 
 ## Wastewater
