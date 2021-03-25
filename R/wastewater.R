@@ -5,8 +5,8 @@ wastewater_prep <- function(data){
   names(data)[5] <- "N1"
   names(data)[7] <- "N2"
   
-  data %>%
-    select(date, N1, N2) %>%
+  data_clean <- data %>%
+    select(date, N1, N2, dataConcern) %>%
     mutate(date = as.Date(date)) %>%
     filter(!is.na(date)) %>%
     # Create mean value of N1 and N2
@@ -16,6 +16,10 @@ wastewater_prep <- function(data){
       viral_roc_daily = ((N1_N2_avg - lag(N1_N2_avg))/lag(N1_N2_avg))/
         (as.numeric(as_date(date)-lag(as_date(date))))
     )
+    
+  data_clean$N1_N2_avg_clean <-
+    ifelse(data_clean$dataConcern == TRUE, NA, data_clean$N1_N2_avg)
+  return(data_clean)
 }
 
 # Script to merge wastewater data into covid data

@@ -33,7 +33,7 @@ ott_covid_data <-
 
 ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
 waste_clean <- wastewater_prep(ott_observed_waste)
-ott_covid_waste <- merge_data(ott_observed_covid, waste_clean)
+#ott_covid_waste <- merge_data(ott_covid_data, waste_clean)
 
 # Set reporting delay, generation time, incubation period
 reporting_delay <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
@@ -98,37 +98,85 @@ plot
 ## Assessing performance of projections on previous data
 
 ```{r}
-hosp_test <- ott_covid_data %>%
+hist_proj <- list()
+# Filter for data beyond Sept 1
+ott_covid_test <- ott_covid_data %>%
+  mutate(date = as.Date(date)) %>%
+  filter(date >= as.Date("2020-09-01"))
+
+time_frame <- c(0, 21, 42, 63, 84, 105)
+x <- 0
+
+for(i in time_frame){
+  x <- x + 1
+  hosp_i <- ott_covid_test %>%
   select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
   mutate(date = as.Date(date)) %>%
   rename(primary = "observed_new_cases", secondary = "observed_census_ICU_p_acute_care") %>%
-  filter(date >= "2020-12-01" & date <= "2021-02-28")
-
-hosp_test <- data.table::setDT(hosp_test)
-
-cases_to_hosp_test <- estimate_secondary(hosp_test, 
+  filter(date >= (first(as.Date(ott_covid_test$date)) + i) &
+           date <= (first(as.Date(ott_covid_test$date)) + i + 90))
+  
+  hosp_i <- data.table::setDT(hosp_i)
+  
+  cases_to_hosp_i <- estimate_secondary(hosp_i, 
                                     delays = delay_opts(list(mean = 2.5, mean_sd = 0.2, 
                                                                sd = 0.47, sd_sd = 0.1, max = 21)),
                                     secondary = secondary_opts(type = "prevalence"),
                                     obs = obs_opts(scale = list(mean = 0.01, sd = 0.0025)),
                                     control = list(adapt_delta = 0.95))
-
-case_forecast_test <- epinow(reported_cases = copy(hosp_test)[, .(date, confirm = primary)], 
+  
+  case_forecast_i <- epinow(reported_cases = copy(hosp_i)[, .(date, confirm = primary)], 
                         generation_time = generation_time,
                         delays = delay_opts(incubation_period, reporting_delay),
                         rt = rt_opts(prior = list(mean = 1.5, sd = 0.5), rw = 7),
                         gp = NULL, horizon = 21)
+  
+  hosp_forecast_i <- forecast_secondary(cases_to_hosp_i, case_forecast_i$estimates)
+  
+  # Prep data to be visualized
+  hosp_proj_i <- hosp_forecast_i[[2]]
+  
+  hosp_proj_i$variable <- "reported_cases"
+  
+  hosp_proj_i$type <- ifelse(hosp_proj_i$date <= max(hosp_i$date), "estimate", "forecast")
+  
+  hist_proj[[x]] <- hosp_proj_i
+}
 
-hosp_forecast_test <- forecast_secondary(cases_to_hosp_test, case_forecast_test$estimates)
+save(hist_proj, file = "hist_proj.RData")
+```
 
-# Prep data to be visualized
-hosp_proj_test <- hosp_forecast_test[[2]]
+```{r}
+# Viewing historic projections without running model
+# Load packages and functions
+library(EpiNow2)
+library(tidyverse)
+library(plotly)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(stats)
+library(zoo)
+library(stringr)
+library(RColorBrewer)
+source("../R/epinow_functions.R")
+source("../R/open_ottawa_scripts.R")
 
-hosp_proj_test$variable <- "reported_cases"
+# Load hist_proj .RData
+load("hist_proj.RData")
+hist_projections <- bind_rows(hist_proj)
 
-hosp_proj_test$type <- ifelse(hosp_proj_test$date <= max(hosp_test$date), "estimate", "forecast")
+# Load test data used to generate historic projections
+ott_covid_data <-
+  read.csv(file.path(getwd(), "../Data/Observed Data/OPH_Observed_COVID_Data.csv"))
+ott_covid_test <- ott_covid_data %>%
+  mutate(date = as.Date(date)) %>%
+  filter(date >= as.Date("2020-09-01"))
 
-short_term_plot(projections = hosp_proj_test, obs_data = ott_covid_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Hospital census projections")
+hist_projections$type <- ifelse(hist_projections$date <= max(ott_covid_test$date), "estimate", "forecast")
+
+short_term_plot(projections = hist_projections, obs_data = ott_covid_test, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Examining historic hospital projections with hospital census data")
 ```
 
 ## Wastewater
