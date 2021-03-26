@@ -89,7 +89,6 @@ short_term_plot(
 
 ## Short-term hospitalization projections
 
-Projections from to `r max(hosp_proj$date, na.rm = TRUE)`
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 short_term_plot(
@@ -104,7 +103,6 @@ short_term_plot(
 
 ## Short-term wastewater projections
 
-Projections from to `r max(ww_proj$date, na.rm = TRUE)`
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 short_term_plot(
