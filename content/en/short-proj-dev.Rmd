@@ -19,9 +19,13 @@ library(lubridate)
 library(plotly)
 library(RColorBrewer)
 source("../../R/epinow_functions.R")
+source("../../R/wastewater.R")
 ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
+ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
+
 load("../../Data/short_term_forecast.RData")
 load("../../Data/short_term_hosp_proj.RData")
+load("../../Data/short_term_ww_proj.RData")
 
 ott_projections <- ott_short_forecast[[1]]
 
@@ -95,5 +99,20 @@ short_term_plot(
   forecast_type = "reported_cases",
   ylab = "Hospital census",
   title = "Projections for hospital census"
+)
+```
+
+## Short-term wastewater projections
+
+Projections from to `r max(ww_proj$date, na.rm = TRUE)`
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# visualize epinow forecast
+short_term_plot(
+  projections = ww_proj,
+  obs_data = ww_data,
+  obs_column = "secondary",
+  forecast_type = "reported_cases",
+  ylab = "Wastewater signal (µ)",
+  title = "Projections for viral signal"
 )
 ```
