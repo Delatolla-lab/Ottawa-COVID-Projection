@@ -95,7 +95,7 @@ observed_census,## {#observed-census},## {#observed-census}
 PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
 observed_admits,## {#observed-admits},## {#observed-admits}
 ProjectedHospital_title,## Projections,## Projections
-case_projections_text, "Short-term and long-term covid-19 projections are presented below. See [More](more) for a discussion about model interpretation and [Methods](methods) for how the projections where created. Short-term projections reflect current covid-19 transmission; while long-term projections reflect sustained transmission trends. Short-term and long-term projections can trend in different directions when there are changing patterns of community covid-19 transmission.
+case_projections_text, "Short-term covid-19 projections are presented below. See [More](more) for a discussion about model interpretation and [Methods](methods) for how the projections where created.
 
 Projections to {{1}}.
 
