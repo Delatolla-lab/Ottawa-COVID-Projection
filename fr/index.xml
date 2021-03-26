@@ -37,10 +37,10 @@ Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet
       
       <guid>https://613covid.ca/fr/change-log/</guid>
       <description>Updates involving only data updates will no longer be documented.
-V3.3.1 2021-03-19
+V3.3.2 2021-03-26
+ Short-term hospitalization projections added. Wastewater Midpoint mean viral signal omits dates flagged by wastewater researchers with potential data concerns.   V3.3.1 2021-03-19
  Long term case and hospitalization projections removed from the homepage. Short-term hospitalization projections to be added in next update.   V3.3.0 2020-11-26
- Short-term case projections added to the homepage. See More for a discussion about model interpretation and Methods for how the projections where created.   V3.2.0 2020-10-27
- Updates to wastewater page.   V3.</description>
+ Short-term case projections added to the homepage. See More for a discussion about model interpretation and Methods for how the projections where created.</description>
     </item>
     
     <item>
