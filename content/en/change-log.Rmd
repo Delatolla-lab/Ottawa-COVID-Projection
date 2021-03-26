@@ -4,6 +4,12 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V3.3.2
+2021-03-26
+
+- Short-term hospitalization projections added.
+- Wastewater Midpoint mean viral signal omits dates flagged by wastewater researchers with potential data concerns.
+
 # V3.3.1
 2021-03-19
 
