@@ -5,6 +5,7 @@ options(mc.cores = 4)
 library(ggplot2)
 library(EpiNow2)
 library(tidyverse)
+library(lubridate)
 
 source("R/open_ottawa_scripts.R")
 source("R/wastewater.R")
