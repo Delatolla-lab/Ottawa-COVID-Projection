@@ -13,6 +13,10 @@ reworked_figure <-
            error_bands = FALSE,
            error_data = NULL,
            error_col = NULL,
+           level = FALSE,
+           level_upper = NULL,
+           level_lower = NULL,
+           level_col = NULL,
            titles,
            vline = FALSE,
            vline_date = NULL,
@@ -280,6 +284,23 @@ reworked_figure <-
                      line = list(color = "transparent"),
                      showlegend = FALSE,
                      name = "Lower bound")
+    }
+    
+    if(isTRUE(level)){
+      p <- add_trace(p, x = data$date, y = level_upper,
+                     type = "scatter",
+                     mode = "lines",
+                     line = list(color = "transparent"),
+                     showlegend = FALSE,
+                     name = "Level of detection")
+      p <- add_trace(p, x = data$date, y = level_lower,
+                     type = "scatter",
+                     mode = "lines",
+                     fill = "tonexty",
+                     fillcolor = level_col,
+                     line = list(color = "transparent"),
+                     showlegend = TRUE,
+                     name = "Level of detection")
     }
     
     if(is.null(yaxis2)){
