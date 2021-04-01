@@ -170,3 +170,15 @@ merge_data <- function(data1, data2){
         100
     )
 }
+
+# Script to clean long wastewater data
+ww_long_prep <- function(data){
+  data_cleaned <- data %>%
+    select(analysisDate, type, aggregation, value) %>%
+    rename(date = "analysisDate") %>%
+    mutate(date = as.Date(date)) %>%
+    spread(type, value) %>%
+    filter(aggregation != "sd" & aggregation != "sdNr") %>%
+    select(date, covN1, covN2, varB117)
+  return(data_cleaned)
+}
