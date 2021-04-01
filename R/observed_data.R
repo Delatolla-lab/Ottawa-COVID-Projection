@@ -10,6 +10,8 @@ reworked_figure <-
            yaxis2_button = FALSE,
            y_button_name = "",
            y2_button_name = "",
+           error_bars = FALSE,
+           error_data = NULL,
            titles,
            vline = FALSE,
            vline_date = NULL,
@@ -66,7 +68,13 @@ reworked_figure <-
       "signal_data"
     
     library(plotly)
-    p <- plot_ly()
+    
+    if(isTRUE(error_bars)){
+      p <- plot_ly(error_y = list(array = data[[as.character(error_data)]]))
+    }
+    else{
+      p <- plot_ly()
+    }
     
     # base parameters for buttons
     base_params <- 'list(
