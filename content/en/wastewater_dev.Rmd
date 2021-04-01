@@ -46,8 +46,10 @@ ott_covid_waste <- merge_data(ott_observed_covid, waste_clean) %>%
     filter(date >= "2020-06-02")
 
 variant_data <- ww_long_prep(ott_long_ww_data) %>%
-  select(date, varB117) %>%
-  filter(!is.na(varB117))
+  select(date, aggregation, varB117) %>%
+  filter(!is.na(varB117)) %>%
+  spread(aggregation, varB117) %>%
+  rename(propB117 = "single")
 
 # Colours
 case_col <- "rgb(0, 128, 128)"
@@ -124,7 +126,7 @@ change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_n
 
 daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 
-var_call <- list(type = "observed_data", y_column = "varB117", name = "Proportion of variant B.1.1.7 in wastewater", color = case_col)
+var_call <- list(type = "signal_data", y_column = "propB117", name = "Proportion of variant B.1.1.7 in wastewater", color = case_col)
 ```
 
 The National Capital Region is the first community in Canada to conduct and report daily wastewater readings of Cov-V2 viral signal to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa).
@@ -169,7 +171,7 @@ reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_7_day_call, change_new
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
-reworked_figure(xaxis = "date", yaxis = list(var_call), titles = c(y = "Proportion", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 in wastewater, Ottawa</b>"), data = variant_data, ticks = FALSE)
+reworked_figure(xaxis = "date", yaxis = list(var_call), error_bars = TRUE, error_data = "sd", titles = c(y = "Proportion", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 in wastewater, Ottawa</b>"), data = variant_data, ticks = FALSE)
 ```
 
 ```

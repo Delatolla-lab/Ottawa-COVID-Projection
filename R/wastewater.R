@@ -178,7 +178,6 @@ ww_long_prep <- function(data){
     rename(date = "analysisDate") %>%
     mutate(date = as.Date(date)) %>%
     spread(type, value) %>%
-    filter(aggregation != "sd" & aggregation != "sdNr") %>%
-    select(date, covN1, covN2, varB117)
+    select(date, aggregation, covN1, covN2, varB117)
   return(data_cleaned)
 }
