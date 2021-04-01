@@ -20,7 +20,7 @@ reworked_figure <-
            smooth_colour = NULL,
            width = 800,
            height = 500,
-           tickvals = TRUE,
+           ticks = TRUE,
            data) {
     # ---------- PRESETS ----------
     tickvals <- floor_date(as_date(data$date), "month")
@@ -262,7 +262,7 @@ reworked_figure <-
     if(is.null(yaxis2)){
       if(!isTRUE(yaxis_button)){
         if(isTRUE(vline)){
-          if(isTRUE(tickvals)){
+          if(isTRUE(ticks)){
             p <-
               layout(
                 p,
@@ -305,7 +305,7 @@ reworked_figure <-
           }
         }
         else{
-          if(isTRUE(tickvals)){
+          if(isTRUE(ticks)){
             p <-
               layout(
                 p,
@@ -348,7 +348,7 @@ reworked_figure <-
       }
       else{
         if(isTRUE(vline)){
-          if(isTRUE(tickvals)){
+          if(isTRUE(ticks)){
             p <-
               layout(
                 p,
@@ -391,7 +391,7 @@ reworked_figure <-
           }
         }
         else{
-          if(isTRUE(tickvals)){
+          if(isTRUE(ticks)){
             p <-
               layout(
                 p,
@@ -436,7 +436,7 @@ reworked_figure <-
     else{
       if(isTRUE(yaxis_button)){
         if(isTRUE(vline)){
-          if(isTRUE(tickvals)){
+          if(isTRUE(ticks)){
             p <-
               layout(
                 p,
@@ -493,7 +493,7 @@ reworked_figure <-
           }
         }
         else{
-          if(isTRUE(tickvals)){
+          if(isTRUE(ticks)){
             p <-
               layout(
                 p,
@@ -549,7 +549,7 @@ reworked_figure <-
       else if(isTRUE(yaxis2_button)){
         tmp <- 2*max(data[,yaxis2[[1]][["y_column"]]], na.rm = TRUE)
         if(isTRUE(vline)){
-          if(isTRUE(tickvals)){
+          if(isTRUE(ticks)){
             p <-
               layout(
                 p,
@@ -618,7 +618,7 @@ reworked_figure <-
           }
         }
         else{
-          if(isTRUE(tickvals)){
+          if(isTRUE(ticks)){
             p <-
               layout(
                 p,
@@ -688,7 +688,7 @@ reworked_figure <-
       else{
         tmp <- 2*max(data[,yaxis2[[1]][["y_column"]]], na.rm = TRUE)
         if(isTRUE(vline)){
-          if(isTRUE(tickvals)){
+          if(isTRUE(ticks)){
             p <-
               layout(
                 p,
@@ -745,7 +745,7 @@ reworked_figure <-
           }
         }
         else{
-          if(isTRUE(tickvals)){
+          if(isTRUE(ticks)){
             p <-
               layout(
                 p,
