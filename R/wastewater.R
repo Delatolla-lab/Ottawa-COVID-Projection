@@ -19,6 +19,8 @@ wastewater_prep <- function(data){
     
   data_clean$N1_N2_avg_clean <-
     ifelse(data_clean$dataConcern == TRUE, NA, data_clean$N1_N2_avg)
+  data_clean$N1_N2_avg_omit <-
+    ifelse(data_clean$dataConcern == TRUE, data_clean$N1_N2_avg, NA)
   return(data_clean)
 }
 
@@ -169,4 +171,15 @@ merge_data <- function(data1, data2){
            lag(observed_new_cases_10_day, 10))/lag(observed_new_cases_10_day, 10) *
         100
     )
+}
+
+# Script to clean long wastewater data
+ww_long_prep <- function(data){
+  data_cleaned <- data %>%
+    select(analysisDate, type, aggregation, value) %>%
+    rename(date = "analysisDate") %>%
+    mutate(date = as.Date(date)) %>%
+    spread(type, value) %>%
+    select(date, aggregation, covN1, covN2, varB117)
+  return(data_cleaned)
 }

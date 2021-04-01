@@ -10,6 +10,13 @@ reworked_figure <-
            yaxis2_button = FALSE,
            y_button_name = "",
            y2_button_name = "",
+           error_bands = FALSE,
+           error_data = NULL,
+           error_col = NULL,
+           level = FALSE,
+           level_upper = NULL,
+           level_lower = NULL,
+           level_col = NULL,
            titles,
            vline = FALSE,
            vline_date = NULL,
@@ -20,6 +27,7 @@ reworked_figure <-
            smooth_colour = NULL,
            width = 800,
            height = 500,
+           ticks = TRUE,
            data) {
     # ---------- PRESETS ----------
     tickvals <- floor_date(as_date(data$date), "month")
@@ -65,7 +73,8 @@ reworked_figure <-
       "signal_data"
     
     library(plotly)
-    p <- plot_ly()
+    
+      p <- plot_ly()
     
     # base parameters for buttons
     base_params <- 'list(
@@ -258,277 +267,581 @@ reworked_figure <-
                                  width = 2.5))
     }
     
+    if(isTRUE(error_bands)){
+      error_y_upper <- data[[var_to_map$y_column]] + data[[as.character(error_data)]]
+      error_y_lower <- data[[var_to_map$y_column]] - data[[as.character(error_data)]]
+      p <- add_trace(p, x = data$date, y = error_y_upper,
+                     type = "scatter",
+                     mode = "lines",
+                     line = list(color = "transparent"),
+                     showlegend = FALSE,
+                     name = "Upper bound")
+      p <- add_trace(p, x = data$date, y = error_y_lower,
+                     type = "scatter",
+                     mode = "lines",
+                     fill = "tonexty",
+                     fillcolor = error_col,
+                     line = list(color = "transparent"),
+                     showlegend = FALSE,
+                     name = "Lower bound")
+    }
+    
+    if(isTRUE(level)){
+      p <- add_trace(p, x = data$date, y = level_upper,
+                     type = "scatter",
+                     mode = "lines",
+                     line = list(color = "transparent"),
+                     showlegend = FALSE,
+                     name = "Level of detection")
+      p <- add_trace(p, x = data$date, y = level_lower,
+                     type = "scatter",
+                     mode = "lines",
+                     fill = "tonexty",
+                     fillcolor = level_col,
+                     line = list(color = "transparent"),
+                     showlegend = TRUE,
+                     name = "Level of detection")
+    }
+    
     if(is.null(yaxis2)){
       if(!isTRUE(yaxis_button)){
         if(isTRUE(vline)){
-          p <-
-            layout(
-              p,
-              title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-              xaxis = list(type = "date",
-                           title = list(text = as.character(titles[["x"]])),
-                           automargin = TRUE, tickvals = tickvals, 
-                           tickformat = "%b"),
-              yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                           automargin = TRUE),
-              barmode =  "relative",
-              bargap = 0,
-              autosize = FALSE,
-              width = width,
-              height = height,
-              legend = list(x = 0.025, y = 0.9),
-              dragmode = "pan",
-              shapes = list(vline(x = as.Date(vline_date)))
-            )
+          if(isTRUE(ticks)){
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickvals = tickvals, 
+                             tickformat = "%b"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.025, y = 0.9),
+                dragmode = "pan",
+                shapes = list(vline(x = as.Date(vline_date)))
+              )
+          }
+          else{
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickformat = "%b %d"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.025, y = 0.9),
+                dragmode = "pan",
+                shapes = list(vline(x = as.Date(vline_date)))
+              )
+          }
         }
         else{
-          p <-
-            layout(
-              p,
-              title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-              xaxis = list(type = "date",
-                           title = list(text = as.character(titles[["x"]])),
-                           automargin = TRUE, tickvals = tickvals, 
-                           tickformat = "%b"),
-              yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                           automargin = TRUE),
-              barmode =  "relative",
-              bargap = 0,
-              autosize = FALSE,
-              width = width,
-              height = height,
-              legend = list(x = 0.025, y = 0.9),
-              dragmode = "pan"
-            )
+          if(isTRUE(ticks)){
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickvals = tickvals, 
+                             tickformat = "%b"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.025, y = 0.9),
+                dragmode = "pan"
+              )
+          }
+          else{
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickformat = "%b %d"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.025, y = 0.9),
+                dragmode = "pan"
+              )
+          }
         }
       }
       else{
         if(isTRUE(vline)){
-          p <-
-            layout(
-              p,
-              title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-              xaxis = list(type = "date",
-                           title = list(text = as.character(titles[["x"]])),
-                           automargin = TRUE, tickvals = tickvals, 
-                           tickformat = "%b"),
-              yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                           automargin = TRUE),
-              barmode =  "relative",
-              bargap = 0,
-              autosize = FALSE,
-              width = width,
-              height = height,
-              legend = list(x = 0.05, y = 1),
-              updatemenus = updated,
-              shapes = list(vline(x = as.Date(vline_date)))
-            )
+          if(isTRUE(ticks)){
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickvals = tickvals, 
+                             tickformat = "%b"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 1),
+                updatemenus = updated,
+                shapes = list(vline(x = as.Date(vline_date)))
+              )
+          }
+          else{
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickformat = "%b %d"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 1),
+                updatemenus = updated,
+                shapes = list(vline(x = as.Date(vline_date)))
+              )
+          }
         }
         else{
-          p <-
-            layout(
-              p,
-              title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-              xaxis = list(type = "date",
-                           title = list(text = as.character(titles[["x"]])),
-                           automargin = TRUE, tickvals = tickvals, 
-                           tickformat = "%b"),
-              yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                           automargin = TRUE),
-              barmode =  "relative",
-              bargap = 0,
-              autosize = FALSE,
-              width = width,
-              height = height,
-              legend = list(x = 0.05, y = 1),
-              updatemenus = updated
-            )
+          if(isTRUE(ticks)){
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickvals = tickvals, 
+                             tickformat = "%b"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 1),
+                updatemenus = updated
+              )
+          }
+          else{
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickformat = "%b %d"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 1),
+                updatemenus = updated
+              )
+          }
         }
       }
     }
     else{
       if(isTRUE(yaxis_button)){
         if(isTRUE(vline)){
-          p <-
-            layout(
-              p,
-              title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-              xaxis = list(type = "date",
-                           title = list(text = as.character(titles[["x"]])),
-                           automargin = TRUE, tickvals = tickvals, 
-                           tickformat = "%b"),
-              yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                           automargin = TRUE, overlaying = "y2",
-                           zeroline = FALSE),
-              yaxis2 = list(
-                side = "right",
-                title = list(text = as.character(titles[["y2"]])),
-                automargin = TRUE, 
-                showgrid = FALSE
-              ),
-              barmode =  "relative",
-              bargap = 0,
-              autosize = FALSE,
-              width = width,
-              height = height,
-              legend = list(x = 0.05, y = 0.9),
-              updatemenus = updated,
-              shapes = list(vline(x = as.Date(vline_date)))
-            )
+          if(isTRUE(ticks)){
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickvals = tickvals, 
+                             tickformat = "%b"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 0.9),
+                updatemenus = updated,
+                shapes = list(vline(x = as.Date(vline_date)))
+              )
+          }
+          else{
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickformat = "%b %d"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 0.9),
+                updatemenus = updated,
+                shapes = list(vline(x = as.Date(vline_date)))
+              )
+          }
         }
         else{
-          p <-
-            layout(
-              p,
-              title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-              xaxis = list(type = "date",
-                           title = list(text = as.character(titles[["x"]])),
-                           automargin = TRUE, tickvals = tickvals, 
-                           tickformat = "%b"),
-              yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                           automargin = TRUE, overlaying = "y2",
-                           zeroline = FALSE),
-              yaxis2 = list(
-                side = "right",
-                title = list(text = as.character(titles[["y2"]])),
-                automargin = TRUE, 
-                showgrid = FALSE
-              ),
-              barmode =  "relative",
-              bargap = 0,
-              autosize = FALSE,
-              width = width,
-              height = height,
-              legend = list(x = 0.05, y = 0.9),
-              updatemenus = updated)
+          if(isTRUE(ticks)){
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickvals = tickvals, 
+                             tickformat = "%b"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 0.9),
+                updatemenus = updated)
+          }
+          else{
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickformat = "%b %d"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 0.9),
+                updatemenus = updated)
+          }
         }
       }
       else if(isTRUE(yaxis2_button)){
         tmp <- 2*max(data[,yaxis2[[1]][["y_column"]]], na.rm = TRUE)
         if(isTRUE(vline)){
-          p <-
-            layout(
-              p,
-              title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-              xaxis = list(type = "date",
-                           title = list(text = as.character(titles[["x"]])),
-                           automargin = TRUE, tickvals = tickvals, 
-                           tickformat = "%b"),
-              yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                           automargin = TRUE, overlaying = "y2",
-                           zeroline = FALSE),
-              yaxis2 = list(
-                side = "right",
-                title = list(text = as.character(titles[["y2"]])),
-                automargin = TRUE, 
-                showgrid = FALSE,
-                range = c(0, tmp)
-              ),
-              barmode =  "relative",
-              bargap = 0,
-              autosize = FALSE,
-              width = width,
-              height = height,
-              annotations = list(
-                x = 1.26, y = 0.95, text = y2_button_name, 
-                showarrow = F, xref='paper', yref='paper',
-                font=list(size=15)
-              ),
-              legend = list(x = 0.05, y = 0.9),
-              updatemenus = updated_y2,
-              shapes = list(vline(x = as.Date(vline_date)))
-            )
+          if(isTRUE(ticks)){
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickvals = tickvals, 
+                             tickformat = "%b"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE,
+                  range = c(0, tmp)
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                annotations = list(
+                  x = 1.26, y = 0.95, text = y2_button_name, 
+                  showarrow = F, xref='paper', yref='paper',
+                  font=list(size=15)
+                ),
+                legend = list(x = 0.05, y = 0.9),
+                updatemenus = updated_y2,
+                shapes = list(vline(x = as.Date(vline_date)))
+              )
+          }
+          else{
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickformat = "%b %d"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE,
+                  range = c(0, tmp)
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                annotations = list(
+                  x = 1.26, y = 0.95, text = y2_button_name, 
+                  showarrow = F, xref='paper', yref='paper',
+                  font=list(size=15)
+                ),
+                legend = list(x = 0.05, y = 0.9),
+                updatemenus = updated_y2,
+                shapes = list(vline(x = as.Date(vline_date)))
+              )
+          }
         }
         else{
-          p <-
-            layout(
-              p,
-              title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-              xaxis = list(type = "date",
-                           title = list(text = as.character(titles[["x"]])),
-                           automargin = TRUE, tickvals = tickvals, 
-                           tickformat = "%b"),
-              yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                           automargin = TRUE, overlaying = "y2",
-                           zeroline = FALSE),
-              yaxis2 = list(
-                side = "right",
-                title = list(text = as.character(titles[["y2"]])),
-                automargin = TRUE, 
-                showgrid = FALSE,
-                range = c(0, tmp)
-              ),
-              barmode =  "relative",
-              bargap = 0,
-              autosize = FALSE,
-              width = width,
-              height = height,
-              annotations = list(
-                x = 1.26, y = 0.95, text = y2_button_name, 
-                showarrow = F, xref='paper', yref='paper',
-                font=list(size=15)
-              ),
-              legend = list(x = 0.05, y = 0.9),
-              updatemenus = updated_y2
-            )
+          if(isTRUE(ticks)){
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickvals = tickvals, 
+                             tickformat = "%b"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE,
+                  range = c(0, tmp)
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                annotations = list(
+                  x = 1.26, y = 0.95, text = y2_button_name, 
+                  showarrow = F, xref='paper', yref='paper',
+                  font=list(size=15)
+                ),
+                legend = list(x = 0.05, y = 0.9),
+                updatemenus = updated_y2
+              )
+          }
+          else{
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickformat = "%b %d"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE,
+                  range = c(0, tmp)
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                annotations = list(
+                  x = 1.26, y = 0.95, text = y2_button_name, 
+                  showarrow = F, xref='paper', yref='paper',
+                  font=list(size=15)
+                ),
+                legend = list(x = 0.05, y = 0.9),
+                updatemenus = updated_y2
+              )
+          }
         }
       }
       else{
         tmp <- 2*max(data[,yaxis2[[1]][["y_column"]]], na.rm = TRUE)
         if(isTRUE(vline)){
-          p <-
-            layout(
-              p,
-              title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-              xaxis = list(type = "date",
-                           title = list(text = as.character(titles[["x"]])),
-                           automargin = TRUE, tickvals = tickvals, 
-                           tickformat = "%b"),
-              yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                           automargin = TRUE, overlaying = "y2",
-                           zeroline = FALSE),
-              yaxis2 = list(
-                side = "right",
-                title = list(text = as.character(titles[["y2"]])),
-                automargin = TRUE, 
-                showgrid = FALSE,
-                range = c(0, tmp)
-              ),
-              barmode =  "relative",
-              bargap = 0,
-              autosize = FALSE,
-              width = width,
-              height = height,
-              legend = list(x = 0.05, y = 0.9),
-              shapes = list(vline(x = as.Date(vline_date)))
-            )
+          if(isTRUE(ticks)){
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickvals = tickvals, 
+                             tickformat = "%b"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE,
+                  range = c(0, tmp)
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 0.9),
+                shapes = list(vline(x = as.Date(vline_date)))
+              )
+          }
+          else{
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickformat = "%b %d"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE,
+                  range = c(0, tmp)
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 0.9),
+                shapes = list(vline(x = as.Date(vline_date)))
+              )
+          }
         }
         else{
-          p <-
-            layout(
-              p,
-              title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
-              xaxis = list(type = "date",
-                           title = list(text = as.character(titles[["x"]])),
-                           automargin = TRUE, tickvals = tickvals, 
-                           tickformat = "%b"),
-              yaxis = list(title = list(text = as.character(titles[["y"]])), 
-                           automargin = TRUE, overlaying = "y2",
-                           zeroline = FALSE),
-              yaxis2 = list(
-                side = "right",
-                title = list(text = as.character(titles[["y2"]])),
-                automargin = TRUE, 
-                showgrid = FALSE,
-                range = c(0, tmp)
-              ),
-              barmode =  "relative",
-              bargap = 0,
-              autosize = FALSE,
-              width = width,
-              height = height,
-              legend = list(x = 0.05, y = 0.9)
-            )
+          if(isTRUE(ticks)){
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickvals = tickvals, 
+                             tickformat = "%b"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE,
+                  range = c(0, tmp)
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 0.9)
+              )
+          }
+          else{
+            p <-
+              layout(
+                p,
+                title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
+                xaxis = list(type = "date",
+                             title = list(text = as.character(titles[["x"]])),
+                             automargin = TRUE, tickformat = "%b %d"),
+                yaxis = list(title = list(text = as.character(titles[["y"]])), 
+                             automargin = TRUE, overlaying = "y2",
+                             zeroline = FALSE),
+                yaxis2 = list(
+                  side = "right",
+                  title = list(text = as.character(titles[["y2"]])),
+                  automargin = TRUE, 
+                  showgrid = FALSE,
+                  range = c(0, tmp)
+                ),
+                barmode =  "relative",
+                bargap = 0,
+                autosize = FALSE,
+                width = width,
+                height = height,
+                legend = list(x = 0.05, y = 0.9)
+              )
+          }
         }
       }  
     }

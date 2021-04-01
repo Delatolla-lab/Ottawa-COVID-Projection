@@ -38,19 +38,39 @@ ottawa_test_data <-
 # data
 ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
 ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
+ott_long_ww_data <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/data-model-implementation/data/wwMeasure.csv")
 
 # functions to integrate waste & covid data together
 waste_clean <- wastewater_prep(ott_observed_waste)
 ott_covid_waste <- merge_data(ott_observed_covid, waste_clean) %>%
     filter(date >= "2020-06-02")
 
+variant_data <- ww_long_prep(ott_long_ww_data) %>%
+  select(date, aggregation, varB117) %>%
+  filter(!is.na(varB117)) %>%
+  spread(aggregation, varB117) %>%
+  rename(propB117 = "single") %>%
+  filter(sd != is.na(sd))
+
+variant_non_detect <- ww_long_prep(ott_long_ww_data) %>%
+  select(date, aggregation, varB117) %>%
+  filter(!is.na(varB117)) %>%
+  spread(aggregation, varB117) %>%
+  rename(propB117_detect = "single") %>%
+  select(date, propB117_detect) %>%
+  filter(propB117_detect == 0) %>%
+  full_join(variant_data, by = "date")
+
 # Colours
 case_col <- "rgb(0, 128, 128)"
+case_shade <- "rgba(0, 128, 128, 0.2)"
 n1_col <- "rgb(23, 63, 95)"
 n2_col <- "rgb(60, 174, 163)"
 n1_n2_col <- "rgb(237, 85, 59)"
 rolling_avg_col <- "rgb(226, 127, 88)"
 smooth_col <- "rgb(34, 140, 34)"
+red <- "rgb(255,0,0)"
+red_shade <- "rgba(255, 0, 0, 0.2)"
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -118,6 +138,10 @@ change_new_cases_10_day_call <- list(type = "observed_data", y_column = "change_
 change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_new_cases_7_day", name = "Percent change in \nnew case rolling \navg over 7 days", short_name = "7 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
 
 daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
+
+var_call <- list(type = "signal_data", y_column = "propB117", name = "B.1.1.7 RNA signal", color = case_col)
+
+var_nondetect_call <- list(type = "signal_data", y_column = "propB117_detect", name = "B.1.1.7 non-detection", color = red)
 ```
 
 The National Capital Region is the first community in Canada to conduct and report daily wastewater readings of Cov-V2 viral signal to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa).
@@ -158,6 +182,14 @@ Outbreaks often result in significant increases in the number of covid-19 infect
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
 reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_7_day_call, change_new_cases_7_day_call), titles = c(y = "Percent change (%)", x = "Date", title = "<b>Percent change^ in 7 day rolling average</b>"), data = ott_covid_waste)
 ```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
+reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call), error_bands = TRUE, error_data = "sd", error_col = case_shade, titles = c(y = "Proportion", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
+```
+
+*Shaded area reflect the uncertainty of each B.1.1.7 detection.
 
 ---
 
