@@ -38,11 +38,16 @@ ottawa_test_data <-
 # data
 ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
 ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
+ott_long_ww_data <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/data-model-implementation/data/wwMeasure.csv")
 
 # functions to integrate waste & covid data together
 waste_clean <- wastewater_prep(ott_observed_waste)
 ott_covid_waste <- merge_data(ott_observed_covid, waste_clean) %>%
     filter(date >= "2020-06-02")
+
+variant_data <- ww_long_prep(ott_long_ww_data) %>%
+  select(date, varB117) %>%
+  filter(!is.na(varB117))
 
 # Colours
 case_col <- "rgb(0, 128, 128)"
@@ -118,6 +123,8 @@ change_new_cases_10_day_call <- list(type = "observed_data", y_column = "change_
 change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_new_cases_7_day", name = "Percent change in \nnew case rolling \navg over 7 days", short_name = "7 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
 
 daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
+
+var_call <- list(type = "observed_data", y_column = "varB117", name = "Proportion of variant B.1.1.7 in wastewater", color = case_col)
 ```
 
 The National Capital Region is the first community in Canada to conduct and report daily wastewater readings of Cov-V2 viral signal to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa).
@@ -160,6 +167,12 @@ reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_7_day_call, change_new
 ```
 
 ---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
+reworked_figure(xaxis = "date", yaxis = list(var_call), titles = c(y = "Proportion", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 in wastewater, Ottawa</b>"), data = variant_data)
+```
+
+```
 
 See the [Methods](/model/) page for more information on how the samples were collected, access to the data, and how the plots were created. The plots are currently for research only and presented to the public for discussion.
 
