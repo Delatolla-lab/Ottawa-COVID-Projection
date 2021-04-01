@@ -19,6 +19,8 @@ wastewater_prep <- function(data){
     
   data_clean$N1_N2_avg_clean <-
     ifelse(data_clean$dataConcern == TRUE, NA, data_clean$N1_N2_avg)
+  data_clean$N1_N2_avg_omit <-
+    ifelse(data_clean$dataConcern == TRUE, data_clean$N1_N2_avg, NA)
   return(data_clean)
 }
 

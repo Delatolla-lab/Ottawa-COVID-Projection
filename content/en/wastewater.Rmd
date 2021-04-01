@@ -115,7 +115,9 @@ change_new_cases_10_day_call <- list(type = "observed_data", y_column = "change_
 
 change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_new_cases_7_day", name = "Percent change in \nnew case rolling \navg over 7 days", short_name = "7 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
 
-daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
+daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg_clean", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
+
+daily_viral_signal_call_omit <- list(type = "observed_data", y_column = "N1_N2_avg_omit", name = "Omitted viral signal", short_name = "Daily signal", color = case_col, yaxis = "y2", opacity = 0.50)
 ```
 
 The National Capital Region is the first community in Canada to conduct and report daily wastewater readings of SARS-CoV-2 viral signal to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute and the University of Ottawa.
@@ -124,7 +126,7 @@ People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardl
 
 ### Status of variants
 
-B.1.1.7: **detected** in samples collected on 2021-03-18
+B.1.1.7: **detected** in samples collected on 2021-03-28
 
 B.1.351: not tested
 
@@ -146,10 +148,10 @@ The three plots below illustrate daily viral covid-19 wastewater signal in Ottaw
 For mobile users, dragging the plot while in landscape mode will allow you to view current data.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste)
+reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste)
 ```
 
-*Midpoint mean viral signal omits dates flagged by wastewater researchers with potential data concerns. Data is currently being studied for effects of snow melt and other diluting factors on RNA signal. 
+*Midpoint mean viral signal omits dates (coloured in blue) flagged by wastewater researchers with potential data concerns. Data is currently being studied for effects of snow melt and other diluting factors on RNA signal. 
 
 ---
 
