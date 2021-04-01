@@ -10,8 +10,9 @@ reworked_figure <-
            yaxis2_button = FALSE,
            y_button_name = "",
            y2_button_name = "",
-           error_bars = FALSE,
+           error_bands = FALSE,
            error_data = NULL,
+           error_col = NULL,
            titles,
            vline = FALSE,
            vline_date = NULL,
@@ -69,12 +70,7 @@ reworked_figure <-
     
     library(plotly)
     
-    if(isTRUE(error_bars)){
-      p <- plot_ly(error_y = list(array = data[[as.character(error_data)]]))
-    }
-    else{
       p <- plot_ly()
-    }
     
     # base parameters for buttons
     base_params <- 'list(
@@ -265,6 +261,25 @@ reworked_figure <-
                      mode = "lines", 
                      line = list(color = as.character(smooth_colour),
                                  width = 2.5))
+    }
+    
+    if(isTRUE(error_bands)){
+      error_y_upper <- data[[var_to_map$y_column]] + data[[as.character(error_data)]]
+      error_y_lower <- data[[var_to_map$y_column]] - data[[as.character(error_data)]]
+      p <- add_trace(p, x = data$date, y = error_y_upper,
+                     type = "scatter",
+                     mode = "lines",
+                     line = list(color = "transparent"),
+                     showlegend = FALSE,
+                     name = "Upper bound")
+      p <- add_trace(p, x = data$date, y = error_y_lower,
+                     type = "scatter",
+                     mode = "lines",
+                     fill = "tonexty",
+                     fillcolor = error_col,
+                     line = list(color = "transparent"),
+                     showlegend = FALSE,
+                     name = "Lower bound")
     }
     
     if(is.null(yaxis2)){
