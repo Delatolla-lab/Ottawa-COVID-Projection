@@ -6,7 +6,7 @@ wastewater_prep <- function(data){
   names(data)[7] <- "N2"
   
   data_clean <- data %>%
-    select(date, N1, N2, dataConcern) %>%
+    select(date, N1, N2, qualityFlag) %>%
     mutate(date = as.Date(date)) %>%
     filter(!is.na(date)) %>%
     # Create mean value of N1 and N2
@@ -18,9 +18,9 @@ wastewater_prep <- function(data){
     )
     
   data_clean$N1_N2_avg_clean <-
-    ifelse(data_clean$dataConcern == TRUE, NA, data_clean$N1_N2_avg)
+    ifelse(data_clean$qualityFlag == TRUE, NA, data_clean$N1_N2_avg)
   data_clean$N1_N2_avg_omit <-
-    ifelse(data_clean$dataConcern == TRUE, data_clean$N1_N2_avg, NA)
+    ifelse(data_clean$qualityFlag == TRUE, data_clean$N1_N2_avg, NA)
   return(data_clean)
 }
 

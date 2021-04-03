@@ -50,6 +50,8 @@ variant_data <- ww_long_prep(ott_long_ww_data) %>%
   filter(!is.na(varB117)) %>%
   spread(aggregation, varB117) %>%
   rename(propB117 = "single") %>%
+  mutate(propB117 = propB117*100,
+         sd = sd*100) %>%
   filter(sd != is.na(sd))
 
 variant_non_detect <- ww_long_prep(ott_long_ww_data) %>%
@@ -139,7 +141,7 @@ change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_n
 
 daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 
-var_call <- list(type = "signal_data", y_column = "propB117", name = "B.1.1.7 RNA signal", color = case_col)
+var_call <- list(type = "signal_data", y_column = "propB117", name = "% B.1.1.7 RNA", color = case_col)
 
 var_nondetect_call <- list(type = "signal_data", y_column = "propB117_detect", name = "B.1.1.7 non-detection", color = red)
 ```
@@ -186,7 +188,7 @@ reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_7_day_call, change_new
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
-reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call), error_bands = TRUE, error_data = "sd", error_col = case_shade, titles = c(y = "Proportion", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
+reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call), error_bands = TRUE, error_data = "sd", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
 ```
 
 *Shaded area reflect the uncertainty of each B.1.1.7 detection.
