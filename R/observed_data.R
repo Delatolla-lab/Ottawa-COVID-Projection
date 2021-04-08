@@ -12,6 +12,7 @@ reworked_figure <-
            y2_button_name = "",
            error_bands = FALSE,
            error_data = NULL,
+           error_pct = FALSE,
            error_col = NULL,
            level = FALSE,
            level_upper = NULL,
@@ -268,8 +269,22 @@ reworked_figure <-
     }
     
     if(isTRUE(error_bands)){
-      error_y_upper <- data[[var_to_map$y_column]] + data[[as.character(error_data)]]
-      error_y_lower <- data[[var_to_map$y_column]] - data[[as.character(error_data)]]
+      if(isTRUE(error_pct)){
+        error_y_upper <-
+          ifelse((data[[var_to_map$y_column]]
+                  + data[[as.character(error_data)]]) > 100, 100,
+                 data[[var_to_map$y_column]] + data[[as.character(error_data)]])
+        error_y_lower <-
+          ifelse((data[[var_to_map$y_column]] -
+                    data[[as.character(error_data)]]) < 0, 0,
+                 data[[var_to_map$y_column]] - data[[as.character(error_data)]])
+      }
+      else{
+        error_y_upper <-
+          data[[var_to_map$y_column]] + data[[as.character(error_data)]]
+        error_y_lower <-
+          data[[var_to_map$y_column]] - data[[as.character(error_data)]]
+      }
       p <- add_trace(p, x = data$date, y = error_y_upper,
                      type = "scatter",
                      mode = "lines",
