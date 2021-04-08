@@ -141,6 +141,8 @@ change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_n
 
 daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 
+daily_viral_signal_call_omit <- list(type = "observed_data", y_column = "N1_N2_avg_omit", name = "Omitted viral signal", short_name = "Daily signal", color = case_col, yaxis = "y2", opacity = 0.50)
+
 var_call <- list(type = "signal_data", y_column = "propB117", name = "% B.1.1.7 RNA", color = case_col)
 
 var_nondetect_call <- list(type = "signal_data", y_column = "propB117_detect", name = "B.1.1.7 non-detection", color = red)

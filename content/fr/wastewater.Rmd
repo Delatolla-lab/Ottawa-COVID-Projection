@@ -34,32 +34,56 @@ ottawa_case_data <-
 ottawa_test_data <-
   fromJSON("https://opendata.arcgis.com/datasets/26c902bf1da44d3d90b099392b544b81_0/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
 
+
 # data
 ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]]
 ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
+ott_long_ww_data <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wwMeasure.csv")
 
 # functions to integrate waste & covid data together
 waste_clean <- wastewater_prep(ott_observed_waste)
 ott_covid_waste <- merge_data(ott_observed_covid, waste_clean) %>%
     filter(date >= "2020-06-02")
 
+variant_data <- ww_long_prep(ott_long_ww_data) %>%
+  select(date, aggregation, varB117) %>%
+  filter(!is.na(varB117)) %>%
+  spread(aggregation, varB117) %>%
+  rename(propB117 = "single") %>%
+  mutate(propB117 = propB117*100,
+         sd = sd*100) %>%
+  filter(sd != is.na(sd))
+
+variant_non_detect <- ww_long_prep(ott_long_ww_data) %>%
+  select(date, aggregation, varB117) %>%
+  filter(!is.na(varB117)) %>%
+  spread(aggregation, varB117) %>%
+  rename(propB117_detect = "single") %>%
+  select(date, propB117_detect) %>%
+  filter(propB117_detect == 0) %>%
+  full_join(variant_data, by = "date")
+
 # Colours
 case_col <- "rgb(0, 128, 128)"
+case_shade <- "rgba(0, 128, 128, 0.2)"
 n1_col <- "rgb(23, 63, 95)"
 n2_col <- "rgb(60, 174, 163)"
 n1_n2_col <- "rgb(237, 85, 59)"
 rolling_avg_col <- "rgb(226, 127, 88)"
+smooth_col <- "rgb(34, 140, 34)"
+red <- "rgb(255,0,0)"
+red_shade <- "rgba(255, 0, 0, 0.2)"
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Initialize calls for each parameter
 new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Daily reported new cases", short_name = "Daily cases", color = case_col)
 
-new_case_5_day_call <- list(type = "observed_data", y_column = "observed_new_cases_5_day", name = "5-day mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
+new_case_5_day_call <- list(type = "observed_data", y_column = "observed_new_cases_5_day", name = "5-day midpoint mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
 
-new_case_10_day_call <- list(type = "observed_data", y_column = "observed_new_cases_10_day", name = "10-day mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
+new_case_10_day_call <- list(type = "observed_data", y_column = "observed_new_cases_10_day", name = "10-day midpoint mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
 
-new_case_7_day_call <- list(type = "observed_data", y_column = "observed_new_cases_7_day", name = "7-day mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
+new_case_7_day_call <- list(type = "observed_data", y_column = "observed_new_cases_7_day", name = "7-day midpoint mean in \nreported new cases \n(by reporting date)", short_name = "New cases\n(reported date)", color = case_col, opacity = 0.15)
 
 new_episode_5_day_call <- list(type = "observed_data", y_column = "observed_new_episodes_5_day", name = "5-day mean in \nreported new cases \n(by episode date)", short_name = "New cases\n(episode date)", color = case_col, opacity = 0.15)
 
@@ -91,11 +115,11 @@ n2_call <- list(type = "signal_data", y_column = "N2", name = "N2 RNA signal", c
 
 n1_n2_call <- list(type = "avg_data", y_column = "N1_N2_avg", name = "Avg. viral signal", short_name = "viral signal", color = n1_n2_col, yaxis = "y2", opacity = 0.15)
 
-n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day mean viral signal", short_name = "10 day", color = rolling_avg_col, yaxis = "y2")
+n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day midpoint mean viral signal", short_name = "10-day", color = rolling_avg_col, yaxis = "y2")
 
-n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day mean viral signal", short_name = "5 day", color = rolling_avg_col, yaxis = "y2")
+n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day midpoint mean viral signal", short_name = "5-day", color = rolling_avg_col, yaxis = "y2")
 
-n1_n2_7_day_call <- list(type = "avg_data", y_column = "N1_N2_7_day", name = "7-day mean viral signal", short_name = "7 day", color = rolling_avg_col, yaxis = "y2")
+n1_n2_7_day_call <- list(type = "avg_data", y_column = "N1_N2_7_day", name = "7-day midpoint mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2")
 
 viral_roc_call <- list(type = "avg_data", y_column = "viral_roc_daily", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2")
 
@@ -103,21 +127,25 @@ rolling_avg <- list(type = "avg_data", y_column = "rolling_avg", name = "Daily r
 
 viral_rolling_avg_call <- list(type = "avg_data", y_column = "avg_viral_roc_5_day", name = "5-day rolling avg. daily \nchange in viral signal", color = rolling_avg_col, yaxis = "y2")
 
-change_N1_N2_5_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_day", name = "Percent change in rolling avg \nover 5 days", short_name = "5 day % change", color = rolling_avg_col, yaxis = "y2")
+change_N1_N2_5_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_day", name = "Percent change in rolling avg \nover 5 days", short_name = "5-day % change", color = rolling_avg_col, yaxis = "y2")
 
-change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_10_day", name = "Percent change in rolling avg \nover 10 days", short_name = "10 day % change", color = rolling_avg_col, yaxis = "y2") 
+change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_10_day", name = "Percent change in rolling avg \nover 10 days", short_name = "10-day % change", color = rolling_avg_col, yaxis = "y2")
 
-change_N1_N2_7_day_call <- list(type = "avg_data", y_column = "change_N1_N2_7_day", name = "Percent change in viral signal rolling avg \nover 7 days", short_name = "7 day % change", color = rolling_avg_col, yaxis = "y2")
+change_N1_N2_7_day_call <- list(type = "avg_data", y_column = "change_N1_N2_7_day", name = "Percent change in \nviral signal rolling \navg over 7 days", short_name = "7 day % change", color = rolling_avg_col, yaxis = "y2")
 
 change_new_cases_5_day_call <- list(type = "observed_data", y_column = "change_new_cases_5_day", name = "Percent change in rolling avg \nover 5 days", short_name = "5 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
 
 change_new_cases_10_day_call <- list(type = "observed_data", y_column = "change_new_cases_10_day", name = "Percent change in rolling avg \nover 10 days", short_name = "10 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
 
-change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_new_cases_7_day", name = "Percent change in new case rolling avg \nover 7 days", short_name = "7 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
+change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_new_cases_7_day", name = "Percent change in \nnew case rolling \navg over 7 days", short_name = "7 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
 
-daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg_clean", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
+daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 
 daily_viral_signal_call_omit <- list(type = "observed_data", y_column = "N1_N2_avg_omit", name = "Omitted viral signal", short_name = "Daily signal", color = case_col, yaxis = "y2", opacity = 0.50)
+
+var_call <- list(type = "signal_data", y_column = "propB117", name = "% B.1.1.7 RNA", color = case_col)
+
+var_nondetect_call <- list(type = "signal_data", y_column = "propB117_detect", name = "B.1.1.7 non-detection", color = red)
 ```
 
 The National Capital Region is the first community in Canada to conduct and report daily wastewater readings of SARS-CoV-2 viral signal to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute and the University of Ottawa.
@@ -152,6 +180,16 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_vira
 ```
 
 *Midpoint mean viral signal omits dates (coloured in blue) flagged by wastewater researchers with potential data concerns. Data is currently being studied for effects of snow melt and other diluting factors on RNA signal. 
+
+---
+
+Variant testing began late February for B.1.1.7 in the Ottawa wastewater system. The next plot illustrates the proportion of variant B.1.1.7 RNA signal detected in wastewater samples.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
+reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call), error_bands = TRUE, error_pct = TRUE, error_data = "sd", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
+```
+
+*Shaded area reflect the uncertainty of each B.1.1.7 detection.
 
 ---
 
