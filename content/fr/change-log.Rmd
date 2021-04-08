@@ -4,6 +4,11 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
+# V3.3.3
+2021-04-08
+
+- Plot added to the [Wastewater](/wastewater) page visualizing proportion of variant B.1.1.7 RNA detected in wastewater.
+
 # V3.3.2
 2021-03-26
 
