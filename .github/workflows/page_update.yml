@@ -11,7 +11,7 @@ on:
 jobs:
   blogdown:
     name: Render-Blog
-    runs-on: "macOS-latest"
+    runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v2
         with:
@@ -20,6 +20,14 @@ jobs:
         with:
           r-version: '3.6.3'
       - uses: r-lib/actions/setup-pandoc@v1
+      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
+      - name: Install libnode-dev
+        run: |
+          sudo add-apt-repository ppa:cran/v8
+          sudo apt-get update
+          sudo apt-get install libnode-dev
+      - name: Install snap version of nodejs
+        run: sudo snap install node --classic --channel=14
       - name: Install V8
         run: Rscript -e 'install.packages("V8")'
       - name: Install rmarkdown and blogdown
