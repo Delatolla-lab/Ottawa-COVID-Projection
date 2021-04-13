@@ -94,9 +94,9 @@ ott_covid_data <-
   mutate(date = as.Date(date)) %>%
   filter(date >= (max(as.Date(date)) - 12*7))
 
-hist_case_projections$type <- ifelse(hist_case_projections$date <= max(ott_covid_data$date), "estimate", "forecast")
+hist_case_projections$type <- ifelse(hist_case_projections$date <= max(ott_covid_data$date), "historic forecast", "forecast")
 
-short_term_plot(projections = hist_case_projections, obs_data = ott_covid_data, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Examining historic case projections with case data")
+short_term_plot(projections = hist_case_projections, levels = c("historic forecast", "forecast"), obs_data = ott_covid_data, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Examining historic case projections with case data")
 ```
 
 
