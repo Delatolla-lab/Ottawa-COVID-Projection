@@ -62,7 +62,7 @@ for(i in time_frame){
   reporting_delay = reporting_delay,
   output = "both"
   )
-  case_proj_hist[[x]] <- case_i
+  case_proj_hist[[x]] <- ott_short_forecast_i
 }
 save(case_proj_hist, file = "case_proj_hist.RData")
 ```
