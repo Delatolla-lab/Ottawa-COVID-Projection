@@ -67,4 +67,36 @@ for(i in time_frame){
 save(case_proj_hist, file = "case_proj_hist.RData")
 ```
 
+```{r}
+# Viewing historic projections without running model
+# Load packages and functions
+library(EpiNow2)
+library(tidyverse)
+library(plotly)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(stats)
+library(zoo)
+library(stringr)
+library(RColorBrewer)
+source("../R/epinow_functions.R")
+source("../R/open_ottawa_scripts.R")
+
+# Load hist_proj .RData
+load("case_proj_hist.RData")
+hist_case_projections <- bind_rows(case_proj_hist)
+
+# load covid data
+ott_covid_data <-
+  read.csv(file.path(getwd(), "../Data/Observed Data/OPH_Observed_COVID_Data.csv")) %>%
+  mutate(date = as.Date(date)) %>%
+  filter(date >= (max(as.Date(date)) - 12*7))
+
+hist_case_projections$type <- ifelse(hist_case_projections$date <= max(ott_covid_data$date), "estimate", "forecast")
+
+short_term_plot(projections = hist_case_projections, obs_data = ott_covid_data, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Examining historic case projections with case data")
+```
+
 
