@@ -43,7 +43,7 @@ incubation_period <-
 
 ```{r}
 case_proj_hist <- list()
-time_frame <- c(0, 21, 42, 63, 84, 105)
+time_frame <- c(0, 21, 42, 63)
 x <- 0
 
 for(i in time_frame){
@@ -51,7 +51,7 @@ for(i in time_frame){
   case_i <- 
     ott_covid_data %>%
     filter(date >= (first(as.Date(ott_covid_data$date)) + i) &
-           date <= (first(as.Date(ott_covid_data$date)) + i + 90))
+           date <= (first(as.Date(ott_covid_data$date)) + i + 21))
   # Run epinow forecast
   ott_short_forecast_i <- short_term_forecast(
   data = case_i,
@@ -64,7 +64,7 @@ for(i in time_frame){
   )
   case_proj_hist[[x]] <- case_i
 }
-save(case_proj_hist, "case_proj_hist.RData")
+save(case_proj_hist, file = "case_proj_hist.RData")
 ```
 
 
