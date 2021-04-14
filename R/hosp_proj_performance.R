@@ -35,7 +35,7 @@ options(mc.cores = 4)
 
 hosp_proj_hist <- list()
 
-time_frame <- c(0, 28, 56)
+time_frame <- c(0, 21, 42, 63)
 x <- 0
 
 for(i in time_frame){
