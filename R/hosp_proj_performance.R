@@ -62,7 +62,7 @@ for(i in time_frame){
                             rt = rt_opts(prior = list(mean = 1.5, sd = 0.5), rw = 7),
                             gp = NULL, horizon = 14)
   
-  hosp_forecast_i <- forecast_secondary(cases_to_hosp_i, case_forecast_i$estimates)
+  hosp_forecast_i <- forecast_secondary(cases_to_hosp_i, case_forecast_i$estimates, all_dates = TRUE)
   
   # Prep data to be visualized
   hosp_proj_i <- hosp_forecast_i[[2]]
