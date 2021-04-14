@@ -125,5 +125,5 @@ ott_data <- ott_covid_data %>%
 
 short_term_plot(projections = hist_case_projections, levels = c("historic forecast", "forecast"), obs_data = ott_data, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Examining historic case projections with case data")
 
-short_term_plot(projections = hist_hosp_projections, levels = c("historic forecast", "forecast"), obs_data = ott_data, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Examining historic hospitalization projections with hospital census data")
+short_term_plot(projections = hist_hosp_projections, levels = c("historic forecast", "forecast"), obs_data = ott_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Examining historic hospitalization projections with hospital census data")
 ```
