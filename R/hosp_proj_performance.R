@@ -40,12 +40,12 @@ x <- 0
 
 for(i in time_frame){
   x <- x + 1
-  hosp_i <- ott_covid_test %>%
+  hosp_i <- ott_covid_data %>%
     select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
     mutate(date = as.Date(date)) %>%
     rename(primary = "observed_new_cases", secondary = "observed_census_ICU_p_acute_care") %>%
-    filter(date >= (first(as.Date(ott_covid_test$date)) + i) &
-             date <= (first(as.Date(ott_covid_test$date)) + i + 21))
+    filter(date >= (first(as.Date(ott_covid_data$date)) + i) &
+             date <= (first(as.Date(ott_covid_data$date)) + i + 21))
   
   hosp_i <- data.table::setDT(hosp_i)
   
@@ -76,8 +76,8 @@ for(i in time_frame){
 
 hist_hosp_projections <- bind_rows(hosp_proj_hist)
 
-hist_case_projections$type <-
+hist_hosp_projections$type <-
   ifelse(hist_hosp_projections$date <= max(ott_covid_data$date),
          "historic forecast", "forecast")
 
-save(hist_hosp_projections, file = "Date/hist_hosp_projections.RData")
+save(hist_hosp_projections, file = "Data/hist_hosp_projections.RData")
