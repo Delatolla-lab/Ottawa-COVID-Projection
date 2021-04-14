@@ -40,6 +40,10 @@ ott_observed_covid <- data_creation(ottawa_case_data, ottawa_test_data)[["data"]
 ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
 ott_long_ww_data <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wwMeasure.csv")
 
+ott_b117_data <- ott_observed_waste %>%
+  mutate(sampleDate = as.Date(sampleDate)) %>%
+  filter(detectB117 == TRUE)
+
 # functions to integrate waste & covid data together
 waste_clean <- wastewater_prep(ott_observed_waste)
 ott_covid_waste <- merge_data(ott_observed_covid, waste_clean) %>%
@@ -154,7 +158,7 @@ People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardl
 
 ### Status of variants
 
-B.1.1.7: **detected** in samples collected on 2021-03-28
+B.1.1.7: **detected** in samples collected on `r last(ott_b117_data$sampleDate)`
 
 B.1.351: not tested
 

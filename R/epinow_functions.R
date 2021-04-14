@@ -105,6 +105,7 @@ short_term_forecast <- function(data,
 }
 
 short_term_plot <- function(projections,
+                            levels = c("historic", "forecast"),
                             obs_data,
                             obs_column,
                             forecast_type,
@@ -124,8 +125,8 @@ short_term_plot <- function(projections,
   projections$type[projections$type == "estimate based on partial data"] <-
     "historic"
   
-  projections$type <- factor(projections$type, levels = c("historic",
-                                                          "forecast"))
+  projections$type <- factor(projections$type, levels =
+                               c(as.character(levels[[1]]), as.character(levels[[2]])))
   
   # set up CrI index
   CrIs <- extract_CrIs(projections)
@@ -157,7 +158,7 @@ short_term_plot <- function(projections,
   }
   
   # plot v line for last observed date
-  historic <- projections[projections$type == "historic",]
+  historic <- projections[projections$type == levels[[1]],]
   plot <- plot +
     geom_vline(
       xintercept = 
