@@ -60,7 +60,7 @@ for(i in time_frame){
                             generation_time = generation_time,
                             delays = delay_opts(incubation_period, reporting_delay),
                             rt = rt_opts(prior = list(mean = 1.5, sd = 0.5), rw = 7),
-                            gp = NULL, horizon = 21)
+                            gp = NULL, horizon = 14)
   
   hosp_forecast_i <- forecast_secondary(cases_to_hosp_i, case_forecast_i$estimates)
   
