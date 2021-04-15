@@ -17,7 +17,7 @@ data <- data.table::setDT(data)
 
 # Estimate relationship between cases and hospitalization
 cases_to_hosp <- estimate_secondary(data, 
-                                    delays = delay_opts(list(mean = 1.5, mean_sd = 0.2, 
+                                    delays = delay_opts(list(mean = 3.5, mean_sd = 0.2, 
                                                                sd = 0.47, sd_sd = 0.1, max = 21)),
                                     secondary = secondary_opts(type = "prevalence"),
                                     obs = obs_opts(scale = list(mean = 0.01, sd = 0.0025)),
