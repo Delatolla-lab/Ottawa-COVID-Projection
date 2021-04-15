@@ -119,10 +119,35 @@ short_term_plot(
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 load("../../Data/hist_case_projections.RData")
 load("../../Data/hist_hosp_projections.RData")
+load("../../R/observed_data.R")
+
+case_col <- "rgb(226, 127, 88)"
+proj_col <- "rgb(0, 128, 128)"
+proj_shade <- "rgba(0, 128, 128, 0.2)"
+red <- "rgb(255,0,0)"
+red_shade <- "rgba(255, 0, 0, 0.2)"
+rolling_avg_col <- "rgb(226, 127, 88)"
+
+new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Daily reported new cases", short_name = "Daily cases", color = case_col, opacity = 0.5)
+new_hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Daily reported new cases", short_name = "Hospital census", color = case_col, opacity = 0.5)
+proj_call <- list(type = "avg_data", y_column = "median", name = "Projections", short_name = "projections", color = proj_col)
+
 ott_data <- ott_covid_data %>%
   mutate(date = as.Date(date)) %>%
   filter(date >= (max(as.Date(date)) - 12*7))
 
+plot_hist_case_proj <- hist_case_projections %>%
+  filter(variable == "reported_cases")
+
+plot_data <- ott_data %>%
+  select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
+  full_join(plot_hist_case_proj)
+
+reworked_figure(xaxis = "date", yaxis = list(new_case_call, proj_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "New Cases", y2 = "", x = "Date", title = "Examining historic case projections with case data"), data = plot_data, ticks = FALSE)
+
+```
+
+```{r}
 short_term_plot(projections = hist_case_projections, levels = c("historic forecast", "forecast"), obs_data = ott_data, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Examining historic case projections with case data")
 
 short_term_plot(projections = hist_hosp_projections, levels = c("historic forecast", "forecast"), obs_data = ott_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Examining historic hospitalization projections with hospital census data")

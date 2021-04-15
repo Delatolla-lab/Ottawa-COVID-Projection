@@ -280,10 +280,18 @@ reworked_figure <-
                  data[[var_to_map$y_column]] - data[[as.character(error_data)]])
       }
       else{
-        error_y_upper <-
-          data[[var_to_map$y_column]] + data[[as.character(error_data)]]
-        error_y_lower <-
-          data[[var_to_map$y_column]] - data[[as.character(error_data)]]
+        if(length(error_data) > 1){
+          error_y_upper <-
+            data[[var_to_map$y_column]] + data[[error_data[[1]]]]
+          error_y_lower <-
+            data[[var_to_map$y_column]] - data[[error_data[[2]]]]
+        }
+        else{
+          error_y_upper <-
+            data[[var_to_map$y_column]] + data[[as.character(error_data)]]
+          error_y_lower <-
+            data[[var_to_map$y_column]] - data[[as.character(error_data)]]
+        }
       }
       p <- add_trace(p, x = data$date, y = error_y_upper,
                      type = "scatter",
