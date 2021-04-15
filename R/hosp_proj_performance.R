@@ -50,7 +50,7 @@ for(i in time_frame){
   hosp_i <- data.table::setDT(hosp_i)
   
   cases_to_hosp_i <- estimate_secondary(hosp_i, 
-                                        delays = delay_opts(list(mean = 2.5, mean_sd = 0.2, 
+                                        delays = delay_opts(list(mean = 3.5, mean_sd = 0.2, 
                                                                  sd = 0.47, sd_sd = 0.1, max = 21)),
                                         secondary = secondary_opts(type = "prevalence"),
                                         obs = obs_opts(scale = list(mean = 0.01, sd = 0.0025)),
