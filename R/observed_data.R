@@ -281,10 +281,8 @@ reworked_figure <-
       }
       else{
         if(length(error_data) > 1){
-          error_y_upper <-
-            data[[var_to_map$y_column]] + data[[error_data[[1]]]]
-          error_y_lower <-
-            data[[var_to_map$y_column]] - data[[error_data[[2]]]]
+          error_y_upper <- data[[error_data[[1]]]]
+          error_y_lower <- data[[error_data[[2]]]]
         }
         else{
           error_y_upper <-
