@@ -119,7 +119,7 @@ short_term_plot(
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 load("../../Data/hist_case_projections.RData")
 load("../../Data/hist_hosp_projections.RData")
-load("../../R/observed_data.R")
+source("../../R/observed_data.R")
 
 case_col <- "rgb(226, 127, 88)"
 proj_col <- "rgb(0, 128, 128)"
@@ -128,10 +128,6 @@ red <- "rgb(255,0,0)"
 red_shade <- "rgba(255, 0, 0, 0.2)"
 rolling_avg_col <- "rgb(226, 127, 88)"
 
-new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Observed Historic new cases", short_name = "Daily cases", color = case_col, opacity = 0.5)
-new_hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Daily reported new cases", short_name = "Hospital census", color = case_col, opacity = 0.5)
-proj_call <- list(type = "avg_data", y_column = "median", name = "Previous projected new cases", short_name = "projections", color = proj_col)
-
 ott_data <- ott_covid_data %>%
   mutate(date = as.Date(date)) %>%
   filter(date >= (max(as.Date(date)) - 12*7))
@@ -139,18 +135,32 @@ ott_data <- ott_covid_data %>%
 plot_hist_case_proj <- hist_case_projections %>%
   filter(variable == "reported_cases")
 
-plot_data <- ott_data %>%
-  select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
-  full_join(plot_hist_case_proj)
+plot_hist_hosp_proj <- hist_hosp_projections %>%
+  filter(variable == "reported_cases")
 
-plot_data <- plot_data[plot_data$date <= max(as.Date(ott_data$date)),]
+case_plot_data <- ott_data %>%
+  select(date, observed_new_cases) %>%
+  full_join(plot_hist_case_proj) %>%
+  filter(duplicated(date) == FALSE,
+         date > first(date))
 
-reworked_figure(xaxis = "date", yaxis = list(proj_call, new_case_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "New Cases", x = "Date", title = "Examining historic case projections with case data"), data = plot_data, ticks = FALSE)
+hosp_plot_data <- ott_data %>%
+  select(date, observed_census_ICU_p_acute_care) %>%
+  full_join(plot_hist_hosp_proj) %>%
+  filter(duplicated(date) == FALSE,
+         date > first(date))
 
+case_plot_data <- case_plot_data[case_plot_data$date <= max(as.Date(ott_data$date)),]
+
+hosp_plot_data <- hosp_plot_data[hosp_plot_data$date <= max(as.Date(ott_data$date)),]
+
+new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Observed Historic new cases", short_name = "Daily cases", color = case_col, opacity = 0.5)
+new_hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Daily reported new cases", short_name = "Hospital census", color = case_col, opacity = 0.5)
+proj_call <- list(type = "avg_data", y_column = "median", name = "Previous projected new cases", short_name = "projections", color = proj_col)
 ```
 
 ```{r}
-short_term_plot(projections = hist_case_projections, levels = c("historic forecast", "forecast"), obs_data = ott_data, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Examining historic case projections with case data")
+reworked_figure(xaxis = "date", yaxis = list(proj_call, new_case_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "New cases", x = "Date", title = "Examining historic case projections with case data"), data = case_plot_data, ticks = FALSE)
 
-short_term_plot(projections = hist_hosp_projections, levels = c("historic forecast", "forecast"), obs_data = ott_data, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Examining historic hospitalization projections with hospital census data")
+reworked_figure(xaxis = "date", yaxis = list(proj_call, new_hosp_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital census", x = "Date", title = "Examining historic hospital projections with hospital census data"), data = hosp_plot_data, ticks = FALSE)
 ```
