@@ -11,7 +11,7 @@ data <- read.csv(file.path(getwd(),"Data/Observed data/OPH_Observed_COVID_Data.c
   select(date, observed_new_cases, observed_census_ICU_p_acute_care) %>%
   mutate(date = as.Date(date)) %>%
   rename(primary = "observed_new_cases", secondary = "observed_census_ICU_p_acute_care") %>%
-  filter(date >= (max(as.Date(date)) - 12*7))
+  filter(date >= (max(as.Date(date)) - 16*7))
 
 data <- data.table::setDT(data)
 
