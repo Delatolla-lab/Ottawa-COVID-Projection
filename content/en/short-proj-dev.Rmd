@@ -154,13 +154,14 @@ case_plot_data <- case_plot_data[case_plot_data$date <= max(as.Date(ott_data$dat
 
 hosp_plot_data <- hosp_plot_data[hosp_plot_data$date <= max(as.Date(ott_data$date)),]
 
-new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Observed Historic new cases", short_name = "Daily cases", color = case_col, opacity = 0.5)
-new_hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Daily reported new cases", short_name = "Hospital census", color = case_col, opacity = 0.5)
-proj_call <- list(type = "avg_data", y_column = "median", name = "Previous projected new cases", short_name = "projections", color = proj_col)
+new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Observed historic new cases", short_name = "Daily cases", color = case_col, opacity = 0.5)
+new_hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Observed historic hospital census", short_name = "Hospital census", color = case_col, opacity = 0.5)
+proj_case_call <- list(type = "avg_data", y_column = "median", name = "Historic projected new cases", short_name = "projections", color = proj_col)
+proj_hosp_call <- list(type = "avg_data", y_column = "median", name = "Historic projected hospital census", short_name = "projections", color = proj_col)
 ```
 
 ```{r}
-reworked_figure(xaxis = "date", yaxis = list(proj_call, new_case_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "New cases", x = "Date", title = "Examining historic case projections with case data"), data = case_plot_data, ticks = FALSE)
+reworked_figure(xaxis = "date", yaxis = list(new_case_call, proj_case_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "New cases", x = "Date", title = "Examining historic case projections with case data"), data = case_plot_data, ticks = FALSE)
 
-reworked_figure(xaxis = "date", yaxis = list(proj_call, new_hosp_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital census", x = "Date", title = "Examining historic hospital projections with hospital census data"), data = hosp_plot_data, ticks = FALSE)
+reworked_figure(xaxis = "date", yaxis = list(new_hosp_call, proj_hosp_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital census", x = "Date", title = "Examining historic hospital projections with hospital census data"), data = hosp_plot_data, ticks = FALSE)
 ```
