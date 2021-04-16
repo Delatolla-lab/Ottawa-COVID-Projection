@@ -50,7 +50,7 @@ for(i in time_frame){
   hosp_i <- data.table::setDT(hosp_i)
   
   cases_to_hosp_i <- estimate_secondary(hosp_i, 
-                                        delays = delay_opts(list(mean = 3.5, mean_sd = 0.2, 
+                                        delays = delay_opts(list(mean = 2.5, mean_sd = 0.2, 
                                                                  sd = 0.47, sd_sd = 0.1, max = 21)),
                                         secondary = secondary_opts(type = "prevalence"),
                                         obs = obs_opts(scale = list(mean = 0.01, sd = 0.0025)),
@@ -59,7 +59,7 @@ for(i in time_frame){
   case_forecast_i <- epinow(reported_cases = copy(hosp_i)[, .(date, confirm = primary)], 
                             generation_time = generation_time,
                             delays = delay_opts(incubation_period, reporting_delay),
-                            rt = rt_opts(prior = list(mean = 1.5, sd = 0.5), rw = 7),
+                            rt = rt_opts(prior = list(mean = 2, sd = 0.5), rw = 7),
                             gp = NULL, horizon = 14)
   
   hosp_forecast_i <- forecast_secondary(cases_to_hosp_i, case_forecast_i$estimates, all_dates = TRUE)
