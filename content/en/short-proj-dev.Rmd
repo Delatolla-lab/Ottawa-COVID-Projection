@@ -161,7 +161,11 @@ proj_hosp_call <- list(type = "avg_data", y_column = "median", name = "Historic 
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(new_case_call, proj_case_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "New cases", x = "Date", title = "Examining historic case projections with case data"), data = case_plot_data, ticks = FALSE)
+reworked_figure(xaxis = "date", yaxis = list(new_case_call, proj_case_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "New cases", x = "Date", title = "Predictive model performance: historical comparison of projections to observed new cases"), data = case_plot_data, ticks = FALSE)
+```
 
-reworked_figure(xaxis = "date", yaxis = list(new_hosp_call, proj_hosp_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital census", x = "Date", title = "Examining historic hospital projections with hospital census data"), data = hosp_plot_data, ticks = FALSE)
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(new_hosp_call, proj_hosp_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital census", x = "Date", title = "Predictive model performance: historical comparison of projections to observed hospital census"), data = hosp_plot_data, ticks = FALSE)
 ```
