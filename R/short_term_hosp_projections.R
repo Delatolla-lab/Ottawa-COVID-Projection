@@ -45,3 +45,9 @@ hosp_proj$variable <- "reported_cases"
 hosp_proj$type <- ifelse(hosp_proj$date <= max(data$date), "estimate", "forecast")
 
 save(hosp_proj, file = "Data/short_term_hosp_proj.RData")
+save(hosp_proj, file = paste(
+  paste("Data/Historic Projections/short_term_hosp_proj", Sys.Date(), sep = "_"),
+  ".RData", sep = ""))
+write.csv(hosp_proj, file = paste(
+  paste("Data/Historic Projections/short_term_hosp_proj", Sys.Date(), sep = "_"),
+  ".csv", sep = ""), row.names = FALSE)
