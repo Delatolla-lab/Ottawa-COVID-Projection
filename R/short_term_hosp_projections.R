@@ -17,7 +17,7 @@ data <- data.table::setDT(data)
 
 # Estimate relationship between cases and hospitalization
 cases_to_hosp <- estimate_secondary(data, 
-                                    delays = delay_opts(list(mean = 3.5, mean_sd = 0.2, 
+                                    delays = delay_opts(list(mean = 2.5, mean_sd = 0.2, 
                                                                sd = 0.47, sd_sd = 0.1, max = 21)),
                                     secondary = secondary_opts(type = "prevalence"),
                                     obs = obs_opts(scale = list(mean = 0.01, sd = 0.0025)),
@@ -33,7 +33,7 @@ incubation_period <-
 case_forecast <- epinow(reported_cases = copy(data)[, .(date, confirm = primary)], 
                         generation_time = generation_time,
                         delays = delay_opts(incubation_period, reporting_delay),
-                        rt = rt_opts(prior = list(mean = 1.5, sd = 0.5), rw = 7),
+                        rt = rt_opts(prior = list(mean = 2, sd = 0.5), rw = 7),
                         gp = NULL, horizon = 14)
 
 hosp_unknown_case_forecast <- forecast_secondary(cases_to_hosp, case_forecast$estimates, all_dates = TRUE)
@@ -45,3 +45,9 @@ hosp_proj$variable <- "reported_cases"
 hosp_proj$type <- ifelse(hosp_proj$date <= max(data$date), "estimate", "forecast")
 
 save(hosp_proj, file = "Data/short_term_hosp_proj.RData")
+save(hosp_proj, file = paste(
+  paste("Data/Historic Projections/short_term_hosp_proj", Sys.Date(), sep = "_"),
+  ".RData", sep = ""))
+write.csv(hosp_proj, file = paste(
+  paste("Data/Historic Projections/short_term_hosp_proj", Sys.Date(), sep = "_"),
+  ".csv", sep = ""), row.names = FALSE)

@@ -20,7 +20,7 @@ incubation_period <-
 ott_short_forecast <- short_term_forecast(
   data = ott_covid_data,
   parameter = "observed_new_cases",
-  start_date = "2020-12-01", # can be changed
+  start_date = "2020-07-01", # can be changed
  # end_date = "2020-11-24", # can be changed, if missing will default to last day
   generation_time = generation_time,
   incubation_period = incubation_period,
@@ -32,4 +32,10 @@ ott_short_forecast <- short_term_forecast(
 ott_projections <- ott_short_forecast[[1]]
 write.csv(ott_projections,
           file = "Data/short_term_forecast.csv", row.names = FALSE)
+write.csv(ott_projections, file = paste(
+  paste("Data/Historic Projections/short_term_forecast", Sys.Date(), sep = "_"),
+                                        ".csv", sep = ""), row.names = FALSE)
 save(ott_short_forecast, file = "Data/short_term_forecast.RData")
+save(ott_projections, file = paste(
+  paste("Data/Historic Projections/short_term_forecast", Sys.Date(), sep = "_"),
+  ".RData", sep = ""))

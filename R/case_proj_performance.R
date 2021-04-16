@@ -20,7 +20,7 @@ source("R/open_ottawa_scripts.R")
 ott_covid_data <-
   read.csv(file.path(getwd(), "Data/Observed Data/OPH_Observed_COVID_Data.csv")) %>%
   mutate(date = as.Date(date)) %>%
-  filter(date >= (max(as.Date(date)) - 12*7))
+  filter(date >= (max(as.Date(date)) - 16*7))
 
 # Set reporting delay, generation time, incubation period
 reporting_delay <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
@@ -30,7 +30,7 @@ incubation_period <-
   get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 
 case_proj_hist <- list()
-time_frame <- c(0, 21, 42, 63)
+time_frame <- c(0, 28, 56, 84)
 x <- 0
 
 for(i in time_frame){
@@ -38,7 +38,7 @@ for(i in time_frame){
   case_i <- 
     ott_covid_data %>%
     filter(date >= (first(as.Date(ott_covid_data$date)) + i) &
-             date <= (first(as.Date(ott_covid_data$date)) + i + 21))
+             date <= (first(as.Date(ott_covid_data$date)) + i + 28))
   # Run epinow forecast
   ott_short_forecast_i <- short_term_forecast(
     data = case_i,
