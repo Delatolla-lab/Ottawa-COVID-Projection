@@ -207,7 +207,7 @@ You can learn more about wastewater epidemiology and its role in covid-19 survei
 
 \* For new cases, the reported date is the day the test result is reported by the laboratory. Episode date is the approximate date of covid-19 infection estimated from information available: the date of symptom onset, test date, or the reported date.
 
-\* A central question in wastewater epidemiology is determining the proportion of the wastewater that is actually from humans and the proportion that is rain water, snow melt etc. To address this issue, viral copy data is thus normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](/model/) for more details.
+\* A central question in wastewater epidemiology is determining the proportion of the wastewater that is actually from humans and the proportion that is rain water, snow melt etc. To address this issue, viral copy data is thus normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](/model/) for more details
 
 ^ Percent change in 7-day average is calculated by comparing the 7-day average (previous day 1 to 7) with a lagged 7-day average (days 8 to 14).
 
