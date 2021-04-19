@@ -71,4 +71,4 @@ ww_proj$variable <- "reported_cases"
 ww_proj$type <- ifelse(ww_proj$date <= max(case_data$date), "estimate",
                        "forecast")
 
-#save(ww_proj, ww_data, file = "Data/short_term_ww_proj.RData")
+save(ww_proj, ww_data, file = "Data/short_term_ww_proj.RData")

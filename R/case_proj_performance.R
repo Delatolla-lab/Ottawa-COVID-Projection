@@ -58,4 +58,4 @@ hist_case_projections$type <-
   ifelse(hist_case_projections$date <= max(ott_covid_data$date),
          "historic forecast", "forecast")
 
-#save(hist_case_projections, file = "Data/hist_case_projections.RData")
+save(hist_case_projections, file = "Data/hist_case_projections.RData")
