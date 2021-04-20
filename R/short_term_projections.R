@@ -22,6 +22,7 @@ ott_short_forecast <- short_term_forecast(
   parameter = "observed_new_cases",
   start_date = "2020-07-01", # can be changed
  # end_date = "2020-11-24", # can be changed, if missing will default to last day
+  omit_last_date = TRUE,
   generation_time = generation_time,
   incubation_period = incubation_period,
   reporting_delay = reporting_delay,
