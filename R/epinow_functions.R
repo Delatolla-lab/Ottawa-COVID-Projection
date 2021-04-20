@@ -3,6 +3,7 @@ short_term_forecast <- function(data,
                                 parameter_weight = 1,
                                 start_date,
                                 end_date,
+                                omit_last_date = FALSE,
                                 generation_time,
                                 incubation_period,
                                 reporting_delay,
@@ -14,11 +15,15 @@ short_term_forecast <- function(data,
   
   data_formatted <- data %>%
     filter(as.Date(date) >= as.Date(start_date)) %>%
-    filter(as.Date(date) < as.Date(end_date)) %>%
+    filter(as.Date(date) <= as.Date(end_date)) %>%
     select(date, as.character(parameter)) %>%
     rename(confirm = as.character(parameter)) %>%
     mutate(date = as.Date(date),
            confirm = as.integer(confirm * parameter_weight))
+  
+  if(isTRUE(omit_last_date)){
+    data_formatted <- data_formatted[data_formatted$date < as.Date(end_date),]
+  }
   
   # Run epinow2 sim 
   projections <-
@@ -119,11 +124,13 @@ short_term_plot <- function(projections,
     filter(variable == as.character(forecast_type)) %>%
     select(-c(lower_50, upper_50, lower_20, upper_20))
   
-  # Convert estimates & estimate based on partial data to historic
-  projections$type[projections$type == "estimate"] <-
-    "historic"
-  projections$type[projections$type == "estimate based on partial data"] <-
-    "historic"
+  
+  # Set types to levels indicated in function call
+  projections$type[projections$date <= as.Date(last(obs_data$date))] <-
+    as.character(levels[[1]])
+  
+  projections$type[projections$date > as.Date(last(obs_data$date))] <-
+    as.character(levels[[2]])
   
   projections$type <- factor(projections$type, levels =
                                c(as.character(levels[[1]]), as.character(levels[[2]])))
