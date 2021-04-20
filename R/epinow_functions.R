@@ -14,7 +14,7 @@ short_term_forecast <- function(data,
   
   data_formatted <- data %>%
     filter(as.Date(date) >= as.Date(start_date)) %>%
-    filter(as.Date(date) <= as.Date(end_date)) %>%
+    filter(as.Date(date) < as.Date(end_date)) %>%
     select(date, as.character(parameter)) %>%
     rename(confirm = as.character(parameter)) %>%
     mutate(date = as.Date(date),
