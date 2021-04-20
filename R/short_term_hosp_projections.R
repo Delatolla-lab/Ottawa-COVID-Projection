@@ -15,6 +15,8 @@ data <- read.csv(file.path(getwd(),"Data/Observed data/OPH_Observed_COVID_Data.c
 
 data <- data.table::setDT(data)
 
+data <- data[data$date < as.Date(last(data$date)),]
+
 # Estimate relationship between cases and hospitalization
 cases_to_hosp <- estimate_secondary(data, 
                                     delays = delay_opts(list(mean = 2.5, mean_sd = 0.2, 
