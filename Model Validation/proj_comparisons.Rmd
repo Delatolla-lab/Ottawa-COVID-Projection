@@ -1,0 +1,45 @@
+---
+title: "Examining historic projections with observed data"
+author: "Warsame Yusuf"
+date: "21/04/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(EpiNow2)
+library(stringr)
+library(purrr)
+library(lubridate)
+library(plotly)
+library(RColorBrewer)
+source("../../R/epinow_functions.R")
+source("../../R/observed_data.R")
+
+ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
+
+case_col <- "rgb(226, 127, 88)"
+proj_col <- "rgb(0, 128, 128)"
+proj_shade <- "rgba(0, 128, 128, 0.2)"
+
+new_case_call <- list(type = "observed_data", y_column = "observed_new_cases", name = "Observed historic new cases", short_name = "Daily cases", color = case_col, opacity = 0.5)
+new_hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Observed historic hospital census", short_name = "Hospital census", color = case_col, opacity = 0.5)
+proj_case_call <- list(type = "avg_data", y_column = "median", name = "Historic projected new cases", short_name = "projections", color = proj_col)
+proj_hosp_call <- list(type = "avg_data", y_column = "median", name = "Historic projected hospital census", short_name = "projections", color = proj_col)
+```
+
+## Case Projections vs New Cases
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+
+```
+
+## Hospitalization Projections vs Hospital census
+
+```{r echo=FALSE}
+```
