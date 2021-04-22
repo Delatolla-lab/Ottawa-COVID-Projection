@@ -124,6 +124,9 @@ short_term_plot <- function(projections,
     filter(variable == as.character(forecast_type)) %>%
     select(-c(lower_50, upper_50, lower_20, upper_20))
   
+  # Omit last day of observed data
+  obs_data <- obs_data %>%
+    filter(date < as.Date(last(date)))
   
   # Set types to levels indicated in function call
   projections$type[projections$date <= as.Date(last(obs_data$date))] <-
