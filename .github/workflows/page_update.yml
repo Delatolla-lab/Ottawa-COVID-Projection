@@ -22,10 +22,12 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install V8
         run: Rscript -e 'install.packages("V8")'
-      - name: Install rmarkdown and blogdown
+      - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown","blogdown", "knitr"))'
       - name: Install rmd packages
         run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr", "EpiNow2", "purrr", "RColorBrewer"))'
+      - name: Install blogdown
+        run: Rscript -e 'remotes::install_github("rstudio/blogdown")'
       - name: Install RStan
         run: Rscript -e 'install.packages("rstan", repos = "https://cloud.r-project.org/", dependencies = TRUE)'
       - name: Install covidseir
