@@ -33,7 +33,7 @@ jobs:
       - name: install hugo
         run: Rscript -e 'blogdown::install_hugo()'
       - name: Render website
-        run: Rscript -e 'blogdown::build_site(build_rmd = TRUE)'
+        run: Rscript -e 'blogdown::build_site(build_rmd = TRUE, method = "html")'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
