@@ -18,10 +18,11 @@ library(purrr)
 library(lubridate)
 library(plotly)
 library(RColorBrewer)
-source("../../R/epinow_functions.R")
-source("../../R/observed_data.R")
+source("../R/epinow_functions.R")
+source("../R/observed_data.R")
 
-ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
+ott_covid_data <- read.csv(file.path(getwd(), "../Data/Observed data/OPH_Observed_COVID_Data.csv")) %>%
+  mutate(date = as.Date(date))
 
 case_col <- "rgb(226, 127, 88)"
 proj_col <- "rgb(0, 128, 128)"
@@ -37,16 +38,54 @@ proj_hosp_call <- list(type = "avg_data", y_column = "median", name = "Historic 
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 case_proj_hist <- list()
-time_frame <- 1:3
+time_frame <- 1:5
 x <- 0
 
 for(i in time_frame){
   x <- x + 1
-case_proj_hist[[x]] <- load(paste(paste("../../Data/Historic Projections/short_term_forecast", as.character(Sys.Date()-i), sep = "_"), ".RData", sep = ""))
+case_proj_hist[[x]] <- read.csv(paste(paste("../Data/Historic Projections/short_term_forecast", as.character(Sys.Date()-i), sep = "_"), ".csv", sep = "")) %>%
+  filter(variable == "reported_cases", type == "forecast")
 }
+
+case_proj_hist <- bind_rows(case_proj_hist) %>%
+  mutate(date = as.Date(date)) %>%
+  filter(duplicated(date) == FALSE) %>%
+  arrange(date)
+
+ott_covid_data <- ott_covid_data[ott_covid_data$date >= first(case_proj_hist$date),]
+
+ott_case_data <- ott_covid_data %>%
+  mutate(date = as.Date(date)) %>%
+  select(date, observed_new_cases) %>%
+  left_join(case_proj_hist, by = "date")
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(new_case_call, proj_case_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "New cases", x = "Date", title = "Predictive model performance: historical comparison of projections to observed new cases"), data = ott_case_data, ticks = FALSE)
 ```
 
 ## Hospitalization Projections vs Hospital census
 
 ```{r echo=FALSE}
+hosp_proj_hist <- list()
+time_frame <- 1:5
+x <- 0
+
+for(i in time_frame){
+  x <- x + 1
+hosp_proj_hist[[x]] <- read.csv(paste(paste("../Data/Historic Projections/short_term_hosp_proj", as.character(Sys.Date()-i), sep = "_"), ".csv", sep = "")) %>%
+  filter(variable == "reported_cases", type == "forecast")
+}
+
+hosp_proj_hist <- bind_rows(hosp_proj_hist) %>%
+  mutate(date = as.Date(date)) %>%
+  filter(duplicated(date) == FALSE) %>%
+  arrange(date)
+
+ott_covid_data <- ott_covid_data[ott_covid_data$date >= first(hosp_proj_hist$date),]
+
+ott_hosp_data <- ott_covid_data %>%
+  mutate(date = as.Date(date)) %>%
+  select(date, observed_census_ICU_p_acute_care) %>%
+  left_join(hosp_proj_hist, by = "date")
 ```
