@@ -124,12 +124,15 @@ short_term_plot <- function(projections,
     filter(variable == as.character(forecast_type)) %>%
     select(-c(lower_50, upper_50, lower_20, upper_20))
   
+  # Omit last day of observed data
+  obs_data_omit <- obs_data %>%
+    filter(date < as.Date(last(date)))
   
   # Set types to levels indicated in function call
-  projections$type[projections$date <= as.Date(last(obs_data$date))] <-
+  projections$type[projections$date <= as.Date(last(obs_data_omit$date))] <-
     as.character(levels[[1]])
   
-  projections$type[projections$date > as.Date(last(obs_data$date))] <-
+  projections$type[projections$date > as.Date(last(obs_data_omit$date))] <-
     as.character(levels[[2]])
   
   projections$type <- factor(projections$type, levels =
@@ -150,12 +153,12 @@ short_term_plot <- function(projections,
            aes(x = date, col = type, fill = type))
   
   # Add observed data if R is not specified
-  obs_data <- filter(obs_data, as.Date(date) >= start_date)
-  y_col <- obs_data[[as.character(obs_column)]]
+  obs_plot <- filter(obs_data_omit, as.Date(date) >= start_date)
+  y_col <- obs_plot[[as.character(obs_column)]]
   if(forecast_type != as.character("R")){
     plot <- plot +
       geom_col(data = 
-                 obs_data[as.Date(obs_data$date) >= as.Date(start_date),],
+                 obs_plot[as.Date(obs_plot$date) >= as.Date(start_date),],
                aes(x = as.Date(date),
                    y = y_col,
                    text = paste("Observed:",

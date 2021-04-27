@@ -29,9 +29,12 @@ reworked_figure <-
            width = 800,
            height = 500,
            ticks = TRUE,
+           date_constraint = FALSE,
+           constraint_val = NULL,
            data) {
     # ---------- PRESETS ----------
     tickvals <- floor_date(as_date(data$date), "month")
+    
     trace_presets <- list(
       doubling_time =
         list(
@@ -865,6 +868,17 @@ reworked_figure <-
           }
         }
       }  
+    }
+    
+    if(isTRUE(date_constraint)){
+      if(as.Date(first(data$date)) > as.Date(last(data$date) - 40)){
+        a <- as.Date(first(data$date))
+      }
+      else{
+        a <- as.Date(last(data$date) - constraint_val) 
+      }
+      b <- as.Date(last(data$date))
+      p <- layout(p, xaxis = list(range = c(a, b)))
     }
     return(p)
     

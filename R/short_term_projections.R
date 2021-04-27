@@ -31,8 +31,8 @@ ott_short_forecast <- short_term_forecast(
 
 # Save projections as CSV 
 ott_projections <- ott_short_forecast[[1]]
-#write.csv(ott_projections,
-          #file = "Data/short_term_forecast.csv", row.names = FALSE)
+write.csv(ott_projections,
+          file = "Data/short_term_forecast.csv", row.names = FALSE)
 write.csv(ott_projections, file = paste(
   paste("Data/Historic Projections/short_term_forecast", Sys.Date(), sep = "_"),
                                         ".csv", sep = ""), row.names = FALSE)
