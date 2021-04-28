@@ -318,9 +318,6 @@ ICU_p_acute_care
 `r case_projections_text`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-ott_observed_omit <- ott_observed %>%
-  filter(date < as.Date(last(date)))
-
 # visualize epinow forecast
 short_term_plot(
   projections = ott_projections,
