@@ -22,7 +22,8 @@ source("../R/epinow_functions.R")
 source("../R/observed_data.R")
 
 ott_covid_data <- read.csv(file.path(getwd(), "../Data/Observed data/OPH_Observed_COVID_Data.csv")) %>%
-  mutate(date = as.Date(date))
+  mutate(date = as.Date(date)) %>%
+  filter(date < last(date))
 
 case_col <- "rgb(226, 127, 88)"
 proj_col <- "rgb(0, 128, 128)"
@@ -39,26 +40,27 @@ proj_hosp_call <- list(type = "avg_data", y_column = "median", name = "Historic 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 case_proj_hist <- list()
 tf <- grep("short_term_forecast", list.files("../Data/Historic Projections")) 
-time_frame <- length(tf)/2
+time_frame <- 1:(length(tf)/2)
 x <- 0
 
 for(i in time_frame){
   x <- x + 1
 case_proj_hist[[x]] <- read.csv(paste(paste("../Data/Historic Projections/short_term_forecast", as.character(Sys.Date()-i), sep = "_"), ".csv", sep = "")) %>%
-  filter(variable == "reported_cases", type == "forecast")
+  filter(variable == "reported_cases", type == "forecast") %>%
+  mutate(proj_date = as.Date(Sys.Date()-i))
 }
 
 case_proj_hist <- bind_rows(case_proj_hist) %>%
   mutate(date = as.Date(date)) %>%
-  filter(duplicated(date) == FALSE) %>%
-  arrange(date)
+  arrange(date, proj_date)
 
 ott_covid_data <- ott_covid_data[ott_covid_data$date >= first(case_proj_hist$date),]
 
 ott_case_data <- ott_covid_data %>%
   mutate(date = as.Date(date)) %>%
   select(date, observed_new_cases) %>%
-  left_join(case_proj_hist, by = "date")
+  left_join(case_proj_hist, by = "date") %>%
+  filter(duplicated(date) == FALSE)
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
@@ -70,26 +72,27 @@ reworked_figure(xaxis = "date", yaxis = list(new_case_call, proj_case_call), err
 ```{r echo=FALSE}
 hosp_proj_hist <- list()
 tf <- grep("short_term_hosp_proj", list.files("../Data/Historic Projections")) 
-time_frame <- length(tf)/2
+time_frame <- 1:length(tf)/2
 x <- 0
 
 for(i in time_frame){
   x <- x + 1
 hosp_proj_hist[[x]] <- read.csv(paste(paste("../Data/Historic Projections/short_term_hosp_proj", as.character(Sys.Date()-i), sep = "_"), ".csv", sep = "")) %>%
-  filter(variable == "reported_cases", type == "forecast")
+  filter(variable == "reported_cases", type == "forecast") %>%
+  mutate(proj_date = as.Date(Sys.Date()-i))
 }
 
 hosp_proj_hist <- bind_rows(hosp_proj_hist) %>%
   mutate(date = as.Date(date)) %>%
-  filter(duplicated(date) == FALSE) %>%
-  arrange(date)
+  arrange(date, proj_date)
 
 ott_covid_data <- ott_covid_data[ott_covid_data$date >= first(hosp_proj_hist$date),]
 
 ott_hosp_data <- ott_covid_data %>%
   mutate(date = as.Date(date)) %>%
   select(date, observed_census_ICU_p_acute_care) %>%
-  left_join(hosp_proj_hist, by = "date")
+  left_join(hosp_proj_hist, by = "date") %>% 
+  filter(duplicated(date) == FALSE)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
