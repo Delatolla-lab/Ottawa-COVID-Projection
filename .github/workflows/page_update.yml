@@ -23,7 +23,7 @@ jobs:
       - name: Install V8
         run: Rscript -e 'install.packages("V8")'
       - name: Install rmarkdown
-        run: Rscript -e 'install.packages(c("rmarkdown","blogdown", "knitr"))'
+        run: Rscript -e 'install.packages(c("rmarkdown", "knitr"))'
       - name: Install rmd packages
         run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr", "EpiNow2", "purrr", "RColorBrewer"))'
       - name: Install blogdown
