@@ -38,7 +38,8 @@ proj_hosp_call <- list(type = "avg_data", y_column = "median", name = "Historic 
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 case_proj_hist <- list()
-time_frame <- 1:5
+tf <- grep("short_term_forecast", list.files("../Data/Historic Projections")) 
+time_frame <- length(tf)/2
 x <- 0
 
 for(i in time_frame){
@@ -68,7 +69,8 @@ reworked_figure(xaxis = "date", yaxis = list(new_case_call, proj_case_call), err
 
 ```{r echo=FALSE}
 hosp_proj_hist <- list()
-time_frame <- 1:5
+tf <- grep("short_term_hosp_proj", list.files("../Data/Historic Projections")) 
+time_frame <- length(tf)/2
 x <- 0
 
 for(i in time_frame){
