@@ -137,7 +137,7 @@ change_new_cases_10_day_call <- list(type = "observed_data", y_column = "change_
 
 change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_new_cases_7_day", name = "Percent change in \nnew case rolling \navg over 7 days", short_name = "7 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
 
-daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
+daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg_clean", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 
 daily_viral_signal_call_omit <- list(type = "observed_data", y_column = "N1_N2_avg_omit", name = "Omitted viral signal", short_name = "Daily signal", color = case_col, yaxis = "y2", opacity = 0.50)
 
