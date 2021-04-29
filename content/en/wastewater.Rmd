@@ -50,7 +50,7 @@ variant_data <- ww_long_prep(ott_long_ww_data) %>%
   rename(propB117 = "single") %>%
   mutate(propB117 = propB117*100,
          sd = sd*100) %>%
-  filter(sd != is.na(sd))
+  filter(!is.na(sd))
 
 variant_non_detect <- ww_long_prep(ott_long_ww_data) %>%
   select(date, aggregation, varB117) %>%
