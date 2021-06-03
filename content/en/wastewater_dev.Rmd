@@ -150,6 +150,20 @@ The National Capital Region is the first community in Canada to conduct and repo
 
 People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a covid-19 test or ever are diagnosed. Thus, in contrast to assessing community covid-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with covid-19 given that everyone goes to the washroom. In addition to serving as a valuable confirmatory data source for covid-19 levels, wastewater can also serve as early indicator for possible outbreaks, as described below.
 
+---
+
+# {#ww-visualization}
+
+For mobile users, dragging the plot while in landscape mode will allow you to view current data. Using the display options at the top allows you to modify the view by zooming in and out of the plot.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40)
+```
+
+*Midpoint mean viral signal omits dates (coloured in blue) flagged by wastewater researchers with potential data concerns. Data is currently being studied for effects of snow melt and other diluting factors on RNA signal. 
+
+---
+
 ## Variants of Concern and Interest (VOC and VOI)
 
 ### Summary
@@ -170,7 +184,7 @@ See plot below, “Proportion of variant, Alpha (B1.1117) RNA in wastewater, Ott
 
 Summary: May 11, 2021, Ottawa wastewater shows prevalence of B.1.1.7 and low confidence detection of B.1.617+ lineages. Two weeks prior, high confidence detection of B.1.617+ lineages was observed. No other VOC/VOI were identified above the level of detection of the assay.
 
-### Detailed report for viral RNA signal and VOC/VOI detection
+### Detailed report for overall SARS-CoV-2 signal
 
 Analysis of COVID-19 wastewater RNA viral signal shows that the mean is changing direction. Few more datapoints will show if this becomes a trend.
 
@@ -206,24 +220,9 @@ Tiled amplicon sequencing of SARS-CoV-2 meta-genomes 2(ArticV3) using an Illumin
 
 * CDC N1 and N2 RT-qPCR assays yielded Cts of 34.6 and 33.1, respectively (Cts >35 will result in poor sensitivity).
 
-### Interpretation
+### Interpretation cautions
 
 The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
-
-The four plots below illustrate daily viral covid-19 wastewater signal in Ottawa.
-
----
-
-
-# {#ww-visualization}
-
-For mobile users, dragging the plot while in landscape mode will allow you to view current data. Using the display options at the top allows you to modify the view by zooming in and out of the plot.
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40)
-```
-
-*Midpoint mean viral signal omits dates (coloured in blue) flagged by wastewater researchers with potential data concerns. Data is currently being studied for effects of snow melt and other diluting factors on RNA signal. 
 
 ---
 
