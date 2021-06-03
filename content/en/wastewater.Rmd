@@ -164,7 +164,7 @@ SARS-CoV-2 variant testing is performed two times per week.
 
 The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
 
-The three plots below illustrate daily viral covid-19 wastewater signal in Ottawa.
+The four plots below illustrate daily viral covid-19 wastewater signal in Ottawa.
 
 ---
 
