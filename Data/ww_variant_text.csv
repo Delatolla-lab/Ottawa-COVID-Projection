@@ -1,26 +1,28 @@
 ﻿variable,details
-summary_1,"Alpha (B.1.1.7) detected in high levels, last reported using qRT-PCR on June 1, 2021 and metagenome assay on May 11, 2021."
-summary_2,"Delta (B.1.617+) detected in low levels, last reported using metagenome assay on May 11, 2021."
-summary_3,No other VOC/VOI were identified above the level of detection of the assay.
-summary_4,"Ottawa wastewater includes two VOC/VOI tests. See methods for more details. See the bottom of the page for detailed report, including the quality control summary."
-summary_5,"1. Thrice weekly tests for Alpha (B.1.117) using a qRT-PCR assay. These tests are performed by the uOttawa/CHEO laboratory beginning February 2021.
-
-See plot below, “Proportion of variant, Alpha (B1.1117) RNA in wastewater, Ottawa”.
-
-2. Weekly test for all VOC/VOI using a metagenome assay, also known as the consensus community genome. These tests are performed by the National Microbiology Laboratory, Winnipeg beginning May 2021."
-summary_6,"Summary: May 11, 2021, Ottawa wastewater shows prevalence of B.1.1.7 and low confidence detection of B.1.617+ lineages. Two weeks prior, high confidence detection of B.1.617+ lineages was observed. No other VOC/VOI were identified above the level of detection of the assay."
-detailed_1,"Analysis of COVID-19 wastewater RNA viral signal shows that the mean is changing direction. Few more datapoints will show if this becomes a trend.
-
-Predictive values of wastewater viral signal data will not be reported due to limitations and uncertainties at this time with respect to varying fecal shedding periods in patients and unreported active cases in the community."
-qc_1,Standard curves R 2 ≥ 0.95.
-qc_2,Primer efficiency between 90%-130%.
-qc_3,No template controls are negative
-detailed_2,"The second sequencing run performed on Ottawa wastewater in as many weeks revealed continued prevalence of B.1.1.7 and low confidence detection of B.1.617+ lineages. Two weeks prior, high confidence detection of B.1.617+ lineages was observed. No other VOC/VOI were identified above the level of detection of the assay."
-detailed_3,"The assembled consensus community genome (i.e., most frequent metagenome observed) was consistent with genomes of the B.1.1.7 lineage (aka UK variant) with 83.5% genome coverage at >5X read depth. The mean depth of coverage across the community genome was 493X."
-detailed_4,16 out of 17 mutations associated with B.1.1.7 genomes were present in the community genome.
-detailed_5,"Of every 100 reads that overlapped sites of B.1.1.7 mutation, approx. 90 were found to harbour B.1.1.7 mutations. This is consistent with a sample where the major proportion of contributing viral RNA can be assigned to the B.1.1.7 lineage."
-detailed_6,"The May 11 sample contained fewer reads that could be associated with the B.1.617 lineages than in the April 25 sample. 3 out of 11-17 mutations associated with these lineages were observed including Orf7a:V82A, Orf7a:T20I, N:R203M, but at frequencies below that needed for confident assignment to the B.1.617+ lineages."
-detailed_7,There was insufficient evidence to support the presence of any other VOC/VOI above the level of detection of the assay.
+alphaDetect,TRUE
+alphaLevel,high
+alphaPCR,TRUE
+alphaPCRDate,2021-06-01
+alphaAssay,TRUE
+alphaAssayDate,2021-05-11
+deltaDetect,TRUE
+deltaLevel,low
+deltaPCR,FALSE
+deltaPCRDate,NA
+deltaAssay,TRUE
+deltaAssayDate,2021-05-11
+otherVOCDetect,FALSE
+otherVOCDetails,NULL
+summaryDescription,"Summary: May 11, 2021, Ottawa wastewater shows prevalence of B.1.1.7 and low confidence detection of B.1.617+ lineages. Two weeks prior, high confidence detection of B.1.617+ lineages was observed. No other VOC/VOI were identified above the level of detection of the assay."
+standCurve95,TRUE
+primerEfficiency,90-130%
+negativeTemplateControls,FALSE
+detailedDescription2,"The second sequencing run performed on Ottawa wastewater in as many weeks revealed continued prevalence of B.1.1.7 and low confidence detection of B.1.617+ lineages. Two weeks prior, high confidence detection of B.1.617+ lineages was observed. No other VOC/VOI were identified above the level of detection of the assay."
+detailedDescription3,"The assembled consensus community genome (i.e., most frequent metagenome observed) was consistent with genomes of the B.1.1.7 lineage (aka UK variant) with 83.5% genome coverage at >5X read depth. The mean depth of coverage across the community genome was 493X."
+detailedDescription4,16 out of 17 mutations associated with B.1.1.7 genomes were present in the community genome.
+detailedDescription5,"Of every 100 reads that overlapped sites of B.1.1.7 mutation, approx. 90 were found to harbour B.1.1.7 mutations. This is consistent with a sample where the major proportion of contributing viral RNA can be assigned to the B.1.1.7 lineage."
+detailedDescription6,"The May 11 sample contained fewer reads that could be associated with the B.1.617 lineages than in the April 25 sample. 3 out of 11-17 mutations associated with these lineages were observed including Orf7a:V82A, Orf7a:T20I, N:R203M, but at frequencies below that needed for confident assignment to the B.1.617+ lineages."
+detailedDescription7,There was insufficient evidence to support the presence of any other VOC/VOI above the level of detection of the assay.
 protocol_1,Tiled amplicon sequencing of SARS-CoV-2 meta-genomes 2(ArticV3) using an Illumina platform. See methods for details.
-qc_4,"CDC N1 and N2 RT-qPCR assays yielded Cts of 34.6 and 33.1, respectively (Cts >35 will result in poor sensitivity)."
-interpretation,"The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. "
+ctN1Assay,34.6
+ctN2Assay,33.1
