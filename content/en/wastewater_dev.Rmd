@@ -167,53 +167,41 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_vira
 ## Variants of Concern and Interest (VOC and VOI)
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-variant_data <- read.csv(file.path(getwd(), "../../Data/ww_variant_text.csv"))
+library(googledrive)
+source("../../R/variant_df_prep.R")
 
-alphaDetect <- as.logical(variant_data[variant_data$variable == "alphaDetect",2])
+drive_download(as_id("1jUAWx9_r7CLhh5vtRNNjCRDMX4nEKEx5gvXM_tpsxhE"), path = "../../Data/ww_variant_text.csv", overwrite = TRUE)
 
-alphaLevel <- as.character(variant_data[variant_data$variable == "alphaLevel",2])
+variant_sheet <- read.csv(file.path(getwd(), "../../Data/ww_variant_text.csv"))
 
-alphaPCR <- as.logical(variant_data[variant_data$variable == "alphaPCR",2])
+names(variant_sheet) <- c("ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days",
+                         "CDC_N1", "CDC_N2", "method", "sequencing_platform", "breadth_of_coverage_pct",
+                         "mean_coverage_depth", "pangolin_lineage", "detect", "consensus_subconsensus_NA",
+                         "prop_voc_mutations", "frac_voc_detected")
 
-alphaPCRDate <- as.Date(variant_data[variant_data$variable == "alphaPCRDate",2])
+variant_text <- variant_df_prep(variant_sheet)
 
-alphaAssay <- as.logical(variant_data[variant_data$variable == "alphaAssay",2])
+date <- format(as.Date(variant_text[variant_text$variable == "date",2]), "%B %d, %Y")
 
-alphaAssayDate <- as.Date(variant_data[variant_data$variable == "alphaAssayDate",2])
+alphaDetect <- as.logical(variant_text[variant_text$variable == "alphaDetect",2])
 
-alphaSummary1 <- ifelse(alphaDetect == TRUE, paste0(paste0("Alpha (B.1.1.7) detected in ", alphaLevel, " levels, "),
-                                                  ifelse(alphaPCR == TRUE, paste0("last reported using qRT-PCR on ", alphaPCRDate), ifelse(alphaAssay == TRUE, paste0("last reported using metagenomic assay on ", alphaAssayDate), ""))))
-                                                         
-alphaSummary2<- ifelse(alphaAssay == TRUE, paste0(" and metagenomic assay on ", alphaAssayDate, "."), "")
+alphaLevel <- as.character(variant_text[variant_text$variable == "alphaLevel",2])
 
-alphaSummary <- paste0(alphaSummary1, alphaSummary2)
+alphaSummary <- ifelse(alphaDetect == TRUE, paste("Alpha (B.1.1.7) detected in", alphaLevel, "levels, last reported on", paste0(date, ".")), paste("Alpha (B.1.1.7) not detected, last reported on", paste0(date, ".")))
 
-deltaDetect <- as.logical(variant_data[variant_data$variable == "deltaDetect",2])
+deltaDetect <- as.logical(variant_text[variant_text$variable == "deltaDetect",2])
 
-deltaLevel <- as.character(variant_data[variant_data$variable == "deltaLevel",2])
+deltaLevel <- as.character(variant_text[variant_text$variable == "deltaLevel",2])
 
-deltaPCR <- as.logical(variant_data[variant_data$variable == "deltaPCR",2])
+deltaSummary <- ifelse(deltaDetect == TRUE, paste("Delta (B.1.617+) detected in", deltaLevel, "levels, last reported on", paste0(date, ".")), paste("Delta (B.1.617+) not detected, last reported on", paste0(date, ".")))
 
-deltaPCRDate <- as.Date(variant_data[variant_data$variable == "deltaPCRDate",2])
+otherVOCDetect <- as.logical(variant_text[variant_text$variable == "otherVOCDetect",2])
 
-deltaAssay <- as.logical(variant_data[variant_data$variable == "deltaAssay",2])
-
-deltaAssayDate <- as.Date(variant_data[variant_data$variable == "deltaAssayDate",2])
-
-deltaSummary1 <- ifelse(deltaDetect == TRUE, paste0(paste0("Delta (B.1.1.7) detected in ", deltaLevel, " levels, "),
-                                                  ifelse(deltaPCR == TRUE, paste0("last reported using qRT-PCR on ", deltaPCRDate), ifelse(deltaAssay == TRUE, paste0("last reported using metagenomic assay on ", deltaAssayDate, "."), ""))))
-                                                         
-deltaSummary2<- ifelse((deltaPCR == TRUE & deltaAssay == TRUE), paste0(" and metagenomic assay on ", deltaAssayDate, "."), "")
-
-deltaSummary <- paste0(deltaSummary1, deltaSummary2)
-
-otherVOCDetect <- as.logical(variant_data[variant_data$variable == "otherVOCDetect",2])
-
-otherVOCDetails <- as.character(variant_data[variant_data$variable == "otherVOCDetails",2])
+otherVOCLevel <- as.character(variant_text[variant_text$variable == "otherVOCDetails",2])
 
 otherVOCSummary <- ifelse(otherVOCDetect == TRUE, otherVOCDetails, "No other VOC/VOI were identified above the level of detection of the assay.")
 
-summaryDescription <- as.character(variant_data[variant_data$variable == "summaryDescription",2])
+summaryDescription <- as.character(variant_text[variant_text$variable == "summaryDescription",2])
 
 ```
 
@@ -227,9 +215,9 @@ summaryDescription <- as.character(variant_data[variant_data$variable == "summar
 
 Ottawa wastewater includes two VOC/VOI tests. See methods for more details. See the bottom of the page for detailed report, including the quality control summary.
 
-1. Thrice weekly tests for Alpha (B.1.117) using a qRT-PCR assay. These tests are performed by the uOttawa/CHEO laboratory beginning February 2021.
+1. Thrice weekly tests for Alpha (B.1.1.7) using a qRT-PCR assay. These tests are performed by the uOttawa/CHEO laboratory beginning February 2021.
 
-See plot below, “Proportion of variant, Alpha (B1.1117) RNA in wastewater, Ottawa”.
+See plot below, “Proportion of variant, Alpha (B.1.1.7) RNA in wastewater, Ottawa”.
 
 2. Weekly test for all VOC/VOI using a metagenome assay, also known as the consensus community genome. These tests are performed by the National Microbiology Laboratory, Winnipeg beginning May 2021.
 
@@ -243,51 +231,31 @@ Predictive values of wastewater viral signal data will not be reported due to li
 
 ### Quality control
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-standCurve95 <- as.logical(variant_data[variant_data$variable == "standCurve95",2])
+- Standard curves R 2 ≥ 0.95.
 
-standardcurves <- ifelse(standCurve95 == TRUE, "Standard curves R 2 ≥ 0.95.", "Standard curves R 2.")
+- Primer efficiency between 90%-130%.
 
-primerEfficiency <- as.character(variant_data[variant_data$variable == "primerEfficiency",2])
-
-negativeTemplateControls <- as.logical(variant_data[variant_data$variable == "negativeTemplateControls",2])
-
-templateControls <- ifelse(negativeTemplateControls == FALSE, "No template controls are negative.", "Template controls are negative.")
-```
-
-- `r standardcurves`
-
-- Primer efficiency between `r primerEfficiency`.
-
-- `r templateControls`
+- No template controls are negative
 
 ### Detailed VOC/VOI report
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-detailedDescription1 <- as.character(variant_data[variant_data$variable == "detailedDescription1",2])
+detailedDescription1 <- as.character(variant_text[variant_text$variable == "detailedDescription1",2])
 
-detailedDescription2 <- as.character(variant_data[variant_data$variable == "detailedDescription2",2])
+detailedDescription2 <- as.character(variant_text[variant_text$variable == "detailedDescription2",2])
 
-detailedDescription3 <- as.character(variant_data[variant_data$variable == "detailedDescription3",2])
+detailedDescription3 <- as.character(variant_text[variant_text$variable == "detailedDescription3",2])
 
-detailedDescription4 <- as.character(variant_data[variant_data$variable == "detailedDescription4",2])
-
-detailedDescription5 <- as.character(variant_data[variant_data$variable == "detailedDescription5",2])
-
-detailedDescription6 <- as.character(variant_data[variant_data$variable == "detailedDescription6",2])
+detailedDescription4 <- as.character(variant_text[variant_text$variable == "detailedDescription4",2])
 ```
 
-`r detailedDescription1`
+* `r detailedDescription1`
 
 * `r detailedDescription2`
 
 * `r detailedDescription3`
 
 * `r detailedDescription4`
-
-* `r detailedDescription5`
-
-* `r detailedDescription6`
 
 ### Protocol
 
@@ -296,9 +264,9 @@ Tiled amplicon sequencing of SARS-CoV-2 meta-genomes 2(ArticV3) using an Illumin
 ### Quality control
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-ctN1Assay <- variant_data[variant_data$variable == "ctN1Assay",2]
+ctN1Assay <- variant_text[variant_text$variable == "ctN1Assay",2]
 
-ctN2Assay <- variant_data[variant_data$variable == "ctN2Assay",2]
+ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
 ```
 
 * CDC N1 and N2 RT-qPCR assays yielded Cts of `r ctN1Assay` and `ctN2Assay`, respectively (Cts >35 will result in poor sensitivity).
