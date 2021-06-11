@@ -287,7 +287,7 @@ ctN1Assay <- variant_text[variant_text$variable == "ctN1Assay",2]
 ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
 ```
 
-* CDC N1 and N2 RT-qPCR assays yielded Cts of `r ctN1Assay` and `ctN2Assay`, respectively (Cts >35 will result in poor sensitivity).
+* CDC N1 and N2 RT-qPCR assays yielded Cts of `r ctN1Assay` and `r ctN2Assay`, respectively (Cts >35 will result in poor sensitivity).
 
 ### Interpretation cautions
 

@@ -85,13 +85,13 @@ variant_df_prep <- function(sheet){
   var_text[[2]][[10]] <- last(df$CDC_N2)
   
   var_text[[2]][[11]] <-
-  paste("The assembled consensus community genome (i.e., most frequent metagenome observed) was consistent with genomes of B.1.1.7 lineage (aka the UK variant) with", last(df$breadth_of_coverage_pct), "genome coverage at >5X read depth. The mean depth of coverage across the community genome was", paste0(round(last(df$mean_coverage_depth), 0), "X."))
+  paste("The assembled consensus community genome (i.e., most frequent metagenome observed) was consistent with genomes of B.1.1.7 lineage (aka the UK variant) with", paste0(last(df$breadth_of_coverage_pct),"%"), "genome coverage at >5X read depth. The mean depth of coverage across the community genome was", paste0(round(last(df$mean_coverage_depth), 0), "X."))
   
   var_text[[2]][[12]] <-
   paste(last(df$frac_voc_detected_B.1.1.7), "mutations associated with B.1.1.7 genomes were present in the community genome.")
   
   var_text[[2]][[13]] <-
-  paste("Of every 100 reads that overlapped sites of B.1.1.7 mutations, approx.", round(last(df$prop_voc_mutations_B.1.1.7)), "were found to harbour B.1.1.7 mutations. This is consistent with a sample where the major proportion of contributing viral RNA can be assigned to the B.1.1.7 lineage.")
+  paste("Of every 100 reads that overlapped sites of B.1.1.7 mutations, approx.", round(last(df$prop_voc_mutations_B.1.1.7), -1), "were found to harbour B.1.1.7 mutations. This is consistent with a sample where the major proportion of contributing viral RNA can be assigned to the B.1.1.7 lineage.")
   
   other_voc_sufficiency <-
     ifelse(var_text[[2]][[6]] == FALSE, "insufficient",
