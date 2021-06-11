@@ -185,12 +185,10 @@ reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call), erro
 ## Variants of Concern and Interest (VOC and VOI)
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(googledrive)
 source("../../R/variant_df_prep.R")
+library(readxl)
 
-drive_download(as_id("1jUAWx9_r7CLhh5vtRNNjCRDMX4nEKEx5gvXM_tpsxhE"), path = "../../Data/ww_variant_text.csv", overwrite = TRUE)
-
-variant_sheet <- read.csv(file.path(getwd(), "../../Data/ww_variant_text.csv"))
+variant_sheet <- as.data.frame(read_excel(file.path(getwd(), "../../Data/variant_sheet.xlsx")))
 
 names(variant_sheet) <- c("ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days",
                          "CDC_N1", "CDC_N2", "method", "sequencing_platform", "breadth_of_coverage_pct",

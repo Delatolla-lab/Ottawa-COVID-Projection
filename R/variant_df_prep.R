@@ -24,7 +24,7 @@ variant_df_prep <- function(sheet){
   }
   
   # Fill date
-  var_text[[2]][[1]] <- last(df$date_collected)
+  var_text[[2]][[1]] <- as.character(last(df$date_collected))
   
   # Fill alphaDetect value
   var_text[[2]][[2]] <- ifelse(last(df$detect_B.1.1.7) == "detect",
