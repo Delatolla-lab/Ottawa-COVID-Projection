@@ -17,6 +17,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          ref: master
+          token: ${{ secrets.ACTION_TOKEN }}
 
       - name: Download from Google Drive
         run: curl -o "Data/variant_sheet.xlsx" "https://docs.google.com/spreadsheets/d/1jUAWx9_r7CLhh5vtRNNjCRDMX4nEKEx5gvXM_tpsxhE/export?gid=0&format=csv"
