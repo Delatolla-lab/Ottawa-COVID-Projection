@@ -22,7 +22,7 @@ jobs:
           token: ${{ secrets.ACTION_TOKEN }}
 
       - name: Download from Google Drive
-        run: curl -L "https://docs.google.com/uc?export=download&id=1jUAWx9_r7CLhh5vtRNNjCRDMX4nEKEx5gvXM_tpsxhE" --output "Data/variant_sheet.xlsx" --create-dirs
+        run: curl -L "https://docs.google.com/spreadsheets/d/1jUAWx9_r7CLhh5vtRNNjCRDMX4nEKEx5gvXM_tpsxhE/export?gid=0&format=xlsx" --output "Data/variant_sheet.xlsx" --create-dirs
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
