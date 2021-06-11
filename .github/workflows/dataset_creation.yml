@@ -36,6 +36,8 @@ jobs:
             ${{ runner.os }}-renv-
       - name: Install dependencies
         run: R -e 'renv::restore()'
+      - name: Download variant sheet from Google Drive
+        run: curl -L "https://docs.google.com/spreadsheets/d/1jUAWx9_r7CLhh5vtRNNjCRDMX4nEKEx5gvXM_tpsxhE/export?gid=0&format=xlsx" --output "Data/variant_sheet.xlsx" --create-dirs
       - name: Prepare data
         run: Rscript R/dataset_creation.R
       - name: Run short term projections 
