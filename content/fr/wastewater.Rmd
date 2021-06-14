@@ -146,28 +146,9 @@ var_call <- list(type = "signal_data", y_column = "propB117", name = "% B.1.1.7 
 var_nondetect_call <- list(type = "signal_data", y_column = "propB117_detect", name = "B.1.1.7 non-detection", color = red)
 ```
 
-The National Capital Region is the first community in Canada to conduct and report daily wastewater readings of SARS-CoV-2 viral signal to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute and the University of Ottawa.
-
 People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a covid-19 test or ever are diagnosed. Thus, in contrast to assessing community covid-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with covid-19 given that everyone goes to the washroom. In addition to serving as a valuable confirmatory data source for covid-19 levels, wastewater can also serve as early indicator for possible outbreaks, as described below.
 
-### Status of variants
-
-B.1.1.7: **detected** in samples collected on `r last(ott_b117_data$sampleDate)`
-
-B.1.351: not tested
-
-P.1: not tested
-
-SARS-CoV-2 variant testing is performed two times per week.
-
-### Interpretation
-
-The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
-
-The four plots below illustrate daily viral covid-19 wastewater signal in Ottawa.
-
 ---
-
 
 # {#ww-visualization}
 
@@ -181,16 +162,6 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_vira
 
 ---
 
-Variant testing began late February for B.1.1.7 in the Ottawa wastewater system. The next plot illustrates the proportion of variant B.1.1.7 RNA signal detected in wastewater samples.
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
-reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call), error_bands = TRUE, error_pct = TRUE, error_data = "sd", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
-```
-
-*Shaded area reflect the uncertainty of each B.1.1.7 detection.
-
----
-
 The next plot illustrates the 7-day midpoint mean in daily covid-19 wastewater viral signal. This number is the average of a week’s readings; today's reading, the previous 3 days, and the subsequent 3 days. Also on the graph are various comparators (e.g. reported daily covid-19 cases, hospitalization census), which can be individually selected by toggling the menu on the right.
 
 ---
@@ -201,13 +172,124 @@ reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(ne
 
 ---
 
-Outbreaks often result in significant increases in the number of covid-19 infection. Wastewater surveillance can help identify, even anticipate such outbreaks; for example, note the 580% increase in signal in mid-July preceding the uptick in covid-19 testing by 3 days in the following plot.
+Variant testing began late February for B.1.1.7 in the Ottawa wastewater system. The next plot illustrates the proportion of variant B.1.1.7 RNA signal detected in wastewater samples.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
+reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call), error_bands = TRUE, error_pct = TRUE, error_data = "sd", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
+```
+
+*Shaded area reflect the uncertainty of each B.1.1.7 detection.
 
 ---
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
-reworked_figure(xaxis = "date", yaxis = list(change_N1_N2_7_day_call, change_new_cases_7_day_call), titles = c(y = "Percent change (%)", x = "Date", title = "<b>Percent change^ in 7 day rolling average</b>"), data = ott_covid_waste)
+## Variants of Concern and Interest (VOC and VOI)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../../R/variant_df_prep.R")
+library(readxl)
+
+variant_sheet <- as.data.frame(read_excel(file.path(getwd(), "../../Data/variant_sheet.xlsx")))
+
+names(variant_sheet) <- c("ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days",
+                         "CDC_N1", "CDC_N2", "method", "sequencing_platform", "breadth_of_coverage_pct",
+                         "mean_coverage_depth", "pangolin_lineage", "detect", "consensus_subconsensus_NA",
+                         "prop_voc_mutations", "frac_voc_detected")
+
+variant_text <- variant_df_prep(variant_sheet)
+
+date <- format(as.Date(variant_text[variant_text$variable == "date",2]), "%B %d, %Y")
+
+alphaDetect <- as.logical(variant_text[variant_text$variable == "alphaDetect",2])
+
+alphaLevel <- as.character(variant_text[variant_text$variable == "alphaLevel",2])
+
+alphaSummary <- ifelse(alphaDetect == TRUE, paste("Alpha (B.1.1.7) detected in", alphaLevel, "levels, last reported on", paste0(date, ".")), paste("Alpha (B.1.1.7) not detected, last reported on", paste0(date, ".")))
+
+deltaDetect <- as.logical(variant_text[variant_text$variable == "deltaDetect",2])
+
+deltaLevel <- as.character(variant_text[variant_text$variable == "deltaLevel",2])
+
+deltaSummary <- ifelse(deltaDetect == TRUE, paste("Delta (B.1.617+) detected in", deltaLevel, "levels, last reported on", paste0(date, ".")), paste("Delta (B.1.617+) not detected, last reported on", paste0(date, ".")))
+
+otherVOCDetect <- as.logical(variant_text[variant_text$variable == "otherVOCDetect",2])
+
+otherVOCLevel <- as.character(variant_text[variant_text$variable == "otherVOCDetails",2])
+
+otherVOCSummary <- ifelse(otherVOCDetect == TRUE, otherVOCDetails, "No other VOC/VOI were identified above the level of detection of the assay.")
+
+summaryDescription <- as.character(variant_text[variant_text$variable == "summaryDescription",2])
+
 ```
+
+### Summary
+
+`r alphaSummary`
+
+`r deltaSummary`
+
+`r otherVOCSummary`
+
+Ottawa wastewater includes two VOC/VOI tests. See methods for more details. See the bottom of the page for detailed report, including the quality control summary.
+
+1. Thrice weekly tests for Alpha (B.1.1.7) using a qRT-PCR assay. These tests are performed by the uOttawa/CHEO laboratory beginning February 2021.
+
+See plot below, “Proportion of variant, Alpha (B.1.1.7) RNA in wastewater, Ottawa”.
+
+2. Weekly test for all VOC/VOI using a metagenome assay, also known as the consensus community genome. These tests are performed by the National Microbiology Laboratory, Winnipeg beginning May 2021.
+
+`r summaryDescription`
+
+### Detailed report for overall SARS-CoV-2 signal
+
+Analysis of COVID-19 wastewater RNA viral signal shows that the mean is changing direction. Few more datapoints will show if this becomes a trend.
+
+Predictive values of wastewater viral signal data will not be reported due to limitations and uncertainties at this time with respect to varying fecal shedding periods in patients and unreported active cases in the community.
+
+### Quality control
+
+- Standard curves R 2 ≥ 0.95.
+
+- Primer efficiency between 90%-130%.
+
+- No template controls are negative
+
+### Detailed VOC/VOI report
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+detailedDescription1 <- as.character(variant_text[variant_text$variable == "detailedDescription1",2])
+
+detailedDescription2 <- as.character(variant_text[variant_text$variable == "detailedDescription2",2])
+
+detailedDescription3 <- as.character(variant_text[variant_text$variable == "detailedDescription3",2])
+
+detailedDescription4 <- as.character(variant_text[variant_text$variable == "detailedDescription4",2])
+```
+
+* `r detailedDescription1`
+
+* `r detailedDescription2`
+
+* `r detailedDescription3`
+
+* `r detailedDescription4`
+
+### Protocol
+
+Tiled amplicon sequencing of SARS-CoV-2 meta-genomes 2(ArticV3) using an Illumina platform. See methods for details.
+
+### Quality control
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ctN1Assay <- variant_text[variant_text$variable == "ctN1Assay",2]
+
+ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
+```
+
+* CDC N1 and N2 RT-qPCR assays yielded Cts of `r ctN1Assay` and `r ctN2Assay`, respectively (Cts >35 will result in poor sensitivity).
+
+### Interpretation cautions
+
+The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
 
 ---
 
