@@ -4,11 +4,6 @@ title: Changelog
 
 **Updates involving only data updates will no longer be documented.**
 
-# V3.4.0
-2021-06-14
-
-- Expanded content on variants of interest/concern on the [Wastewater](/wastewater) page.
-
 # V3.3.3
 2021-04-08
 
