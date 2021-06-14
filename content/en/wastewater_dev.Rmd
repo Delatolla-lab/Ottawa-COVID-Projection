@@ -203,19 +203,19 @@ alphaDetect <- as.logical(variant_text[variant_text$variable == "alphaDetect",2]
 
 alphaLevel <- as.character(variant_text[variant_text$variable == "alphaLevel",2])
 
-alphaSummary <- ifelse(alphaDetect == TRUE, paste("Alpha (B.1.1.7) detected in", alphaLevel, "levels, last reported on", paste0(date, ".")), paste("Alpha (B.1.1.7) not detected, last reported on", paste0(date, ".")))
+alphaSummary <- ifelse(alphaDetect == TRUE, paste("Alpha (B.1.1.7) detected in", alphaLevel, "levels by sequencing and PCR, last reported on", paste0(date, ".")), paste("Alpha (B.1.1.7) not detected, last reported on", paste0(date, ".")))
 
 deltaDetect <- as.logical(variant_text[variant_text$variable == "deltaDetect",2])
 
 deltaLevel <- as.character(variant_text[variant_text$variable == "deltaLevel",2])
 
-deltaSummary <- ifelse(deltaDetect == TRUE, paste("Delta (B.1.617+) detected in", deltaLevel, "levels, last reported on", paste0(date, ".")), paste("Delta (B.1.617+) not detected, last reported on", paste0(date, ".")))
+deltaSummary <- ifelse(deltaDetect == TRUE, paste("B.1.617+ including Delta variant detected at", deltaLevel, "levels by sequencing, last reported on", paste0(date, ".")), paste("B.1.617+ including Delta variant not detected by sequencing, last reported on", paste0(date, ".")))
 
 otherVOCDetect <- as.logical(variant_text[variant_text$variable == "otherVOCDetect",2])
 
 otherVOCLevel <- as.character(variant_text[variant_text$variable == "otherVOCDetails",2])
 
-otherVOCSummary <- ifelse(otherVOCDetect == TRUE, otherVOCDetails, "No other VOC/VOI were identified above the level of detection of the assay.")
+otherVOCSummary <- ifelse(otherVOCDetect == TRUE, otherVOCDetails, "No other VOC/VOI were identified by sequencing above the level of detection of the assay.")
 
 summaryDescription <- as.character(variant_text[variant_text$variable == "summaryDescription",2])
 
@@ -223,35 +223,14 @@ summaryDescription <- as.character(variant_text[variant_text$variable == "summar
 
 ### Summary
 
+Analysis of COVID-19 wastewater RNA viral signal shows that the mean is changing direction.
+
 `r alphaSummary`
 
 `r deltaSummary`
 
 `r otherVOCSummary`
 
-Ottawa wastewater includes two VOC/VOI tests. See methods for more details. See the bottom of the page for detailed report, including the quality control summary.
-
-1. Thrice weekly tests for Alpha (B.1.1.7) using a qRT-PCR assay. These tests are performed by the uOttawa/CHEO laboratory beginning February 2021.
-
-See plot below, “Proportion of variant, Alpha (B.1.1.7) RNA in wastewater, Ottawa”.
-
-2. Weekly test for all VOC/VOI using a metagenome assay, also known as the consensus community genome. These tests are performed by the National Microbiology Laboratory, Winnipeg beginning May 2021.
-
-`r summaryDescription`
-
-### Detailed report for overall SARS-CoV-2 signal
-
-Analysis of COVID-19 wastewater RNA viral signal shows that the mean is changing direction. Few more datapoints will show if this becomes a trend.
-
-Predictive values of wastewater viral signal data will not be reported due to limitations and uncertainties at this time with respect to varying fecal shedding periods in patients and unreported active cases in the community.
-
-### Quality control
-
-- Standard curves R 2 ≥ 0.95.
-
-- Primer efficiency between 90%-130%.
-
-- No template controls are negative
 
 ### Detailed VOC/VOI report
 
@@ -273,11 +252,15 @@ detailedDescription4 <- as.character(variant_text[variant_text$variable == "deta
 
 * `r detailedDescription4`
 
-### Protocol
+Ottawa wastewater includes two VOC/VOI tests. See methods for more details. See the bottom of the page for detailed report, including the quality control summary.
 
-Tiled amplicon sequencing of SARS-CoV-2 meta-genomes 2(ArticV3) using an Illumina platform. See methods for details.
+1. Thrice weekly tests for Alpha (B.1.1.7) using a qRT-PCR assay. These tests are performed by the uOttawa/CHEO laboratory beginning February 2021.
 
-### Quality control
+See plot above, “Proportion of variant, Alpha (B.1.1.7) RNA in wastewater, Ottawa”.
+
+2. Weekly test for all VOC/VOI using a metagenome assay, also known as the consensus community genome. These tests are performed by the National Microbiology Laboratory, Winnipeg beginning May 2021.
+
+## Quality control
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ctN1Assay <- variant_text[variant_text$variable == "ctN1Assay",2]
@@ -285,9 +268,21 @@ ctN1Assay <- variant_text[variant_text$variable == "ctN1Assay",2]
 ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
 ```
 
+### Overall viral signal
+
+* Standard curves R 2 ≥ 0.95.
+
+* Primer efficiency between 90%-130%.
+
+* No template controls are negative
+
+### VOC/VOI
+
 * CDC N1 and N2 RT-qPCR assays yielded Cts of `r ctN1Assay` and `r ctN2Assay`, respectively (Cts >35 will result in poor sensitivity).
 
-### Interpretation cautions
+* Protocol: Tiled amplicon sequencing of SARS-CoV-2 meta-genomes 2(ArticV3) using an Illumina platform. See methods for details.
+
+## Interpretation cautions
 
 The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. Covid-19 wastewater signal is helpful when interpreted alongside other covid-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
 
