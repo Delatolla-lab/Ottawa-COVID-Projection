@@ -50,10 +50,7 @@ reworked_figure <-
       avg_data = list(
         type = "scatter",
         mode = "line",
-        showlegend = TRUE,
-        line = list(
-          width = 4
-        )
+        showlegend = TRUE
       ),
       observed_data = list(
         type = "bar",
@@ -65,6 +62,11 @@ reworked_figure <-
       signal_data = list(
         type = "scatter",
         showlegend = TRUE
+      ),
+      var_data = list(
+        type = "scatter",
+        mode = "lines+marker",
+        showlegend = TRUE
       )
     )
     attr(trace_presets$doubling_time, "class") <-
@@ -75,6 +77,8 @@ reworked_figure <-
       "observed_data"
     attr(trace_presets$signal_data, "class") <-
       "signal_data"
+    attr(trace_presets$var_data, "class") <-
+      "var_data"
     
     library(plotly)
     
@@ -116,9 +120,15 @@ reworked_figure <-
     for (i in 1:length(yaxis)) {
       var_to_map <- yaxis[[i]]
       curr_temp <- trace_presets[[var_to_map$type]]
-      if (!is_null(var_to_map$color)) {
+      if (!is_null(var_to_map$color) & !is.null(var_to_map$width)) {
         curr_temp <-
-          change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
+          change_color(template = trace_presets[[var_to_map$type]],
+                       color = var_to_map$color, width = var_to_map$width)
+      }
+      else if(!is_null(var_to_map$color)){
+        curr_temp <-
+          change_color(template = trace_presets[[var_to_map$type]],
+                       color = var_to_map$color)
       }
       if (isTRUE(yaxis_button)){
           vis_logical <- c(rep(NA, length(yaxis)), rep(T, length(yaxis2)))
@@ -184,9 +194,15 @@ reworked_figure <-
       for (i in 1:length(yaxis2)) {
         var_to_map <- yaxis2[[i]]
         curr_temp <- trace_presets[[var_to_map$type]]
-        if (!is_null(var_to_map$color)) {
+        if (!is_null(var_to_map$color) & !is.null(var_to_map$width)) {
           curr_temp <-
-            change_color(template = trace_presets[[var_to_map$type]], color = var_to_map$color)
+            change_color(template = trace_presets[[var_to_map$type]],
+                         color = var_to_map$color, width = var_to_map$width)
+        }
+        else if(!is_null(var_to_map$color)){
+          curr_temp <-
+            change_color(template = trace_presets[[var_to_map$type]],
+                         color = var_to_map$color)
         }
         
         if (isTRUE(yaxis2_button)){
@@ -904,14 +920,14 @@ change_color.doubling_time <- function(template, color) {
   ))
 }
 
-change_color.avg_data <- function(template, color){
+change_color.avg_data <- function(template, color, width){
   return(list(
     type = "scatter",
     mode = "line",
     showlegend = TRUE,
     line = list(
       color = color,
-      width = 4
+      width = width
     )
   ))
 }
@@ -928,6 +944,19 @@ change_color.signal_data <- function(template, color) {
   return(list(
     type = "scatter",
     showlegend = TRUE,
+    marker = list(color = color)
+  ))
+}
+
+change_color.var_data <- function(template, color, width) {
+  return(list(
+    type = "scatter",
+    mode = "lines+marker",
+    showlegend = TRUE,
+    line = list(
+      color = color,
+      width = width
+    ),
     marker = list(color = color)
   ))
 }
