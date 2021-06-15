@@ -255,6 +255,8 @@ detailedDescription3 <- as.character(variant_text[variant_text$variable == "deta
 detailedDescription4 <- as.character(variant_text[variant_text$variable == "detailedDescription4",2])
 ```
 
+* Community genome analyses is in-progress research by the National Microbial Laboratory. The findings are presented for discussion only. Interpret with caution. 
+
 * `r detailedDescription1`
 
 * `r detailedDescription2`
