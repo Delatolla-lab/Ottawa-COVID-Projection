@@ -64,6 +64,7 @@ variant_non_detect <- ww_long_prep(ott_long_ww_data) %>%
 # Colours
 case_col <- "rgb(0, 128, 128)"
 case_shade <- "rgba(0, 128, 128, 0.2)"
+var_col <- "rgb(85, 151, 217)"
 n1_col <- "rgb(23, 63, 95)"
 n2_col <- "rgb(60, 174, 163)"
 n1_n2_col <- "rgb(237, 85, 59)"
