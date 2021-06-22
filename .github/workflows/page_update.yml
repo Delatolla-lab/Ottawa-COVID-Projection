@@ -25,7 +25,7 @@ jobs:
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown", "knitr"))'
       - name: Install rmd packages
-        run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr", "EpiNow2", "purrr", "RColorBrewer"))'
+        run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr", "EpiNow2", "purrr", "RColorBrewer", "DT"))'
       - name: Install blogdown
         run: Rscript -e 'remotes::install_github("rstudio/blogdown")'
       - name: install hugo
