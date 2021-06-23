@@ -26,12 +26,6 @@ fewer <- insert_translation(localization_data, lang, "fewer")
 the_same <- insert_translation(localization_data, lang, "the_same")
 ```
 
-[Wastewater](/wastewater)
-[Model](/model)
-[More](/more)
-[Contact](/contact)
-[Changelog](/change-log)
-
 `r intro`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
