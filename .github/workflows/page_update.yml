@@ -18,18 +18,16 @@ jobs:
           ref: master
       - uses: r-lib/actions/setup-r@v1
         with:
-          r-version: '4.0.3'
+          r-version: '4.1.0'
       - uses: r-lib/actions/setup-pandoc@v1
-      - name: Install V8
-        run: Rscript -e 'install.packages("V8")'
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown", "knitr"))'
       - name: Install rmd packages
-        run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr", "EpiNow2", "purrr", "RColorBrewer"))'
+        run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr", "purrr", "EpiNow2", "RColorBrewer", "DT"))'
       - name: Install blogdown
-        run: Rscript -e 'remotes::install_github("rstudio/blogdown")'
+        run: Rscript -e 'install.packages("blogdown")'
       - name: install hugo
-        run: Rscript -e 'blogdown::install_hugo()'
+        run: Rscript -e 'blogdown::install_hugo(version = "0.60.1")'
       - name: Render website
         run: Rscript -e 'blogdown::build_site(build_rmd = TRUE)'
       - name: Deploy

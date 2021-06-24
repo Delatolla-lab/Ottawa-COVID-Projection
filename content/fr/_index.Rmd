@@ -25,6 +25,7 @@ more <- insert_translation(localization_data, lang, "more")
 fewer <- insert_translation(localization_data, lang, "fewer")
 the_same <- insert_translation(localization_data, lang, "the_same")
 ```
+
 `r intro`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
