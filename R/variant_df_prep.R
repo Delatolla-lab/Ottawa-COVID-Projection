@@ -1,4 +1,7 @@
 variant_df_prep <- function(sheet){
+  sheet$pangolin_lineage <- ifelse(
+    grepl("^B.1.617", sheet$pangolin_lineage) == TRUE, "B.1.617+",
+    sheet$pangolin_lineage)
   df <- pivot_wider(sheet, names_from = pangolin_lineage,
                     values_from = c(detect, consensus_subconsensus_NA,
                                     prop_voc_mutations, frac_voc_detected)) %>%
