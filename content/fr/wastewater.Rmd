@@ -202,15 +202,15 @@ library(readxl)
 variant_sheet <- as.data.frame(read_excel(file.path(getwd(), "../../Data/variant_sheet.xlsx")))
 
 names(variant_sheet) <- c("ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days",
-                         "CDC_N1", "CDC_N2", "method", "sequencing_platform", "breadth_of_coverage_pct",
-                         "mean_coverage_depth", "pangolin_lineage", "detect", "consensus_subconsensus_NA",
-                         "prop_voc_mutations", "frac_voc_detected")
+                         "assay_id", "CDC_N1", "CDC_N2", "breadth_of_coverage_pct",
+                         "mean_coverage_depth", "pangolin_lineage", "detect",
+                         "prop_voc_mutations", "detection_quality", "frac_voc_detected")
 
 sheet <- variant_sheet %>%
   select("ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days",
-                         "CDC_N1", "CDC_N2", "method", "sequencing_platform", "breadth_of_coverage_pct",
-                         "mean_coverage_depth", "pangolin_lineage", "detect", "consensus_subconsensus_NA",
-                         "prop_voc_mutations", "frac_voc_detected") %>%
+                         "assay_id", "CDC_N1", "CDC_N2", "breadth_of_coverage_pct",
+                         "mean_coverage_depth", "pangolin_lineage",
+                         "prop_voc_mutations", "detection_quality", "frac_voc_detected") %>%
   filter(!is.na(ENT_ID))
 
 variant_text <- variant_df_prep(sheet)
