@@ -3,8 +3,8 @@ variant_df_prep <- function(sheet){
     grepl("^B.1.617", sheet$pangolin_lineage) == TRUE, "B.1.617+",
     sheet$pangolin_lineage)
   df <- pivot_wider(sheet, names_from = pangolin_lineage,
-                    values_from = c(detect, consensus_subconsensus_NA,
-                                    prop_voc_mutations, frac_voc_detected)) %>%
+                    values_from = c(prop_voc_mutations,
+                                    detection_quality, frac_voc_detected)) %>%
     arrange(date_collected)
   
   var_text <- data.frame(variable = character(),
@@ -19,6 +19,11 @@ variant_df_prep <- function(sheet){
   
   var_text[nrow(var_text)+length(variables),] <- NA
   
+  df$`detection_quality_B.1.617+` <- 
+    ifelse(is.vector(df$`detection_quality_B.1.617+`),
+           ifelse("high" %in% df$`detection_quality_B.1.617+`, "high", "low"),
+           df$`detection_quality_B.1.617+`)
+  
   x <- 0
   
   for(i in variables){
@@ -30,40 +35,36 @@ variant_df_prep <- function(sheet){
   var_text[[2]][[1]] <- as.character(last(df$date_collected))
   
   # Fill alphaDetect value
-  var_text[[2]][[2]] <- ifelse(last(df$detect_B.1.1.7) == "detect",
+  var_text[[2]][[2]] <- ifelse(last(df$detection_quality_B.1.1.7) == "high" ||
+                                 last(df$detection_quality_B.1.1.7) == "low",
                                  TRUE, FALSE)
   
   # Fill alphaLevel
-  var_text[[2]][[3]] <- ifelse(last(df$consensus_subconsensus_NA_B.1.1.7) == 
-                                 "consensus", "high",
-                               ifelse(last(
-                                 df$consensus_subconsensus_NA_B.1.1.7) == 
-                                   "sub-consensus", "low", NA))
+  var_text[[2]][[3]] <- ifelse(last(df$detection_quality_B.1.1.7) ==
+                                 "non-detect", NA,
+                               last(df$detection_quality_B.1.1.7))
   
   # Fill deltaDetect
-  var_text[[2]][[4]] <- ifelse(last(df$`detect_B.1.617+`) == "detect",
+  var_text[[2]][[4]] <- ifelse(last(df$`detection_quality_B.1.617+`) == "high" ||
+                                 last(df$`detection_quality_B.1.617+`) == "low",
                                TRUE, FALSE)
   
   # Fill deltaLevel
   var_text[[2]][[5]] <-
-    ifelse(last(df$`consensus_subconsensus_NA_B.1.617+`) == 
-                                 "consensus", "high",
-                               ifelse(last(
-                                 df$`consensus_subconsensus_NA_B.1.617+`) == 
-                                   "sub-consensus",
-                                 "low", NA))
+    ifelse(last(df$`detection_quality_B.1.617+`) == 
+                                 "non-detect", NA,
+           last(df$`detection_quality_B.1.617+`))
   
   # Fill otherVOCDetect
   var_text[[2]][[6]] <-
-    ifelse(last(df$`detect_other VOC/VOI`) == "detect", TRUE, FALSE)
+    ifelse(last(df$`detection_quality_other VOC/VOI`) == "high" || 
+             last(df$`detection_quality_other VOC/VOI`) == "low", TRUE, FALSE)
   
   # Fill otherVOCLevel
-  var_text[[2]][[7]] <- ifelse(last(
-    df$`consensus_subconsensus_NA_other VOC/VOI`) == 
-                                 "consensus", "high",
-    ifelse(last(df$`consensus_subconsensus_NA_other VOC/VOI`) == 
-                                   "sub-consensus",
-                                 "low", NA))
+  var_text[[2]][[7]] <- ifelse(last(df$`detection_quality_other VOC/VOI`) ==
+                                 "non-detect" ||
+                                 is.null(last(df$`detection_quality_other VOC/VOI`)),
+                               NA, last(df$`detection_quality_other VOC/VOI`))
   
   # Interpretation text
   date <- format(as.Date(last(df$date_collected)), "%B %d, %Y")
@@ -72,10 +73,10 @@ variant_df_prep <- function(sheet){
   
   delta_prev <- ifelse(is.na(var_text[[2]][[5]]), "no", var_text[[2]][[5]])
   
-  delta_prev_2_wk <- ifelse(df[nrow(df)-1, "consensus_subconsensus_NA_B.1.617+"]
+  delta_prev_2_wk <- ifelse(df[nrow(df)-1, "detection_quality_B.1.617+"]
                             == "high", "high confidence",
                             ifelse(df[nrow(df)-1,
-                                      "consensus_subconsensus_NA_B.1.617+"] ==
+                                      "detection_quality_B.1.617+"] ==
                                      "low", "low confidence", "no"))
   
   voc_prev <- ifelse(var_text[[2]][[6]] == FALSE, "No other", "Other")
