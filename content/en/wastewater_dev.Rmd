@@ -247,8 +247,11 @@ Analysis of COVID-19 wastewater RNA viral signal shows that the mean is changing
 
 `r deltaSummary`
 
-`r otherVOCSummary`
+`r b1351Summary`
 
+`r p1Summary`
+
+`r otherVOCSummary`
 
 ### Detailed VOC/VOI report
 

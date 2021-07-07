@@ -2,6 +2,7 @@ variant_df_prep <- function(sheet){
   sheet$pangolin_lineage <- ifelse(
     grepl("^B.1.617", sheet$pangolin_lineage) == TRUE, "B.1.617+",
     sheet$pangolin_lineage)
+  
   df <- pivot_wider(sheet, names_from = pangolin_lineage,
                     values_from = c(prop_voc_mutations,
                                     detection_quality, frac_voc_detected)) %>%
@@ -11,7 +12,8 @@ variant_df_prep <- function(sheet){
                          details = character())
   
   variables <- c("date", "alphaDetect", "alphaLevel", "deltaDetect",
-                 "deltaLevel", "otherVOCDetect", "otherVOCLevel",
+                 "deltaLevel", "B1351Detect", "B1351Level", "P1Detect",
+                 "P1Level", "otherVOCDetect", "otherVOCLevel",
                  "summaryDescription", 
                  "ctN1Assay", "ctN2Assay",
                  "detailedDescription1", "detailedDescription2",
@@ -55,13 +57,35 @@ variant_df_prep <- function(sheet){
                                  "non-detect", NA,
            last(df$`detection_quality_B.1.617+`))
   
+  # Fill B1351Detect
+  var_text[[2]][[6]] <- ifelse(last(df$`detection_quality_B.1.351`) == "high" ||
+                                 last(df$`detection_quality_B.1.351`) == "low",
+                               TRUE, FALSE)
+  
+  # Fill B1351Level
+  var_text[[2]][[7]] <-
+    ifelse(last(df$`detection_quality_B.1.351`) == 
+             "high" || last(df$`detection_quality_B.1.351`) == 
+             "low", last(df$`detection_quality_B.1.351`), NA)
+  
+  # Fill P1Detect
+  var_text[[2]][[8]] <- ifelse(last(df$`detection_quality_P.1`) == "high" ||
+                                 last(df$`detection_quality_P.1`) == "low",
+                               TRUE, FALSE)
+  
+  # Fill P1Level
+  var_text[[2]][[9]] <-
+    ifelse(last(df$`detection_quality_P.1`) == 
+             "high" || last(df$`detection_quality_P.1`) == 
+             "low", last(df$`detection_quality_P.1`), NA)
+  
   # Fill otherVOCDetect
-  var_text[[2]][[6]] <-
+  var_text[[2]][[10]] <-
     ifelse(last(df$`detection_quality_other VOC/VOI`) == "high" || 
              last(df$`detection_quality_other VOC/VOI`) == "low", TRUE, FALSE)
   
   # Fill otherVOCLevel
-  var_text[[2]][[7]] <- ifelse(last(df$`detection_quality_other VOC/VOI`) ==
+  var_text[[2]][[11]] <- ifelse(last(df$`detection_quality_other VOC/VOI`) ==
                                  "non-detect" ||
                                  is.null(last(df$`detection_quality_other VOC/VOI`)),
                                NA, last(df$`detection_quality_other VOC/VOI`))
@@ -73,35 +97,39 @@ variant_df_prep <- function(sheet){
   
   delta_prev <- ifelse(is.na(var_text[[2]][[5]]), "no", var_text[[2]][[5]])
   
+  b1351_prev <- ifelse(is.na(var_text[[2]][[7]]), "no", var_text[[2]][[7]])
+  
+  p1_prev <- ifelse(is.na(var_text[[2]][[9]]), "no", var_text[[2]][[9]])
+  
   delta_prev_2_wk <- ifelse(df[nrow(df)-1, "detection_quality_B.1.617+"]
                             == "high", "high confidence",
                             ifelse(df[nrow(df)-1,
                                       "detection_quality_B.1.617+"] ==
                                      "low", "low confidence", "no"))
   
-  voc_prev <- ifelse(var_text[[2]][[6]] == FALSE, "No other", "Other")
-  
-  var_text[[2]][[8]] <-
-    paste(paste0(date, ":"), "Ottawa wastewater shows", alpha_prev, "confidence detection of B.1.1.7 and", delta_prev, "confidence of B.1.617+ lineages. Two weeks prior,", delta_prev_2_wk, "detection of B.1.617+ lineages was observed.", voc_prev, "VOC/VOI were identified above the level of detection of the assay.")
-  
-  var_text[[2]][[9]] <- last(df$CDC_N1)
-  
-  var_text[[2]][[10]] <- last(df$CDC_N2)
-  
-  var_text[[2]][[11]] <-
-  paste("The assembled consensus community genome (i.e., most frequent metagenome observed) was consistent with genomes of B.1.1.7 lineage (aka the UK variant) with", paste0(last(df$breadth_of_coverage_pct),"%"), "genome coverage at >5X read depth. The mean depth of coverage across the community genome was", paste0(round(last(df$mean_coverage_depth), 0), "X."))
+  voc_prev <- ifelse(var_text[[2]][[10]] == FALSE, "No other", "Other")
   
   var_text[[2]][[12]] <-
+    paste(paste0(date, ":"), "Ottawa wastewater shows", alpha_prev, "confidence detection of B.1.1.7 and", delta_prev, "confidence of B.1.617+ lineages. Ottawa wastewater also shows", b1351_prev, "confidence detection of B.1.351 variant, and", p1_prev, "confidence detection of P1 variant. Two weeks prior,", delta_prev_2_wk, "detection of B.1.617+ lineages was observed.", voc_prev, "VOC/VOI were identified above the level of detection of the assay.")
+  
+  var_text[[2]][[13]] <- last(df$CDC_N1)
+  
+  var_text[[2]][[14]] <- last(df$CDC_N2)
+  
+  var_text[[2]][[15]] <-
+  paste("The assembled consensus community genome (i.e., most frequent metagenome observed) was consistent with genomes of B.1.1.7 lineage (aka the UK variant) with", paste0(last(df$breadth_of_coverage_pct),"%"), "genome coverage at >5X read depth. The mean depth of coverage across the community genome was", paste0(round(last(df$mean_coverage_depth), 0), "X."))
+  
+  var_text[[2]][[16]] <-
   paste(last(df$frac_voc_detected_B.1.1.7), "mutations associated with B.1.1.7 genomes were present in the community genome.")
   
-  var_text[[2]][[13]] <-
+  var_text[[2]][[17]] <-
   paste("Of every 100 reads that overlapped sites of B.1.1.7 mutations, approx.", round(last(df$prop_voc_mutations_B.1.1.7), -1), "were found to harbour B.1.1.7 mutations. This is consistent with a sample where the major proportion of contributing viral RNA can be assigned to the B.1.1.7 lineage.")
   
   other_voc_sufficiency <-
-    ifelse(var_text[[2]][[6]] == FALSE, "insufficient",
+    ifelse(var_text[[2]][[10]] == FALSE, "insufficient",
            "sufficient")
   
-  var_text[[2]][[14]] <-
+  var_text[[2]][[18]] <-
     paste("There was", other_voc_sufficiency, "evidence to support the presence of any other VOC/VOI above the level of detection of the assay.")
   
   return(var_text)
