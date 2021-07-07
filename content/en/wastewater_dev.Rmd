@@ -229,6 +229,18 @@ deltaLevel <- as.character(variant_text[variant_text$variable == "deltaLevel",2]
 
 deltaSummary <- ifelse(deltaDetect == TRUE, paste("B.1.617+ including Delta variant detected at", deltaLevel, "levels by sequencing, last reported on", paste0(date, ".")), paste("B.1.617+ including Delta variant not detected by sequencing, last reported on", paste0(date, ".")))
 
+b1351Detect <- as.logical(variant_text[variant_text$variable == "B1351Detect",2])
+
+b1351Level <- as.character(variant_text[variant_text$variable == "B1351Level",2])
+
+b1351Summary <- ifelse(b1351Detect == TRUE, paste("B.1.351 detected at", b1351Level, "levels by sequencing, last reported on", paste0(date, ".")), paste("B.1.351 not detected by sequencing, last reported on", paste0(date, ".")))
+
+p1Detect <- as.logical(variant_text[variant_text$variable == "P1Detect",2])
+
+p1Level <- as.character(variant_text[variant_text$variable == "P1Level",2])
+
+p1Summary <- ifelse(deltaDetect == TRUE, paste("P.1 variant detected at", deltaLevel, "levels by sequencing, last reported on", paste0(date, ".")), paste("P.1 variant not detected by sequencing, last reported on", paste0(date, ".")))
+
 otherVOCDetect <- as.logical(variant_text[variant_text$variable == "otherVOCDetect",2])
 
 otherVOCLevel <- as.character(variant_text[variant_text$variable == "otherVOCDetails",2])
