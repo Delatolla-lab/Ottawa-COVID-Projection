@@ -1,11 +1,9 @@
 # Script to clean wastewater data
 wastewater_prep <- function(data){
-  # Rename gene headers 
-  names(data)[1] <- "date"
-  names(data)[5] <- "N1"
-  names(data)[7] <- "N2"
-  
   data_clean <- data %>%
+    rename(date = "sampleDate",
+           N1 = "covN1_nPMMoV_meanNr",
+           N2 = "covN2_nPMMoV_meanNr") %>%
     select(date, N1, N2, qualityFlag) %>%
     mutate(date = as.Date(date)) %>%
     filter(!is.na(date)) %>%
