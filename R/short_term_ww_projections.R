@@ -17,7 +17,7 @@ case_data <-
   mutate(date = as.Date(date))
 
 ww_data <-
-  read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
+  read.csv("https://raw.githubusercontent.com/Big-Life-Lab/COWS/main/Ottawa/Data/wastewater_virus.csv")
 
 waste_clean <- wastewater_prep(ww_data) %>%
   select(date, N1_N2_avg) %>%
