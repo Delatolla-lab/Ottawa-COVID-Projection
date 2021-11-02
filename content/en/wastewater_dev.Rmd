@@ -31,8 +31,8 @@ source("../../R/wastewater.R")
 # data
 ott_observed_covid <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv")) %>%
   mutate(date = as.Date(date))
-ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/COWS/main/Ottawa/Data/wastewater_virus.csv")
-ott_long_ww_data <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/COWS/main/Ottawa/Data/wwMeasure.csv")
+ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
+ott_long_ww_data <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wwMeasure.csv")
 
 ott_b117_data <- ott_observed_waste %>%
   mutate(sampleDate = as.Date(sampleDate)) %>%
