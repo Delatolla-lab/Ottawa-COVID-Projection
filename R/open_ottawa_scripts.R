@@ -50,7 +50,7 @@ data_creation <- function(ottawa_case_data, ottawa_test_data){
     ottawa_test %>%
       select(-OBJECTID) %>%
       rename(
-        date = "_Date",
+        date = "Date",
         num_non_ltch_tests = "Number_of_Tests,_Excluding_LTCH",
         non_ltch_pct_positivity = "Daily_%_Positivity,_Excluding_LTCH",
         num_ltch_tests = "Number_of_Tests_in_LTCH",
