@@ -181,19 +181,11 @@ The next plot illustrates the 7-day midpoint mean in daily covid-19 wastewater v
 reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day, hosp_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 300)
 ```
 
----
-
-Variant testing began late February for B.1.1.7 in the Ottawa wastewater system. The next plot illustrates the proportion of variant B.1.1.7 RNA signal detected in wastewater samples. 
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
-reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call, var_7_day_avg), error_bands = TRUE, error_pct = TRUE, error_data = "sd_7day", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
+#reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call, var_7_day_avg), error_bands = TRUE, error_pct = TRUE, error_data = "sd_7day", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
 ```
 
-*Shaded area reflect the uncertainty of the midpoint rolling average.
-
 ---
-
-## Variants of Concern and Interest (VOC and VOI)
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/variant_df_prep.R")
@@ -201,10 +193,7 @@ library(readxl)
 
 variant_sheet <- as.data.frame(read_excel(file.path(getwd(), "../../Data/variant_sheet.xlsx")))
 
-names(variant_sheet) <- c("ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days",
-                         "assay_id", "CDC_N1", "CDC_N2", "breadth_of_coverage_pct",
-                         "mean_coverage_depth", "pangolin_lineage", "detect",
-                         "prop_voc_mutations", "detection_quality", "frac_voc_detected")
+names(variant_sheet) <- c("ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days","assay_id", "CDC_N1", "CDC_N2", "breadth_of_coverage_pct","mean_coverage_depth", "pangolin_lineage", "detect","prop_voc_mutations", "detection_quality", "frac_voc_detected")
 
 sheet <- variant_sheet %>%
   select("ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days",
@@ -213,94 +202,57 @@ sheet <- variant_sheet %>%
                          "prop_voc_mutations", "detection_quality", "frac_voc_detected") %>%
   filter(!is.na(ENT_ID))
 
-variant_text <- variant_df_prep(sheet)
+#variant_text <- variant_df_prep(sheet)
 
-date <- format(as.Date(variant_text[variant_text$variable == "date",2]), "%B %d, %Y")
+#date <- format(as.Date(variant_text[variant_text$variable == "date",2]), "%B %d, %Y")
 
-alphaDetect <- as.logical(variant_text[variant_text$variable == "alphaDetect",2])
+#alphaDetect <- as.logical(variant_text[variant_text$variable == "alphaDetect",2])
 
-alphaLevel <- as.character(variant_text[variant_text$variable == "alphaLevel",2])
+#alphaLevel <- as.character(variant_text[variant_text$variable == "alphaLevel",2])
 
-alphaSummary <- ifelse(alphaDetect == TRUE, paste("Alpha (B.1.1.7) detected in", alphaLevel, "levels by sequencing and PCR, last reported on", paste0(date, ".")), paste("Alpha (B.1.1.7) not detected, last reported on", paste0(date, ".")))
+#alphaSummary <- ifelse(alphaDetect == TRUE, paste("Alpha (B.1.1.7) detected in", alphaLevel, "levels by sequencing and PCR, last reported on", paste0(date, ".")), paste("Alpha (B.1.1.7) not detected, last reported on", paste0(date, ".")))
 
-deltaDetect <- as.logical(variant_text[variant_text$variable == "deltaDetect",2])
+#deltaDetect <- as.logical(variant_text[variant_text$variable == "deltaDetect",2])
 
-deltaLevel <- as.character(variant_text[variant_text$variable == "deltaLevel",2])
+#deltaLevel <- as.character(variant_text[variant_text$variable == "deltaLevel",2])
 
-deltaSummary <- ifelse(deltaDetect == TRUE, paste("B.1.617+ including Delta variant detected at", deltaLevel, "levels by sequencing, last reported on", paste0(date, ".")), paste("B.1.617+ including Delta variant not detected by sequencing, last reported on", paste0(date, ".")))
+#deltaSummary <- ifelse(deltaDetect == TRUE, paste("B.1.617+ including Delta variant detected at", deltaLevel, "levels by sequencing, last reported on", paste0(date, ".")), paste("B.1.617+ including Delta variant not detected by sequencing, last reported on", paste0(date, ".")))
 
-b1351Detect <- as.logical(variant_text[variant_text$variable == "B1351Detect",2])
+#b1351Detect <- as.logical(variant_text[variant_text$variable == "B1351Detect",2])
 
-b1351Level <- as.character(variant_text[variant_text$variable == "B1351Level",2])
+#b1351Level <- as.character(variant_text[variant_text$variable == "B1351Level",2])
 
-b1351Summary <- ifelse(b1351Detect == TRUE, paste("B.1.351 detected at", b1351Level, "levels by sequencing, last reported on", paste0(date, ".")), paste("B.1.351 not detected by sequencing, last reported on", paste0(date, ".")))
+#b1351Summary <- ifelse(b1351Detect == TRUE, paste("B.1.351 detected at", b1351Level, "levels by sequencing, last reported on", paste0(date, ".")), paste("B.1.351 not detected by sequencing, last reported on", paste0(date, ".")))
 
-p1Detect <- as.logical(variant_text[variant_text$variable == "P1Detect",2])
+#p1Detect <- as.logical(variant_text[variant_text$variable == "P1Detect",2])
 
-p1Level <- as.character(variant_text[variant_text$variable == "P1Level",2])
+#p1Level <- as.character(variant_text[variant_text$variable == "P1Level",2])
 
-p1Summary <- ifelse(deltaDetect == TRUE, paste("P.1 variant detected at", deltaLevel, "levels by sequencing, last reported on", paste0(date, ".")), paste("P.1 variant not detected by sequencing, last reported on", paste0(date, ".")))
+#p1Summary <- ifelse(deltaDetect == TRUE, paste("P.1 variant detected at", deltaLevel, "levels by sequencing, last reported on", paste0(date, ".")), paste("P.1 variant not detected by sequencing, last reported on", paste0(date, ".")))
 
-otherVOCDetect <- as.logical(variant_text[variant_text$variable == "otherVOCDetect",2])
+#otherVOCDetect <- as.logical(variant_text[variant_text$variable == "otherVOCDetect",2])
 
-otherVOCLevel <- as.character(variant_text[variant_text$variable == "otherVOCDetails",2])
+#otherVOCLevel <- as.character(variant_text[variant_text$variable == "otherVOCDetails",2])
 
-otherVOCSummary <- ifelse(otherVOCDetect == TRUE, otherVOCDetails, "No other VOC/VOI were identified by sequencing above the level of detection of the assay.")
+#otherVOCSummary <- ifelse(otherVOCDetect == TRUE, otherVOCDetails, "No other VOC/VOI were identified by sequencing above the level of detection of the assay.")
 
-summaryDescription <- as.character(variant_text[variant_text$variable == "summaryDescription",2])
-
+#summaryDescription <- as.character(variant_text[variant_text$variable == "summaryDescription",2])
 ```
 
-### Summary
-
-Analysis of COVID-19 wastewater RNA viral signal shows that the mean is changing direction.
-
-`r alphaSummary`
-
-`r deltaSummary`
-
-`r b1351Summary`
-
-`r p1Summary`
-
-`r otherVOCSummary`
-
-### Detailed VOC/VOI report
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-detailedDescription1 <- as.character(variant_text[variant_text$variable == "detailedDescription1",2])
+#detailedDescription1 <- as.character(variant_text[variant_text$variable == "detailedDescription1",2])
 
-detailedDescription2 <- as.character(variant_text[variant_text$variable == "detailedDescription2",2])
+#detailedDescription2 <- as.character(variant_text[variant_text$variable == "detailedDescription2",2])
 
-detailedDescription3 <- as.character(variant_text[variant_text$variable == "detailedDescription3",2])
+#detailedDescription3 <- as.character(variant_text[variant_text$variable == "detailedDescription3",2])
 
-detailedDescription4 <- as.character(variant_text[variant_text$variable == "detailedDescription4",2])
+#detailedDescription4 <- as.character(variant_text[variant_text$variable == "detailedDescription4",2])
 ```
 
-* Community genome analyses is in-progress research by the National Microbial Laboratory. The findings are presented for discussion only. Interpret with caution. 
-
-* `r detailedDescription1`
-
-* `r detailedDescription2`
-
-* `r detailedDescription3`
-
-* `r detailedDescription4`
-
-Ottawa wastewater includes two VOC/VOI tests. See methods for more details. See the bottom of the page for detailed report, including the quality control summary.
-
-1. Thrice weekly tests for Alpha (B.1.1.7) using a qRT-PCR assay. These tests are performed by the uOttawa/CHEO laboratory beginning February 2021.
-
-See plot above, “Proportion of variant, Alpha (B.1.1.7) RNA in wastewater, Ottawa”.
-
-2. Weekly test for all VOC/VOI using a metagenome assay, also known as the consensus community genome. These tests are performed by the National Microbiology Laboratory, Winnipeg beginning May 2021.
-
-## Quality control
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-ctN1Assay <- variant_text[variant_text$variable == "ctN1Assay",2]
+#ctN1Assay <- variant_text[variant_text$variable == "ctN1Assay",2]
 
-ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
+#ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
 ```
 
 ### Overall viral signal
@@ -310,12 +262,6 @@ ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
 * Primer efficiency between 90%-130%.
 
 * No template controls are negative
-
-### VOC/VOI
-
-* CDC N1 and N2 RT-qPCR assays yielded Cts of `r ctN1Assay` and `r ctN2Assay`, respectively (Cts >35 will result in poor sensitivity).
-
-* Protocol: Tiled amplicon sequencing of SARS-CoV-2 meta-genomes 2(ArticV3) using an Illumina platform. See methods for details.
 
 ## Interpretation cautions
 
