@@ -374,4 +374,8 @@ source("../../R/hosp_projections.R")
 #hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (Number of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed # of daily admissions", project_to = "2021-05-31")
 ```
 
+>**Interpretive caution:** Hospital projections can be less accurate at the beginning of new waves. Hospital projections are based on the projected transmission of cases. Case transmission can be lower in vaccinated people with a lower risk of hospitalization.
+
+`r line_break`
+
 `r definitions`
