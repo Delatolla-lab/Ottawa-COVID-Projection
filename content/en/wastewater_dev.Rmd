@@ -60,6 +60,48 @@ variant_data <- ww_long_prep(ott_long_ww_data) %>%
                   by=1, by.column=TRUE, partial=FALSE,
                   fill=NA, align="center"))
 
+delta_data <- ww_long_prep(ott_long_ww_data) %>%
+  select(date, aggregation, var_delta) %>%
+  filter(!is.na(var_delta)) %>%
+  spread(aggregation, var_delta) %>%
+  rename(prop_delta = "single",
+         sd_delta = "sd") %>%
+  mutate(prop_delta = prop_delta*100,
+         sd_delta = sd_delta*100) %>%
+  filter(!is.na(sd_delta)) %>%
+  mutate(prop_delta_3day = rollapply(prop_delta, width=3,
+                  FUN=function(x) mean(x, na.rm = TRUE),
+                  by=1, by.column=TRUE, partial=FALSE,
+                  fill=NA, align="center")) %>%
+  mutate(sd_delta_3day = rollapply(sd_delta, width=3,
+                  FUN=function(x) mean(x, na.rm = TRUE),
+                  by=1, by.column=TRUE, partial=FALSE,
+                  fill=NA, align="center")) %>%
+  drop_na()
+
+omicron_data <- ww_long_prep(ott_long_ww_data) %>%
+  select(date, aggregation, varC2811T) %>%
+  filter(!is.na(varC2811T)) %>%
+  spread(aggregation, varC2811T) %>%
+  rename(prop_omicron = "single",
+         sd_omicron = "sd") %>%
+  mutate(prop_omicron = prop_omicron*100,
+         sd_omicron = sd_omicron*100) %>%
+  filter(!is.na(sd_omicron)) %>%
+  mutate(prop_omicron_3day = rollapply(prop_omicron, width=3,
+                  FUN=function(x) mean(x, na.rm = TRUE),
+                  by=1, by.column=TRUE, partial=FALSE,
+                  fill=NA, align="center")) %>%
+  mutate(sd_omicron_3day = rollapply(sd_omicron, width=3,
+                  FUN=function(x) mean(x, na.rm = TRUE),
+                  by=1, by.column=TRUE, partial=FALSE,
+                  fill=NA, align="center")) %>%
+  drop_na()
+
+delta_omicron_data <- delta_data %>%
+  full_join(omicron_data, by = "date") %>%
+  arrange(date)
+
 variant_non_detect <- ww_long_prep(ott_long_ww_data) %>%
   select(date, aggregation, varB117) %>%
   filter(!is.na(varB117)) %>%
@@ -80,6 +122,10 @@ rolling_avg_col <- "rgb(226, 127, 88)"
 smooth_col <- "rgb(34, 140, 34)"
 red <- "rgb(255,0,0)"
 red_shade <- "rgba(255, 0, 0, 0.2)"
+delta_col <- "rgb(226, 127, 88)"
+delta_shade <- "rgba(226, 127, 88, 0.2)"
+omicron_col <- "rgb(102, 51, 153)"
+omicron_shade <- "rgba(102, 51, 153, 0.2)"
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -155,6 +201,14 @@ var_call <- list(type = "signal_data", y_column = "propB117", name = "% B.1.1.7 
 var_nondetect_call <- list(type = "signal_data", y_column = "propB117_detect", name = "B.1.1.7 non-detection", color = red)
 
 var_7_day_avg <- list(type = "avg_data", y_column = "propB117_7day", name = "7 obs midpoint rolling average", color = var_col, width = 3)
+
+delta_call <- list(type = "signal_data", y_column = "prop_delta", name = "% Delta RNA", color = delta_col)
+
+delta_3_day_avg <- list(type = "avg_data", y_column = "prop_delta_3day", name = "Delta midpoint rolling average", color = delta_col, width = 3)
+
+omicron_call <- list(type = "signal_data", y_column = "prop_omicron", name = "% Omicron RNA", color = omicron_col)
+
+omicron_3_day_avg <- list(type = "avg_data", y_column = "prop_omicron_3day", name = "Omicron midpoint rolling average", color = omicron_col, width = 3)
 ```
 
 People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a covid-19 test or ever are diagnosed. Thus, in contrast to assessing community covid-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with covid-19 given that everyone goes to the washroom. In addition to serving as a valuable confirmatory data source for covid-19 levels, wastewater can also serve as early indicator for possible outbreaks, as described below.
@@ -183,17 +237,15 @@ reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(ne
 
 ---
 
-Variant testing began late February for B.1.1.7 in the Ottawa wastewater system. The next plot illustrates the proportion of variant B.1.1.7 RNA signal detected in wastewater samples. Shaded area represents the confidence interval for the midpoint rolling average.
+## Variants of Concern and Interest (VOC and VOI)
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
-reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call, var_7_day_avg), error_bands = TRUE, error_pct = TRUE, error_data = "sd_7day", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
+reworked_figure(xaxis = "date", yaxis = list(delta_call, delta_3_day_avg), error_bands = TRUE, error_pct = TRUE, error_data = "sd_delta_3day", error_col = delta_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant Delta RNA signal in wastewater, Ottawa</b>"), data = delta_data, ticks = FALSE)
 ```
 
-*Shaded area reflect the uncertainty of each B.1.1.7 detection.
-
----
-
-## Variants of Concern and Interest (VOC and VOI)
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
+reworked_figure(xaxis = "date", yaxis = list(omicron_call, omicron_3_day_avg), error_bands = TRUE, error_pct = TRUE, error_data = "sd_omicron_3day", error_col = omicron_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant Omicron RNA signal in wastewater, Ottawa</b>"), data = omicron_data, ticks = FALSE)
+```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/variant_df_prep.R")
