@@ -317,26 +317,14 @@ ICU_p_acute_care
 
 `r line_break`
 
-`r projected_hospital_title`
-
-`r case_projections`
-
-`r case_projections_text`
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 #short_term_plot(projections = ott_projections, obs_data = ott_observed, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Short-term daily COVID-19 cases in Ottawa by reported date")
 ```
 
-`r line_break`
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 #short_term_plot(projections = ott_projections, obs_data = ott_observed, obs_column = "observed_new_episodes", forecast_type = "infections", ylab = "New cases", title = "Short-term daily COVID-19 cases in Ottawa by episode date")
 ```
-
-`r line_break`
-
-`r hosp_projections`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
