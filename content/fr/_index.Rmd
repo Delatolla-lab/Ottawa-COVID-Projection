@@ -26,6 +26,8 @@ fewer <- insert_translation(localization_data, lang, "fewer")
 the_same <- insert_translation(localization_data, lang, "the_same")
 ```
 
+>**NOTE:** Case and hospitalization projections have been temporarily paused. Reliable estimates of transmissibility (Rt) cannot be calculated due to restrictions in testing eligibility.
+
 `r intro`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
