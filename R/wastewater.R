@@ -19,20 +19,14 @@ wastewater_prep <- function(data){
     ifelse(data_clean$qualityFlag == TRUE, NA, data_clean$N1_N2_avg)
   data_clean$N1_N2_avg_omit <-
     ifelse(data_clean$qualityFlag == TRUE, data_clean$N1_N2_avg, NA)
-  return(data_clean)
-}
-
-# Script to merge wastewater data into covid data
-merge_data <- function(data1, data2){
-  data1 %>%
-    full_join(data2, by = "date") %>%
+  data_final <- data_clean %>%
     # create 5 day rolling avg of viral signal
     mutate(
       N1_N2_5_day =
         rollapply(N1_N2_avg_clean, width=5,
                   FUN=function(x) mean(x, na.rm = TRUE),
                   by=1, by.column=TRUE, partial=FALSE,
-                  fill=NA, align="center")
+                  fill=NA, align="right")
     ) %>%
     # create 7 day rolling avg of viral signal
     mutate(
@@ -40,7 +34,7 @@ merge_data <- function(data1, data2){
         rollapply(N1_N2_avg_clean, width=7,
                   FUN=function(x) mean(x, na.rm = TRUE),
                   by=1, by.column=TRUE, partial=FALSE,
-                  fill=NA, align="center")
+                  fill=NA, align="right")
     ) %>%
     # create 10 day rolling avg of viral signal
     mutate(
@@ -48,7 +42,7 @@ merge_data <- function(data1, data2){
         rollapply(N1_N2_avg_clean, width=10,
                   FUN=function(x) mean(x, na.rm = TRUE),
                   by=1, by.column=TRUE, partial=FALSE,
-                  fill=NA, align="center")
+                  fill=NA, align="right")
     ) %>%
     # create 10 day rolling avg of daily rate of change of viral signal
     mutate(
@@ -56,13 +50,20 @@ merge_data <- function(data1, data2){
         rollapply(viral_roc_daily, width=10,
                   FUN=function(x) mean(x),
                   by=1, by.column=TRUE, partial=FALSE,
-                  fill=NA, align="center")
+                  fill=NA, align="right")
     ) %>%
     # create change in 5 day rolling avg from 5 day rolling avg 5 days ago
     mutate(
       change_N1_N2_5_day =
         (N1_N2_5_day - lag(N1_N2_5_day, 5))/lag(N1_N2_5_day, 5) * 100
     ) %>%
+  return(data_final)
+}
+
+# Script to merge wastewater data into covid data
+merge_data <- function(data1, data2){
+  data1 %>%
+    full_join(data2, by = "date") %>%
     # create change in 7 day rolling avg from 7 day rolling avg 5 days ago
     mutate(
       change_N1_N2_7_day =
