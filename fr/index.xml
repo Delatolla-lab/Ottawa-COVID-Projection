@@ -19,8 +19,8 @@
       <guid>https://613covid.ca/fr/model/</guid>
       <description>Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references.
 Projection models All data used to create projection models can be accessed at Open Ottawa. See ’COVID-19 cases and deaths`.
-Covid-19 short-term projections are created using the Bayesian EpiNow2 model developed by the EpiForecasts team.
- Projections are based on observed covid-19 cases by reporting date, which is, in turn, estimated using reported incubation period and consideration for reporting delays.</description>
+COVID-19 short-term projections are created using the Bayesian EpiNow2 model developed by the EpiForecasts team.
+ Projections are based on observed COVID-19 cases by reporting date, which is, in turn, estimated using reported incubation period and consideration for reporting delays.</description>
     </item>
     
     <item>
@@ -61,12 +61,12 @@ Avec le soutien des épidémiologistes de Santé publique Ottawa: Amira Ali, Jac
     </item>
     
     <item>
-      <title>Ottawa covid-19 wastewater surveillance</title>
+      <title>Ottawa COVID-19 wastewater surveillance</title>
       <link>https://613covid.ca/fr/wastewater/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/fr/wastewater/</guid>
-      <description>People with covid-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a covid-19 test or ever are diagnosed. Thus, in contrast to assessing community covid-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with covid-19 given that everyone goes to the washroom.</description>
+      <description>People with COVID-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a COVID-19 test or ever are diagnosed. Thus, in contrast to assessing community COVID-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with COVID-19 given that everyone goes to the washroom.</description>
     </item>
     
     <item>
