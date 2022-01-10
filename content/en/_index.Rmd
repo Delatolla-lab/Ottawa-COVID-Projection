@@ -26,6 +26,8 @@ fewer <- insert_translation(localization_data, lang, "fewer")
 the_same <- insert_translation(localization_data, lang, "the_same")
 ```
 
+>**NOTE:** Case and hospitalization projections have been temporarily paused. Reliable estimates of transmissibility (Rt) cannot be calculated due to restrictions in testing eligibility.
+
 `r intro`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -315,51 +317,18 @@ ICU_p_acute_care
 
 `r line_break`
 
-`r projected_hospital_title`
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# visualize epinow forecast
+#short_term_plot(projections = ott_projections, obs_data = ott_observed, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Short-term daily COVID-19 cases in Ottawa by reported date")
+```
 
-`r case_projections`
-
-`r case_projections_text`
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#short_term_plot(projections = ott_projections, obs_data = ott_observed, obs_column = "observed_new_episodes", forecast_type = "infections", ylab = "New cases", title = "Short-term daily COVID-19 cases in Ottawa by episode date")
+```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
-short_term_plot(
-  projections = ott_projections,
-  obs_data = ott_observed,
-  obs_column = "observed_new_cases",
-  forecast_type = "reported_cases",
-  ylab = "New cases",
-  title = "Short-term daily COVID-19 cases in Ottawa by reported date"
-)
-```
-
-`r line_break`
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-short_term_plot(
-  projections = ott_projections,
-  obs_data = ott_observed,
-  obs_column = "observed_new_episodes",
-  forecast_type = "infections",
-  ylab = "New cases",
-  title = "Short-term daily COVID-19 cases in Ottawa by episode date"
-)
-```
-
-`r line_break`
-
-`r hosp_projections`
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# visualize epinow forecast
-short_term_plot(
-  projections = hosp_proj,
-  obs_data = ott_observed,
-  obs_column = "observed_census_ICU_p_acute_care",
-  forecast_type = "reported_cases",
-  ylab = "Hospital census",
-  title = "Short-term hospital census projections in Ottawa"
-)
+#short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Short-term hospital census projections in Ottawa")
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -373,8 +342,6 @@ source("../../R/hosp_projections.R")
 source("../../R/hosp_projections.R")
 #hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (Number of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed # of daily admissions", project_to = "2021-05-31")
 ```
-
->**Interpretive caution:** Hospital projections can be less accurate at the beginning of new waves. Hospital projections are based on the projected transmission of cases. Case transmission can be lower in vaccinated people with a lower risk of hospitalization.
 
 `r line_break`
 

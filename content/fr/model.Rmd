@@ -10,37 +10,37 @@ Described below is a brief description of methods, data and model parameters use
 
 All data used to create projection models can be accessed at [Open Ottawa](https://open.ottawa.ca/datasets/covid-19-cases-and-deaths-in-ottawa). See 'COVID-19 cases and deaths`.
     
-1) *Covid-19 short-term projections are created using the [Bayesian EpiNow2 model](https://epiforecasts.io/EpiNow2/) developed by the EpiForecasts team.*
+1) *COVID-19 short-term projections are created using the [Bayesian EpiNow2 model](https://epiforecasts.io/EpiNow2/) developed by the EpiForecasts team.*
 
-    - Projections are based on observed covid-19 cases by reporting date, which is, in turn, estimated using reported incubation period and consideration for reporting delays. Future updates on 613covid.ca will consider observed episode date for Ottawa cases.
+    - Projections are based on observed COVID-19 cases by reporting date, which is, in turn, estimated using reported incubation period and consideration for reporting delays. Future updates on 613covid.ca will consider observed episode date for Ottawa cases.
     
-2) *Covid-19 case projections created using the [Bayesian SEIR model](https://github.com/seananderson/covidseir) developed by Simon Fraser University.*
+2) *COVID-19 case projections created using the [Bayesian SEIR model](https://github.com/seananderson/covidseir) developed by Simon Fraser University.*
 
-    - Projections are based on observed covid-19 cases by episode date. Episode date reflects the date closest to the onset of symptoms. Projections exclude the most recent week of cases, reflecting a lag time in detecting and reporting recent covid-19 infections.
+    - Projections are based on observed COVID-19 cases by episode date. Episode date reflects the date closest to the onset of symptoms. Projections exclude the most recent week of cases, reflecting a lag time in detecting and reporting recent COVID-19 infections.
     
-    - Covid-19 transmission is estimated within the SEIR model. 
+    - COVID-19 transmission is estimated within the SEIR model. 
     
 3) *Hospital projections created using the [Bayesian extension to the CHIME model](https://github.com/pennsignals/chime_sims) developed by the University of Pennsylvania Health System.*  
 
-    - Projections are based on the observed covid-19 hospitalization census for each day for the five Ottawa hospitals who treat covid-19 patients. 
+    - Projections are based on the observed COVID-19 hospitalization census for each day for the five Ottawa hospitals who treat COVID-19 patients. 
     
-    - Hospitalization is used to estimate covid-19 transmission in Ottawa population that results in hospitalization. 
+    - Hospitalization is used to estimate COVID-19 transmission in Ottawa population that results in hospitalization. 
     
     - Model parameters other than Ottawa hospital use are aligned with other models,  described [below](#parameters). 
 
-## Wastewater covid-19 surveillance
+## Wastewater COVID-19 surveillance
 
-Ottawa's wastewater data available [here](https://github.com/Big-Life-Lab/covid-19-wastewater).
+Ottawa's wastewater data available [here](https://github.com/Big-Life-Lab/PHESD).
  
-See [Ottawa Public Health webiste](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx) for an overview of the wastewater surveillance program and its role in covid-19 surveillance. Detail laboratory methods are published [here](https://www.medrxiv.org/content/10.1101/2020.08.11.20173062v3). The surveillance program is under development. Results and interpretation are publicly-presented for discussion.
+See [Ottawa Public Health website](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx) for an overview of the wastewater surveillance program and its role in COVID-19 surveillance. Detail laboratory methods are published [here](https://www.medrxiv.org/content/10.1101/2020.08.11.20173062v3). The surveillance program is under development. Results and interpretation are publicly-presented for discussion.
  
-Wastewater samples are from the Robert O. Pickard Environmental Centre (ROPEC) which collects and treats wastewater from ~91.6% of Ottawa’s population. Samples for covid-19 surveillance are collected hourly for a period of 24 hours, five days a week from sludge (directly from the primary clarifiers). The assay method has been validated in a national cross-laboratory study. Two viral regions of SARS-CoV-2 (N1 and N2) are assayed and standardized using the viral levels of Pepper Mild Mottle Virus (PMMoV). The reported measure is the sample mean of N1 + N2 copies per copy of PMMoV.
+Wastewater samples are from the Robert O. Pickard Environmental Centre (ROPEC) which collects and treats wastewater from ~91.6% of Ottawa’s population. Samples for COVID-19 surveillance are collected hourly for a period of 24 hours, five days a week from sludge (directly from the primary clarifiers). The assay method has been validated in a national cross-laboratory study. Two viral regions of SARS-CoV-2 (N1 and N2) are assayed and standardized using the viral levels of Pepper Mild Mottle Virus (PMMoV). The reported measure is the sample mean of N1 + N2 copies per copy of PMMoV.
 
 ## The importance of physical distancing {#physical-distancing}
 
 The trend of COVID-19 cases and hospital use is summarized as “doubling time.” Doubling time — and the weekly change in doubling time — are the most important parameters in COVID-19 projections that vary between communities. 
 
-An exponential growth in covid-19 cases and hosptialization (doubling time of less than 4 days) will occur unless one of two situations occurs:  
+An exponential growth in COVID-19 cases and hosptialization (doubling time of less than 4 days) will occur unless one of two situations occurs:  
 
 1) The number of people susceptible to infection decreases. As an epidemic progresses, there will be fewer people left in the community who can become infected. However, as of  `r format(Sys.Date()-1, '%b %d, %Y')` only a small proportion of people living in Ottawa are currently infected or are recovered from COVID-19 -- likely less than 5%. This means that the current reduction in susceptible people has a negligible effect effect on changes to hospital infection doubling times.
 
@@ -85,7 +85,7 @@ $$g_0 = \beta_0 - \gamma$$
 
 ## Input parameters {#parameters}
 
-  Parameter estimates for hospital projections are based on covid-19 patients from the Ottawa Hospital and from the [COVID-19-MC](https://www.covid-19-mc.ca/interactive-model) and [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) models, with updates based on [Verity et al. (Lancet, March 20, 2020)](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)* and [Ferguson et al. (March 16, 2020)](https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf).
+  Parameter estimates for hospital projections are based on COVID-19 patients from the Ottawa Hospital and from the [COVID-19-MC](https://www.covid-19-mc.ca/interactive-model) and [Tuite, Fisman, et al.](https://www.medrxiv.org/content/10.1101/2020.03.24.20042705v1) models, with updates based on [Verity et al. (Lancet, March 20, 2020)](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)* and [Ferguson et al. (March 16, 2020)](https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf).
  
   
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
