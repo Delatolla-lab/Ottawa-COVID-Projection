@@ -26,46 +26,28 @@ short_term_forecast <- function(data,
   }
   
   # Run epinow2 sim 
-  projections <-
+  if(is.null(reporting_delay)){
+    projections <-
+      EpiNow2::epinow(reported_cases = data_formatted, 
+                      generation_time = generation_time,
+                      delays = delay_opts(incubation_period),
+                      rt = rt_opts(prior = list(mean = 2, sd = 0.2), rw = 7),
+                      stan = stan_opts(cores = 4),
+                      gp = NULL, horizon = 14)
+  }
+  else{
+    projections <-
       EpiNow2::epinow(reported_cases = data_formatted, 
                       generation_time = generation_time,
                       delays = delay_opts(incubation_period, reporting_delay),
                       rt = rt_opts(prior = list(mean = 2, sd = 0.2), rw = 7),
                       stan = stan_opts(cores = 4),
                       gp = NULL, horizon = 14)
-  # Extract output
+  }
   if(output == as.character("projections")){
     forecast <-
       # Obtain summarized projections
-      projections[[1]][[2]] %>%
-      # Divide by the parameter weight
-      mutate(median = ifelse(variable == "infections" | variable == "prior_infections" |
-                               variable == "reported_cases",
-                             median/parameter_weight, median),
-             mean = ifelse(variable == "infections" | variable == "prior_infections" |
-                             variable == "reported_cases",
-                           mean/parameter_weight, mean),
-             sd = ifelse(variable == "infections" | variable == "prior_infections" |
-                           variable == "reported_cases",
-                         sd/parameter_weight, sd),
-             lower_90 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                 variable == "reported_cases",
-                               lower_90/parameter_weight, lower_90),
-             lower_50 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                 variable == "reported_cases",
-                               lower_50/parameter_weight, lower_50),
-             lower_20 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                 variable == "reported_cases",
-                               lower_20/parameter_weight, lower_20),
-             upper_90 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                 variable == "reported_cases",
-                               upper_90/parameter_weight, upper_90),
-             upper_50 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                 variable == "reported_cases",
-                               upper_50/parameter_weight, upper_50),
-             upper_20 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                 variable == "reported_cases",
-                               upper_20/parameter_weight, upper_20))
+      projections[[1]][[2]] 
   }  
   else if(output == as.character("estimates")){
     forecast <-
@@ -73,35 +55,7 @@ short_term_forecast <- function(data,
   }
   else if(output == as.character("both")){
     forecast <- list(
-      projections[[1]][[2]] %>%
-        # Divide by the parameter weight
-        mutate(median = ifelse(variable == "infections" | variable == "prior_infections" |
-                                 variable == "reported_cases",
-                               median/parameter_weight, median),
-               mean = ifelse(variable == "infections" | variable == "prior_infections" |
-                               variable == "reported_cases",
-                             mean/parameter_weight, mean),
-               sd = ifelse(variable == "infections" | variable == "prior_infections" |
-                             variable == "reported_cases",
-                           sd/parameter_weight, sd),
-               lower_90 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                   variable == "reported_cases",
-                                 lower_90/parameter_weight, lower_90),
-               lower_50 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                   variable == "reported_cases",
-                                 lower_50/parameter_weight, lower_50),
-               lower_20 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                   variable == "reported_cases",
-                                 lower_20/parameter_weight, lower_20),
-               upper_90 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                   variable == "reported_cases",
-                                 upper_90/parameter_weight, upper_90),
-               upper_50 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                   variable == "reported_cases",
-                                 upper_50/parameter_weight, upper_50),
-               upper_20 = ifelse(variable == "infections" | variable == "prior_infections" |
-                                   variable == "reported_cases",
-                                 upper_20/parameter_weight, upper_20)),
+      projections[[1]][[2]],
       projections[[3]][[3]]
     )
   }  
