@@ -25,12 +25,11 @@ library(zoo)
 # Source the necessary R files containing the functions of interest
 source("../R/epinow_functions.R")
 source("../R/wastewater.R")
-source("../R/observed_data.R")
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Load case/hospitalizations dataset
-ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
+ott_covid_data <- read.csv(file.path(getwd(), "../Data/Observed data/OPH_Observed_COVID_Data.csv"))
 
 # Load wastewater dataset
 ww_data <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
@@ -56,19 +55,20 @@ ott_short_forecast <- short_term_forecast(
   data = ott_covid_data, # data to run projections from
   parameter = "observed_new_cases", # column to feed data into
   start_date = "2021-12-01", # can be changed
+  parameter_weight = 1, # multiplier for data that <0 (e.g. ww signal)
  # end_date = "2020-11-24", # can be changed, if missing will default to last day
   omit_last_date = TRUE,
   generation_time = generation_time, # estimated time between two generations of virus
   incubation_period = incubation_period, # time between exposure and symptom onset
   reporting_delay = reporting_delay, # time between exposure and reported 
-  output = "projections"
+  output = "projections" # output type
 )
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualizing projections
 short_term_plot(
-  projections = ott_projections, # projection data
+  projections = ott_short_forecast, # projection data
   obs_data = ott_covid_data, # observed data
   obs_column = "observed_new_cases", # observed data column
   forecast_type = "reported_cases", # forecast type
