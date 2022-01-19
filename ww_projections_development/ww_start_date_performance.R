@@ -82,4 +82,4 @@ ww_forecast_12_month <- short_term_forecast(
   output = "projections"
 )
 
-save(ww_forecast_12_month, file = "WW Projections Development/ww_forecast_12_month.RData")
+save(ww_forecast_12_month, file = "ww_projections_development/ww_forecast_12_month.RData")
