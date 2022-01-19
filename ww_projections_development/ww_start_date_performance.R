@@ -55,7 +55,7 @@ ww_forecast_3_month <- short_term_forecast(
 save(ww_forecast_3_month, file = "ww_projections_development/ww_forecast_3_month.RData")
 
 # Projections using 6 months of data
-ww_forecast_3_month <- short_term_forecast(
+ww_forecast_6_month <- short_term_forecast(
   data = ww_clean,
   input = "N1_N2_avg_clean",
   start_date = as.Date(Sys.Date() - (30*6)),
@@ -70,7 +70,7 @@ ww_forecast_3_month <- short_term_forecast(
 save(ww_forecast_6_month, file = "ww_projections_development/ww_forecast_6_month.RData")
 
 # Projections using 12 months of data
-ww_forecast_3_month <- short_term_forecast(
+ww_forecast_12_month <- short_term_forecast(
   data = ww_clean,
   input = "N1_N2_avg_clean",
   start_date = as.Date(Sys.Date() - (30*12)),
