@@ -28,8 +28,8 @@ jobs:
             ${{ runner.os }}-renv-
       - name: Install dependencies
         run: R -e 'renv::restore()'
-      - name: Run short term hosp projections 
-        run: Rscript WW Projections Development/ww_start_date_performance.R
+      - name: Run ww projections
+        run: Rscript ww_projections_development/ww_start_date_performance.R
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
