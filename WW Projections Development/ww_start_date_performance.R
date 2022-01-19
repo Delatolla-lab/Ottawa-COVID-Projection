@@ -37,7 +37,7 @@ ww_forecast_1_month <- short_term_forecast(
   output = "projections"
 )
 
-save(ww_forecast_1_month, file = "ww_forecast_1_month.RData")
+save(ww_forecast_1_month, file = "WW Projections Development/ww_forecast_1_month.RData")
 
 # Projections using 3 months of data
 ww_forecast_3_month <- short_term_forecast(
@@ -52,7 +52,7 @@ ww_forecast_3_month <- short_term_forecast(
   output = "projections"
 )
 
-save(ww_forecast_3_month, file = "ww_forecast_3_month.RData")
+save(ww_forecast_3_month, file = "WW Projections Development/ww_forecast_3_month.RData")
 
 # Projections using 6 months of data
 ww_forecast_3_month <- short_term_forecast(
@@ -67,7 +67,7 @@ ww_forecast_3_month <- short_term_forecast(
   output = "projections"
 )
 
-save(ww_forecast_6_month, file = "ww_forecast_6_month.RData")
+save(ww_forecast_6_month, file = "WW Projections Development/ww_forecast_6_month.RData")
 
 # Projections using 12 months of data
 ww_forecast_3_month <- short_term_forecast(
@@ -82,4 +82,4 @@ ww_forecast_3_month <- short_term_forecast(
   output = "projections"
 )
 
-save(ww_forecast_12_month, file = "ww_forecast_12_month.RData")
+save(ww_forecast_12_month, file = "WW Projections Development/ww_forecast_12_month.RData")
