@@ -1,4 +1,4 @@
-name: WW-proj-testing
+name: WW-hist-proj-testing
 
 on:
   workflow_dispatch:
@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: R -e 'renv::restore()'
       - name: Run ww projections
-        run: Rscript ww_projections_development/ww_start_date_performance.R
+        run: Rscript ww_projections_development/ww_historic_proj_performance.R
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
