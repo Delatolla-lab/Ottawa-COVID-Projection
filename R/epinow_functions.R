@@ -51,11 +51,15 @@ short_term_forecast <- function(data,
   }  
   else if(output == as.character("estimates")){
     forecast <-
-      projections[[3]][[3]] # Obtain numeric estimates
+      list(
+        cbind(projections[[3]][[1]], projections[[3]][[2]]),
+        projections[[3]][[3]]
+      )
   }
   else if(output == as.character("both")){
     forecast <- list(
       projections[[1]][[2]],
+      cbind(projections[[3]][[1]], projections[[3]][[2]]),
       projections[[3]][[3]]
     )
   }  
