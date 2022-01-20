@@ -27,6 +27,7 @@ source("../../R/data_conversion.R")
 source("../../R/hosp_projections.R")
 source("../../R/open_ottawa_scripts.R")
 source("../../R/wastewater.R")
+source("../../R/epinow_functions.R")
 
 # data
 ott_observed_covid <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv")) %>%
