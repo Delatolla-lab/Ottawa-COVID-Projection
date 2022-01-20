@@ -1,0 +1,42 @@
+name: WW-hist-proj-testing
+
+on:
+  workflow_dispatch:
+
+jobs: 
+  dataset-creation:
+    runs-on: "macOS-latest"
+    env:
+      RENV_PATHS_ROOT: ~/.local/share/renv
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ww-dev
+          token: ${{ secrets.ACTION_TOKEN }}
+      - name: setup-r
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: '4.1.1'
+      - name: Install renv package
+        run: R -e 'install.packages("renv")'
+      - name: Cache packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+      - name: Install dependencies
+        run: R -e 'renv::restore()'
+      - name: Run ww projections
+        run: Rscript ww_projections_development/ww_historic_proj_performance.R
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git commit -m "Update WW projections" -a || echo "Nothing to update"
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          branch: 'ww-dev'
