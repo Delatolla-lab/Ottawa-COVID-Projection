@@ -47,7 +47,7 @@ for(date in date_intervals){
            type == "forecast")
   
   ww_data[[x]] <- ww_clean %>%
-    mutate(N1_N2_avg = N1_N2_avg*1000000) %>%
+    mutate(N1_N2_avg_clean = N1_N2_avg_clean*1000000) %>%
     full_join(ww_forecast) %>%
     filter(duplicated(date) == FALSE,
            date > first(date),
