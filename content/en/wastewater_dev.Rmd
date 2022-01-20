@@ -19,6 +19,7 @@ library(lubridate)
 library(stats)
 library(zoo)
 library(stringr)
+library(EpiNow2)
 
 # scripts
 source("../../R/lag_replacement.R")
