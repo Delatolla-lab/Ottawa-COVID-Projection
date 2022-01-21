@@ -51,6 +51,20 @@ short_term_plot(
 
 ---
 
+## Current growth estimates
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+growth_measures <- ww_forecast[[2]]
+colnames(growth_measures) <- c("measure", "estimate")
+
+growth_measures[2, "measure"] <- "Expected change in viral signal"
+growth_measures <- growth_measures[-1,]
+
+knitr::kable(growth_measures)
+```
+
+---
+
 ## Historic WW Projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
