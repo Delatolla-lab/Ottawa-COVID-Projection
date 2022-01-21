@@ -30,7 +30,28 @@ ww_clean <- wastewater_prep(ww_data) %>%
   mutate(date = as.Date(date))
 
 load("../../ww_projections_development/historic_ww_proj.RData")
+load("../../Data/short_term_ww_proj.RData")
 ```
+
+## Current WW Projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ww_normalized <- ww_clean %>%
+  mutate(N1_N2_avg_clean = N1_N2_avg_clean*1000000)
+
+short_term_plot(
+  projections = ww_forecast[[1]],
+  obs_data = ww_normalized,
+  obs_column = "N1_N2_avg_clean",
+  forecast_type = "reported_cases",
+  ylab = "Viral copies (µ)",
+  title = "Projections for viral signal"
+)
+```
+
+---
+
+## Historic WW Projections
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 signal_col <- "rgb(226, 127, 88)"
@@ -40,23 +61,61 @@ proj_shade <- "rgba(0, 128, 128, 0.2)"
 ww_proj_call <- list(type = "avg_data", y_column = "median", name = "Historic projected viral signal", short_name = "projections", color = proj_col, width = 4)
 ww_obs_call <- list(type = "observed_data", y_column = "N1_N2_avg_clean", name = "Observed historic viral signal", short_name = "Daily signal", color = signal_col, opacity = 0.5)
 
-reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral signal", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[1]][["date"]])), paste("to", last(ww_data[[1]][["date"]])))), data = ww_data[[1]], ticks = FALSE)
-
-reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral signal", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[2]][["date"]])), paste("to", last(ww_data[[2]][["date"]])))), data = ww_data[[2]], ticks = FALSE)
-
-reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral signal", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[3]][["date"]])), paste("to", last(ww_data[[3]][["date"]])))), data = ww_data[[3]], ticks = FALSE)
-
-reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral signal", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[4]][["date"]])), paste("to", last(ww_data[[4]][["date"]])))), data = ww_data[[4]], ticks = FALSE)
-
-reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral signal", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[5]][["date"]])), paste("to", last(ww_data[[5]][["date"]])))), data = ww_data[[5]], ticks = FALSE)
-
-reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral signal", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[6]][["date"]])), paste("to", last(ww_data[[6]][["date"]])))), data = ww_data[[6]], ticks = FALSE)
-
-reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral signal", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[7]][["date"]])), paste("to", last(ww_data[[7]][["date"]])))), data = ww_data[[7]], ticks = FALSE)
-
-reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral signal", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[8]][["date"]])), paste("to", last(ww_data[[8]][["date"]])))), data = ww_data[[8]], ticks = FALSE)
-
-reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral signal", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[9]][["date"]])), paste("to", last(ww_data[[9]][["date"]])))), data = ww_data[[9]], ticks = FALSE)
-
-reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral signal", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[10]][["date"]])), paste("to", last(ww_data[[10]][["date"]])))), data = ww_data[[10]], ticks = FALSE)
+reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral copies (µ)", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[1]][["date"]])), paste("to", last(ww_data[[1]][["date"]])))), data = ww_data[[1]], ticks = FALSE)
 ```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral copies (µ)", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[2]][["date"]])), paste("to", last(ww_data[[2]][["date"]])))), data = ww_data[[2]], ticks = FALSE)
+```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral copies (µ)", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[3]][["date"]])), paste("to", last(ww_data[[3]][["date"]])))), data = ww_data[[3]], ticks = FALSE)
+```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral copies (µ)", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[4]][["date"]])), paste("to", last(ww_data[[4]][["date"]])))), data = ww_data[[4]], ticks = FALSE)
+```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral copies (µ)", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[5]][["date"]])), paste("to", last(ww_data[[5]][["date"]])))), data = ww_data[[5]], ticks = FALSE)
+```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral copies (µ)", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[6]][["date"]])), paste("to", last(ww_data[[6]][["date"]])))), data = ww_data[[6]], ticks = FALSE)
+```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral copies (µ)", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[7]][["date"]])), paste("to", last(ww_data[[7]][["date"]])))), data = ww_data[[7]], ticks = FALSE)
+```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral copies (µ)", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[8]][["date"]])), paste("to", last(ww_data[[8]][["date"]])))), data = ww_data[[8]], ticks = FALSE)
+```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral copies (µ)", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[9]][["date"]])), paste("to", last(ww_data[[9]][["date"]])))), data = ww_data[[9]], ticks = FALSE)
+```
+
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral copies (µ)", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[10]][["date"]])), paste("to", last(ww_data[[10]][["date"]])))), data = ww_data[[10]], ticks = FALSE)
+```
+
+---
