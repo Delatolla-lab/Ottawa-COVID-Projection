@@ -10,6 +10,7 @@ library(zoo)
 
 source("R/open_ottawa_scripts.R")
 source("R/wastewater.R")
+source("R/epinow_functions.R")
 
 ww_data <-
   read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
