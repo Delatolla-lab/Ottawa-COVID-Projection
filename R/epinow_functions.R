@@ -1,6 +1,6 @@
 short_term_forecast <- function(data,
-                                parameter,
-                                parameter_weight = 1,
+                                input,
+                                input_multiplier = 1,
                                 start_date,
                                 end_date,
                                 omit_last_date = FALSE,
@@ -16,10 +16,10 @@ short_term_forecast <- function(data,
   data_formatted <- data %>%
     filter(as.Date(date) >= as.Date(start_date)) %>%
     filter(as.Date(date) <= as.Date(end_date)) %>%
-    select(date, as.character(parameter)) %>%
-    rename(confirm = as.character(parameter)) %>%
+    select(date, as.character(input)) %>%
+    rename(confirm = as.character(input)) %>%
     mutate(date = as.Date(date),
-           confirm = as.integer(confirm * parameter_weight))
+           confirm = as.integer(confirm * input_multiplier))
   
   if(isTRUE(omit_last_date)){
     data_formatted <- data_formatted[data_formatted$date < as.Date(end_date),]
@@ -51,11 +51,15 @@ short_term_forecast <- function(data,
   }  
   else if(output == as.character("estimates")){
     forecast <-
-      projections[[3]][[3]] # Obtain numeric estimates
+      list(
+        cbind(projections[[3]][[1]], projections[[3]][[2]]),
+        projections[[3]][[3]]
+      )
   }
   else if(output == as.character("both")){
     forecast <- list(
       projections[[1]][[2]],
+      cbind(projections[[3]][[1]], projections[[3]][[2]]),
       projections[[3]][[3]]
     )
   }  

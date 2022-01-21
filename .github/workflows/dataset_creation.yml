@@ -42,6 +42,8 @@ jobs:
         run: Rscript R/short_term_projections.R
       - name: Run short term hosp projections 
         run: Rscript R/short_term_hosp_projections.R
+      - name: Run short term ww projections 
+        run: Rscript R/short_term_ww_projections.R  
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -52,9 +54,9 @@ jobs:
         with:
           github_token: ${{ secrets.ACTION_TOKEN }}
           branch: 'master' #optional defaults to master
-      - name: Merge master -> hosp-projections
+      - name: Merge master -> ww-dev
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.ACTION_TOKEN }}
-          branch: 'hosp-projections'
+          branch: 'ww-dev'
           force: true

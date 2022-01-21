@@ -1,0 +1,93 @@
+---
+title: "WW proj performance examination"
+author: "Warsame Yusuf"
+date: "13/01/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+## run ott_projections() in short_term_projections.R to generate data for plots
+# load library, packages, functions, data
+library(tidyverse)
+library(ggplot2)
+library(EpiNow2)
+library(stringr)
+library(purrr)
+library(lubridate)
+library(plotly)
+library(RColorBrewer)
+library(zoo)
+source("../R/epinow_functions.R")
+source("../R/wastewater.R")
+source("../R/observed_data.R")
+
+ww_data <-
+  read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
+
+ww_clean <- wastewater_prep(ww_data) %>%
+  select(date, N1_N2_avg, N1_N2_avg_clean) %>%
+  mutate(date = as.Date(date))
+
+# Set reporting delay, generation time, incubation period for simulation
+reporting_delay <- NULL
+generation_time <-
+  get_generation_time(disease = "SARS-CoV-2", source = "ganyani")
+incubation_period <-
+  get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
+```
+
+# WW Projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Examine ww projections during Mar-Apr 2021 surge
+ww_forecast <- short_term_forecast(
+    data = ww_clean,
+    input = "N1_N2_avg_clean",
+    start_date = "2021-12-01",
+    input_multiplier = 1000000,
+    omit_last_date = FALSE,
+    generation_time = generation_time,
+    incubation_period = incubation_period,
+    reporting_delay = reporting_delay,
+    output = "both"
+)
+
+ww_normalized <- ww_clean %>%
+  mutate(N1_N2_avg_clean = N1_N2_avg_clean*1000000)
+
+short_term_plot(
+  projections = ww_forecast[[1]],
+  obs_data = ww_normalized,
+  obs_column = "N1_N2_avg_clean",
+  forecast_type = "reported_cases",
+  ylab = "Viral copies (µ)",
+  title = "Projections for viral signal"
+)
+```
+
+# Examine WW projections against historic data
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+signal_col <- "rgb(226, 127, 88)"
+proj_col <- "rgb(0, 128, 128)"
+proj_shade <- "rgba(0, 128, 128, 0.2)"
+
+ww_proj_call <- list(type = "avg_data", y_column = "median", name = "Historic projected viral signal", short_name = "projections", color = proj_col, width = 4)
+ww_obs_call <- list(type = "observed_data", y_column = "N1_N2_avg_clean", name = "Observed historic viral signal", short_name = "Daily signal", color = signal_col, opacity = 0.5)
+
+# Examine ww projections during Mar-Apr 2021 surge
+load("historic_ww_proj.RData")
+
+figures <- list()
+
+for(i in 1:length(ww_data)){
+  figures[[i]] <-
+    reworked_figure(xaxis = "date", yaxis = list(ww_proj_call, ww_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Viral signal", x = "Date", title = paste(paste("WW projections vs observed signal", first(ww_data[[i]][["date"]])), paste("to", last(ww_data[[i]][["date"]])))), data = ww_data[[i]], ticks = FALSE)
+}
+
+figures
+```
