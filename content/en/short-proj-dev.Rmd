@@ -29,7 +29,7 @@ load("../../Data/short_term_ww_proj.RData")
 
 ott_projections <- ott_short_forecast[[1]]
 
-dt <- ott_short_forecast[[2]][[5]][[1]]
+dt <- ott_short_forecast[[3]][[5]][[1]]
 dt_label = switch( 
   (sign(dt) + 2),
   "Case halving time:",

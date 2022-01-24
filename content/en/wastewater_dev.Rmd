@@ -19,6 +19,10 @@ library(lubridate)
 library(stats)
 library(zoo)
 library(stringr)
+library(EpiNow2)
+library(stringr)
+library(purrr)
+library(RColorBrewer)
 
 # scripts
 source("../../R/lag_replacement.R")

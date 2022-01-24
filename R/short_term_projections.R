@@ -19,8 +19,8 @@ incubation_period <-
 # Run epinow forecast
 ott_short_forecast <- short_term_forecast(
   data = ott_covid_data,
-  parameter = "observed_new_cases",
-  start_date = "2021-01-01", # can be changed
+  input = "observed_new_cases",
+  start_date = "2021-09-01", # can be changed
  # end_date = "2020-11-24", # can be changed, if missing will default to last day
   omit_last_date = TRUE,
   generation_time = generation_time,
