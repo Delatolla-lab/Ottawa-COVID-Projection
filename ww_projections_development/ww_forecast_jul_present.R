@@ -39,4 +39,3 @@ ww_forecast_jul_pres <- short_term_forecast(
 )
 
 save(ww_forecast_jul_pres, file = "jul20_present22_ww_proj.RData")
-load("jul20_present22_ww_proj.RData")

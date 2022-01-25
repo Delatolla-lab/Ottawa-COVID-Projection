@@ -14,7 +14,7 @@ source("../R/epinow_functions.R")
 
 
 ott_covid_data <- read.csv(file.path(getwd(), "../Data/Observed data/OPH_Observed_COVID_Data.csv"))
-head(ott_covid_data)
+
 # Set reporting delay, generation time, incubation period for simulation
 reporting_delay <- bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30)
 generation_time <-
@@ -35,4 +35,3 @@ hosp_forecast_jul_pres <- short_term_forecast(
 )
 
 save(hosp_forecast_jul_pres, file = "jul20_present22_hosp_proj.RData")
-load("jul20_present22_hosp_proj.RData")
