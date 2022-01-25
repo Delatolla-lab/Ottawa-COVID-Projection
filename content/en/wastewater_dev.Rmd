@@ -244,6 +244,8 @@ reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(ne
 
 ## WW Projections
 
+Preliminary projections forecasting viral signal are shown below. Projections forecast normalized viral copies per copy based on observed signal data. Caution is encouraged when interpreting results.  
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 load("../../Data/short_term_ww_proj.RData")
 
