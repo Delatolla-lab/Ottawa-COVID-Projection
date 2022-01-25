@@ -110,10 +110,11 @@ short_term_plot <- function(projections,
     ggplot(projections[as.Date(projections$date) >= as.Date(start_date),],
            aes(x = date, col = type, fill = type))
   
-  # Add observed data if R is not specified
+  # Add observed data if R or growth rate is not specified
   obs_plot <- filter(obs_data_omit, as.Date(date) >= start_date)
   y_col <- obs_plot[[as.character(obs_column)]]
-  if(forecast_type != as.character("R")){
+  if(forecast_type != as.character("R") &
+     forecast_type != as.character("growth_rate")){
     plot <- plot +
       geom_col(data = 
                  obs_plot[as.Date(obs_plot$date) >= as.Date(start_date),],
