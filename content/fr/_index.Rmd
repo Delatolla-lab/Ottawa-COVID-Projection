@@ -285,7 +285,7 @@ ottawa_hosp <-
   reworked_figure(
     xaxis = "date",
     yaxis = list(icu_call, acute_care), #DT1, DT2, DT3),
-    titles = c(y = "# of patients", x = "Date", title = "Observed census of COVID-19 hospitalizations in Ottawa hospitals"),
+    titles = c(y = "# of patients", x = "Date", title = "Observed count of COVID-19 patients in Ottawa hospitals"),
     data = exp_census[[1]]
   )
 

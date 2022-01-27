@@ -271,7 +271,7 @@ short_term_plot(
 
 ---
 
-## Current growth estimates
+## Current viral growth estimates
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 growth_measures <- ww_forecast[[2]]
