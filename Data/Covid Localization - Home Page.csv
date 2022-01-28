@@ -57,7 +57,15 @@ LongRangeForecast,"### Long-range forecast
 Sommet de **{{1}} à {{2}}** patients à Ottawa entre **{{3}} et {{4}}**."
 Definitions,"## Definitions
 
-> **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
+> **Hospital count** is the count of patients in all Ottawa hospitals at midnight on the previous day. OPH counts and hospital counts reported from other sources may be different because:
+
+> * Hospital counts from other sources may include people who do not reside in Ottawa;
+
+> * Interpretation of clearance may vary between hospitals and OPH;
+
+> * Interpretation of treated for COVID-19 and being treated primarily for COVID-19 may vary slightly; and
+
+> * OPH workload may delay the clearance of hospitalizations in preference to reporting new ones by OPH when volumes are high.
 
 > **Transmission** is the risk that a person becomes infected when they come in contact with a person with COVID-19.
 
@@ -90,7 +98,7 @@ Consultez la section [Plus](/more) d’infos pour en savoir plus sur les termes 
 ---"
 PastData_title,## Observed cases & hospital use,## Cas observés et occupation des hôpitaux
 observed_cases,## {#observed-cases},## {#observed-cases}
-observed_cases_text,"**Note:** New cases are based on approximate date of episode. Case data in the last 7 days should be considered preliminary as as public health investigators determine earliest onset date.""""",**Remarque:** Les nouveaux cas sont basés sur la date d’épisode approximative. Les données sur les cas des 7 derniers jours doivent être considérées comme préliminaires puisque ce sont les enquêteurs de la santé publique qui déterminent la date d’apparition des premiers symptômes.
+observed_cases_text,**Note:** New cases are based on approximate date of episode. Case data in the last 7 days should be considered preliminary as as public health investigators determine earliest onset date.,**Remarque:** Les nouveaux cas sont basés sur la date d’épisode approximative. Les données sur les cas des 7 derniers jours doivent être considérées comme préliminaires puisque ce sont les enquêteurs de la santé publique qui déterminent la date d’apparition des premiers symptômes.
 observed_census,## {#observed-census},## {#observed-census}
 PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
 observed_admits,## {#observed-admits},## {#observed-admits}
@@ -116,6 +124,7 @@ ProjectedHospital_text,"The hospital census forecast of:
 case_projections,## {#case-projections},## {#case-projections}
 hosp_projections,## {#hospitalization-projections},## {#hospitalization-projections}
 vent_projections,## {#ventilator-projections},## {#ventilator-projections}
+definitions_link,## {#defintions},## {#defintions}
 break,---,---
 death_title,## Past deaths {#death-visualization},## Décès antérieurs {#death-visualization}
 Death_text,**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date.,**Remarque:** Il est possible que le nombre de décès des 3 à 5 derniers jours ne reflète pas le nombre réel de décès attribuables à la COVID-19 puisque certains cas sont encore à l’étude afin de déterminer la date la plus récente d’apparition.

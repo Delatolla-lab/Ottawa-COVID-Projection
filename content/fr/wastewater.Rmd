@@ -19,6 +19,9 @@ library(lubridate)
 library(stats)
 library(zoo)
 library(stringr)
+library(EpiNow2)
+library(purrr)
+library(RColorBrewer)
 
 # scripts
 source("../../R/lag_replacement.R")
@@ -27,6 +30,7 @@ source("../../R/data_conversion.R")
 source("../../R/hosp_projections.R")
 source("../../R/open_ottawa_scripts.R")
 source("../../R/wastewater.R")
+source("../../R/epinow_functions.R")
 
 # data
 ott_observed_covid <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv")) %>%
@@ -104,7 +108,7 @@ new_community_case_10_day_call <- list(type = "observed_data", y_column = "obser
 
 new_community_case_7_day_call <- list(type = "observed_data", y_column = "observed_new_community_cases_10_day", name = "7 day mean \nin reported new community cases", color = case_col, opacity = 0.15)
 
-hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Hospital census", short_name = "Hosp census", color = case_col, opacity = 0.15)
+hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Hospital count", short_name = "Hosp count", color = case_col, opacity = 0.15)
 
 pct_positivity_call_7_day <- list(type = "observed_data", y_column = "pct_positivity_7_day", name = "7-day mean \npercent positivity rate", short_name = "% positivity", color = case_col, opacity = 0.15)
 
@@ -171,16 +175,59 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_vira
 
 ---
 
-The next plot illustrates the 7-day rolling mean in daily COVID-19 wastewater viral signal. This number is the average of a week’s readings; today's reading with the previous six days. Also on the graph are various comparators (e.g. reported daily COVID-19 cases, hospitalization census), which can be individually selected by toggling the menu on the right.
+The next plot illustrates the 7-day rolling mean in daily COVID-19 wastewater viral signal. This number is the average of a week’s readings; today's reading with the previous six days. Also on the graph are various comparators (e.g. reported daily COVID-19 cases, hospitalization count), which can be individually selected by toggling the menu on the right.
 
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.45}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day, hosp_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 300)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(hosp_call, new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 300)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
 #reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call, var_7_day_avg), error_bands = TRUE, error_pct = TRUE, error_data = "sd_7day", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
+```
+
+---
+
+## Wastewater Projections
+
+Preliminary projections forecasting viral signal are shown below. Projections forecast normalized viral copies per copy based on observed signal data. Caution is encouraged when interpreting results. Methods have not been peer-reviewed, and validation is ongoing.  
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+load("../../Data/short_term_ww_proj.RData")
+
+ww_data <-
+  read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
+
+ww_clean <- wastewater_prep(ww_data) %>%
+  select(date, N1_N2_avg, N1_N2_avg_clean) %>%
+  mutate(date = as.Date(date))
+
+ww_normalized <- ww_clean %>%
+  mutate(N1_N2_avg_clean = N1_N2_avg_clean*1000000)
+
+short_term_plot(
+  projections = ww_forecast[[1]],
+  obs_data = ww_normalized,
+  obs_column = "N1_N2_avg_clean",
+  forecast_type = "reported_cases",
+  ylab = "Viral copies (µ)",
+  title = "Projections for viral signal"
+)
+```
+
+---
+
+## Current growth estimates for the amount of virus in wastewater
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+growth_measures <- ww_forecast[[2]]
+colnames(growth_measures) <- c("measure", "estimate")
+
+growth_measures[2, "measure"] <- "Expected change in viral amount"
+growth_measures <- growth_measures[-1,]
+
+knitr::kable(growth_measures)
 ```
 
 ---
@@ -259,13 +306,17 @@ The figure below illustrates the proportion of variants of concern (VOC) found i
 
 <img src="/images/Delta Omicron allelic proportion.png" width = "90%" height = "90%"/>
 
+---
+
 ### Overall viral signal
 
 * Standard curves R 2 ≥ 0.95.
 
 * Primer efficiency between 90%-130%.
 
-* No template controls are negative
+* No template controls are negative.
+
+---
 
 ## Interpretation cautions
 
