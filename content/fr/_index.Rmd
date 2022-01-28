@@ -227,6 +227,8 @@ short_range_forecast <- insert_translation(localization_data, lang, "ShortRangeF
 
 defintions <- insert_translation(localization_data, lang, "Definitions")
 
+def_link <- insert_translation(localization_data, lang, "definitions_link")
+
 past_data_title <- insert_translation(localization_data, lang, "PastData_title") 
 
 past_hospital_text <- insert_translation(localization_data, lang, "PastHospital_text",
@@ -342,5 +344,7 @@ source("../../R/hosp_projections.R")
 source("../../R/hosp_projections.R")
 #hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed # of daily admissions", project_to = "2021-05-31")
 ```
+
+`r def_link`
 
 `r definitions`

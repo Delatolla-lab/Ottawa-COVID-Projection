@@ -104,7 +104,7 @@ new_community_case_10_day_call <- list(type = "observed_data", y_column = "obser
 
 new_community_case_7_day_call <- list(type = "observed_data", y_column = "observed_new_community_cases_10_day", name = "7 day mean \nin reported new community cases", color = case_col, opacity = 0.15)
 
-hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Hospital counts", short_name = "Hosp counts", color = case_col, opacity = 0.15)
+hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Hospital count", short_name = "Hosp count", color = case_col, opacity = 0.15)
 
 pct_positivity_call_7_day <- list(type = "observed_data", y_column = "pct_positivity_7_day", name = "7-day mean \npercent positivity rate", short_name = "% positivity", color = case_col, opacity = 0.15)
 
@@ -171,7 +171,7 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_vira
 
 ---
 
-The next plot illustrates the 7-day rolling mean in daily COVID-19 wastewater viral signal. This number is the average of a week’s readings; today's reading with the previous six days. Also on the graph are various comparators (e.g. reported daily COVID-19 cases, hospitalization counts), which can be individually selected by toggling the menu on the right.
+The next plot illustrates the 7-day rolling mean in daily COVID-19 wastewater viral signal. This number is the average of a week’s readings; today's reading with the previous six days. Also on the graph are various comparators (e.g. reported daily COVID-19 cases, hospitalization count), which can be individually selected by toggling the menu on the right.
 
 ---
 
