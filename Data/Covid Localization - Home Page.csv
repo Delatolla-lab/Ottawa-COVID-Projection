@@ -57,7 +57,15 @@ LongRangeForecast,"### Long-range forecast
 Sommet de **{{1}} à {{2}}** patients à Ottawa entre **{{3}} et {{4}}**."
 Definitions,"## Definitions
 
-> **Hospital census** is the count of patients in all Ottawa hospitals at midnight on the previous day.
+> **Hospital counts** is the count of patients in all Ottawa hospitals at midnight on the previous day. OPH counts and hospital counts reported from other sources may be different because:
+
+> * Hospital counts from other sources may include people who do not reside in Ottawa;
+
+> * Interpretation of clearance may vary between hospitals and OPH;
+
+> * Interpretation of treated for COVID-19 and being treated primarily for COVID-19 may vary slightly; and
+
+> * OPH workload may delay the clearance of hospitalizations in preference to reporting new ones by OPH when volumes are high
 
 > **Transmission** is the risk that a person becomes infected when they come in contact with a person with COVID-19.
 
