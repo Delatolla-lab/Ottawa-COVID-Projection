@@ -2,7 +2,10 @@
 title: Changelog
 ---
 
-**Updates involving only data updates will no longer be documented.**
+# V3.5.0
+2022-01-28
+
+- Wastewater projections and growth estimates added to [Wastewater](/wastewater) page.
 
 # V3.4.0
 2021-06-16
