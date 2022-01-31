@@ -4,8 +4,9 @@ wastewater_prep <- function(data){
     rename(date = "sampleDate",
            N1 = "covN1_nPMMoV_meanNr",
            N2 = "covN2_nPMMoV_meanNr") %>%
-    select(date, N1, N2, qualityFlag) %>%
-    mutate(date = as.Date(date)) %>%
+    select(date, N1, N2, qualityFlag, reportDate) %>%
+    mutate(date = as.Date(date),
+           reportDate = as.Date(reportDate)) %>%
     filter(!is.na(date)) %>%
     # Create mean value of N1 and N2
     mutate(N1_N2_avg = (N1 + N2)/2) %>%
