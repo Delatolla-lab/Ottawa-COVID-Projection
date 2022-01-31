@@ -162,3 +162,27 @@ short_term_plot(
   title = "Projections of viral signal over time" # plot title
 )
 ```
+
+# Creating datasets to merge from hospital, cases and waste water data
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ww_data = ww_forecast_jul_pres[[1]]
+hosp_data = hosp_forecast_jul_pres[[1]]
+cases_data = cases_forecast_jul20_pres22[[1]]
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Script to merge wastewater data into covid data
+merge_data <- function(data1, data2 , by = "date", suffix = c("", "")){
+final_merged_data = full_join(data1, data2, by = by, suffix = suffix)
+return(final_merged_data)
+}
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+combined_data = merge_data(ww_data, cases_data, suffix = c("", "_cases_data"))
+final_merged_data = merge_data(combined_data, hosp_data, by = "date", suffix = c("_ww_data", "_hosp_data"))
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+save(final_merged_data, "ww_projections_development/merged_data_cases_hosp_ww.RData")
+```
