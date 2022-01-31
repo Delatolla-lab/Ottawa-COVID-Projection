@@ -69,6 +69,12 @@ publishDir = "./docs"
     weight = 6
     
 [[menu.main]]
+    name = "definitions"
+    url = "/#definitions"
+    parent = "viz"
+    weight = 7
+    
+[[menu.main]]
     name = "wastewater"
     url = "/wastewater/"
     weight = 3
