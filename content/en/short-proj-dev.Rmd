@@ -21,11 +21,9 @@ library(RColorBrewer)
 source("../../R/epinow_functions.R")
 source("../../R/wastewater.R")
 ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
-ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/covid-19-wastewater/main/data/wastewater_virus.csv")
 
 load("../../Data/short_term_forecast.RData")
 load("../../Data/short_term_hosp_proj.RData")
-load("../../Data/short_term_ww_proj.RData")
 
 ott_projections <- ott_short_forecast[[1]]
 
