@@ -210,8 +210,8 @@ short_term_plot(
   obs_data = ww_normalized,
   obs_column = "N1_N2_avg_clean",
   forecast_type = "reported_cases",
-  ylab = "Viral copies (µ)",
-  title = "Projections for viral signal"
+  ylab = "Normalized viral copies* (µ)",
+  title = "<b>Projections for COVID-19 wastewater viral signal, Ottawa</b>"
 )
 ```
 
