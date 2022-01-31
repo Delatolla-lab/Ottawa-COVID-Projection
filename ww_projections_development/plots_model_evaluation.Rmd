@@ -44,6 +44,11 @@ ww_clean <- wastewater_prep(ww_data) %>%
 load("jul20_present22_cases_proj.RData")
 ```
 
+# Current growth estimates for observed new case data
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+estimates_cases = cases_forecast_jul20_pres22[[2]]
+print(estimates_cases)
+```
 
 # Plot of case projection data for Rt
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -79,6 +84,12 @@ short_term_plot(
 load("jul20_present22_hosp_proj.RData")
 ```
 
+# Current growth rate estimates for hospital census data
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+estimates_hosp_cases = hosp_forecast_jul_pres[[2]]
+print(estimates_hosp_cases)
+```
+
 
 # Plot of hospital case data for Rt projection
 
@@ -112,6 +123,14 @@ short_term_plot(
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 load("jul20_present22_ww_proj.RData")
 ```
+
+
+# Current growth estimates of waste water data
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+estimates_ww_data = ww_forecast_jul_pres[[2]]
+print(estimates_ww_data)
+```
+
 
 
 # Plot of waste water data for Rt projection
