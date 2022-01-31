@@ -5,15 +5,11 @@ date: "31/01/2022"
 output: html_document
 ---
 
-source("R/open_ottawa_scripts.R")
-source("R/wastewater.R")
-source("R/epinow_functions.R")
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r setup, include=FALSE}
+```{r echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(ggplot2)
 library(EpiNow2)
@@ -23,12 +19,16 @@ library(lubridate)
 library(plotly)
 library(RColorBrewer)
 library(zoo)
+
+source("../R/open_ottawa_scripts.R")
+source("../R/wastewater.R")
+source("../R/epinow_functions.R")
 ```
 
 # Load data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # load data
-ott_covid_data <- read.csv(file.path(getwd(), "Data/Observed data/OPH_Observed_COVID_Data.csv"))
+ott_covid_data <- read.csv(file.path(getwd(), "../Data/Observed data/OPH_Observed_COVID_Data.csv"))
 
 ww_data <-
   read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
@@ -149,13 +149,16 @@ short_term_plot(
 # Plot of waste water data for viral signal over time
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ww_normalized <- ww_clean %>%
+  mutate(N1_N2_avg_clean = N1_N2_avg_clean*1000000)
+
 # Visualizing projections
 short_term_plot(
   projections = ww_forecast_jul_pres[[1]], # projection data
-  obs_data = ww_clean, # observed data
+  obs_data = ww_normalized, # observed data
   obs_column = "N1_N2_avg_clean", # observed data column
   forecast_type = "reported_cases", # forecast type
-  ylab = "Viral signal over time", # yaxis label
+  ylab = "Viral signal over time (µ)", # yaxis label
   title = "Projections of viral signal over time" # plot title
 )
 ```
