@@ -165,24 +165,26 @@ short_term_plot(
 
 # Creating datasets to merge from hospital, cases and waste water data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-ww_data = ww_forecast_jul_pres[[1]]
-hosp_data = hosp_forecast_jul_pres[[1]]
-cases_data = cases_forecast_jul20_pres22[[1]]
+# Filter data and append column names in each dataset
+ww_data = ww_forecast_jul_pres[[1]] %>%
+  filter(variable == "reported_cases") %>%
+  rename_with(function(x) paste(x, "_ww"), .cols = -date)
+hosp_data = hosp_forecast_jul_pres[[1]] %>%
+  filter(variable == "reported_cases") %>%
+  rename_with(function(x) paste(x, "_hosp"), .cols = -date)
+cases_data = cases_forecast_jul20_pres22[[1]] %>%
+  filter(variable == "reported_cases") %>%
+  rename_with(function(x) paste(x, "_cases"), .cols = -date)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Script to merge wastewater data into covid data
-merge_data <- function(data1, data2 , by = "date", suffix = c("", "")){
-final_merged_data = full_join(data1, data2, by = by, suffix = suffix)
-return(final_merged_data)
-}
+# Merge datasets
+final_merged_data <- ww_data %>%
+  full_join(hosp_data, by = "date") %>%
+  full_join(cases_data, by = "date") %>%
+  arrange(date)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-combined_data = merge_data(ww_data, cases_data, suffix = c("", "_cases_data"))
-final_merged_data = merge_data(combined_data, hosp_data, by = "date", suffix = c("_ww_data", "_hosp_data"))
-```
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-save(final_merged_data, "ww_projections_development/merged_data_cases_hosp_ww.RData")
+save(final_merged_data, file = "merged_data_cases_hosp_ww.RData")
 ```
