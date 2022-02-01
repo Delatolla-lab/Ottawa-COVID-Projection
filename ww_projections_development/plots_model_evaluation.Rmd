@@ -185,6 +185,22 @@ final_merged_data <- ww_data %>%
   arrange(date)
 ```
 
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 save(final_merged_data, file = "merged_data_cases_hosp_ww.RData")
 ```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Merging observed_new_cases
+joined_with_observed_cases = ott_covid_data %>% select(date, observed_new_cases) %>% mutate(date = as.Date(date)) %>% inner_join(final_merged_data, by = "date") %>% relocate(observed_new_cases, .after = median_cases)
+# Merging observed hospital ICU cases
+joined_with_observed_cases = ott_covid_data %>% select(date, observed_census_ICU_p_acute_care) %>% mutate(date = as.Date(date)) %>% inner_join(joined_with_observed_cases, by = "date") %>% relocate(observed_census_ICU_p_acute_care, .after = median_hosp)
+# Merging observed ww signal
+joined_with_observed_cases = ww_clean %>% select(date, N1_N2_avg_clean) %>% mutate(date = as.Date(date)) %>% inner_join(joined_with_observed_cases, by = "date") %>% relocate(N1_N2_avg_clean, .after = median_ww)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+save(joined_with_observed_cases, file = "merged_data_cases_hosp_ww_observed.RData")
+```
+
+
