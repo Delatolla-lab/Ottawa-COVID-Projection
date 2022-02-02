@@ -168,13 +168,13 @@ short_term_plot(
 # Filter data and append column names in each dataset
 ww_data = ww_forecast_jul_pres[[1]] %>%
   filter(variable == "reported_cases") %>%
-  rename_with(function(x) paste(x, "_ww"), .cols = -date)
+  rename_with(function(x) paste0(x, "_ww"), .cols = -date)
 hosp_data = hosp_forecast_jul_pres[[1]] %>%
   filter(variable == "reported_cases") %>%
-  rename_with(function(x) paste(x, "_hosp"), .cols = -date)
+  rename_with(function(x) paste0(x, "_hosp"), .cols = -date)
 cases_data = cases_forecast_jul20_pres22[[1]] %>%
   filter(variable == "reported_cases") %>%
-  rename_with(function(x) paste(x, "_cases"), .cols = -date)
+  rename_with(function(x) paste0(x, "_cases"), .cols = -date)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
