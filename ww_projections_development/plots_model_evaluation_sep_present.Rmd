@@ -271,7 +271,7 @@ short_term_plot(
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Merging hospital data with joined_with_observed_cases for reporting delay of 10 days
-hosp_data_delay_10 = hosp_forecast_nov21_pres22_delay_10[[1]] %>%
+hosp_data_delay_10 = hosp_forecast_sep21_pres22_delay_10[[1]] %>%
   filter(variable == "reported_cases") %>%
   rename_with(function(x) paste0(x, "_hosp_delay_10"), .cols = -date)
   
