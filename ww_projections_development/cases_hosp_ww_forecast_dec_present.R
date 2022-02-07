@@ -8,9 +8,9 @@ library(tidyverse)
 library(lubridate)
 library(zoo)
 
-source("../R/open_ottawa_scripts.R")
-source("../R/wastewater.R")
-source("../R/epinow_functions.R")
+source("R/open_ottawa_scripts.R")
+source("R/wastewater.R")
+source("R/epinow_functions.R")
 
 # load data
 ott_covid_data <- read.csv(file.path(getwd(), "Data/Observed data/OPH_Observed_COVID_Data.csv"))

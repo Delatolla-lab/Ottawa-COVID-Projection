@@ -269,3 +269,24 @@ short_term_plot(
 )
 ```
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Merging hospital data with joined_with_observed_cases for reporting delay of 10 days
+hosp_data_delay_10 = hosp_forecast_dec21_pres22_delay_10[[1]] %>%
+  filter(variable == "reported_cases") %>%
+  rename_with(function(x) paste0(x, "_hosp_delay_10"), .cols = -date)
+  
+joined_with_observed_cases = joined_with_observed_cases %>% full_join(hosp_data_delay_10, by = "date")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Merging hospital data with joined_with_observed_cases for reporting delay of 14 days
+hosp_data_delay_14 = hosp_forecast_dec21_pres22_delay_14[[1]] %>%
+  filter(variable == "reported_cases") %>%
+  rename_with(function(x) paste0(x, "_hosp_delay_14"), .cols = -date)
+  
+joined_with_observed_cases = joined_with_observed_cases %>% full_join(hosp_data_delay_14, by = "date")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+save(joined_with_observed_cases, file = "merged_data_cases_hosp_ww_observed_dec_present.RData")
+```

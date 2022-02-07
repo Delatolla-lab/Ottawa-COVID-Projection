@@ -25,7 +25,8 @@ short_term_forecast <- function(data,
   if(isTRUE(omit_last_date)){
     data_formatted <- data_formatted[data_formatted$date < as.Date(end_date),]
   }
-  
+  print('DATA FORMATED')
+  print(data_formatted)
   # Run epinow2 sim 
   if(is.null(reporting_delay)){
     projections <-
