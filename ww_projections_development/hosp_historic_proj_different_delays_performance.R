@@ -23,14 +23,10 @@ incubation_period <-
 
 date_intervals <- c(0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360)
 
-delay_intervals <- list('report_delay_4' = bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30), 'report_delay_10' =  bootstrapped_dist_fit(rlnorm(100, log(10), 1), max_value = 30), 'report_delay_14' = bootstrapped_dist_fit(rlnorm(100, log(14), 1), max_value = 30))
-hosp_data_forecast <- list('reporting_delay_4' = list(), 'reporting_delay_10' = list(), 'reporting_delay_14' = list())
+delay_intervals <- c(4, 10, 14)
+hosp_data_forecast <- list()
 x <- 0
-delay <- 0
-for (reporting_delay in delay_intervals){
-  print('Reporting Delay')
-  print(reporting_delay)
-  delay <- delay + 1
+for (delay in delay_intervals){
 for(date in date_intervals){
   x <- x + 1
   hosp_forecast <- short_term_forecast(
@@ -42,14 +38,16 @@ for(date in date_intervals){
     omit_last_date = TRUE,
     generation_time = generation_time,
     incubation_period = incubation_period,
-    reporting_delay = reporting_delay,
+    reporting_delay = bootstrapped_dist_fit(rlnorm(100, log(delay), 1), max_value = 30),
     output = "projections"
   ) %>%
     filter(variable == "reported_cases",
            type == "forecast")
 
-  ott_data <- ott_covid_data %>% mutate(date = as.Date(date))
-  hosp_data_forecast[[delay]][[x]] <- ott_data %>%
+  ott_data <- ott_covid_data %>%
+    mutate(date = as.Date(date)) %>%
+    select(date, observed_census_ICU_p_acute_care)
+  hosp_data_forecast[[paste0("reporting_delay_",delay)]][[x]] <- ott_data %>%
     full_join(hosp_forecast) %>%
     filter(duplicated(date) == FALSE,
            date > first(date),
