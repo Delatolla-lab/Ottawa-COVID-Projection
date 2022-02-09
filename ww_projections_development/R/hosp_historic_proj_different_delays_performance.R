@@ -56,4 +56,4 @@ for (delay in delay_intervals){
   }
 }
 
-save(hosp_data_forecast, file = "hosp_projections_development/historic_hosp_proj.RData")
+save(hosp_data_forecast, file = "ww_projections_development/Data/ottawa_historic_hosp_proj.RData")

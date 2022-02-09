@@ -69,9 +69,9 @@ ww_forecast_jan22_pres22 <- short_term_forecast(
 )
 
 # save forecasts
-save(cases_forecast_jan22_pres22, file = "ww_projections_development/jan22_present22_cases_proj.RData")
-save(hosp_forecast_jan22_pres22, file = "ww_projections_development/jan22_present22_hosp_proj.RData")
-save(ww_forecast_jan22_pres22, file = "ww_projections_development/jan22_present22_ww_proj.RData")
+save(cases_forecast_jan22_pres22, file = "ww_projections_development/Data/jan22_present22_cases_proj.RData")
+save(hosp_forecast_jan22_pres22, file = "ww_projections_development/Data/jan22_present22_hosp_proj.RData")
+save(ww_forecast_jan22_pres22, file = "ww_projections_development/Data/jan22_present22_ww_proj.RData")
 
 
 # Set reporting delay to 10 days, generation time, incubation period for simulation of hospital data
@@ -97,7 +97,7 @@ hosp_forecast_jan22_pres22_delay_10 <- short_term_forecast(
 
 
 # save forecasts
-save(hosp_forecast_jan22_pres22_delay_10, file = "ww_projections_development/jan22_present22_hosp_proj_delay_10.RData")
+save(hosp_forecast_jan22_pres22_delay_10, file = "ww_projections_development/Data/jan22_present22_hosp_proj_delay_10.RData")
 
 
 # Set reporting delay to 14 days, generation time, incubation period for simulation of hospital cases
@@ -123,5 +123,5 @@ hosp_forecast_jan22_pres22_delay_14 <- short_term_forecast(
 
 
 # save forecasts
-save(hosp_forecast_jan22_pres22_delay_14, file = "ww_projections_development/jan22_present22_hosp_proj_delay_14.RData")
+save(hosp_forecast_jan22_pres22_delay_14, file = "ww_projections_development/Data/jan22_present22_hosp_proj_delay_14.RData")
 

@@ -69,6 +69,6 @@ ww_forecast_jul_pres <- short_term_forecast(
 )
 
 # save forecasts
-save(cases_forecast_jul20_pres22, file = "ww_projections_development/jul20_present22_cases_proj.RData")
-save(hosp_forecast_jul_pres, file = "ww_projections_development/jul20_present22_hosp_proj.RData")
-save(ww_forecast_jul_pres, file = "ww_projections_development/jul20_present22_ww_proj.RData")
+save(cases_forecast_jul20_pres22, file = "ww_projections_development/Data/jul20_present22_cases_proj.RData")
+save(hosp_forecast_jul_pres, file = "ww_projections_development/Data/jul20_present22_hosp_proj.RData")
+save(ww_forecast_jul_pres, file = "ww_projections_development/Data/jul20_present22_ww_proj.RData")

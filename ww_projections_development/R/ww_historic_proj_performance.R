@@ -56,4 +56,4 @@ for(date in date_intervals){
     select(-c(variable, strat,type))
 }
 
-save(ww_data, file = "ww_projections_development/historic_ww_proj.RData")
+save(ww_data, file = "ww_projections_development/Data/historic_ww_proj.RData")
