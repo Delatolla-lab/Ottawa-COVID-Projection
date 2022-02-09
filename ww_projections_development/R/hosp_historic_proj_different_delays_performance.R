@@ -25,8 +25,8 @@ date_intervals <- c(0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360)
 
 delay_intervals <- c(4, 10, 14)
 hosp_data_forecast <- list()
-x <- 0
 for (delay in delay_intervals){
+  x <- 0
   for(date in date_intervals){
     x <- x + 1
     hosp_forecast <- short_term_forecast(
