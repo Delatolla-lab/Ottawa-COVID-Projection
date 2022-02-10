@@ -156,11 +156,7 @@ reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), err
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for 10 days delay period", first(hosp_data_forecast$reporting_delay_10[[7]][["date"]])), paste("to", last(hosp_data_forecast$reporting_delay_10[[7]][["date"]])))), data = hosp_data_forecast$reporting_delay_10[[7]], ticks = FALSE)
 ```
-# for 10 days reporting delay with interval period 7
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for 10 days delay period", first(hosp_data_forecast$reporting_delay_10[[7]][["date"]])), paste("to", last(hosp_data_forecast$reporting_delay_10[[7]][["date"]])))), data = hosp_data_forecast$reporting_delay_10[[7]], ticks = FALSE)
-```
 
 # for 14 days reporting delay with interval period 7
 
@@ -188,6 +184,14 @@ reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), err
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for 4 days delay period", first(hosp_data_forecast$reporting_delay_4[[9]][["date"]])), paste("to", last(hosp_data_forecast$reporting_delay_4[[9]][["date"]])))), data = hosp_data_forecast$reporting_delay_4[[9]], ticks = FALSE)
 ```
+# for 10 days reporting delay with interval period 9
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for 14 days delay period", first(hosp_data_forecast$reporting_delay_10[[9]][["date"]])), paste("to", last(hosp_data_forecast$reporting_delay_10[[9]][["date"]])))), data = hosp_data_forecast$reporting_delay_10[[9]], ticks = FALSE)
+```
+
+
+
 # for 14 days reporting delay with interval period 9
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
