@@ -63,3 +63,4 @@ hosp_data_forecast_7_14_days <-
 
 save(hosp_data_forecast_7_14_days,
      file = "ww_projections_development/Data/ottawa_historic_hosp_proj_7_14_days.RData")
+
