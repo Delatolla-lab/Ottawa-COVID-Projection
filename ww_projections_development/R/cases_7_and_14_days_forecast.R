@@ -37,7 +37,7 @@ while(end_date <= as.Date("2022-01-20")){
     omit_last_date = TRUE,
     generation_time = generation_time,
     incubation_period = incubation_period,
-    reporting_delay = NULL,
+    reporting_delay = bootstrapped_dist_fit(rlnorm(100, log(4), 1), max_value = 30),
     output = "projections"
   ) %>%
     filter(variable == "reported_cases",
