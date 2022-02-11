@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # load library, packages, functions, data
 library(tidyverse)
 library(ggplot2)
@@ -27,8 +27,6 @@ source("../R/observed_data.R")
 
 load("Data/ottawa_historic_hosp_proj.RData")
 ```
-
----
 
 ## Historic Hospital Projections 
 ## for 4 days reporting delay for interval period 1
