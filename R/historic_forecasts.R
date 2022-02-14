@@ -23,7 +23,9 @@ create_historic_forecast_dataset <- function(data,
     data[[x]] <- bind_rows(daily_proj)
   }
   forecast_dataset <- bind_rows(data) %>%
+    group_by(date) %>%
+    summarise_all(list(~ .[!is.na(.)][1])) %>%
     arrange(date) %>%
     relocate(date, obs_column)
-  return(forecast_dataset)
+  return(as.data.frame(forecast_dataset))
 }
