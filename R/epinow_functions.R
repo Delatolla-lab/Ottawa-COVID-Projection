@@ -8,6 +8,7 @@ short_term_forecast <- function(data,
                                 incubation_period,
                                 reporting_delay,
                                 horizon = 14,
+                                rw = 7,
                                 output = "projections"){
   # Format dataset
   if(missing(end_date)) {
@@ -25,15 +26,14 @@ short_term_forecast <- function(data,
   if(isTRUE(omit_last_date)){
     data_formatted <- data_formatted[data_formatted$date < as.Date(end_date),]
   }
-  print('DATA FORMATED')
-  print(data_formatted)
+
   # Run epinow2 sim 
   if(is.null(reporting_delay)){
     projections <-
       EpiNow2::epinow(reported_cases = data_formatted, 
                       generation_time = generation_time,
                       delays = delay_opts(incubation_period),
-                      rt = rt_opts(prior = list(mean = 2, sd = 0.2), rw = 7),
+                      rt = rt_opts(prior = list(mean = 2, sd = 0.2), rw = rw),
                       stan = stan_opts(cores = 4),
                       gp = NULL, horizon = horizon)
   }
@@ -42,7 +42,7 @@ short_term_forecast <- function(data,
       EpiNow2::epinow(reported_cases = data_formatted, 
                       generation_time = generation_time,
                       delays = delay_opts(incubation_period, reporting_delay),
-                      rt = rt_opts(prior = list(mean = 2, sd = 0.2), rw = 7),
+                      rt = rt_opts(prior = list(mean = 2, sd = 0.2), rw = rw),
                       stan = stan_opts(cores = 4),
                       gp = NULL, horizon = horizon)
   }
