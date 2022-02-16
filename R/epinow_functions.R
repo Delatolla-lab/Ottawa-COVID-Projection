@@ -9,6 +9,7 @@ short_term_forecast <- function(data,
                                 reporting_delay,
                                 horizon = 14,
                                 rw = 7,
+                                gp = NULL,
                                 output = "projections"){
   # Format dataset
   if(missing(end_date)) {
@@ -35,7 +36,7 @@ short_term_forecast <- function(data,
                       delays = delay_opts(incubation_period),
                       rt = rt_opts(prior = list(mean = 2, sd = 0.2), rw = rw),
                       stan = stan_opts(cores = 4),
-                      gp = NULL, horizon = horizon)
+                      gp = gp, horizon = horizon)
   }
   else{
     projections <-
@@ -44,7 +45,7 @@ short_term_forecast <- function(data,
                       delays = delay_opts(incubation_period, reporting_delay),
                       rt = rt_opts(prior = list(mean = 2, sd = 0.2), rw = rw),
                       stan = stan_opts(cores = 4),
-                      gp = NULL, horizon = horizon)
+                      gp = gp, horizon = horizon)
   }
   if(output == as.character("projections")){
     forecast <-
