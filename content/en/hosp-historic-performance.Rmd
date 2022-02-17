@@ -45,37 +45,49 @@ reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), err
 reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for", first(hosp_data_forecast[[2]][["date"]])), paste("to", last(hosp_data_forecast[[2]][["date"]])))), data = hosp_data_forecast[[2]], ticks = FALSE)
 ```
 
+---
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for", first(hosp_data_forecast[[3]][["date"]])), paste("to", last(hosp_data_forecast[[3]][["date"]])))), data = hosp_data_forecast[[3]], ticks = FALSE)
 ```
+
+---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for", first(hosp_data_forecast[[4]][["date"]])), paste("to", last(hosp_data_forecast[[4]][["date"]])))), data = hosp_data_forecast[[4]], ticks = FALSE)
 ```
 
-
+---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for", first(hosp_data_forecast[[5]][["date"]])), paste("to", last(hosp_data_forecast[[5]][["date"]])))), data = hosp_data_forecast[[5]], ticks = FALSE)
 ```
 
+---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for", first(hosp_data_forecast[[6]][["date"]])), paste("to", last(hosp_data_forecast[[6]][["date"]])))), data = hosp_data_forecast[[6]], ticks = FALSE)
 ```
 
+---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for", first(hosp_data_forecast[[7]][["date"]])), paste("to", last(hosp_data_forecast[[7]][["date"]])))), data = hosp_data_forecast[[7]], ticks = FALSE)
 ```
 
+---
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for", first(hosp_data_forecast[[8]][["date"]])), paste("to", last(hosp_data_forecast[[8]][["date"]])))), data = hosp_data_forecast[[8]], ticks = FALSE)
 ```
 
+---
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for", first(hosp_data_forecast[[9]][["date"]])), paste("to", last(hosp_data_forecast[[9]][["date"]])))), data = hosp_data_forecast[[9]], ticks = FALSE)
 ```
+
+---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(hosp_proj_call, hosp_obs_call), error_bands = TRUE, error_data = c("upper_90", "lower_90"), error_col = proj_shade, titles = c(y = "Hospital cases", x = "Date", title = paste(paste("Hospital projections vs observed cases for", first(hosp_data_forecast[[10]][["date"]])), paste("to", last(hosp_data_forecast[[10]][["date"]])))), data = hosp_data_forecast[[10]], ticks = FALSE)
