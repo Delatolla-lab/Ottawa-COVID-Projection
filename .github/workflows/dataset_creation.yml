@@ -54,9 +54,3 @@ jobs:
         with:
           github_token: ${{ secrets.ACTION_TOKEN }}
           branch: 'master' #optional defaults to master
-      - name: Merge master -> ww-dev
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.ACTION_TOKEN }}
-          branch: 'ww-dev'
-          force: true
