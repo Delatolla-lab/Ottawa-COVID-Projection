@@ -58,7 +58,7 @@ while(end_date <= as.Date("2022-01-20")){
 }
 
 hosp_data_forecast_7_14_days <-
-  historic_forecast_dataset(hosp_data_forecast, 
+  create_historic_forecast_dataset(hosp_data_forecast, 
                             obs_column = "observed_census_ICU_p_acute_care")
 
 save(hosp_data_forecast_7_14_days,
