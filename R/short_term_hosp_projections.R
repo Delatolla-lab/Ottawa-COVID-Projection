@@ -29,6 +29,7 @@ hosp_projections <- short_term_forecast(
 hosp_proj <- hosp_projections[[1]]
 
 save(hosp_proj, file = "Data/short_term_hosp_proj.RData")
+save(hosp_projections, file = "Data/hosp_projections.RData")
 save(hosp_proj, file = paste(
   paste("Data/Historic Projections/short_term_hosp_proj", Sys.Date(), sep = "_"),
   ".RData", sep = ""))
