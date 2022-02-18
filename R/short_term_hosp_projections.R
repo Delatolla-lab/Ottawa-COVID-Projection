@@ -14,7 +14,7 @@ incubation_period <-
   get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 
 # Run epinow forecast
-ott_short_forecast <- short_term_forecast(
+hosp_proj <- short_term_forecast(
   data = ott_covid_data,
   input = "observed_census_ICU_p_acute_care",
   start_date = "2021-09-01", # can be changed
