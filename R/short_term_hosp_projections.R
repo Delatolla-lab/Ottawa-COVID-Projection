@@ -14,10 +14,10 @@ incubation_period <-
   get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 
 # Run epinow forecast
-hosp_proj <- short_term_forecast(
+hosp_projections <- short_term_forecast(
   data = ott_covid_data,
   input = "observed_census_ICU_p_acute_care",
-  start_date = "2021-09-01", # can be changed
+  start_date = as.Date(last(ott_covid_data$date)) - 120,
   # end_date = "2020-11-24", # can be changed, if missing will default to last day
   omit_last_date = TRUE,
   generation_time = generation_time,
@@ -25,6 +25,8 @@ hosp_proj <- short_term_forecast(
   reporting_delay = reporting_delay,
   output = "both"
 )
+
+hosp_proj <- hosp_projections[[1]]
 
 save(hosp_proj, file = "Data/short_term_hosp_proj.RData")
 save(hosp_proj, file = paste(
