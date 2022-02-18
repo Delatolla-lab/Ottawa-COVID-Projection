@@ -1,10 +1,6 @@
-# set number of cores to use fitting the model
-# no benefit on runtime if cores > chains which is set to 4 by default
-options(mc.cores = 4)
-
-library(ggplot2)
 library(EpiNow2)
 library(tidyverse)
+source("R/epinow_functions.R")
 
 # load covid data
 ott_covid_data <-
