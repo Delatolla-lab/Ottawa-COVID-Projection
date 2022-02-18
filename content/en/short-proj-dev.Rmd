@@ -99,7 +99,6 @@ short_term_plot(
 )
 ```
 
-## Assessing historic projections with observed data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 load("../../Data/hist_case_projections.RData")
 load("../../Data/hist_hosp_projections.RData")
