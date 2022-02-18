@@ -95,6 +95,8 @@ short_term_plot(
 
 ## Short-term case projections
 
+Case projections will not be published, but will continue to be run daily for development purposes.
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 short_term_plot(
