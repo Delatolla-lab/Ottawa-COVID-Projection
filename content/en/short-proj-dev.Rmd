@@ -83,36 +83,6 @@ Short-term COVID-19 hospital projections are presented below. See [More](more) f
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
-#short_term_plot(
-  #projections = ott_projections,
-  #obs_data = ott_covid_data,
-  #obs_column = "observed_new_episodes",
-  #forecast_type = "infections",
-  #ylab = "New cases",
-  #title = "Projections for new cases by episode date"
-#)
-
-#short_term_plot(
-  #projections = ott_projections,
-  #obs_data = ott_covid_data,
-  #forecast_type = "reported_cases",
-  #obs_column = "observed_new_cases",
-  #ylab = "New cases",
-  #title = "Projections for new cases by reported date"
-#)
-
-#short_term_plot(
-  #projections = ott_projections,
-  #obs_data = ott_covid_data,
-  #obs_column = "observed_new_cases",
-  #forecast_type = "R",
-  #ylab = "R",
-  #title = "Rt projections"
-#)
-```
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# visualize epinow forecast
 short_term_plot(
   projections = hosp_proj,
   obs_data = ott_covid_data,
@@ -120,6 +90,38 @@ short_term_plot(
   forecast_type = "reported_cases",
   ylab = "Hospital census",
   title = "Projections for hospital census"
+)
+```
+
+## Short-term case projections
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# visualize epinow forecast
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_covid_data,
+  obs_column = "observed_new_episodes",
+  forecast_type = "infections",
+  ylab = "New cases",
+  title = "Projections for new cases by episode date"
+)
+
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_covid_data,
+  forecast_type = "reported_cases",
+  obs_column = "observed_new_cases",
+  ylab = "New cases",
+  title = "Projections for new cases by reported date"
+)
+
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_covid_data,
+  obs_column = "observed_new_cases",
+  forecast_type = "R",
+  ylab = "R",
+  title = "Rt projections"
 )
 ```
 
