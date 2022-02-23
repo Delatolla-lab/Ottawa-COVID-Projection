@@ -48,8 +48,6 @@ library(RColorBrewer)
 # scripts
 source("../../R/lag_replacement.R")
 source("../../R/observed_data.R")
-source("../../R/data_conversion.R")
-source("../../R/hosp_projections.R")
 source("../../R/open_ottawa_scripts.R")
 source("../../R/epinow_functions.R")
 
@@ -271,11 +269,6 @@ reworked_figure(
 `r observed_cases_text`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Ottawa Hospital data section @Warsame
-exp_census[[1]]$DT1 <- exp_census[[3]][[1]]$expected_val
-exp_census[[1]]$DT2 <- exp_census[[3]][[2]]$expected_val
-exp_census[[1]]$DT3 <- exp_census[[3]][[3]]$expected_val
-
 # Graph selection list
 icu_call <- list(type = "observed_data", y_column = "observed_census_ICU", name = "ICU census", color = icu_col)
 acute_care <- list(type = "observed_data", y_column = "observed_census_acute_care", name = "Acute care census", color = acute_col)
@@ -323,24 +316,8 @@ ICU_p_acute_care
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-#short_term_plot(projections = ott_projections, obs_data = ott_observed, obs_column = "observed_new_episodes", forecast_type = "infections", ylab = "New cases", title = "Short-term daily COVID-19 cases in Ottawa by episode date")
-```
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 #short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Short-term hospital census projections in Ottawa")
-```
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Import projections
-ott_projections <- read.csv(file.path(getwd(), "../../Data/OPH_projection_estimates.csv"))
-source("../../R/hosp_projections.R")
-#hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (Number of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed census of patients", project_to = "2021-05-31")
-```
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../../R/hosp_projections.R")
-#hosp_fun(ott_projections, "hosp_admits", title = "Projected COVID-19 daily hospital admissions in Ottawa", y = "New admissions (Number of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 10, reduction_color = reduction_col, reduction_shade = reduction_shade, increase_value = 10, increase_color = increase_col, increase_shade = increase_shade, observed_name = "Observed # of daily admissions", project_to = "2021-05-31")
 ```
 
 `r def_link`
