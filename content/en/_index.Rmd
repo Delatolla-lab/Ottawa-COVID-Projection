@@ -1,7 +1,7 @@
 ---
 title: "Ottawa COVID-19 Projections"
-params: 
-  lang: "en"
+params:
+  lang: en
 ---
 
 ```{r setup, include=FALSE}
@@ -245,6 +245,9 @@ case_projections <- insert_translation(localization_data, lang, "case_projection
 case_projections_text <- insert_translation(localization_data, lang, "case_projections_text",
                                             c(max(ott_projections$date, na.rm = TRUE)))
 
+hosp_projections_text <- insert_translation(localization_data, lang, "hosp_projections_text",
+                                            c(max(ott_projections$date, na.rm = TRUE)))
+
 hosp_projections <- insert_translation(localization_data, lang, "hosp_projections")
 ```
 
@@ -310,6 +313,9 @@ ICU_p_acute_care
 
 `r line_break`
 
+`r hosp_projections`
+`r hosp_projections_text`
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 #short_term_plot(projections = ott_projections, obs_data = ott_observed, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Short-term daily COVID-19 cases in Ottawa by reported date")
@@ -317,7 +323,7 @@ ICU_p_acute_care
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
-#short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Short-term hospital census projections in Ottawa")
+short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Short-term hospital census projections in Ottawa")
 ```
 
 `r def_link`
