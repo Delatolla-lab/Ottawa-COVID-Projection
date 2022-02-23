@@ -1,0 +1,306 @@
+---
+title: "Plots of projections from Jan2021 to Present"
+author: "Gauri Priya Saran"
+date: "02/02/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(EpiNow2)
+library(stringr)
+library(purrr)
+library(lubridate)
+library(plotly)
+library(RColorBrewer)
+library(zoo)
+
+source("../R/open_ottawa_scripts.R")
+source("../R/wastewater.R")
+source("../R/epinow_functions.R")
+```
+
+# Load data
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# load data
+ott_covid_data <- read.csv(file.path(getwd(), "../Data/Observed data/OPH_Observed_COVID_Data.csv"))
+
+ww_data <-
+  read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
+
+# prep ww data
+ww_clean <- wastewater_prep(ww_data) %>%
+  select(date, N1_N2_avg, N1_N2_avg_clean) %>%
+  mutate(date = as.Date(date))
+```
+
+# Loading Case projection Data 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+load("Data/jan22_present22_cases_proj.RData")
+```
+
+# Current growth estimates for observed new case data
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+estimates_cases = cases_forecast_jan22_pres22[[2]]
+print(estimates_cases)
+```
+
+# Plot of case projection data for Rt
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualizing projections
+short_term_plot(
+  projections = cases_forecast_jan22_pres22[[1]], # projection data
+  obs_data = ott_covid_data, # observed data
+  obs_column = "observed_new_cases", # observed data column
+  forecast_type = "R", # forecast type
+  ylab = "Effective Reproduction # Rt", # yaxis label
+  title = "Projections of Rt for observed new cases" # plot title
+)
+```
+
+
+# Plot of case projection data over time
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualizing projections
+short_term_plot(
+  projections = cases_forecast_jan22_pres22[[1]], # projection data
+  obs_data = ott_covid_data, # observed data
+  obs_column = "observed_new_cases", # observed data column
+  forecast_type = "reported_cases", # forecast type
+  ylab = "Number of Infections", # yaxis label
+  title = "Projections of Cases over time" # plot title
+)
+```
+
+# Load the hospital case data for reporting delay period of 4 days
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+load("Data/jan22_present22_hosp_proj.RData")
+```
+
+# Loading the forecasted hospital case data from September2021 to present for 10 days reporting delay
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+load("Data/jan22_present22_hosp_proj_delay_10.RData")
+```
+
+# Loading the forecasted hospital case data from September2021 to present for 14 days reporting delay
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+load("Data/jan22_present22_hosp_proj_delay_14.RData")
+```
+
+
+# Current growth rate estimates for hospital census data
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+estimates_hosp_cases = hosp_forecast_jan22_pres22[[2]]
+print(estimates_hosp_cases)
+```
+# Current growth rate estimates for hospital census data with reporting delay of 10 days
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+estimates_hosp_cases = hosp_forecast_jan22_pres22_delay_10[[2]]
+print(estimates_hosp_cases)
+```
+# Current growth rate estimates for hospital census data with reporting delay of 10 days
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+estimates_hosp_cases = hosp_forecast_jan22_pres22_delay_14[[2]]
+print(estimates_hosp_cases)
+```
+
+
+# Plot of hospital case data for Rt projection with reporting delay of 4 days
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualizing projections
+short_term_plot(
+  projections = hosp_forecast_jan22_pres22[[1]], # projection data
+  obs_data = ott_covid_data, # observed data
+  obs_column = "observed_census_ICU_p_acute_care", # observed data column
+  forecast_type = "R", # forecast type
+  ylab = "Effective Reproduction #", # yaxis label
+  title = "Projections of Rt for hospital case data" # plot title
+)
+```
+# Plot of hospital data for Rt projections with reporting delay of 10 days
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualizing projections
+short_term_plot(
+  projections = hosp_forecast_jan22_pres22_delay_10[[1]], # projection data
+  obs_data = ott_covid_data, # observed data
+  obs_column = "observed_census_ICU_p_acute_care", # observed data column
+  forecast_type = "R", # forecast type
+  ylab = "Effective Reproduction #", # yaxis label
+  title = "Projections of Rt for hospital case data" # plot title
+)
+```
+
+# Plot of hospital data for Rt projections with reporting delay of 14 days
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualizing projections
+short_term_plot(
+  projections = hosp_forecast_jan22_pres22_delay_14[[1]], # projection data
+  obs_data = ott_covid_data, # observed data
+  obs_column = "observed_census_ICU_p_acute_care", # observed data column
+  forecast_type = "R", # forecast type
+  ylab = "Effective Reproduction #", # yaxis label
+  title = "Projections of Rt for hospital case data" # plot title
+)
+```
+
+
+#Plot of Hospital cases over time with reporting delay of 4 days
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualizing projections
+short_term_plot(
+  projections = hosp_forecast_jan22_pres22[[1]], # projection data
+  obs_data = ott_covid_data, # observed data
+  obs_column = "observed_census_ICU_p_acute_care", # observed data column
+  forecast_type = "reported_cases", # forecast type
+  ylab = "Hospital cases over time", # yaxis label
+  title = "Projections of Hospital cases over time" # plot title
+)
+```
+
+
+#Plot of Hospital cases over time with reporting delay of 10 days
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualizing projections
+short_term_plot(
+  projections = hosp_forecast_jan22_pres22_delay_10[[1]], # projection data
+  obs_data = ott_covid_data, # observed data
+  obs_column = "observed_census_ICU_p_acute_care", # observed data column
+  forecast_type = "reported_cases", # forecast type
+  ylab = "Hospital cases over time", # yaxis label
+  title = "Projections of Hospital cases over time" # plot title
+)
+```
+
+
+#Plot of Hospital cases over time with reporting delay of 14 days
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualizing projections
+short_term_plot(
+  projections = hosp_forecast_jan22_pres22_delay_14[[1]], # projection data
+  obs_data = ott_covid_data, # observed data
+  obs_column = "observed_census_ICU_p_acute_care", # observed data column
+  forecast_type = "reported_cases", # forecast type
+  ylab = "Hospital cases over time", # yaxis label
+  title = "Projections of Hospital cases over time" # plot title
+)
+```
+
+
+
+# Load the waste water data
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+load("Data/jan22_present22_ww_proj.Rdata")
+```
+
+
+# Current growth estimates of waste water data
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+estimates_ww_data = ww_forecast_jan22_pres22[[2]]
+print(estimates_ww_data)
+```
+
+
+
+# Plot of waste water data for Rt projection
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Visualizing projections
+short_term_plot(
+  projections = ww_forecast_jan22_pres22[[1]], # projection data
+  obs_data = ww_clean, # observed data
+  obs_column = "N1_N2_avg_clean", # observed data column
+  forecast_type = "R", # forecast type
+  ylab = "Effective Reproduction #", # yaxis label
+  title = "Projections of Rt for waste water data" # plot title
+)
+```
+
+# Plot of waste water data for viral signal over time
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ww_normalized <- ww_clean %>%
+  mutate(N1_N2_avg_clean = N1_N2_avg_clean*1000000)
+
+# Visualizing projections
+short_term_plot(
+  projections = ww_forecast_jan22_pres22[[1]], # projection data
+  obs_data = ww_normalized, # observed data
+  obs_column = "N1_N2_avg_clean", # observed data column
+  forecast_type = "reported_cases", # forecast type
+  ylab = "Viral signal over time (µ)", # yaxis label
+  title = "Projections of viral signal over time" # plot title
+)
+```
+
+
+# Creating datasets to merge from hospital, cases and waste water data
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Filter data and append column names in each dataset
+ww_data = ww_forecast_jan22_pres22[[1]] %>%
+  filter(variable == "reported_cases") %>%
+  rename_with(function(x) paste0(x, "_ww"), .cols = -date)
+hosp_data = hosp_forecast_jan22_pres22[[1]] %>%
+  filter(variable == "reported_cases") %>%
+  rename_with(function(x) paste0(x, "_hosp"), .cols = -date)
+cases_data = cases_forecast_jan22_pres22[[1]] %>%
+  filter(variable == "reported_cases") %>%
+  rename_with(function(x) paste0(x, "_cases"), .cols = -date)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Merge datasets
+final_merged_data <- ww_data %>%
+  full_join(hosp_data, by = "date") %>%
+  full_join(cases_data, by = "date") %>%
+  arrange(date)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+save(final_merged_data, file = "Data/merged_data_cases_hosp_ww_jan_present.RData")
+```
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Merging observed_new_cases
+joined_with_observed_cases = ott_covid_data %>% select(date, observed_new_cases) %>% mutate(date = as.Date(date)) %>% inner_join(final_merged_data, by = "date") %>% relocate(observed_new_cases, .after = median_cases)
+# Merging observed hospital ICU cases
+joined_with_observed_cases = ott_covid_data %>% select(date, observed_census_ICU_p_acute_care) %>% mutate(date = as.Date(date)) %>% inner_join(joined_with_observed_cases, by = "date") %>% relocate(observed_census_ICU_p_acute_care, .after = median_hosp)
+# Merging observed ww signal
+joined_with_observed_cases = ww_normalized %>% select(date, N1_N2_avg_clean) %>% mutate(date = as.Date(date)) %>% inner_join(joined_with_observed_cases, by = "date") %>% relocate(N1_N2_avg_clean, .after = median_ww)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+save(joined_with_observed_cases, file = "Data/merged_data_cases_hosp_ww_observed_jan_present.RData")
+```
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Merging hospital data with joined_with_observed_cases for reporting delay of 10 days
+hosp_data_delay_10 = hosp_forecast_jan22_pres22_delay_10[[1]] %>%
+  filter(variable == "reported_cases") %>%
+  rename_with(function(x) paste0(x, "_hosp_delay_10"), .cols = -date)
+  
+joined_with_observed_cases = joined_with_observed_cases %>% full_join(hosp_data_delay_10, by = "date")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Merging hospital data with joined_with_observed_cases for reporting delay of 14 days
+hosp_data_delay_14 = hosp_forecast_jan22_pres22_delay_14[[1]] %>%
+  filter(variable == "reported_cases") %>%
+  rename_with(function(x) paste0(x, "_hosp_delay_14"), .cols = -date)
+  
+joined_with_observed_cases = joined_with_observed_cases %>% full_join(hosp_data_delay_14, by = "date")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+save(joined_with_observed_cases, file = "Data/merged_data_cases_hosp_ww_observed_jan_present.RData")
+```

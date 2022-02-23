@@ -34,8 +34,8 @@ for(date in date_intervals){
   ww_forecast <- short_term_forecast(
     data = ww_clean,
     input = "N1_N2_avg_clean",
-    start_date = as.Date("2020-10-01") + date,
-    end_date = as.Date("2021-03-31") + date,
+    start_date = as.Date("2020-09-01") + date,
+    end_date = as.Date("2021-02-01") + date,
     input_multiplier = 1000000,
     omit_last_date = TRUE,
     generation_time = generation_time,
@@ -52,7 +52,8 @@ for(date in date_intervals){
     filter(duplicated(date) == FALSE,
            date > first(date),
            !is.na(variable)) %>%
-    arrange(date)
+    arrange(date) %>%
+    select(-c(variable, strat,type))
 }
 
-save(ww_data, file = "ww_projections_development/historic_ww_proj.RData")
+save(ww_data, file = "ww_projections_development/Data/historic_ww_proj.RData")

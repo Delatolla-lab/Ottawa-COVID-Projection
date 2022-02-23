@@ -1,5 +1,5 @@
 ---
-title: "Short-term case projections for Ottawa (development page)"
+title: "Short-term hospital projections for Ottawa (development page)"
 output: html_document
 ---
 
@@ -24,6 +24,7 @@ ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Obse
 
 load("../../Data/short_term_forecast.RData")
 load("../../Data/short_term_hosp_proj.RData")
+load("../../Data/hosp_projections.RData")
 
 ott_projections <- ott_short_forecast[[1]]
 
@@ -36,24 +37,65 @@ dt_label = switch(
 
 dt_abs <- abs(dt)
 
+dt_hosp <- hosp_projections[[3]][[5]][[1]]
+dt_label_hosp = switch( 
+  (sign(dt_hosp) + 2),
+  "Hospital halving time:",
+  "No change:",
+  "Hospital doubling time:")
+
+dt_abs_hosp <- abs(dt_hosp)
+
 growth_rate <- ott_short_forecast[[2]][[4]][[1]]
+
+time <- .POSIXct(Sys.time(), "America/New_York")
+
+
 ```
+
+_Last updated on `r c(format(time, '%d %B, %Y, %X'))`_
+
+Pour le français cliquez [ici](https://613covid.ca/fr/). 
+
+This website has forecasts of hospitalization counts from COVID-19 and wastewater recovery of SARS-CoV-2.
+
+Website is optimized for desktop use. For mobile users, it is recommended to view in landscape mode. 
+
+Click [here](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/daily-covid19-dashboard.aspx) to access the COVID-19 Daily Dashboard created by Ottawa Public Health. The Ottawa Public Health dashboard provides up to date COVID-19 metrics that inform projections presented on this website. 
 
 ## Dashboard 
 
-(part of the main page dashboard)
+Data to `r last(ott_covid_data$date)`
 
-`r dt_label` **`r dt_abs` days**
+### Current
 
-## Introduction 
+`r dt_label_hosp` **`r dt_abs_hosp` days**
+
+**`r last(ott_covid_data$observed_census_ICU_p_acute_care)`** confirmed COVID-19 patients in hospital.
+
+Including **`r last(ott_covid_data$observed_census_acute_care)`** acute care patients. **`r last(ott_covid_data$observed_census_ICU)`** ICU patients.
+
+## Short-term hospitalization projections
 
 (text will go after observed data)
 
-Short-term and long-term covid-19 projections are presented below. See [More](more) for a discussion about model interpretation and [Methods](methods) for how the projections where created. Short-term projections reflect current covid-19 transmission; while long-term projections reflect sustained transmission trends. Short-term and long-term projections can trend in different directions when there are changing patterns of community covid-19 transmission. 
+Short-term COVID-19 hospital projections are presented below. See [More](more) for a discussion about model interpretation and [Methods](methods) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# visualize epinow forecast
+short_term_plot(
+  projections = hosp_proj,
+  obs_data = ott_covid_data,
+  obs_column = "observed_census_ICU_p_acute_care",
+  forecast_type = "reported_cases",
+  ylab = "Hospital census",
+  title = "Projections for hospital census"
+)
+```
 
 ## Short-term case projections
 
-Projections from `r min(ott_projections$date, na.rm = TRUE)` to `r max(ott_projections$date, na.rm = TRUE)`
+Case projections will not be published, but will continue to be run daily for development purposes.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
@@ -85,21 +127,6 @@ short_term_plot(
 )
 ```
 
-## Short-term hospitalization projections
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# visualize epinow forecast
-short_term_plot(
-  projections = hosp_proj,
-  obs_data = ott_covid_data,
-  obs_column = "observed_census_ICU_p_acute_care",
-  forecast_type = "reported_cases",
-  ylab = "Hospital census",
-  title = "Projections for hospital census"
-)
-```
-
-## Assessing historic projections with observed data
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 load("../../Data/hist_case_projections.RData")
 load("../../Data/hist_hosp_projections.RData")
