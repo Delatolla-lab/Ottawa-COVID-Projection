@@ -2,6 +2,11 @@
 title: Changelog
 ---
 
+# V3.6.0
+2022-02-24
+
+- Hospital projections added to homepage.
+
 # V3.5.0
 2022-01-28
 
