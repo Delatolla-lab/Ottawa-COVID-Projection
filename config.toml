@@ -51,28 +51,22 @@ publishDir = "./docs"
     weight = 3
     
 [[menu.main]]
-    name = "case_proj"
-    url = "/#case-projections"
-    parent = "viz"
-    weight = 4
-    
-[[menu.main]]
     name = "hosp_projs"
     url = "/#hospitalization-projections"
     parent = "viz"
-    weight = 5
+    weight = 4
 
 [[menu.main]]
     name = "ww_viz"
     url = "/wastewater/#ww-visualization"
     parent = "viz"
-    weight = 6
+    weight = 5
     
 [[menu.main]]
     name = "definitions"
     url = "/#definitions"
     parent = "viz"
-    weight = 7
+    weight = 6
     
 [[menu.main]]
     name = "wastewater"
