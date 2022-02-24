@@ -236,6 +236,8 @@ observed_cases <- insert_translation(localization_data, lang, "observed_cases")
 
 observed_cases_text <- insert_translation(localization_data, lang, "observed_cases_text")
 
+observed_census <- insert_translation(localization_data, lang, "observed_census")
+
 observed_admits <- insert_translation(localization_data, lang, "observed_admits")
 
 projected_hospital_title <- insert_translation(localization_data, lang, "ProjectedHospital_title")
@@ -270,6 +272,10 @@ reworked_figure(
 ```
 
 `r observed_cases_text`
+
+`r line_break`
+
+`r observed_census`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Graph selection list
@@ -312,6 +318,7 @@ ICU_p_acute_care
 ```
 
 `r line_break`
+
 `r hosp_projections`
 `r hosp_projections_text`
 
@@ -324,6 +331,8 @@ ICU_p_acute_care
 # visualize epinow forecast
 short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Short-term hospital census projections in Ottawa")
 ```
+
+`r line_break`
 
 `r def_link`
 
