@@ -103,8 +103,8 @@ observed_census,## {#observed-census},## {#observed-census}
 PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
 observed_admits,## {#observed-admits},## {#observed-admits}
 ProjectedHospital_title,## Projections,## Projections
-case_projections_text," ""Short-term COVID-19 projections are presented below. See [More](more) for a discussion about model interpretation and [Methods](methods) for how the projections where created.",
-hosp_projections_text,"""Short-term COVID-19 hospital projections are presented below. See More for a discussion about model interpretation and Methods for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.""",
+case_projections_text,Short-term COVID-19 projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created.,
+hosp_projections_text,"Short-term COVID-19 hospital projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.",
 Projections to {{1}}.,,
 ,,
 "Dashed line represents the last date of observed cases."""," ""Projections to {{1}}."" ",
@@ -122,7 +122,7 @@ ProjectedHospital_text,"The hospital census forecast of:
 
 {{6}} patients en {{7}} en fonction d’un retour au niveau de transmission du début de la pandémie en mars 2020."
 case_projections,## {#case-projections},## {#case-projections}
-hosp_projections,## {#hospitalization-projections},## {#hospitalization-projections}
+hosp_projections,## Short-term hospitalization projections {#hospitalization-projections},## {#hospitalization-projections}
 vent_projections,## {#ventilator-projections},## {#ventilator-projections}
 definitions_link,## {#defintions},## {#defintions}
 break,---,---
