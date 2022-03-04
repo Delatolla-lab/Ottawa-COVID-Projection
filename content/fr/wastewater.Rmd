@@ -24,11 +24,7 @@ library(purrr)
 library(RColorBrewer)
 
 # scripts
-source("../../R/lag_replacement.R")
 source("../../R/observed_data.R")
-source("../../R/data_conversion.R")
-source("../../R/hosp_projections.R")
-source("../../R/open_ottawa_scripts.R")
 source("../../R/wastewater.R")
 source("../../R/epinow_functions.R")
 
