@@ -89,42 +89,18 @@ publishDir = "./docs"
     url = "/model/#wastewater"
     parent = "model"
     weight = 2
-
-[[menu.main]]
-    name = "phys_dist"
-    url = "/model/#physical-distancing"
-    parent = "model"
-    weight = 3
-
-[[menu.main]]
-    name = "phys_math"
-    url = "/model/#distancing-math"
-    parent = "model"
-    weight = 4
-    
-[[menu.main]]
-    name = "phys_dist_effect"
-    url = "/model/#distancing-effectiveness"
-    parent = "model"
-    weight = 5
     
 [[menu.main]]
     name = "inp_params"
     url = "/model/#parameters"
     parent = "model"
-    weight = 6
-
-[[menu.main]]
-    name = "plot_data"
-    url = "/model/#plot-data"
-    parent = "model"
-    weight = 7
+    weight = 3
     
 [[menu.main]]
     name = "refs"
     url = "/model/#references"
     parent = "model"
-    weight = 8
+    weight = 4
 
 [[menu.main]]
     name = "more"
