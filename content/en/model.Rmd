@@ -16,7 +16,7 @@ All data used to create projection models can be accessed at [Open Ottawa](https
 
 ## Wastewater COVID-19 surveillance {#wastewater}
 
-Ottawa's wastewater data is available [here](https://github.com/Big-Life-Lab/PHESD).
+Ottawa's wastewater data is available [here](https://github.com/Big-Life-Lab/PHESD). Wastewater test results for other Canadian cities can be found here [here](https://nccid.ca/wastewater-surveillance-for-covid-19/).
  
 See [Ottawa Public Health website](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx) for an overview of the wastewater surveillance program and its role in COVID-19 surveillance. Detail laboratory methods are published [here](https://www.medrxiv.org/content/10.1101/2020.08.11.20173062v3). The surveillance program is under development. Results and interpretation are publicly-presented for discussion.
 
