@@ -73,12 +73,6 @@ Definitions,"## Definitions
 
 > **Daily growth** is the rate of change in the hospitalization from day-to-day.
 
-> **Physical distancing** is a reduction in close contact between people.
-
-> **Wise socializing** is ensuring you don't become a link in a COVID-19 transmission chain that ends in a person becoming hospitalized or dying. This involves wearing a mask in indoor spaces, isolating yourself from others when sick, staying 2 meters apart from people outside your household, and exercising proper hand hygiene. Click [here](https://www.ottawapublichealth.ca/en/public-health-topics/be-covidwise.aspx) for more details on being COVIDWise.
-
-See the [More](/more) page for more definitions and more information about the terms used.
-
 ---","## Définitions
 
 > **Le recensement des hospitalisations** correspond au nombre de patients recensés dans l’ensemble des hôpitaux d’Ottawa à minuit, le jour précédent.
@@ -89,12 +83,6 @@ See the [More](/more) page for more definitions and more information about the t
 
 > **La croissance quotidienne** désigne le taux de variation du nombre d’hospitalisations jour après jour.
 
-> **La distanciation physique** est la réduction du nombre de contacts étroits entre les personnes.
-
-> **L’établissement avisé de contacts sociaux sécuritaire** consiste à éviter de devenir soi-même un maillon d’une chaîne de transmission de la COVID-19 qui entraînerait l’hospitalisation ou le décès de quelqu’un. Vous devez donc porter un masque à l’intérieur, vous isoler lorsque vous êtes malade, garder une distance de 2 mètres avec les autres qui ne font pas partie de votre ménage et bien vous laver les mains. En savoir plus pour être [COVID avisé](https://www.santepubliqueottawa.ca/fr/public-health-topics/be-covidwise.aspx).
-
-Consultez la section [Plus](/more) d’infos pour en savoir plus sur les termes employés.
-
 ---"
 PastData_title,## Observed cases & hospital use,## Cas observés et occupation des hôpitaux
 observed_cases,## {#observed-cases},## {#observed-cases}
@@ -104,7 +92,7 @@ PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecti
 observed_admits,## {#observed-admits},## {#observed-admits}
 ProjectedHospital_title,## Projections,## Projections
 case_projections_text,Short-term COVID-19 projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created.,
-hosp_projections_text,"Short-term COVID-19 hospital projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.",
+hosp_projections_text,"Short-term COVID-19 hospital projections are presented below. See [Methods](/model) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.",
 Projections to {{1}}.,,
 ,,
 "Dashed line represents the last date of observed cases."""," ""Projections to {{1}}."" ",

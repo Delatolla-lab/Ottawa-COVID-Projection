@@ -8,7 +8,7 @@ Described below is a brief description of methods, data and model parameters use
 
 ## Projection models {#projection-models}
 
-All data used to create projection models can be accessed at [Open Ottawa](https://open.ottawa.ca/datasets/covid-19-cases-and-deaths-in-ottawa). See 'COVID-19 cases and deaths`.
+All data used to create projection models can be accessed at [Open Ottawa](https://open.ottawa.ca/datasets/covid-19-cases-and-deaths-in-ottawa). See 'COVID-19 cases and deaths`. Data used to create wastewater projection models can be accessed at [PHESD](https://github.com/Big-Life-Lab/PHESD).
 
 *COVID-19 short-term projections are created using the [Bayesian EpiNow2 model](https://epiforecasts.io/EpiNow2/) developed by the EpiForecasts team.*
 
@@ -26,6 +26,6 @@ A note about data reporting: Data is typically uploaded to the website less than
 
 ## Input parameters {#parameters}
 
-Parameter estimates for hospital projections are based on the reported number of COVID-19 patients in hospitals from Ottawa Public Health, while wastewater projections are based on sample data from ROPEC. For both projections, generation time estimates are obtained from [Ganyani et. al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7201952/), while incubation period estimates are obtained from [Lauer et. al.](https://pubmed.ncbi.nlm.nih.gov/32150748/).
+Parameter estimates for hospital projections are based on the reported number of COVID-19 patients in hospitals from Ottawa Public Health, while wastewater projections are based on sample data from ROPEC. For both projections, generation time estimates are obtained from [Ganyani et. al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7201952/) @Ganyani2020, while incubation period estimates are obtained from [Lauer et. al.](https://pubmed.ncbi.nlm.nih.gov/32150748/) @Lauer2020.
 
 ### References {#references}

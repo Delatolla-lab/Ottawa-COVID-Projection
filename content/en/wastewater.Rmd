@@ -297,14 +297,6 @@ sheet <- variant_sheet %>%
 #ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
 ```
 
-### Variants of Concern
-
-The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater. 
-
-<img src="/images/Delta Omicron allelic proportion.png" width = "90%" height = "90%"/>
-
----
-
 ### Overall viral signal
 
 * Standard curves R 2 ≥ 0.95.
