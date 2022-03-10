@@ -103,49 +103,14 @@ publishDir = "./docs"
     weight = 4
 
 [[menu.main]]
-    name = "more"
-    url = "/more/"
-    weight = 5
-    
-[[menu.main]]
-    name = "model_use"
-    url = "/more/#use"
-    parent = "more"
-    weight = 1
-
-[[menu.main]]
-    name = "model_acc"
-    url = "/more/#accuracy"
-    parent = "more"
-    weight = 2   
-    
-[[menu.main]]
-    name = "scens_phys_dist"
-    url = "/more/#scenarios"
-    parent = "more"
-    weight = 3  
-    
-[[menu.main]]
-    name = "phys_dist"
-    url = "/more/#distancing"
-    parent = "more"
-    weight = 4 
-    
-[[menu.main]]
-    name = "phys_dist_effect"
-    url = "/more/#distancing-effectiveness"
-    parent = "more"
-    weight = 5
-
-[[menu.main]]
     name = "contact"
     url = "/contact/"
-    weight = 6
+    weight = 5
 
 [[menu.main]]
     name = "changelog"
     url = "/change-log/"
-    weight = 7
+    weight = 6
 
 [params]
     description = "Ottawa COVID-19 hospital projections."
