@@ -1,7 +1,0 @@
-ConfigArgParse
-gitpython
-seaborn
-numpy
-pandas
-gvar
-lsqfit
