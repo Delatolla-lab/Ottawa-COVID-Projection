@@ -25,10 +25,7 @@ jobs:
           r-version: '4.1.1'
       - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
       - name: Install libnode-dev
-        run: |
-          sudo add-apt-repository ppa:cran/v8
-          sudo apt-get update
-          sudo apt-get install libnode-dev
+        run: sudo apt-get install libnode-dev
       - name: Install snap version of nodejs
         run: sudo snap install node --classic --channel=14
       - name: Install renv package
