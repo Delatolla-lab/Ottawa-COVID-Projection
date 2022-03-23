@@ -218,8 +218,8 @@ short_term_plot <- function(interval_num=40,
                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
                            font=list(size=10)
                          ),
-                         dragmode = "pan",
-                         width = 1150)
+                         dragmode = "pan"
+                         )
   
   
   

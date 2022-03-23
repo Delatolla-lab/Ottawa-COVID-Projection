@@ -219,7 +219,8 @@ short_term_plot(
   title = "<b>Projections for COVID-19 wastewater viral signal, Ottawa</b>",
   tick_period = "1 month",
   tick_labels_date = "%b %y",
-  annotation_text = "*Shaded area represents the 75% credible region"
+  annotation_text = "*Shaded area represents the 75% credible region",
+  interval_num = 178
 )
 ```
 
@@ -311,7 +312,7 @@ sheet <- variant_sheet %>%
 
 The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater. 
 
-<img src="/images/Screen Shot 2022-03-22 at 11.54.28.png" width = "90%" height = "90%"/>
+<img src="../../static/images/Screen Shot 2022-03-22 at 11.54.28.png" width = "90%" height = "90%"/>
 
 ---
 
