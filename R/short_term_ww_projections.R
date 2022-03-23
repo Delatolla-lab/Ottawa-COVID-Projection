@@ -35,7 +35,9 @@ ww_forecast <- short_term_forecast(
   generation_time = generation_time,
   incubation_period = incubation_period,
   reporting_delay = reporting_delay,
-  output = "both"
+  output = "both",
+  horizon = 7,
+  CrI = c(0.2, 0.5, 0.9,0.75)
 )
 
 save(ww_forecast, file = "Data/short_term_ww_proj.RData")
