@@ -112,10 +112,10 @@ short_term_plot <- function(interval_num=40,
     select(-c(lower_50, upper_50, lower_20, upper_20, lower_90, upper_90))
   
   # Set types to levels indicated in function call
-  projections$type[projections$date <= as.Date(last(obs_data_omit$date))] <-
+  projections$type[projections$date <= as.Date(last(obs_data$date))] <-
     as.character(levels[[1]])
   
-  projections$type[projections$date > as.Date(last(obs_data_omit$date))] <-
+  projections$type[projections$date > as.Date(last(obs_data$date))] <-
     as.character(levels[[2]])
   
   projections$type <- factor(projections$type, levels =
@@ -132,7 +132,7 @@ short_term_plot <- function(interval_num=40,
            aes(x = date, col = type, fill = type))
   
   # Add observed data if R or growth rate is not specified
-  obs_plot <- filter(obs_data_omit, as.Date(date) >= start_date)
+  obs_plot <- filter(obs_data, as.Date(date) >= start_date)
   y_col <- obs_plot[[as.character(obs_column)]]
   if(forecast_type != as.character("R") &
      forecast_type != as.character("growth_rate")){
