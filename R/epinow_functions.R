@@ -11,7 +11,7 @@ short_term_forecast <- function(data,
                                 rw = 7,
                                 gp = NULL,
                                 output = "projections",
-                                CrI = c(0.2, 0.5, 0.9)
+                                CrI = c(0.2, 0.5, 0.75, 0.9)
                                 
 ){
   # Format dataset
@@ -88,6 +88,7 @@ short_term_plot <- function(interval_num=40,
                             start_date = first(as.Date(projections$date)),
                             ylab,
                             title,
+                            CrI = 75, # credible interval percentage to plot. CrI should be present in forecast.
                             scale = FALSE,
                             tick_period = "1 week",
                             tick_labels_date = "%b %d",
@@ -95,13 +96,20 @@ short_term_plot <- function(interval_num=40,
                             
                             
 ){
+  # Stop function if CrI not present in forecast
+  cr_pct <- CrI/10
+  cr_upper <- paste0("upper_", CrI)
+  cr_lower <- paste0("lower_", CrI)
+  
+  if(!(cr_upper %in% colnames(projections)) &&
+     !(cr_lower %in% colnames(projections))){
+    stop("The ",paste0(CrI, "% "), "credible interval is not included in the projections.")
+  }
+  
   # Filter data based on forecast type and remove 50% CI
   projections <- projections %>%
     filter(variable == as.character(forecast_type)) %>%
     select(-c(lower_50, upper_50, lower_20, upper_20, lower_90, upper_90))
-  # Omit last day of observed data
-  obs_data_omit <- obs_data %>%
-    filter(date < as.Date(last(date)))
   
   # Set types to levels indicated in function call
   projections$type[projections$date <= as.Date(last(obs_data_omit$date))] <-
@@ -117,14 +125,6 @@ short_term_plot <- function(interval_num=40,
   CrIs <- extract_CrIs(projections)
   index <- 1
   alpha_per_CrI <- 0.6 / (length(CrIs) - 1)
-  
-  # Modify CI column names in dataset
-  if(CrIs == 75){colnames(projections) <- reduce2(c("_", "5"), c(" ", "5%"),
-                                                  .init = colnames(projections),
-                                                  str_replace)}
-  else{colnames(projections) <- reduce2(c("_", "0"), c(" ", "0%"),
-                                        .init = colnames(projections),
-                                        str_replace)}
   
   # Set up ggplot object
   plot<- 
