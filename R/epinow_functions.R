@@ -162,8 +162,8 @@ short_term_plot <- function(interval_num=40,
   
   # plot CrIs
   for (CrI in CrIs) {
-    bottom <- paste("lower", paste0(CrI, "%"))
-    top <-  paste("upper", paste0(CrI, "%"))
+    bottom <- paste0("lower_", CrI)
+    top <-  paste0("upper_", CrI)
     plot <- plot +
       geom_ribbon(ggplot2::aes(ymin = .data[[bottom]], ymax = .data[[top]]), 
                   alpha = 0.2, size = 0.05)
