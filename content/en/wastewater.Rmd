@@ -232,8 +232,8 @@ short_term_plot(
 growth_measures <- ww_forecast[[2]]
 colnames(growth_measures) <- c("measure", "estimate")
 
-growth_measures[1, "measure"] <- "Expected change in viral amount"
-growth_measures <- growth_measures[-2,]
+growth_measures[2, "measure"] <- "Expected change in viral amount"
+growth_measures <- growth_measures[-1,]
 
 knitr::kable(growth_measures)
 ```
