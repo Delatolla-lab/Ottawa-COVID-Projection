@@ -105,6 +105,7 @@ short_term_plot(
   obs_column = "observed_new_episodes",
   forecast_type = "infections",
   ylab = "New cases",
+  CrI = 90,
   title = "Projections for new cases by episode date"
 )
 
@@ -114,6 +115,7 @@ short_term_plot(
   forecast_type = "reported_cases",
   obs_column = "observed_new_cases",
   ylab = "New cases",
+  CrI = 90,
   title = "Projections for new cases by reported date"
 )
 
@@ -123,6 +125,7 @@ short_term_plot(
   obs_column = "observed_new_cases",
   forecast_type = "R",
   ylab = "R",
+  CrI = 90,
   title = "Rt projections"
 )
 ```
