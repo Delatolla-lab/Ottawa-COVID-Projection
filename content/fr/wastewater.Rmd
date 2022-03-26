@@ -306,7 +306,7 @@ sheet <- variant_sheet %>%
 
 The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater. 
 
-<img src="/images/Delta Omicron allelic proportion.png" width = "90%" height = "90%"/>
+<img src="/images/delta_omicron_ba1_ba2_allelic_proportion.png" width = "90%" height = "90%"/>
 
 ---
 
