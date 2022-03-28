@@ -1,7 +1,7 @@
 ---
 title: "Ottawa COVID-19 Projections"
 params:
-  lang: "en"
+  lang: en
 ---
 
 ```{r setup, include=FALSE}

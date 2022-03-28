@@ -106,6 +106,7 @@ short_term_plot <- function(interval_num=40,
     stop("The ",paste0(CrI, "% "), "credible interval is not included in the projections.")
   }
   
+  
   # Filter data based on forecast type and remove 50% CI
   projections <- projections %>%
     filter(variable == as.character(forecast_type)) %>%
