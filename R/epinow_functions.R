@@ -97,7 +97,6 @@ short_term_plot <- function(interval_num=40,
                             
 ){
   # Stop function if CrI not present in forecast
-  cr_pct <- CrI/10
   cr_upper <- paste0("upper_", CrI)
   cr_lower <- paste0("lower_", CrI)
   
@@ -109,7 +108,7 @@ short_term_plot <- function(interval_num=40,
   # Filter data based on forecast type and remove 50% CI
   projections <- projections %>%
     filter(variable == as.character(forecast_type)) %>%
-    select(-c(lower_50, upper_50, lower_20, upper_20, lower_90, upper_90))
+    select(c(date, type, median, mean, sd, as.character(cr_upper), as.character(cr_lower)))
   
   # Set types to levels indicated in function call
   projections$type[projections$date <= as.Date(last(obs_data$date))] <-
