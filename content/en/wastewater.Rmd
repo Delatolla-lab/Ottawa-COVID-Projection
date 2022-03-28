@@ -197,6 +197,7 @@ reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(ho
 Preliminary projections forecasting viral signal are shown below. Projections forecast normalized viral copies per copy based on observed signal data. Caution is encouraged when interpreting results. Methods have not been peer-reviewed, and validation is ongoing.  
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../../R/epinow_functions.R")
 load("../../Data/short_term_ww_proj.RData")
 
 ww_data <-
@@ -215,7 +216,11 @@ short_term_plot(
   obs_column = "N1_N2_avg_clean",
   forecast_type = "reported_cases",
   ylab = "Normalized viral copies* (µ)",
-  title = "<b>Projections for COVID-19 wastewater viral signal, Ottawa</b>"
+  title = "<b>Projections for COVID-19 wastewater viral signal, Ottawa</b>",
+  tick_period = "1 month",
+  tick_labels_date = "%b %y",
+  annotation_text = "*Shaded area represents the 75% credible region",
+  interval_num = 178
 )
 ```
 
@@ -227,8 +232,8 @@ short_term_plot(
 growth_measures <- ww_forecast[[2]]
 colnames(growth_measures) <- c("measure", "estimate")
 
-growth_measures[2, "measure"] <- "Expected change in viral amount"
-growth_measures <- growth_measures[-1,]
+growth_measures[1, "measure"] <- "Expected change in viral amount"
+growth_measures <- growth_measures[-2,]
 
 knitr::kable(growth_measures)
 ```
@@ -307,7 +312,7 @@ sheet <- variant_sheet %>%
 
 The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater. 
 
-<img src="/images/Delta Omicron allelic proportion.png" width = "90%" height = "90%"/>
+<img src="/images/delta_omicron_ba1_ba2_allelic_proportion.png" width = "90%" height = "90%"/>
 
 ---
 
