@@ -125,7 +125,7 @@ short_term_plot <- function(interval_num=40,
   CrIs <- extract_CrIs(projections)
   index <- 1
   alpha_per_CrI <- 0.6 / (length(CrIs) - 1)
-  
+
   # Set up ggplot object
   plot<- 
     ggplot(projections[as.Date(projections$date) >= as.Date(start_date),],
@@ -192,7 +192,7 @@ short_term_plot <- function(interval_num=40,
   
   # Convert to plotly object
   plot <- plotly::ggplotly(plot, tooltip = c("date", "text", "median",
-                                             "lower 75%", "upper 75%"))
+                                             paste0("lower", "_", CrIs), paste0("upper", "_", CrIs)))
   
   
   # Set date display constraints
