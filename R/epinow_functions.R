@@ -92,7 +92,7 @@ short_term_plot <- function(interval_num=40,
                             scale = FALSE,
                             tick_period = "1 week",
                             tick_labels_date = "%b %d",
-                            annotation_text = "*Shaded area represents the 90% credible region"
+                            annotation_text = "*Shaded area represents the 75% credible region"
                             
                             
 ){
