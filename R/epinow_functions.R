@@ -92,7 +92,8 @@ short_term_plot <- function(interval_num=40,
                             scale = FALSE,
                             tick_period = "1 week",
                             tick_labels_date = "%b %d",
-                            annotation_text = "*Shaded area represents the 75% credible region"
+                            annotation_text = "*Shaded area represents the 75% credible region",
+                            CrIp = 25
                             
                             
 ){
@@ -120,12 +121,19 @@ short_term_plot <- function(interval_num=40,
   
   projections$type <- factor(projections$type, levels =
                                c(as.character(levels[[1]]), as.character(levels[[2]])))
-  
+
+  for (col in colnames(projections)){
+    if (paste0("lower_",CrI) %in% col){
+      val <- 100 - CrI
+      col_name <- paste0("lower_", val)
+      projections[,`col_name`] <- projections %>% select(`col`)
+    }
+  }
   # set up CrI index
-  CrIs <- extract_CrIs(projections)
+  CrIs <- CrIp
   index <- 1
   alpha_per_CrI <- 0.6 / (length(CrIs) - 1)
-
+  
   # Set up ggplot object
   plot<- 
     ggplot(projections[as.Date(projections$date) >= as.Date(start_date),],
@@ -162,14 +170,14 @@ short_term_plot <- function(interval_num=40,
   
   # plot CrIs
   for (CrI in CrIs) {
+    up= 100 - CrI
     bottom <- paste0("lower_", CrI)
-    top <-  paste0("upper_", CrI)
+    top <-  paste0("upper_", up)
     plot <- plot +
       geom_ribbon(ggplot2::aes(ymin = .data[[bottom]], ymax = .data[[top]]), 
                   alpha = 0.2, size = 0.05)
     
   }
-  
   # Set custom palette
   palette <- brewer.pal(name = "Dark2", n = 8)[c(1,3)]
   
@@ -192,7 +200,7 @@ short_term_plot <- function(interval_num=40,
   
   # Convert to plotly object
   plot <- plotly::ggplotly(plot, tooltip = c("date", "text", "median",
-                                             paste0("lower", "_", CrIs), paste0("upper", "_", CrIs)))
+                                             paste0("lower", "_", CrIs), paste0("upper", "_", 100 - CrIs)))
   
   
   # Set date display constraints
