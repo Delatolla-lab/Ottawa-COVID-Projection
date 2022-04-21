@@ -14,6 +14,7 @@ reworked_figure <-
            error_data = NULL,
            error_pct = FALSE,
            error_col = NULL,
+           error_bars = FALSE,
            level = FALSE,
            level_upper = NULL,
            level_lower = NULL,
@@ -29,11 +30,16 @@ reworked_figure <-
            width = 800,
            height = 500,
            ticks = TRUE,
+           ticklabels = "%b %d",
            date_constraint = FALSE,
            constraint_val = NULL,
+           specified_type = NULL,
+           a = NULL,
+           b = NULL,
            data) {
     # ---------- PRESETS ----------
     tickvals <- floor_date(as_date(data$date), "month")
+    
     
     trace_presets <- list(
       doubling_time =
@@ -82,7 +88,7 @@ reworked_figure <-
     
     library(plotly)
     
-      p <- plot_ly()
+    p <- plot_ly()
     
     # base parameters for buttons
     base_params <- 'list(
@@ -116,9 +122,12 @@ reworked_figure <-
     menu <- ""
     updated_y2 <- NULL
     menu_y2 <- ""
-    
+    min_val_vec = c()
+    max_val_vec = c()
     for (i in 1:length(yaxis)) {
       var_to_map <- yaxis[[i]]
+      min_val_vec[i] = min(data[, var_to_map$y_column])
+      max_val_vec[i] = max(data[, var_to_map$y_column])
       curr_temp <- trace_presets[[var_to_map$type]]
       if (!is_null(var_to_map$color) & !is.null(var_to_map$width)) {
         curr_temp <-
@@ -131,64 +140,89 @@ reworked_figure <-
                        color = var_to_map$color)
       }
       if (isTRUE(yaxis_button)){
-          vis_logical <- c(rep(NA, length(yaxis)), rep(T, length(yaxis2)))
-          vis_logical[i] <- T
-          vis_logical[is.na(vis_logical)] <- F
-          vis_logical <- paste0("c(",stringr::str_flatten(vis_logical, ","),")")
-          menu_item <- sprintf('
+        vis_logical <- c(rep(NA, length(yaxis)), rep(T, length(yaxis2)))
+        vis_logical[i] <- T
+        vis_logical[is.na(vis_logical)] <- F
+        vis_logical <- paste0("c(",stringr::str_flatten(vis_logical, ","),")")
+        menu_item <- sprintf('
       list(
         label = "%s",
         method = "update",
         args = list(list(visible = %s),
                     list(title = "%s")))',
-                               yaxis[[i]][["short_name"]],
-                               vis_logical,
-                               titles[["title"]])
-          
-          if (i < length(yaxis)){
-            menu <- stringr::str_glue(stringr::str_glue(menu,menu_item),",")
-          } else {
-            menu <- stringr::str_glue(menu,menu_item)
+                             yaxis[[i]][["short_name"]],
+                             vis_logical,
+                             titles[["title"]])
+        
+        if (i < length(yaxis)){
+          menu <- stringr::str_glue(stringr::str_glue(menu,menu_item),",")
+        } else {
+          menu <- stringr::str_glue(menu,menu_item)
+        }
+        if(i == 1){
+          p <-
+            do.call(add_trace, c(
+              list(p = p, name = var_to_map$name),
+              curr_temp,
+              list(x = data[, xaxis],
+                   y = data[, var_to_map$y_column]),
+              hovertemplate = paste('%{x|%b %d, %Y}:',
+                                    '%{y}')
+            ))
+        }else{
+          p <-
+            do.call(add_trace, c(
+              list(p = p, name = var_to_map$name),
+              curr_temp,
+              list(x = data[, xaxis],
+                   y = data[, var_to_map$y_column]),
+              hovertemplate = paste('%{x|%b %d, %Y}:',
+                                    '%{y}'),
+              visible = FALSE
+            ))
+        }
+      }
+      else{
+        if (!is.null(specified_type)){
+          if((yaxis[[i]]$type == specified_type & error_bars == TRUE)){
+            curr_temp_copy = curr_temp
           }
-          if(i == 1){
+          else if(yaxis[[i]]$type != specified_type & error_bars == TRUE){
             p <-
               do.call(add_trace, c(
                 list(p = p, name = var_to_map$name),
                 curr_temp,
                 list(x = data[, xaxis],
                      y = data[, var_to_map$y_column]),
+                opacity = var_to_map$opacity,
                 hovertemplate = paste('%{x|%b %d, %Y}:',
                                       '%{y}')
               ))
-          }else{
-            p <-
-              do.call(add_trace, c(
-                list(p = p, name = var_to_map$name),
-                curr_temp,
-                list(x = data[, xaxis],
-                     y = data[, var_to_map$y_column]),
-                hovertemplate = paste('%{x|%b %d, %Y}:',
-                                      '%{y}'),
-                visible = FALSE
-              ))
           }
-      }
-      else{
-        p <-
-          do.call(add_trace, c(
-            list(p = p, name = var_to_map$name),
-            curr_temp,
-            list(x = data[, xaxis],
-                 y = data[, var_to_map$y_column]),
-            opacity = var_to_map$opacity,
-            hovertemplate = paste('%{x|%b %d, %Y}:',
-                                  '%{y}')
-          ))
+        }
+        else{
+          p <-
+            do.call(add_trace, c(
+              list(p = p, name = var_to_map$name),
+              curr_temp,
+              list(x = data[, xaxis],
+                   y = data[, var_to_map$y_column]),
+              opacity = var_to_map$opacity,
+              hovertemplate = paste('%{x|%b %d, %Y}:',
+                                    '%{y}')
+            ))
+        }
       }
     }
     
     updated <- sprintf(base_params, menu)
     updated <- eval(parse(text = updated))
+    if(is.null(a)){
+      a <- min(min_val_vec)
+    }
+    if(is.null(b)){
+      a <- max(max_val_vec)
+    }
     
     if(!is.null(yaxis2)){
       for (i in 1:length(yaxis2)) {
@@ -243,18 +277,18 @@ reworked_figure <-
                                       '%{y}')
               ))
           }else{
-          p <-
-            do.call(add_trace, c(
-              list(p = p, name = var_to_map$name),
-              curr_temp,
-              list(x = data[, xaxis],
-                   y = data[, var_to_map$y_column],
-                   yaxis = "y2"),
-              opacity = var_to_map$opacity,
-              hovertemplate = paste('%{x|%b %d, %Y}:',
-                                    '%{y}'),
-              visible = FALSE
-            ))
+            p <-
+              do.call(add_trace, c(
+                list(p = p, name = var_to_map$name),
+                curr_temp,
+                list(x = data[, xaxis],
+                     y = data[, var_to_map$y_column],
+                     yaxis = "y2"),
+                opacity = var_to_map$opacity,
+                hovertemplate = paste('%{x|%b %d, %Y}:',
+                                      '%{y}'),
+                visible = FALSE
+              ))
           }
           
         }
@@ -310,22 +344,70 @@ reworked_figure <-
             data[[var_to_map$y_column]] - data[[as.character(error_data)]]
         }
       }
-      p <- add_trace(p, x = data$date, y = error_y_upper,
-                     type = "scatter",
-                     mode = "lines",
-                     line = list(color = "transparent"),
-                     showlegend = FALSE,
-                     name = "Upper bound")
-      p <- add_trace(p, x = data$date, y = error_y_lower,
-                     type = "scatter",
-                     mode = "lines",
-                     fill = "tonexty",
-                     fillcolor = error_col,
-                     line = list(color = "transparent"),
-                     showlegend = FALSE,
-                     name = "Lower bound")
+      if(isTRUE(error_bars)){
+        if(!is.null(specified_type)){
+          for (i in 1:length(yaxis)) {
+            if((yaxis[[i]]$type == specified_type)){
+              if(!(is.null(trace_presets[[yaxis[[i]]$type]]$mode))){
+                p <-
+                  add_trace(p, name = yaxis[[i]]$name,  type = curr_temp_copy$type,
+                            showlegend = curr_temp_copy$showlegend,
+                            line = list(color = yaxis[[i]]$color, width =yaxis[[i]]$width),
+                            mode = curr_temp_copy$mode,
+                            x = data$date, 
+                            y = data[, yaxis[[i]]$y_column], 
+                            error_y = list(type = "data",
+                                           
+                                           symmetric = FALSE,
+                                           
+                                           array = error_y_upper,
+                                           
+                                           arrayminus = error_y_lower,
+                                           color = "black")
+                  )
+                p <- layout(p, yaxis = list(range = c(a, b)))
+              }
+              else{
+                p <-
+                  add_trace(p,  name = yaxis[[i]]$name, type = curr_temp_copy$type,
+                            showlegend = curr_temp_copy$showlegend,
+                            marker = list(color = yaxis[[i]]$color),
+                            mode = curr_temp_copy$mode,
+                            x = data$date, 
+                            y = data[, yaxis[[i]]$y_column],  
+                            #type = trace_presets[[yaxis[[i]]$type]]$type,
+                            #showlegend = trace_presets[[yaxis[[i]]$type]]$showlegend,
+                            error_y = list(type = "data",
+                                           
+                                           symmetric = FALSE,
+                                           
+                                           array = error_y_upper,
+                                           
+                                           arrayminus = error_y_lower,
+                                           color = "black")
+                  )
+              }
+            }
+          }
+        }
+      }
+      else{
+        p <- add_trace(p, x = data$date, y = error_y_upper,
+                       type = "scatter",
+                       mode = "lines",
+                       line = list(color = "transparent"),
+                       showlegend = FALSE,
+                       name = "Upper bound")
+        p <- add_trace(p, x = data$date, y = error_y_lower,
+                       type = "scatter",
+                       mode = "lines",
+                       fill = "tonexty",
+                       fillcolor = error_col,
+                       line = list(color = "transparent"),
+                       showlegend = FALSE,
+                       name = "Lower bound")
+      }
     }
-    
     if(isTRUE(level)){
       p <- add_trace(p, x = data$date, y = level_upper,
                      type = "scatter",
@@ -354,7 +436,7 @@ reworked_figure <-
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
                              automargin = TRUE, tickvals = tickvals, 
-                             tickformat = "%b"),
+                             tickformat = "%b %y"),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE),
                 barmode =  "relative",
@@ -374,7 +456,7 @@ reworked_figure <-
                 title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
-                             automargin = TRUE, tickformat = "%b %d"),
+                             automargin = TRUE, tickformat = ticklabels),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE),
                 barmode =  "relative",
@@ -397,7 +479,7 @@ reworked_figure <-
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
                              automargin = TRUE, tickvals = tickvals, 
-                             tickformat = "%b"),
+                             tickformat = "%b %y"),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE),
                 barmode =  "relative",
@@ -416,7 +498,7 @@ reworked_figure <-
                 title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
-                             automargin = TRUE, tickformat = "%b %d"),
+                             automargin = TRUE, tickformat = ticklabels),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE),
                 barmode =  "relative",
@@ -440,7 +522,7 @@ reworked_figure <-
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
                              automargin = TRUE, tickvals = tickvals, 
-                             tickformat = "%b"),
+                             tickformat = "%b %y"),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE),
                 barmode =  "relative",
@@ -460,7 +542,7 @@ reworked_figure <-
                 title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
-                             automargin = TRUE, tickformat = "%b %d"),
+                             automargin = TRUE, tickformat = ticklabels),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE),
                 barmode =  "relative",
@@ -483,7 +565,7 @@ reworked_figure <-
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
                              automargin = TRUE, tickvals = tickvals, 
-                             tickformat = "%b"),
+                             tickformat = "%b %y"),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE),
                 barmode =  "relative",
@@ -502,7 +584,7 @@ reworked_figure <-
                 title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
-                             automargin = TRUE, tickformat = "%b %d"),
+                             automargin = TRUE, tickformat = ticklabels),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE),
                 barmode =  "relative",
@@ -528,7 +610,7 @@ reworked_figure <-
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
                              automargin = TRUE, tickvals = tickvals, 
-                             tickformat = "%b"),
+                             tickformat = "%b %y"),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
@@ -555,7 +637,7 @@ reworked_figure <-
                 title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
-                             automargin = TRUE, tickformat = "%b %d"),
+                             automargin = TRUE, tickformat = ticklabels),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
@@ -585,7 +667,7 @@ reworked_figure <-
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
                              automargin = TRUE, tickvals = tickvals, 
-                             tickformat = "%b"),
+                             tickformat = "%b %y"),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
@@ -610,7 +692,7 @@ reworked_figure <-
                 title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
-                             automargin = TRUE, tickformat = "%b %d"),
+                             automargin = TRUE, tickformat = ticklabels),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
@@ -641,7 +723,7 @@ reworked_figure <-
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
                              automargin = TRUE, tickvals = tickvals, 
-                             tickformat = "%b"),
+                             tickformat = "%b %y"),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
@@ -674,7 +756,7 @@ reworked_figure <-
                 title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
-                             automargin = TRUE, tickformat = "%b %d"),
+                             automargin = TRUE, tickformat = ticklabels),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
@@ -710,7 +792,7 @@ reworked_figure <-
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
                              automargin = TRUE, tickvals = tickvals, 
-                             tickformat = "%b"),
+                             tickformat = "%b %y"),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
@@ -742,7 +824,7 @@ reworked_figure <-
                 title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
-                             automargin = TRUE, tickformat = "%b %d"),
+                             automargin = TRUE, tickformat = ticklabels),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
@@ -780,7 +862,7 @@ reworked_figure <-
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
                              automargin = TRUE, tickvals = tickvals, 
-                             tickformat = "%b"),
+                             tickformat = "%b %y"),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
@@ -807,7 +889,7 @@ reworked_figure <-
                 title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
-                             automargin = TRUE, tickformat = "%b %d"),
+                             automargin = TRUE, tickformat = ticklabels),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
@@ -837,7 +919,7 @@ reworked_figure <-
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
                              automargin = TRUE, tickvals = tickvals, 
-                             tickformat = "%b"),
+                             tickformat = "%b %y"),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
@@ -863,7 +945,7 @@ reworked_figure <-
                 title = list(text = titles[["title"]], x = 0.5, autosize = TRUE),
                 xaxis = list(type = "date",
                              title = list(text = as.character(titles[["x"]])),
-                             automargin = TRUE, tickformat = "%b %d"),
+                             automargin = TRUE, tickformat = ticklabels),
                 yaxis = list(title = list(text = as.character(titles[["y"]])), 
                              automargin = TRUE, overlaying = "y2",
                              zeroline = FALSE),
