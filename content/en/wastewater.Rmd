@@ -170,15 +170,12 @@ localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid L
 time <- .POSIXct(Sys.time(), "America/New_York")
 wwintro<- insert_translation(localization_data, lang, "WWIntro", c(format(time, '%d %B, %Y, %X')))
 curr_day <- as.Date(time)
-one_day_back <- curr_day - as.difftime(1, unit="days")
-two_days_back <- curr_day - as.difftime(2, unit="days")
-wwcollectdate<- insert_translation(localization_data, lang, "WWCollectDate", c(format(one_day_back, '%d %B, %Y')))
-wwanalysesdate<- insert_translation(localization_data, lang, "WWAnalysesDate", c(format(two_days_back, '%d %B, %Y')))
+collect_date <- as.Date(last(ott_covid_waste$date))
+wwcollectdate<- insert_translation(localization_data, lang, "WWCollectDate", c(format(collect_date, '%d %B, %Y')))
+wwanalysesdate<- insert_translation(localization_data, lang, "WWAnalysesDate", c(format(curr_day, '%d %B, %Y')))
 ```
 
 `r wwintro`
-
-Current plots include:
 
 `r wwcollectdate`
 
@@ -191,6 +188,7 @@ The website is updated Monday to Friday at approximately 5 p.m. Updates can be d
 
 Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing. Samples that are collected from Friday to Sunday are processed on Monday and thus are posted to the website on Tuesday at 5 p.m.
 
+A method modification was applied on June 8th 2021 to the Ottawa wastewater data set. The magnitudes (not the shape of the curve) from June 8th to present have been retroactively modified on April 12, 2022 to better align the modified method to previous data.
 
 People with COVID-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a COVID-19 test or ever are diagnosed. Thus, in contrast to assessing community COVID-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with COVID-19 given that everyone goes to the washroom. In addition to serving as a valuable confirmatory data source for COVID-19 levels, wastewater can also serve as early indicator for possible outbreaks, as described below.
 
@@ -203,7 +201,7 @@ For mobile users, dragging the plot while in landscape mode will allow you to vi
 Data last reported `r as.character(tail(waste_clean$reportDate, n=1))`. Click [here](/model/#wastewater) for more details on wastewater data reporting.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40)
+reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
 ```
 
 *Rolling mean viral signal omits dates (coloured in blue) flagged by wastewater researchers with potential data concerns. Data is currently being studied for effects of snow melt and other diluting factors on RNA signal. 
@@ -215,7 +213,7 @@ The next plot illustrates the 7-day rolling mean in daily COVID-19 wastewater vi
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.45}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(hosp_call, new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 300)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(hosp_call, new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 300, date_constraint = TRUE, constraint_val= 301)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
@@ -228,6 +226,7 @@ reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(ho
 Preliminary projections forecasting viral signal are shown below. Projections forecast normalized viral copies per copy based on observed signal data. Caution is encouraged when interpreting results. Methods have not been peer-reviewed, and validation is ongoing.  
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../../R/epinow_functions.R")
 load("../../Data/short_term_ww_proj.RData")
 
 ww_data <-
@@ -246,7 +245,11 @@ short_term_plot(
   obs_column = "N1_N2_avg_clean",
   forecast_type = "reported_cases",
   ylab = "Normalized viral copies* (µ)",
-  title = "<b>Projections for COVID-19 wastewater viral signal, Ottawa</b>"
+  title = "<b>Projections for COVID-19 wastewater viral signal, Ottawa</b>",
+  tick_period = "1 month",
+  tick_labels_date = "%b %y",
+  annotation_text = "*Shaded area represents the 75% credible region",
+  interval_num = 178
 )
 ```
 
@@ -258,8 +261,8 @@ short_term_plot(
 growth_measures <- ww_forecast[[2]]
 colnames(growth_measures) <- c("measure", "estimate")
 
-growth_measures[2, "measure"] <- "Expected change in viral amount"
-growth_measures <- growth_measures[-1,]
+growth_measures[1, "measure"] <- "Expected change in viral amount"
+growth_measures <- growth_measures[-2,]
 
 knitr::kable(growth_measures)
 ```
@@ -337,12 +340,9 @@ sheet <- variant_sheet %>%
 ### Variants of Concern
 
 The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater. 
-
 <img src="../../static/images/voc_image_22April22.png" width = "90%" height = "90%"/>
 
 ---
-
-
 
 ### Overall viral signal
 

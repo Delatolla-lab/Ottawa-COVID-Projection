@@ -1,7 +1,7 @@
 ---
 title: "Ottawa COVID-19 Projections"
 params:
-  lang: "en"
+  lang: en
 ---
 
 ```{r setup, include=FALSE}
@@ -28,7 +28,7 @@ the_same <- insert_translation(localization_data, lang, "the_same")
 
 `r intro`
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 # libraries
 library(plotly)
@@ -261,12 +261,13 @@ hosp_projections <- insert_translation(localization_data, lang, "hosp_projection
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualize current daily cases
+source("../../R/observed_data.R")
 observed_new_episodes <- list(type = "observed_data", y_column = "observed_new_episodes", name = "New cases by episode date", color = current_case_hex)
 
 reworked_figure(
     xaxis = "date",
     yaxis = list(observed_new_episodes),
-    titles = c(y = "Daily cases", x = "Date", title = "Observed daily COVID-19 cases in Ottawa by episode date"),
+    titles = c(y = "Daily cases", x = "Date", title = "Observed daily COVID-19 cases in Ottawa by episode date", ticklabels = "%b %y"),
     data = ott_observed
   )
 ```
@@ -329,7 +330,7 @@ ICU_p_acute_care
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
-short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Short-term hospital census projections in Ottawa")
+short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Short-term hospital census projections in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
 ```
 
 `r line_break`

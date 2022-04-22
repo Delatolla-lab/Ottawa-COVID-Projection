@@ -10,7 +10,10 @@ short_term_forecast <- function(data,
                                 horizon = 14,
                                 rw = 7,
                                 gp = NULL,
-                                output = "projections"){
+                                output = "projections",
+                                CrI = c(0.2, 0.5, 0.75, 0.9)
+                                
+){
   # Format dataset
   if(missing(end_date)) {
     end_date <- max(as.Date(data$date), na.rm = TRUE)
@@ -27,23 +30,24 @@ short_term_forecast <- function(data,
   if(isTRUE(omit_last_date)){
     data_formatted <- data_formatted[data_formatted$date < as.Date(end_date),]
   }
-
+  
   # Run epinow2 sim 
   if(is.null(reporting_delay)){
     projections <-
       EpiNow2::epinow(reported_cases = data_formatted, 
                       generation_time = generation_time,
                       delays = delay_opts(incubation_period),
-                      rt = rt_opts(prior = list(mean = 2, sd = 0.2), rw = rw),
+                      rt = rt_opts(prior = list(mean = 2, sd = 0.1), rw = rw),
                       stan = stan_opts(cores = 4),
-                      gp = gp, horizon = horizon)
+                      gp = gp, horizon = horizon,
+                      CrIs = CrI)
   }
   else{
     projections <-
       EpiNow2::epinow(reported_cases = data_formatted, 
                       generation_time = generation_time,
                       delays = delay_opts(incubation_period, reporting_delay),
-                      rt = rt_opts(prior = list(mean = 2, sd = 0.2), rw = rw),
+                      rt = rt_opts(prior = list(mean = 2, sd = 0.1), rw = rw),
                       stan = stan_opts(cores = 4),
                       gp = gp, horizon = horizon)
   }
@@ -53,24 +57,30 @@ short_term_forecast <- function(data,
       projections[[1]][[2]] 
   }  
   else if(output == as.character("estimates")){
-    forecast <-
-      list(
-        cbind(projections[[3]][[1]], projections[[3]][[2]]),
-        projections[[3]][[3]]
-      )
+    growth_measures <- cbind(projections[[3]][[1]], projections[[3]][[2]])
+    colnames(growth_measures) <- c("measure", "estimate")
+    growth_measures[2, "measure"] <- "Expected change in viral amount"
+    growth_measures <- growth_measures[-1,]
+    forecast <- list()
+    forecast[["Growth summary"]] <- growth_measures
+    forecast[["Growth estimates"]] <- projections[[3]][[3]]
   }
   else if(output == as.character("both")){
-    forecast <- list(
-      projections[[1]][[2]],
-      cbind(projections[[3]][[1]], projections[[3]][[2]]),
-      projections[[3]][[3]]
-    )
+    growth_measures <- cbind(projections[[3]][[1]], projections[[3]][[2]])
+    colnames(growth_measures) <- c("measure", "estimate")
+    growth_measures[2, "measure"] <- "Expected change in viral amount"
+    growth_measures <- growth_measures[-1,]
+    forecast <- list()
+    forecast[["Forecast"]] <- projections[[1]][[2]]
+    forecast[["Growth summary"]] <- growth_measures
+    forecast[["Growth estimates"]] <- projections[[3]][[3]]
   }  
-
+  
   return(forecast)
 }
 
-short_term_plot <- function(projections,
+short_term_plot <- function(interval_num=40,
+                            projections,
                             levels = c("historic", "forecast"),
                             obs_data,
                             obs_column,
@@ -78,43 +88,59 @@ short_term_plot <- function(projections,
                             start_date = first(as.Date(projections$date)),
                             ylab,
                             title,
-                            scale = FALSE){
+                            CrI = 75, # credible interval percentage to plot. CrI should be present in forecast.
+                            scale = FALSE,
+                            tick_period = "1 week",
+                            tick_labels_date = "%b %d",
+                            annotation_text = "*Shaded area represents the 75% credible region",
+                            CrIp = 25
+                            
+                            
+){
+  # Stop function if CrI not present in forecast
+  cr_upper <- paste0("upper_", CrI)
+  cr_lower <- paste0("lower_", CrI)
+  
+  if(!(cr_upper %in% colnames(projections)) &&
+     !(cr_lower %in% colnames(projections))){
+    stop("The ",paste0(CrI, "% "), "credible interval is not included in the projections.")
+  }
+  
   
   # Filter data based on forecast type and remove 50% CI
   projections <- projections %>%
     filter(variable == as.character(forecast_type)) %>%
-    select(-c(lower_50, upper_50, lower_20, upper_20))
-  
-  # Omit last day of observed data
-  obs_data_omit <- obs_data %>%
-    filter(date < as.Date(last(date)))
+    select(c(date, type, median, mean, sd, as.character(cr_upper), as.character(cr_lower)))
   
   # Set types to levels indicated in function call
-  projections$type[projections$date <= as.Date(last(obs_data_omit$date))] <-
+  projections$type[projections$date <= as.Date(last(obs_data$date))] <-
     as.character(levels[[1]])
   
-  projections$type[projections$date > as.Date(last(obs_data_omit$date))] <-
+  projections$type[projections$date > as.Date(last(obs_data$date))] <-
     as.character(levels[[2]])
   
   projections$type <- factor(projections$type, levels =
                                c(as.character(levels[[1]]), as.character(levels[[2]])))
-  
+
+  for (col in colnames(projections)){
+    if (paste0("lower_",CrI) %in% col){
+      val <- 100 - CrI
+      col_name <- paste0("lower_", val)
+      projections[,`col_name`] <- projections %>% select(`col`)
+    }
+  }
   # set up CrI index
-  CrIs <- extract_CrIs(projections)
+  CrIs <- CrIp
   index <- 1
   alpha_per_CrI <- 0.6 / (length(CrIs) - 1)
   
-  # Modify CI column names in dataset
-  colnames(projections) <- reduce2(c("_", "0"), c(" ", "0%"),
-                                   .init = colnames(projections),
-                                   str_replace)
   # Set up ggplot object
   plot<- 
     ggplot(projections[as.Date(projections$date) >= as.Date(start_date),],
            aes(x = date, col = type, fill = type))
   
   # Add observed data if R or growth rate is not specified
-  obs_plot <- filter(obs_data_omit, as.Date(date) >= start_date)
+  obs_plot <- filter(obs_data, as.Date(date) >= start_date)
   y_col <- obs_plot[[as.character(obs_column)]]
   if(forecast_type != as.character("R") &
      forecast_type != as.character("growth_rate")){
@@ -144,14 +170,14 @@ short_term_plot <- function(projections,
   
   # plot CrIs
   for (CrI in CrIs) {
-    bottom <- paste("lower", paste0(CrI, "%"))
-    top <-  paste("upper", paste0(CrI, "%"))
-      plot <- plot +
-        geom_ribbon(ggplot2::aes(ymin = .data[[bottom]], ymax = .data[[top]]), 
-                             alpha = 0.2, size = 0.05)
+    up= 100 - CrI
+    bottom <- paste0("lower_", CrI)
+    top <-  paste0("upper_", up)
+    plot <- plot +
+      geom_ribbon(ggplot2::aes(ymin = .data[[bottom]], ymax = .data[[top]]), 
+                  alpha = 0.2, size = 0.05)
     
   }
-  
   # Set custom palette
   palette <- brewer.pal(name = "Dark2", n = 8)[c(1,3)]
   
@@ -168,38 +194,42 @@ short_term_plot <- function(projections,
     scale_fill_manual(values = palette) +
     labs(y = ylab, x = "Date", col = "Type", fill = "Type", title = title) +
     expand_limits(y = c(-0.4, 0.8)) + 
-    scale_x_date(expand = c(0,0), date_breaks = "1 week",
-                 date_labels = "%b %d") +
+    scale_x_date(expand = c(0,0), date_breaks = tick_period,
+                 date_labels = tick_labels_date) +
     scale_y_continuous(expand = c(0, 0)) 
   
   # Convert to plotly object
   plot <- plotly::ggplotly(plot, tooltip = c("date", "text", "median",
-                                             "lower 90%", "upper 90%"))
+                                             paste0("lower", "_", CrIs), paste0("upper", "_", 100 - CrIs)))
   
   
   # Set date display constraints
-  if(as.numeric(as.Date(first(projections$date))) > as.Date(last(projections$date) - 40)){
+  if(as.numeric(as.Date(first(projections$date))) > as.Date(last(projections$date) - interval_num)){
     a <- as.numeric(as.Date(first(projections$date)))
   }
   else{
-    a <- as.numeric(as.Date(last(projections$date) - 40)) 
+    a <- as.numeric(as.Date(last(projections$date) - interval_num)) 
   }
   b <- as.numeric(as.Date(last(projections$date)))
   
   # Format legend layout & add annotation
   plot <- plotly::layout(plot,
-                         xaxis = list(range = c(a, b)),
+                         xaxis = list( 
+                           range = c(a,b)), 
                          legend = list(
                            #orientation = "h",
                            x = 0.02, y = 1
                          ),
                          annotations = list(
-                           x = 1, y = -0.12, text = "*Shaded area represents the 90% credible region", 
+                           x = 1, y = -.18, text = annotation_text, 
                            showarrow = F, xref='paper', yref='paper', 
                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
                            font=list(size=10)
                          ),
-                         dragmode = "pan")
+                         dragmode = "pan"
+  )
+  
+  
   
   if(isTRUE(scale)){
     tmp <- 1.75*max(projections$mean, na.rm = TRUE)

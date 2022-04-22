@@ -14,7 +14,7 @@ For English click [here](https://613covid.ca/)
 Prévisions actuelles de l’occupation des hôpitaux par des patients atteints de la COVID-19 dans la région d’Ottawa. Une réalisation de l’équipe de [ProjectBigLife.ca](https://www.projectbiglife.ca) à L’Hôpital d’Ottawa et à l’Université d’Ottawa, avec la contribution de Santé publique Ottawa, qui fournit notamment les données."
 WWIntro,Wastewater plots last updated: {{1}}
 WWCollectDate,Wastewater samples collected up to: {{1}}
-WWAnalysesDate,Analyses completed by: {{1}}
+WWAnalysesDate,Reported date up to: {{1}}
 DT_label_half,halving time,temps de division
 DT_label_double,doubling time,temps de doublement
 DT_label_no_change,no growth (flat),pas de croissance
