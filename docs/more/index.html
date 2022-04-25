@@ -103,12 +103,6 @@
                     
                         <a 
                             class="dropdown-item" 
-                            href="/#case-projections">
-                             Case Projections
-                        </a>
-                    
-                        <a 
-                            class="dropdown-item" 
                             href="/#hospitalization-projections">
                             Hospitalization Projections
                         </a>
@@ -117,6 +111,12 @@
                             class="dropdown-item" 
                             href="/wastewater/#ww-visualization">
                              Wastewater visualization
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/#definitions">
+                            Definitions
                         </a>
                     
                     </div>
@@ -153,70 +153,14 @@
                     
                         <a 
                             class="dropdown-item" 
-                            href="/model/#distancing-math">
-                             How physical distancing affects projections
-                        </a>
-                    
-                        <a 
-                            class="dropdown-item" 
                             href="/model/#parameters">
                             Input parameters
                         </a>
                     
                         <a 
                             class="dropdown-item" 
-                            href="/model/#plot-data">
-                             Plot data
-                        </a>
-                    
-                        <a 
-                            class="dropdown-item" 
                             href="/model/#references">
                             References
-                        </a>
-                    
-                    </div>
-                </li>
-                
-            
-                
-                <li class="nav-item dropdown">
-                    <a 
-                        class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        More
-                    </a>
-                    <div 
-                        class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdownMenuLink" id="viz-dropdown">
-                    
-                        <a 
-                            class="dropdown-item" 
-                            href="/more/#use">
-                            Model use
-                        </a>
-                    
-                        <a 
-                            class="dropdown-item" 
-                            href="/more/#accuracy">
-                            Model accuracy
-                        </a>
-                    
-                        <a 
-                            class="dropdown-item" 
-                            href="/more/#scenarios">
-                            Scenarios of physical distancing
-                        </a>
-                    
-                        <a 
-                            class="dropdown-item" 
-                            href="/more/#distancing">
-                            Physical distancing
-                        </a>
-                    
-                        <a 
-                            class="dropdown-item" 
-                            href="/more/#distancing-effectiveness">
-                            Physical distancing effectiveness
                         </a>
                     
                     </div>
@@ -271,20 +215,20 @@
 
     <div class="article-content">
       
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <div id="use" class="section level2">
 <h2>Model use</h2>
 <p>There are two main uses of the projections:</p>
 <ol style="list-style-type: decimal">
-<li><p>Short-term projections (2 to 4 weeks) inform the current level of covid-19 transmssion. In turn, current covid-19 transmission reflects effectivess of ongoing covid-19 prevention and control. Short-term projections the immediate need health care such hospital and critical care services for COVID-19 patients.</p></li>
-<li><p>Long-term projections (6 weeks onward) to assess the potential effect of changes in covid-19 transmission. In turn, future covid-19 transmission reflects potential changes to covid-19 re-opening stages and the effectiveness of cvoid prevention and control.</p></li>
+<li><p>Short-term projections (1 to 4 weeks) reflect the current level of COVID-19 transmission and current effectivess of ongoing COVID-19 prevention and control. Short-term projections the immediate need health care such hospital and critical care services for COVID-19 patients.</p></li>
+<li><p>Long-term projections (6 weeks onward) reflect sustain trends in COVID-19 transmissions. Long-term projections are helpful to assess the potiential effect of COVID-19 re-opening or the need of increased restrictions to control surges.</p></li>
 </ol>
 </div>
 <div id="accuracy" class="section level2">
 <h2>Model accuracy</h2>
-<p>Creating accurate, long-range projections to predict the spread COVID-19 is difficult. It’s akin to forecasting when a hurricane will make landfall when it is still thousands of kilometers out at sea. Forecasts are more accurate for a shorter time range. Projections are updated with the latest data, including local data to help understand when and where the hurricane will reach landfall.</p>
+<p>Short-term projections have a moderate amount of variation between modelling methods. Countries such as <a href="https://kitmetricslab.github.io/forecasthub/forecast">Germany and Poland</a> and the <a href="https://viz.covid19forecasthub.org">United States</a> address model variation by aggregation and ensemble hubs that combine projections from different science teams and modelling approaches. The approach used at 613covid.ca is commonly found within ensemble hubs. Typically, the approach used at 613covid.ca generates projects that fall within the middle to somewhat higher than the average ensemble projection during increasing COVID-19 transmission or somewhat lower than average during decreasing COVID-19 transmission.</p>
+<p>Long-range projections have a lower accuracy than short-term projections as a consequence of changing COVID-19 control strategies. Long-term COVID-19 forecasting is similar to weather forecasting. It is difficult to predict when a hurricane will make landfall when it is still thousands of kilometers out at sea. Projections are updated with the latest data, including local data to help understand when and where the hurricane will reach landfall.</p>
 <p>We can’t reliably forecast the weather six months out, and we can’t forecast COVID-19 six months out. However, we can reliably forecast COVID-19 two to four weeks into the future. Those short-term projections give us time to plan and increase health-care resources as needed.</p>
 <p>That being said, hurricanes and COVID-19 are not the same. The path and force of a hurricane can’t be influenced, but the worst effects of COVID-19 can be avoided if we follow public health guidelines like staying home and practive physical distancing.</p>
 </div>
