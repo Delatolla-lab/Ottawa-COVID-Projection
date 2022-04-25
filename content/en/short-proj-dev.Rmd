@@ -1,0 +1,128 @@
+---
+title: "Short-term hospital projections for Ottawa (development page)"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+## run ott_projections() in short_term_projections.R to generate data for plots
+# load library, packages, functions, data
+library(tidyverse)
+library(ggplot2)
+library(EpiNow2)
+library(stringr)
+library(purrr)
+library(lubridate)
+library(plotly)
+library(RColorBrewer)
+source("../../R/epinow_functions.R")
+source("../../R/wastewater.R")
+ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
+
+load("../../Data/short_term_forecast.RData")
+load("../../Data/short_term_hosp_proj.RData")
+load("../../Data/hosp_projections.RData")
+
+ott_projections <- ott_short_forecast[[1]]
+
+dt <- ott_short_forecast[[3]][[5]][[1]]
+dt_label = switch( 
+  (sign(dt) + 2),
+  "Case halving time:",
+  "No change:",
+  "Case doubling time:")
+
+dt_abs <- abs(dt)
+
+dt_hosp <- hosp_projections[[3]][[5]][[1]]
+dt_label_hosp = switch( 
+  (sign(dt_hosp) + 2),
+  "Hospital halving time:",
+  "No change:",
+  "Hospital doubling time:")
+
+dt_abs_hosp <- abs(dt_hosp)
+
+growth_rate <- ott_short_forecast[[2]][[4]][[1]]
+
+time <- .POSIXct(Sys.time(), "America/New_York")
+
+
+```
+
+_Last updated on `r c(format(time, '%d %B, %Y, %X'))`_
+
+Pour le français cliquez [ici](https://613covid.ca/fr/). 
+
+This website has forecasts of hospitalization counts from COVID-19 and wastewater recovery of SARS-CoV-2.
+
+Website is optimized for desktop use. For mobile users, it is recommended to view in landscape mode. 
+
+Click [here](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/daily-covid19-dashboard.aspx) to access the COVID-19 Daily Dashboard created by Ottawa Public Health. The Ottawa Public Health dashboard provides up to date COVID-19 metrics that inform projections presented on this website. 
+
+## Dashboard 
+
+Data to `r last(ott_covid_data$date)`
+
+### Current
+
+`r dt_label_hosp` **`r dt_abs_hosp` days**
+
+**`r last(ott_covid_data$observed_census_ICU_p_acute_care)`** confirmed COVID-19 patients in hospital.
+
+Including **`r last(ott_covid_data$observed_census_acute_care)`** acute care patients. **`r last(ott_covid_data$observed_census_ICU)`** ICU patients.
+
+## Short-term hospitalization projections
+
+(text will go after observed data)
+
+Short-term COVID-19 hospital projections are presented below. See [More](more) for a discussion about model interpretation and [Methods](methods) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# visualize epinow forecast
+short_term_plot(
+  projections = hosp_proj,
+  obs_data = ott_covid_data,
+  obs_column = "observed_census_ICU_p_acute_care",
+  forecast_type = "reported_cases",
+  ylab = "Hospital census",
+  title = "Projections for hospital census"
+)
+```
+
+## Short-term case projections
+
+Case projections will not be published, but will continue to be run daily for development purposes.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# visualize epinow forecast
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_covid_data,
+  obs_column = "observed_new_episodes",
+  forecast_type = "infections",
+  ylab = "New cases",
+  title = "Projections for new cases by episode date"
+)
+
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_covid_data,
+  forecast_type = "reported_cases",
+  obs_column = "observed_new_cases",
+  ylab = "New cases",
+  title = "Projections for new cases by reported date"
+)
+
+short_term_plot(
+  projections = ott_projections,
+  obs_data = ott_covid_data,
+  obs_column = "observed_new_cases",
+  forecast_type = "R",
+  ylab = "R",
+  title = "Rt projections"
+)
+```

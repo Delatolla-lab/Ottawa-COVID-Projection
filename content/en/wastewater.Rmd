@@ -1,12 +1,13 @@
 ---
 title: "Ottawa COVID-19 wastewater surveillance"
-output:
-  pdf_document: default
-  html_document: default
+output: html_document
+params:
+  lang: "en"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+lang <- params$lang
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -26,11 +27,7 @@ library(purrr)
 library(RColorBrewer)
 
 # scripts
-source("../../R/lag_replacement.R")
 source("../../R/observed_data.R")
-source("../../R/data_conversion.R")
-source("../../R/hosp_projections.R")
-source("../../R/open_ottawa_scripts.R")
 source("../../R/wastewater.R")
 source("../../R/epinow_functions.R")
 
@@ -162,6 +159,34 @@ var_nondetect_call <- list(type = "signal_data", y_column = "propB117_detect", n
 
 var_7_day_avg <- list(type = "avg_data", y_column = "propB117_7day", name = "7 observation \nrolling average", color = var_col, width = 3)
 ```
+
+```{r include=FALSE}
+##Load localization file
+source("../../R/localization.R")
+localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid Localization - Home Page.csv"))
+```
+
+```{r, results='hold', echo=FALSE, comment=NA}
+time <- .POSIXct(Sys.time(), "America/New_York")
+wwintro<- insert_translation(localization_data, lang, "WWIntro", c(format(time, '%d %B, %Y, %X')))
+curr_day <- as.Date(time)
+collect_date <- as.Date(last(ott_covid_waste$date))
+wwcollectdate<- insert_translation(localization_data, lang, "WWCollectDate", c(format(collect_date, '%d %B, %Y')))
+wwanalysesdate<- insert_translation(localization_data, lang, "WWAnalysesDate", c(format(curr_day, '%d %B, %Y')))
+```
+
+`r wwintro`
+
+`r wwcollectdate`
+
+`r wwanalysesdate`
+
+
+The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
+
+
+
+Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing. Samples that are collected from Friday to Sunday are processed on Monday and thus are posted to the website on Tuesday at 5 p.m.
 
 A method modification was applied on June 8th 2021 to the Ottawa wastewater data set. The magnitudes (not the shape of the curve) from June 8th to present have been retroactively modified on April 12, 2022 to better align the modified method to previous data.
 
@@ -315,8 +340,7 @@ sheet <- variant_sheet %>%
 ### Variants of Concern
 
 The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater. 
-
-<img src="/images/delta_omicron_ba1_ba2_allelic_proportion.png" width = "90%" height = "90%"/>
+<img src="../../static/images/voc_image_22April22.png" width = "90%" height = "90%"/>
 
 ---
 
