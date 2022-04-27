@@ -12,9 +12,9 @@ Click here to access the COVID-19 Daily Dashboard created by Ottawa Public Healt
 For English click [here](https://613covid.ca/)
 
 Prévisions actuelles de l’occupation des hôpitaux par des patients atteints de la COVID-19 dans la région d’Ottawa. Une réalisation de l’équipe de [ProjectBigLife.ca](https://www.projectbiglife.ca) à L’Hôpital d’Ottawa et à l’Université d’Ottawa, avec la contribution de Santé publique Ottawa, qui fournit notamment les données."
-WWIntro,Wastewater plots last updated: {{1}}
-WWCollectDate,Wastewater samples collected up to: {{1}}
-WWAnalysesDate,Reported date up to: {{1}}
+WWIntro,Wastewater plots last updated: {{1}},
+WWCollectDate,Wastewater samples collected up to: {{1}},
+WWAnalysesDate,Reported date up to: {{1}},
 DT_label_half,halving time,temps de division
 DT_label_double,doubling time,temps de doublement
 DT_label_no_change,no growth (flat),pas de croissance
@@ -119,21 +119,19 @@ definitions_link,## {#defintions},## {#defintions}
 break,---,---
 death_title,## Past deaths {#death-visualization},## Décès antérieurs {#death-visualization}
 Death_text,**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date.,**Remarque:** Il est possible que le nombre de décès des 3 à 5 derniers jours ne reflète pas le nombre réel de décès attribuables à la COVID-19 puisque certains cas sont encore à l’étude afin de déterminer la date la plus récente d’apparition.
-Contact,"**Media contact:** Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, [mschreiter@toh.ca](mailto:mschreiter@toh.ca) ph: 613-222-7674
+Contact,"**Science contacts:** Mathew Thomson [matthomson@ohri.ca](mailto:matthomson@ohri.ca)
 
-**Science contacts:** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Alan Forster
-
-**Acknowledgements for website and content:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Andrew Fitches, and others on Big Life Lab team.
+**Acknowledgements for website and content:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran and others on Big Life Lab team.
 
 **Supporting Ottawa Public Health epidemiologists:** Amira Ali, Jacqueline Willmore, Dara Spatz
 
 **uOttawa – CHEO SARS-CoV-2 research group:** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber
 
-**Computing infrastructure:** Indoc Research - Open Data Environment
-
 **Colour consultant:** Toby Barker
 
-**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).","**Personne-ressource pour les médias:** Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: [mschreiter@toh.ca](mailto:mschreiter@toh.ca) Téléphone: 613-222-7674
+**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).
+
+**Media contact:** Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, [mschreiter@toh.ca](mailto:mschreiter@toh.ca)","**Personne-ressource pour les médias:** Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: [mschreiter@toh.ca](mailto:mschreiter@toh.ca) Téléphone: 613-222-7674
 
 **Personnes-ressources scientifiques:** Doug Manuel [dmanuel@ohri.ca](mailto:dmanuel@ohri.ca), Alan Forster
 
