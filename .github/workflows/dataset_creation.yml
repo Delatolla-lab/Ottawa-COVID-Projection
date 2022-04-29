@@ -3,10 +3,10 @@
 
 name: Dataset-creation
 
-# Runs everyday at 12:00pm EST/EDT (5:00pm UTC)
+# Runs everyday at 2:30pm EST/EDT (7:30pm UTC)
 on:
   schedule:
-    - cron: '0 17 * * *'
+    - cron: '30 19 * * *'
   workflow_dispatch:
   
 jobs:

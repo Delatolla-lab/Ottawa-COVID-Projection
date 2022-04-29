@@ -29,7 +29,7 @@ ww_clean <- wastewater_prep(ww_data) %>%
   select(date, N1_N2_avg, N1_N2_avg_clean) %>%
   mutate(date = as.Date(date))
 
-load("../../ww_projections_development/Data/historic_ww_proj.RData")
+load("../../Model Validation/ww_projections_development/Data/historic_ww_proj.RData")
 load("../../Data/short_term_ww_proj.RData")
 ```
 

@@ -1,12 +1,13 @@
 ---
 title: "Ottawa COVID-19 wastewater surveillance"
-output:
-  pdf_document: default
-  html_document: default
+output: html_document
+params:
+  lang: "en"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+lang <- params$lang
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -26,11 +27,7 @@ library(purrr)
 library(RColorBrewer)
 
 # scripts
-source("../../R/lag_replacement.R")
 source("../../R/observed_data.R")
-source("../../R/data_conversion.R")
-source("../../R/hosp_projections.R")
-source("../../R/open_ottawa_scripts.R")
 source("../../R/wastewater.R")
 source("../../R/epinow_functions.R")
 
@@ -163,7 +160,37 @@ var_nondetect_call <- list(type = "signal_data", y_column = "propB117_detect", n
 var_7_day_avg <- list(type = "avg_data", y_column = "propB117_7day", name = "7 observation \nrolling average", color = var_col, width = 3)
 ```
 
-A method modification was applied on June 8th 2021 to the Ottawa wastewater data set. The magnitudes (not the shape of the curve) from June 8th to present have been retroactively modified on April 12, 2022 to better align the modified method to previous data.
+```{r include=FALSE}
+##Load localization file
+source("../../R/localization.R")
+localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid Localization - Home Page.csv"))
+```
+
+```{r, results='hold', echo=FALSE, comment=NA}
+time <- .POSIXct(Sys.time(), "America/New_York")
+wwintro<- insert_translation(localization_data, lang, "WWIntro", c(format(time, '%d %B, %Y, %X')))
+curr_day <- as.Date(time)
+collect_date <- as.Date(last(ott_covid_waste$date))
+wwcollectdate<- insert_translation(localization_data, lang, "WWCollectDate", c(format(collect_date, '%d %B, %Y')))
+wwanalysesdate<- insert_translation(localization_data, lang, "WWAnalysesDate", c(format(curr_day, '%d %B, %Y')))
+```
+
+`r wwintro`
+
+`r wwcollectdate`
+
+`r wwanalysesdate`
+
+
+The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
+
+
+
+Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing. Samples that are collected from Friday to Sunday are processed on Monday and thus are posted to the website on Tuesday at 5 p.m.
+
+A method modification was applied on June 8th 2021 to the Ottawa wastewater data set. The magnitudes (not the shape of the curve) from June 8th to present have been retroactively modified on April 12, 2022 to better align the modified method to previous data. The two methods are the same method, with the new method being one that is adapted for settings of lower wastewater detection by processing slightly larger amounts of wastewater. This means that had this new method been applied to the old samples, the amount of virus detected would be proportionally larger. 
+
+It is important to remember that the exact meaning of the magnitude of the viral signal is not fully understood, particularly as it is affected by numerous known and unknown factors (eg. the variant in current circulation, the level of immunization in the population, etc.). The most valuable indicator that wastewater follows is actually the relative increase and decrease in overall signal, which tends to precede increases and decreases in hospitalization.
 
 People with COVID-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a COVID-19 test or ever are diagnosed. Thus, in contrast to assessing community COVID-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with COVID-19 given that everyone goes to the washroom. In addition to serving as a valuable confirmatory data source for COVID-19 levels, wastewater can also serve as early indicator for possible outbreaks, as described below.
 
@@ -315,8 +342,7 @@ sheet <- variant_sheet %>%
 ### Variants of Concern
 
 The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater. 
-
-<img src="/images/delta_omicron_ba1_ba2_allelic_proportion.png" width = "90%" height = "90%"/>
+<img src="../../static/images/voc_image_22April22.png" width = "90%" height = "90%"/>
 
 ---
 

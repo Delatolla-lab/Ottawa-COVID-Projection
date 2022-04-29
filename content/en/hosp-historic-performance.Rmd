@@ -22,7 +22,7 @@ source("../../R/epinow_functions.R")
 source("../../R/observed_data.R")
 ott_covid_data <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv"))
 
-load("../../ww_projections_development/Data/ottawa_historic_hosp_proj_delay_0.RData")
+load("../../Model Validation/ww_projections_development/Data/ottawa_historic_hosp_proj_delay_0.RData")
 load("../../Data/short_term_hosp_proj.RData")
 ```
 

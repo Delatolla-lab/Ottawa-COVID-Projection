@@ -8,7 +8,7 @@ params:
 knitr::opts_chunk$set(echo = TRUE)
 lang <- params$lang
 source("../../R/localization.R")
-localization_data <- read.csv(file.path(getwd(),"../../Data/Covid Localization - Home Page.csv"))
+localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid Localization - Home Page.csv"))
 contact <- insert_translation(localization_data, lang, "Contact")
 ```
 
