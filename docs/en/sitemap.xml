@@ -89,6 +89,10 @@
   </url>
   
   <url>
+    <loc>https://613covid.ca/hosp-historic-performance/</loc>
+  </url>
+  
+  <url>
     <loc>https://613covid.ca/wastewater/</loc>
     <xhtml:link
                 rel="alternate"
@@ -121,6 +125,10 @@
   </url>
   
   <url>
+    <loc>https://613covid.ca/short-proj-dev/</loc>
+  </url>
+  
+  <url>
     <loc>https://613covid.ca/tags/</loc>
     <xhtml:link
                 rel="alternate"
@@ -132,6 +140,10 @@
                 hreflang="en"
                 href="https://613covid.ca/tags/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://613covid.ca/ww-historic-performance/</loc>
   </url>
   
 </urlset>
