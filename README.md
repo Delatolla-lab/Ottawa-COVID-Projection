@@ -1,8 +1,7 @@
 # Ottawa COVID-19 projections
 
-Projections for daily new COVID-19 cases and hospitalizations for residents in the Ottawa area. 
+Projections for daily new COVID-19 hospitalizations and wastewater for residents in the Ottawa area. 
 
-Case projections are created using the [Bayesian SEIR model](https://github.com/seananderson/covidseir) developed by Simon Fraser University. Hospital projections are based on the [Bayesian extension to the CHIME model](https://github.com/pennsignals/chime_sims) developed by the University of Pennsylvania Health System. The figures in this repository, however, can be used to present projections for other models.
 
 # To build the website
 
