@@ -18,9 +18,8 @@
       
       <guid>https://613covid.ca/model/</guid>
       <description>Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references.
-Projection models All data used to create projection models can be accessed at Open Ottawa. See ’COVID-19 cases and deaths`.
-COVID-19 short-term projections are created using the Bayesian EpiNow2 model developed by the EpiForecasts team.
- Projections are based on observed COVID-19 cases by reporting date, which is, in turn, estimated using reported incubation period and consideration for reporting delays.</description>
+Projection models Data used to create hospital projection models can be accessed at Open Ottawa. See ’COVID-19 cases and deaths`. Data used to create wastewater projection models can be accessed at PHESD.
+COVID-19 short-term projections are created using the Bayesian EpiNow2 model developed by the EpiForecasts team.</description>
     </item>
     
     <item>
@@ -53,11 +52,13 @@ Short-term projections (1 to 4 weeks) reflect the current level of COVID-19 tran
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/contact/</guid>
-      <description>Media contact: Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, mschreiter@toh.ca ph: 613-222-7674
-Science contacts: Mathew Thomson matthomson@ohri.ca
-Acknowledgements for website and content: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Andrew Fitches, and others on Big Life Lab team.
+      <description>Science contacts: Mathew Thomson matthomson@ohri.ca
+Acknowledgements for website and content: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran and others on Big Life Lab team.
 Supporting Ottawa Public Health epidemiologists: Amira Ali, Jacqueline Willmore, Dara Spatz
-uOttawa – CHEO SARS-CoV-2 research group: Robert Delatolla, Alex MacKenzie, Patrick D’Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber</description>
+uOttawa – CHEO SARS-CoV-2 research group: Robert Delatolla, Alex MacKenzie, Patrick D’Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber
+Colour consultant: Toby Barker
+Attribution: COVID-19 icons made by surang from www.flaticon.com.
+Media contact: Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, mschreiter@toh.</description>
     </item>
     
     <item>
@@ -75,8 +76,11 @@ uOttawa – CHEO SARS-CoV-2 research group: Robert Delatolla, Alex MacKenzie, Pa
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/wastewater/</guid>
-      <description>A method modification was applied on June 8th 2021 to the Ottawa wastewater data set. The magnitudes (not the shape of the curve) from June 8th to present have been retroactively modified on April 12, 2022 to better align the modified method to previous data.
-People with COVID-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a COVID-19 test or ever are diagnosed.</description>
+      <description>Wastewater plots last updated: 29 April, 2022, 15:10:00
+Wastewater samples collected up to: 27 April, 2022
+Reported date up to: 29 April, 2022
+The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
+Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing.</description>
     </item>
     
     <item>
@@ -96,6 +100,19 @@ People with COVID-19 shed the causative SARS-CoV-2 virus in their stool, regardl
       <guid>https://613covid.ca/roadmap/</guid>
       <description> The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
  Review and update model parameters based on recent published studies. Priories for review:  ventilated patients deaths   </description>
+    </item>
+    
+    <item>
+      <title>Short-term hospital projections for Ottawa (development page)</title>
+      <link>https://613covid.ca/short-proj-dev/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://613covid.ca/short-proj-dev/</guid>
+      <description>Last updated on 29 April, 2022, 15:09:41
+Pour le français cliquez ici.
+This website has forecasts of hospitalization counts from COVID-19 and wastewater recovery of SARS-CoV-2.
+Website is optimized for desktop use. For mobile users, it is recommended to view in landscape mode.
+Click here to access the COVID-19 Daily Dashboard created by Ottawa Public Health. The Ottawa Public Health dashboard provides up to date COVID-19 metrics that inform projections presented on this website.</description>
     </item>
     
     <item>
