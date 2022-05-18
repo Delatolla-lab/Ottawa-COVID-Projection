@@ -129,12 +129,23 @@ reworked_figure <-
       min_val_vec[i] = min(data[, var_to_map$y_column])
       max_val_vec[i] = max(data[, var_to_map$y_column])
       curr_temp <- trace_presets[[var_to_map$type]]
-      if (!is_null(var_to_map$color) & !is.null(var_to_map$width)) {
+      legendshow <- var_to_map$showlegend
+      if (!is_null(var_to_map$color) & !is.null(var_to_map$width) & !is.null(legendshow)) {
+        curr_temp <-
+          change_color(template = trace_presets[[var_to_map$type]],
+                       color = var_to_map$color, width = var_to_map$width, legends = legendshow)
+      }
+      else if(!is_null(var_to_map$color)& !is.null(legendshow) & is.null(var_to_map$width)){
+        curr_temp <-
+          change_color(template = trace_presets[[var_to_map$type]],
+                       color = var_to_map$color, legends = legendshow)
+      }
+      else if (!is_null(var_to_map$color) & !is.null(var_to_map$width)) {
         curr_temp <-
           change_color(template = trace_presets[[var_to_map$type]],
                        color = var_to_map$color, width = var_to_map$width)
       }
-      else if(!is_null(var_to_map$color)){
+      else if (!is_null(var_to_map$color)) {
         curr_temp <-
           change_color(template = trace_presets[[var_to_map$type]],
                        color = var_to_map$color)
@@ -1002,11 +1013,11 @@ change_color.doubling_time <- function(template, color) {
   ))
 }
 
-change_color.avg_data <- function(template, color, width){
+change_color.avg_data <- function(template, color, width, legends){
   return(list(
     type = "scatter",
     mode = "line",
-    showlegend = TRUE,
+    showlegend = legends,
     line = list(
       color = color,
       width = width

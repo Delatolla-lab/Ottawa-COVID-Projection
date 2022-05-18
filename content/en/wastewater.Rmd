@@ -17,6 +17,7 @@ library(tidyverse)
 library(jsonlite)
 library(ggplot2)
 library(dplyr)
+library(data.table)
 library(tidyr)
 library(lubridate)
 library(stats)
@@ -203,8 +204,23 @@ For mobile users, dragging the plot while in landscape mode will allow you to vi
 Data last reported `r as.character(tail(waste_clean$reportDate, n=1))`. Click [here](/model/#wastewater) for more details on wastewater data reporting.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
+
+new_ott_covid_waste <- copy(ott_covid_waste)
+temp_data <- new_ott_covid_waste %>% subset(!is.na(N1_N2_avg_omit))
+end_data_first <- first(temp_data$date)
+start_data_second <- last(temp_data$date)
+new_ott_covid_waste$N1_N2_7_day_p1 <- NA
+new_ott_covid_waste[(new_ott_covid_waste$date < end_data_first),"N1_N2_7_day_p1"] <- new_ott_covid_waste[(new_ott_covid_waste$date < end_data_first), "N1_N2_7_day"]
+new_ott_covid_waste$N1_N2_7_day_p2 <- NA
+new_ott_covid_waste[(new_ott_covid_waste$date > start_data_second),"N1_N2_7_day_p2"] <- new_ott_covid_waste[(new_ott_covid_waste$date > start_data_second), "N1_N2_7_day"]
+
+n1_n2_7_day_call_p1 <- list(type = "avg_data", y_column = "N1_N2_7_day_p1", name = "7-day rolling mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = FALSE)
+
+n1_n2_7_day_call_p2 <- list(type = "avg_data", y_column = "N1_N2_7_day_p2", name = "7-day rolling mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
+
+reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call_p1, n1_n2_7_day_call_p2), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>COVID-19 wastewater viral signal, Ottawa</b>"), data = new_ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
 ```
+
 
 *Rolling mean viral signal omits dates (coloured in blue) flagged by wastewater researchers with potential data concerns. Data is currently being studied for effects of snow melt and other diluting factors on RNA signal. 
 
