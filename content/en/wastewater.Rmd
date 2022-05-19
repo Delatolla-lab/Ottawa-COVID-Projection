@@ -17,13 +17,13 @@ library(tidyverse)
 library(jsonlite)
 library(ggplot2)
 library(dplyr)
-library(data.table)
 library(tidyr)
 library(lubridate)
 library(stats)
 library(zoo)
 library(stringr)
 library(EpiNow2)
+library(data.table)
 library(purrr)
 library(RColorBrewer)
 
@@ -165,6 +165,8 @@ var_7_day_avg <- list(type = "avg_data", y_column = "propB117_7day", name = "7 o
 ##Load localization file
 source("../../R/localization.R")
 localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid Localization - Home Page.csv"))
+
+
 ```
 
 ```{r, results='hold', echo=FALSE, comment=NA}
@@ -220,7 +222,6 @@ n1_n2_7_day_call_p2 <- list(type = "avg_data", y_column = "N1_N2_7_day_p2", name
 
 reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call_p1, n1_n2_7_day_call_p2), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>COVID-19 wastewater viral signal, Ottawa</b>"), data = new_ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
 ```
-
 
 *Rolling mean viral signal omits dates (coloured in blue) flagged by wastewater researchers with potential data concerns. Data is currently being studied for effects of snow melt and other diluting factors on RNA signal. 
 
