@@ -1,0 +1,220 @@
+---
+title: "WEM testing"
+author: "Warsame Yusuf"
+date: "26/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# libraries
+library(plotly)
+library(tidyverse)
+library(jsonlite)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(stats)
+library(zoo)
+library(stringr)
+library(wem)
+
+# scripts
+source("../R/lag_replacement.R")
+source("../R/observed_data.R")
+source("../R/data_conversion.R")
+source("../R/hosp_projections.R")
+source("../R/open_ottawa_scripts.R")
+source("../R/wastewater.R")
+
+# data
+ott_observed_covid <- read.csv(file.path(getwd(), "../Data/Observed data/OPH_Observed_COVID_Data.csv")) %>%
+  mutate(date = as.Date(date))
+ott_observed_waste <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
+
+# functions to integrate waste & covid data together
+waste_clean <- wastewater_prep(ott_observed_waste)
+ott_covid_waste <- merge_data(ott_observed_covid, waste_clean)
+
+ott_data_prep <- ott_covid_waste %>%
+  select(date, observed_active_cases, observed_new_cases, observed_census_ICU_p_acute_care,
+         N1_N2_avg, N1_N2_7_day) %>%
+  rename(observed_hosp_census = "observed_census_ICU_p_acute_care")
+
+
+# Prepare dataset for modelling
+cases <- data.frame(ott_covid_waste$date, ott_covid_waste$observed_new_cases) %>%
+  drop_na()
+colnames(cases) <- c("date", "value")
+hosp <- data.frame(ott_covid_waste$date, ott_covid_waste$observed_census_ICU_p_acute_care) %>%
+  drop_na()
+colnames(hosp) <- c("date", "value")
+ww <- data.frame(ott_covid_waste$date, ott_covid_waste$N1_N2_7_day) %>%
+  drop_na()
+colnames(ww) <- c("date", "value")
+
+ww_dat <- build_data(cases = cases, hosp = hosp, ww = ww, hosp.type = 'hosp.occ', case.date.type = "report")
+```
+
+```{r}
+# Visualize data
+g.data <- ggplot(ww_dat[["obs.long"]],aes(x=date, y = value)) + 
+    geom_line()+facet_wrap(~name, nrow = 1, scales = 'free_y')
+
+plot(g.data)
+```
+
+```{r}
+# Examine priors before fitting model
+source("utils.R")
+## Load model example
+init.prm <- model_prm_example()
+
+## Get vax coverage and add to model example
+vax <- get_vax_OTW(pop.OTW = 1e6)
+init.prm$vacc.rate.t <- 331 + c(vax$t,1+tail(vax$t,1))
+init.prm$vacc.rate.v <- c(0,vax$v) 
+
+# Adjust other model params   
+init.prm$pop.size <- 1e6 
+init.prm$horizon <- 700
+init.prm$R0 <- 2.9 
+init.prm$init.I1 <- 10
+init.prm$init.V <- 0
+
+init.prm$vacc.eff.infection       <- 0.65
+init.prm$vacc.eff.symptomatic     <- 0.90
+init.prm$vacc.eff.hospitalization <- 0.999
+init.prm$hosp.length.mean <- 11
+init.prm$hosp.rate.t <- c(50,140,150)
+init.prm$hosp.rate.v <- c(4,2,1)
+
+# WW fitting params
+init.prm$transm.t = c(1,105 ,155 ,175 ,215,250 ,285 ,305,365 ,415 ,450 ,550,655 )
+init.prm$transm.v = c(0.4,0.6,0.4,0.37,0.65,0.30,0.60,0.35,0.90,0.82,0.95,1.2,3)
+
+init.prm$ww.scale <- 3e-9
+init.prm$transit.time.mean <- 1
+init.prm$report.lag.ww <- 1
+
+g.beta <- plot_simobs_beta(data=ww_dat,
+                           prm = init.prm,
+                           include.cases = FALSE,
+                           include.ww    = TRUE,
+                           include.hosp  = FALSE,
+                           log.scale     = FALSE)
+
+plot(g.beta)
+```
+
+```{r}
+# Create priors object
+priors <- data.frame(
+  name = c('R0', 
+           'transm.v_2',
+           'transm.v_3',
+           'transm.v_4',
+           'transm.v_5',
+           'transm.v_6',
+           'transm.v_7',
+           'transm.v_8',
+           'transm.v_9',
+           'transm.v_10',
+           'transm.v_11',
+           'transm.v_12',
+           'transm.v_13',
+           'ww.scale',
+           'transit.time.mean',
+           'vacc.eff.infection',
+           'vacc.eff.symptomatic'),
+  distrib = c('runif',
+              'rnorm',
+              'rnorm',
+              'rnorm',
+              'rnorm',
+              'rnorm',
+              'rnorm',
+              'rnorm',
+              'rnorm',
+              'rnorm',
+              'rnorm',
+              'rnorm',
+              'rnorm',
+              'runif',
+              'runif',
+              'runif',
+              'runif'),
+  prms = c('2.4;3.3',
+           paste0(init.prm$transm.v[2], ";0.10"),
+           paste0(init.prm$transm.v[3], ";0.10"),
+           paste0(init.prm$transm.v[4], ";0.10"),
+           paste0(init.prm$transm.v[5], ";0.10"),
+           paste0(init.prm$transm.v[6], ";0.10"),
+           paste0(init.prm$transm.v[7], ";0.10"),
+           paste0(init.prm$transm.v[8], ";0.10"),
+           paste0(init.prm$transm.v[9], ";0.10"),
+           paste0(init.prm$transm.v[10], ";0.10"),
+           paste0(init.prm$transm.v[11], ";0.10"),
+           paste0(init.prm$transm.v[12], ";0.10"),
+           paste0(init.prm$transm.v[13], ";0.10"),
+           '1e-9;8e-9',
+           '0;4',
+           '0.5;0.70',
+           '0.85;0.95')
+)
+```
+
+```{r}
+# Fit model
+q <- 2
+last.date.to.fit <- as.Date(last(ww_dat$obs$date))
+
+
+prm.abc <- define_abc_prms(
+  iter = round(10^q),
+  accept = 5*10^(1-q),
+  case.weight = 0,
+  ww.weight = 1,
+  hosp.weight = 0,
+  hosp.type = "hosp.occ"
+)
+
+fitobj <- fit(
+  data = ww_dat,
+  prm.abc = prm.abc,
+  prm = init.prm,
+  df.priors = priors,
+  n.cores = parallel::detectCores() - 1,
+  last.date = last.date.to.fit
+)
+```
+
+```{r}
+g <- plot_fit_result(fitobj = fitobj,ci = 0.95)
+plot(g$fitted.observation)
+```
+
+```{r}
+Rt = estimate_Rt(fitobj=fitobj, ci=0.95, n.cores=8)
+g.Rt = plot_Rt(Rdata = Rt,
+               min.date = first(ww_dat$obs.long$date),
+               max.date = last(ww_dat$obs.long$date))
+plot(g.Rt)
+```
+
+```{r}
+ff = fcst(fitobj = fitobj, horizon.fcst = 60, dat = ww_dat)
+gf = plot_fcst(var = 'report', 
+               fcst.obj = ff, 
+               dat = ww_dat)
+```
+
+```{r}
+plot(gf + geom_point(data = ww_dat$obs,
+                     aes(y=clin.obs), 
+                     color='red3', shape=4))
+```

@@ -1,0 +1,69 @@
+---
+title: ""
+params: 
+  lang: "en"
+---
+
+
+
+<div id="use" class="section level2">
+<h2>Model use</h2>
+<p>There are two main uses of the projections:</p>
+<ol style="list-style-type: decimal">
+<li><p>Short-term projections (1 to 4 weeks) reflect the current level of COVID-19 transmission and current effectivess of ongoing COVID-19 prevention and control. Short-term projections the immediate need health care such hospital and critical care services for COVID-19 patients.</p></li>
+<li><p>Long-term projections (6 weeks onward) reflect sustain trends in COVID-19 transmissions. Long-term projections are helpful to assess the potiential effect of COVID-19 re-opening or the need of increased restrictions to control surges.</p></li>
+</ol>
+</div>
+<div id="accuracy" class="section level2">
+<h2>Model accuracy</h2>
+<p>Short-term projections have a moderate amount of variation between modelling methods. Countries such as <a href="https://kitmetricslab.github.io/forecasthub/forecast">Germany and Poland</a> and the <a href="https://viz.covid19forecasthub.org">United States</a> address model variation by aggregation and ensemble hubs that combine projections from different science teams and modelling approaches. The approach used at 613covid.ca is commonly found within ensemble hubs. Typically, the approach used at 613covid.ca generates projects that fall within the middle to somewhat higher than the average ensemble projection during increasing COVID-19 transmission or somewhat lower than average during decreasing COVID-19 transmission.</p>
+<p>Long-range projections have a lower accuracy than short-term projections as a consequence of changing COVID-19 control strategies. Long-term COVID-19 forecasting is similar to weather forecasting. It is difficult to predict when a hurricane will make landfall when it is still thousands of kilometers out at sea. Projections are updated with the latest data, including local data to help understand when and where the hurricane will reach landfall.</p>
+<p>We can’t reliably forecast the weather six months out, and we can’t forecast COVID-19 six months out. However, we can reliably forecast COVID-19 two to four weeks into the future. Those short-term projections give us time to plan and increase health-care resources as needed.</p>
+<p>That being said, hurricanes and COVID-19 are not the same. The path and force of a hurricane can’t be influenced, but the worst effects of COVID-19 can be avoided if we follow public health guidelines like staying home and practive physical distancing.</p>
+</div>
+<div id="scenarios" class="section level2">
+<h2>Scenarios of physical distancing</h2>
+<p>Physical distancing and other preventive measures susch as wearing masks are the most important factors for projecting long-range (1 to 4 months) COVID-19 cases and hospital use.</p>
+<p>Public Health Ontario projected 100,000 COVID-19 Ontario deaths with no preventative measures and a lower estimate of 3,000 deaths with preventive measures This wide range of estimates (100,000 to 3,000 deaths) reflects different levels of physical distancing.</p>
+<p>A high level of physical distancing will achieve a <strong>97% reduction in deaths</strong> compared to a scenario of no preventive action (100,000 deaths). The wide range in projections is why we need to monitor and update Ottawa projections to reflect how well we achieve COVID-19 prevention.</p>
+</div>
+<div id="distancing" class="section level2">
+<h2>Physical distancing</h2>
+<div class="more-info-images">
+<figure>
+<img src="/images/Physicalsocialdistancing_webbanner_updated.jpg"
+  alt="2 meters, no groups, stay in your house, stay away from vulnerable people, keep social using video, stay with your family" />
+<figcaption>
+Original source: <a href="https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx">Ottawa Public Health</a>
+</figure>
+</figccaption>
+</div>
+<p>Physical distancing is the reduction of close contacts between people. Close contact is defined as being within two meters of another person. See <a href="https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx">Ottawa Public Health</a> for more information on recommendations.</p>
+<p>If a person who had close contact with 10 people per day before the COVID-19 pandemic now has close contact with three people per day, their physical distancing score is 70 percent. If they have contact with five people per day, their score is 50 percent.</p>
+<p>In these projection models, a 70 percent physical distancing scenario means that on average the people of Ottawa have reduced their close contacts by 70 percent. Some people, like essential workers, cannot reduce their number of close contacts.</p>
+<p>See <a href="/model#distancing">model</a> for a technical discussion about how physical distancing affects COVID-19 spread.</p>
+<div class="more-info-images">
+<figure>
+<img src="/images/176989- infographic No.png"
+  alt="No reduction in physical distanicng. One person infects 5.5 people on day 5 and 406 people on day 30"/>
+<img src="/images/176989- infographic 50 percent.png"
+  alt="50% reduction in physical distanicng. One person infects 1.25 people on day 5 and 15 people on day 30" />
+<img src="/images/176989- infographic 75 percent.png"
+  alt="75% reduction in physical distanicng. One person infects 0.625 people on day 2.5 and 15 people on day 30" />
+<figcaption>
+Original source: <a href="https://www.visualcapitalist.com/the-math-behind-social-distancing/">visualcapitalist.com</a>
+</figure>
+</figccaption>
+</div>
+</div>
+<div id="distancing-effectiveness" class="section level2">
+<h2>Physical distancing effectiveness</h2>
+<p>Physical distancing effectiveness describes how fast COVID-19 spreads in Ottawa compared to if there was no physical distancing. It is a mathematical calculation based on the observed doubling time (growth) of the hospital census for the previous week.</p>
+<p>Physical distancing effectiveness is different from other measures that describe the level of physical distancing, including <a href="https://www.ottawapublichealth.ca/en/reports-research-and-statistics/la-maladie-coronavirus-covid-19.aspx">surveys</a> or <a href="https://www.gstatic.com/covid19/mobility/2020-04-17_CA_Mobility_Report_en.pdf">community movement statistics</a>.</p>
+<p>At the beginning of COVID-19 in Ottawa, new cases (and hospitalizations) doubled every 3 to 4 days. This means that five patients in the hospital on Monday for COVID-19 would increase to 10 patients on Thursday or Friday and then to 20 patients the following week.</p>
+<p>As people in Ottawa began to physical distance, the spread of COVID-19 slowed. Less illness meant fewer patients were admitted to the hospital. There was a slower growth or doubling time of patients in hospitals.</p>
+<p>If there is perfect or 100% physical distancing effectiveness, there would be no COVID-19 spread. A person with COVID-19 illness would not contact people who can become ill and their infection would not spread past their illness. After a few weeks, COVID-19 would be eliminated from Ottawa; no new patients would be admitted to hospital. The hospital census would gradually decrease as currently admitted patients recovered and were discharged.</p>
+<p>Currently, hospital admissions are slower than the initial 3 to 4 days doubling time, but we have not yet eliminated all COVID-19 growth. Physical distancing effectiveness reflects the hospital census that we expect given the observed doubling time.</p>
+<p>Note that there is a lag of several weeks between the level of physical distancing and its effect on slowing the growth of COVID-19 illness. There is a further time difference between the onset of illness and hospitalization. Physical distance effectiveness has the same time lag from the onset of distancing to the benefit of distancing showing results in the calculation of physical distancing effectiveness.</p>
+<p>See <a href="model#distancing">model</a>.</p>
+</div>
