@@ -10,9 +10,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## the plan for adding absenteeism to the website.
 
-1)  First pilot on `index-absentee.hmtl`
+1)  First pilot on `index-absentee.hmtl` . Translations at: \~/github/Ottawa-COVID-Projection/Data/translations/Covid Localization - Home Page.csv
 
-2)  Update the dashboard section:
+2)  Update the dashboard section
+
+3)  Add 3 plots.
+
+4)  Review "Methods" page and "definitions".
+
+5)  Add absenteeism to "comparator" in WW plot.
 
     ### **Current**
 
@@ -24,9 +30,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
     Including **12** acute care patients. **2** ICU patients.
 
-3)  Add 3 plots.
-
-4)  Review "Methods" page and "definitions".
+6)  
 
     ## Title: Observed COVID-19 cases in health care workers in Ottawa by episode date
 
