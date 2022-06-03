@@ -1,0 +1,17 @@
+---
+title: "absenteeism"
+output: html_document
+date: '2022-06-03'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## the plan for adding absenteeism to the website.
+
+1) Add 3 plots to the main page
+
+1.1) 
+
+
