@@ -90,16 +90,22 @@ Definitions,"## Definitions
 PastData_title,## Observed cases & hospital use,## Cas observés et occupation des hôpitaux
 observed_cases,## {#observed-cases},## {#observed-cases}
 observed_cases_text,**Note:** New cases are based on approximate date of episode. Case data in the last 7 days should be considered preliminary as as public health investigators determine earliest onset date.,**Remarque:** Les nouveaux cas sont basés sur la date d’épisode approximative. Les données sur les cas des 7 derniers jours doivent être considérées comme préliminaires puisque ce sont les enquêteurs de la santé publique qui déterminent la date d’apparition des premiers symptômes.
+observed_staff_cases,## Observed COVID-19 cases in health care workers in Ottawa by episode date,
+observed_staff,## {#observed-staff},## {#observed-staff}
+observed_staff_cases_text,**Note:** The health care worker cases (per 1000 people) are the number of hospital staff who reported a positive PCR or RAT for selected hospitals and health care organizations. These are people who notified Occupational Health of their positive result. Based on an estimated reporting rate of 50%. The actual rate per 1000 people 50% lower than reported in this figure.,
+observed_staff_incident,## Cumulative incidence of COVID-19 positive staff,
+observed_incident,## {#observed-incident},## {#observed-incident}
+observed_staff_incident_cases_text,"**Note:** The cumulative health care worker cases (per 1000 people) is the cumulative incidence or total proportion of health care workers who reported a positive PCR or RAT for selected hospitals and health care organizations since December 26, 2021. These are people who notified Occupational Health of their positive result. Based on an estimated reporting rate of 50%. The actual rate per 1000 people 50% lower than reported in this figure.",
 observed_census,## {#observed-census},## {#observed-census}
 PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
 observed_admits,## {#observed-admits},## {#observed-admits}
 ProjectedHospital_title,## Projections,## Projections
 case_projections_text,Short-term COVID-19 projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created.,
 hosp_projections_text,"Short-term COVID-19 hospital projections are presented below. See [Methods](/model) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.",
+staff_projections_text,"**Note:** The health care worker cases (per 1000 people) are the number of hospital staff who reported a positive PCR or RAT for selected hospitals and health care organizations. These are people who notified Occupational Health of their positive result. Based on an estimated reporting rate of 50%. The actual rate per 1000 people 50% lower than reported in this figure.",s
 Projections to {{1}}.,,
-,,
 "Dashed line represents the last date of observed cases."""," ""Projections to {{1}}."" ",
-ProjectedHospital_text,"The hospital census forecast of:
+ProjectedHospital_text,"The hospital census forecast of: 
 
 {{1}} patients on {{2}} is based on the previous week’s growth rate of {{3}}%.
 
@@ -114,6 +120,8 @@ ProjectedHospital_text,"The hospital census forecast of:
 {{6}} patients en {{7}} en fonction d’un retour au niveau de transmission du début de la pandémie en mars 2020."
 case_projections,## {#case-projections},## {#case-projections}
 hosp_projections,## Short-term hospitalization projections {#hospitalization-projections},## {#hospitalization-projections}
+staff_projections,## Short-term COVID-19 positive staff projection in Ottawa,
+staff_rt_projections,## Short-term Rt projections from COVID-19 positive staff projection in Ottawa,
 vent_projections,## {#ventilator-projections},## {#ventilator-projections}
 definitions_link,## {#defintions},## {#defintions}
 break,---,---

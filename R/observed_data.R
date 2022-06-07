@@ -36,6 +36,7 @@ reworked_figure <-
            specified_type = NULL,
            a = NULL,
            b = NULL,
+           interval_num = 40,
            data) {
     # ---------- PRESETS ----------
     tickvals <- floor_date(as_date(data$date), "month")
@@ -968,16 +969,27 @@ reworked_figure <-
       }  
     }
     
+    print(" A B")
+    print(a)
+    print(b)
     if(isTRUE(date_constraint)){
-      if(as.Date(first(data$date)) > as.Date(last(data$date) - 40)){
+      print("DATE CONST")
+      print(as.Date(last(data$date)) - 40)
+      if(as.Date(first(data$date)) > as.Date(last(data$date)) - 40){
         a <- as.Date(first(data$date))
+      }else{
+        print("CONSTRAINT VAL")
+        print(constraint_val)
+        a <- as.Date(last(data$date)) - constraint_val
       }
-      else{
-        a <- as.Date(last(data$date) - constraint_val) 
-      }
+      print(" A B")
+
       b <- as.Date(last(data$date))
+      print(a)
+      print(b)
       p <- layout(p, xaxis = list(range = c(a, b)))
     }
+
     return(p)
     
   }
