@@ -34,8 +34,8 @@ reworked_figure <-
            date_constraint = FALSE,
            constraint_val = NULL,
            specified_type = NULL,
-           lower_lim_range = NULL,
-           upper_lim_range = NULL,
+           low_lim = NULL,
+           up_lim = NULL,
            interval_num = 40,
            data) {
     # ---------- PRESETS ----------
@@ -218,11 +218,11 @@ reworked_figure <-
     
     updated <- sprintf(base_params, menu)
     updated <- eval(parse(text = updated))
-    if(is.null(a)){
-      lower_lim_range <- min(min_val_vec)
+    if(is.null(low_lim)){
+      low_lim <- min(min_val_vec)
     }
-    if(is.null(b)){
-      lower_lim_range <- max(max_val_vec)
+    if(is.null(up_lim)){
+      up_lim <- max(max_val_vec)
     }
     
     if(!is.null(yaxis2)){
@@ -971,16 +971,15 @@ reworked_figure <-
     
 
     if(isTRUE(date_constraint)){
-      print(as.Date(last(data$date)) - 40)
+
       if(as.Date(first(data$date)) > as.Date(last(data$date)) - 40){
         lower_lim_range <- as.Date(first(data$date))
       }else{
-        upper_lim_range <- as.Date(last(data$date)) - constraint_val
+
+        lower_lim_range <- as.Date(last(data$date)) - constraint_val
       }
 
       upper_lim_range <- as.Date(last(data$date))
-      print(lower_lim_range)
-      print(upper_lim_range)
       p <- layout(p, xaxis = list(range = c(lower_lim_range, upper_lim_range)))
     }
 
