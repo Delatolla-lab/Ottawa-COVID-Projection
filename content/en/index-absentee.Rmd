@@ -63,18 +63,11 @@ ott_observed <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observ
 ott_observed_staff <- ott_observed %>% mutate(date = as.Date(date)) %>% full_join(covid_data, by= "date")
 
 #Loading health care worker staff two week Covid projections.
-staff_projections <- load(file.path(getwd(), "../../Data/Historic Projections/historic_cases_projections_twoweekCovidEmployeeData.RData"))
 
-# Transforming the Covid projections of the health care workers and the confidence intervals into rate per 1000 population
-staff_cov_projections<- cases_forecast[[1]] %>% filter(variable == "reported_cases") %>% mutate(median = (median/7019)*1000)
-staff_cov_projections<- cases_forecast[[1]] %>% filter(variable == "reported_cases") %>% mutate(upper_75 = (upper_75/7019)*1000)
-staff_cov_projections<- cases_forecast[[1]] %>% filter(variable == "reported_cases") %>% mutate(lower_75 = (lower_75/7019)*1000)
+cov_proj <- load("../../Data/Historic Projections/projections_twoweekCovidEmployeeData.RData")
 
-# Transforming the Rt projections of the health care workers and the confidence intervals into rate per 1000 population
-staff_rt_projection<- cases_forecast[[1]] %>% filter(variable == "R") %>% mutate(median = (median/7019)*1000)
-staff_rt_projection<- cases_forecast[[1]] %>% filter(variable == "R") %>% mutate(upper_75 = (upper_75/7019)*1000)
-staff_rt_projection<- cases_forecast[[1]] %>% filter(variable == "R") %>% mutate(lower_75 = (lower_75/7019)*1000)
 
+rt_proj <- load("../../Data/Historic Projections/rt_projections_twoweekCovidEmployeeData.RData")
 
 load("../../Data/short_term_forecast.RData")
 load("../../Data/short_term_hosp_proj.RData")
@@ -259,8 +252,6 @@ past_hospital_text <- insert_translation(localization_data, lang, "PastHospital_
 
 observed_cases <- insert_translation(localization_data, lang, "observed_cases")
 
-source("../../R/localization.R")
-localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid Localization - Home Page.csv"))
 
 observed_staff <- insert_translation(localization_data, lang, "observed_staff")
 
