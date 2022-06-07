@@ -34,8 +34,8 @@ reworked_figure <-
            date_constraint = FALSE,
            constraint_val = NULL,
            specified_type = NULL,
-           a = NULL,
-           b = NULL,
+           lower_lim_range = NULL,
+           upper_lim_range = NULL,
            interval_num = 40,
            data) {
     # ---------- PRESETS ----------
@@ -219,10 +219,10 @@ reworked_figure <-
     updated <- sprintf(base_params, menu)
     updated <- eval(parse(text = updated))
     if(is.null(a)){
-      a <- min(min_val_vec)
+      lower_lim_range <- min(min_val_vec)
     }
     if(is.null(b)){
-      a <- max(max_val_vec)
+      lower_lim_range <- max(max_val_vec)
     }
     
     if(!is.null(yaxis2)){
@@ -969,25 +969,19 @@ reworked_figure <-
       }  
     }
     
-    print(" A B")
-    print(a)
-    print(b)
+
     if(isTRUE(date_constraint)){
-      print("DATE CONST")
       print(as.Date(last(data$date)) - 40)
       if(as.Date(first(data$date)) > as.Date(last(data$date)) - 40){
-        a <- as.Date(first(data$date))
+        lower_lim_range <- as.Date(first(data$date))
       }else{
-        print("CONSTRAINT VAL")
-        print(constraint_val)
-        a <- as.Date(last(data$date)) - constraint_val
+        upper_lim_range <- as.Date(last(data$date)) - constraint_val
       }
-      print(" A B")
 
-      b <- as.Date(last(data$date))
-      print(a)
-      print(b)
-      p <- layout(p, xaxis = list(range = c(a, b)))
+      upper_lim_range <- as.Date(last(data$date))
+      print(lower_lim_range)
+      print(upper_lim_range)
+      p <- layout(p, xaxis = list(range = c(lower_lim_range, upper_lim_range)))
     }
 
     return(p)
