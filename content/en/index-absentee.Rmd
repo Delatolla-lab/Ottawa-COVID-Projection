@@ -4,6 +4,7 @@ params:
   lang: en
 ---
 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 lang <- params$lang
@@ -31,6 +32,7 @@ the_same <- insert_translation(localization_data, lang, "the_same")
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 # libraries
+library(rmarkdown)
 library(plotly)
 library(tidyverse)
 library(jsonlite)
@@ -64,8 +66,12 @@ ott_observed_staff <- ott_observed %>% mutate(date = as.Date(date)) %>% full_joi
 
 #Loading health care worker staff two week Covid projections.
 
+
+
 cov_proj <- load("../../Data/Historic Projections/projections_twoweekCovidEmployeeData.RData")
 
+summary_proj <- load("../../Data/Historic Projections/summary_twoweekCovidEmployeeData.RData")
+summary_estm <- load("../../Data/Historic Projections/summaryestimates_twoweekCovidEmployeeData.RData")
 
 rt_proj <- load("../../Data/Historic Projections/rt_projections_twoweekCovidEmployeeData.RData")
 
@@ -107,7 +113,7 @@ more_less_census = switch(
   more
 )
 
-dt <- ott_short_forecast[[3]][[5]][[1]]
+dt <- summary_stats[[5]][[1]]
 dt_label = switch( 
   (sign(dt) + 2),
   "Case halving time:",
@@ -215,7 +221,7 @@ rolling_avg_col <- "rgb(226, 127, 88)"
 ```{r, results='hold', echo=FALSE, comment=NA}
 line_break <- insert_translation(localization_data, lang, "break")
 dashboard <- insert_translation(localization_data, lang, "Dashboard",
-                                c(as.character(tail(ott_observed$date, n=1)),
+                                c(as.character(tail(covid_data$date, n=1)),
                                   dt_label,
                                   dt_abs,
                                   #last(na.omit(ott_observed$observed_active_cases)),
@@ -253,7 +259,7 @@ past_hospital_text <- insert_translation(localization_data, lang, "PastHospital_
 observed_cases <- insert_translation(localization_data, lang, "observed_cases")
 
 
-observed_staff <- insert_translation(localization_data, lang, "observed_staff")
+#observed_staff <- insert_translation(localization_data, lang, "observed_staff")
 
 observed_cases_text <- insert_translation(localization_data, lang, "observed_cases_text")
 
@@ -261,7 +267,7 @@ observed_staff_cases <- insert_translation(localization_data, lang, "observed_st
 
 observed_staff_cases_text <- insert_translation(localization_data, lang, "observed_staff_cases_text")
 
-observed_incident <- insert_translation(localization_data, lang, "observed_incident")
+#observed_incident <- insert_translation(localization_data, lang, "observed_incident")
 
 observed_staff_incident <- insert_translation(localization_data, lang, "observed_staff_incident")
 
@@ -281,13 +287,15 @@ case_projections_text <- insert_translation(localization_data, lang, "case_proje
 hosp_projections_text <- insert_translation(localization_data, lang, "hosp_projections_text",
                                             c(max(ott_projections$date, na.rm = TRUE)))
 
+staff_projections <- insert_translation(localization_data, lang, "staff_projections")
+
 staff_projections_text <- insert_translation(localization_data, lang, "hosp_projections_text")
 
 staff_rt_projections <- insert_translation(localization_data, lang, "staff_rt_projections")
 
 hosp_projections <- insert_translation(localization_data, lang, "hosp_projections")
 
-staff_projections <- insert_translation(localization_data, lang, "staff_projections")
+
 
 
 ```
@@ -330,7 +338,6 @@ reworked_figure(
     data = ott_observed_staff, date_constraint = TRUE, constraint_val = constrain_val
   )
 ```
-
 
 `r observed_staff_cases_text`
 
@@ -407,26 +414,34 @@ ICU_p_acute_care
 #short_term_plot(projections = ott_projections, obs_data = ott_observed, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Short-term daily COVID-19 cases in Ottawa by reported date")
 ```
 
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Short-term hospital census projections in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
 ```
 
+
 `r line_break`
+
 `r staff_projections`
+
+`r line_break`
+
 `r staff_projections_text`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 short_term_plot(projections = staff_cov_projections, obs_data = covid_data, obs_column = "covidPosAbs_pop", forecast_type = "reported_cases", ylab = "Health care worker cases (per 1000 people)", title = "Short-term COVID-19 positive staff projection in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
 ```
+
 `r line_break`
+
 `r staff_rt_projections`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/epinow_functions.R")
 # visualize epinow forecast
-short_term_plot(projections = staff_rt_projection, obs_data = covid_data, obs_column = "covidPosAbs_pop", forecast_type = "R", ylab = "Reproduction number of Health care worker cases (per 1000 people)", title = "Short-term COVID-19 positive staff projection in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
+short_term_plot(projections = staff_rt_projection, obs_data = covid_data, obs_column = "covidPosAbs_pop", forecast_type = "R", ylab = "Rt of Health care worker cases (per 1000 people)", title = "Short-term COVID-19 positive staff projection in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
 ```
 
 `r def_link`
