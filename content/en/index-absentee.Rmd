@@ -66,7 +66,9 @@ ott_observed_staff <- ott_observed %>% mutate(date = as.Date(date)) %>% full_joi
 
 #Loading health care worker staff two week Covid projections.
 
-
+#summary_estimates <- cases_forecast[[2]]
+#summary_estimates <- list(summary_estimates)
+#save(summary_estimates, file = "../../Data/Historic Projections/summaryestimates_twoweekCovidEmployeeData.RData")
 
 cov_proj <- load("../../Data/Historic Projections/projections_twoweekCovidEmployeeData.RData")
 
@@ -121,6 +123,12 @@ dt_label = switch(
   "Case doubling time:")
 
 dt_abs <- abs(dt)
+
+dt_sts <- summary_stats[[2]][[1]]
+dt_label_sts = "Rt:"
+
+
+dt_sts_abs <- abs(dt_sts)
 
 ## Observed new cases by episode date (excluding past 7 days)
 ott_observed_episodes <- as.data.frame(ott_observed[1:(nrow(ott_observed) - 6),])
@@ -224,6 +232,8 @@ dashboard <- insert_translation(localization_data, lang, "Dashboard",
                                 c(as.character(tail(covid_data$date, n=1)),
                                   dt_label,
                                   dt_abs,
+                                  dt_label_sts,
+                                  dt_sts_abs,
                                   #last(na.omit(ott_observed$observed_active_cases)),
                                   last(na.omit(ott_observed$observed_census_ICU_p_acute_care)),
                                   last(na.omit(ott_observed$observed_census_acute_care)),

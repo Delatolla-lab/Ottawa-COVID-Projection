@@ -27,11 +27,13 @@ Data to {{1}}
 
 ### Current
 
-{{2}} **{{3}}** days
+{{2}} **{{3}}** days (based on health care worker absenteeism due to COVID-19)
 
-**{{4}}** confirmed COVID-19 patients in hospital.
+{{4}} **{{5}}** based on health care worker absenteeism due to COVID-19.
+
+**{{6}}** confirmed COVID-19 patients in hospital.
  
-Including **{{5}}** acute care patients. **{{6}}** ICU patients.","# Tableau de bord
+Including **{{7}}** acute care patients. **{{8}}** ICU patients.","# Tableau de bord
 
 Données en date du {{1}}
 
@@ -91,10 +93,8 @@ PastData_title,## Observed cases & hospital use,## Cas observés et occupation d
 observed_cases,## {#observed-cases},## {#observed-cases}
 observed_cases_text,**Note:** New cases are based on approximate date of episode. Case data in the last 7 days should be considered preliminary as as public health investigators determine earliest onset date.,**Remarque:** Les nouveaux cas sont basés sur la date d’épisode approximative. Les données sur les cas des 7 derniers jours doivent être considérées comme préliminaires puisque ce sont les enquêteurs de la santé publique qui déterminent la date d’apparition des premiers symptômes.
 observed_staff_cases,## Observed COVID-19 cases in health care workers in Ottawa by episode date,
-observed_staff,## {#observed-staff},## {#observed-staff}
 observed_staff_cases_text,**Note:** The health care worker cases (per 1000 people) are the number of hospital staff who reported a positive PCR or RAT for selected hospitals and health care organizations. These are people who notified Occupational Health of their positive result. Based on an estimated reporting rate of 50%. The actual rate per 1000 people 50% lower than reported in this figure.,
 observed_staff_incident,## Cumulative incidence of COVID-19 positive staff,
-observed_incident,## {#observed-incident},## {#observed-incident}
 observed_staff_incident_cases_text,"**Note:** The cumulative health care worker cases (per 1000 people) is the cumulative incidence or total proportion of health care workers who reported a positive PCR or RAT for selected hospitals and health care organizations since December 26, 2021. These are people who notified Occupational Health of their positive result. Based on an estimated reporting rate of 50%. The actual rate per 1000 people 50% lower than reported in this figure.",
 observed_census,## {#observed-census},## {#observed-census}
 PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
