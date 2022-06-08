@@ -35,13 +35,15 @@ Data to {{1}}
 
 ### Current
 
-{{2}} **{{3}}** days (based on health care worker absenteeism due to COVID-19)
+{{2}} **{{3}}** days *
 
-{{4}} **{{5}}** based on health care worker absenteeism due to COVID-19.
+{{4}} **{{5}}** *
 
 **{{6}}** confirmed COVID-19 patients in hospital.
  
-Including **{{7}}** acute care patients. **{{8}}** ICU patients.","# Tableau de bord
+Including **{{7}}** acute care patients. **{{8}}** ICU patients.
+
+\* Based on health care worker absenteeism due to COVID-19.","# Tableau de bord
 
 Données en date du {{1}}
 
@@ -153,7 +155,7 @@ PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecti
 observed_admits,## {#observed-admits},## {#observed-admits}
 ProjectedHospital_title,## Projections,## Projections
 case_projections_text,Short-term COVID-19 projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created.,Les projections COVID-19 à court terme sont présentées ci-dessous. Voir [plus](/more) pour une discussion sur l'interprétation du modèle et [Méthodes](/model) pour savoir comment les projections ont été créées.
-hosp_projections_text,"Short-term COVID-19 hospital projections are presented below. See [Methods](/model) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.","Les projections hospitalières COVID-19 à court terme sont présentées ci-dessous. Voir [Méthodes](/model) pour savoir comment les projections ont été créées. Les projections à court terme peuvent prendre des directions différentes lorsque les schémas de transmission du COVID-19 dans la communauté changent. Par exemple, le nombre d'hospitalizations prévu peut être sous-estimé pendant les périodes de réouverture rapide."
+hosp_projections_text,"Projection of hospital census in Ottawa are presented below. See [Methods](/model) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.","Les projections hospitalières COVID-19 à court terme sont présentées ci-dessous. Voir [Méthodes](/model) pour savoir comment les projections ont été créées. Les projections à court terme peuvent prendre des directions différentes lorsque les schémas de transmission du COVID-19 dans la communauté changent. Par exemple, le nombre d'hospitalizations prévu peut être sous-estimé pendant les périodes de réouverture rapide."
 staff_projections_text,"**Note:** The health care worker cases (per 1000 people) are the number of hospital staff who reported a positive PCR or RAT for selected hospitals and health care organizations. These are people who notified Occupational Health of their positive result, based on an estimated reporting rate of 50%. The actual reporting rate per 1000 people of 50% may be lower than reported in this figure.","**Remarque:** Les cas de travailleurs de la santé ( par 1000 personnes) sont le nombre de membres du personnel hospitalier qui ont rapporté un RCP ou un TAR positif pour les hôpitaux et les organisations de soins de santé sélectionnés. Il s'agit de personnes qui ont informé la médecine du travail de leur résultat positif, basé sur un taux de déclaration estimé à 50%. Le taux de déclaration réel de 50 % pour 1000 personnes peut être inférieur à celui indiqué dans cette figure."
 Projections to {{1}}.,,
 "Dashed line represents the last date of observed cases.""","""Projections to {{1}}.""","""Projections à {{1}}."""
@@ -171,9 +173,9 @@ ProjectedHospital_text,"The hospital census forecast of:
 
 {{6}} patients en {{7}} en fonction d’un retour au niveau de transmission du début de la pandémie en mars 2020."
 case_projections,## {#case-projections},## {#case-projections}
-hosp_projections,## Short-term hospitalization projections {#hospitalization-projections},## Projections d'hospitalisation à court terme {#hospitalization-projections}
-staff_projections,## Short-term COVID-19-positive staff projection in Ottawa,## Projection à court terme de personnel positif au COVID-19 à Ottawa
-staff_rt_projections,## Short-term Rt projections from COVID-19-positive staff projection in Ottawa,## Projections à court terme de Rt à partir de la projection du personnel positif au COVID-19 à Ottawa
+hosp_projections,## Projection of hospital census in Ottawa {#hospitalization-projections},## Projections d'hospitalisation à court terme {#hospitalization-projections}
+staff_projections,## Projection of COVID-19 positive health care workers in Ottawa,## Projection à court terme de personnel positif au COVID-19 à Ottawa
+staff_rt_projections,## Rt Projection of COVID-19 positive health care workers in Ottawa,## Projections à court terme de Rt à partir de la projection du personnel positif au COVID-19 à Ottawa
 vent_projections,## {#ventilator-projections},## {#ventilator-projections}
 definitions_link,## {#defintions},## {#defintions}
 break,---,---
@@ -195,7 +197,8 @@ Contact,"**Media Contact:** Michaela Schreiter, Media Relations Officer, The Ott
 
 **Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).","**Personne-ressource pour les médias:** Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: [mschreiter@toh.ca](mailto:mschreiter@toh.ca) Téléphone: 613-222-7674
 
-**Personnes-ressources scientifiques:** Mathew Thomson [matthomson@ohri.ca](mailto:matthomson@ohri.ca)
+**Personnes-ressources scientifiques:** Mathew Thomson [matthomson@ohri.ca](mailto:matthomson@ohri.ca)
+
 
 **Remerciements pour le site Web et le contenu:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
 
