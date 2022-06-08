@@ -28,7 +28,6 @@ the_same <- insert_translation(localization_data, lang, "the_same")
 ```
 
 `r intro`
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 # libraries
@@ -56,7 +55,7 @@ source("../../R/epinow_functions.R")
 
 # Loading the covid data of the health care workers in Ottawa (rate of Covid cases per 1000 population)
 
-staff_cov_data<-load("../../Data/Observed data/cumulative_covid_absenteeism.RData")
+staff_cov_data<-load("../../Data/Observed data/cumulative_covid_absenteeism_v1.RData")
 
 
 # data
@@ -64,16 +63,16 @@ ott_observed <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observ
 
 ott_observed_staff <- ott_observed %>% mutate(date = as.Date(date)) %>% full_join(covid_data, by= "date")
 
+
+
 #Loading health care worker staff two week Covid projections.
 
-#summary_estimates <- cases_forecast[[2]]
-#summary_estimates <- list(summary_estimates)
-#save(summary_estimates, file = "../../Data/Historic Projections/summaryestimates_twoweekCovidEmployeeData.RData")
 
-cov_proj <- load("../../Data/Historic Projections/projections_twoweekCovidEmployeeData.RData")
+staff_cov_projections <- load("../../Data/Historic Projections/Projecions_rev_twoweekCovidEmployeeData.RData")
 
 summary_proj <- load("../../Data/Historic Projections/summary_twoweekCovidEmployeeData.RData")
 summary_estm <- load("../../Data/Historic Projections/summaryestimates_twoweekCovidEmployeeData.RData")
+
 
 rt_proj <- load("../../Data/Historic Projections/rt_projections_twoweekCovidEmployeeData.RData")
 
@@ -358,7 +357,7 @@ reworked_figure(
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualize current daily cases
 source("../../R/observed_data.R")
-observed_new_episodes <- list(type = "avg_data", y_column = "cummcovidPosAbs_pop", name = "Cumulative health care worker cases by episode date", color = rolling_avg_col, showlegend = TRUE, width = 4)
+observed_new_episodes <- list(type = "avg_data", y_column = "cummCovidPosAbs_pop", name = "Cumulative health care worker cases by episode date", color = rolling_avg_col, showlegend = TRUE, width = 4)
 
 reworked_figure(
     xaxis = "date",
@@ -441,7 +440,7 @@ short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
-short_term_plot(projections = staff_cov_projections, obs_data = covid_data, obs_column = "covidPosAbs_pop", forecast_type = "reported_cases", ylab = "Health care worker cases (per 1000 people)", title = "Short-term COVID-19 positive staff projection in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
+short_term_plot(projections = staff_cov_projections_2, obs_data = covid_data, obs_column = "covidPosAbs_pop", forecast_type = "reported_cases", ylab = "Health care worker cases (per 1000 people)", title = "Short-term COVID-19 positive staff projection in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
 ```
 
 `r line_break`
@@ -451,7 +450,7 @@ short_term_plot(projections = staff_cov_projections, obs_data = covid_data, obs_
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/epinow_functions.R")
 # visualize epinow forecast
-short_term_plot(projections = staff_rt_projection, obs_data = covid_data, obs_column = "covidPosAbs_pop", forecast_type = "R", ylab = "Rt of Health care worker cases (per 1000 people)", title = "Short-term COVID-19 positive staff projection in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
+short_term_plot(projections = staff_cov_projections_3, obs_data = covid_data, obs_column = "covidPosAbs_pop", forecast_type = "R", ylab = "Rt of Health care worker cases (per 1000 people)", title = "Short-term COVID-19 positive staff projection in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
 ```
 
 `r def_link`
