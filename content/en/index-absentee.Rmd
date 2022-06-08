@@ -426,7 +426,8 @@ ICU_p_acute_care
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
-short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Short-term hospital census projections in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
+interval_num <- tail(as.Date(hosp_proj$date), 2)[[1]] - as.Date("2021-12-01")
+short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Short-term hospital census projections in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month", interval_num = interval_num)
 ```
 
 
@@ -440,7 +441,7 @@ short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
-short_term_plot(projections = staff_cov_projections_2, obs_data = covid_data, obs_column = "covidPosAbs_pop", forecast_type = "reported_cases", ylab = "Health care worker cases (per 1000 people)", title = "Short-term COVID-19 positive staff projection in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
+short_term_plot(projections = staff_cov_projections_2, obs_data = covid_data, obs_column = "covidPosAbs_pop", forecast_type = "reported_cases", ylab = "Health care worker cases (per 1000 people)", title = "Short-term COVID-19 positive staff projection in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month", interval_num = interval_num)
 ```
 
 `r line_break`
@@ -450,7 +451,7 @@ short_term_plot(projections = staff_cov_projections_2, obs_data = covid_data, ob
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/epinow_functions.R")
 # visualize epinow forecast
-short_term_plot(projections = staff_cov_projections_3, obs_data = covid_data, obs_column = "covidPosAbs_pop", forecast_type = "R", ylab = "Rt of Health care worker cases (per 1000 people)", title = "Short-term COVID-19 positive staff projection in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month")
+short_term_plot(projections = staff_cov_projections_3, obs_data = covid_data, obs_column = "covidPosAbs_pop", forecast_type = "R", ylab = "Rt of Health care worker cases (per 1000 people)", title = "Short-term COVID-19 positive staff projection in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month", interval_num = interval_num)
 ```
 
 `r def_link`
