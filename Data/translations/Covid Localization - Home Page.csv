@@ -11,13 +11,9 @@ Click here to access the COVID-19 Daily Dashboard created by Ottawa Public Healt
 
 For English click [here](https://613covid.ca/)
 
-Ce site web présente les prévisions du nombre d'hospitalisations de COVID-19 et de la récupération de SARS-CoV-2 dans les eaux usées.
-
-
+Ce site web présente les prévisions du nombre d'hospitalisations de COVID-19 et de la récupération de SARS-CoV-2 dans les eaux usées
 
 Le site web est optimisé pour une utilisation sur ordinateur de bureau. Pour les utilisateurs mobiles, il est recommandé de le visualiser en mode paysage.
-
-
 
 Cliquez ici pour accéder au tableau de bord quotidien COVID-19 créé par Santé publique Ottawa. Le tableau de bord de Santé publique Ottawa fournit des données actualisées sur le COVID-19 qui éclairent les projections présentées sur ce site web."
 WWIntro,Wastewater plots last updated: {{1}},Dernière mise à jour des graphiques sur les eaux usées : {{1}}
@@ -49,19 +45,15 @@ Données en date du {{1}}
 
 ### Situation actuelle
 
-{{2}} **{{3}} jours (sur la base de l'absentéisme du personnel de santé dû au COVID-19)
+{{2}} **{{3}}** jours *
 
-
-
-{{4}} **{5}}** sur la base de l'absentéisme du personnel de santé dû au COVID-19.
-
-
+{{4}} **{5}}** *
 
 **{6}}** patients confirmés atteints de COVID-19 à l'hôpital.
  
+Y compris les **{7}}** patients en soins aigus. **{8}}** patients en soins intensifs.
 
-
-Y compris les **{7}}** patients en soins aigus. **{8}}** patients en soins intensifs."
+\* Basé sur l'absentéisme du personnel de santé dû au COVID-19."
 ShortRangeForecast,"### Short-range forecast
 
 **{{1}}** active cases in the following week, reflecting a current {{2}} of **{{3}} days** (daily growth of {{4}}%).
@@ -74,15 +66,9 @@ ShortRangeForecast,"### Short-range forecast
 
 **{{1}}** cas actifs dans la semaine suivante, reflétant un {{2}} actuel de **{{3}} jours** (croissance quotidienne de {{4}}%).
 
-
-
 **{{5}}** nouveaux cas* dans la semaine suivante, reflétant un {{6} actuel de **{{7}} jours** (croissance quotidienne de {{8}}%).
 
-
-
 **{{9}}** patients hospitalisés la semaine suivante, reflétant un {{10}} actuel de **{{{11}} jours** (croissance quotidienne de {{12}}%).
-
-
 
 *Les nouveaux cas sont basés sur la date approximative de l'épisode. Les données sur les 7 derniers jours ne sont pas prises en compte dans les calculs de croissance car les enquêteurs de la santé publique déterminent la date d'apparition la plus précoce."
 LongRangeForecast,"### Long-range forecast
@@ -112,51 +98,35 @@ Definitions,"## Definitions
 
 > **Le recensement des hospitalisations** correspond au nombre de patients recensés dans l’ensemble des hôpitaux d’Ottawa à minuit, le jour précédent. Les dénombrements de Santé publique Ottawa et les dénombrements des hôpitaux rapportés par d'autres sources peuvent être différents pour les raisons suivantes :
 
-
-
 > * Les comptes des hôpitaux provenant d'autres sources peuvent inclure des personnes qui ne résident pas à Ottawa ;
-
-
 
 > * L'interprétation de la clairance peut varier entre les hôpitaux et Santé publique Ottawa ;
 
-
-
 > L'interprétation des termes "" traité pour le COVID-19 "" et "" traité principalement pour le COVID-19 "" peut varier légèrement ; et
-
-
 
 > La charge de travail de Santé publique Ottawa peut retarder l'élimination des hospitalisations de préférence à la déclaration de nouvelles hospitalisations par Santé publique Ottawa lorsque les volumes sont élevés.
 
-
-
 > **Transmission** désigne le risque qu'une personne soit infectée lorsqu'elle entre en contact avec une personne atteinte du COVID-19.
-
-
 
 > **Temps de doublement** désigne le temps qu'il faut pour que le nombre de patients hospitalisés double. Inversement, le **temps de division** désigne le temps nécessaire pour que le nombre de patients hospitalisés diminue de moitié.
 
-
-
 > **La croissance journalière** est le taux de variation de l'hospitalisation de jour en jour.
-
-
 
 ---"
 PastData_title,## Observed cases & hospital use,## Cas observés et occupation des hôpitaux
 observed_cases,## {#observed-cases},## {#observed-cases}
 observed_cases_text,**Note:** New cases are based on approximate date of episode. Case data in the last 7 days should be considered preliminary as as public health investigators determine earliest onset date.,**Remarque:** Les nouveaux cas sont basés sur la date d’épisode approximative. Les données sur les cas des 7 derniers jours doivent être considérées comme préliminaires puisque ce sont les enquêteurs de la santé publique qui déterminent la date d’apparition des premiers symptômes.
 observed_staff_cases,## Observed COVID-19 cases in health care workers in Ottawa by episode date,## Cas de COVID-19 observés chez les travailleurs de la santé à Ottawa par date d'épisode
-observed_staff_cases_text,"**Note:** The health care worker cases (per 1000 people) are the number of hospital staff who reported a positive PCR or RAT for selected hospitals and health care organizations. These are people who notified Occupational Health of their positive result. Observed COVID-19 cases are adjusted for under-reporting for staff working from home and not providing direct patient care.","**Remarque:** Les cas de travailleurs de la santé ( par 1000 personnes) sont le nombre de membres du personnel hospitalier qui ont rapporté un RCP ou un TAR positif pour les hôpitaux et les organisations de soins de santé sélectionnés. Il s'agit de personnes qui ont informé la médecine du travail de leur résultat positif, basé sur un taux de déclaration estimé à 50%. Le taux de déclaration réel de 50 % pour 1000 personnes peut être inférieur à celui indiqué dans cette figure."
+observed_staff_cases_text,**Note:** The health care worker cases (per 1000 people) are the number of hospital staff who reported a positive PCR or RAT for selected hospitals and health care organizations. These are people who notified Occupational Health of their positive result. Observed COVID-19 cases are adjusted for under-reporting for staff working from home and not providing direct patient care.,**Remarque:** Les cas de travailleurs de la santé ( par 1000 personnes) sont le nombre de membres du personnel hospitalier qui ont rapporté un RCP ou un TAR positif pour les hôpitaux et les organisations de soins de santé sélectionnés. Il s'agit de personnes qui ont informé la médecine du travail de leur résultat positif. Les cas COVID-19 observés sont ajustés pour tenir compte de la sous-déclaration du personnel travaillant à domicile et ne fournissant pas de soins directs aux patients.
 observed_staff_incident,## Cumulative incidence of COVID-19 positive staff,## Incidence cumulée du personnel positif au COVID-19
-observed_staff_incident_cases_text,"**Note:** The cumulative health care worker cases (per 1000 people) is the cumulative incidence or total proportion of health care workers who reported a positive PCR or RAT for selected hospitals and health care organizations since December 26, 2021. These are people who notified Occupational Health of their positive result. Observed COVID-19 cases are adjusted for under-reporting for staff working from home and not providing direct patient care.","**Note:** Les cas cumulés de travailleurs de la santé ( par 1000 personnes) correspondent à l'incidence cumulée ou à la proportion totale de travailleurs de la santé ayant déclaré une RCP ou un TAR positif pour certains hôpitaux et organismes de santé depuis le 26 décembre 2021. Il s'agit de personnes qui ont informé la médecine du travail de leur résultat positif, basé sur un taux de déclaration estimé à 50%. Le taux de déclaration réel de 50 % pour 1000 personnes peut être inférieur à celui indiqué dans cette figure."
+observed_staff_incident_cases_text,"**Note:** The cumulative health care worker cases (per 1000 people) is the cumulative incidence or total proportion of health care workers who reported a positive PCR or RAT for selected hospitals and health care organizations since December 26, 2021. These are people who notified Occupational Health of their positive result. Observed COVID-19 cases are adjusted for under-reporting for staff working from home and not providing direct patient care.",**Note:** Les cas cumulés de travailleurs de la santé ( par 1000 personnes) correspondent à l'incidence cumulée ou à la proportion totale de travailleurs de la santé ayant déclaré une RCP ou un TAR positif pour certains hôpitaux et organismes de santé depuis le 26 décembre 2021. Il s'agit de personnes qui ont informé la médecine du travail de leur résultat positif. Les cas COVID-19 observés sont ajustés pour tenir compte de la sous-déclaration du personnel travaillant à domicile et ne fournissant pas de soins directs aux patients.
 observed_census,## {#observed-census},## {#observed-census}
 PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
 observed_admits,## {#observed-admits},## {#observed-admits}
 ProjectedHospital_title,## Projections,## Projections
 case_projections_text,Short-term COVID-19 projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created.,Les projections COVID-19 à court terme sont présentées ci-dessous. Voir [plus](/more) pour une discussion sur l'interprétation du modèle et [Méthodes](/model) pour savoir comment les projections ont été créées.
 hosp_projections_text,"Projection of hospital census in Ottawa are presented below. See [Methods](/model) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.","Les projections hospitalières COVID-19 à court terme sont présentées ci-dessous. Voir [Méthodes](/model) pour savoir comment les projections ont été créées. Les projections à court terme peuvent prendre des directions différentes lorsque les schémas de transmission du COVID-19 dans la communauté changent. Par exemple, le nombre d'hospitalizations prévu peut être sous-estimé pendant les périodes de réouverture rapide."
-staff_projections_text,"**Note:** The health care worker cases (per 1000 people) are the number of hospital staff who reported a positive PCR or RAT for selected hospitals and health care organizations. These are people who notified Occupational Health of their positive result. Observed COVID-19 cases are adjusted for under-reporting for staff working from home and not providing direct patient care.","**Remarque:** Les cas de travailleurs de la santé ( par 1000 personnes) sont le nombre de membres du personnel hospitalier qui ont rapporté un RCP ou un TAR positif pour les hôpitaux et les organisations de soins de santé sélectionnés. Il s'agit de personnes qui ont informé la médecine du travail de leur résultat positif, basé sur un taux de déclaration estimé à 50%. Le taux de déclaration réel de 50 % pour 1000 personnes peut être inférieur à celui indiqué dans cette figure."
+staff_projections_text,**Note:** The health care worker cases (per 1000 people) are the number of hospital staff who reported a positive PCR or RAT for selected hospitals and health care organizations. These are people who notified Occupational Health of their positive result. Observed COVID-19 cases are adjusted for under-reporting for staff working from home and not providing direct patient care.,**Remarque:** Les cas de travailleurs de la santé ( par 1000 personnes) sont le nombre de membres du personnel hospitalier qui ont rapporté un RCP ou un TAR positif pour les hôpitaux et les organisations de soins de santé sélectionnés. Il s'agit de personnes qui ont informé la médecine du travail de leur résultat positif. Les cas COVID-19 observés sont ajustés pour tenir compte de la sous-déclaration du personnel travaillant à domicile et ne fournissant pas de soins directs aux patients.
 Projections to {{1}}.,,
 "Dashed line represents the last date of observed cases.""","""Projections to {{1}}.""","""Projections à {{1}}."""
 ProjectedHospital_text,"The hospital census forecast of: 
@@ -173,9 +143,9 @@ ProjectedHospital_text,"The hospital census forecast of:
 
 {{6}} patients en {{7}} en fonction d’un retour au niveau de transmission du début de la pandémie en mars 2020."
 case_projections,## {#case-projections},## {#case-projections}
-hosp_projections,## Projection of hospital census in Ottawa {#hospitalization-projections},## Projections d'hospitalisation à court terme {#hospitalization-projections}
-staff_projections,## Projection of COVID-19 positive health care workers in Ottawa,## Projection à court terme de personnel positif au COVID-19 à Ottawa
-staff_rt_projections,## Rt Projection of COVID-19 positive health care workers in Ottawa,## Projections à court terme de Rt à partir de la projection du personnel positif au COVID-19 à Ottawa
+hosp_projections,## Projection of hospital census in Ottawa {#hospitalization-projections},## Projection du recensement des hôpitaux à Ottawa {#hospitalization-projections}
+staff_projections,## Projection of COVID-19 positive health care workers in Ottawa,## Projection des travailleurs de la santé positifs au COVID-19 à Ottawa
+staff_rt_projections,## Rt Projection of COVID-19 positive health care workers in Ottawa,## Projection du Rt des travailleurs de la santé positifs au COVID-19 à Ottawa
 vent_projections,## {#ventilator-projections},## {#ventilator-projections}
 definitions_link,## {#defintions},## {#defintions}
 break,---,---
@@ -198,7 +168,6 @@ Contact,"**Media Contact:** Michaela Schreiter, Media Relations Officer, The Ott
 **Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).","**Personne-ressource pour les médias:** Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: [mschreiter@toh.ca](mailto:mschreiter@toh.ca) Téléphone: 613-222-7674
 
 **Personnes-ressources scientifiques:** Mathew Thomson [matthomson@ohri.ca](mailto:matthomson@ohri.ca)
-
 
 **Remerciements pour le site Web et le contenu:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
 
@@ -249,35 +218,19 @@ Les projections s’utilisent principalement de deux manières :
 
 Les projections à court terme présentent un degré modéré de variation entre les méthodes de modélisation. Des pays comme [l'Allemagne et la Pologne] (https://kitmetricslab.github.io/forecasthub/forecast) et les [États-Unis] (https://viz.covid19forecasthub.org) abordent la variation des modèles par l'agrégation et les centres d'ensemble qui combinent les projections de différentes équipes scientifiques et approches de modélisation. L'approche utilisée à 613covid.ca se retrouve couramment dans les centres d'ensemble. Typiquement, l'approche utilisée à 613covid.ca génère des projets qui se situent au milieu ou un peu plus haut que la projection d'ensemble moyenne pendant une augmentation de la transmission du COVID-19 ou un peu plus bas que la moyenne pendant une diminution de la transmission du COVID-19. 
 
-
-
 Les projections à long terme sont moins précises que les projections à court terme en raison de l'évolution des stratégies de contrôle du COVID-19. Les prévisions à long terme concernant le COVID-19 sont similaires aux prévisions météorologiques. Il est difficile de prévoir quand un ouragan touchera terre alors qu'il se trouve encore à des milliers de kilomètres en mer. Les prévisions sont mises à jour avec les dernières données, y compris les données locales, pour aider à comprendre quand et où l'ouragan touchera terre. 
-
-
 
 Nous ne pouvons pas prévoir de manière fiable le temps qu'il fera dans six mois, et nous ne pouvons pas prévoir le COVID-19 dans six mois. Cependant, nous pouvons prévoir COVID-19 de manière fiable dans deux à quatre semaines. Ces prévisions à court terme nous donnent le temps de planifier et d'augmenter les ressources en matière de soins de santé en fonction des besoins. 
 
-
-
 Ceci étant dit, les ouragans et le COVID-19 ne sont pas les mêmes. La trajectoire et la force d'un ouragan ne peuvent pas être influencées, mais les pires effets du COVID-19 peuvent être évités si nous suivons les directives de santé publique, comme rester chez soi et pratiquer la distanciation physique. 
-
-
 
 ## Scénarios de distanciation physique {#scénarios}
 
-
-
 La distanciation physique et d'autres mesures préventives comme le port de masques sont les facteurs les plus importants pour prévoir les cas de COVID-19 à long terme (1 à 4 mois) et le recours aux hôpitaux. 
-
-
 
 Santé publique Ontario a prévu 100 000 décès dus au COVID-19 en Ontario sans mesures préventives et une estimation inférieure de 3 000 décès avec des mesures préventives. Cette large fourchette d'estimations (100 000 à 3 000 décès) reflète différents niveaux de distanciation physique. 
 
-
-
 Un niveau élevé de distanciation physique permettra d'obtenir une réduction de **97 % des décès** par rapport à un scénario sans mesure préventive (100 000 décès). Le large éventail des projections est la raison pour laquelle nous devons surveiller et mettre à jour les projections d'Ottawa afin de refléter la façon dont nous réalisons la prévention de COVID-19. 
-
-
 
 ##Distanciation physique {#distanciation}"
 Physical_distancing_middle,"Physical distancing is the reduction of close contacts between people. Close contact is defined as being within two meters of another person. See [Ottawa Public Health](https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx) for more information on recommendations. 
