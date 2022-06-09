@@ -80,6 +80,7 @@ load("../../Data/short_term_forecast.RData")
 load("../../Data/short_term_hosp_proj.RData")
 ott_projections <- ott_short_forecast[[1]]
 
+
 ## Observed census
 exp_census <- calc_expected_values_for_n_weeks(data = ott_observed, number_weeks = 3, first_day = 1)
 
