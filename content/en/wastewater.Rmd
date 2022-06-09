@@ -26,11 +26,17 @@ library(EpiNow2)
 library(data.table)
 library(purrr)
 library(RColorBrewer)
+library(readxl)
 
 # scripts
 source("../../R/observed_data.R")
 source("../../R/wastewater.R")
 source("../../R/epinow_functions.R")
+
+covid_data <- file.path(getwd(), "../../Data/Observed data/DailyPos.xlsx")
+staff_cov_data <- read_excel(covid_data, sheet = "Data")
+staff_cov_data <- staff_cov_data %>% mutate(date = as.Date(sampleDate)) %>% select(-c(sampleDate))
+
 
 # data
 ott_observed_covid <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv")) %>%
@@ -46,6 +52,8 @@ ott_b117_data <- ott_observed_waste %>%
 waste_clean <- wastewater_prep(ott_observed_waste)
 ott_covid_waste <- merge_data(ott_observed_covid, waste_clean) %>%
     filter(date >= "2020-06-02")
+
+ott_covid_waste <- ott_covid_waste %>% full_join(staff_cov_data, by = "date")
 
 variant_data <- ww_long_prep(ott_long_ww_data) %>%
   select(date, aggregation, varB117) %>%
@@ -111,6 +119,8 @@ new_community_case_7_day_call <- list(type = "observed_data", y_column = "observ
 hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Hospital count", short_name = "Hosp count", color = case_col, opacity = 0.15)
 
 pct_positivity_call_7_day <- list(type = "observed_data", y_column = "pct_positivity_7_day", name = "7-day mean \npercent positivity rate", short_name = "% positivity", color = case_col, opacity = 0.15)
+
+staff_incident_cases_7_day <- list(type = "observed_data", y_column = "covidPosAbs", name = "Observed COVID-19 cases in health care workers in Ottawa by episode date", short_name = "Health care worker cases", color = case_col, opacity = 0.15)
 
 active_case_call <- list(type = "observed_data", y_column = "observed_active_cases", name = "Active cases", short_name = "Active cases", color = case_col, opacity = 0.15)
 
@@ -230,7 +240,7 @@ The next plot illustrates the 7-day rolling mean in daily COVID-19 wastewater vi
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.45}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(hosp_call, new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 300, date_constraint = TRUE, constraint_val= 301)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(hosp_call, new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day, staff_incident_cases_7_day), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 300, date_constraint = TRUE, constraint_val= 301)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}

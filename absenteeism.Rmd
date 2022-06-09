@@ -1,0 +1,112 @@
+---
+title: "absenteeism"
+output: html_document
+date: '2022-06-03'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## the plan for adding absenteeism to the website.
+
+1)  First pilot on `index-absentee.hmtl` . Translations at: \~/github/Ottawa-COVID-Projection/Data/translations/Covid Localization - Home Page.csv
+
+2)  Update the dashboard section
+
+3)  Add 3 plots.
+
+4)  Review "Methods" page and "definitions".
+
+5)  Add absenteeism to "comparator" in WW plot.
+
+    ### **Current**
+
+    Case doubling time: **XX** days (based on health care worker absenteeism due to COVID-19).
+
+    Rt: XX based on health care worker absenteeism due to COVID-19.
+
+    **14** confirmed COVID-19 patients in hospital.
+
+    Including **12** acute care patients. **2** ICU patients.
+
+6)  
+
+    ## Title: Observed COVID-19 cases in health care workers in Ottawa by episode date
+
+    -   position after: Observed daily Covid-19 cases in Ottawa. (before Observed count of hospital patients)
+
+    ```{=html}
+    <!-- -->
+    ```
+    -   Time period: all data. From Dec. 20 to current.
+
+    -   Data: **covidPosAbs**
+
+    -   Transform observations to rate per 1000 health care workers using 14,038/2
+
+    -   Plot range: from March 20 to current.
+
+    -   X-axis: "Date"
+
+    -   Y-axis: Health care worker cases (per 1000 people)
+
+    -   "Note: The health care worker cases (per 1000 people) are the number of hospital staff who reported a positive PCR or RAT for selected hospitals and health care organizations. These are people who notified Occupational Health of their positive result. Based on an estimated reporting rate of 50%. The actual rate per 1000 people 50% lower than reported in this figure..."
+
+        ## title: Cumulative incidence of COVID-19 positive staff
+
+    -   position: after the plot above.
+
+    -   Time: same as above.
+
+    -   Data: **cummCovidPosAbs**
+
+    -   Transform: same as above.
+
+    -   Plot range: same as above.
+
+    -   X-axis: "Date"
+
+    -   Y-axis: "Cumulative health care worker cases (per 1000 people)
+
+    -   Note: The cumulative health care worker cases (per 1000 people) is the cumulative incidence or total proportion of health care workers who reported a positive PCR or RAT for selected hospitals and health care organizations since December 26, 2021. These are people who notified Occupational Health of their positive result. Based on an estimated reporting rate of 50%. The actual rate per 1000 people 50% lower than reported in this figure...
+
+    ## tilte: Short-term COVID-19 positive staff projection in Ottawa
+
+    -   position: after the hospital projection
+
+    -   Time: From Dec. 26, 2021 (for both the hospital and HCW plots).
+
+    -   Data: **covidPosAbs**
+
+    -   Projection period: 2 weeks.
+
+    -   Transform: same as above.
+
+    -   Plot range: same as above.
+
+    -   X-axis: "Date"
+
+    -   Y-axis: Health care worker cases (per 1000 people)
+
+    -   "Note: The health care worker cases (per 1000 people) are the number of hospital staff who reported a positive PCR or RAT for selected hospitals and health care organizations. These are people who notified Occupational Health of their positive result. Based on an estimated reporting rate of 50%. The actual rate per 1000 people 50% lower than reported in this figure..."
+
+    ## title: ????Rt based on Covid-19 positive staff
+
+-   position: after the hospital projection
+
+-   Time: From Dec. 26, 2021 (for both the hospital and HCW plots).
+
+-   Data: **covidPosAbs**
+
+-   Projection period: 2 weeks.
+
+-   Transform: same as above.
+
+-   Plot range: same as above.
+
+-   X-axis: "Date"
+
+-   Y-axis: ....
+
+-   "Note: .....
