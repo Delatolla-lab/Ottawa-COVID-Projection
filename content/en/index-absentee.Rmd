@@ -2,6 +2,10 @@
 title: "Ottawa COVID-19 Projections"
 params:
   lang: en
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
 ---
 
 
@@ -66,14 +70,15 @@ ott_observed_staff <- ott_observed %>% mutate(date = as.Date(date)) %>% full_joi
 
 
 #Loading health care worker staff two week Covid projections.
-
-
 staff_cov_projections <- load("../../Data/Historic Projections/Projecions_rev_twoweekCovidEmployeeData.RData")
 
+## Variable type == "reported_cases"
 summary_proj <- load("../../Data/Historic Projections/summary_twoweekCovidEmployeeData.RData")
+
+## summary estimates below
 summary_estm <- load("../../Data/Historic Projections/summaryestimates_twoweekCovidEmployeeData.RData")
 
-
+## Variable type == "R"
 rt_proj <- load("../../Data/Historic Projections/rt_projections_twoweekCovidEmployeeData.RData")
 
 load("../../Data/short_term_forecast.RData")
@@ -228,7 +233,9 @@ rolling_avg_col <- "rgb(226, 127, 88)"
 
 ```{r, results='hold', echo=FALSE, comment=NA}
 line_break <- insert_translation(localization_data, lang, "break")
-dashboard <- insert_translation(localization_data, lang, "Dashboard",
+
+
+dashboard_absenteeism <- insert_translation(localization_data, lang, "Dashboard_Absenteeism",
                                 c(as.character(tail(covid_data$date, n=1)),
                                   dt_label,
                                   dt_abs,
@@ -310,7 +317,7 @@ hosp_projections <- insert_translation(localization_data, lang, "hosp_projection
 
 ```
 
-`r dashboard`
+`r dashboard_absenteeism`
 
 `r past_data_title`
 

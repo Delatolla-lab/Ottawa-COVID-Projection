@@ -25,7 +25,29 @@ DT_label_no_change,no growth (flat),pas de croissance
 more,More,Plus
 fewer,Fewer,Moins
 the_same,About the same,À peu près la même
+
 Dashboard,"# Dashboard
+
+Data to {{1}}
+
+### Current
+
+{{2}} **{{3}}** days
+
+**{{4}}** confirmed COVID-19 patients in hospital.
+ 
+Including **{{5}}** acute care patients. **{{6}}** ICU patients.","# Tableau de bord
+
+Données en date du {{1}}
+
+### Situation actuelle
+
+{{2}} **{{3}}** days
+
+**{{4}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés.
+
+De ce nombre : **{{5}}** patient(s) en soins actifs, **{{6}}** patient(s) aux soins intensifs."
+Dashboard_Absenteeism,"# Dashboard
 
 Data to {{1}}
 
