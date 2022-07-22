@@ -3,9 +3,9 @@ title: "Ottawa COVID-19 Projections"
 params:
   lang: en
 output:
-  word_document: default
-  pdf_document: default
   html_document: default
+  pdf_document: default
+  word_document: default
 ---
 
 
@@ -59,7 +59,9 @@ source("../../R/epinow_functions.R")
 
 # Loading the covid data of the health care workers in Ottawa (rate of Covid cases per 1000 population)
 
-staff_cov_data<-load("../../Data/Observed data/cumulative_covid_absenteeism_v1.RData")
+
+load("../../Data/Observed data/cumulative_data_absenteeism.RData")
+
 
 
 # data
@@ -70,16 +72,21 @@ ott_observed_staff <- ott_observed %>% mutate(date = as.Date(date)) %>% full_joi
 
 
 #Loading health care worker staff two week Covid projections.
-staff_cov_projections <- load("../../Data/Historic Projections/Projecions_rev_twoweekCovidEmployeeData.RData")
+load("../../Data/Historic Projections/historic_cases_projections_twoweekCovidEmployeeData.RData")
 
-## Variable type == "reported_cases"
-summary_proj <- load("../../Data/Historic Projections/summary_twoweekCovidEmployeeData.RData")
+# Transforming the Covid projections of the health care workers and the confidence intervals into rate per 1000 population
+staff_cov_projections_2<- cases_forecast[[1]] %>% filter(variable == "reported_cases") %>% mutate(median = (median/7019)*1000) %>% mutate(upper_75 = (upper_75/7019)*1000) %>% mutate(lower_75 = (lower_75/7019)*1000)
+
+
 
 ## summary estimates below
-summary_estm <- load("../../Data/Historic Projections/summaryestimates_twoweekCovidEmployeeData.RData")
+summary_estimates <- cases_forecast[[2]]
+
+## summary statistics below:
+summary_stats <- cases_forecast[[3]]
 
 ## Variable type == "R"
-rt_proj <- load("../../Data/Historic Projections/rt_projections_twoweekCovidEmployeeData.RData")
+staff_cov_projections_3 <- cases_forecast[[1]] %>% filter(variable == "R") 
 
 load("../../Data/short_term_forecast.RData")
 load("../../Data/short_term_hosp_proj.RData")
