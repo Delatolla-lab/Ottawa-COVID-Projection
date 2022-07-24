@@ -367,25 +367,6 @@ reworked_figure(
 
 `r line_break`
 
-`r observed_staff_incident`
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Visualize current daily cases
-source("../../R/observed_data.R")
-observed_new_episodes <- list(type = "avg_data", y_column = "cummCovidPosAbs_pop", name = "Cumulative health care worker cases by episode date", color = rolling_avg_col, showlegend = TRUE, width = 4)
-
-reworked_figure(
-    xaxis = "date",
-    yaxis = list(observed_new_episodes),
-    titles = c(y = "Cumulative health care worker cases (per 1000 people)", x = "Date", title = "Cumulative incidence of COVID-19 positive staff", ticklabels = "%b %y"),
-    data = ott_observed_staff, date_constraint = TRUE, constraint_val = constrain_val
-  )
-```
-
-`r observed_staff_incident_cases_text`
-
-`r line_break`
-
 `r observed_census`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
