@@ -381,9 +381,19 @@ The figure below illustrates the proportion of variants of concern (VOC) found i
 
 ---
 
+### Influenza virus
+
+Samples are screened for influenza once a week during the summer period. The website and plots are updated the day after processing. 
+
+The next plot illustrates the 7-day rolling mean in daily influenza A wastewater viral signal. This number is the average of a week’s readings. Also on the graph is the Influenzas A percent positivity. 
+
+<img src="/images/flu_image_21jun22.png" width = "90%" height = "90%"/>
+
+---
+
 ## Interpretation cautions
 
-The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. COVID-19 wastewater signal is helpful when interpreted alongside other COVID-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
+The accuracy and thus reliability of SARS-CoV-2 and influenza wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for SARS-CoV-2 variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. COVID-19 and influenza wastewater signal is helpful when interpreted alongside other surveillance measures, taking into consideration the strengths and limitations of each measure. Visit [Seasonal Respiratory Infections and Enteric Outbreaks Surveillance Reports](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/flu-report.aspx) for more information on Ottawa public health surveillance. 
 
 ---
 
@@ -397,7 +407,7 @@ You can learn more about wastewater epidemiology and its role in COVID-19 survei
 
 \* For new cases, the reported date is the day the test result is reported by the laboratory. Episode date is the approximate date of COVID-19 infection estimated from information available: the date of symptom onset, test date, or the reported date.
 
-\* Percent positivity refers to the percentage of individuals tested for COVID-19 infection in a given day that test positive.
+\* Percent positivity refers to the percentage of individuals tested for either COVID-19 infection or influenza A infection in a given day that test positive.
 
 \* A central question in wastewater epidemiology is determining the proportion of the wastewater that is actually from humans and the proportion that is rain water, snow melt etc. To address this issue, viral copy data is thus normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](/model/) for more details.
 
