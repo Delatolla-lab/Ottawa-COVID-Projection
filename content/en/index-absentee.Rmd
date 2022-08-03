@@ -62,6 +62,7 @@ source("../../R/epinow_functions.R")
 
 load("../../Data/Observed data/cumulative_data_absenteeism.RData")
 
+#covid_data <- covid_data %>% rename(date = sampleDate)
 
 
 # data
