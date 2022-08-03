@@ -239,7 +239,7 @@ rolling_avg_col <- "rgb(226, 127, 88)"
 line_break <- insert_translation(localization_data, lang, "break")
 
 
-dashboard_absenteeism <- insert_translation(localization_data, lang, "Dashboard_Absenteeism",
+dashboard_HCWcovid <- insert_translation(localization_data, lang, "Dashboard_HCWcovid",
                                 c(as.character(tail(covid_data$date, n=1)),
                                   dt_label,
                                   dt_abs,
@@ -321,7 +321,7 @@ hosp_projections <- insert_translation(localization_data, lang, "hosp_projection
 
 ```
 
-`r dashboard_absenteeism`
+`r dashboard_HCWcovid`
 
 `r past_data_title`
 
