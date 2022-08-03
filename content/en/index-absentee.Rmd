@@ -72,12 +72,8 @@ ott_observed_staff <- ott_observed %>% mutate(date = as.Date(date)) %>% full_joi
 
 
 
-#Loading health care worker staff two week Covid projections.
-load("../../Data/Historic Projections/historic_cases_projections_twoweekCovidEmployeeData.RData")
-
-# Transforming the Covid projections of the health care workers and the confidence intervals into rate per 1000 population
-staff_cov_projections_2<- cases_forecast[[1]] %>% filter(variable == "reported_cases") %>% mutate(median = (median/7019)*1000) %>% mutate(upper_75 = (upper_75/7019)*1000) %>% mutate(lower_75 = (lower_75/7019)*1000)
-
+#Loading health care worker staff two week Covid projections per 1000 population
+load(paste0("../../Data/Historic Projections/rate_transformed_historic_cases_projections_", numofweeks, gsub(" ", "", site), ".RData"))
 
 
 ## summary estimates below
