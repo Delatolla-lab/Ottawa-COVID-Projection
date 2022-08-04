@@ -1,0 +1,101 @@
+---
+title: "long-term-assessment"
+author: "Warsame Yusuf"
+date: "01/12/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+## run ott_projections() in short_term_projections.R to generate data for plots
+# load library, packages, functions, data
+library(tidyverse)
+library(ggplot2)
+library(covidseir)
+library(zoo)
+library(stringr)
+library(purrr)
+library(lubridate)
+library(plotly)
+source("../R/plot_case_projections.R")
+ott_covid_data <- read.csv(file.path(getwd(), "../Data/Observed data/OPH_Observed_COVID_Data.csv"))
+ott_observed_episodes <- as.data.frame(ott_covid_data[1:(nrow(ott_covid_data) - 6),])
+
+current_case_hex <- "#008080"
+reduction_hex <- "#85c22b"
+increase_hex <- "#F6D556"
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Set up SEIR model
+
+## Set up sampling fractions
+samp_frac <- c(rep(0.14, 13), rep(0.21, 38))
+samp_frac <- c(samp_frac, rep(0.37, nrow(ott_observed_episodes) - length(samp_frac)))
+
+## Set up contact rate breakpoints
+f_seg <- c(0, rep(1, nrow(ott_observed_episodes) - 1))
+day_new_f <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-05-19")) # Date of phase 1 reopening
+f_seg[seq(day_new_f, length(f_seg))] <- 2
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-06-12")) # Date of phase 2 reopening
+f_seg[seq(day_ch, length(f_seg))] <- 3
+
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-07-17")) # Date of phase 3 reopening
+f_seg[seq(day_ch, length(f_seg))] <- 4
+
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-10-09")) # Date of modified phase 2
+f_seg[seq(day_ch, length(f_seg))] <- 5
+
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-11-09")) # End date of modified phase 2
+f_seg[seq(day_ch, length(f_seg))] <- 6
+
+day_ch <- which(as.character(ott_observed_episodes[["date"]]) == ymd("2020-12-26")) # Start date of lockdown order
+f_seg[seq(day_ch, length(f_seg))] <- 7
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE}
+# Potential f_priors for last f_seg
+potential_f <- c(0.3, 0.4, 0.45, 0.5, 0.55, 0.6)
+
+for(i in potential_f){
+  # Fit SEIR model of observed new cases in Ottawa
+  fit <- fit_seir(
+    daily_cases = ott_observed_episodes[["observed_new_episodes"]],
+    samp_frac_fixed = samp_frac, 
+    f_seg = f_seg,
+    i0_prior = c(log(7), 1), # 7 total cases on March 1st, 2020
+    e_prior = c(0.85, 0.05), # 85% of residents social distancing
+    start_decline_prior = c(log(24), 0.1), # Starting date of closing of non-essential businesses (March 24th, 2020)
+    end_decline_prior = c(log(34), 0.1), # 10 day buffer to ramp in social distancing
+    f_prior = cbind(c(0.4, 0.5, 0.6, 0.65, 0.6, 0.6, i), c(0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2)),
+    R0_prior = c(log(2.5), 0.2), # Starting R0 value
+    N_pop = 1049486, # Ottawa population
+    iter = 500, # number of posterior samples
+    fit_type = "optimizing" # for speed only
+  )
+  
+  # Prepare model fit
+  proj <- project_seir(fit, iter = 1:50)
+  tidy_proj <- tidy_seir(proj, resample_y_rep = 20)
+  first_day <- min(as.Date(ott_observed_episodes[["date"]])) # first observation date
+  last_day <- 500 # how many days to create dates for
+  lut <- tibble( # Create look-up table (lut)
+  day = seq_len(last_day),
+  date = seq(first_day, first_day + length(day) - 1, by = "1 day")
+  )
+  tidy_proj <- left_join(tidy_proj, lut, by = "day")
+  
+  # Generate projections for SEIR model fit
+  ott_case_projections <- proj_generation(fit, lut, ott_observed_episodes, project_to = "2021-05-31",    day_start_reduction = 7, pct_change = 10)
+  
+  # Create data set to visualize projections
+  projection_data <- case_projection_data(ott_case_projections, 10)
+  
+  # Visualize projections
+  plot <- case_projection_plot(projection_data, ott_observed_episodes, current_col = current_case_hex, reduction_col = reduction_hex, increase_col = increase_hex, value_column = "observed_new_episodes", date_column = "date", title = paste("Long-term daily COVID-19 cases in Ottawa, f_prior value:", i), pct_change = 10)
+  print(plot)
+}
+```
