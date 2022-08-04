@@ -1,0 +1,486 @@
+---
+title: "VAR Model for hospital cases with log transformation on the data"
+author: "Gauri Saran"
+date: '2022-05-09'
+output: html_document
+---
+
+## <b>Use of Vector Autoregressive model (VAR) to forecast hospital cases using multivariate data (with log transformation) with vaccination information in different age group and wastewater signal. 5 days of forecast.</b>
+
+Vector Autogressive model (VAR) is like ARIMA model which forecasts a time series based on the correlation between one timeseries that we are trying to forecast and its own lagged values. However, VAR being a multivariate model also allows use of multiple variables to be involved whose lagged values can also be used to forecast. 
+However, unlike ARIMAX model which allows use of external regressors in the model in a one way causal relationship where the external variables can be used as regressors to forecast one univariate timeseries, VAR model allows two way causal relationship where the lagged values of one timeseries can cause changes in another timeseries and the lagged values of the latter timeseries can also cause changes in the former one. VAR model regresses each variable against its own lagged values as well as the lagged values of other variables in the dataset.
+
+VAR model just like ARIMA also requires stationary time series to work with. In this notebook, we check for those assumptions or make the time series data stationary. The goal was to forecast hospitalization using the lagged values of other variables that might impact the hospitalization from vaccination data and the waste water signal. The most appropriate lag value was selected based on lowest AIC error metric from a loop of different lag values used.
+
+The data has been log transformed and then divided into train and test set and the RMSE score, MAPE error metric has been evaluated.
+
+Granger causality test has been performed to confirm whether there is a causal relationship between different time series in our data that is statistically signicant.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, comment = "#>")
+library(tidyverse)
+library(jsonlite)
+library(tidyr)
+library(lubridate)
+library(stats)
+library(dplyr)
+library(zoo)
+library(stringr)
+library(data.table)
+library(corrr)
+library("Hmisc")
+library("corrplot")
+library(ggpubr)
+library(caTools)
+library(vars)
+library(tseries)
+library(Metrics)
+source("vaccine_data_prep.R")
+source("wastewater.R")
+```
+
+
+
+```{r echo=FALSE}
+#load vaccine data 
+ottawa_vaccine_data <-
+  fromJSON("https://services.arcgis.com/G6F8XLCl5KtAlZ2G/arcgis/rest/services/COVID-19_Vaccine_Coverage_by_Day_by_Age_by_Dose_for_Ottawa_Residents/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
+
+vacc_data <- ottawa_vaccine_data$features$attributes
+vacc_data <- clean_vacc_data(vacc_data)
+
+```
+
+### Initial Data Cleaning
+
+Vaccine data, Cases data from the hospital, and the waste water signal data has been loaded, cleaned, and then merged into one final dataframe, `final_data`.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+#load vaccine data 
+ottawa_vaccine_data <-
+  fromJSON("https://services.arcgis.com/G6F8XLCl5KtAlZ2G/arcgis/rest/services/COVID-19_Vaccine_Coverage_by_Day_by_Age_by_Dose_for_Ottawa_Residents/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
+
+vacc_data <- ottawa_vaccine_data$features$attributes
+#Clean the vaccine data
+vacc_data <- clean_vacc_data(vacc_data)
+
+#load cases data
+cases_data <- read.csv(file.path(getwd(), "OPH_Observed_COVID_Data.csv"))
+
+# Select only the hospital case column observed_census_ICU_p_acute_care from the data
+cases_data <- cases_data %>% mutate(date = as.Date(date))
+cases_data <- cases_data %>% dplyr::select(c(date, observed_census_ICU_p_acute_care))
+
+#load waste water data
+ww_data <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
+
+# Clean the waste water data
+ww_clean <- wastewater_prep(ww_data)
+ww_clean <- ww_clean %>% dplyr::select(c(date, N1_N2_avg))
+
+# Merging the waste water, cases and vaccination data
+final_data <- vacc_data %>% inner_join(cases_data, by= "date") %>% inner_join(ww_clean, by = "date") %>% arrange(date)
+
+#Since there were missing dates before 2021-01-01, therefore filtered out data before that date.
+final_data <- final_data %>% filter(date > "2020-12-31")
+final_data <- final_data %>% dplyr::select(-c(ObjectId))
+
+```
+
+The variables have been log transformed.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+final_data$observed_census_ICU_p_acute_care = log(final_data$observed_census_ICU_p_acute_care)
+final_data$Percent_of_Ottawa_residents_5_1_dose = log1p(final_data$Percent_of_Ottawa_residents_5_1_dose)
+final_data$Percent_of_Ottawa_residents_5_1_dose = log1p(final_data$Percent_of_Ottawa_residents_5_1_dose)
+final_data$Percent_of_Ottawa_residents_5_2_dose = log1p(final_data$Percent_of_Ottawa_residents_5_2_dose)
+final_data$Percent_of_Ottawa_residents_12_1_dose = log1p(final_data$Percent_of_Ottawa_residents_12_1_dose)
+final_data$Percent_of_Ottawa_residents_12_2_dose = log1p(final_data$Percent_of_Ottawa_residents_12_2_dose)
+final_data$Percent_of_Ottawa_residents_18_1_dose = log1p(final_data$Percent_of_Ottawa_residents_18_1_dose)
+final_data$Percent_of_Ottawa_residents_30_1_dose = log1p(final_data$Percent_of_Ottawa_residents_30_1_dose)
+final_data$Percent_of_Ottawa_residents_30_2_dose = log1p(final_data$Percent_of_Ottawa_residents_30_2_dose)
+final_data$Percent_of_Ottawa_residents_40_1_dose = log1p(final_data$Percent_of_Ottawa_residents_40_1_dose)
+final_data$Percent_of_Ottawa_residents_40_2_dose = log1p(final_data$Percent_of_Ottawa_residents_40_2_dose)
+final_data$Percent_of_Ottawa_residents_50_1_dose = log1p(final_data$Percent_of_Ottawa_residents_50_1_dose)
+final_data$Percent_of_Ottawa_residents_50_2_dose = log1p(final_data$Percent_of_Ottawa_residents_50_2_dose)
+final_data$Percent_of_Ottawa_residents_60_1_dose = log1p(final_data$Percent_of_Ottawa_residents_60_1_dose)
+final_data$Percent_of_Ottawa_residents_60_2_dose = log1p(final_data$Percent_of_Ottawa_residents_60_2_dose)
+final_data$Percent_of_Ottawa_residents_70_1_dose = log1p(final_data$Percent_of_Ottawa_residents_70_1_dose)
+final_data$Percent_of_Ottawa_residents_70_2_dose = log1p(final_data$Percent_of_Ottawa_residents_70_2_dose)
+final_data$Percent_of_Ottawa_residents_80_1_dose = log1p(final_data$Percent_of_Ottawa_residents_80_1_dose)
+final_data$Percent_of_Ottawa_residents_80_2_dose = log1p(final_data$Percent_of_Ottawa_residents_80_2_dose)
+final_data$N1_N2_avg = (final_data$N1_N2_avg) * 1000
+final_data$N1_N2_avg = log1p(final_data$N1_N2_avg)
+
+```
+
+
+Creating a time series dataframe from the original data using frequency of 365 for days.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+final_data_new <- final_data %>% dplyr::select(-c(date))
+inds <- seq(as.Date("2021-01-01"), as.Date("2022-02-01"), by = "day")
+myvarts <- ts(final_data_new, start = c(2021, as.numeric(format(inds[1], "%j"))),
+           frequency = 365)
+```
+
+
+Time Series Plots for those with 1 dose of vaccination in the age groups (5-40 years old) dataset below:
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12, fig.height=12}
+# use all columns and shorten the measure name to mvar
+vaccine_age_5_40_1dose <- myvarts[,c(1:5)]
+plot(vaccine_age_5_40_1dose)
+```
+
+Time Series Plots for those with 1 dose of vaccination in the age groups (50 - 80 years old) and those with 2nd dose in the age groups (5 - 12 years old) in the dataset below:
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12, fig.height=12}
+# use all columns and shorten the measure name to mvar
+vaccine_age_50_80_1dose_5_12_2_dose <- myvarts[,c(6:11)]
+plot(vaccine_age_50_80_1dose_5_12_2_dose)
+```
+
+Time Series Plots for those with 2nd dose of vaccination in the age groups (18 to 80 years old) and the plot for hospitalization and wastewater signal (N1_N2_avg).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12, fig.height=20}
+# use all columns and shorten the measure name to mvar
+vaccine_age_18_80_2_dose_N1_N2_avg_cases <- myvarts[,c(12:20)]
+plot(vaccine_age_18_80_2_dose_N1_N2_avg_cases)
+```
+To fit a VAR model on the data, the timeseries must be stationary with stable mean and variance over time. The time series above show definite trend and the mean is not constant over time. In wastewater and hospitalization, the variance do not seem to be constant over time. Therefore, they do not appear stationary. However, a statistical test to check whether the time series is stationary or not, <b>Augmented Dickey Fuller Test</b> has been performed.
+
+Null Hypothesis H0: The time series is not stationary.
+Alternate Hypothesis H1: The time series is stationary.
+
+From the p-values obtained below is evident that we can not reject the null hypothesis and our time series are not stationary.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+### tseries - standard test adt.test
+apply(myvarts, 2, adf.test)
+```
+To make the time series stationary for fitting VAR Model, the first difference of the time series data has been taken by subtracting the current row from its previous row.
+Before differencing the time series the dataset has been divided into train and test datasets. The last days of the timeseries is part of the test dataset. The MTS package has been used for taking the differnce of the time series. 
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# Diving data into train and test set.
+train <- head(myvarts, 406)
+test <- tail(myvarts, 6)
+
+```
+
+After taking the difference of the time series, the <b>Augmented Dickey Fuller</b> test is again performed on it to check if time series is now stationary. The p-value is statistically significant below 0.05. Therefore, we can say that the time series are now stationary.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Differencing the whole mts
+
+library(MTS)
+
+diff_series_train = diffM(train)
+diff_series_test = diffM(test)
+apply(diff_series_train, 2, adf.test)
+
+```
+Further confirmation also comes from the plots of the differenced time series. The trend observed in time series before is now no longer visible. The time series are now looking more stationary.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12, fig.height=20}
+# use all columns and shorten the measure name to mvar
+stnry_11 <- diff_series_train[,c(1:5)]
+plot.ts(stnry_11)
+```
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12, fig.height=20}
+# use all columns and shorten the measure name to mvar
+stnry_12 <- diff_series_train[,c(6:11)]
+plot.ts(stnry_12)
+```
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12, fig.height=20}
+# use all columns and shorten the measure name to mvar
+stnry_13 <- diff_series_train[,c(12:20)]
+plot.ts(stnry_13)
+```
+VARselect has been used from VAR model to determine the most appropriate lag value to regress against each variable in the dataset. VAR model has been run on the differenced time series training data using lag values from 1 to a maximum value of 15 to check the most appropriate lag value. There were 4 error metrics used to determine which lag value from 1 to 15 gave the lowest of those 4 error metrics. In case different error metrics gave different values of lag, then AIC was used as the choice of metric to select the right lag value.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+library(vars)
+VARselect(diff_series_train, type = "none", lag.max = 15)
+
+
+```
+From the lowest error metric, 15th lag is the most appropriate to use. The VAR model is now fit on the training data with a lag of 15 days.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Creating a VAR model with vars
+
+var.a <- vars::VAR(diff_series_train,
+            lag.max = 15,
+
+            ic = "AIC",
+
+            type = "none")
+```
+
+
+Summary of the VAR model with beta coefficients for all the 15 different lag values and their statistical significance for all the different variables in the model that are being regressed against each other is available in VAR. Below we can see the summary for the hospitalization variable `observed_census_ICU_p_acute_care`. We only look at `observed_census_ICU_p_acute_care` variable since we are only interested in forecasting the hospitalization.
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+summary(var.a$varresult$observed_census_ICU_p_acute_care)
+
+```
+
+
+#### SERIAL CORRELATION BETWEEN ERRORS
+
+The serial correlation between errors have been tested using Portmanteau Test (asymototic). The null hypothesis of this test states that there is no correlation between errors. The p-value being statistically significant shows that there is correlation between the errors. The model may need further tweaking for reducing the correlation between errors.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Residual diagnostics
+
+serial.test(var.a)
+```
+
+Predicting 6 days ahead.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Residual diagnostics
+fcast_cases <- predict(var.a,n.ahead =6)
+  
+  
+  
+```
+
+
+#### FORECASTING 6 DAYS AHEAD INTO FUTURE and CALCULATING ERROR ON THE TEST DATA SET
+
+The difference has been readded back to the predictions to bring it back on original scale.
+
+
+#### RMSE Error metric on test data
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Residual diagnostics
+fcast <- fcast_cases$fcst
+test_actual <- tail(myvarts, 7)
+test_actual <- as.data.frame(test_actual)
+prediction <- fcast$observed_census_ICU_p_acute_care 
+prediction <- as.data.frame(prediction)
+final_data <- as.data.frame(final_data)
+date_forecast <- tail(final_data$date, 6)
+test <- as.data.frame(test)
+for(i in 1:nrow(prediction)){prediction$fcst[i] = prediction$fcst[i] + test_actual$observed_census_ICU_p_acute_care[i] 
+}
+
+actual <- exp(tail(test$observed_census_ICU_p_acute_care, 6))
+
+predict <- exp(prediction$fcst)
+
+results <- cbind(date_forecast, predict, actual)
+results <- as.data.frame(results)
+colnames(results) <- c("date_forecast", "prediction", "actual")
+rmse(results$prediction, results$actual)
+  
+```
+
+
+
+#### MAPE Error metric on test data
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+mape(results$prediction, results$actual)
+
+```
+
+Plots comparing actual test data and predicted test data 
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+library(plotly)
+linear_reg_plot <- ggplot()+
+  geom_line(data=results,aes(y=actual,x= date_forecast,colour="Actual values of hospital cases"),size=1 )+
+  geom_line(data=results,aes(y=prediction,x= date_forecast,colour="Predicted values of hospital cases"),size=1) +
+  scale_color_manual(name = "Y series", values = c("Actual values of hospital cases" = "green", "Predicted values of hospital cases" = "red"))
+
+t <- list(
+  family = "Times New Roman",
+  size = 16
+ )
+
+ggplotly(linear_reg_plot) %>%
+  layout(title = list(text = "<b>Comparison plot between Actual and predicted values for VAR model with log transformed data</b>", font = t), xaxis = list(title = ""), yaxis = list(title = "<b>Hospital Cases</b>"), width=1100)
+
+```
+
+### <b>Summary:</b>
+
+In Summary, the error metrics on the test data looks reasonably good with a low RMSE of 6.5 compared to the standard deviation of original data which is about 35. The MAPE metric is also around 6% which is quite good. For predictive analysis VAR model can be very effective. Further tuning of hyperparameters can be experimented on this model for better performance.
+
+VAR model is based on the fact that one timeseries causes changes in other time series in multivariate data.
+
+The Granger causality test has been performed to confirm if a timeseries from our data causes another timeseries which means if the lagged values of the given time series being tested is causing the other time series in the data.
+
+The <b>Null Hypothesis H0</b> is: The given time series does not cause the other time series in the data.
+<b>Alternate hypthesis H1</b>: The given time series causes the other time series in the data.
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_5_1_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_5_1_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_5_2_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_5_2_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_12_1_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_12_1_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_12_2_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_12_2_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_18_1_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_18_1_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_18_2_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_18_2_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_30_1_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_30_1_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_30_2_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_30_2_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_40_1_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_40_1_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_40_2_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_40_2_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_50_1_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_50_1_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_50_2_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_50_2_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_60_1_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_60_1_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_60_2_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_60_2_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_70_1_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_70_1_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_70_2_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_70_2_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_80_1_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_80_1_dose"))
+```
+
+#### From the statistically significant p-value, it shows that `Percent_of_Ottawa_residents_80_2_dose` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("Percent_of_Ottawa_residents_80_2_dose"))
+```
+
+#### From the statistically significant p-value, it shows that wastewater signal `N1_N2_avg` causes the other time series in the data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Granger test for causality
+
+causality(var.a, cause = c("N1_N2_avg"))
+```
+
+
+
+
+
+
+
+

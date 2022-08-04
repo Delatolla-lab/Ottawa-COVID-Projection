@@ -17,7 +17,7 @@ incubation_period <-
 hosp_projections <- short_term_forecast(
   data = ott_covid_data,
   input = "observed_census_ICU_p_acute_care",
-  start_date = as.Date(last(ott_covid_data$date)) - 120,
+  start_date = as.Date("2021-12-26"),
   # end_date = "2020-11-24", # can be changed, if missing will default to last day
   omit_last_date = TRUE,
   generation_time = generation_time,

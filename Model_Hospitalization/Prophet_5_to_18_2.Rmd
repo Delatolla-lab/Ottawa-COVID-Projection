@@ -1,0 +1,278 @@
+---
+title: "Prophet Forecast for smaller age groups 5 to 18 year old vaccine 2 dose"
+author: "Gauri Saran"
+date: '2022-05-08'
+output: html_document
+---
+
+## <b> Forecast Hospital cases using Prophet model using extra regressor variables from vaccine data for those who received 2nd dose of vaccine in the smaller age groups (5 - 18). 3 days of forecast.</b>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, comment = "#>")
+library(tidyverse)
+library(jsonlite)
+library(tidyr)
+library(tidyr)
+library(lubridate)
+library(stats)
+library(zoo)
+library(stringr)
+library(data.table)
+library(corrr)
+library("Hmisc")
+library("corrplot")
+library(ggpubr)
+library(caTools)
+library(Metrics)
+source("vaccine_data_prep.R")
+source("wastewater.R")
+```
+
+
+
+```{r echo=FALSE}
+#load vaccine data 
+ottawa_vaccine_data <-
+  fromJSON("https://services.arcgis.com/G6F8XLCl5KtAlZ2G/arcgis/rest/services/COVID-19_Vaccine_Coverage_by_Day_by_Age_by_Dose_for_Ottawa_Residents/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
+
+vacc_data <- ottawa_vaccine_data$features$attributes
+vacc_data <- clean_vacc_data(vacc_data)
+
+```
+
+### Initial Data Cleaning
+
+Vaccine data, Cases data from the hospital, and the waste water signal data has been loaded, cleaned, and then merged into one final dataframe, `final_data`.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+#load vaccine data 
+ottawa_vaccine_data <-
+  fromJSON("https://services.arcgis.com/G6F8XLCl5KtAlZ2G/arcgis/rest/services/COVID-19_Vaccine_Coverage_by_Day_by_Age_by_Dose_for_Ottawa_Residents/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
+
+vacc_data <- ottawa_vaccine_data$features$attributes
+#Clean the vaccine data
+vacc_data <- clean_vacc_data(vacc_data)
+
+#load cases data
+cases_data <- read.csv(file.path(getwd(), "OPH_Observed_COVID_Data.csv"))
+
+# Select only the hospital case column observed_census_ICU_p_acute_care from the data
+cases_data <- cases_data %>% mutate(date = as.Date(date))
+cases_data <- cases_data %>% select(c(date, observed_census_ICU_p_acute_care))
+
+#load waste water data
+ww_data <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
+
+# Clean the waste water data
+ww_clean <- wastewater_prep(ww_data)
+ww_clean <- ww_clean %>% select(c(date, N1_N2_avg))
+
+# Merging the waste water, cases and vaccination data
+final_data <- vacc_data %>% inner_join(cases_data, by= "date") %>% inner_join(ww_clean, by = "date") %>% arrange(date)
+
+```
+
+The variables have been log transformed.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+final_data <- final_data %>% select(-c(ObjectId))
+final_data$observed_census_ICU_p_acute_care = log(final_data$observed_census_ICU_p_acute_care)
+final_data$Percent_of_Ottawa_residents_5_1_dose = log1p(final_data$Percent_of_Ottawa_residents_5_1_dose)
+final_data$Percent_of_Ottawa_residents_5_1_dose = log1p(final_data$Percent_of_Ottawa_residents_5_1_dose)
+final_data$Percent_of_Ottawa_residents_5_2_dose = log1p(final_data$Percent_of_Ottawa_residents_5_2_dose)
+final_data$Percent_of_Ottawa_residents_12_1_dose = log1p(final_data$Percent_of_Ottawa_residents_12_1_dose)
+final_data$Percent_of_Ottawa_residents_12_2_dose = log1p(final_data$Percent_of_Ottawa_residents_12_2_dose)
+final_data$Percent_of_Ottawa_residents_18_1_dose = log1p(final_data$Percent_of_Ottawa_residents_18_1_dose)
+final_data$Percent_of_Ottawa_residents_30_1_dose = log1p(final_data$Percent_of_Ottawa_residents_30_1_dose)
+final_data$Percent_of_Ottawa_residents_30_2_dose = log1p(final_data$Percent_of_Ottawa_residents_30_2_dose)
+final_data$Percent_of_Ottawa_residents_40_1_dose = log1p(final_data$Percent_of_Ottawa_residents_40_1_dose)
+final_data$Percent_of_Ottawa_residents_40_2_dose = log1p(final_data$Percent_of_Ottawa_residents_40_2_dose)
+final_data$Percent_of_Ottawa_residents_50_1_dose = log1p(final_data$Percent_of_Ottawa_residents_50_1_dose)
+final_data$Percent_of_Ottawa_residents_50_2_dose = log1p(final_data$Percent_of_Ottawa_residents_50_2_dose)
+final_data$Percent_of_Ottawa_residents_60_1_dose = log1p(final_data$Percent_of_Ottawa_residents_60_1_dose)
+final_data$Percent_of_Ottawa_residents_60_2_dose = log1p(final_data$Percent_of_Ottawa_residents_60_2_dose)
+final_data$Percent_of_Ottawa_residents_70_1_dose = log1p(final_data$Percent_of_Ottawa_residents_70_1_dose)
+final_data$Percent_of_Ottawa_residents_70_2_dose = log1p(final_data$Percent_of_Ottawa_residents_70_2_dose)
+final_data$Percent_of_Ottawa_residents_80_1_dose = log1p(final_data$Percent_of_Ottawa_residents_80_1_dose)
+final_data$Percent_of_Ottawa_residents_80_2_dose = log1p(final_data$Percent_of_Ottawa_residents_80_2_dose)
+final_data$N1_N2_avg = (final_data$N1_N2_avg) * 1000
+final_data$N1_N2_avg = log1p(final_data$N1_N2_avg)
+
+```
+
+The response variable `observed_census_ICU_p_acute_care` has been renamed as y and the date has been renamed as ds to fit the prophet model.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12, fig.height=12}
+final_data <- final_data %>% rename(y = observed_census_ICU_p_acute_care, ds = date)
+```
+
+The dataset is divided into train and test set. The test set consist of last 3 days of data.
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# Diving data into train and test set.
+train <- head(final_data, 409)
+test <- tail(final_data, 3)
+
+```
+
+Adding other variable as regressors to the model.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+library(prophet)
+model_cases <- prophet(interval.width = 0.95)
+model_cases <- add_regressor(model_cases, 'N1_N2_avg')
+model_cases <- add_regressor(model_cases, 'Percent_of_Ottawa_residents_5_2_dose')
+model_cases <- add_regressor(model_cases, 'Percent_of_Ottawa_residents_12_2_dose')
+model_cases <- add_regressor(model_cases, 'Percent_of_Ottawa_residents_18_2_dose')
+
+
+
+```
+
+Fitting the Prophet Model.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+model_cases <- fit.prophet(model_cases, train)
+```
+
+
+Forecasting 3 days into future
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+future <- make_future_dataframe(model_cases, periods = 3)
+
+```
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+future$N1_N2_avg = final_data$N1_N2_avg
+future$Percent_of_Ottawa_residents_5_2_dose = final_data$Percent_of_Ottawa_residents_5_2_dose
+future$Percent_of_Ottawa_residents_12_2_dose = final_data$Percent_of_Ottawa_residents_12_2_dose
+future$Percent_of_Ottawa_residents_18_2_dose = final_data$Percent_of_Ottawa_residents_18_2_dose
+
+```
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+forecast <- predict(model_cases, future)
+
+
+```
+
+
+Checking last 6 days of forecast data
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+tail(forecast[c('ds','yhat','yhat_lower', 'yhat_upper')])
+
+
+```
+
+The plot of actual data and predicted data from Prophet forecast. The blue line is predicted data whereas the black dots are actual data.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+dyplot.prophet(model_cases, forecast)
+
+```
+
+Root Mean Squared Error on train set:
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+prediction_prophet <- exp(forecast$yhat)
+actual_data <- exp(final_data$y)
+date_prophet <- lubridate::ymd(final_data$ds)
+results_prophet <- cbind(date_prophet, prediction_prophet, actual_data)
+results_prophet <- as.data.frame(results_prophet)
+results_prophet$date_prophet <- as.Date(results_prophet$date_prophet)
+rmse(results_prophet$prediction_prophet, results_prophet$actual_data)
+
+```
+
+
+MAPE on train set:
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+mape(results_prophet$actual_data,results_prophet$prediction_prophet)
+```
+
+Standard deviation of the actual data
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+sd(exp(final_data$y))
+
+```
+
+Plots comparing actual data and predicted data 
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+library(plotly)
+linear_reg_plot <- ggplot()+
+  geom_line(data=results_prophet,aes(y=actual_data,x= date_prophet,colour="Actual values of hospital cases"),size=1 )+
+  geom_line(data=results_prophet,aes(y=prediction_prophet,x= date_prophet,colour="Predicted values of hospital cases"),size=1) +
+  scale_color_manual(name = "Y series", values = c("Actual values of hospital cases" = "green", "Predicted values of hospital cases" = "lightblue"))
+
+t <- list(
+  family = "Times New Roman",
+  size = 16
+ )
+
+ggplotly(linear_reg_plot) %>%
+  layout(title = list(text = "<b>Comparison plot between Actual and predicted values for Prophet model regressed against those who received 2nd dose.</b>", font = t), xaxis = list(title = ""), yaxis = list(title = "<b>Hospital Cases</b>"), width=1100)
+
+```
+
+RMSE on test set
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+predicted <- tail(forecast, 3)
+date_forecast <- tail(forecast$ds, 3)
+actual <- test$y
+results <- cbind(date_forecast, predicted, actual)
+results <- as.data.frame(results)
+results$yhat <- exp(results$yhat)
+results$actual <- exp(results$actual)
+
+
+rmse(results$yhat, results$actual)
+
+```
+MAPE on test set
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+mape(results$actual,results$yhat)
+```
+
+
+Plots comparing actual data and predicted data
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+library(plotly)
+linear_reg_plot <- ggplot()+
+  geom_line(data=results,aes(y=actual,x= date_forecast,colour="Actual values of hospital cases"),size=1 )+
+  geom_line(data=results,aes(y=yhat,x= date_forecast,colour="Predicted values of hospital cases"),size=1) +
+  scale_color_manual(name = "Y series", values = c("Actual values of hospital cases" = "green", "Predicted values of hospital cases" = "red"))
+
+t <- list(
+  family = "Times New Roman",
+  size = 16
+ )
+
+ggplotly(linear_reg_plot) %>%
+  layout(title = list(text = "<b>Comparison plot between Actual and predicted values for Linear Regression model</b>", font = t), xaxis = list(title = ""), yaxis = list(title = "<b>Hospital Cases</b>"), width=1100)
+
+```
+
+
+The error metrics are high when model is regressed against only those who received 2nd dose in the smaller age groups. 
+
+
+#### <b>Component plot showing yearly and weekly trend of the model.</b>
+The model trend shows a higher number of cases in the very beginning of January 2021 and then a weak linear increase in trend of hospitalizations in 2021 until April and from April to December there is a decrease in hospitalizations.
+The extra regressor plot shows the additive effect of regressors and it shows that 2nd dose of vaccination in smaller age groups remains steady until April/May 2021 and then shows a sharp decrease in July 2021 and then shows a linear increase until January 2022. 
+Weekly trend shows there are more hospitalizations on Tuesday and Thursday.
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+prophet_plot_components(model_cases, forecast)
+
+
+```

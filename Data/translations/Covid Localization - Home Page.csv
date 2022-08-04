@@ -21,6 +21,7 @@ DT_label_no_change,no growth (flat),pas de croissance
 more,More,Plus
 fewer,Fewer,Moins
 the_same,About the same,À peu près la même
+,,
 Dashboard,"# Dashboard
 
 Data to {{1}}
@@ -42,6 +43,35 @@ Données en date du {{1}}
 **{{4}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés.
 
 De ce nombre : **{{5}}** patient(s) en soins actifs, **{{6}}** patient(s) aux soins intensifs."
+Dashboard_HCWcovid,"# Dashboard
+
+Data to {{1}}
+
+### Current
+
+{{2}} **{{3}}** days *
+
+{{4}} **{{5}}** *
+
+**{{6}}** confirmed COVID-19 patients in hospital.
+ 
+Including **{{7}}** acute care patients. **{{8}}** ICU patients.
+
+\* Based on COVID-19 cases among health care worker.","# Tableau de bord
+
+Données en date du {{1}}
+
+### Situation actuelle
+
+{{2}} **{{3}}** jours *
+
+{{4}} **{5}}** *
+
+**{6}}** patients confirmés atteints de COVID-19 à l'hôpital.
+ 
+Y compris les **{7}}** patients en soins aigus. **{8}}** patients en soins intensifs.
+
+\* Basé sur les cas de COVID-19 parmi le personnel de santé."
 ShortRangeForecast,"### Short-range forecast
 
 **{{1}}** active cases in the following week, reflecting a current {{2}} of **{{3}} days** (daily growth of {{4}}%).
@@ -52,7 +82,13 @@ ShortRangeForecast,"### Short-range forecast
 
 *New cases are based on approximate date of episode. Case data in the last 7 days are omitted in growth calculations as public health investigators determine earliest onset date.","### Prévisions à court terme
 
-**{{1}}** de patients au cours de la semaine suivante, ce qui reflète un {{2}} par deux actuel de **{{3}} jours** (croissance quotidienne de {{4}} %)."
+**{{1}}** cas actifs dans la semaine suivante, reflétant un {{2}} actuel de **{{3}} jours** (croissance quotidienne de {{4}}%).
+
+**{{5}}** nouveaux cas* dans la semaine suivante, reflétant un {{6} actuel de **{{7}} jours** (croissance quotidienne de {{8}}%).
+
+**{{9}}** patients hospitalisés la semaine suivante, reflétant un {{10}} actuel de **{{{11}} jours** (croissance quotidienne de {{12}}%).
+
+*Les nouveaux cas sont basés sur la date approximative de l'épisode. Les données sur les 7 derniers jours ne sont pas prises en compte dans les calculs de croissance car les enquêteurs de la santé publique déterminent la date d'apparition la plus précoce."
 LongRangeForecast,"### Long-range forecast
 
 **{{1}} to {{2}}** peak patients in Ottawa between **{{3}} & {{4}}**.","### Prévisions à long terme

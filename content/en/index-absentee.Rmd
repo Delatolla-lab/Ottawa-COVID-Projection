@@ -2,6 +2,10 @@
 title: "Ottawa COVID-19 Projections"
 params:
   lang: en
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
 ---
 
 
@@ -55,7 +59,10 @@ source("../../R/epinow_functions.R")
 
 # Loading the covid data of the health care workers in Ottawa (rate of Covid cases per 1000 population)
 
-staff_cov_data<-load("../../Data/Observed data/cumulative_covid_absenteeism_v1.RData")
+
+load("../../Data/Observed data/cumulative_data_absenteeism.RData")
+
+#covid_data <- covid_data %>% rename(date = sampleDate)
 
 
 # data
@@ -65,20 +72,23 @@ ott_observed_staff <- ott_observed %>% mutate(date = as.Date(date)) %>% full_joi
 
 
 
-#Loading health care worker staff two week Covid projections.
+#Loading health care worker staff two week Covid projections per 1000 population
+load(paste0("../../Data/Historic Projections/rate_transformed_historic_cases_projections_", numofweeks, gsub(" ", "", site), ".RData"))
 
 
-staff_cov_projections <- load("../../Data/Historic Projections/Projecions_rev_twoweekCovidEmployeeData.RData")
+## summary estimates below
+summary_estimates <- cases_forecast[[2]]
 
-summary_proj <- load("../../Data/Historic Projections/summary_twoweekCovidEmployeeData.RData")
-summary_estm <- load("../../Data/Historic Projections/summaryestimates_twoweekCovidEmployeeData.RData")
+## summary statistics below:
+summary_stats <- cases_forecast[[3]]
 
-
-rt_proj <- load("../../Data/Historic Projections/rt_projections_twoweekCovidEmployeeData.RData")
+## Variable type == "R"
+staff_cov_projections_3 <- cases_forecast[[1]] %>% filter(variable == "R") 
 
 load("../../Data/short_term_forecast.RData")
 load("../../Data/short_term_hosp_proj.RData")
 ott_projections <- ott_short_forecast[[1]]
+
 
 ## Observed census
 exp_census <- calc_expected_values_for_n_weeks(data = ott_observed, number_weeks = 3, first_day = 1)
@@ -227,7 +237,9 @@ rolling_avg_col <- "rgb(226, 127, 88)"
 
 ```{r, results='hold', echo=FALSE, comment=NA}
 line_break <- insert_translation(localization_data, lang, "break")
-dashboard <- insert_translation(localization_data, lang, "Dashboard",
+
+
+dashboard_HCWcovid <- insert_translation(localization_data, lang, "Dashboard_HCWcovid",
                                 c(as.character(tail(covid_data$date, n=1)),
                                   dt_label,
                                   dt_abs,
@@ -309,7 +321,7 @@ hosp_projections <- insert_translation(localization_data, lang, "hosp_projection
 
 ```
 
-`r dashboard`
+`r dashboard_HCWcovid`
 
 `r past_data_title`
 
@@ -349,25 +361,6 @@ reworked_figure(
 ```
 
 `r observed_staff_cases_text`
-
-`r line_break`
-
-`r observed_staff_incident`
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Visualize current daily cases
-source("../../R/observed_data.R")
-observed_new_episodes <- list(type = "avg_data", y_column = "cummCovidPosAbs_pop", name = "Cumulative health care worker cases by episode date", color = rolling_avg_col, showlegend = TRUE, width = 4)
-
-reworked_figure(
-    xaxis = "date",
-    yaxis = list(observed_new_episodes),
-    titles = c(y = "Cumulative health care worker cases (per 1000 people)", x = "Date", title = "Cumulative incidence of COVID-19 positive staff", ticklabels = "%b %y"),
-    data = ott_observed_staff, date_constraint = TRUE, constraint_val = constrain_val
-  )
-```
-
-`r observed_staff_incident_cases_text`
 
 `r line_break`
 

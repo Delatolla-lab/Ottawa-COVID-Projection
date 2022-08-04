@@ -1,0 +1,725 @@
+---
+title: "Linear Regression Analysis of Ottawa Cases"
+author: "Gauri Saran"
+date: '2022-04-27'
+output: html_document
+---
+
+## <b>Forecasting hospital cases using wastewater signal and vaccination data using Linear Regression model and Multivariate Adaptive Regression Spline (MARS) model with log transformation of the data.</b>
+
+```{r setup, echo=FALSE, warning=FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+## Load libraries
+library(tidyverse)
+library(jsonlite)
+library(tidyr)
+library(tidyr)
+library(lubridate)
+library(stats)
+library(zoo)
+library(stringr)
+library(data.table)
+library(corrr)
+library("Hmisc")
+library("corrplot")
+library(ggpubr)
+library(caTools)
+library(Metrics)
+```
+
+
+```{r echo=FALSE}
+source("vaccine_data_prep.R")
+source("wastewater.R")
+```
+
+```{r echo=FALSE}
+#load vaccine data 
+ottawa_vaccine_data <-
+  fromJSON("https://services.arcgis.com/G6F8XLCl5KtAlZ2G/arcgis/rest/services/COVID-19_Vaccine_Coverage_by_Day_by_Age_by_Dose_for_Ottawa_Residents/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
+
+vacc_data <- ottawa_vaccine_data$features$attributes
+vacc_data <- clean_vacc_data(vacc_data)
+
+```
+### Initial Data Cleaning
+
+Vaccine data, Cases data from the hospital, and the waste water signal data has been loaded, cleaned, and then merged into one final dataframe, `final_data`.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+#load vaccine data 
+ottawa_vaccine_data <-
+  fromJSON("https://services.arcgis.com/G6F8XLCl5KtAlZ2G/arcgis/rest/services/COVID-19_Vaccine_Coverage_by_Day_by_Age_by_Dose_for_Ottawa_Residents/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
+
+vacc_data <- ottawa_vaccine_data$features$attributes
+#Clean the vaccine data
+vacc_data <- clean_vacc_data(vacc_data)
+
+#load cases data
+cases_data <- read.csv(file.path(getwd(), "OPH_Observed_COVID_Data.csv"))
+
+# Select only the hospital case column observed_census_ICU_p_acute_care from the data
+cases_data <- cases_data %>% mutate(date = as.Date(date))
+cases_data <- cases_data %>% select(c(date, observed_census_ICU_p_acute_care))
+
+#load waste water data
+ww_data <- read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
+
+# Clean the waste water data
+ww_clean <- wastewater_prep(ww_data)
+ww_clean <- ww_clean %>% select(c(date, N1_N2_avg))
+
+# Merging the waste water, cases and vaccination data
+final_data <- vacc_data %>% inner_join(cases_data, by= "date") %>% inner_join(ww_clean, by = "date")
+
+```
+
+
+### Exploratory Analysis of the Data
+
+#### <b>The trend of vaccinations in different age groups, waste water signal and the hospitalizations is shown in the plot below:</b>
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+library(plotly)
+trend_plot <- ggplot()+
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_5_1_dose,x= date,colour="Percentage of 5 year olds in Ottawa received 1 dose"),size=1 )+
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_5_2_dose,x= date,colour="Percentage of 5 year olds in Ottawa received 2 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_12_1_dose,x= date,colour="Percentage of 12 year olds in Ottawa received 1 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_12_2_dose,x= date,colour="Percentage of 12 year olds in Ottawa received 2 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_18_1_dose,x= date,colour="Percentage of 18 year olds in Ottawa received 1 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_18_2_dose,x= date,colour="Percentage of 18 year olds in Ottawa received 2 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_30_1_dose,x= date,colour="Percentage of 30 year olds in Ottawa received 1 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_30_2_dose,x= date,colour="Percentage of 30 year olds in Ottawa received 2 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_40_1_dose,x= date,colour="Percentage of 40 year olds in Ottawa received 1 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_40_2_dose,x= date,colour="Percentage of 40 year olds in Ottawa received 2 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_50_1_dose,x= date,colour="Percentage of 50 year olds in Ottawa received 1 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_50_2_dose,x= date,colour="Percentage of 50 year olds in Ottawa received 2 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_60_1_dose,x= date,colour="Percentage of 60 year olds in Ottawa received 1 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_60_2_dose,x= date,colour="Percentage of 60 year olds in Ottawa received 2 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_70_1_dose,x= date,colour="Percentage of 70 year olds in Ottawa received 1 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_70_2_dose,x= date,colour="Percentage of 70 year olds in Ottawa received 2 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_80_1_dose,x= date,colour="Percentage of 80 year olds in Ottawa received 1 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=Percent_of_Ottawa_residents_80_2_dose,x= date,colour="Percentage of 80 year olds in Ottawa received 2 dose"),size=1 ) +
+  geom_line(data=final_data,aes(y=N1_N2_avg,x= date,colour="Wastewater signal"),size=1 ) +
+  geom_line(data=final_data,aes(y=observed_census_ICU_p_acute_care,x= date,colour="Hospital Cases"),size=1 ) +
+  scale_color_manual(name = "Y series", 
+                     values = c("Percentage of 5 year olds in Ottawa received 1 dose" = "darkblue", 
+                                "Percentage of 5 year olds in Ottawa received 2 dose" = "red",
+                                "Percentage of 12 year olds in Ottawa received 1 dose" = "#348EC3",
+                                "Percentage of 12 year olds in Ottawa received 2 dose" = "#468076",
+                                "Percentage of 18 year olds in Ottawa received 1 dose" = "#DDE23C",
+                                "Percentage of 18 year olds in Ottawa received 2 dose" = "#42440C",
+                                "Percentage of 30 year olds in Ottawa received 1 dose" = "#C4C5E9",
+                                "Percentage of 30 year olds in Ottawa received 2 dose" = "#DC77E4",
+                                "Percentage of 40 year olds in Ottawa received 1 dose" = "#E50EF5",
+                                "Percentage of 40 year olds in Ottawa received 2 dose" = "#1E3A64",
+                                "Percentage of 50 year olds in Ottawa received 1 dose" = "#499F7D",
+                                "Percentage of 50 year olds in Ottawa received 2 dose" =  "#8B80D1",
+                                "Percentage of 60 year olds in Ottawa received 1 dose" = "#3C0E17",
+                                "Percentage of 60 year olds in Ottawa received 2 dose" =  "#FC4066",
+                                "Percentage of 70 year olds in Ottawa received 1 dose" = "#CFFAFA",
+                                "Percentage of 70 year olds in Ottawa received 2 dose" = "#26542D",
+                                "Percentage of 80 year olds in Ottawa received 1 dose" = "#CFFAFA",
+                                "Percentage of 80 year olds in Ottawa received 2 dose" = "#26542D",
+                                "Wastewater signal" = "#F36937",
+                                "Hospital Cases" = "#798347"
+                                ))
+t <- list(
+  family = "Times New Roman",
+  size = 16
+ )
+
+ggplotly(trend_plot) %>%
+  layout(title = list(text = "<b>Trend of Vaccinations, wastewater signal, and hospitalizations</b>", font = t), xaxis = list(title = "date"), yaxis = list(title = "<b>Hospital Cases</b>"), width=1100)
+```
+
+The variables have been log transformed to improve correlation between the variables.
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+final_data <- final_data %>% select(-c(ObjectId))
+final_data$observed_census_ICU_p_acute_care = log(final_data$observed_census_ICU_p_acute_care)
+final_data$Percent_of_Ottawa_residents_5_1_dose = log1p(final_data$Percent_of_Ottawa_residents_5_1_dose)
+final_data$Percent_of_Ottawa_residents_5_1_dose = log1p(final_data$Percent_of_Ottawa_residents_5_1_dose)
+final_data$Percent_of_Ottawa_residents_5_2_dose = log1p(final_data$Percent_of_Ottawa_residents_5_2_dose)
+final_data$Percent_of_Ottawa_residents_12_1_dose = log1p(final_data$Percent_of_Ottawa_residents_12_1_dose)
+final_data$Percent_of_Ottawa_residents_12_2_dose = log1p(final_data$Percent_of_Ottawa_residents_12_2_dose)
+final_data$Percent_of_Ottawa_residents_18_1_dose = log1p(final_data$Percent_of_Ottawa_residents_18_1_dose)
+final_data$Percent_of_Ottawa_residents_30_1_dose = log1p(final_data$Percent_of_Ottawa_residents_30_1_dose)
+final_data$Percent_of_Ottawa_residents_30_2_dose = log1p(final_data$Percent_of_Ottawa_residents_30_2_dose)
+final_data$Percent_of_Ottawa_residents_40_1_dose = log1p(final_data$Percent_of_Ottawa_residents_40_1_dose)
+final_data$Percent_of_Ottawa_residents_40_2_dose = log1p(final_data$Percent_of_Ottawa_residents_40_2_dose)
+final_data$Percent_of_Ottawa_residents_50_1_dose = log1p(final_data$Percent_of_Ottawa_residents_50_1_dose)
+final_data$Percent_of_Ottawa_residents_50_2_dose = log1p(final_data$Percent_of_Ottawa_residents_50_2_dose)
+final_data$Percent_of_Ottawa_residents_60_1_dose = log1p(final_data$Percent_of_Ottawa_residents_60_1_dose)
+final_data$Percent_of_Ottawa_residents_60_2_dose = log1p(final_data$Percent_of_Ottawa_residents_60_2_dose)
+final_data$Percent_of_Ottawa_residents_70_1_dose = log1p(final_data$Percent_of_Ottawa_residents_70_1_dose)
+final_data$Percent_of_Ottawa_residents_70_2_dose = log1p(final_data$Percent_of_Ottawa_residents_70_2_dose)
+final_data$Percent_of_Ottawa_residents_80_1_dose = log1p(final_data$Percent_of_Ottawa_residents_80_1_dose)
+final_data$Percent_of_Ottawa_residents_80_2_dose = log1p(final_data$Percent_of_Ottawa_residents_80_2_dose)
+final_data$N1_N2_avg = (final_data$N1_N2_avg) * 1000
+final_data$N1_N2_avg = log1p(final_data$N1_N2_avg)
+```
+
+#### <b>Correlation plot to see the pearson correlation coefficients between different variables in the dataset.</b>
+
+Initially without the log trasformation on the data, the wastewater signal and the vaccination in 5 year old age group showed the highest correlation with hospitalization as can be seen in the correlation plot below. To improve the correlation with other vaccination data, log transformation of the data has been used here.
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12}
+# Creating Correlation matrix and correlellogram plot
+numeric.cols <- sapply(final_data, is.numeric)
+# Filter
+cor.data <- round(cor(final_data[,numeric.cols]), 2)
+
+```
+
+```{r echo=FALSE, warning=FALSE, message = FALSE, fig.width=12, fig.height=12}
+# Creating Correlation matrix and correlellogram plot
+corrplot(cor.data, method = "number")
+```
+
+Checking the correlation between lagged values of the waste water signal with current hospital cases. Past 100 lagged values were evaluated. The correlation with the lagged values seem to be higher for the first few lags and then decreases. The correlation for the lagged values however had increased for the log transformed data than it was the original data without log transformation. Also the higher correlations are seen up to 10th lag value whereas in the original data it was seen until 7th lag after which it started to decrease.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+for (lag in 2:100){
+ lagged <- lag - 2
+ hosp_df <- final_data %>% select(observed_census_ICU_p_acute_care) %>% slice(lag:nrow(final_data))
+
+ lagged_ww <- final_data %>% select(N1_N2_avg) %>% slice(-c((nrow(final_data)-lagged):nrow(final_data)))
+
+ cor.data <- round(cor(hosp_df, lagged_ww), 2)
+ print(paste0("Correlation for lag of", lag))
+ print(cor.data)
+
+ 
+ 
+}
+
+```
+
+### Creating Scatter plots to check correlation
+
+Correlation between waste water signal and observed_census_ICU_p_acute_care (hospitalizations).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+
+ggscatter(final_data, x = "N1_N2_avg", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Waste water signal", ylab = "Hospital cases in Ottawa")
+
+```
+
+Correlation between Percent_of_Ottawa_residents_5_1_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_5_1_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 5 year old vaccinated", ylab = "Hospital cases in Ottawa")
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_12_1_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_12_1_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 12 year old vaccinated", ylab = "Hospital cases in Ottawa")
+
+```
+
+
+Checking correlation between Percent_of_Ottawa_residents_18_1_dose and observed_census_ICU_p_acute_care
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_18_1_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 18 year old vaccinated", ylab = "Hospital cases in Ottawa")
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_30_1_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_30_1_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 18 year old vaccinated", ylab = "Hospital cases in Ottawa")
+
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_40_1_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_40_1_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 40 year old vaccinated", ylab = "Hospital cases in Ottawa")
+
+
+```
+
+Correlation between Percent_of_Ottawa_residents_50_1_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_50_1_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 50 year old vaccinated", ylab = "Hospital cases in Ottawa")
+
+
+```
+
+Correlation between Percent_of_Ottawa_residents_60_1_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_60_1_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 60 year old vaccinated", ylab = "Hospital cases in Ottawa")
+
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_70_1_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_70_1_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 70 year old vaccinated", ylab = "Hospital cases in Ottawa")
+
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_80_1_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_80_1_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 80 year old vaccinated", ylab = "Hospital cases in Ottawa")
+
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_5_2_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_5_2_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 5 year old vaccinated with 2 doses", ylab = "Hospital cases in Ottawa")
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_12_2_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_12_2_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 12 year old vaccinated with 2 doses", ylab = "Hospital cases in Ottawa")
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_18_2_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_18_2_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 18 year old vaccinated with 2 doses", ylab = "Hospital cases in Ottawa")
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_30_2_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_30_2_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 30 year old vaccinated with 2 doses", ylab = "Hospital cases in Ottawa")
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_40_2_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_40_2_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 40 year old vaccinated with 2 doses", ylab = "Hospital cases in Ottawa")
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_50_2_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_50_2_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 50 year old vaccinated with 2 doses", ylab = "Hospital cases in Ottawa")
+
+```
+
+
+Correlation between Percent_of_Ottawa_residents_60_2_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_60_2_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 60 year old vaccinated with 2 doses", ylab = "Hospital cases in Ottawa")
+
+```
+
+Correlation between Percent_of_Ottawa_residents_70_2_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_70_2_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 70 year old vaccinated with 2 doses", ylab = "Hospital cases in Ottawa")
+
+```
+
+Correlation between Percent_of_Ottawa_residents_80_2_dose and observed_census_ICU_p_acute_care (hospitalizations).
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggscatter(final_data, x = "Percent_of_Ottawa_residents_80_2_dose", y = "observed_census_ICU_p_acute_care",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Percentage of 80 year old vaccinated with 2 doses", ylab = "Hospital cases in Ottawa")
+
+```
+
+The scatter plots below do not show a perfectly linear relationship between hospitalization and other variables especially with the vaccine data. The relationship looks non-linear and a piecewise linear model might be a better approach. However, to check for the predictive accuracy of the model, we try both Simple Linear Regression model and MARS model below and compare the accuracy.
+
+#### <b>Simple Linear Regression Model.</b>
+
+Performing Simple Linear Regression on the model for predictive analysis.
+Data is divided into train and test set and the model has been fit on the training data and validated on test data to check performance with metrics. The training set contains 97% of the data. 
+
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+set.seed(101)
+final_data <- final_data %>% select(-c(date))
+colnames(final_data)
+# Diving data into train and test set.
+sample <- sample.int(n = nrow(final_data), size = floor(.97*nrow(final_data)), replace = F)
+train <- final_data[sample, ]
+test  <- final_data[-sample, ]
+
+```
+
+
+<b>Summary</b> of the Linear Regression model with beta coefficients of the variables used for regression analysis to predict hospitalization and their statistical significance is presented below. The Rsquare is around 87%. Therefore, 87% of variance in the response is being explained by a simple linear regression model.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+model <- lm(observed_census_ICU_p_acute_care ~ ., data = train)
+summary(model)
+```
+Checking residuals in the Simple Linear Regression model and creating a plot of the residuals.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+res <- residuals(model)
+res <- as.data.frame(res)
+head(res)
+ggplot(res, aes(res)) + geom_histogram(fill = 'blue', alpha=0.5)
+```
+
+#### Checking distribution of errors in a qqplot.
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggqqplot(res$res, ylab = "Distribution of Errors in Linear Regression model")
+
+```
+
+
+### Plot of the residuals for simple Linear Regression model
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+plot(res$res, 
+     main = "Residuals for Simple Linear Regression model", 
+     xlab = "Observation number in test set", 
+     ylab = "Residual")
+```
+
+
+Even though the errors were not normally distributed when the regression analysis was done on the data without log transformation, however, after log transformation, the errors in linear regression model looks normally distributed.The qqplot, histogram plot and residual plots reflect this.
+
+Calculating metrics from actual vs predicted:
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+train.predictions <- predict(model, train)
+train.predictions <- exp(train.predictions)
+train_results <- cbind(train.predictions, exp(train$observed_census_ICU_p_acute_care))
+train_results <- as.data.frame(train_results)
+colnames(train_results) <- c('predicted', 'actual')
+hospital.predictions <- predict(model, test)
+hospital.predictions <- exp(hospital.predictions)
+results <- cbind(hospital.predictions, exp(test$observed_census_ICU_p_acute_care))
+colnames(results) <- c('predicted', 'actual')
+results <- as.data.frame(results)
+print(head(results))
+```
+
+Root Mean Squared Error for the test data:
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+rmse(results$predicted, results$actual)
+
+```
+Mape on Test set
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+mape(results$predicted, results$actual)
+
+```
+
+Root Mean Squared Error for the Simple Linear Regression Model on train set:
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+rmse(train_results$predicted, train_results$actual)
+
+```
+Mape on Train set
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+mape(train_results$predicted, train_results$actual)
+
+```
+
+Standard deviation of the actual data
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+sd(exp(final_data$observed_census_ICU_p_acute_care))
+```
+
+
+
+Plots comparing actual test data and predicted test data by simple linear regression model
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+library(plotly)
+linear_reg_plot <- ggplot()+
+  geom_line(data=results,aes(y=actual,x= 1:nrow(results),colour="Actual values of hospital cases"),size=1 )+
+  geom_line(data=results,aes(y=predicted,x= 1:nrow(results),colour="Predicted values of hospital cases"),size=1) +
+  scale_color_manual(name = "Y series", values = c("Actual values of hospital cases" = "green", "Predicted values of hospital cases" = "red"))
+
+t <- list(
+  family = "Times New Roman",
+  size = 16
+ )
+
+ggplotly(linear_reg_plot) %>%
+  layout(title = list(text = "<b>Comparison plot between Actual and predicted values for Linear Regression model on the test data</b>", font = t), xaxis = list(title = ""), yaxis = list(title = "<b>Hospital Cases</b>"), width=1100)
+
+```
+
+
+#### <b>Using Multivariate Adaptive Reression Splines (Piecewise Linear Regression model) for prediction of hospital cases.</b>
+
+This model uses piece wise linear regression to fit the data. It automatically finds the knots in the data to use for piece wise regression.
+
+The model has been fit on the training data which consist of the 97% of the data.
+
+Automated hyperparameter search is done using grid search algorithm using cross validation with 10 folds. Here data is divided into 10 equal sized folds where the validation is performed on each of those 10 folds using the remaining data for training in each scenario. The combination of those hyperparameters that gives the lowest average error metric on those 10 folds is selected by the cross validation algorithm as the most appropriate hyperparameters.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(MASS)
+library(earth)
+library(caret)
+
+set.seed(201)
+
+mars_train_x <- train[ ,!(colnames(train) %in% c("observed_census_ICU_p_acute_care"))]
+mars_train_y <- train$observed_census_ICU_p_acute_care
+
+
+```
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# Create a parameter tuning "grid"
+parameter_grid <- floor(expand.grid(degree = 1:4, nprune = seq(5, 25, by = 5)))
+```
+
+Performing Cross validation grid search with 4 degrees of interaction terms corresponding to the `degree` hyperparameter in the model and number of knots to include in the final pruned model corresponding to the `nprune` hyperparameter in the model.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# Perform cross-validation
+cv_mars_model <- train(x = mars_train_x,
+                        y = mars_train_y,
+                        method = "earth",
+                        metric = "RMSE",
+                        trControl = trainControl(method = "cv", number = 10), #number of cross validation folds
+                        tuneGrid = parameter_grid)
+```
+
+#### <b>Summary of the Cross validation performed using the MARS model</b>
+
+The data below shows which hyperparameters gives the lowest error metrics (RMSE, Rsquare, and Mean Absolute error).
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+print(cv_mars_model)
+```
+
+Below the model with the lowest RMSE from cross validation search is displayed.
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+cv_mars_model$results %>%
+  filter(nprune==cv_mars_model$bestTune$nprune, degree ==cv_mars_model$bestTune$degree)
+```
+
+
+The model has selected 14 predictor variables with 3 degree of interaction terms. The final model has 25 terms which includes the intercept. The Rsquare is 96.2%. The RMSE error in the model is 3.69. Therefore, a very high percentage of variance in the response is being explained by the predictor variables in the model. 
+
+For the simple linear regression model the Rsquare was 91.0% and only explains 91% of variance in the response. The RMSE was 26.4. The model has improved 91% to 96% from simple linear regression to MARS model when using log transformed data. However, the improve in model was far more without log transformation in the MARS model as the R square for MARS model using data without log transformation was 98% and the Rsquare for linear regression was 87%. Therefore, for the data without log transformation, there was a greater shift in the model fit statistics.
+
+The MARS model definitely outperforms the simple linear regression model with a lower RMSE and higher Rsquare.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+summary(cv_mars_model)
+```
+
+
+#### Visualizing the results from the cross validation on the parameter tuning 
+#### nprune is along x-axis (maximum number of terms)
+#### the fill aesthetic (colours) and shape aesthetic are "degree" (max. degree of interaction term)
+
+From the model below it is clear that the best model is one with 3 degrees of interaction and 25 nprune terms.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(cv_mars_model)
+```
+
+Using the best model to predict response variable for the train and test set.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+mars_predict <- predict(object = cv_mars_model$finalModel, 
+                        newdata = test)
+mars_predict <- exp(mars_predict)
+mars_predict <- as.data.frame(mars_predict)
+results <- cbind(mars_predict$y, exp(test$observed_census_ICU_p_acute_care))
+
+results <- as.data.frame(results)
+colnames(results) <- c('predicted', 'actual')
+
+mars_train_predict <- predict(object = cv_mars_model$finalModel, 
+                        newdata = train)
+mars_train_predict <- exp(mars_train_predict)
+mars_train_predict <- as.data.frame(mars_train_predict)
+train_results <- cbind(mars_train_predict$y, exp(train$observed_census_ICU_p_acute_care))
+train_results <- as.data.frame(train_results)
+colnames(train_results) <- c('predicted', 'actual')
+```
+
+Root Mean Squared Error for the Simple Linear Regression Model on the Test set:
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+rmse(results$predicted, results$actual)
+
+```
+
+Mape on Test set
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+mape(results$predicted, results$actual)
+
+```
+
+Root Mean Squared Error for the Simple Linear Regression Model on Train set:
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+rmse(train_results$predicted, train_results$actual)
+
+```
+
+Mape on Train set
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+mape(train_results$predicted, train_results$actual)
+
+```
+
+Plots comparing actual test data and predicted test data by MARS model
+
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+library(plotly)
+mars_plot <- ggplot()+
+  geom_line(data=results,aes(y=actual,x= 1:nrow(results),colour="Actual values of hospital cases"),size=1 )+
+  geom_line(data=results,aes(y=predicted,x= 1:nrow(results),colour="Predicted values of hospital cases"),size=1) +
+  scale_color_manual(name = "Y series", values = c("Actual values of hospital cases" = "darkblue", "Predicted values of hospital cases" = "red"))
+t <- list(
+  family = "Times New Roman",
+  size = 16
+ )
+
+ggplotly(mars_plot) %>%
+  layout(title = list(text = "<b>Comparison plot between Actual and predicted values of test data for MARS model</b>", font = t), xaxis = list(title = ""), yaxis = list(title = "<b>Hospital Cases</b>"), width=1100)
+```
+
+
+Checking residuals in the MARS model and creating a plot
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+res <- exp(test$observed_census_ICU_p_acute_care) - mars_predict$y
+res <- as.data.frame(res)
+ggplot(res, aes(res)) + geom_histogram(fill = 'blue', alpha=0.5)
+```
+
+
+### Checking distribution of errors in a qqplot.
+```{r echo=FALSE, warning=FALSE, message = FALSE}
+ggqqplot(res$res, ylab = "Distribution of Errors in Linear Regression model")
+
+```
+
+# Plot of the residuals for MARS model
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+plot(exp(test$observed_census_ICU_p_acute_care) - mars_predict$y, 
+     main = "Residuals for MARS model", 
+     xlab = "Observation number in test set", 
+     ylab = "Residual")
+```
+
+
+#### <b>Summary</b>
+
+Taking the log transformation of the data has definitely improved the correlation between the vaccine data and the hospitalization. The simple linear regression also performs better on log transformed data than the original data as R square statistic showing model fit increased. The RMSE and MAPE score also decreased for simple linear regression model with log transformed data.
+
+However, piece wise linear regression analysis using MARS model still outperformed linear regression giving a lower error metric and better model fit on log transformed data as well.
+
+The errors in MARS model are much smaller than ones obtained from Simple Linear Regression. There are a few outliers. However, the qqplot shows a pretty much close to normal distribution of errors.
+
+### Advantages of using MARS:
+MARS scans each predictor to identify a split that improves predictive accuracy, non-informative features will not be chosen. Furthermore, highly correlated predictors do not impede predictive accuracy as much as they do with OLS models.
