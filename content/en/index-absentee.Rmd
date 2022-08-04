@@ -76,6 +76,8 @@ ott_observed_staff <- ott_observed %>% mutate(date = as.Date(date)) %>% full_joi
 load(paste0("../../Data/Historic Projections/rate_transformed_historic_cases_projections_", numofweeks, gsub(" ", "", site), ".RData"))
 
 
+load(paste0("../../Data/Historic Projections/historic_cases_summary_stats_", numofweeks, gsub(" ", "", site), ".RData"))
+
 ## summary estimates below
 summary_estimates <- cases_forecast[[2]]
 
