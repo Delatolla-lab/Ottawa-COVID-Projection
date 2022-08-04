@@ -980,11 +980,11 @@ reworked_figure <-
     }
     
     if(isTRUE(date_constraint)){
-      if(as.Date(first(data$date)) > as.Date(last(data$date) - 40)){
+      if(as.Date(first(data$date)) > as.Date(last(data$date))- 40){
         a <- as.Date(first(data$date))
       }
       else{
-        a <- as.Date(last(data$date) - constraint_val) 
+        a <- as.Date(last(data$date))- constraint_val 
       }
       b <- as.Date(last(data$date))
       p <- layout(p, xaxis = list(range = c(a, b)))
