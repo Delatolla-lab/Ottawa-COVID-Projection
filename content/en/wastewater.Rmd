@@ -359,7 +359,7 @@ sheet <- variant_sheet %>%
 ### Variants of Concern
 
 The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater. 
-<img src="/images/voc_image_22April22.png" width = "90%" height = "90%"/>
+<img src="/images/voc_image_25July22.jpg" width = "90%" height = "90%"/>
 
 ---
 
