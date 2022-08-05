@@ -1,0 +1,40 @@
+---
+date: "2016-05-05T21:48:51-07:00"
+title: Methods
+link-citations: true
+bibliography: refs.bib
+---
+
+
+
+<p>Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references.</p>
+<div id="projection-models" class="section level2">
+<h2>Projection models</h2>
+<p>Data used to create hospital projection models can be accessed at <a href="https://open.ottawa.ca/datasets/covid-19-cases-and-deaths-in-ottawa">Open Ottawa</a>. See ’COVID-19 cases and deaths`. Data used to create wastewater projection models can be accessed at <a href="https://github.com/Big-Life-Lab/PHESD">PHESD</a>.</p>
+<p><em>COVID-19 short-term projections are created using the <a href="https://epiforecasts.io/EpiNow2/">Bayesian EpiNow2 model</a> developed by the EpiForecasts team.</em></p>
+<ul>
+<li>Projections are based on observed COVID-19 hospital census and wastewater viral recovery, which is, in turn, estimated using reported incubation period and consideration for reporting delays.</li>
+</ul>
+</div>
+<div id="wastewater" class="section level2">
+<h2>Wastewater COVID-19 surveillance</h2>
+<p>Ottawa’s wastewater data is available <a href="https://github.com/Big-Life-Lab/PHESD">here</a>. Wastewater test results for other Canadian cities can be found here <a href="https://nccid.ca/wastewater-surveillance-for-covid-19/">here</a>.</p>
+<p>See <a href="https://www.ottawapublichealth.ca/en/reports-research-and-statistics/Wastewater_COVID-19_Surveillance.aspx">Ottawa Public Health website</a> for an overview of the wastewater surveillance program and its role in COVID-19 surveillance. Detail laboratory methods are published <a href="https://www.medrxiv.org/content/10.1101/2020.08.11.20173062v3">here</a>. The surveillance program is under development. Results and interpretation are publicly-presented for discussion.</p>
+<p>Wastewater samples are from the Robert O. Pickard Environmental Centre (ROPEC) which collects and treats wastewater from ~91.6% of Ottawa’s population. Samples for COVID-19 surveillance are collected hourly for a period of 24 hours, five days a week from sludge (directly from the primary clarifiers). The assay method has been validated in a national cross-laboratory study. Two viral regions of SARS-CoV-2 (N1 and N2) are assayed and standardized using the viral levels of Pepper Mild Mottle Virus (PMMoV). The reported measure is the sample mean of N1 + N2 copies per copy of PMMoV. A <a href="https://www.sciencedirect.com/science/article/pii/S0043135420310952?dgcid=author">peer-reviewed study</a> describes the methods in more detail. The pre-print is published <a href="https://www.medrxiv.org/content/10.1101/2020.08.11.20173062v3">here</a>.</p>
+<p>A note about data reporting: Data is typically uploaded to the website less than 24 hours after the sample is collected from the wastewater treatment plant. The samples are collected for a period of 24 hours. So samples uploaded to the website are dated 48 hours prior to the upload date. Samples collected on Fridays, Saturdays and Sundays will be reported the following week on Tuesdays. If data generated does not pass quality control (this is not a rare occurrence and reflects both the nature of the technology and the rigorous standards applied to achieve reliable measurements), data reporting may be delayed further.</p>
+</div>
+<div id="parameters" class="section level2">
+<h2>Input parameters</h2>
+<p>Parameter estimates for hospital projections are based on the reported number of COVID-19 patients in hospitals from Ottawa Public Health, while wastewater projections are based on sample data from ROPEC. For both projections, generation time estimates are obtained from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7201952/">Ganyani et. al.</a> <span class="citation">Ganyani et al. (<a href="#ref-Ganyani2020" role="doc-biblioref">2020</a>)</span>, while incubation period estimates are obtained from <a href="https://pubmed.ncbi.nlm.nih.gov/32150748/">Lauer et. al.</a> <span class="citation">Lauer et al. (<a href="#ref-Lauer2020" role="doc-biblioref">2020</a>)</span>.</p>
+<div id="references" class="section level3 unnumbered">
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Ganyani2020" class="csl-entry">
+Ganyani, Tapiwa, Cécile Kremer, Dongxuan Chen, Andrea Torneri, Christel Faes, Jacco Wallinga, and Niel Hens. 2020. <span>“<span class="nocase">Estimating the generation interval for coronavirus disease (COVID-19) based on symptom onset data, March 2020</span>.”</span> <em>Eurosurveillance</em>. <a href="https://doi.org/10.2807/1560-7917.ES.2020.25.17.2000257">https://doi.org/10.2807/1560-7917.ES.2020.25.17.2000257</a>.
+</div>
+<div id="ref-Lauer2020" class="csl-entry">
+Lauer, Stephen A., Kyra H. Grantz, Qifang Bi, Forrest K. Jones, Qulu Zheng, Hannah R. Meredith, Andrew S. Azman, Nicholas G. Reich, and Justin Lessler. 2020. <span>“<span class="nocase">The incubation period of coronavirus disease 2019 (CoVID-19) from publicly reported confirmed cases: Estimation and application</span>.”</span> <em>Annals of Internal Medicine</em>. <a href="https://doi.org/10.7326/M20-0504">https://doi.org/10.7326/M20-0504</a>.
+</div>
+</div>
+</div>
+</div>
