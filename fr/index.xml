@@ -29,9 +29,7 @@ COVID-19 short-term projections are created using the Bayesian EpiNow2 model dev
       
       <guid>https://613covid.ca/fr/more/</guid>
       <description>Utilisation des modèles Les projections s’utilisent principalement de deux manières :
-Les projections à court terme (2 à 4 semaines) servent à connaître les besoins immédiats en services hospitaliers et en soins critiques pour les patients atteints de la COVID-19.
-Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet d’un relâchement de la distanciation physique.
- Précision des modèles Il est difficile de faire des projections précises à long terme sur la propagation de la COVID-19.</description>
+Les projections à court terme (1 à 4 semaines) reflètent le niveau actuel de transmission du COVID-19 et l’efficacité actuelle de la prévention et du contrôle du COVID-19 en cours. Les projections à court terme reflètent les besoins immédiats en matière de soins de santé, tels que les services hospitaliers et de soins intensifs pour les patients atteints du COVID-19.</description>
     </item>
     
     <item>
@@ -54,7 +52,7 @@ Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet
       
       <guid>https://613covid.ca/fr/contact/</guid>
       <description>Personne-ressource pour les médias: Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: mschreiter@toh.ca Téléphone: 613-222-7674
-Personnes-ressources scientifiques: Doug Manuel dmanuel@ohri.ca, Alan Forster
+Personnes-ressources scientifiques: Mathew Thomson matthomson@ohri.ca
 Remerciements pour le site Web et le contenu: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
 Avec le soutien des épidémiologistes de Santé publique Ottawa: Amira Ali, Jacqueline Willmore, Dara Spatz
 Groupe de recherche uOttawa – CHEO SARS-CoV-2: Robert Delatolla, Alex MacKenzie, Patrick D’Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber.</description>
@@ -66,7 +64,24 @@ Groupe de recherche uOttawa – CHEO SARS-CoV-2: Robert Delatolla, Alex MacKenzi
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/fr/wastewater/</guid>
-      <description>People with COVID-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a COVID-19 test or ever are diagnosed. Thus, in contrast to assessing community COVID-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with COVID-19 given that everyone goes to the washroom.</description>
+      <description>Wastewater plots last updated: 05 August, 2022, 09:41:01
+Wastewater samples collected up to: 02 August, 2022
+Reported date up to: 05 August, 2022
+The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
+Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing.</description>
+    </item>
+    
+    <item>
+      <title>Ottawa COVID-19 wastewater surveillance</title>
+      <link>https://613covid.ca/fr/wastewater_plus_influenza/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://613covid.ca/fr/wastewater_plus_influenza/</guid>
+      <description>Wastewater plots last updated: 05 August, 2022, 09:40:48
+Wastewater samples collected up to: 02 August, 2022
+Reported date up to: 05 August, 2022
+The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
+Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing.</description>
     </item>
     
     <item>
