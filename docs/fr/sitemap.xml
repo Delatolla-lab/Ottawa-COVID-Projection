@@ -103,20 +103,6 @@
   </url>
   
   <url>
-    <loc>https://613covid.ca/fr/wastewater_plus_influenza/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/wastewater_plus_influenza/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/wastewater_plus_influenza/"
-                />
-  </url>
-  
-  <url>
     <loc>https://613covid.ca/fr/roadmap/</loc>
     <xhtml:link
                 rel="alternate"

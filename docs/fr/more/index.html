@@ -103,6 +103,12 @@
                     
                         <a 
                             class="dropdown-item" 
+                            href="/fr/#case-projections">
+                             Case Projections
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
                             href="/fr/#hospitalization-projections">
                             Projections d&#39;hospitalisation
                         </a>
@@ -111,12 +117,6 @@
                             class="dropdown-item" 
                             href="/fr/wastewater/#ww-visualization">
                              Wastewater visualization
-                        </a>
-                    
-                        <a 
-                            class="dropdown-item" 
-                            href="/fr/#definitions">
-                            D�finitions
                         </a>
                     
                     </div>
@@ -153,14 +153,70 @@
                     
                         <a 
                             class="dropdown-item" 
+                            href="/fr/model/#distancing-math">
+                             How physical distancing affects projections
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
                             href="/fr/model/#parameters">
                             Paramètres d&#39;entrée
                         </a>
                     
                         <a 
                             class="dropdown-item" 
+                            href="/fr/model/#plot-data">
+                             Plot data
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
                             href="/fr/model/#references">
                             Références
+                        </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                <li class="nav-item dropdown">
+                    <a 
+                        class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Plus
+                    </a>
+                    <div 
+                        class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdownMenuLink" id="viz-dropdown">
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/fr/more/#use">
+                            Utilisation du modèle
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/fr/more/#accuracy">
+                            Précision du modèle
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/fr/more/#scenarios">
+                            Scénarios de distanciation physique
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/fr/more/#distancing">
+                            Distanciation physique
+                        </a>
+                    
+                        <a 
+                            class="dropdown-item" 
+                            href="/fr/more/#distancing-effectiveness">
+                            Efficacité de l&#39;éloignement physique
                         </a>
                     
                     </div>
@@ -221,24 +277,24 @@
 <div id="use" class="section level2">
 <h2>Utilisation des modèles</h2>
 <p>Les projections s’utilisent principalement de deux manières :</p>
-<ol style="list-style-type: decimal">
-<li><p>Les projections à court terme (1 à 4 semaines) reflètent le niveau actuel de transmission du COVID-19 et l’efficacité actuelle de la prévention et du contrôle du COVID-19 en cours. Les projections à court terme reflètent les besoins immédiats en matière de soins de santé, tels que les services hospitaliers et de soins intensifs pour les patients atteints du COVID-19.</p></li>
-<li><p>Les projections à long terme (à partir de 6 semaines) reflètent les tendances durables des transmissions du COVID-19. Les projections à long terme sont utiles pour évaluer l’effet potentiel de la réouverture du COVID-19 ou la nécessité d’augmenter les restrictions pour contrôler les poussées.</p></li>
-</ol>
+<p>Les projections à court terme (2 à 4 semaines) servent à connaître les besoins immédiats en services hospitaliers et en soins critiques pour les patients atteints de la COVID-19.</p>
+<p>Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet d’un relâchement de la distanciation physique.</p>
 </div>
 <div id="accuracy" class="section level2">
-<h2>Précision du modèle</h2>
-<p>Les projections à court terme présentent un degré modéré de variation entre les méthodes de modélisation. Des pays comme [l’Allemagne et la Pologne] (<a href="https://kitmetricslab.github.io/forecasthub/forecast" class="uri">https://kitmetricslab.github.io/forecasthub/forecast</a>) et les [États-Unis] (<a href="https://viz.covid19forecasthub.org" class="uri">https://viz.covid19forecasthub.org</a>) abordent la variation des modèles par l’agrégation et les centres d’ensemble qui combinent les projections de différentes équipes scientifiques et approches de modélisation. L’approche utilisée à 613covid.ca se retrouve couramment dans les centres d’ensemble. Typiquement, l’approche utilisée à 613covid.ca génère des projets qui se situent au milieu ou un peu plus haut que la projection d’ensemble moyenne pendant une augmentation de la transmission du COVID-19 ou un peu plus bas que la moyenne pendant une diminution de la transmission du COVID-19.</p>
-<p>Les projections à long terme sont moins précises que les projections à court terme en raison de l’évolution des stratégies de contrôle du COVID-19. Les prévisions à long terme concernant le COVID-19 sont similaires aux prévisions météorologiques. Il est difficile de prévoir quand un ouragan touchera terre alors qu’il se trouve encore à des milliers de kilomètres en mer. Les prévisions sont mises à jour avec les dernières données, y compris les données locales, pour aider à comprendre quand et où l’ouragan touchera terre.</p>
-<p>Nous ne pouvons pas prévoir de manière fiable le temps qu’il fera dans six mois, et nous ne pouvons pas prévoir le COVID-19 dans six mois. Cependant, nous pouvons prévoir COVID-19 de manière fiable dans deux à quatre semaines. Ces prévisions à court terme nous donnent le temps de planifier et d’augmenter les ressources en matière de soins de santé en fonction des besoins.</p>
-<p>Ceci étant dit, les ouragans et le COVID-19 ne sont pas les mêmes. La trajectoire et la force d’un ouragan ne peuvent pas être influencées, mais les pires effets du COVID-19 peuvent être évités si nous suivons les directives de santé publique, comme rester chez soi et pratiquer la distanciation physique.</p>
+<h2>Précision des modèles</h2>
+<p>Il est difficile de faire des projections précises à long terme sur la propagation de la COVID-19. C’est un peu comme tenter de prévoir le moment où un ouragan touchera terre alors qu’il est encore à des milliers de kilomètres de la côte. Les prévisions à court terme sont plus précises. Il faut mettre à jour les projections à partir des données les plus récentes, notamment les données locales, pour avoir une meilleure idée du moment et de l’endroit où l’ouragan touchera terre.</p>
+<p>Tout comme la météo, il est impossible de prédire l’évolution de la COVID-19 avec fiabilité six mois d’avance. Par contre, nous pouvons prédire de façon fiable l’évolution de la COVID-19 pour les deux à quatre prochaines semaines. Grâce à ces projections à court terme, nous avons le temps de prévoir les besoins en ressources pour offrir des soins de santé et d’augmenter ces ressources si nécessaires.</p>
+<p>Cela dit, la COVID-19 et un ouragan sont deux choses différentes. Nous ne pouvons pas modifier la trajectoire ni la force d’un ouragan, mais nous pouvons éviter les conséquences les plus graves de la COVID-19 si nous suivons les directives de santé publique, comme rester à la maison et pratiquer la distanciation physique.</p>
+<p>Quant aux projections à long terme relatives à la COVID-19, elles nous informent sur l’efficacité de la distanciation physique et des autres mesures de prévention.</p>
 </div>
-<div id="scénarios" class="section level2">
+<div id="scenarios" class="section level2">
 <h2>Scénarios de distanciation physique</h2>
-<p>La distanciation physique et d’autres mesures préventives comme le port de masques sont les facteurs les plus importants pour prévoir les cas de COVID-19 à long terme (1 à 4 mois) et le recours aux hôpitaux.</p>
-<p>Santé publique Ontario a prévu 100 000 décès dus au COVID-19 en Ontario sans mesures préventives et une estimation inférieure de 3 000 décès avec des mesures préventives. Cette large fourchette d’estimations (100 000 à 3 000 décès) reflète différents niveaux de distanciation physique.</p>
-<p>Un niveau élevé de distanciation physique permettra d’obtenir une réduction de <strong>97 % des décès</strong> par rapport à un scénario sans mesure préventive (100 000 décès). Le large éventail des projections est la raison pour laquelle nous devons surveiller et mettre à jour les projections d’Ottawa afin de refléter la façon dont nous réalisons la prévention de COVID-19.</p>
-<p>##Distanciation physique {#distanciation}</p>
+<p>La distanciation physique et les autres mesures préventives sont les facteurs les plus importants qui servent à prédire à long terme (de 1 à 10 mois d’avance) le nombre de cas de COVID-19 et l’occupation des hôpitaux.</p>
+<p>Selon les projections de Santé publique Ontario, l’absence de mesures de prévention pourrait entraîner 100 000 décès attribuables à la COVID-19 en Ontario, tandis qu’avec des mesures de prévention, le nombre estimé de décès est réduit à 3 000. L’écart important entre les estimations (100 000 décès comparativement à 3 000) reflète les différents degrés de distanciation physique envisagés dans les scénarios.</p>
+<p>Un degré élevé de distanciation physique permettrait de réduire de 97 % le nombre de décès par rapport à un scénario sans aucune mesure préventive (100 000 décès). Compte tenu des grandes différences entre ces projections, nous devons surveiller et mettre à jour les projections d’Ottawa afin qu’elles reflètent l’efficacité de nos mesures de prévention.</p>
+</div>
+<div id="distancing" class="section level2">
+<h2>Distanciation physique</h2>
 <div class="more-info-images">
 <figure>
 <img src="/images/Physicalsocialdistancing_webbanner_updated.jpg"
