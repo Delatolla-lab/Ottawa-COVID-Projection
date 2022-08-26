@@ -1,23 +1,34 @@
-﻿Key,en,fr
-Intro,"_Last updated on {{1}}._
+gty,en,fr
+break,---,---
+case_projections,## {#case-projections},## {#case-projections}
+case_projections_text,Short-term COVID-19 projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created.,Les projections COVID-19 à court terme sont présentées ci-dessous. Voir [plus](/more) pour une discussion sur l'interprétation du modèle et [Méthodes](/model) pour savoir comment les projections ont été créées.
+Contact,"**Media Contact:** Rebecca Abelson, Media Relations Officer, The Ottawa Hospital Email: [rabelson@toh.ca](mailto:rabelson@toh.ca) 
 
-Pour le français cliquez [ici](https://613covid.ca/fr/).
+**Science contacts:** Mathew Thomson [matthomson@ohri.ca](mailto:matthomson@ohri.ca)
 
-This website has forecasts of hospitalization counts from COVID-19 and wastewater recovery of SARS-CoV-2.
+**Acknowledgements for website and content:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran and others on Big Life Lab team.
 
-Website is optimized for desktop use. For mobile users, it is recommended to view in landscape mode.
+**Supporting Ottawa Public Health epidemiologists:** Amira Ali, Jacqueline Willmore, Dara Spatz
 
-Click here to access the COVID-19 Daily Dashboard created by Ottawa Public Health. The Ottawa Public Health dashboard provides up to date COVID-19 metrics that inform projections presented on this website.","_Dernière mise à jour : {{1}}._
+**uOttawa ‚Äì CHEO SARS-CoV-2 research group:** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, √âlisabeth Mercier, Antoine Cantin, Tyson Graber
 
-For English click [here](https://613covid.ca/)
+**Computing infrastructure:** Indoc Research - Open Data Environment
 
-Prévisions actuelles de l’occupation des hôpitaux par des patients atteints de la COVID-19 dans la région d’Ottawa. Une réalisation de l’équipe de [ProjectBigLife.ca](https://www.projectbiglife.ca) à L’Hôpital d’Ottawa et à l’Université d’Ottawa, avec la contribution de Santé publique Ottawa, qui fournit notamment les données."
-DT_label_half,halving time,temps de division
-DT_label_double,doubling time,temps de doublement
-DT_label_no_change,no growth (flat),pas de croissance
-more,More,Plus
-fewer,Fewer,Moins
-the_same,About the same,À peu près la même
+**Colour consultant:** Toby Barker
+
+**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).","**Personnes-ressources scientifiques:** Mathew Thomson [matthomson@ohri.ca](mailto:matthomson@ohri.ca)
+
+**Remerciements pour le site Web et le contenu:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
+
+**Avec le soutien des épidémiologistes de Santé publique Ottawa:** Amira Ali, Jacqueline Willmore, Dara Spatz
+
+**Groupe de recherche uOttawa – CHEO SARS-CoV-2:** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber.
+
+**Consultant couleur:** Toby Barker
+
+**Propriété intellectuelle:** Icônes relatives à la COVID-19 créées par [surang](https://www.flaticon.com/authors/surang), de [www.flaticon.com](https://www.flaticon.com/authors/surang).
+
+**Personne-ressource pour les mdias:** Rebecca Abelson, agente des relations avec les médias, L'Hôpital d'Ottawa. Courriel: rabelson@toh.ca"
 Dashboard,"# Dashboard
 
 Data to {{1}}
@@ -30,31 +41,57 @@ Data to {{1}}
  
 Including **{{5}}** acute care patients. **{{6}}** ICU patients.","# Tableau de bord
 
+
+
+Données en date du {{1}}
+
+
+
+### Situation actuelle
+
+
+
+{{2}} **{{3}}** days
+
+
+
+**{{4}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés.
+
+
+
+De ce nombre : **{{5}}** patient(s) en soins actifs, **{{6}}** patient(s) aux soins intensifs."
+Dashboard_HCWcovid,"# Dashboard
+
+Data to {{1}}
+
+### Current
+
+{{2}} **{{3}}** days *
+
+{{4}} **{{5}}** *
+
+**{{6}}** confirmed COVID-19 patients in hospital.
+ 
+Including **{{7}}** acute care patients. **{{8}}** ICU patients.
+
+\* Based on COVID-19 cases among health care worker.","# Tableau de bord
+
 Données en date du {{1}}
 
 ### Situation actuelle
 
-{{2}} **{{3}}** days
+{{2}} **{{3}}** jours *
 
-**{{4}}** patient(s) atteint(s) de la COVID-19 sont hospitalisés.
+{{4}} **{5}}** *
 
-De ce nombre : **{{5}}** patient(s) en soins actifs, **{{6}}** patient(s) aux soins intensifs."
-ShortRangeForecast,"### Short-range forecast
+**{6}}** patients confirmés atteints de COVID-19 à l'hôpital.
+ 
+Y compris les **{7}}** patients en soins aigus. **{8}}** patients en soins intensifs.
 
-**{{1}}** active cases in the following week, reflecting a current {{2}} of **{{3}} days** (daily growth of {{4}}%).
-
-**{{5}}** new cases* in the following week, reflecting a current {{6}} of **{{7}} days** (daily growth of {{8}}%).
-
-**{{9}}** hospital patients in the following week, reflecting a current {{10}} of **{{11}} days** (daily growth of {{12}}%).
-
-*New cases are based on approximate date of episode. Case data in the last 7 days are omitted in growth calculations as public health investigators determine earliest onset date.","### Prévisions à court terme
-
-**{{1}}** de patients au cours de la semaine suivante, ce qui reflète un {{2}} par deux actuel de **{{3}} jours** (croissance quotidienne de {{4}} %)."
-LongRangeForecast,"### Long-range forecast
-
-**{{1}} to {{2}}** peak patients in Ottawa between **{{3}} & {{4}}**.","### Prévisions à long terme
-
-Sommet de **{{1}} à {{2}}** patients à Ottawa entre **{{3}} et {{4}}**."
+\* Basé sur les cas de COVID-19 parmi le personnel de santé."
+"Dashed line represents the last date of observed cases.""","""Projections to {{1}}.""","""Projections à {{1}}."""
+Death_text,**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date.,**Remarque:** Il est possible que le nombre de décès des 3 à 5 derniers jours ne reflète pas le nombre réel de décès attribuables à la COVID-19 puisque certains cas sont encore à l’étude afin de déterminer la date la plus récente d’apparition.
+death_title,## Past deaths {#death-visualization},## Décès antérieurs {#death-visualization}
 Definitions,"## Definitions
 
 > **Hospital count** is the count of patients in all Ottawa hospitals at midnight on the previous day. OPH counts and hospital counts reported from other sources may be different because:
@@ -81,85 +118,76 @@ See the [More](/more) page for more definitions and more information about the t
 
 ---","## Définitions
 
+
+
 > **Le recensement des hospitalisations** correspond au nombre de patients recensés dans l’ensemble des hôpitaux d’Ottawa à minuit, le jour précédent.
+
+
 
 > **La transmission** désigne le risque qu’une personne devienne infectée si elle est en contact avec une personne atteinte de la COVID-19.
 
+
+
 > **Le temps de doublement** correspond au temps nécessaire pour que le nombre de patients hospitalisés double. À l’inverse, **le temps de division** par deux indique le temps nécessaire pour que le nombre de patients hospitalisés diminue de moitié.
+
+
 
 > **La croissance quotidienne** désigne le taux de variation du nombre d’hospitalisations jour après jour.
 
+
+
 > **La distanciation physique** est la réduction du nombre de contacts étroits entre les personnes.
+
+
 
 > **L’établissement avisé de contacts sociaux sécuritaire** consiste à éviter de devenir soi-même un maillon d’une chaîne de transmission de la COVID-19 qui entraînerait l’hospitalisation ou le décès de quelqu’un. Vous devez donc porter un masque à l’intérieur, vous isoler lorsque vous êtes malade, garder une distance de 2 mètres avec les autres qui ne font pas partie de votre ménage et bien vous laver les mains. En savoir plus pour être [COVID avisé](https://www.santepubliqueottawa.ca/fr/public-health-topics/be-covidwise.aspx).
 
+
+
 Consultez la section [Plus](/more) d’infos pour en savoir plus sur les termes employés.
 
+
+
 ---"
-PastData_title,## Observed cases & hospital use,## Cas observés et occupation des hôpitaux
-observed_cases,## {#observed-cases},## {#observed-cases}
-observed_cases_text,**Note:** New cases are based on approximate date of episode. Case data in the last 7 days should be considered preliminary as as public health investigators determine earliest onset date.,**Remarque:** Les nouveaux cas sont basés sur la date d’épisode approximative. Les données sur les cas des 7 derniers jours doivent être considérées comme préliminaires puisque ce sont les enquêteurs de la santé publique qui déterminent la date d’apparition des premiers symptômes.
-observed_census,## {#observed-census},## {#observed-census}
-PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
-observed_admits,## {#observed-admits},## {#observed-admits}
-ProjectedHospital_title,## Projections,## Projections
-case_projections_text,Short-term COVID-19 projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created.,
-hosp_projections_text,"Short-term COVID-19 hospital projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.",
-Projections to {{1}}.,,
-,,
-"Dashed line represents the last date of observed cases."""," ""Projections to {{1}}."" ",
-ProjectedHospital_text,"The hospital census forecast of:
-
-{{1}} patients on {{2}} is based on the previous week’s growth rate of {{3}}%.
-
-{{4}} patients on {{5}} is based on a 10% increase in COVID-19 transmission.
-
-{{6}} patients on {{7}} is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020.","Explication des prévisions relatives au recensement des hospitalisations :
-
-{{1}} patients en {{2}} en fonction d’un taux de croissance de {{3}}% la semaine précédente.
-
-{{4}} patients en {{5}} en fonction d’une augmentation de 10% de la transmission de la COVID-19. 
-
-{{6}} patients en {{7}} en fonction d’un retour au niveau de transmission du début de la pandémie en mars 2020."
-case_projections,## {#case-projections},## {#case-projections}
-hosp_projections,## Short-term hospitalization projections {#hospitalization-projections},## {#hospitalization-projections}
-vent_projections,## {#ventilator-projections},## {#ventilator-projections}
 definitions_link,## {#defintions},## {#defintions}
-break,---,---
-death_title,## Past deaths {#death-visualization},## Décès antérieurs {#death-visualization}
-Death_text,**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date.,**Remarque:** Il est possible que le nombre de décès des 3 à 5 derniers jours ne reflète pas le nombre réel de décès attribuables à la COVID-19 puisque certains cas sont encore à l’étude afin de déterminer la date la plus récente d’apparition.
-Contact,"**Science contacts:** Mathew Thomson [matthomson@ohri.ca](mailto:matthomson@ohri.ca)
+DT_label_double,doubling time,temps de doublement
+DT_label_half,halving time,temps de division
+DT_label_no_change,no growth (flat),pas de croissance
+fewer,Fewer,Moins
+hosp_projections,## Projection of hospital census in Ottawa {#hospitalization-projections},## Projection du recensement des hôpitaux à Ottawa {#hospitalization-projections}
+hosp_projections_text,"Projection of hospital census in Ottawa are presented below. See [Methods](/model) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.","Les projections hospitalières COVID-19 à court terme sont présentées ci-dessous. Voir [Méthodes](/model) pour savoir comment les projections ont été créées. Les projections à court terme peuvent prendre des directions différentes lorsque les schémas de transmission du COVID-19 dans la communauté changent. Par exemple, le nombre d'hospitalizations prévu peut être sous-estimé pendant les périodes de reouverture rapide."
+Intro,"_Last updated on {{1}}._
 
-**Acknowledgements for website and content:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran and others on Big Life Lab team.
+Pour le fran√ßais cliquez [ici](https://613covid.ca/fr/).
 
-**Supporting Ottawa Public Health epidemiologists:** Amira Ali, Jacqueline Willmore, Dara Spatz
+This website has forecasts of hospitalization counts from COVID-19 and wastewater recovery of SARS-CoV-2.
 
-**uOttawa – CHEO SARS-CoV-2 research group:** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber
+Website is optimized for desktop use. For mobile users, it is recommended to view in landscape mode.
 
-**Colour consultant:** Toby Barker
+Click here to access the COVID-19 Daily Dashboard created by Ottawa Public Health. The Ottawa Public Health dashboard provides up to date COVID-19 metrics that inform projections presented on this website.","_Dernière mise à jour : {{1}}._
 
-**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).
 
-**Media contact:** Michaela Schreiter, Media Relations Officer, The Ottawa Hospital, [mschreiter@toh.ca](mailto:mschreiter@toh.ca)","**Personnes-ressources scientifiques:** Mathew Thomson [matthomson@ohri.ca](mailto:matthomson@ohri.ca)
 
-**Remerciements pour le site Web et le contenu:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
+For English click [here](https://613covid.ca/)
 
-**Avec le soutien des épidémiologistes de Santé publique Ottawa:** Amira Ali, Jacqueline Willmore, Dara Spatz
 
-**Groupe de recherche uOttawa – CHEO SARS-CoV-2:** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber.
 
-**Consultant couleur:** Toby Barker
+Prévisions actuelles de l’occupation des hôpitaux par des patients atteints de la COVID-19 dans la région d’Ottawa. Une réalisation de l’équipe de [ProjectBigLife.ca](https://www.projectbiglife.ca) à L’Hôpital d’Ottawa et à l’Université d’Ottawa, avec la contribution de Santé publique Ottawa, qui fournit notamment les données."
+LongRangeForecast,"### Long-range forecast
 
-**Propriété intellectuelle:** Icônes relatives à la COVID-19 créées par [surang](https://www.flaticon.com/authors/surang), de [www.flaticon.com](https://www.flaticon.com/authors/surang).
+**{{1}} to {{2}}** peak patients in Ottawa between **{{3}} & {{4}}**.","### Prévisions à long terme
 
-**Personne-ressource pour les m�dias:** Michaela Schreiter, agente des relations avec les m�dias, L�H�pital d�Ottawa. Courriel: mschreiter@toh.ca T�l�phone: 613-222-7674"
+
+
+Sommet de **{{1}} à {{2}}** patients à Ottawa entre **{{3}} et {{4}}**."
+more,More,Plus
 More_intro,"## Model use {#use}
 
 There are two main uses of the projections:
 
-1) Short-term projections (1 to 4 weeks) reflect the current level of COVID-19 transmission and current effectivess of ongoing COVID-19 prevention and control. Short-term projections the immediate need health care such hospital and critical care services for COVID-19 patients. 
+1) Short-term projections (1 to 4 weeks) reflect the current level of COVID-19 transmission and current effectiveness of ongoing COVID-19 prevention and control. Short-term projections the immediate need health care such hospital and critical care services for COVID-19 patients. 
 
-2) Long-term projections (6 weeks onward) reflect sustain trends in COVID-19 transmissions. Long-term projections are helpful to assess the potiential effect of COVID-19 re-opening or the need of increased restrictions to control surges.
+2) Long-term projections (6 weeks onward) reflect sustain trends in COVID-19 transmissions. Long-term projections are helpful to assess the potential effect of COVID-19 re-opening or the need of increased restrictions to control surges.
 
 ## Model accuracy {#accuracy}
 
@@ -183,9 +211,9 @@ A high level of physical distancing will achieve a **97% reduction in deaths** c
 
 Les projections s’utilisent principalement de deux manières : 
 
-Les projections à court terme (2 à 4 semaines) servent à connaître les besoins immédiats en services hospitaliers et en soins critiques pour les patients atteints de la COVID-19. 
+1) Les projections à court terme (2 à 4 semaines) servent à connaître les besoins immédiats en services hospitaliers et en soins critiques pour les patients atteints de la COVID-19. 
 
-Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet d’un relâchement de la distanciation physique. 
+2) Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet d’un relâchement de la distanciation physique. 
 
 ## Précision des modèles {#accuracy}
 
@@ -206,19 +234,16 @@ Selon les projections de Santé publique Ontario, l’absence de mesures de pré
 Un degré élevé de distanciation physique permettrait de réduire de 97 % le nombre de décès par rapport à un scénario sans aucune mesure préventive (100 000 décès). Compte tenu des grandes différences entre ces projections, nous devons surveiller et mettre à jour les projections d’Ottawa afin qu’elles reflètent l’efficacité de nos mesures de prévention. 
 
 ## Distanciation physique {#distancing}"
-Physical_distancing_middle,"Physical distancing is the reduction of close contacts between people. Close contact is defined as being within two meters of another person. See [Ottawa Public Health](https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx) for more information on recommendations. 
-
-If a person who had close contact with 10 people per day before the COVID-19 pandemic now has close contact with three people per day, their physical distancing score is 70 percent. If they have contact with five people per day, their score is 50 percent. 
-
-In these projection models, a 70 percent physical distancing scenario means that on average the people of Ottawa have reduced their close contacts by 70 percent. Some people, like essential workers, cannot reduce their number of close contacts.
-
-See [model](/model#distancing) for a technical discussion about how physical distancing affects COVID-19 spread.","La distanciation physique consiste à réduire le nombre de contacts étroits entre les personnes. Se trouver à moins de deux mètres d’une autre personne constitue un contact étroit. Consultez le site Web de [Santé publique Ottawa](https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx) pour en savoir plus sur les recommandations. 
-
-Si une personne qui avait des contacts étroits avec 10 autres personnes par jour avant la pandémie de COVID-19 se limite maintenant à des contacts étroits avec trois personnes par jour, sa note de distanciation physique est alors de 70 %. Si elle a maintenant des contacts étroits avec cinq personnes par jour, sa note est de 50 %. 
-
-Dans ces modèles de projection, un scénario fondé sur une distanciation physique de 70 % signifie que la population d’Ottawa a réduit ses contacts étroits de 70 % en moyenne. Certaines personnes, comme les travailleurs essentiels, ne peuvent pas limiter leur nombre de contacts étroits. 
-
-Consultez la section [Modèle](/model#distancing) pour un exposé technique des effets de la distanciation physique sur la propagation de la COVID-19."
+observed_admits,## {#observed-admits},## {#observed-admits}
+observed_cases,## {#observed-cases},## {#observed-cases}
+observed_cases_text,**Note:** New cases are based on approximate date of episode. Case data in the last 7 days should be considered preliminary as as public health investigators determine earliest onset date.,**Remarque:** Les nouveaux cas sont basés sur la date d’épisode approximative. Les données sur les cas des 7 derniers jours doivent être considérées comme préliminaires puisque ce sont les enquêteurs de la santé publique qui déterminent la date d’apparition des premiers symptômes.
+observed_census,## {#observed-census},## {#observed-census}
+observed_staff_cases,## Observed COVID-19 cases in health care workers in Ottawa by episode date,## Cas de COVID-19 observés chez les travailleurs de la santé à Ottawa par date d'épisode
+observed_staff_cases_text,**Note:** The health care worker cases (per 1000 people) are the number of hospital staff who reported a positive PCR or RAT for selected hospitals and health care organizations. These are people who notified Occupational Health of their positive result. Observed COVID-19 cases are adjusted for under-reporting for staff working from home and not providing direct patient care.,**Remarque:** Les cas de travailleurs de la santé ( par 1000 personnes) sont le nombre de membres du personnel hospitalier qui ont rapporté un RCP ou un TAR positif pour les hôpitaux et les organisations de soins de santé sélectionnés. Il s'agit de personnes qui ont informé la médecine du travail de leur résultat positif. Les cas COVID-19 observés sont ajustés pour tenir compte de la sous-déclaration du personnel travaillant à domicile et ne fournissant pas de soins directs aux patients.
+observed_staff_incident,## Cumulative incidence of COVID-19 positive staff,## Incidence cumulée du personnel positif au COVID-19
+observed_staff_incident_cases_text,"**Note:** The cumulative health care worker cases (per 1000 people) is the cumulative incidence or total proportion of health care workers who reported a positive PCR or RAT for selected hospitals and health care organizations since December 26, 2021. These are people who notified Occupational Health of their positive result. Observed COVID-19 cases are adjusted for under-reporting for staff working from home and not providing direct patient care.",**Remarque:** Les cas cumulés de travailleurs de la santé ( par 1000 personnes) correspondent à l'incidence cumulée ou à la proportion totale de travailleurs de la santé ayant déclaré une RCP ou un TAR positif pour certains hôpitaux et organismes de santé depuis le 26 décembre 2021. Il s'agit de personnes qui ont informé la médecine du travail de leur résultat positif. Les cas COVID-19 observés sont ajustés pour tenir compte de la sous-déclaration du personnel travaillant à domicile et ne fournissant pas de soins directs aux patients.
+PastData_title,## Observed cases & hospital use,## Cas observés et occupation des hôpitaux
+PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
 Physical_distancing_effectiveness,"## Physical distancing effectiveness {#distancing-effectiveness}
 
 Physical distancing effectiveness describes how fast COVID-19 spreads in Ottawa compared to if there was no physical distancing. It is a mathematical calculation based on the observed doubling time (growth) of the hospital census for the previous week.
@@ -237,18 +262,73 @@ Note that there is a lag of several weeks between the level of physical distanci
 
 See [model](model#distancing).","## Efficacité de la distanciation physique {#distancing-effectiveness}
 
+
+
 L’efficacité de la distanciation physique représente la vitesse à laquelle la COVID-19 se propage à Ottawa par rapport à ce qu’elle serait sans distanciation physique. Pour déterminer cette efficacité, il faut effectuer un calcul mathématique à partir du temps de doublement observé (croissance) indiqué dans le recensement des hospitalisations de la semaine précédente. 
+
+
 
 L’efficacité de la distanciation physique est différente des autres indicateurs qui reflètent le degré de distanciation physique, comme les [sondages](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/la-maladie-coronavirus-covid-19.aspx) ou les [statistiques sur la mobilité de la population](https://www.gstatic.com/covid19/mobility/2020-04-17_CA_Mobility_Report_en.pdf). 
 
+
+
 Au début de l’éclosion de COVID-19 à Ottawa, le nombre de nouveaux cas (et d’hospitalisations) doublait tous les 3 ou 4 jours. Cela signifie que s’il y avait cinq patients atteints de la COVID-19 à l’hôpital le lundi, ce nombre augmentait pour atteindre 10 patients le jeudi ou le vendredi, et 20 patients la semaine suivante. 
+
+
 
 Quand la population d’Ottawa a commencé à pratiquer la distanciation physique, la propagation du virus a ralenti. La diminution de la propagation s’est traduite par une baisse du nombre de patients admis à l’hôpital. La croissance, ou le temps de doublement, du nombre de patients hospitalisés a donc ralenti aussi. 
 
+
+
 Si l’efficacité de la distanciation physique était parfaite, c’est-à-dire de 100 %, il n’y aurait aucune propagation de la COVID-19. Une personne atteinte de la COVID-19 n’aurait aucun contact avec d’autres personnes qui pourraient contracter la maladie. Par conséquent, l’infection ne se propagerait pas au-delà de la personne atteinte. Après quelques semaines, la COVID-19 disparaîtrait à Ottawa et aucun nouveau patient ne serait admis à l’hôpital. Les chiffres du recensement des hospitalisations baisseraient graduellement, à mesure que les patients guéris obtiendraient leur congé. 
+
+
 
 À l’heure actuelle, l’augmentation des hospitalisations est moins rapide que le temps de doublement initial (qui était de 3 ou 4 jours), mais nous n’avons pas freiné complètement la croissance du nombre de cas de COVID-19. L’efficacité de la distanciation physique reflète le recensement des hospitalisations auquel nous nous attendons en fonction du temps de doublement observé. 
 
+
+
 Il est à noter qu’il a un décalage de plusieurs semaines entre l’observation d’un certain degré de distanciation physique et la manifestation de ses effets sur la croissance des cas de COVID-19. Il y a également un délai entre l’apparition de la maladie et l’hospitalisation. Il en va de même pour l’efficacité de la distanciation physique : il faut tenir compte du même décalage entre le début de la distanciation physique et l’apparition des bienfaits de celle-ci dans le calcul de l’efficacité de la distanciation physique. 
 
+
+
 Veuillez consulter la section [Modèle](model#distancing)."
+Physical_distancing_middle,"Physical distancing is the reduction of close contacts between people. Close contact is defined as being within two meters of another person. See [Ottawa Public Health](https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx) for more information on recommendations. 
+
+If a person who had close contact with 10 people per day before the COVID-19 pandemic now has close contact with three people per day, their physical distancing score is 70 percent. If they have contact with five people per day, their score is 50 percent. 
+
+In these projection models, a 70 percent physical distancing scenario means that on average the people of Ottawa have reduced their close contacts by 70 percent. Some people, like essential workers, cannot reduce their number of close contacts.
+
+See [model](/model#distancing) for a technical discussion about how physical distancing affects COVID-19 spread.","La distanciation physique consiste à réduire le nombre de contacts étroits entre les personnes. Se trouver à moins de deux mètres d’une autre personne constitue un contact étroit. Consultez le site Web de [Santé publique Ottawa](https://www.ottawapublichealth.ca/en/public-health-topics/social-distancing.aspx) pour en savoir plus sur les recommandations. 
+
+
+
+Si une personne qui avait des contacts étroits avec 10 autres personnes par jour avant la pandémie de COVID-19 se limite maintenant à des contacts étroits avec trois personnes par jour, sa note de distanciation physique est alors de 70 %. Si elle a maintenant des contacts étroits avec cinq personnes par jour, sa note est de 50 %. 
+
+
+
+Dans ces modèles de projection, un scénario fondé sur une distanciation physique de 70 % signifie que la population d’Ottawa a réduit ses contacts étroits de 70 % en moyenne. Certaines personnes, comme les travailleurs essentiels, ne peuvent pas limiter leur nombre de contacts étroits. 
+
+
+
+Consultez la section [Modèle](/model#distancing) pour un exposé technique des effets de la distanciation physique sur la propagation de la COVID-19."
+ProjectedHospital_text,"The hospital census forecast of: 
+
+{{1}} patients on {{2}} is based on the previous week‚Äôs growth rate of {{3}}%.
+
+{{4}} patients on {{5}} is based on a 10% increase in COVID-19 transmission.
+
+{{6}} patients on {{7}} is based on a return to COVID-19 transmission to the beginning of the pandemic in March 2020.","Explication des prévisions relatives au recensement des hospitalisations :
+
+
+
+{{1}} patients en {{2}} en fonction d’un taux de croissance de {{3}}% la semaine précédente.
+
+
+
+{{4}} patients en {{5}} en fonction d’une augmentation de 10% de la transmission de la COVID-19. 
+
+
+
+{{6}} patients en {{7}} en fonction d’un retour au niveau de transmission du début de la pandémie en mars 2020."
+ProjectedHospital_title,## Projections,## Projections
