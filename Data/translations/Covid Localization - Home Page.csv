@@ -1,4 +1,4 @@
-gty,en,fr
+key,en,fr
 break,---,---
 case_projections,## {#case-projections},## {#case-projections}
 case_projections_text,Short-term COVID-19 projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created.,Les projections COVID-19 à court terme sont présentées ci-dessous. Voir [plus](/more) pour une discussion sur l'interprétation du modèle et [Méthodes](/model) pour savoir comment les projections ont été créées.
@@ -332,3 +332,34 @@ ProjectedHospital_text,"The hospital census forecast of:
 
 {{6}} patients en {{7}} en fonction d’un retour au niveau de transmission du début de la pandémie en mars 2020."
 ProjectedHospital_title,## Projections,## Projections
+Projections to {{1}}.,,
+ShortRangeForecast,"### Short-range forecast
+
+**{{1}}** active cases in the following week, reflecting a current {{2}} of **{{3}} days** (daily growth of {{4}}%).
+
+**{{5}}** new cases* in the following week, reflecting a current {{6}} of **{{7}} days** (daily growth of {{8}}%).
+
+**{{9}}** hospital patients in the following week, reflecting a current {{10}} of **{{11}} days** (daily growth of {{12}}%).
+
+*New cases are based on approximate date of episode. Case data in the last 7 days are omitted in growth calculations as public health investigators determine earliest onset date.","### Prévisions à court terme
+
+**{{1}}** de cas actifs au cours de la semaine suivante, reflètant un {{2}}  actuel de **{{3}} jours** (croissance quotidienne de {{4}} %).
+
+**{{5}}** de cas actifs au cours de la semaine suivante, reflètant un {{6}}  actuel de **{{7}} jours** (croissance quotidienne de {{8}} %).
+
+**{{9}}** patients hospitalisés au cours de la semaine suivante, reflétant un {{10}} actuel de **{11}} jours** (croissance quotidienne de {{12}}%).
+
+*Les nouveaux cas sont basés sur la date approximative de l'épisode. Les données sur les 7 derniers jours ne sont pas prises en compte dans les calculs de croissance car les enquêteurs de santé publique déterminent la date d'apparition la plus précoce."
+staff_projections,## Projection of COVID-19 positive health care workers in Ottawa,## Projection des travailleurs de la santé positifs au COVID-19 à Ottawa
+staff_projections_text,"**Note:** The number of Health Care Workers with COVID-19 is based on the number of hospital staff at reporting hospitals and health care organizations who notified their  occupational health department of a COVID-19 positive PCR or RAT test result. This number is then divided by the number of staff eligible to report to get a count per 1000 people.  Because reporting hospitals and organizations may vary from time to time and these counts are based on self-report and include RAT testing, this measure cannot be directly compared to estimates based on laboratory confirmed cases.  
+ 
+Regarding the interpretation of numbers and figures reported here, they cannot be taken as any reflection of staffing coverage at the hospitals and are in no way reflective of the level of care the hospitals are currently equipped to provide. These numbers do not speak to hospital capacity. Health care workers are a ‘sentinel’ population for community transmission. COVID-19 infection rates in other work or community settings may be higher than in the health care setting. Health care workers tend to be of working age, highly vaccinated and practice rigorous infection control while working. Observed COVID-19 cases are adjusted for under-reporting for staff working from home and not providing direct patient care.
+","**Remarque:** Le nombre de travailleurs de la santé atteints de COVID-19 est basé sur le nombre de membres du personnel hospitalier des hôpitaux et des organisations de soins de santé déclarants qui ont notifié à leur département de médecine du travail un résultat positif au test PCP ou RAT pour le COVID-19. Ce nombre est ensuite divisé par le nombre d'employés éligibles pour la déclaration afin d'obtenir un nombre pour 1000 personnes.  Étant donné que les hôpitaux et organisations déclarants peuvent varier de temps en temps et que ces chiffres sont basés sur l'auto-déclaration et incluent les tests RAT, cette mesure ne peut pas être directement comparée aux estimations basées sur les cas confirmés en laboratoire.  
+ 
+En ce qui concerne l'interprétation des nombres et des graphiques rapportés ici, ils ne peuvent être considérés comme un reflet de la couverture en personnel des hôpitaux et ne reflètent en aucun cas le niveau de soins que les hôpitaux sont actuellement équipés pour fournir. Ces chiffres ne parlent pas de la capacité des hôpitaux. Les travailleurs de la santé constituent une population ""sentinelle"" pour la transmission communautaire. Les taux d'infection par le COVID-19 dans d'autres milieux de travail ou dans la communauté peuvent être plus élevés que dans le milieu des soins de santé. Les travailleurs de la santé ont tendance à être en âge de travailler, à être fortement vaccinés et à pratiquer un contrôle rigoureux de l'infection pendant leur travail. Les cas observés de COVID-19 sont ajustés pour tenir compte de la sous-déclaration du personnel travaillant à domicile et ne fournissant pas de soins directs aux patients."
+staff_rt_projections,## Rt Projection of COVID-19 positive health care workers in Ottawa,## Projection du Rt des travailleurs de la santé positifs au COVID-19 à Ottawa
+the_same,About the same,À peu près la même
+vent_projections,## {#ventilator-projections},## {#ventilator-projections}
+WWAnalysesDate,Reported date up to: {{1}},Date rapportée jusqu'à : {{1}}
+WWCollectDate,Wastewater samples collected up to: {{1}},Echantillons d'eaux usées collectés jusqu'à : {{1}}
+WWIntro,Wastewater plots last updated: {{1}},Dernière mise à jour des graphiques sur les eaux usées : {{1}}
