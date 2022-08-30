@@ -1,4 +1,3 @@
-
 key,en,fr
 break,---,---
 case_projections,## {#case-projections},## {#case-projections}
@@ -60,7 +59,6 @@ Données en date du {{1}}
 
 
 
-
 De ce nombre : **{{5}}** patient(s) en soins actifs, **{{6}}** patient(s) aux soins intensifs."
 Dashboard_HCWcovid,"# Dashboard
 
@@ -91,7 +89,6 @@ Données en date du {{1}}
 Y compris les **{7}}** patients en soins aigus. **{8}}** patients en soins intensifs.
 
 \* Basé sur les cas de COVID-19 parmi le personnel de santé."
-
 "Dashed line represents the last date of observed cases.""","""Projections to {{1}}.""","""Projections à {{1}}."""
 Death_text,**Note:** The number of deaths in the last 3-5 days may not reflect the actual number of COVID-19 deaths as case investigations are ongoing to determine earliest onset date.,**Remarque:** Il est possible que le nombre de décès des 3 à 5 derniers jours ne reflète pas le nombre réel de décès attribuables à la COVID-19 puisque certains cas sont encore à l’étude afin de déterminer la date la plus récente d’apparition.
 death_title,## Past deaths {#death-visualization},## Décès antérieurs {#death-visualization}
@@ -366,4 +363,3 @@ vent_projections,## {#ventilator-projections},## {#ventilator-projections}
 WWAnalysesDate,Reported date up to: {{1}},Date rapportée jusqu'à : {{1}}
 WWCollectDate,Wastewater samples collected up to: {{1}},Echantillons d'eaux usées collectés jusqu'à : {{1}}
 WWIntro,Wastewater plots last updated: {{1}},Dernière mise à jour des graphiques sur les eaux usées : {{1}}
-
