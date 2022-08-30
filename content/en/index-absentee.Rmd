@@ -29,6 +29,9 @@ dt_label_no_change <- insert_translation(localization_data, lang, "DT_label_no_c
 more <- insert_translation(localization_data, lang, "more")
 fewer <- insert_translation(localization_data, lang, "fewer")
 the_same <- insert_translation(localization_data, lang, "the_same")
+
+numofweeks <- "twoweek"
+site <- "CovidEmployeeData"
 ```
 
 `r intro`

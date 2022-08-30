@@ -34,9 +34,8 @@ reworked_figure <-
            date_constraint = FALSE,
            constraint_val = NULL,
            specified_type = NULL,
-           low_lim = NULL,
-           up_lim = NULL,
-           interval_num = 40,
+           a = NULL,
+           b = NULL,
            data) {
     # ---------- PRESETS ----------
     tickvals <- floor_date(as_date(data$date), "month")
@@ -130,12 +129,23 @@ reworked_figure <-
       min_val_vec[i] = min(data[, var_to_map$y_column])
       max_val_vec[i] = max(data[, var_to_map$y_column])
       curr_temp <- trace_presets[[var_to_map$type]]
-      if (!is_null(var_to_map$color) & !is.null(var_to_map$width)) {
+      legendshow <- var_to_map$showlegend
+      if (!is_null(var_to_map$color) & !is.null(var_to_map$width) & !is.null(legendshow)) {
+        curr_temp <-
+          change_color(template = trace_presets[[var_to_map$type]],
+                       color = var_to_map$color, width = var_to_map$width, legends = legendshow)
+      }
+      else if(!is_null(var_to_map$color)& !is.null(legendshow) & is.null(var_to_map$width)){
+        curr_temp <-
+          change_color(template = trace_presets[[var_to_map$type]],
+                       color = var_to_map$color, legends = legendshow)
+      }
+      else if (!is_null(var_to_map$color) & !is.null(var_to_map$width)) {
         curr_temp <-
           change_color(template = trace_presets[[var_to_map$type]],
                        color = var_to_map$color, width = var_to_map$width)
       }
-      else if(!is_null(var_to_map$color)){
+      else if (!is_null(var_to_map$color)) {
         curr_temp <-
           change_color(template = trace_presets[[var_to_map$type]],
                        color = var_to_map$color)
@@ -218,11 +228,11 @@ reworked_figure <-
     
     updated <- sprintf(base_params, menu)
     updated <- eval(parse(text = updated))
-    if(is.null(low_lim)){
-      low_lim <- min(min_val_vec)
+    if(is.null(a)){
+      a <- min(min_val_vec)
     }
-    if(is.null(up_lim)){
-      up_lim <- max(max_val_vec)
+    if(is.null(b)){
+      a <- max(max_val_vec)
     }
     
     if(!is.null(yaxis2)){
@@ -969,20 +979,16 @@ reworked_figure <-
       }  
     }
     
-
     if(isTRUE(date_constraint)){
-
-      if(as.Date(first(data$date)) > as.Date(last(data$date)) - 40){
-        lower_lim_range <- as.Date(first(data$date))
-      }else{
-
-        lower_lim_range <- as.Date(last(data$date)) - constraint_val
+      if(as.Date(first(data$date)) > as.Date(last(data$date))- 40){
+        a <- as.Date(first(data$date))
       }
-
-      upper_lim_range <- as.Date(last(data$date))
-      p <- layout(p, xaxis = list(range = c(lower_lim_range, upper_lim_range)))
+      else{
+        a <- as.Date(last(data$date))- constraint_val 
+      }
+      b <- as.Date(last(data$date))
+      p <- layout(p, xaxis = list(range = c(a, b)))
     }
-
     return(p)
     
   }
@@ -1007,11 +1013,11 @@ change_color.doubling_time <- function(template, color) {
   ))
 }
 
-change_color.avg_data <- function(template, color, width){
+change_color.avg_data <- function(template, color, width, legends){
   return(list(
     type = "scatter",
     mode = "line",
-    showlegend = TRUE,
+    showlegend = legends,
     line = list(
       color = color,
       width = width

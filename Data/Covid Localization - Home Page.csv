@@ -1,3 +1,4 @@
+
 key,en,fr
 break,---,---
 case_projections,## {#case-projections},## {#case-projections}
@@ -16,6 +17,7 @@ Contact,"**Media Contact:** Rebecca Abelson, Media Relations Officer, The Ottawa
 
 **Colour consultant:** Toby Barker
 
+
 **Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).","**Personnes-ressources scientifiques:** Mathew Thomson [matthomson@ohri.ca](mailto:matthomson@ohri.ca)
 
 **Remerciements pour le site Web et le contenu:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
@@ -27,6 +29,7 @@ Contact,"**Media Contact:** Rebecca Abelson, Media Relations Officer, The Ottawa
 **Consultant couleur:** Toby Barker
 
 **Propriété intellectuelle:** Icônes relatives à la COVID-19 créées par [surang](https://www.flaticon.com/authors/surang), de [www.flaticon.com](https://www.flaticon.com/authors/surang).
+
 
 **Personne-ressource pour les mdias:** Rebecca Abelson, agente des relations avec les médias, L'Hôpital d'Ottawa. Courriel: rabelson@toh.ca"
 Dashboard,"# Dashboard
@@ -260,6 +263,7 @@ Currently, hospital admissions are slower than the initial 3 to 4 days doubling 
 
 Note that there is a lag of several weeks between the level of physical distancing and its effect on slowing the growth of COVID-19 illness. There is a further time difference between the onset of illness and hospitalization. Physical distance effectiveness has the same time lag from the onset of distancing to the benefit of distancing showing results in the calculation of physical distancing effectiveness. 
 
+
 See [model](model#distancing).","## Efficacité de la distanciation physique {#distancing-effectiveness}
 
 
@@ -363,3 +367,4 @@ vent_projections,## {#ventilator-projections},## {#ventilator-projections}
 WWAnalysesDate,Reported date up to: {{1}},Date rapportée jusqu'à : {{1}}
 WWCollectDate,Wastewater samples collected up to: {{1}},Echantillons d'eaux usées collectés jusqu'à : {{1}}
 WWIntro,Wastewater plots last updated: {{1}},Dernière mise à jour des graphiques sur les eaux usées : {{1}}
+
