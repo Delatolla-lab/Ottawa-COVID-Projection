@@ -32,11 +32,12 @@ source("../../R/observed_data.R")
 source("../../R/wastewater.R")
 source("../../R/epinow_functions.R")
 
-covid_data <- file.path(getwd(), "../../Data/Observed data/DailyPos.xlsx")
-staff_cov_data <- read_excel(covid_data, sheet = "Data")
-staff_cov_data <- staff_cov_data %>% mutate(date = as.Date(sampleDate)) %>% select(-c(sampleDate))
+#covid_data <- file.path(getwd(), "../../Data/Observed data/DailyPos.xlsx")
+#staff_cov_data <- read_excel(covid_data, sheet = "Data")
+#staff_cov_data <- staff_cov_data %>% mutate(date = as.Date(sampleDate)) %>% select(-c(sampleDate))
 
-
+load("../../Data/Observed data/cumulative_data_absenteeism.RData")
+staff_cov_data <- covid_data
 # data
 ott_observed_covid <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observed_COVID_Data.csv")) %>%
   mutate(date = as.Date(date))
@@ -119,7 +120,7 @@ hosp_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acut
 
 pct_positivity_call_7_day <- list(type = "observed_data", y_column = "pct_positivity_7_day", name = "7-day mean \npercent positivity rate", short_name = "% positivity", color = case_col, opacity = 0.15)
 
-staff_incident_cases_7_day <- list(type = "observed_data", y_column = "covidPosAbs", name = "Observed COVID-19 cases in health care workers in Ottawa by episode date", short_name = "Health care worker cases", color = case_col, opacity = 0.15)
+staff_incident_cases_7_day <- list(type = "observed_data", y_column = "covidPosAbs_pop", name = "Observed COVID-19 cases in health care workers in Ottawa by episode date", short_name = "Health care worker cases", color = case_col, opacity = 0.15)
 
 active_case_call <- list(type = "observed_data", y_column = "observed_active_cases", name = "Active cases", short_name = "Active cases", color = case_col, opacity = 0.15)
 
