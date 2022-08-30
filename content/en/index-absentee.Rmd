@@ -29,6 +29,9 @@ dt_label_no_change <- insert_translation(localization_data, lang, "DT_label_no_c
 more <- insert_translation(localization_data, lang, "more")
 fewer <- insert_translation(localization_data, lang, "fewer")
 the_same <- insert_translation(localization_data, lang, "the_same")
+
+numofweeks <- "twoweek"
+site <- "CovidEmployeeData"
 ```
 
 `r intro`
@@ -71,12 +74,12 @@ ott_observed <- read.csv(file.path(getwd(), "../../Data/Observed data/OPH_Observ
 ott_observed_staff <- ott_observed %>% mutate(date = as.Date(date)) %>% full_join(covid_data, by= "date")
 
 
-
+site = "Covid Employee Data"
 #Loading health care worker staff two week Covid projections per 1000 population
-load(paste0("../../Data/Historic Projections/rate_transformed_historic_cases_projections_", numofweeks, gsub(" ", "", site), ".RData"))
+load(paste0("../../Data/Historic Projections/rate_transformed_historic_cases_projections_twoweek", gsub(" ", "", site), ".RData"))
 
 
-load(paste0("../../Data/Historic Projections/historic_cases_summary_stats_", numofweeks, gsub(" ", "", site), ".RData"))
+load(paste0("../../Data/Historic Projections/historic_cases_summary_stats_twoweek", gsub(" ", "", site), ".RData"))
 
 ## summary estimates below
 summary_estimates <- cases_forecast[[2]]
