@@ -1,5 +1,5 @@
 insert_translation <- function(data, lang, key, vars=c()){
-  translation_row <- as.character(data[data[["Key"]] == key, lang])
+  translation_row <- as.character(data[data[["key"]] == key, lang])
   Encoding(translation_row) <- "UTF-8"
   if (grepl("\\{\\{", translation_row)){
     # Insert vars

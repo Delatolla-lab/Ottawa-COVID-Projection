@@ -46,7 +46,7 @@ signal_col <- "rgb(226, 127, 88)"
 proj_col <- "rgb(0, 128, 128)"
 proj_shade <- "rgba(0, 128, 128, 0.2)"
 
-hosp_proj_call <- list(type = "avg_data", y_column = "median", name = "Historic projected hospital cases", short_name = "projections", color = proj_col, width = 4, showlegend = TRUE)
+hosp_proj_call <- list(type = "avg_data", y_column = "median", name = "Historic projected hospital cases", short_name = "projections", color = proj_col, width = 4)
 hosp_obs_call <- list(type = "observed_data", y_column = "observed_census_ICU_p_acute_care", name = "Observed historic hospital cases", short_name = "Daily signal", color = signal_col, opacity = 0.5)
 ```
 
