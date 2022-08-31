@@ -1,4 +1,4 @@
-# This is a workflow to automate the dataset creation for 613covid.ca and 
+# This is a workflow to automate the dataset creation for 613covid.ca and
 # run short-term hospitalization projections
 
 name: Dataset-creation
@@ -6,9 +6,9 @@ name: Dataset-creation
 # Runs everyday at 2:30pm EST/EDT (7:30pm UTC)
 on:
   schedule:
-    - cron: '30 19 * * *'
+    - cron: "30 19 * * *"
   workflow_dispatch:
-  
+
 jobs:
   dataset-creation:
     runs-on: "ubuntu-latest"
@@ -22,7 +22,7 @@ jobs:
       - name: setup-r
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: '4.1.1'
+          r-version: "4.1.1"
       - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
       - name: Install libnode-dev
         run: sudo apt-get install libnode-dev
@@ -43,12 +43,10 @@ jobs:
         run: curl -L "https://docs.google.com/spreadsheets/d/1jUAWx9_r7CLhh5vtRNNjCRDMX4nEKEx5gvXM_tpsxhE/export?gid=0&format=xlsx" --output "Data/variant_sheet.xlsx" --create-dirs
       - name: Prepare data
         run: Rscript R/dataset_creation.R
-      - name: Run short term projections 
-        run: Rscript R/short_term_projections.R
-      - name: Run short term hosp projections 
+      - name: Run short term hosp projections
         run: Rscript R/short_term_hosp_projections.R
-      - name: Run short term ww projections 
-        run: Rscript R/short_term_ww_projections.R  
+      - name: Run short term ww projections
+        run: Rscript R/short_term_ww_projections.R
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -58,4 +56,4 @@ jobs:
       - uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.ACTION_TOKEN }}
-          branch: 'master' #optional defaults to master
+          branch: "master" #optional defaults to master
