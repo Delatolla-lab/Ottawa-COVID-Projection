@@ -18,8 +18,9 @@
       
       <guid>https://613covid.ca/fr/model/</guid>
       <description>Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references.
-Projection models All data used to create projection models can be accessed at Open Ottawa. See ’COVID-19 cases and deaths`. Data used to create wastewater projection models can be accessed at PHESD.
-COVID-19 short-term projections are created using the Bayesian EpiNow2 model developed by the EpiForecasts team.</description>
+Projection models All data used to create projection models can be accessed at Open Ottawa. See ’COVID-19 cases and deaths`.
+Covid-19 case projections created using the Bayesian SEIR model developed by Simon Fraser University.
+ Projections are based on observed covid-19 cases by episode date.</description>
     </item>
     
     <item>
@@ -30,8 +31,8 @@ COVID-19 short-term projections are created using the Bayesian EpiNow2 model dev
       <guid>https://613covid.ca/fr/more/</guid>
       <description>Utilisation des modèles Les projections s’utilisent principalement de deux manières :
 Les projections à court terme (2 à 4 semaines) servent à connaître les besoins immédiats en services hospitaliers et en soins critiques pour les patients atteints de la COVID-19.
- Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet d’un relâchement de la distanciation physique.
-   Précision des modèles Il est difficile de faire des projections précises à long terme sur la propagation de la COVID-19.</description>
+Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet d’un relâchement de la distanciation physique.
+ Précision des modèles Il est difficile de faire des projections précises à long terme sur la propagation de la COVID-19.</description>
     </item>
     
     <item>
@@ -40,11 +41,11 @@ Les projections à court terme (2 à 4 semaines) servent à connaître les besoi
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/fr/change-log/</guid>
-      <description>V3.6.0 2022-02-24
- Hospital projections added to homepage.   V3.5.0 2022-01-28
- Wastewater projections and growth estimates added to Wastewater page.   V3.4.0 2021-06-16
- Updates to the Wastewater page. Variant plot updated to include a midpoint rolling average. Details on variants of interest/concern detection included in page.   V3.3.3 2021-04-08
- Plot added to the Wastewater page visualizing proportion of variant B.1.1.7 RNA detected in wastewater.</description>
+      <description>Updates involving only data updates will no longer be documented.
+V3.1.0 2020-10-13
+ Wastewater page added describing covid-19 wastewater surveillance.   V3.0.0 2020-10-05
+ Case data &amp;amp; projections have been added to the website. See model for more details on how projections for cases were created including input parameters. Ventilator &amp;amp; peak projections removed from website. Death figure removed from website.   V2.3.0 2020-08-05
+ Projections use OPH hospitalization data from 07/07/2020 onwards.</description>
     </item>
     
     <item>
@@ -53,37 +54,21 @@ Les projections à court terme (2 à 4 semaines) servent à connaître les besoi
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/fr/contact/</guid>
-      <description>Personnes-ressources scientifiques: Mathew Thomson matthomson@ohri.ca
-Remerciements pour le site Web et le contenu: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
-Avec le soutien des épidémiologistes de Santé publique Ottawa: Amira Ali, Jacqueline Willmore, Dara Spatz
-Groupe de recherche uOttawa – CHEO SARS-CoV-2: Robert Delatolla, Alex MacKenzie, Patrick D’Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber.
-Consultant couleur: Toby Barker</description>
+      <description>Personne-ressource pour les médias: Michaela Schreiter, agente des relations avec les médias, L’Hôpital d’Ottawa. Courriel: mschreiter@toh.ca Téléphone: 613-222-7674
+Personnes-ressources scientifiques: Doug Manuel dmanuel@ohri.ca, Warsame Yusuf waryusuf@ohri.ca, Alan Forster
+Remerciements pour le site Web et le contenu: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
+Avec le soutien des épidémiologistes de Santé publique Ottawa: Amira Ali, Jacqueline Willmore, Dara Spatz</description>
     </item>
     
     <item>
-      <title>Ottawa COVID-19 wastewater surveillance</title>
+      <title>Ottawa covid-19 wastewater surveillance</title>
       <link>https://613covid.ca/fr/wastewater/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/fr/wastewater/</guid>
-      <description>Wastewater plots last updated: 01 September, 2022, 12:53:32
-Wastewater samples collected up to: 29 August, 2022
-Reported date up to: 01 September, 2022
-The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
-Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing.</description>
-    </item>
-    
-    <item>
-      <title>Ottawa COVID-19 wastewater surveillance</title>
-      <link>https://613covid.ca/fr/wastewater_archive/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://613covid.ca/fr/wastewater_archive/</guid>
-      <description>Wastewater plots last updated: 01 September, 2022, 12:53:19
-Wastewater samples collected up to: 29 August, 2022
-Reported date up to: 01 September, 2022
-The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
-Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing.</description>
+      <description>The National Capital Region is one of the first communities in Canada to conduct daily wastewater readings to help inform its community response in the fight against covid-19, thanks to innovative research from the CHEO Research Institute (CHEO RI) and the University of Ottawa (uOttawa).
+Learn more about wastewater epidemiology and its role in covid-19 surveillance on Ottawa Public Health’s website.
+The science supporting wastewater surveillance is rapidly evolving.</description>
     </item>
     
     <item>
@@ -92,7 +77,7 @@ Samples that are collected from Monday to Thursday are processed the day after c
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/fr/roadmap/</guid>
-      <description> The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
+      <description>  The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
  Review and update model parameters based on recent published studies. Priories for review:  ventilated patients deaths   </description>
     </item>
     
