@@ -1,10 +1,13 @@
 ---
 title: "Ottawa COVID-19 wastewater surveillance"
 output: html_document
+params:
+  lang: "en"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+lang <- params$lang
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -20,6 +23,7 @@ library(stats)
 library(zoo)
 library(stringr)
 library(EpiNow2)
+library(data.table)
 library(purrr)
 library(RColorBrewer)
 
@@ -120,25 +124,25 @@ n1_call <- list(type = "signal_data", y_column = "N1", name = "N1 RNA signal", c
 
 n2_call <- list(type = "signal_data", y_column = "N2", name = "N2 RNA signal", color = n2_col, yaxis = "y2")
 
-n1_n2_call <- list(type = "avg_data", y_column = "N1_N2_avg", name = "Avg. viral signal", short_name = "viral signal", color = n1_n2_col, yaxis = "y2", opacity = 0.15, width = 4)
+n1_n2_call <- list(type = "avg_data", y_column = "N1_N2_avg", name = "Avg. viral signal", short_name = "viral signal", color = n1_n2_col, yaxis = "y2", opacity = 0.15, width = 4, showlegend = TRUE)
 
-n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day rolling mean viral signal", short_name = "10-day", color = rolling_avg_col, yaxis = "y2", width = 4)
+n1_n2_10_day_call <- list(type = "avg_data", y_column = "N1_N2_10_day", name = "10-day rolling mean viral signal", short_name = "10-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
-n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day rolling mean viral signal", short_name = "5-day", color = rolling_avg_col, yaxis = "y2", width = 4)
+n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-day rolling mean viral signal", short_name = "5-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
-n1_n2_7_day_call <- list(type = "avg_data", y_column = "N1_N2_7_day", name = "7-day rolling mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4)
+n1_n2_7_day_call <- list(type = "avg_data", y_column = "N1_N2_7_day", name = "7-day rolling mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
-viral_roc_call <- list(type = "avg_data", y_column = "viral_roc_daily", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2", width = 4)
+viral_roc_call <- list(type = "avg_data", y_column = "viral_roc_daily", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
-rolling_avg <- list(type = "avg_data", y_column = "rolling_avg", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2", width = 4)
+rolling_avg <- list(type = "avg_data", y_column = "rolling_avg", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
-viral_rolling_avg_call <- list(type = "avg_data", y_column = "avg_viral_roc_5_day", name = "5-day rolling avg. daily \nchange in viral signal", color = rolling_avg_col, yaxis = "y2", width = 4)
+viral_rolling_avg_call <- list(type = "avg_data", y_column = "avg_viral_roc_5_day", name = "5-day rolling avg. daily \nchange in viral signal", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
-change_N1_N2_5_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_day", name = "Percent change in rolling avg \nover 5 days", short_name = "5-day % change", color = rolling_avg_col, yaxis = "y2", width = 4)
+change_N1_N2_5_day_call <- list(type = "avg_data", y_column = "change_N1_N2_5_day", name = "Percent change in rolling avg \nover 5 days", short_name = "5-day % change", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
-change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_10_day", name = "Percent change in rolling avg \nover 10 days", short_name = "10-day % change", color = rolling_avg_col, yaxis = "y2", width = 4)
+change_N1_N2_10_day_call <- list(type = "avg_data", y_column = "change_N1_N2_10_day", name = "Percent change in rolling avg \nover 10 days", short_name = "10-day % change", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
-change_N1_N2_7_day_call <- list(type = "avg_data", y_column = "change_N1_N2_7_day", name = "Percent change in \nviral signal rolling \navg over 7 days", short_name = "7 day % change", color = rolling_avg_col, yaxis = "y2", width = 4)
+change_N1_N2_7_day_call <- list(type = "avg_data", y_column = "change_N1_N2_7_day", name = "Percent change in \nviral signal rolling \navg over 7 days", short_name = "7 day % change", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
 change_new_cases_5_day_call <- list(type = "observed_data", y_column = "change_new_cases_5_day", name = "Percent change in rolling avg \nover 5 days", short_name = "5 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
 
@@ -157,6 +161,38 @@ var_nondetect_call <- list(type = "signal_data", y_column = "propB117_detect", n
 var_7_day_avg <- list(type = "avg_data", y_column = "propB117_7day", name = "7 observation \nrolling average", color = var_col, width = 3)
 ```
 
+```{r include=FALSE}
+##Load localization file
+source("../../R/localization.R")
+localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid Localization - Home Page.csv"))
+
+
+```
+
+```{r, results='hold', echo=FALSE, comment=NA}
+time <- .POSIXct(Sys.time(), "America/New_York")
+wwintro<- insert_translation(localization_data, lang, "WWIntro", c(format(time, '%d %B, %Y, %X')))
+curr_day <- as.Date(time)
+collect_date <- as.Date(last(ott_covid_waste$date))
+wwcollectdate<- insert_translation(localization_data, lang, "WWCollectDate", c(format(collect_date, '%d %B, %Y')))
+wwanalysesdate<- insert_translation(localization_data, lang, "WWAnalysesDate", c(format(curr_day, '%d %B, %Y')))
+```
+
+`r wwintro`
+
+`r wwcollectdate`
+
+`r wwanalysesdate`
+
+
+The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
+
+
+
+Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing. Samples that are collected from Friday to Sunday are processed on Monday and thus are posted to the website on Tuesday at 5 p.m.
+
+
+
 People with COVID-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a COVID-19 test or ever are diagnosed. Thus, in contrast to assessing community COVID-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with COVID-19 given that everyone goes to the washroom. In addition to serving as a valuable confirmatory data source for COVID-19 levels, wastewater can also serve as early indicator for possible outbreaks, as described below.
 
 ---
@@ -168,7 +204,21 @@ For mobile users, dragging the plot while in landscape mode will allow you to vi
 Data last reported `r as.character(tail(waste_clean$reportDate, n=1))`. Click [here](/model/#wastewater) for more details on wastewater data reporting.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40)
+
+new_ott_covid_waste <- copy(ott_covid_waste)
+temp_data <- new_ott_covid_waste %>% subset(!is.na(N1_N2_avg_omit))
+end_data_first <- first(temp_data$date)
+start_data_second <- last(temp_data$date)
+new_ott_covid_waste$N1_N2_7_day_p1 <- NA
+new_ott_covid_waste[(new_ott_covid_waste$date < end_data_first),"N1_N2_7_day_p1"] <- new_ott_covid_waste[(new_ott_covid_waste$date < end_data_first), "N1_N2_7_day"]
+new_ott_covid_waste$N1_N2_7_day_p2 <- NA
+new_ott_covid_waste[(new_ott_covid_waste$date > start_data_second),"N1_N2_7_day_p2"] <- new_ott_covid_waste[(new_ott_covid_waste$date > start_data_second), "N1_N2_7_day"]
+
+n1_n2_7_day_call_p1 <- list(type = "avg_data", y_column = "N1_N2_7_day_p1", name = "7-day rolling mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = FALSE)
+
+n1_n2_7_day_call_p2 <- list(type = "avg_data", y_column = "N1_N2_7_day_p2", name = "7-day rolling mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
+
+reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call_p1, n1_n2_7_day_call_p2), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>COVID-19 wastewater viral signal, Ottawa</b>"), data = new_ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
 ```
 
 *Rolling mean viral signal omits dates (coloured in blue) flagged by wastewater researchers with potential data concerns. Data is currently being studied for effects of snow melt and other diluting factors on RNA signal. 
@@ -180,13 +230,12 @@ The next plot illustrates the 7-day rolling mean in daily COVID-19 wastewater vi
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.45}
-reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(hosp_call, new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 300)
+reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(hosp_call, new_case_7_day_call, new_episode_7_day_call, active_case_call, pct_positivity_call_7_day), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>7-day mean COVID-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, yaxis2_button = TRUE, y2_button_name = "Comparator", height = 300, date_constraint = TRUE, constraint_val= 301)
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
 #reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call, var_7_day_avg), error_bands = TRUE, error_pct = TRUE, error_data = "sd_7day", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
 ```
-
 ---
 
 ## Wastewater Projections
@@ -194,6 +243,7 @@ reworked_figure(xaxis = "date", yaxis = list(n1_n2_7_day_call), yaxis2 = list(ho
 Preliminary projections forecasting viral signal are shown below. Projections forecast normalized viral copies per copy based on observed signal data. Caution is encouraged when interpreting results. Methods have not been peer-reviewed, and validation is ongoing.  
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("../../R/epinow_functions.R")
 load("../../Data/short_term_ww_proj.RData")
 
 ww_data <-
@@ -212,7 +262,11 @@ short_term_plot(
   obs_column = "N1_N2_avg_clean",
   forecast_type = "reported_cases",
   ylab = "Normalized viral copies* (µ)",
-  title = "<b>Projections for COVID-19 wastewater viral signal, Ottawa</b>"
+  title = "<b>Projections for COVID-19 wastewater viral signal, Ottawa</b>",
+  tick_period = "1 month",
+  tick_labels_date = "%b %y",
+  annotation_text = "*Shaded area represents the 75% credible region",
+  interval_num = 178
 )
 ```
 
@@ -224,8 +278,8 @@ short_term_plot(
 growth_measures <- ww_forecast[[2]]
 colnames(growth_measures) <- c("measure", "estimate")
 
-growth_measures[2, "measure"] <- "Expected change in viral amount"
-growth_measures <- growth_measures[-1,]
+growth_measures[1, "measure"] <- "Expected change in viral amount"
+growth_measures <- growth_measures[-2,]
 
 knitr::kable(growth_measures)
 ```
@@ -299,12 +353,10 @@ sheet <- variant_sheet %>%
 
 #ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
 ```
-
 ### Variants of Concern
 
 The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater. 
-
-<img src="/images/delta_omicron_ba1_ba2_allelic_proportion.png" width = "90%" height = "90%"/>
+<img src="/images/voc_image_25July22.jpg" width = "90%" height = "90%"/>
 
 ---
 
@@ -318,9 +370,19 @@ The figure below illustrates the proportion of variants of concern (VOC) found i
 
 ---
 
+### Influenza virus
+
+Samples are screened for influenza A virus (IAV) once a week during the summer period. Influenza B virus (IBV) is only screened during the winter period. The website and plots are updated the day after processing. 
+
+The next plot illustrates the 7-day rolling mean in daily influenza A wastewater viral signal. This number is the average of a week’s readings. Also on the graph is the Influenza A and Influenza B percent positivity. 
+
+<img src="/images/flu_image_21aug12.png" width = "90%" height = "90%"/>
+
+---
+
 ## Interpretation cautions
 
-The accuracy and thus reliability of SARS-CoV-2 wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. COVID-19 wastewater signal is helpful when interpreted alongside other COVID-19 surveillance measures, taking into consideration the strengths and limitations of each measure. 
+The accuracy and thus reliability of SARS-CoV-2 and influenza wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for SARS-CoV-2 variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. COVID-19 and influenza wastewater signal is helpful when interpreted alongside other surveillance measures, taking into consideration the strengths and limitations of each measure. Visit [Seasonal Respiratory Infections and Enteric Outbreaks Surveillance Reports](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/flu-report.aspx) for more information on Ottawa public health surveillance. 
 
 ---
 
@@ -330,14 +392,12 @@ You can learn more about wastewater epidemiology and its role in COVID-19 survei
 
 ## Definitions
 
-\* A 7-day average is generated by averaging the levels from a given day with the six previous days. The average is termed “rolling” as it changes each day.   
+\* A 7-day average is generated by averaging the levels from a given day with the six previous days. The average is termed “rolling” as it changes each day.  
 
 \* For new cases, the reported date is the day the test result is reported by the laboratory. Episode date is the approximate date of COVID-19 infection estimated from information available: the date of symptom onset, test date, or the reported date.
 
-\* Percent positivity refers to the percentage of individuals tested for COVID-19 infection in a given day that test positive.
+\* Percent positivity refers to the percentage of individuals tested for either COVID-19 infection or influenza A infection in a given day that test positive.
 
 \* A central question in wastewater epidemiology is determining the proportion of the wastewater that is actually from humans and the proportion that is rain water, snow melt etc. To address this issue, viral copy data is thus normalized using a seasonally stable fecal biomarker; pepper mild mottle virus (PMMoV). See [methods](/model/) for more details.
 
 ^ Percent change in 7-day average is calculated by comparing the 7-day average (previous day 1 to 7) with a lagged 7-day average (days 8 to 14).
-
-Data to `r as.character(tail(ott_covid_waste$date, n=1))`
