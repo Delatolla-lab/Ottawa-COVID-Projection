@@ -33,11 +33,6 @@
   </url>
   
   <url>
-    <loc>https://613covid.ca/index-absentee/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://613covid.ca/more/</loc>
     <xhtml:link
                 rel="alternate"
