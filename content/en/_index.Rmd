@@ -138,7 +138,7 @@ dt_label = switch(
 
 dt_abs <- abs(dt)
 
-dt_sts <- summary_stats[[2]][[1]]
+dt_sts <- summary_stats[[3]][[1]]
 dt_label_sts = "Rt:"
 
 
