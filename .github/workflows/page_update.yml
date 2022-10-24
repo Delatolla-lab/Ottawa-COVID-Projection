@@ -27,7 +27,7 @@ jobs:
       - name: Install rmd packages
         run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr", "purrr", "RColorBrewer", "DT"))'
       - name: Install EpiNow2 Dependencies
-        run: Rscript -e 'install.packages(c("cowplot", "futile.logger", "patchwork", "rstan", "runner", "truncnorm", "BH", "StanHeaders"))'
+        run: Rscript -e 'install.packages(c("cowplot", "futile.logger", "patchwork", "rstan", "runner", "truncnorm", "BH", "StanHeaders", "future", "future.apply", "progressr", "R.utils"))'
       - name: Install EpiNow2
         run: Rscript -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/EpiNow2/EpiNow2_1.3.2.tar.gz", repos=NULL)'
       - name: Install blogdown
