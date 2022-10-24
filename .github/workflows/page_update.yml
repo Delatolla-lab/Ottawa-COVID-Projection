@@ -26,8 +26,10 @@ jobs:
         run: Rscript -e 'install.packages(c("rmarkdown", "knitr"))'
       - name: Install rmd packages
         run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr", "purrr", "RColorBrewer", "DT"))'
+      - name: Install EpiNow2 Dependencies
+        run: Rscript -e 'install.packages(c("cowplot", "futile.logger", "patchwork", "rstan", "runner", "truncnorm", "BH", "StanHeaders"))'
       - name: Install EpiNow2
-        run: Rscript -e 'install.packages(c("https://cran.r-project.org/src/contrib/Archive/EpiNow2/EpiNow2_1.3.2.tar.gz", repos=NULL, type="source")
+        run: Rscript -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/EpiNow2/EpiNow2_1.3.2.tar.gz", repos=NULL)'
       - name: Install blogdown
         run: Rscript -e 'install.packages("blogdown")'
       - name: install hugo
