@@ -132,6 +132,10 @@ n1_n2_5_day_call <- list(type = "avg_data", y_column = "N1_N2_5_day", name = "5-
 
 n1_n2_7_day_call <- list(type = "avg_data", y_column = "N1_N2_7_day", name = "7-day rolling mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
+infa_7_day <- list(type = "avg_data", y_column = "InfA_7_day", name = "7-day rolling mean Influenza A viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
+
+rsv_7_day <- list(type = "avg_data", y_column = "RSV_7_day", name = "7-day rolling mean RSV viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
+
 viral_roc_call <- list(type = "avg_data", y_column = "viral_roc_daily", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
 rolling_avg <- list(type = "avg_data", y_column = "rolling_avg", name = "Daily rate of change in viral signal", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
@@ -149,6 +153,10 @@ change_new_cases_5_day_call <- list(type = "observed_data", y_column = "change_n
 change_new_cases_10_day_call <- list(type = "observed_data", y_column = "change_new_cases_10_day", name = "Percent change in rolling avg \nover 10 days", short_name = "10 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
 
 change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_new_cases_7_day", name = "Percent change in \nnew case rolling \navg over 7 days", short_name = "7 day % change", color = case_col, yaxis = "y2", opacity = 0.15)
+
+daily_infa_signal <- list(type = "observed_data", y_column = "InfA", name = "Daily Influenza A viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
+
+daily_rsv_signal <- list(type = "observed_data", y_column = "RSV", name = "Daily Influenza B viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 
 daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg_clean", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 
@@ -199,10 +207,6 @@ For mobile users, dragging the plot while in landscape mode will allow you to vi
 Data last reported `r as.character(tail(waste_clean$reportDate, n=1))`. Click [here](/model/#wastewater) for more details on wastewater data reporting.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-<<<<<<< Updated upstream
-#reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>Covid-19 wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40)
-=======
-
 new_ott_covid_waste <- copy(ott_covid_waste)
 temp_data <- new_ott_covid_waste %>% subset(!is.na(N1_N2_avg_omit))
 end_data_first <- first(temp_data$date)
@@ -217,7 +221,7 @@ n1_n2_7_day_call_p1 <- list(type = "avg_data", y_column = "N1_N2_7_day_p1", name
 n1_n2_7_day_call_p2 <- list(type = "avg_data", y_column = "N1_N2_7_day_p2", name = "7-day rolling mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
 reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call_p1, n1_n2_7_day_call_p2), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>COVID-19 wastewater viral signal, Ottawa</b>"), data = new_ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
->>>>>>> Stashed changes
+
 ```
 
 \*Rolling mean viral signal omits dates (coloured in blue) flagged by wastewater researchers with potential data concerns. Data is currently being studied for effects of snow melt and other diluting factors on RNA signal.
@@ -379,13 +383,19 @@ Samples are screened for influenza A virus (IAV) once a week during the summer p
 
 The next plot illustrates the 7-day rolling mean in daily influenza A wastewater viral signal. This number is the average of a week's readings. Also on the graph is the Influenza A and Influenza B percent positivity.
 
-<!-- <img src="/images/flu_image_21aug12.png" width="90%" height="90%"/> - remove this static image, add figures for influenza A and influenza B viral signal-->
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(daily_infa_signal, infa_7_day), titles = c(y = "Normalized Influenza A viral copies*", y2 = "", x = "Date", title = "<b>Influenza A wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
+
+```
 
 ### Respiratory Syncytial Virus Infection (RSV)
 
 Test text - will generate text for here
 
-Insert figure here
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+reworked_figure(xaxis = "date", yaxis = list(daily_rsv_signal, rsv_7_day), titles = c(y = "Normalized RSV viral copies*", y2 = "", x = "Date", title = "<b>RSV wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
+
+```
 
 ------------------------------------------------------------------------
 
