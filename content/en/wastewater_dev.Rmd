@@ -156,7 +156,7 @@ change_new_cases_7_day_call <- list(type = "observed_data", y_column = "change_n
 
 daily_infa_signal <- list(type = "observed_data", y_column = "InfA", name = "Daily Influenza A viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 
-daily_rsv_signal <- list(type = "observed_data", y_column = "RSV", name = "Daily Influenza B viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
+daily_rsv_signal <- list(type = "observed_data", y_column = "RSV", name = "Daily RSV viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 
 daily_viral_signal_call <- list(type = "observed_data", y_column = "N1_N2_avg_clean", name = "Daily viral signal", short_name = "Daily signal", color = rolling_avg_col, yaxis = "y2", opacity = 0.50)
 
