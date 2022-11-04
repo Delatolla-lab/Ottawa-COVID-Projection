@@ -360,10 +360,9 @@ sheet <- variant_sheet %>%
 
 ### Variants of Concern
 
-The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater. 
+The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater.
 
-<img src="/images/voc_image_25July22.jpg" width="90%" height="90%"/>
-<!-- Will eventually need to transform this into a live figure and not a static image as well --> 
+<img src="/images/voc_image_25July22.jpg" width="90%" height="90%"/> <!-- Will eventually need to transform this into a live figure and not a static image as well -->
 
 ------------------------------------------------------------------------
 
@@ -379,9 +378,9 @@ The figure below illustrates the proportion of variants of concern (VOC) found i
 
 ### Influenza virus
 
-Samples are screened for influenza A virus (IAV) once a week during the summer period. Influenza B virus (IBV) is only screened during the winter period. The website and plots are updated the day after processing.
+Samples are screened for influenza A virus (IAV) once a week during the summer period (April to September). Samples are screened daily for IAV and influenza B virus (IBV) during the winter period (October to March). The website and plots are updated the day after processing.
 
-The next plot illustrates the 7-day rolling mean in daily influenza A wastewater viral signal. This number is the average of a week's readings. Also on the graph is the Influenza A and Influenza B percent positivity.
+The next plot illustrate the 7-day rolling mean in daily IAV wastewater viral signal. This number is the average of a week's daily readings.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(daily_infa_signal, infa_7_day), titles = c(y = "Normalized Influenza A viral copies*", y2 = "", x = "Date", title = "<b>Influenza A wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
@@ -390,7 +389,9 @@ reworked_figure(xaxis = "date", yaxis = list(daily_infa_signal, infa_7_day), tit
 
 ### Respiratory Syncytial Virus Infection (RSV)
 
-Test text - will generate text for here
+Samples are screened daily for respiratory syncytial virus (RSV) during the winter period (October to March). This test does not differentiate between RSV A and RSV B strains. The website and plots are updated the day after processing.
+
+The next plots illustrate the 7-day rolling mean in daily RSV wastewater viral signal. This number is the average of a week's daily readings. RSV is not a reportable disease, meaning that it does not fall under the list of diseases of public health significance in Ontario as designated by the Minister of Health$^1$. Nevertheless, RSV has been identified as a disease that could benefit from wastewater-based surveillance given its contribution to seasonal emergency department visits and hospitalizations among young children and to outbreaks in healthcare institutions such as long-term care homes. Visit [Respiratory Virus Detections](https://www.canada.ca/en/public-health/services/surveillance/respiratory-virus-detections-canada.html) in Canada for more information on RSV surveillance.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 reworked_figure(xaxis = "date", yaxis = list(daily_rsv_signal, rsv_7_day), titles = c(y = "Normalized RSV viral copies*", y2 = "", x = "Date", title = "<b>RSV wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
@@ -401,7 +402,17 @@ reworked_figure(xaxis = "date", yaxis = list(daily_rsv_signal, rsv_7_day), title
 
 ## Interpretation cautions
 
-The accuracy and thus reliability of SARS-CoV-2 and influenza wastewater testing is improving, as scientists understand more of the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily and short-term variation in the viral signal. The level of detection for SARS-CoV-2 variant tests is unknown at this time but based on preliminary data, is estimated at more than 100 newly diagnosed or active cases. Research is underway to arrive at a more precise estimate sensitivity. COVID-19 and influenza wastewater signal is helpful when interpreted alongside other surveillance measures, taking into consideration the strengths and limitations of each measure. Visit [Seasonal Respiratory Infections and Enteric Outbreaks Surveillance Reports](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/flu-report.aspx) for more information on Ottawa public health surveillance.
+The accuracy and reliability of SARS-CoV-2, influenza and RSV wastewater testing is improving as scientists understand the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily or less then 3-day variation in the viral signal while evaluation of the methodology in public health surveillance is ongoing. Research is underway to arrive at a more precise estimate of sensitivity. For influenza and RSV, the level of detection is currently unknown as less than a year’s worth of data has been collected, but evaluation is ongoing. Thus, direct comparisons between wastewater signal levels for the 3 viruses is not recommended at this time. COVID-19, influenza and RSV wastewater signal is helpful when interpreted alongside other surveillance measures, taking into consideration the strengths and limitations of each measure. It is most promising as an early indicator$^2$ of community viral activity and illness and may serve as a warning in advance of increased care-seeking, outbreaks and hospitalizations.  
+
+Visit the Ottawa Public Health [Respiratory and Enteric Surveillance Report](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/flu-report.aspx) for more information on Ottawa’s public health surveillance of respiratory and enteric viruses.  
+
+For more information on wastewater testing in Ottawa, please see the [contact](https://613covid.ca/contact/) page. 
+
+Citations:
+
+1.	Health Protection and Promotion Act, R.S.O. 1990, c. H.7. https://www.ontario.ca/laws/statute/90h07?search=diseases+of+public+health+significance. 
+
+2.	Mercier, É. et al. Wastewater surveillance of influenza activity: Early detection, surveillance, and subtyping in city and neighbourhood communities (preprint). (2022) doi:10.1101/2022.06.28.22276884. 
 
 ------------------------------------------------------------------------
 
