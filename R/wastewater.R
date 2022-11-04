@@ -3,8 +3,11 @@ wastewater_prep <- function(data){
   data_clean <- data %>%
     rename(date = "sampleDate",
            N1 = "covN1_nPMMoV_meanNr",
-           N2 = "covN2_nPMMoV_meanNr") %>%
-    select(date, N1, N2, qualityFlag, reportDate) %>%
+           N2 = "covN2_nPMMoV_meanNr",
+           InfA = "InfA_copies_per_pep_copies_avg",
+           InfB = "InfB_copies_per_pep_copies_avg",
+           RSV = "RSV_copies_per_pep_copies_avg") %>%
+    select(date, N1, N2, InfA, InfB, RSV, qualityFlag, reportDate) %>%
     mutate(date = as.Date(date),
            reportDate = as.Date(reportDate)) %>%
     filter(!is.na(date)) %>%
@@ -20,6 +23,7 @@ wastewater_prep <- function(data){
     ifelse(data_clean$qualityFlag == TRUE, NA, data_clean$N1_N2_avg)
   data_clean$N1_N2_avg_omit <-
     ifelse(data_clean$qualityFlag == TRUE, data_clean$N1_N2_avg, NA)
+  data_clean <- transform(data_clean, InfA = as.numeric(InfA), InfB = as.numeric(InfB), RSV = as.numeric(RSV))
   data_final <- data_clean %>%
     # create 5 day rolling avg of viral signal
     mutate(
@@ -58,6 +62,30 @@ wastewater_prep <- function(data){
       change_N1_N2_5_day =
         (N1_N2_5_day - lag(N1_N2_5_day, 5))/lag(N1_N2_5_day, 5) * 100
     ) %>%
+    # create 7 day rolling avg of influenza A signal
+    mutate(
+      InfA_7_day =
+        rollapply(InfA, width=7,
+                  FUN=function(x) mean(x, na.rm = TRUE),
+                  by=1, by.column=TRUE, partial=FALSE,
+                  fill=NA, align="right")
+    ) %>%
+  # create 7 day rolling avg of influenza B signal
+  mutate(
+    InfB_7_day =
+      rollapply(InfB, width=7,
+                FUN=function(x) mean(x, na.rm = TRUE),
+                by=1, by.column=TRUE, partial=FALSE,
+                fill=NA, align="right")
+  ) %>%
+    # create 7 day rolling avg of RSV virus signal
+    mutate(
+      RSV_7_day =
+        rollapply(RSV, width=7,
+                  FUN=function(x) mean(x, na.rm = TRUE),
+                  by=1, by.column=TRUE, partial=FALSE,
+                  fill=NA, align="right")
+    )
   return(data_final)
 }
 
