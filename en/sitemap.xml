@@ -3,58 +3,9 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://613covid.ca/model/</loc>
-    <lastmod>2016-05-05T21:48:51-07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/model/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/model/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/model/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/model/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/model/</loc>
-    <lastmod>2016-05-05T21:48:51-07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/model/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/model/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/model/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/model/"
-                />
-  </url>
-  
-  <url>
     <loc>https://613covid.ca/</loc>
     <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -68,6 +19,56 @@
   </url>
   
   <url>
+    <loc>https://613covid.ca/model/</loc>
+    <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/model/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/model/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/model/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/model/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://613covid.ca/model/</loc>
+    <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/model/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/model/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/model/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/model/"
+                />
+  </url>
+  
+  <url>
     <loc>https://613covid.ca/more/</loc>
     <xhtml:link
                 rel="alternate"
@@ -112,6 +113,31 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://613covid.ca/more/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://613covid.ca/wastewater/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/wastewater/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/wastewater/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/wastewater/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/wastewater/"
                 />
   </url>
   
@@ -265,30 +291,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://613covid.ca/hosp-historic-performance/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/wastewater/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/wastewater/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/wastewater/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/wastewater/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/wastewater/"
                 />
   </url>
   
