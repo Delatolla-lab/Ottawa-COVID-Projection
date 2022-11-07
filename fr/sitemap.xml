@@ -103,6 +103,20 @@
   </url>
   
   <url>
+    <loc>https://613covid.ca/fr/wastewater_archive/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://613covid.ca/wastewater_archive/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://613covid.ca/fr/wastewater_archive/"
+                />
+  </url>
+  
+  <url>
     <loc>https://613covid.ca/fr/roadmap/</loc>
     <xhtml:link
                 rel="alternate"
