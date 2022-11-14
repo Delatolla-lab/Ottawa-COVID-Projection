@@ -12,6 +12,7 @@ lang <- params$lang
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # libraries
+options(scipen = 999)
 library(plotly)
 library(tidyverse)
 library(jsonlite)
@@ -362,7 +363,7 @@ sheet <- variant_sheet %>%
 
 The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater.
 
-<img src="/static/images/voc_image_25July22.jpg" width="90%" height="90%"/> <!-- Will eventually need to transform this into a live figure and not a static image as well -->
+<img src="/images/voc_image_25July22.jpg" width="90%" height="90%"/> <!-- Will eventually need to transform this into a live figure and not a static image as well -->
 
 ------------------------------------------------------------------------
 
@@ -383,8 +384,10 @@ Samples are screened for influenza A virus (IAV) once a week during the summer p
 The next plot illustrate the 7-day rolling mean in daily IAV wastewater viral signal. This number is the average of a week's daily readings.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(daily_infa_signal, infa_7_day), titles = c(y = "Normalized Influenza A viral copies*", y2 = "", x = "Date", title = "<b>Influenza A wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
+p <- reworked_figure(xaxis = "date", yaxis = list(daily_infa_signal, infa_7_day), titles = c(y = "Normalized Influenza A viral copies*", y2 = "", x = "Date", title = "<b>Influenza A wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
 
+p <- layout(p, yaxis = list(range = c(0, 0.0001350000), exponentformat="none", tickformat=".5f"))
+p
 ```
 
 ### Respiratory Syncytial Virus Infection (RSV)
@@ -394,8 +397,10 @@ Samples are screened daily for respiratory syncytial virus (RSV) during the wint
 The next plots illustrate the 7-day rolling mean in daily RSV wastewater viral signal. This number is the average of a week's daily readings. RSV is not a reportable disease, meaning that it does not fall under the list of diseases of public health significance in Ontario as designated by the Minister of Health$^1$. Nevertheless, RSV has been identified as a disease that could benefit from wastewater-based surveillance given its contribution to seasonal emergency department visits and hospitalizations among young children and to outbreaks in healthcare institutions such as long-term care homes. Visit [Respiratory Virus Detections](https://www.canada.ca/en/public-health/services/surveillance/respiratory-virus-detections-canada.html) in Canada for more information on RSV surveillance.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-reworked_figure(xaxis = "date", yaxis = list(daily_rsv_signal, rsv_7_day), titles = c(y = "Normalized RSV viral copies*", y2 = "", x = "Date", title = "<b>RSV wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
-
+p <- reworked_figure(xaxis = "date", yaxis = list(daily_rsv_signal, rsv_7_day), titles = c(y = "Normalized RSV viral copies*", y2 = "", x = "Date", title = "<b>RSV wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
+p <- layout(p, yaxis = list(range = c(0, 0.0008500), exponentformat="none", tickformat=".5f"))
+p
+```
 ```
 
 ------------------------------------------------------------------------
