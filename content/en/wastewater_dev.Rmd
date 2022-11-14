@@ -363,7 +363,7 @@ sheet <- variant_sheet %>%
 
 The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater.
 
-<img src="/images/flu_image_21aug12.png" width="90%" height="90%"/> <!-- Will eventually need to transform this into a live figure and not a static image as well -->
+<img src="/images/voc_image_25July22.jpg" width="90%" height="90%"/> <!-- Will eventually need to transform this into a live figure and not a static image as well -->
 
 ------------------------------------------------------------------------
 
@@ -386,7 +386,7 @@ The next plot illustrate the 7-day rolling mean in daily IAV wastewater viral si
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 p <- reworked_figure(xaxis = "date", yaxis = list(daily_infa_signal, infa_7_day), titles = c(y = "Normalized Influenza A viral copies*", y2 = "", x = "Date", title = "<b>Influenza A wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
 
-p <- layout(p, yaxis = list(range = c(0.0000007042857, 0.0001350000), exponentformat="none", tickformat=".5f"))
+p <- layout(p, yaxis = list(range = c(0, 0.0001350000), exponentformat="none", tickformat=".5f"))
 p
 ```
 
@@ -398,7 +398,7 @@ The next plots illustrate the 7-day rolling mean in daily RSV wastewater viral s
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 p <- reworked_figure(xaxis = "date", yaxis = list(daily_rsv_signal, rsv_7_day), titles = c(y = "Normalized RSV viral copies*", y2 = "", x = "Date", title = "<b>RSV wastewater viral signal, Ottawa</b>"), data = ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
-p <- layout(p, yaxis = list(range = c(0.00001275000, 0.0002740), exponentformat="none", tickformat=".5f"))
+p <- layout(p, yaxis = list(range = c(0, 0.0008500), exponentformat="none", tickformat=".5f"))
 p
 ```
 ```
