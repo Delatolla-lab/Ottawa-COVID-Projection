@@ -6,7 +6,7 @@ library(tidyverse)
 source("R/epinow_functions.R")
 
 # Date setback variables
-time_to_set_back <- -7
+time_to_set_back <- -7 
 measure_to_set_back <- "months"
 
 # load covid data
@@ -24,11 +24,12 @@ incubation_period <-
 end_date <- as.Date(last(ott_covid_data$date))
 start_date <- seq(as.Date(end_date), length = 2, by = paste(time_to_set_back, measure_to_set_back))[2]
 
+
 # Run epinow forecast
 ott_short_forecast <- short_term_forecast(
   data = ott_covid_data,
   input = "observed_new_cases",
-  start_date = "2021-09-01", # can be changed
+  start_date = start_date, 
  # end_date = "2020-11-24", # can be changed, if missing will default to last day
   omit_last_date = TRUE,
   generation_time = generation_time,
