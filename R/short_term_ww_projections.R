@@ -12,6 +12,10 @@ source("R/open_ottawa_scripts.R")
 source("R/wastewater.R")
 source("R/epinow_functions.R")
 
+# Date setback variables
+time_to_set_back <- -7
+measure_to_set_back <- "months"
+
 ww_data <-
   read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
 
@@ -26,10 +30,14 @@ generation_time <-
 incubation_period <-
   get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 
+# Generate start date from end date
+end_date <- as.Date(last(ww_clean$date))
+start_date <- seq(as.Date(end_date), length = 2, by = paste(time_to_set_back, measure_to_set_back))[2]
+
 ww_forecast <- short_term_forecast(
   data = ww_clean,
   input = "N1_N2_avg_clean",
-  start_date = "2021-10-01",
+  start_date = start_date,
   input_multiplier = 1000000,
   omit_last_date = FALSE,
   generation_time = generation_time,
