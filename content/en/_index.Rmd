@@ -8,7 +8,6 @@ output:
   word_document: default
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 lang <- params$lang
@@ -35,6 +34,7 @@ site <- "CovidEmployeeData"
 ```
 
 `r intro`
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 # libraries
@@ -328,28 +328,6 @@ hosp_projections <- insert_translation(localization_data, lang, "hosp_projection
 
 `r dashboard_HCWcovid`
 
-`r past_data_title`
-
-`r observed_cases`
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Visualize current daily cases
-source("../../R/observed_data.R")
-observed_new_episodes <- list(type = "observed_data", y_column = "observed_new_episodes", name = "New cases by episode date", color = current_case_hex)
-constrain_val = as.Date(last(ott_observed$date)) - as.Date(first(ott_observed$date))
-constrain_val = day(days(constrain_val))
-reworked_figure(
-    xaxis = "date",
-    yaxis = list(observed_new_episodes),
-    titles = c(y = "Daily cases", x = "Date", title = "Observed daily COVID-19 cases in Ottawa by episode date", ticklabels = "%b %y"),
-    data = ott_observed, date_constraint = TRUE, constraint_val =  constrain_val
-  )
-```
-
-`r observed_cases_text`
-
-`r line_break`
-
 `r observed_staff_cases`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -413,21 +391,18 @@ ICU_p_acute_care
 
 `r line_break`
 
-`r hosp_projections`
-`r hosp_projections_text`
+`r hosp_projections` `r hosp_projections_text`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 #short_term_plot(projections = ott_projections, obs_data = ott_observed, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Short-term daily COVID-19 cases in Ottawa by reported date")
 ```
 
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 interval_num <- tail(as.Date(hosp_proj$date), 2)[[1]] - as.Date("2021-12-01")
 short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Projection of hospital census in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month", interval_num = interval_num)
 ```
-
 
 `r line_break`
 

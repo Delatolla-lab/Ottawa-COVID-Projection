@@ -229,7 +229,9 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_vira
 
 ------------------------------------------------------------------------
 
-The next plot illustrates the 7-day rolling mean in daily COVID-19 wastewater viral signal. This number is the average of a week's readings; today's reading with the previous six days. Also on the graph are various comparators (e.g. reported daily COVID-19 cases, hospitalization count), which can be individually selected by toggling the menu on the right.
+The next plot illustrates the 7-day rolling mean in daily COVID-19 wastewater viral signal. This number is the average of a week's readings; today's reading with the previous six days. Also on the graph are various comparators (e.g. hospitalization count), which can be individually selected by toggling the menu on the right.
+
+<!-- Remove all comparators for this plot except 'hospitalizations' and '% positivity' -->
 
 ------------------------------------------------------------------------
 
@@ -401,23 +403,24 @@ p <- reworked_figure(xaxis = "date", yaxis = list(daily_rsv_signal, rsv_7_day), 
 p <- layout(p, yaxis = list(range = c(0, 0.0008500), exponentformat="none", tickformat=".5f"))
 p
 ```
-```
+
+\`\`\`
 
 ------------------------------------------------------------------------
 
 ## Interpretation cautions
 
-The accuracy and reliability of SARS-CoV-2, influenza and RSV wastewater testing is improving as scientists understand the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily or less then 3-day variation in the viral signal while evaluation of the methodology in public health surveillance is ongoing. Research is underway to arrive at a more precise estimate of sensitivity. For influenza and RSV, the level of detection is currently unknown as less than a year’s worth of data has been collected, but evaluation is ongoing. Thus, direct comparisons between wastewater signal levels for the 3 viruses is not recommended at this time. COVID-19, influenza and RSV wastewater signal is helpful when interpreted alongside other surveillance measures, taking into consideration the strengths and limitations of each measure. It is most promising as an early indicator$^2$ of community viral activity and illness and may serve as a warning in advance of increased care-seeking, outbreaks and hospitalizations.  
+The accuracy and reliability of SARS-CoV-2, influenza and RSV wastewater testing is improving as scientists understand the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily or less then 3-day variation in the viral signal while evaluation of the methodology in public health surveillance is ongoing. Research is underway to arrive at a more precise estimate of sensitivity. For influenza and RSV, the level of detection is currently unknown as less than a year's worth of data has been collected, but evaluation is ongoing. Thus, direct comparisons between wastewater signal levels for the 3 viruses is not recommended at this time. COVID-19, influenza and RSV wastewater signal is helpful when interpreted alongside other surveillance measures, taking into consideration the strengths and limitations of each measure. It is most promising as an early indicator$^2$ of community viral activity and illness and may serve as a warning in advance of increased care-seeking, outbreaks and hospitalizations.
 
-Visit the Ottawa Public Health [Respiratory and Enteric Surveillance Report](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/flu-report.aspx) for more information on Ottawa’s public health surveillance of respiratory and enteric viruses.  
+Visit the Ottawa Public Health [Respiratory and Enteric Surveillance Report](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/flu-report.aspx) for more information on Ottawa's public health surveillance of respiratory and enteric viruses.
 
-For more information on wastewater testing in Ottawa, please see the [contact](https://613covid.ca/contact/) page. 
+For more information on wastewater testing in Ottawa, please see the [contact](https://613covid.ca/contact/) page.
 
 Citations:
 
-1.	Health Protection and Promotion Act, R.S.O. 1990, c. H.7. https://www.ontario.ca/laws/statute/90h07?search=diseases+of+public+health+significance. 
+1.  Health Protection and Promotion Act, R.S.O. 1990, c. H.7. <https://www.ontario.ca/laws/statute/90h07?search=diseases+of+public+health+significance>.
 
-2.	Mercier, É. et al. Wastewater surveillance of influenza activity: Early detection, surveillance, and subtyping in city and neighbourhood communities (preprint). (2022) doi:10.1101/2022.06.28.22276884. 
+2.  Mercier, É. et al. Wastewater surveillance of influenza activity: Early detection, surveillance, and subtyping in city and neighbourhood communities (preprint). (2022) <doi:10.1101/2022.06.28.22276884>.
 
 ------------------------------------------------------------------------
 
@@ -428,8 +431,6 @@ You can learn more about wastewater epidemiology and its role in COVID-19 survei
 ## Definitions
 
 \* A 7-day average is generated by averaging the levels from a given day with the six previous days. The average is termed "rolling" as it changes each day.
-
-\* For new cases, the reported date is the day the test result is reported by the laboratory. Episode date is the approximate date of COVID-19 infection estimated from information available: the date of symptom onset, test date, or the reported date.
 
 \* Percent positivity refers to the percentage of individuals tested for either COVID-19 infection or influenza A infection in a given day that test positive.
 
