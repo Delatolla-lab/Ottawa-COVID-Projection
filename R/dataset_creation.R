@@ -23,7 +23,7 @@ ottawa_test_data <-
 
 #ottawa_test_data[["features"]][[1]][[1]] <- str_replace(ottawa_test_data[["features"]][[1]][[1]], "2020-", "20-")
 
-## Pull adjusted case data from arcGIS
+## Pull adjusted case data from arcGIS. Rt, including adjusted Rt with now casing
 adjusted_episodes <- adjusted_function("https://www.arcgis.com/sharing/rest/content/items/d010a848b6e54f4990d60a202f2f2f99/data")
 
 ## Pull data from objects to generate dataset
