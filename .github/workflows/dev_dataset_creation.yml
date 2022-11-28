@@ -2,8 +2,7 @@
 # run short-term hospitalization projections
 
 name: dev_Dataset-creation
-on:
-  workflow_dispatch
+on: workflow_dispatch
 
 jobs:
   dataset-creation:
