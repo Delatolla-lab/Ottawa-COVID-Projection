@@ -2,6 +2,8 @@
 # run short-term hospitalization projections
 
 name: dev_Dataset-creation
+on:
+  workflow_dispatch:
 
 jobs:
   dataset-creation:
@@ -50,4 +52,4 @@ jobs:
       - uses: ad-m/github-push-action@dev
         with:
           github_token: ${{ secrets.ACTION_TOKEN }}
-          branch: "dev" 
+          branch: "dev"
