@@ -3,7 +3,7 @@
 
 name: dev_Dataset-creation
 on:
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
   dataset-creation:
