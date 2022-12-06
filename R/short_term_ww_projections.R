@@ -8,7 +8,8 @@ library(tidyverse)
 library(lubridate)
 library(zoo)
 
-source("R/open_ottawa_scripts.R")
+# Seems unused here
+#source("R/open_ottawa_scripts.R")
 source("R/wastewater.R")
 source("R/epinow_functions.R")
 
