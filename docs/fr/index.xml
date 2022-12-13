@@ -5,12 +5,7 @@
     <link>https://613covid.ca/fr/</link>
     <description>Recent content in Projections relatives à la COVID-19 à Ottawa on Ottawa COVID19</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 05 May 2016 21:48:51 -0700</lastBuildDate>
-    
-	<atom:link href="https://613covid.ca/fr/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://613covid.ca/fr/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Methods</title>
       <link>https://613covid.ca/fr/model/</link>
@@ -66,9 +61,9 @@ Consultant couleur: Toby Barker</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/fr/wastewater/</guid>
-      <description>Wastewater plots last updated: 29 November, 2022, 9:45:19 AM
-Wastewater samples collected up to: 24 November, 2022
-Reported date up to: 29 November, 2022
+      <description>Wastewater plots last updated: 13 December, 2022, 12:57:09 PM
+Wastewater samples collected up to: 08 December, 2022
+Reported date up to: 13 December, 2022
 The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
 Samples that are collected from Monday to Thursday are processed the day after collection.</description>
     </item>
@@ -79,9 +74,9 @@ Samples that are collected from Monday to Thursday are processed the day after c
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/fr/wastewater_archive/</guid>
-      <description>Wastewater plots last updated: 29 November, 2022, 9:45:29 AM
-Wastewater samples collected up to: 24 November, 2022
-Reported date up to: 29 November, 2022
+      <description>Wastewater plots last updated: 13 December, 2022, 12:57:20 PM
+Wastewater samples collected up to: 08 December, 2022
+Reported date up to: 13 December, 2022
 The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
 Samples that are collected from Monday to Thursday are processed the day after collection.</description>
     </item>
@@ -92,7 +87,7 @@ Samples that are collected from Monday to Thursday are processed the day after c
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/fr/roadmap/</guid>
-      <description>The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
+      <description>The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
 Review and update model parameters based on recent published studies. Priories for review:ventilated patientsdeaths</description>
     </item>
     
