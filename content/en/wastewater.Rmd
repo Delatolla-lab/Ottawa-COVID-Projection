@@ -377,7 +377,13 @@ Samples are screened for influenza A virus (IAV) once a week during the summer p
 The next plot illustrate the 7-day rolling mean in daily IAV wastewater viral signal. This number is the average of a week's daily readings.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-inf_data <- ww_covid_waste[ww_covid_waste$date<as.Date("2022-12-05"),]
+# Create subset of data with only needed columns
+inf_data <- ww_covid_waste[,c( "date", "InfA", "InfA_7_day", "RSV", "RSV_7_day")]
+
+# Trim any rows with NA in any column, only affecting trailing rows
+inf_data <- na.trim(inf_data,sides="right")
+
+
 p <- reworked_figure(xaxis = "date", yaxis = list(daily_infa_signal, infa_7_day), titles = c(y = "Normalized Influenza A viral copies*", y2 = "", x = "Date", title = "<b>Influenza A wastewater viral signal, Ottawa</b>"), data = inf_data, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
 
 p <- layout(p, yaxis = list(range = c(0, 0.0001350000), exponentformat="none", tickformat=".5f"))
