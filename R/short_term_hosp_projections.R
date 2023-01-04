@@ -2,6 +2,11 @@ library(EpiNow2)
 library(tidyverse)
 source("R/epinow_functions.R")
 
+# Date setback variables
+time_to_set_back <- -7 
+measure_to_set_back <- "months"
+
+
 # load covid data
 ott_covid_data <-
   read.csv(file.path(getwd(), "Data/Observed data/OPH_Observed_COVID_Data.csv"))
@@ -13,11 +18,15 @@ generation_time <-
 incubation_period <-
   get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 
+# Generate start date from end date
+end_date <- as.Date(last(ott_covid_data$date))
+start_date <- seq(as.Date(end_date), length = 2, by = paste(time_to_set_back, measure_to_set_back))[2]
+
 # Run epinow forecast
 hosp_projections <- short_term_forecast(
   data = ott_covid_data,
   input = "observed_census_ICU_p_acute_care",
-  start_date = as.Date("2021-12-26"),
+  start_date = start_date,
   # end_date = "2020-11-24", # can be changed, if missing will default to last day
   omit_last_date = TRUE,
   generation_time = generation_time,
