@@ -336,12 +336,6 @@ source("../../R/observed_data.R")
 observed_new_episodes <- list(type = "observed_data", y_column = "observed_new_episodes", name = "New cases by episode date", color = current_case_hex)
 constrain_val = as.Date(last(ott_observed$date)) - as.Date(first(ott_observed$date))
 constrain_val = day(days(constrain_val))
-#reworked_figure(
-#    xaxis = "date",
-#    yaxis = list(observed_new_episodes),
-#    titles = c(y = "Daily cases", x = "Date", title = "Observed daily COVID-19 cases in Ottawa by episode date", #ticklabels = "%b %y"),
-#    data = ott_observed, date_constraint = TRUE, constraint_val =  constrain_val
-#  )
 ```
 
 

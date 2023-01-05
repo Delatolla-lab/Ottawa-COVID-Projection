@@ -377,7 +377,7 @@ Samples are screened for influenza A virus (IAV) once a week during the summer p
 The next plot illustrate the 7-day rolling mean in daily IAV wastewater viral signal. This number is the average of a week's daily readings.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# Create subset of data with only needed columns
+# Create subset of data with only needed columns. Subset is needed so only valid columns are checked for NA, other columns would cause unnecessary trimming.
 inf_data <- ww_covid_waste[,c( "date", "InfA", "InfA_7_day", "RSV", "RSV_7_day")]
 
 # Trim any rows with NA in any column, only affecting trailing rows
