@@ -2,9 +2,16 @@ library(EpiNow2)
 library(tidyverse)
 source("R/epinow_functions.R")
 
-# Date setback variables
+# CONFIGURATION VARIABLES START
+# The next two variables configures the rolling window for the short term 
+# hospital projections
+# Without the rolling window the hospital projections take too long to complete
+# The variables are used to set the start date for the projections. For example,
+# If we want the start date to be 1 month before, time_to_set_back would be -1
+# and measure_to_set_back would be "months"
 time_to_set_back <- -7 
 measure_to_set_back <- "months"
+# CONFIGURATION VARIABLES END
 
 
 # load covid data
@@ -20,7 +27,11 @@ incubation_period <-
 
 # Generate start date from end date
 end_date <- as.Date(last(ott_covid_data$date))
-start_date <- seq(as.Date(end_date), length = 2, by = paste(time_to_set_back, measure_to_set_back))[2]
+start_date <- seq(
+  as.Date(end_date), 
+  length = 2, 
+  by = paste(time_to_set_back, measure_to_set_back)
+)[2]
 
 # Run epinow forecast
 hosp_projections <- short_term_forecast(
