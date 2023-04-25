@@ -352,11 +352,9 @@ sheet <- variant_sheet %>%
 #ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
 ```
 
-### Variants of Concern
+<!-- ### Variants of Concern --> 
 
-The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater.
-
-<img src="/images/voc_image_25July22.jpg" width="90%" height="90%"/> <!-- Will eventually need to transform this into a live figure and not a static image as well -->
+<!-- removing the section on VOCs and the accompanying figure, but leaving this placeholder in anticipation of some potential text inputs from Tyson--> 
 
 ------------------------------------------------------------------------
 
