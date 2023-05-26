@@ -29,7 +29,7 @@ jobs:
       - name: Install EpiNow2 Dependencies
         run: Rscript -e 'install.packages(c("cowplot", "futile.logger", "patchwork", "rstan", "runner", "truncnorm", "BH", "StanHeaders", "future", "future.apply", "progressr", "R.utils"))'
       - name: Install EpiNow2
-        run: Rscript -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/EpiNow2/EpiNow2_1.3.2.tar.gz", repos=NULL)'
+        run: Rscript -e 'install.packages("EpiNow2")'
       - name: Install blogdown
         run: Rscript -e 'install.packages("blogdown")'
       - name: install hugo
