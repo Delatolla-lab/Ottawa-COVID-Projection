@@ -33,7 +33,14 @@ the_same <- insert_translation(localization_data, lang, "the_same")
 numofweeks <- "twoweek"
 site <- "CovidEmployeeData"
 ```
-
+<div id="warning-blackbox" class="warning blackbox" style="padding: 1em;
+  background: black;
+  color: white;
+  border: 2px solid orange;
+  border-radius: 10px;
+  text-align: center;">
+  The support for this website will be dropping in the coming months.
+</div>
 `r intro`
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
