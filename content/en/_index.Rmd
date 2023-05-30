@@ -243,18 +243,6 @@ rolling_avg_col <- "rgb(226, 127, 88)"
 ```{r, results='hold', echo=FALSE, comment=NA}
 line_break <- insert_translation(localization_data, lang, "break")
 
-# @DOUG @YULRIC alot of the DT info is calculated using absenteism data
-dashboard_HCWcovid <- insert_translation(localization_data, lang, "Dashboard_HCWcovid",
-                                c(as.character(tail(covid_data$date, n=1)),
-                                  dt_label,
-                                  dt_abs,
-                                  dt_label_sts,
-                                  dt_sts_abs,
-                                  #last(na.omit(ott_observed$observed_active_cases)),
-                                  last(na.omit(ott_observed$observed_census_ICU_p_acute_care)),
-                                  last(na.omit(ott_observed$observed_census_acute_care)),
-                                  last(na.omit(ott_observed$observed_census_ICU))))
-
 definitions <- insert_translation(localization_data, lang, "Definitions")
 
 short_range_forecast <- insert_translation(localization_data, lang, "ShortRangeForecast", 
@@ -326,7 +314,6 @@ hosp_projections <- insert_translation(localization_data, lang, "hosp_projection
 
 ```
 
-`r dashboard_HCWcovid`
 
 
 
