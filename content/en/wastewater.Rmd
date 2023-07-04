@@ -81,7 +81,7 @@ var_col <- "rgb(85, 151, 217)"
 n1_col <- "rgb(23, 63, 95)"
 n2_col <- "rgb(60, 174, 163)"
 n1_n2_col <- "rgb(237, 85, 59)"
-rolling_avg_col ¿)"
+rolling_avg_col <- "rgb(226, 127, 88)"
 smooth_col <- "rgb(34, 140, 34)"
 red <- "rgb(255,0,0)"
 red_shade <- "rgba(255, 0, 0, 0.2)"
@@ -181,6 +181,7 @@ localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid L
 ```{r, results='hold', echo=FALSE, comment=NA}
 time <- .POSIXct(Sys.time(), "America/New_York")
 wwintro<- insert_translation(localization_data, lang, "WWIntro", c(format(time, '%d %B, %Y, %X')))
+end_transition_out <- insert_translation(localization_data, lang, "end_transition_out", c(format(time, '%d %B, %Y, %X')))
 curr_day <- as.Date(time)
 collect_date <- as.Date(last(ww_covid_waste$date))
 wwcollectdate<- insert_translation(localization_data, lang, "WWCollectDate", c(format(collect_date, '%d %B, %Y')))
@@ -402,8 +403,6 @@ p <- reworked_figure(xaxis = "date", yaxis = list(daily_rsv_signal, rsv_7_day), 
 p <- layout(p, yaxis = list(range = c(0, 0.0008500), exponentformat="none", tickformat=".5f"))
 p
 ```
-
-\`\`\`
 
 ------------------------------------------------------------------------
 
