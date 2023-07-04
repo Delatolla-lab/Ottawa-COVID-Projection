@@ -172,11 +172,14 @@ localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid L
 ```{r, results='hold', echo=FALSE, comment=NA}
 time <- .POSIXct(Sys.time(), "America/New_York")
 wwintro<- insert_translation(localization_data, lang, "WWIntro", c(format(time, '%d %B, %Y, %X')))
+end_transition_out <- insert_translation(localization_data, lang, "end_transition_out", c(format(time, '%d %B, %Y, %X')))
 curr_day <- as.Date(time)
 collect_date <- as.Date(last(ott_covid_waste$date))
 wwcollectdate<- insert_translation(localization_data, lang, "WWCollectDate", c(format(collect_date, '%d %B, %Y')))
 wwanalysesdate<- insert_translation(localization_data, lang, "WWAnalysesDate", c(format(curr_day, '%d %B, %Y')))
 ```
+
+`r end_transition_out`
 
 `r wwintro`
 
