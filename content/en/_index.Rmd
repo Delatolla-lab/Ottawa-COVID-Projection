@@ -8,7 +8,6 @@ output:
   word_document: default
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 lang <- params$lang
@@ -23,6 +22,7 @@ localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid L
 ```{r, results='hold', echo=FALSE, comment=NA}
 time <- .POSIXct(Sys.time(), "America/New_York")
 intro<- insert_translation(localization_data, lang, "Intro", c(format(time, '%d %B, %Y, %X')))
+end_transition_out <- insert_translation(localization_data, lang, "end_transition_out", c(format(time, '%d %B, %Y, %X')))
 dt_label_half <- insert_translation(localization_data, lang, "DT_label_half")
 dt_label_double <- insert_translation(localization_data, lang, "DT_label_double")
 dt_label_no_change <- insert_translation(localization_data, lang, "DT_label_no_change")
@@ -34,7 +34,10 @@ numofweeks <- "twoweek"
 # site <- "CovidEmployeeData"
 ```
 
+`r end_transition_out`
+
 `r intro`
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 # libraries
@@ -315,8 +318,6 @@ hosp_projections <- insert_translation(localization_data, lang, "hosp_projection
 ```
 
 
-
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Visualize current daily cases
 observed_new_episodes <- list(type = "observed_data", y_column = "observed_new_episodes", name = "New cases by episode date", color = current_case_hex)
@@ -389,21 +390,18 @@ ICU_p_acute_care
 
 `r line_break`
 
-`r hosp_projections`
-`r hosp_projections_text`
+`r hosp_projections` `r hosp_projections_text`
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 #short_term_plot(projections = ott_projections, obs_data = ott_observed, obs_column = "observed_new_cases", forecast_type = "reported_cases", ylab = "New cases", title = "Short-term daily COVID-19 cases in Ottawa by reported date")
 ```
 
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # visualize epinow forecast
 interval_num <- tail(as.Date(hosp_proj$date), 2)[[1]] - as.Date("2021-12-01")
 short_term_plot(projections = hosp_proj, obs_data = ott_observed, obs_column = "observed_census_ICU_p_acute_care", forecast_type = "reported_cases", ylab = "Hospital census", title = "Projection of hospital census in Ottawa", tick_labels_date = "%b %y", tick_period = "1 month", interval_num = interval_num)
 ```
-
 
 `r line_break`
 

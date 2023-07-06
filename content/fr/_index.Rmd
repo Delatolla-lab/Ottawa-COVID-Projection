@@ -19,6 +19,7 @@ localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid L
 ```{r, results='hold', echo=FALSE, comment=NA}
 time <- .POSIXct(Sys.time(), "America/New_York")
 intro<- insert_translation(localization_data, lang, "Intro", c(format(time, '%d %B, %Y, %X')))
+end_transition_out <- insert_translation(localization_data, lang, "end_transition_out", c(format(time, '%d %B, %Y, %X')))
 dt_label_half <- insert_translation(localization_data, lang, "DT_label_half")
 dt_label_double <- insert_translation(localization_data, lang, "DT_label_double")
 dt_label_no_change <- insert_translation(localization_data, lang, "DT_label_no_change")
@@ -29,6 +30,8 @@ the_same <- insert_translation(localization_data, lang, "the_same")
 numofweeks <- "twoweek"
 # site <- "CovidEmployeeData"
 ```
+
+`r end_transition_out`
 
 `r intro`
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
