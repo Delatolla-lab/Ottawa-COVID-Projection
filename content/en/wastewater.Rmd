@@ -181,11 +181,14 @@ localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid L
 ```{r, results='hold', echo=FALSE, comment=NA}
 time <- .POSIXct(Sys.time(), "America/New_York")
 wwintro<- insert_translation(localization_data, lang, "WWIntro", c(format(time, '%d %B, %Y, %X')))
+end_transition_out <- insert_translation(localization_data, lang, "end_transition_out", c(format(time, '%d %B, %Y, %X')))
 curr_day <- as.Date(time)
 collect_date <- as.Date(last(ww_covid_waste$date))
 wwcollectdate<- insert_translation(localization_data, lang, "WWCollectDate", c(format(collect_date, '%d %B, %Y')))
 wwanalysesdate<- insert_translation(localization_data, lang, "WWAnalysesDate", c(format(curr_day, '%d %B, %Y')))
 ```
+
+`r end_transition_out`
 
 `r wwintro`
 
@@ -228,7 +231,6 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_vira
 \*Rolling mean viral signal omits dates (coloured in blue) flagged by wastewater researchers with potential data concerns. Data is currently being studied for effects of snow melt and other diluting factors on RNA signal.
 
 ------------------------------------------------------------------------
-
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
 #reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call, var_7_day_avg), error_bands = TRUE, error_pct = TRUE, error_data = "sd_7day", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
@@ -352,11 +354,9 @@ sheet <- variant_sheet %>%
 #ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
 ```
 
-### Variants of Concern
+<!-- ### Variants of Concern --> 
 
-The figure below illustrates the proportion of variants of concern (VOC) found in Ottawa wastewater.
-
-<img src="/images/voc_image_25July22.jpg" width="90%" height="90%"/> <!-- Will eventually need to transform this into a live figure and not a static image as well -->
+<!-- removing the section on VOCs and the accompanying figure, but leaving this placeholder in anticipation of some potential text inputs from Tyson--> 
 
 ------------------------------------------------------------------------
 
@@ -401,23 +401,22 @@ p <- reworked_figure(xaxis = "date", yaxis = list(daily_rsv_signal, rsv_7_day), 
 p <- layout(p, yaxis = list(range = c(0, 0.0008500), exponentformat="none", tickformat=".5f"))
 p
 ```
-```
 
 ------------------------------------------------------------------------
 
 ## Interpretation cautions
 
-The accuracy and reliability of SARS-CoV-2, influenza and RSV wastewater testing is improving as scientists understand the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily or less then 3-day variation in the viral signal while evaluation of the methodology in public health surveillance is ongoing. Research is underway to arrive at a more precise estimate of sensitivity. For influenza and RSV, the level of detection is currently unknown as less than a year’s worth of data has been collected, but evaluation is ongoing. Thus, direct comparisons between wastewater signal levels for the 3 viruses is not recommended at this time. COVID-19, influenza and RSV wastewater signal is helpful when interpreted alongside other surveillance measures, taking into consideration the strengths and limitations of each measure. It is most promising as an early indicator$^2$ of community viral activity and illness and may serve as a warning in advance of increased care-seeking, outbreaks and hospitalizations.  
+The accuracy and reliability of SARS-CoV-2, influenza and RSV wastewater testing is improving as scientists understand the role of factors such as differences in sewage systems and laboratory protocols. Nonetheless, we recommend caution when interpreting daily or less then 3-day variation in the viral signal while evaluation of the methodology in public health surveillance is ongoing. Research is underway to arrive at a more precise estimate of sensitivity. For influenza and RSV, the level of detection is currently unknown as less than a year's worth of data has been collected, but evaluation is ongoing. Thus, direct comparisons between wastewater signal levels for the 3 viruses is not recommended at this time. COVID-19, influenza and RSV wastewater signal is helpful when interpreted alongside other surveillance measures, taking into consideration the strengths and limitations of each measure. It is most promising as an early indicator$^2$ of community viral activity and illness and may serve as a warning in advance of increased care-seeking, outbreaks and hospitalizations.
 
-Visit the Ottawa Public Health [Respiratory and Enteric Surveillance Report](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/flu-report.aspx) for more information on Ottawa’s public health surveillance of respiratory and enteric viruses.  
+Visit the Ottawa Public Health [Respiratory and Enteric Surveillance Report](https://www.ottawapublichealth.ca/en/reports-research-and-statistics/flu-report.aspx) for more information on Ottawa's public health surveillance of respiratory and enteric viruses.
 
-For more information on wastewater testing in Ottawa, please see the [contact](https://613covid.ca/contact/) page. 
+For more information on wastewater testing in Ottawa, please see the [contact](https://613covid.ca/contact/) page.
 
 Citations:
 
-1.	Health Protection and Promotion Act, R.S.O. 1990, c. H.7. https://www.ontario.ca/laws/statute/90h07?search=diseases+of+public+health+significance. 
+1.  Health Protection and Promotion Act, R.S.O. 1990, c. H.7. <https://www.ontario.ca/laws/statute/90h07?search=diseases+of+public+health+significance>.
 
-2.	Mercier, É. et al. Wastewater surveillance of influenza activity: Early detection, surveillance, and subtyping in city and neighbourhood communities (preprint). (2022) doi:10.1101/2022.06.28.22276884. 
+2.  Mercier, É. et al. Wastewater surveillance of influenza activity: Early detection, surveillance, and subtyping in city and neighbourhood communities (preprint). (2022) <doi:10.1101/2022.06.28.22276884>.
 
 ------------------------------------------------------------------------
 
