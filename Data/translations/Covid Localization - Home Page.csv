@@ -2,33 +2,35 @@ key,en,fr
 break,---,---
 case_projections,## {#case-projections},## {#case-projections}
 case_projections_text,Short-term COVID-19 projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created.,Les projections COVID-19 à court terme sont présentées ci-dessous. Voir [plus](/more) pour une discussion sur l'interprétation du modèle et [Méthodes](/model) pour savoir comment les projections ont été créées.
-Contact,"**Media Contact:** Rebecca Abelson, Media Relations Officer, The Ottawa Hospital Email: [rabelson@toh.ca](mailto:rabelson@toh.ca) 
+Contact,"**Media Contact:** The Children's Hospital of Eastern Ontario (CHEO) Media Desk Email: [media@cheo.on.ca](mailto:media@cheo.on.ca) 
 
-**Science contacts:** Mathew Thomson [matthomson@ohri.ca](mailto:matthomson@ohri.ca)
+**Science contacts:** Dr. Tyson Graber [tgraber@cheo.on.ca](mailto:tgraber@cheo.on.ca)
 
-**Acknowledgements for website and content:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran and others on Big Life Lab team.
+**Acknowledgements for website and content:** Dr. Douglas Manuel, Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Mathew Thomson, and others on Big Life Lab team.
 
 **Supporting Ottawa Public Health epidemiologists:** Amira Ali, Jacqueline Willmore, Dara Spatz
 
-**uOttawa — CHEO SARS-CoV-2 research group:** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, √âlisabeth Mercier, Antoine Cantin, Tyson Graber
+**uOttawa — CHEO SARS-CoV-2 research group:** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber
 
 **Computing infrastructure:** Indoc Research - Open Data Environment
 
 **Colour consultant:** Toby Barker
 
-**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).","**Personnes-ressources scientifiques:** Mathew Thomson [matthomson@ohri.ca](mailto:matthomson@ohri.ca)
+**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).","**Contact média :** Children's Hospital of Eastern Ontario (CHEO) courriel du service des médias :[media@cheo.on.ca](mailto:media@cheo.on.ca) 
 
-**Remerciements pour le site Web et le contenu:** Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
+**Personnes-ressources scientifiques:** Dr. Tyson Graber [tgraber@cheo.on.ca](mailto:tgraber@cheo.on.ca)
+
+**Remerciements pour le site Web et le contenu:** Dr. Douglas Manuel, Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Mathew Thomson et les autres membres de l’équipe de Big Life Lab.
 
 **Avec le soutien des épidémiologistes de Santé publique Ottawa:** Amira Ali, Jacqueline Willmore, Dara Spatz
 
 **Groupe de recherche uOttawa – CHEO SARS-CoV-2:** Robert Delatolla, Alex MacKenzie, Patrick D'Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber.
 
-**Consultant couleur:** Toby Barker
-
 **Infrastructure informatique:** Indoc Research - Open Data Environment
 
-**Personne-ressource pour les médias:** Rebecca Abelson, agente des relations avec les médias, L'Hôpital d'Ottawa. Courriel: rabelson@toh.ca"
+**Consultant couleur:** Toby Barker
+
+**Attribution:** Les icônes de COVID-19 ont été créées par [surang](https://www.flaticon.com/authors/surang) de [www.flaticon.com](https://www.flaticon.com)."
 Dashboard,"# Dashboard
 
 Data to {{1}}
