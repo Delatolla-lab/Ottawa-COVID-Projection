@@ -2,9 +2,9 @@ key,en,fr
 break,---,---
 case_projections,## {#case-projections},## {#case-projections}
 case_projections_text,Short-term COVID-19 projections are presented below. See [More](/more) for a discussion about model interpretation and [Methods](/model) for how the projections where created.,Les projections COVID-19 à court terme sont présentées ci-dessous. Voir [plus](/more) pour une discussion sur l'interprétation du modèle et [Méthodes](/model) pour savoir comment les projections ont été créées.
-Contact,"**Media Contact:** The Children's Hospital of Eastern Ontario (CHEO) Media Desk Email: [media@cheo.on.ca](mailto:media@cheo.on.ca) 
+Contact,"**Media Contact:** Dr. Robert Delatolla [robert.delatolla@uottawa.ca](mailto:robert.delatolla@uottawa.ca) 
 
-**Science contacts:** Dr. Tyson Graber [tgraber@cheo.on.ca](mailto:tgraber@cheo.on.ca)
+**Website or data issues?** Dr. Tyson Graber [tgraber@cheo.on.ca](mailto:tgraber@cheo.on.ca)
 
 **Acknowledgements for website and content:** Dr. Douglas Manuel, Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Mathew Thomson, and others on Big Life Lab team.
 
@@ -16,9 +16,9 @@ Contact,"**Media Contact:** The Children's Hospital of Eastern Ontario (CHEO) Me
 
 **Colour consultant:** Toby Barker
 
-**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).","**Contact média :** Children's Hospital of Eastern Ontario (CHEO) courriel du service des médias :[media@cheo.on.ca](mailto:media@cheo.on.ca) 
+**Attribution:** COVID-19 icons made by [surang](https://www.flaticon.com/authors/surang) from [www.flaticon.com](https://www.flaticon.com).","**Contact média :** Dr. Robert Delatolla [robert.delatolla@uottawa.ca](mailto:robert.delatolla@uottawa.ca)
 
-**Personnes-ressources scientifiques:** Dr. Tyson Graber [tgraber@cheo.on.ca](mailto:tgraber@cheo.on.ca)
+**Problèmes du site web ou avec les données?** Dr. Tyson Graber [tgraber@cheo.on.ca](mailto:tgraber@cheo.on.ca)
 
 **Remerciements pour le site Web et le contenu:** Dr. Douglas Manuel, Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Mathew Thomson et les autres membres de l’équipe de Big Life Lab.
 
@@ -157,17 +157,21 @@ DT_label_half,halving time,temps de division
 DT_label_no_change,no growth (flat),pas de croissance
 end_transition_out,"613COVID Website Update
 
-Starting July 30, 2023, 613COVID.ca will be managed by Dr. Tyson Graber, Associate Scientist at the CHEO Research Institute. Wastewater will still be tested, and surveillance efforts will continue.
+Ottawa wastewater surveillance continues with daily testing and analysis performed in the lab of [Dr. Robert Delatolla](https://engineering.uottawa.ca/people/delatolla-robert), Professor, Department of Civil Engineering, University of Ottawa, who has led that work since its inception in April 2020.
 
-For the last three years, 613COVID.ca was managed by Dr. Doug Manuel’s team at The Ottawa Hospital. The site was a point of tremendous pride for our lab. We are very happy that we could generate something quickly in a time of uncertainty, with the support and collaboration of our colleagues across disciplines in Ottawa and Ontario. The website has continued to report data on the SARS-CoV-2 signal in wastewater and has expanded to include influenza and RSV viruses.
+Since July 30, 2023, 613COVID.ca is managed by [Dr. Tyson Graber](https://www.cheoresearch.ca/research/find-a-researcher/tyson-graber/), Associate Scientist, CHEO Research Institute. Please follow @rnaguru on X (Twitter) for further contextualization of the data.
+
+613COVID.ca was developed and managed by [Dr. Doug Manuel’s](https://www.ohri.ca/profile/DougManuelLab/profile) team at The Ottawa Hospital over the last three years. The site was a point of tremendous pride for our lab. We are very happy that we could generate something quickly in a time of uncertainty, with the support and collaboration of our colleagues across disciplines in Ottawa and Ontario. The website has continued to report data on the SARS-CoV-2 signal in wastewater and has expanded to include influenza and RSV viruses.
 
 All of this was only possible thanks to the tireless efforts of the Delatolla research group at the University of Ottawa. Without their incredible work, quick responses, and innovative thinking, wastewater surveillance in Ottawa and even in Canada would not have been so successful. With Dr. Graber’s support, their results will continue to be available to the public.
 
-Wastewater surveillance continues to be a key indicator to monitoring COVID-19 and other illnesses and there are ongoing efforts towards building a national wastewater dashboard. We are honoured to have so many people in Ottawa use, consult, and support our application and we are happy to know that Dr. Graber will continue this work with 613COVID.ca.","Mise à jour concernant le site Web 613COVID
+Wastewater surveillance continues to be a key indicator to monitoring COVID-19 and other illnesses and there are ongoing efforts towards building a national wastewater dashboard. We are honoured to have so many people in Ottawa use, consult, and support our application and we are happy to know that Dr. Graber will continue this work with 613COVID.ca","Mise à jour concernant le site Web 613COVID
 
-À compter du 30 juillet 2023, le site Web 613COVID.ca sera géré par le Dr Tyson Graber, scientifique adjoint à l’Institut de recherche du CHEO. Des tests seront encore effectués sur les eaux usées, et les efforts de surveillance se poursuivront.
+La surveillance des eaux usées d'Ottawa se poursuit avec des tests et des analyses quotidiens effectués dans le labo de [Dr Robert Delatolla](https://genie.uottawa.ca/personnes/delatolla-robert), professeur titulaire, Département de génie civil, Université d'Ottawa, qui dirige ces travaux depuis leur début en avril 2020.
 
-Ces trois dernières années, 613COVID.ca a été géré par l’équipe du Dr Doug Manuel à L’Hôpital d’Ottawa. Ce site Web a été une immense source de fierté pour notre laboratoire. Nous sommes très heureux d’avoir pu produire rapidement des données en cette période d’incertitude, grâce au soutien et à la collaboration de nos collègues dans toutes les disciplines à Ottawa et en Ontario. Le site Web n’a pas cessé de fournir des données sur la présence du SRAS-CoV-2 dans les eaux usées et a ensuite ajouté celles sur le virus de la grippe et du VRS.
+Depuis le 30 juillet 2023, le site Web 613COVID.ca est géré par le [Dr Tyson Graber](https://www.cheoresearch.ca/research/find-a-researcher/tyson-graber/), scientifique adjoint à l’Institut de recherche du CHEO. Veuillez suivre @rnaguru sur X (Twitter) pour une contextualisation plus approfondie des données.
+
+613COVID.ca a été développé et géré par l’équipe du [Dr Doug Manuel](https://www.ohri.ca/profile/DougManuelLab/profile) à L’Hôpital d’Ottawa au cours des trois dernières années. Ce site Web a été une immense source de fierté pour notre laboratoire. Nous sommes très heureux d’avoir pu produire rapidement des données en cette période d’incertitude, grâce au soutien et à la collaboration de nos collègues dans toutes les disciplines à Ottawa et en Ontario. Le site Web n’a pas cessé de fournir des données sur la présence du SRAS-CoV-2 dans les eaux usées et a ensuite ajouté celles sur le virus de la grippe et du VRS.
 
 Nous n’y serions certes pas parvenus sans les efforts inlassables du groupe de recherche du professeur Delatolla à l’Université d’Ottawa. Sans le travail remarquable et la pensée innovatrice de ce groupe de recherche, nous n’aurions pas obtenu des réponses aussi rapidement sur la surveillance des eaux usées à Ottawa, voire au Canada. Grâce à l’aide du Dr Graber, le grand public continuera d’avoir accès à ces données.
 
@@ -263,7 +267,7 @@ observed_staff_cases_text,**Note:** The health care worker cases (per 1000 peopl
 observed_staff_incident,## Cumulative incidence of COVID-19 positive staff,## Incidence cumulée du personnel positif au COVID-19
 observed_staff_incident_cases_text,"**Note:** The cumulative health care worker cases (per 1000 people) is the cumulative incidence or total proportion of health care workers who reported a positive PCR or RAT for selected hospitals and health care organizations since December 26, 2021. These are people who notified Occupational Health of their positive result. Observed COVID-19 cases are adjusted for under-reporting for staff working from home and not providing direct patient care.",**Remarque:** Les cas cumulés de travailleurs de la santé ( par 1000 personnes) correspondent à l'incidence cumulée ou à la proportion totale de travailleurs de la santé ayant déclaré une RCP ou un TAR positif pour certains hôpitaux et organismes de santé depuis le 26 décembre 2021. Il s'agit de personnes qui ont informé la médecine du travail de leur résultat positif. Les cas COVID-19 observés sont ajustés pour tenir compte de la sous-déclaration du personnel travaillant à domicile et ne fournissant pas de soins directs aux patients.
 PastData_title,## Observed cases & hospital use,## Cas observés et occupation des hôpitaux
-PastHospital_text,"**Note:** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque:** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
+PastHospital_text,"**Note: Hospitalizations are no longer updated on the site past June 30, 2023 as the open data source is no longer available. ** As per Ottawa Public Health, hospital data reflecting the past 3-5 days should be considered preliminary as data is still being received and entered for this time period.","**Remarque: Les hospitalizations ne sont plus mise à jour après le 30 juin 2023 car les donnèes publique (“Open Data”) ne sont plus disponibles.** Selon Santé publique Ottawa, les chiffres des hôpitaux reflétant la situation des 3 à 5 derniers jours doivent être considérés comme des chiffres préliminaires, puisque la communication et l’entrée des données concernant cette période sont toujours en cours."
 Physical_distancing_effectiveness,"## Physical distancing effectiveness {#distancing-effectiveness}
 
 Physical distancing effectiveness describes how fast COVID-19 spreads in Ottawa compared to if there was no physical distancing. It is a mathematical calculation based on the observed doubling time (growth) of the hospital census for the previous week.
