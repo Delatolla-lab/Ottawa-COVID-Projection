@@ -52,11 +52,12 @@ Short-term projections (1 to 4 weeks) reflect the current level of COVID-19 tran
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/contact/</guid>
-      <description>Media Contact: The Children’s Hospital of Eastern Ontario (CHEO) Media Desk Email: media@cheo.on.ca
-Science contacts: Dr. Tyson Graber tgraber@cheo.on.ca
+      <description>Media Contact: Dr. Robert Delatolla robert.delatolla@uottawa.ca
+Website or data issues? Dr. Tyson Graber tgraber@cheo.on.ca
 Acknowledgements for website and content: Dr. Douglas Manuel, Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Mathew Thomson, and others on Big Life Lab team.
 Supporting Ottawa Public Health epidemiologists: Amira Ali, Jacqueline Willmore, Dara Spatz
-uOttawa — CHEO SARS-CoV-2 research group: Robert Delatolla, Alex MacKenzie, Patrick D’Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber</description>
+uOttawa — CHEO SARS-CoV-2 research group: Robert Delatolla, Alex MacKenzie, Patrick D’Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber
+Computing infrastructure: Indoc Research - Open Data Environment</description>
     </item>
     
     <item>
@@ -75,8 +76,8 @@ uOttawa — CHEO SARS-CoV-2 research group: Robert Delatolla, Alex MacKenzie, Pa
       
       <guid>https://613covid.ca/wastewater/</guid>
       <description>613COVID Website Update
-Starting July 30, 2023, 613COVID.ca will be managed by Dr. Tyson Graber, Associate Scientist at the CHEO Research Institute. Wastewater will still be tested, and surveillance efforts will continue.
-For the last three years, 613COVID.ca was managed by Dr. Doug Manuel’s team at The Ottawa Hospital. The site was a point of tremendous pride for our lab. We are very happy that we could generate something quickly in a time of uncertainty, with the support and collaboration of our colleagues across disciplines in Ottawa and Ontario.</description>
+Ottawa wastewater surveillance continues with daily testing and analysis performed in the lab of Dr. Robert Delatolla, Professor, Department of Civil Engineering, University of Ottawa, who has led that work since its inception in April 2020.
+Since July 30, 2023, 613COVID.ca is managed by Dr. Tyson Graber, Associate Scientist, CHEO Research Institute. Please follow @rnaguru on X (Twitter) for further contextualization of the data.</description>
     </item>
     
     <item>
@@ -85,9 +86,9 @@ For the last three years, 613COVID.ca was managed by Dr. Doug Manuel’s team a
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/wastewater_archive/</guid>
-      <description>Wastewater plots last updated: 29 August, 2023, 18:13:33
+      <description>Wastewater plots last updated: 29 August, 2023, 22:42:50
 Wastewater samples collected up to: 27 August, 2023
-Reported date up to: 29 August, 2023
+Reported date up to: 30 August, 2023
 The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
 Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing.</description>
     </item>
@@ -98,9 +99,9 @@ Samples that are collected from Monday to Thursday are processed the day after c
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/wastewater_dev/</guid>
-      <description>Wastewater plots last updated: 29 August, 2023, 18:13:45
+      <description>Wastewater plots last updated: 29 August, 2023, 22:43:07
 Wastewater samples collected up to: 27 August, 2023
-Reported date up to: 29 August, 2023
+Reported date up to: 30 August, 2023
 The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
 Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing.</description>
     </item>
@@ -121,7 +122,7 @@ Samples that are collected from Monday to Thursday are processed the day after c
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/short-proj-dev/</guid>
-      <description>Last updated on 29 August, 2023, 18:13:23
+      <description>Last updated on 29 August, 2023, 22:42:40
 Pour le français cliquez ici.
 This website has forecasts of hospitalization counts from COVID-19 and wastewater recovery of SARS-CoV-2.
 Website is optimized for desktop use. For mobile users, it is recommended to view in landscape mode.
