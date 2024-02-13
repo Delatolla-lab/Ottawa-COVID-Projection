@@ -157,13 +157,16 @@ DT_label_half,halving time,temps de division
 DT_label_no_change,no growth (flat),pas de croissance
 end_transition_out,"613COVID Website Update
 
-Ottawa wastewater surveillance continues with daily testing and analysis performed in the lab of [Dr. Robert Delatolla](https://engineering.uottawa.ca/people/delatolla-robert), Professor, Department of Civil Engineering, University of Ottawa, who has led that work since its inception in April 2020.
+Ottawa wastewater surveillance continues with daily testing and analysis performed in the lab of [Dr. Robert Delatolla](https://engineering.uottawa.ca/people/delatolla-robert), Professor, Department of Civil Engineering, University of Ottawa, who has led that work since its inception in April 2020. 
 
-Since July 30, 2023, 613COVID.ca is managed by [Dr. Tyson Graber](https://www.cheoresearch.ca/research/find-a-researcher/tyson-graber/), Associate Scientist, CHEO Research Institute. Please follow @rnaguru on X (Twitter) for further contextualization of the data.
+The lab, led by Dr. Delatolla, has expanded its focus beyond SARS-CoV-2 to include influenza and RSV viruses, with the data being regularly reported on the official website. 
 
-613COVID.ca was developed and managed by [Dr. Doug Manuel’s](https://www.ohri.ca/profile/DougManuelLab/profile) team at The Ottawa Hospital over the last three years. The site was a point of tremendous pride for our lab. We are very happy that we could generate something quickly in a time of uncertainty, with the support and collaboration of our colleagues across disciplines in Ottawa and Ontario. The website has continued to report data on the SARS-CoV-2 signal in wastewater and has expanded to include influenza and RSV viruses.
+Please follow @DelatollaLab on X (Twitter) for further contextualization of the data.
 
-All of this was only possible thanks to the tireless efforts of the Delatolla research group at the University of Ottawa. Without their incredible work, quick responses, and innovative thinking, wastewater surveillance in Ottawa and even in Canada would not have been so successful. With Dr. Graber’s support, their results will continue to be available to the public.
+Wastewater surveillance continues to be a key indicator to monitoring COVID-19 and other illnesses and there are ongoing efforts towards building a national wastewater dashboard. 
+
+Acknowledgments are extended to Prof. Doug Manuel and Prof. Tyson Graber for their valuable contributions and support during the unprecedented times of the pandemic and beyond. The collaborative efforts reflect a commitment to advancing public health initiatives through innovative research and data analysis.
+
 
 Wastewater surveillance continues to be a key indicator to monitoring COVID-19 and other illnesses and there are ongoing efforts towards building a national wastewater dashboard. We are honoured to have so many people in Ottawa use, consult, and support our application and we are happy to know that Dr. Graber will continue this work with 613COVID.ca","Mise à jour concernant le site Web 613COVID
 
