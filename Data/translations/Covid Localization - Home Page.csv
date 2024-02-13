@@ -167,19 +167,19 @@ Wastewater surveillance continues to be a key indicator to monitoring COVID-19 a
 
 Acknowledgments are extended to Prof. Doug Manuel and Prof. Tyson Graber for their valuable contributions and support during the unprecedented times of the pandemic and beyond. The collaborative efforts reflect a commitment to advancing public health initiatives through innovative research and data analysis.
 
-
 Wastewater surveillance continues to be a key indicator to monitoring COVID-19 and other illnesses and there are ongoing efforts towards building a national wastewater dashboard. We are honoured to have so many people in Ottawa use, consult, and support our application and we are happy to know that Dr. Graber will continue this work with 613COVID.ca","Mise à jour concernant le site Web 613COVID
 
-La surveillance des eaux usées d'Ottawa se poursuit avec des tests et des analyses quotidiens effectués dans le labo de [Dr Robert Delatolla](https://genie.uottawa.ca/personnes/delatolla-robert), professeur titulaire, Département de génie civil, Université d'Ottawa, qui dirige ces travaux depuis leur début en avril 2020.
+La surveillance des eaux usées d'Ottawa se poursuit avec des tests et des analyses quotidiens effectués dans le laboratoire de [Dr. Robert Delatolla](https://engineering.uottawa.ca/people/delatolla-robert), professeur, Département de génie civil, Université d'Ottawa, qui dirige ces travaux depuis leur lancement en avril 2020.
 
-Depuis le 30 juillet 2023, le site Web 613COVID.ca est géré par le [Dr Tyson Graber](https://www.cheoresearch.ca/research/find-a-researcher/tyson-graber/), scientifique adjoint à l’Institut de recherche du CHEO. Veuillez suivre @rnaguru sur X (Twitter) pour une contextualisation plus approfondie des données.
+Le laboratoire, dirigé par le Dr Delatolla, a élargi son champ d'action au-delà du SARS-CoV-2 pour inclure les virus de la grippe et du RSV, les données étant régulièrement publiées sur le site officiel. 
 
-613COVID.ca a été développé et géré par l’équipe du [Dr Doug Manuel](https://www.ohri.ca/profile/DougManuelLab/profile) à L’Hôpital d’Ottawa au cours des trois dernières années. Ce site Web a été une immense source de fierté pour notre laboratoire. Nous sommes très heureux d’avoir pu produire rapidement des données en cette période d’incertitude, grâce au soutien et à la collaboration de nos collègues dans toutes les disciplines à Ottawa et en Ontario. Le site Web n’a pas cessé de fournir des données sur la présence du SRAS-CoV-2 dans les eaux usées et a ensuite ajouté celles sur le virus de la grippe et du VRS.
+Veuillez suivre @DelatollaLab sur X (Twitter) pour une contextualisation plus approfondie des données.
 
-Nous n’y serions certes pas parvenus sans les efforts inlassables du groupe de recherche du professeur Delatolla à l’Université d’Ottawa. Sans le travail remarquable et la pensée innovatrice de ce groupe de recherche, nous n’aurions pas obtenu des réponses aussi rapidement sur la surveillance des eaux usées à Ottawa, voire au Canada. Grâce à l’aide du Dr Graber, le grand public continuera d’avoir accès à ces données.
+La surveillance des eaux usées continue d'être un indicateur clé pour surveiller le COVID-19 et d'autres maladies et des efforts sont en cours pour créer un tableau de bord national des eaux usées.
 
-La surveillance des eaux usées demeure un indicateur-clé du contrôle de la COVID-19 et d’autres maladies, et les efforts se poursuivent en vue de l’élaboration d’un tableau de bord national sur les eaux usées. C’est un honneur pour nous que tant de personnes à Ottawa
-utilisent, consultent et soutiennent notre application, et nous sommes ravis de savoir que le Dr Graber continuera ce travail avec 613COVID.ca"
+Nous remercions le professeur Doug Manuel et le professeur Tyson Graber pour leurs précieuses contributions et leur soutien pendant la période sans précédent de la pandémie et au-delà. 
+
+Les efforts de collaboration reflètent un engagement à faire progresser les initiatives de santé publique grâce à des recherches et des analyses de données innovantes."
 fewer,Fewer,Moins
 hosp_projections,## Projection of hospital census in Ottawa {#hospitalization-projections},## Projection du recensement des hôpitaux à Ottawa {#hospitalization-projections}
 hosp_projections_text,"Projection of hospital census in Ottawa are presented below. See [Methods](/model) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.","Les projections hospitalières COVID-19 à court terme sont présentées ci-dessous. Voir [Méthodes](/model) pour savoir comment les projections ont été créées. Les projections à court terme peuvent prendre des directions différentes lorsque les schémas de transmission du COVID-19 dans la communauté changent. Par exemple, le nombre d'hospitalizations prévu peut être sous-estimé pendant les périodes de reouverture rapide."
