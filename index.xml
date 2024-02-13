@@ -76,7 +76,7 @@ uOttawa — CHEO SARS-CoV-2 research group: Robert Delatolla, Alex MacKenzie, Pa
       <guid>https://613covid.ca/wastewater/</guid>
       <description>613COVID Website Update
 Ottawa wastewater surveillance continues with daily testing and analysis performed in the lab of Dr. Robert Delatolla, Professor, Department of Civil Engineering, University of Ottawa, who has led that work since its inception in April 2020.
-Since July 30, 2023, 613COVID.ca is managed by Dr. Tyson Graber, Associate Scientist, CHEO Research Institute. Please follow @rnaguru on X (Twitter) for further contextualization of the data.</description>
+The lab, led by Dr. Delatolla, has expanded its focus beyond SARS-CoV-2 to include influenza and RSV viruses, with the data being regularly reported on the official website.</description>
     </item>
     
     <item>
@@ -85,9 +85,9 @@ Since July 30, 2023, 613COVID.ca is managed by Dr. Tyson Graber, Associate Scie
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/wastewater_archive/</guid>
-      <description>Wastewater plots last updated: 12 February, 2024, 15:08:14
+      <description>Wastewater plots last updated: 13 February, 2024, 10:16:56
 Wastewater samples collected up to: 07 February, 2024
-Reported date up to: 12 February, 2024
+Reported date up to: 13 February, 2024
 The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
 Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing.</description>
     </item>
@@ -98,9 +98,9 @@ Samples that are collected from Monday to Thursday are processed the day after c
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/wastewater_dev/</guid>
-      <description>Wastewater plots last updated: 12 February, 2024, 15:08:25
+      <description>Wastewater plots last updated: 13 February, 2024, 10:17:08
 Wastewater samples collected up to: 07 February, 2024
-Reported date up to: 12 February, 2024
+Reported date up to: 13 February, 2024
 The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
 Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing.</description>
     </item>
@@ -121,7 +121,7 @@ Samples that are collected from Monday to Thursday are processed the day after c
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://613covid.ca/short-proj-dev/</guid>
-      <description>Last updated on 12 February, 2024, 15:08:05
+      <description>Last updated on 13 February, 2024, 10:16:47
 Pour le français cliquez ici.
 This website has forecasts of hospitalization counts from COVID-19 and wastewater recovery of SARS-CoV-2.
 Website is optimized for desktop use. For mobile users, it is recommended to view in landscape mode.
