@@ -33,8 +33,8 @@ incubation_period <-
 #  length = 2, 
 #  by = paste(time_to_set_back, measure_to_set_back)
 #)[2]
-
-as.Date(as.Date(end_date)) %m-% months(7)
+#as.Date(as.Date(end_date)) %m-% months(7)
+lubridate::add_with_rollback(as.Date(as.Date(end_date)), months(-7))
 
 # Run epinow forecast
 hosp_projections <- short_term_forecast(
