@@ -1,4 +1,5 @@
 library(EpiNow2)
+library(lubridate)
 library(tidyverse)
 source("R/epinow_functions.R")
 
@@ -26,12 +27,14 @@ incubation_period <-
   get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 
 # Generate start date from end date
-end_date <- as.Date(last(ott_covid_data$date))
-start_date <- seq(
-  as.Date(end_date), 
-  length = 2, 
-  by = paste(time_to_set_back, measure_to_set_back)
-)[2]
+#end_date <- as.Date(last(ott_covid_data$date))
+#start_date <- seq(
+#  as.Date(end_date), 
+#  length = 2, 
+#  by = paste(time_to_set_back, measure_to_set_back)
+#)[2]
+
+as.Date(as.Date(end_date)) %m-% months(7)
 
 # Run epinow forecast
 hosp_projections <- short_term_forecast(
@@ -56,3 +59,7 @@ save(hosp_proj, file = paste(
 write.csv(hosp_proj, file = paste(
   paste("Data/Historic Projections/short_term_hosp_proj", Sys.Date(), sep = "_"),
   ".csv", sep = ""), row.names = FALSE)
+
+print("Printing relevant variables for debugging:")
+print(start_date)
+print(hosp_projections)
