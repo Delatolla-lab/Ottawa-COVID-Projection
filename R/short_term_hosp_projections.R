@@ -27,7 +27,7 @@ incubation_period <-
   get_incubation_period(disease = "SARS-CoV-2", source = "lauer")
 
 # Generate start date from end date
-#end_date <- as.Date(last(ott_covid_data$date))
+end_date <- as.Date(last(ott_covid_data$date))
 #start_date <- seq(
 #  as.Date(end_date), 
 #  length = 2, 
