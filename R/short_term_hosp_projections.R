@@ -29,7 +29,8 @@ incubation_period <-
 
 # Generate start date from end date
 #end_date <- as.Date(last(ott_covid_data$date))
-end_date <- as.Date(tail(ott_covid_data$date))[6]
+#end_date <- as.Date(tail(ott_covid_data$date))[6]
+end_date <- lubridate::add_with_rollback(as.Date(tail(ott_covid_data$date))[6],weeks(-2))
 #start_date <- seq(
 #  as.Date(end_date), 
 #  length = 2, 
