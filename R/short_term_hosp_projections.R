@@ -1,3 +1,4 @@
+Sys.setlocale("LC_ALL","English")
 library(EpiNow2)
 library(lubridate)
 library(tidyverse)
@@ -36,6 +37,10 @@ end_date <- as.Date(last(ott_covid_data$date))
 #as.Date(as.Date(end_date)) %m-% months(7)
 start_date <- lubridate::add_with_rollback(as.Date(as.Date(end_date)), months(-7))
 
+print("Printing relevant variables for debugging:")
+print(start_date)
+print(end_date)
+
 # Run epinow forecast
 hosp_projections <- short_term_forecast(
   data = ott_covid_data,
@@ -61,5 +66,5 @@ write.csv(hosp_proj, file = paste(
   ".csv", sep = ""), row.names = FALSE)
 
 print("Printing relevant variables for debugging:")
-print(start_date)
 print(hosp_projections)
+
