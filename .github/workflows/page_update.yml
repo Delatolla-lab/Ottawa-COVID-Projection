@@ -22,6 +22,8 @@ jobs:
         with:
           r-version: '4.1.0'
       - uses: r-lib/actions/setup-pandoc@v1
+      - name: Install openssl
+        run: brew install openssl@1.1
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown", "knitr"))'
       - name: Install rmd packages
