@@ -7,14 +7,14 @@ data_extract <- function(object){
       as.Date(as.POSIXct(dataframe[[1]]/1000, origin = "1970-01-01"))
   }
   else if(is.character(dataframe[[1]])){
-    if(grepl("^20-", dataframe[[1]]) == TRUE || grepl("^21-", dataframe[[1]]) == TRUE){
+    if(grepl("^20-", dataframe[[1]]) == TRUE | grepl("^21-", dataframe[[1]]) == TRUE){
       dataframe[[1]] <- dataframe[[1]] %>%
         strtrim(8) %>%
         str_replace("20-", "2020-") %>%
         str_replace("21-", "2021-") %>%
         as.Date()
     }
-    else if(grepl("2020-", dataframe[[1]]) == TRUE || grepl("2021-", dataframe[[1]]) == TRUE){
+    else if(grepl("2020-", dataframe[[1]]) == TRUE | grepl("2021-", dataframe[[1]]) == TRUE){
       dataframe[[1]] <- dataframe[[1]] %>%
         as.Date()
     }
