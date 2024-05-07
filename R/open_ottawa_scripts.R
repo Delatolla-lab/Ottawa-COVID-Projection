@@ -29,7 +29,7 @@ adjusted_function <- function(url){
     rename(date = "Date",
            adjusted_episode_cases =
              "Nowcasting.Adjusted.Cases.by.Episode.Date")
-  if(grepl("^20-", adjusted_data[[1]]) == TRUE | grepl("^21-", adjusted_data[[1]]) == TRUE){
+  if(grepl("^20-", adjusted_data[[1]]) == TRUE || grepl("^21-", adjusted_data[[1]]) == TRUE){
     adjusted_data[[1]] <- adjusted_data[[1]] %>%
       strtrim(8) %>%
       str_replace("20-", "2020-") %>%
