@@ -13,7 +13,7 @@ on:
 jobs:
   blogdown:
     name: Render-Blog
-    runs-on: "macOS-latest"
+    runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v2
         with:
