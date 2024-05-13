@@ -22,6 +22,8 @@ jobs:
         with:
           r-version: '4.1.1'
       - uses: r-lib/actions/setup-pandoc@v2
+      - name: Install libcurl4-openssl-dev               # Modified to install libcurl4-openssl-dev (13 May, 2024)
+        run: sudo apt-get install -y libcurl4-openssl-dev
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown", "knitr"))'
       - name: Install rmd packages
