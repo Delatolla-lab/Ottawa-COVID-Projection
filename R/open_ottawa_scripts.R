@@ -2,47 +2,40 @@
 data_extract <- function(object){
   name_for_features <- "features"
   dataframe <- object[[name_for_features]][[1]]
-  
-  if (is.numeric(dataframe[[1]])) {
-    # Convert Unix time to Date
-    dataframe[[1]] <- as.Date(as.POSIXct(dataframe[[1]] / 1000, origin = "1970-01-01"))
-  } else if (is.character(dataframe[[1]])) {
-    # Handle date strings
-    dataframe[[1]] <- dataframe[[1]] %>%
-      # Convert 'yyyy-mm-dd' format directly to Date
-      ifelse(grepl("^\\d{4}-\\d{2}-\\d{2}$", .), as.Date(.),
-             # Convert 'yy-mm-dd' format to 'yyyy-mm-dd' by adding '20' prefix
-             ifelse(grepl("^\\d{2}-", .), 
-                    str_replace(., "^", "20") %>% as.Date(),
-                    as.Date(.))) # Added as.Date() for non-matching cases
+  if(is.numeric(dataframe[[1]])){
+    dataframe[[1]] <- as.Date(as.POSIXct(dataframe[[1]]/1000, origin = "1970-01-01"))
+  }
+  else if(is.character(dataframe[[1]])){
+    if (grepl("^\\d{2}-", dataframe[[1]]) == TRUE){
+      dataframe[[1]] <- dataframe[[1]] %>%
+        strtrim(8) %>%
+        str_replace("^\\d{2}-", function(x) paste0("20", x)) %>%
+        as.Date()
+    }
+    else if(grepl("^\\d{4}-", dataframe[[1]]) == TRUE){
+      dataframe[[1]] <- dataframe[[1]] %>%
+        as.Date()
+    }
   }
   return(dataframe)
 }
 
 # Extract adjusted cases by episode date
-adjusted_function <- function(url) {
-  # Read the CSV file and select relevant columns
+adjusted_function <- function(url){
   adjusted_data <- read.csv(url) %>%
     select(Date, Nowcasting.Adjusted.Cases.by.Episode.Date) %>%
-    rename(
-      date = "Date",
-      adjusted_episode_cases = "Nowcasting.Adjusted.Cases.by.Episode.Date"
-    )
-  # Handle date conversion
-  adjusted_data <- adjusted_data %>%
-    mutate(
-      date = ifelse(
-        grepl("^\\d{4}-\\d{2}-\\d{2}$", date),  # If date is in yyyy-mm-dd format
-        as.Date(date),
-        ifelse(
-          grepl("^\\d{2}-", date),  # If date starts with two digits (yy format)
-          date %>%
-            str_replace("^", "20") %>%  # Add "20" prefix to make it yyyy-mm-dd
-            as.Date(),
-          as.Date(date)  # For any other format
-        )
-      )
-    )
+    rename(date = "Date",
+           adjusted_episode_cases = "Nowcasting.Adjusted.Cases.by.Episode.Date")
+  if (grepl("^\\d{2}-", adjusted_data[[1]]) == TRUE){
+    adjusted_data[[1]] <- adjusted_data[[1]] %>%
+      strtrim(8) %>%
+      str_replace("^\\d{2}-", function(x) paste0("20", x)) %>%
+      as.Date()
+  }
+  else{
+    adjusted_data[[1]] <- adjusted_data[[1]] %>%
+      as.Date()
+  }
   return(adjusted_data)
 }
 
