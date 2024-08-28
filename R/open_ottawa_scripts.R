@@ -14,7 +14,6 @@ data_extract <- function(object){
              ifelse(grepl("^\\d{2}-", .), 
                     str_replace(., "^", "20") %>% as.Date(),
                     . %>% as.Date())) %>%
-      strtrim(8) %>%
   }
   return(dataframe)
 }
