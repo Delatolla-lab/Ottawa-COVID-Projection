@@ -2,6 +2,7 @@
 data_extract <- function(object){
   name_for_features <- "features"
   dataframe <- object[[name_for_features]][[1]]
+  
   if (is.numeric(dataframe[[1]])) {
     # Convert Unix time to Date
     dataframe[[1]] <- as.Date(as.POSIXct(dataframe[[1]] / 1000, origin = "1970-01-01"))
@@ -13,7 +14,7 @@ data_extract <- function(object){
              # Convert 'yy-mm-dd' format to 'yyyy-mm-dd' by adding '20' prefix
              ifelse(grepl("^\\d{2}-", .), 
                     str_replace(., "^", "20") %>% as.Date(),
-                    . %>% as.Date())) %>%
+                    as.Date(.))) # Added as.Date() for non-matching cases
   }
   return(dataframe)
 }
