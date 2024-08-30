@@ -238,40 +238,6 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_vira
 
 ------------------------------------------------------------------------
 
-## Wastewater Projections
-
-Preliminary projections forecasting viral signal are shown below. Projections forecast normalized viral copies per copy based on observed signal data. Caution is encouraged when interpreting results. Methods have not been peer-reviewed, and validation is ongoing.
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-source("../../R/epinow_functions.R")
-load("../../Data/short_term_ww_proj.RData")
-
-ww_data <-
-  read.csv("https://raw.githubusercontent.com/Big-Life-Lab/PHESD/main/Wastewater/Ottawa/Data/wastewater_virus.csv")
-
-ww_clean <- wastewater_prep(ww_data) %>%
-  select(date, N1_N2_avg, N1_N2_avg_clean) %>%
-  mutate(date = as.Date(date))
-
-ww_normalized <- ww_clean %>%
-  mutate(N1_N2_avg_clean = N1_N2_avg_clean*1000000)
-
-short_term_plot(
-  projections = ww_forecast[[1]],
-  obs_data = ww_normalized,
-  obs_column = "N1_N2_avg_clean",
-  forecast_type = "reported_cases",
-  ylab = "Normalized viral copies* (µ)",
-  title = "<b>Projections for COVID-19 wastewater viral signal, Ottawa</b>",
-  tick_period = "1 month",
-  tick_labels_date = "%b %y",
-  annotation_text = "*Shaded area represents the 75% credible region",
-  interval_num = 178
-)
-```
-
-------------------------------------------------------------------------
-
 ## Current growth estimates for the amount of virus in wastewater
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
