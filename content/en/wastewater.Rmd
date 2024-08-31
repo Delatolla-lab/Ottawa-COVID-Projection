@@ -236,8 +236,6 @@ reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_vira
 #reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call, var_7_day_avg), error_bands = TRUE, error_pct = TRUE, error_data = "sd_7day", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
 ```
 
-------------------------------------------------------------------------
-
 <!-- ## Wastewater Projections
 
 Preliminary projections forecasting viral signal are shown below. Projections forecast normalized viral copies per copy based on observed signal data. Caution is encouraged when interpreting results. Methods have not been peer-reviewed, and validation is ongoing. -->
@@ -270,8 +268,6 @@ ww_normalized <- ww_clean %>%
 #)
 ```
 
-------------------------------------------------------------------------
-
 ## Current growth estimates for the amount of virus in wastewater
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -283,8 +279,6 @@ growth_measures <- growth_measures[-2,]
 
 knitr::kable(growth_measures)
 ```
-
-------------------------------------------------------------------------
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("../../R/variant_df_prep.R")
