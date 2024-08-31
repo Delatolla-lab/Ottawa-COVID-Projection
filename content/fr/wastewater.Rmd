@@ -273,8 +273,6 @@ ww_normalized <- ww_clean %>%
 #)
 ```
 
----
-
 ## Current growth estimates for the amount of virus in wastewater
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
