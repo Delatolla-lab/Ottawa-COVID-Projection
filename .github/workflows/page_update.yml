@@ -22,12 +22,14 @@ jobs:
         with:
           r-version: '4.1.1'
       - uses: r-lib/actions/setup-pandoc@v2
-      - name: Install libcurl4-openssl-dev               # Modified to install libcurl4-openssl-dev (13 May, 2024)
+      - name: Install libcurl4-openssl-dev                 # Modified to install libcurl4-openssl-dev (13 May, 2024)
         run: sudo apt-get install -y libcurl4-openssl-dev
-      - name: Install harfbuzz and fribidi               # Modified to install harfbuzz and fribidi libraries needed by textshaping package in R (13 May, 2024)
+      - name: Install harfbuzz and fribidi                 # Modified to install harfbuzz and fribidi libraries needed by textshaping package in R (13 May, 2024)
         run: sudo apt-get install -y libharfbuzz-dev libfribidi-dev
-      - name: Install system dependencies for systemfonts # Added to install dependencies for the systemfonts package (10 Jan, 2025)
+      - name: Install system dependencies for systemfonts  # Added to install dependencies for the systemfonts package (10 Jan, 2025)
         run: sudo apt-get update && sudo apt-get install -y libfontconfig1-dev libfreetype6-dev
+      - name: Install system dependencies for ragg         # Added for ragg package (10 Jan, 2025)
+        run: sudo apt-get update && sudo apt-get install -y libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown", "knitr"))'
       - name: Install rmd packages
