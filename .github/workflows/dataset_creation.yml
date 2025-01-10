@@ -37,7 +37,9 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
-      - name: Set compiler flags for RcppParallel        # Added to set CXX flags for RcppParallel
+      - name: Install system dependencies for ragg       # Added for ragg package (10 Jan, 2025)
+        run: sudo apt-get update && sudo apt-get install -y libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
+      - name: Set compiler flags for RcppParallel        # Added to set CXX flags for RcppParallel (Jan 10, 2025)
         run: echo "CXX14FLAGS += -D__TBB_SUPPRESS_DEPRECATED_MESSAGES=1" >> ~/.R/Makevars
       - name: Install dependencies
         run: R -e 'renv::restore()'
