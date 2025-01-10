@@ -26,6 +26,8 @@ jobs:
         run: sudo apt-get install -y libcurl4-openssl-dev
       - name: Install harfbuzz and fribidi               # Modified to install harfbuzz and fribidi libraries needed by textshaping package in R (13 May, 2024)
         run: sudo apt-get install -y libharfbuzz-dev libfribidi-dev
+      - name: Install system dependencies for systemfonts # Added to install dependencies for the systemfonts package (10 Jan, 2025)
+        run: sudo apt-get update && sudo apt-get install -y libfontconfig1-dev libfreetype6-dev
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown", "knitr"))'
       - name: Install rmd packages
