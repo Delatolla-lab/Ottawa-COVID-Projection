@@ -37,6 +37,8 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
+      - name: Set compiler flags for RcppParallel        # Added to set CXX flags for RcppParallel
+        run: echo "CXX14FLAGS += -D__TBB_SUPPRESS_DEPRECATED_MESSAGES=1" >> ~/.R/Makevars
       - name: Install dependencies
         run: R -e 'renv::restore()'
       - name: Download variant sheet from Google Drive
