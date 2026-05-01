@@ -21,6 +21,9 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.1.1'
+      - uses: r-lib/actions/setup-renv@v2
+        with:
+          cache-version: 1
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install libcurl4-openssl-dev                 # Modified to install libcurl4-openssl-dev (13 May, 2024)
         run: sudo apt-get install -y libcurl4-openssl-dev
@@ -29,17 +32,7 @@ jobs:
       - name: Install system dependencies for systemfonts  # Added to install dependencies for the systemfonts package (10 Jan, 2025)
         run: sudo apt-get update && sudo apt-get install -y libfontconfig1-dev libfreetype6-dev
       - name: Install system dependencies for ragg         # Added for ragg package (10 Jan, 2025)
-        run: sudo apt-get update && sudo apt-get install -y libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
-      - name: Install rmarkdown
-        run: Rscript -e 'install.packages(c("rmarkdown", "knitr"))'
-      - name: Install rmd packages
-        run: Rscript -e 'install.packages(c("plotly", "tidyverse", "jsonlite", "ggplot2", "dplyr", "tidyr", "lubridate", "stats", "remotes", "zoo", "stringr", "purrr", "RColorBrewer", "DT"))'
-      - name: Install EpiNow2 Dependencies
-        run: Rscript -e 'install.packages(c("cowplot", "futile.logger", "patchwork", "rstan", "runner", "truncnorm", "BH", "StanHeaders", "future", "future.apply", "progressr", "R.utils"))'
-      - name: Install EpiNow2
-        run: Rscript -e 'install.packages("EpiNow2")'
-      - name: Install blogdown
-        run: Rscript -e 'install.packages("blogdown")'
+        run: sudo apt-get update && sudo apt-get install -y libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libuv1-dev
       - name: install hugo
         run: Rscript -e 'blogdown::install_hugo(version = "0.60.1")'
       - name: Render website
@@ -47,5 +40,5 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.ACTION_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
