@@ -2383,7 +2383,7 @@
       "Author": "Sean C. Anderson [aut, cre] (ORCID: <https://orcid.org/0000-0001-9563-1937>), Andrew M. Edwards [aut], Madi Yerlanov [aut], Nicola Mulberry [aut], Jessica E. Stockdale [aut], Rebeca C. Falcao [aut], Sarafa A. Iyaniwura [aut], Michael C. Otterstatter [aut], Michael A. Irvine [aut], Naveed Z. Janjua [aut], Daniel Coombs [aut], Caroline Colijn [aut] (Principal Investigator; <ccolijn@sfu.ca>)",
       "Maintainer": "Sean C. Anderson <sean@seananderson.ca>",
       "RemoteType": "git",
-      "RemoteUrl": "git@github.com:seananderson/covidseir.git",
+      "RemoteUrl": "https://github.com/seananderson/covidseir.git",
       "RemoteRef": ""
     },
     "cowplot": {
@@ -9537,7 +9537,7 @@
       "Author": "David Champredon [aut, cre], Warsame Yusuf [ctb], Devan Becker [ctb], Shokoofeh Nourbakhsh [aut]",
       "Maintainer": "David Champredon <david.champredon@canada.ca>",
       "RemoteType": "git",
-      "RemoteUrl": "git@github.com:phac-nml-phrsd/wem.git",
+      "RemoteUrl": "https://github.com/phac-nml-phrsd/wem.git",
       "RemoteRef": ""
     },
     "withr": {

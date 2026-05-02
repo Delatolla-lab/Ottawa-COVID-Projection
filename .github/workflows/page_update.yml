@@ -41,7 +41,8 @@ jobs:
       - uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
-
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
       - uses: r-lib/actions/setup-pandoc@v2
 
       - name: Install hugo
