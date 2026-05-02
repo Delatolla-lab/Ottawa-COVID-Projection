@@ -158,10 +158,10 @@
     },
     "blogdown": {
       "Package": "blogdown",
-      "Version": "1.8",
+      "Version": "1.19",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "9c77de7db6cbafdffc6445f873f4e835"
+      "Hash": "0e4a778ef603d1591ba5f21226162319"
     },
     "bookdown": {
       "Package": "bookdown",
@@ -466,10 +466,10 @@
     },
     "highr": {
       "Package": "highr",
-      "Version": "0.9",
+      "Version": "0.10",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8eb36c8125038e648e5d111c0d7b2ed4"
+      "Hash": "0e4a778ef603d1591ba5f21226162319"
     },
     "hms": {
       "Package": "hms",
@@ -480,17 +480,17 @@
     },
     "htmltools": {
       "Package": "htmltools",
-      "Version": "0.5.2",
+      "Version": "0.5.8",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "526c484233f42522278ab06fb185cb26"
+      "Hash": "0e4a778ef603d1591ba5f21226162319"
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
-      "Version": "1.5.4",
+      "Version": "1.6.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "76147821cd3fcd8c4b04e1ef0498e7fb"
+      "Hash": "0e4a778ef603d1591ba5f21226162319"
     },
     "httpuv": {
       "Package": "httpuv",
@@ -543,10 +543,10 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.37",
+      "Version": "1.45",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "a4ec675eb332a33fe7b7fe26f70e1f98"
+      "Hash": "0e4a778ef603d1591ba5f21226162319"
     },
     "labeling": {
       "Package": "labeling",
@@ -815,10 +815,10 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.11",
+      "Version": "2.25",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "320017b52d05a943981272b295750388"
+      "Hash": "0e4a778ef603d1591ba5f21226162319"
     },
     "rprojroot": {
       "Package": "rprojroot",
@@ -941,10 +941,10 @@
     },
     "tinytex": {
       "Package": "tinytex",
-      "Version": "0.37",
+      "Version": "0.49",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "a80abeb527a977e4bef21873d29222dd"
+      "Hash": "0e4a778ef603d1591ba5f21226162319"
     },
     "truncnorm": {
       "Package": "truncnorm",
