@@ -27,10 +27,6 @@ jobs:
         with:
           r-version: '4.5.3'
           use-public-rspm: true
-      - uses: r-lib/actions/setup-renv@v2
-        with:
-          cache-version: 1
-      - uses: r-lib/actions/setup-pandoc@v2
       - name: Install libcurl4-openssl-dev and libtbb-dev
         run: |
           sudo apt-get update
@@ -46,6 +42,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --fix-missing libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libuv1-dev || (sleep 30 && sudo apt-get update && sudo apt-get install -y --fix-missing libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libuv1-dev)
+      - uses: r-lib/actions/setup-renv@v2
+        with:
+          cache-version: 1
+      - uses: r-lib/actions/setup-pandoc@v2
       - name: install hugo
         run: Rscript -e 'blogdown::install_hugo(version = "0.123.0")'
       - name: Render website

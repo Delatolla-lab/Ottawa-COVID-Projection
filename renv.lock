@@ -102,10 +102,10 @@
     },
     "StanHeaders": {
       "Package": "StanHeaders",
-      "Version": "2.21.0-7",
+      "Version": "2.32.10",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0459d4dd7a8c239be18469a30c23dd4b"
+      "Hash": "0e4a778ef603d1591ba5f21226162319"
     },
     "askpass": {
       "Package": "askpass",
@@ -829,10 +829,10 @@
     },
     "rstan": {
       "Package": "rstan",
-      "Version": "2.21.3",
+      "Version": "2.32.7",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8fa400c2cf6409067a4515581ae4d99b"
+      "Hash": "0e4a778ef603d1591ba5f21226162319"
     },
     "rstudioapi": {
       "Package": "rstudioapi",
@@ -1016,10 +1016,10 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.29",
+      "Version": "0.41",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e2e5fb1a74fbb68b27d6efc5372635dc"
+      "Hash": "0e4a778ef603d1591ba5f21226162319"
     },
     "xml2": {
       "Package": "xml2",
