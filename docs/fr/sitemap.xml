@@ -1,147 +1,127 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>https://613covid.ca/fr/model/</loc>
+    <loc>http://localhost:4321/fr/model/</loc>
     <lastmod>2016-05-05T21:48:51-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/model/"
+                hreflang="en-us"
+                href="http://localhost:4321/model/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://613covid.ca/fr/model/"
+                href="http://localhost:4321/fr/model/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/fr/</loc>
+  </url><url>
+    <loc>http://localhost:4321/fr/</loc>
     <lastmod>2016-05-05T21:48:51-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/"
+                hreflang="en-us"
+                href="http://localhost:4321/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://613covid.ca/fr/"
+                href="http://localhost:4321/fr/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/fr/more/</loc>
+  </url><url>
+    <loc>http://localhost:4321/fr/more/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/more/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/more/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/fr/categories/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/categories/"
+                hreflang="en-us"
+                href="http://localhost:4321/more/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://613covid.ca/fr/categories/"
+                href="http://localhost:4321/fr/more/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/fr/change-log/</loc>
+  </url><url>
+    <loc>http://localhost:4321/fr/categories/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/change-log/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/change-log/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/fr/contact/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/contact/"
+                hreflang="en-us"
+                href="http://localhost:4321/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://613covid.ca/fr/contact/"
+                href="http://localhost:4321/fr/categories/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/fr/wastewater/</loc>
+  </url><url>
+    <loc>http://localhost:4321/fr/change-log/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/wastewater/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/wastewater/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/fr/wastewater_archive/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/wastewater_archive/"
+                hreflang="en-us"
+                href="http://localhost:4321/change-log/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://613covid.ca/fr/wastewater_archive/"
+                href="http://localhost:4321/fr/change-log/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/fr/roadmap/</loc>
+  </url><url>
+    <loc>http://localhost:4321/fr/contact/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/roadmap/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://613covid.ca/fr/roadmap/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://613covid.ca/fr/tags/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://613covid.ca/tags/"
+                hreflang="en-us"
+                href="http://localhost:4321/contact/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://613covid.ca/fr/tags/"
+                href="http://localhost:4321/fr/contact/"
+                />
+  </url><url>
+    <loc>http://localhost:4321/fr/wastewater/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="http://localhost:4321/wastewater/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="http://localhost:4321/fr/wastewater/"
+                />
+  </url><url>
+    <loc>http://localhost:4321/fr/wastewater_archive/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="http://localhost:4321/wastewater_archive/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="http://localhost:4321/fr/wastewater_archive/"
+                />
+  </url><url>
+    <loc>http://localhost:4321/fr/roadmap/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="http://localhost:4321/roadmap/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="http://localhost:4321/fr/roadmap/"
+                />
+  </url><url>
+    <loc>http://localhost:4321/fr/tags/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="http://localhost:4321/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="http://localhost:4321/fr/tags/"
                 />
   </url>
-  
 </urlset>

@@ -9,7 +9,12 @@ wastewater_prep <- function(data){
            RSV = "RSV_copies_per_pep_copies_avg") %>%
     select(date, N1, N2, InfA, InfB, RSV, qualityFlag, reportDate) %>%
     mutate(date = as.Date(date),
-           reportDate = as.Date(reportDate)) %>%
+           reportDate = as.Date(reportDate),
+           N1 = as.numeric(N1),
+           N2 = as.numeric(N2),
+           InfA = as.numeric(InfA),
+           InfB = as.numeric(InfB),
+           RSV = as.numeric(RSV)) %>%
     filter(!is.na(date)) %>%
     # Create mean value of N1 and N2
     mutate(N1_N2_avg = (N1 + N2)/2) %>%
@@ -20,10 +25,9 @@ wastewater_prep <- function(data){
     )
     
   data_clean$N1_N2_avg_clean <-
-    ifelse(data_clean$qualityFlag == TRUE, NA, data_clean$N1_N2_avg)
+    ifelse(!is.na(data_clean$qualityFlag) & data_clean$qualityFlag == TRUE, NA, data_clean$N1_N2_avg)
   data_clean$N1_N2_avg_omit <-
-    ifelse(data_clean$qualityFlag == TRUE, data_clean$N1_N2_avg, NA)
-  data_clean <- transform(data_clean, InfA = as.numeric(InfA), InfB = as.numeric(InfB), RSV = as.numeric(RSV))
+    ifelse(!is.na(data_clean$qualityFlag) & data_clean$qualityFlag == TRUE, data_clean$N1_N2_avg, NA)
   data_final <- data_clean %>%
     # create 5 day rolling avg of viral signal
     mutate(

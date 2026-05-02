@@ -1,4 +1,10 @@
-{{ $translations := getCSV "," "Data/translations/navbar.csv" }}
+{{ $translations := "" }}
+{{ $csvFile := "Data/translations/navbar.csv" }}
+{{ with resources.Get $csvFile }}
+  {{ $translations = . | transform.Unmarshal (dict "delimiter" ",") }}
+{{ else }}
+  {{ errorf "Unable to find translation file: %s" $csvFile }}
+{{ end }}
 {{ $langIndex := 1 }}
 {{range $i, $r := index $translations 0 }}
     {{ if eq $r $.lang }}
