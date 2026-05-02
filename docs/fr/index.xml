@@ -2,99 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projections relatives à la COVID-19 à Ottawa on Ottawa COVID19</title>
-    <link>https://613covid.ca/fr/</link>
+    <link>http://localhost:4321/fr/</link>
     <description>Recent content in Projections relatives à la COVID-19 à Ottawa on Ottawa COVID19</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <generator>Hugo</generator>
+    <language>fr</language>
     <lastBuildDate>Thu, 05 May 2016 21:48:51 -0700</lastBuildDate>
-    
-	<atom:link href="https://613covid.ca/fr/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/fr/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Methods</title>
-      <link>https://613covid.ca/fr/model/</link>
+      <link>http://localhost:4321/fr/model/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>https://613covid.ca/fr/model/</guid>
-      <description>Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references.
-Projection modelsAll data used to create projection models can be accessed at Open Ottawa. See ’COVID-19 cases and deaths`. Data used to create wastewater projection models can be accessed at PHESD.
-COVID-19 short-term projections are created using the Bayesian EpiNow2 model developed by the EpiForecasts team.</description>
+      <guid>http://localhost:4321/fr/model/</guid>
+      <description>&lt;p&gt;Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references.&lt;/p&gt;&#xA;&lt;div id=&#34;projection-models&#34; class=&#34;section level2&#34;&gt;&#xA;&lt;h2&gt;Projection models&lt;/h2&gt;&#xA;&lt;p&gt;All data used to create projection models can be accessed at &lt;a href=&#34;https://open.ottawa.ca/datasets/covid-19-cases-and-deaths-in-ottawa&#34;&gt;Open Ottawa&lt;/a&gt;. See ’COVID-19 cases and deaths`. Data used to create wastewater projection models can be accessed at &lt;a href=&#34;https://github.com/Big-Life-Lab/PHESD&#34;&gt;PHESD&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;COVID-19 short-term projections are created using the &lt;a href=&#34;https://epiforecasts.io/EpiNow2/&#34;&gt;Bayesian EpiNow2 model&lt;/a&gt; developed by the EpiForecasts team.&lt;/em&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title></title>
-      <link>https://613covid.ca/fr/more/</link>
+      <link>http://localhost:4321/fr/more/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://613covid.ca/fr/more/</guid>
-      <description>Utilisation des modèlesLes projections s’utilisent principalement de deux manières :
-Les projections à court terme (2 à 4 semaines) servent à connaître les besoins immédiats en services hospitaliers et en soins critiques pour les patients atteints de la COVID-19.
-Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet d’un relâchement de la distanciation physique.
-Précision des modèlesIl est difficile de faire des projections précises à long terme sur la propagation de la COVID-19.</description>
+      <guid>http://localhost:4321/fr/more/</guid>
+      <description>&lt;div id=&#34;use&#34; class=&#34;section level2&#34;&gt;&#xA;&lt;h2&gt;Utilisation des modèles&lt;/h2&gt;&#xA;&lt;p&gt;Les projections s’utilisent principalement de deux manières :&lt;/p&gt;&#xA;&lt;ol style=&#34;list-style-type: decimal&#34;&gt;&#xA;&lt;li&gt;&lt;p&gt;Les projections à court terme (2 à 4 semaines) servent à connaître les besoins immédiats en services hospitaliers et en soins critiques pour les patients atteints de la COVID-19.&lt;/p&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;p&gt;Les projections à long terme (6 semaines ou plus) servent à évaluer l’effet d’un relâchement de la distanciation physique.&lt;/p&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/div&gt;&#xA;&lt;div id=&#34;accuracy&#34; class=&#34;section level2&#34;&gt;&#xA;&lt;h2&gt;Précision des modèles&lt;/h2&gt;&#xA;&lt;p&gt;Il est difficile de faire des projections précises à long terme sur la propagation de la COVID-19. C’est un peu comme tenter de prévoir le moment où un ouragan touchera terre alors qu’il est encore à des milliers de kilomètres de la côte. Les prévisions à court terme sont plus précises. Il faut mettre à jour les projections à partir des données les plus récentes, notamment les données locales, pour avoir une meilleure idée du moment et de l’endroit où l’ouragan touchera terre.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Changelog</title>
-      <link>https://613covid.ca/fr/change-log/</link>
+      <link>http://localhost:4321/fr/change-log/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://613covid.ca/fr/change-log/</guid>
-      <description>V3.6.02022-02-24
-Hospital projections added to homepage.V3.5.02022-01-28
-Wastewater projections and growth estimates added to Wastewater page.V3.4.02021-06-16
-Updates to the Wastewater page. Variant plot updated to include a midpoint rolling average. Details on variants of interest/concern detection included in page.V3.3.32021-04-08
-Plot added to the Wastewater page visualizing proportion of variant B.1.1.7 RNA detected in wastewater.</description>
+      <guid>http://localhost:4321/fr/change-log/</guid>
+      <description>&lt;div id=&#34;v3.6.0&#34; class=&#34;section level1&#34;&gt;&#xA;&lt;h1&gt;V3.6.0&lt;/h1&gt;&#xA;&lt;p&gt;2022-02-24&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Hospital projections added to homepage.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/div&gt;&#xA;&lt;div id=&#34;v3.5.0&#34; class=&#34;section level1&#34;&gt;&#xA;&lt;h1&gt;V3.5.0&lt;/h1&gt;&#xA;&lt;p&gt;2022-01-28&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Wastewater projections and growth estimates added to &lt;a href=&#34;http://localhost:4321/wastewater&#34;&gt;Wastewater&lt;/a&gt; page.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/div&gt;&#xA;&lt;div id=&#34;v3.4.0&#34; class=&#34;section level1&#34;&gt;&#xA;&lt;h1&gt;V3.4.0&lt;/h1&gt;&#xA;&lt;p&gt;2021-06-16&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Updates to the &lt;a href=&#34;http://localhost:4321/wastewater&#34;&gt;Wastewater&lt;/a&gt; page. Variant plot updated to include a midpoint rolling average. Details on variants of interest/concern detection included in page.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/div&gt;&#xA;&lt;div id=&#34;v3.3.3&#34; class=&#34;section level1&#34;&gt;&#xA;&lt;h1&gt;V3.3.3&lt;/h1&gt;&#xA;&lt;p&gt;2021-04-08&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Plot added to the &lt;a href=&#34;http://localhost:4321/wastewater&#34;&gt;Wastewater&lt;/a&gt; page visualizing proportion of variant B.1.1.7 RNA detected in wastewater.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/div&gt;&#xA;&lt;div id=&#34;v3.3.2&#34; class=&#34;section level1&#34;&gt;&#xA;&lt;h1&gt;V3.3.2&lt;/h1&gt;&#xA;&lt;p&gt;2021-03-26&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Short-term hospitalization projections added.&lt;/li&gt;&#xA;&lt;li&gt;Wastewater Midpoint mean viral signal omits dates flagged by wastewater researchers with potential data concerns.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/div&gt;&#xA;&lt;div id=&#34;v3.3.1&#34; class=&#34;section level1&#34;&gt;&#xA;&lt;h1&gt;V3.3.1&lt;/h1&gt;&#xA;&lt;p&gt;2021-03-19&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Contact</title>
-      <link>https://613covid.ca/fr/contact/</link>
+      <link>http://localhost:4321/fr/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://613covid.ca/fr/contact/</guid>
-      <description>Personnes-ressources scientifiques: Mathew Thomson matthomson@ohri.ca
-Remerciements pour le site Web et le contenu: Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Andrew Fitches et les autres membres de l’équipe de Big Life Lab.
-Avec le soutien des épidémiologistes de Santé publique Ottawa: Amira Ali, Jacqueline Willmore, Dara Spatz
-Groupe de recherche uOttawa – CHEO SARS-CoV-2: Robert Delatolla, Alex MacKenzie, Patrick D’Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber.
-Consultant couleur: Toby Barker</description>
+      <guid>http://localhost:4321/fr/contact/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Contact média :&lt;/strong&gt; Dr. Robert Delatolla &lt;a href=&#34;mailto:robert.delatolla@uottawa.ca&#34;&gt;robert.delatolla@uottawa.ca&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Problèmes du site web ou avec les données?&lt;/strong&gt; Dr. Lakshmi Pisharody (&lt;a href=&#34;mailto:lpisharo@uottawa.ca&#34; class=&#34;uri&#34;&gt;mailto:lpisharo@uottawa.ca&lt;/a&gt;)&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Remerciements pour le site Web et le contenu:&lt;/strong&gt; Dr. Douglas Manuel, Warsame Yusuf, Rostyslav Vyuha, Yulric Sequeira, Gauri Saran, Mathew Thomson et les autres membres de l’équipe de Big Life Lab.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Avec le soutien des épidémiologistes de Santé publique Ottawa:&lt;/strong&gt; Amira Ali, Jacqueline Willmore, Dara Spatz&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Groupe de recherche uOttawa – CHEO SARS-CoV-2:&lt;/strong&gt; Robert Delatolla, Alex MacKenzie, Patrick D’Aoust, Élisabeth Mercier, Antoine Cantin, Tyson Graber.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Ottawa COVID-19 wastewater surveillance</title>
-      <link>https://613covid.ca/fr/wastewater/</link>
+      <link>http://localhost:4321/fr/wastewater/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://613covid.ca/fr/wastewater/</guid>
-      <description>Wastewater plots last updated: 29 November, 2022, 9:45:19 AM
-Wastewater samples collected up to: 24 November, 2022
-Reported date up to: 29 November, 2022
-The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
-Samples that are collected from Monday to Thursday are processed the day after collection.</description>
+      <guid>http://localhost:4321/fr/wastewater/</guid>
+      <description>&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/plotly-binding/plotly.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/typedarray/typedarray.min.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;&#xA;&lt;link href=&#34;http://localhost:4321/rmarkdown-libs/crosstalk/css/crosstalk.min.css&#34; rel=&#34;stylesheet&#34; /&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/crosstalk/js/crosstalk.min.js&#34;&gt;&lt;/script&gt;&#xA;&lt;link href=&#34;http://localhost:4321/rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css&#34; rel=&#34;stylesheet&#34; /&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/plotly-main/plotly-latest.min.js&#34;&gt;&lt;/script&gt;&#xA;&#xA;&#xA;&lt;p&gt;613COVID Website Update&lt;/p&gt;&#xA;&lt;p&gt;Ottawa wastewater surveillance continues with daily testing and analysis performed in the lab of &lt;a href=&#34;https://engineering.uottawa.ca/people/delatolla-robert&#34;&gt;Dr. Robert Delatolla&lt;/a&gt;, Professor, Department of Civil Engineering, University of Ottawa, who has led that work since its inception in April 2020.&lt;/p&gt;&#xA;&lt;p&gt;The lab, led by Dr. Delatolla, has expanded its focus beyond SARS-CoV-2 to include influenza and RSV viruses, with the data being regularly reported on the official website.&lt;/p&gt;&#xA;&lt;p&gt;Please follow &lt;span class=&#34;citation&#34;&gt;@DelatollaLab&lt;/span&gt; on X (Twitter) for further contextualization of the data.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Ottawa COVID-19 wastewater surveillance</title>
-      <link>https://613covid.ca/fr/wastewater_archive/</link>
+      <link>http://localhost:4321/fr/wastewater_archive/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://613covid.ca/fr/wastewater_archive/</guid>
-      <description>Wastewater plots last updated: 29 November, 2022, 9:45:29 AM
-Wastewater samples collected up to: 24 November, 2022
-Reported date up to: 29 November, 2022
-The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
-Samples that are collected from Monday to Thursday are processed the day after collection.</description>
+      <guid>http://localhost:4321/fr/wastewater_archive/</guid>
+      <description>&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/plotly-binding/plotly.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/typedarray/typedarray.min.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;&#xA;&lt;link href=&#34;http://localhost:4321/rmarkdown-libs/crosstalk/css/crosstalk.min.css&#34; rel=&#34;stylesheet&#34; /&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/crosstalk/js/crosstalk.min.js&#34;&gt;&lt;/script&gt;&#xA;&lt;link href=&#34;http://localhost:4321/rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css&#34; rel=&#34;stylesheet&#34; /&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/plotly-main/plotly-latest.min.js&#34;&gt;&lt;/script&gt;&#xA;&#xA;&#xA;&lt;p&gt;Wastewater plots last updated: 25 April, 2026, 12:13:04 PM&lt;/p&gt;&#xA;&lt;p&gt;Wastewater samples collected up to: 19 April, 2026&lt;/p&gt;&#xA;&lt;p&gt;Reported date up to: 25 April, 2026&lt;/p&gt;&#xA;&lt;p&gt;The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.&lt;/p&gt;&#xA;&lt;p&gt;Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing. Samples that are collected from Friday to Sunday are processed on Monday and thus are posted to the website on Tuesday at 5 p.m.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Roadmap</title>
-      <link>https://613covid.ca/fr/roadmap/</link>
+      <link>http://localhost:4321/fr/roadmap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://613covid.ca/fr/roadmap/</guid>
-      <description>The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.
-Review and update model parameters based on recent published studies. Priories for review:ventilated patientsdeaths</description>
+      <guid>http://localhost:4321/fr/roadmap/</guid>
+      <description>&lt;p&gt;The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Review and update model parameters based on recent published studies. Priories for review:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ventilated patients&lt;/li&gt;&#xA;&lt;li&gt;deaths&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
   </channel>
 </rss>

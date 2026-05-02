@@ -1,0 +1,31 @@
+key,en,fr
+home,Home,Accueil
+viz,Visualizations,Visualisations
+obs_cases, Observed Cases, Observed Cases
+obs_hosp_census,Observed Hospital Census,Recensement des hôpitaux observés
+obs_daily_hosp_adms,Observed Daily Hospital Admissions,Admissions quotidiennes à l'hôpital
+peak_hosp_projs,Peak hospitalization projections,Projections d'hospitalisation de pointe
+case_proj, Case Projections, Case Projections
+hosp_projs,Hospitalization Projections,Projections d'hospitalisation
+vent_projs,Ventilator Projections,Projections de ventilateur
+death_viz,Death visualization,Visualisation de la mort
+phys_dist,Physical distancing,Distanciation physique
+wastewater, Wastewater, Wastewater
+ww_viz, Wastewater visualization, Wastewater visualization
+definitions,Definitions,D�finitions
+model,Methods,Méthodes
+model_params,Model parameters,Paramètres du modèle
+proj_models, Projection models, Projection models
+ww_surv, Wastewater surveillance, Wastewater surveillance
+phys_math, How physical distancing affects projections, How physical distancing affects projections
+hosp_data,Hospital data,Données hospitalières
+inp_params,Input parameters,Paramètres d'entrée
+plot_data, Plot data, Plot data
+refs,References,Références
+more,More,Plus
+model_use,Model use,Utilisation du modèle
+model_acc,Model accuracy,Précision du modèle
+scens_phys_dist,Scenarios of physical distancing,Scénarios de distanciation physique
+phys_dist_effect,Physical distancing effectiveness,Efficacité de l'éloignement physique
+contact,Contact,Contact
+changelog,Changelog,Changelog
