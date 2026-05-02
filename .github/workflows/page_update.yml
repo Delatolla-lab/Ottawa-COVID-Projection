@@ -31,10 +31,10 @@ jobs:
         with:
           cache-version: 1
       - uses: r-lib/actions/setup-pandoc@v2
-      - name: Install libcurl4-openssl-dev
+      - name: Install libcurl4-openssl-dev and libtbb-dev
         run: |
           sudo apt-get update
-          sudo apt-get install -y --fix-missing libcurl4-openssl-dev || (sleep 30 && sudo apt-get update && sudo apt-get install -y --fix-missing libcurl4-openssl-dev)
+          sudo apt-get install -y --fix-missing libcurl4-openssl-dev libtbb-dev || (sleep 30 && sudo apt-get update && sudo apt-get install -y --fix-missing libcurl4-openssl-dev libtbb-dev)
       - name: Install harfbuzz and fribidi
         run: |
           sudo apt-get install -y --fix-missing libharfbuzz-dev libfribidi-dev || (sleep 30 && sudo apt-get update && sudo apt-get install -y --fix-missing libharfbuzz-dev libfribidi-dev)
