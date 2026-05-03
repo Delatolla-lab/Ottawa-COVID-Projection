@@ -47,9 +47,17 @@
                     class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdownMenuLink" id="viz-dropdown">
                 {{ range .Site.Sites }}
                     {{ if ne . $.Site }}
+                    {{ $lang := .Language.Lang }}
+                    {{ $currentPage := $.Page }}
+                    {{ $translatedPage := "" }}
+                    {{ range $currentPage.Translations }}
+                        {{ if eq .Language.Lang $lang }}
+                            {{ $translatedPage = . }}
+                        {{ end }}
+                    {{ end }}
                     <a 
                         class="dropdown-item" 
-                        href="{{ .Home.RelPermalink }}">
+                        href="{{ if $translatedPage }}{{ $translatedPage.RelPermalink }}{{ else }}{{ .Home.RelPermalink }}{{ end }}">
                         {{ .Language.LanguageName }}
                     </a>
                     {{ end }}

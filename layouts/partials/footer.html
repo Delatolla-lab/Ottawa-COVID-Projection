@@ -1,21 +1,7 @@
-<div class="footer-partial" style="display: flex; padding: 0 25%;">
-  <div style="align-self: center;">
-    <img src="{{ "images/uottawa-logo.png" | relURL }}" style="width: 100%;" />
-  </div>
-  <div style="align-self: center;">
-    <img src="{{ "images/toh-logo.jpg" | relURL }}" style="width: 100%;" />
-  </div>
-  <div>
-    <img src="{{ "images/oph-logo.png" | relURL }}" style="width: 100%;" />
-  </div>
-  <div>
-    <img src="{{ "images/cheo_logo_purple.png" | relURL }}" style="width: 100%;" />
-  </div>
+<div class="footer-partial" style="display: flex; justify-content: center; align-items: center; gap: 30px; padding-bottom: 2rem;">
+  <img src="{{ "images/uottawa-logo.png" | relURL }}" style="max-width: 200px; height: auto;" />
+  <img src="{{ "images/oph-logo.png" | relURL }}" style="max-width: 200px; height: auto;" />
 </div>
 
-<div style="display: flex; justify-content: center; margin-bottom: 20px;">
-  <span style="align-self: center; margin-right: 10px; font-weight: bold;">MADE BY</span>
-  <img src="{{ "images/pbl-logo.png" | relURL }}" />
-</div>
   {{ partial "footer_highlightjs" . }}
   {{ partial "footer_mathjax" . }}

@@ -5,3 +5,5 @@
 .DS_Store
 .Rprofile
 content/**/*.html
+.idea/
+static/rmarkdown-libs/htmltools-fill/

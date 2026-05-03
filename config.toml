@@ -23,52 +23,6 @@ publishDir = "./docs"
     post = "/:year/:month/:day/:slug/"
 
 [[menu.main]]
-    name = "home"
-    url = "/"
-    weight = 1
-
-[[menu.main]]
-    name = "viz"
-    url = ""
-    weight = 2
-    
-[[menu.main]]
-    name = "obs_cases"
-    url = "/#observed-cases"
-    parent = "viz"
-    weight = 1
-
-[[menu.main]]
-    name = "obs_hosp_census"
-    url = "/#observed-census"
-    parent = "viz"
-    weight = 2
-    
-[[menu.main]]
-    name = "obs_daily_hosp_adms"
-    url = "/#observed-admits"
-    parent = "viz"
-    weight = 3
-    
-[[menu.main]]
-    name = "hosp_projs"
-    url = "/#hospitalization-projections"
-    parent = "viz"
-    weight = 4
-
-[[menu.main]]
-    name = "ww_viz"
-    url = "/wastewater/#ww-visualization"
-    parent = "viz"
-    weight = 5
-    
-[[menu.main]]
-    name = "definitions"
-    url = "/#definitions"
-    parent = "viz"
-    weight = 6
-    
-[[menu.main]]
     name = "wastewater"
     url = "/wastewater/"
     weight = 3
@@ -77,31 +31,13 @@ publishDir = "./docs"
     name = "model"
     url = "/model/"
     weight = 4
-    
-[[menu.main]]
-    name = "proj_models"
-    url = "/model/#projection-models"
-    parent = "model"
-    weight = 1
-    
+
 [[menu.main]]
     name = "ww_surv"
     url = "/model/#wastewater"
     parent = "model"
     weight = 2
     
-[[menu.main]]
-    name = "inp_params"
-    url = "/model/#parameters"
-    parent = "model"
-    weight = 3
-    
-[[menu.main]]
-    name = "refs"
-    url = "/model/#references"
-    parent = "model"
-    weight = 4
-
 [[menu.main]]
     name = "contact"
     url = "/contact/"

@@ -3,16 +3,10 @@ date: "2016-05-05T21:48:51-07:00"
 title: Methods
 link-citations: true
 bibliography: refs.bib
+params:
+    lang: "fr"
 ---
 Described below is a brief description of methods, data and model parameters used at 613covid.ca. More detailed information can be found in the accompanying references. 
-
-## Projection models {#projection-models}
-
-All data used to create projection models can be accessed at [Open Ottawa](https://open.ottawa.ca/datasets/covid-19-cases-and-deaths-in-ottawa). See 'COVID-19 cases and deaths`. Data used to create wastewater projection models can be accessed at [PHESD](https://github.com/Big-Life-Lab/PHESD).
-
-*COVID-19 short-term projections are created using the [Bayesian EpiNow2 model](https://epiforecasts.io/EpiNow2/) developed by the EpiForecasts team.*
-
-- Projections are based on observed COVID-19 hospital census and wastewater viral recovery, which is, in turn, estimated using reported incubation period and consideration for reporting delays.
 
 ## Wastewater COVID-19 surveillance {#wastewater}
 
@@ -24,8 +18,3 @@ Wastewater samples are from the Robert O. Pickard Environmental Centre (ROPEC) w
 
 A note about data reporting: Data is typically uploaded to the website less than 24 hours after the sample is collected from the wastewater treatment plant. The samples are collected for a period of 24 hours. So samples uploaded to the website are dated 48 hours prior to the upload date. Samples collected on Fridays, Saturdays and Sundays will be reported the following week on Tuesdays. If data generated does not pass quality control (this is not a rare occurrence and reflects both the nature of the technology and the rigorous standards applied to achieve reliable measurements), data reporting may be delayed further.
 
-## Input parameters {#parameters}
-
-Parameter estimates for hospital projections are based on the reported number of COVID-19 patients in hospitals from Ottawa Public Health, while wastewater projections are based on sample data from ROPEC. For both projections, generation time estimates are obtained from [Ganyani et. al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7201952/) @Ganyani2020, while incubation period estimates are obtained from [Lauer et. al.](https://pubmed.ncbi.nlm.nih.gov/32150748/) @Lauer2020.
-
-### References {#references}
