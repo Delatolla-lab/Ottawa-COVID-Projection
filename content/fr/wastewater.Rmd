@@ -2,7 +2,7 @@
 title: "Ottawa COVID-19 wastewater surveillance"
 output: html_document
 params:
-  lang: "en"
+  lang: "fr"
 ---
 
 ```{r setup, include=FALSE}
