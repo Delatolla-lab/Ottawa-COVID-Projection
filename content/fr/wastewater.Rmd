@@ -1,5 +1,5 @@
 ---
-title: "Ottawa COVID-19 wastewater surveillance"
+title: "Surveillance de la COVID-19 dans les eaux usées à Ottawa"
 output: html_document
 params:
   lang: "fr"
@@ -47,24 +47,30 @@ ott_b117_data <- ott_observed_waste %>%
 # functions to integrate waste & covid data together
 waste_clean <- wastewater_prep(ott_observed_waste)
 ww_covid_waste <- waste_clean %>%
-    filter(date >= "2020-06-02")
+  filter(date >= "2020-06-02")
 
 variant_data <- ww_long_prep(ott_long_ww_data) %>%
   select(date, aggregation, varB117) %>%
   filter(!is.na(varB117)) %>%
   spread(aggregation, varB117) %>%
   rename(propB117 = "single") %>%
-  mutate(propB117 = propB117*100,
-         sd = sd*100) %>%
+  mutate(
+    propB117 = propB117 * 100,
+    sd = sd * 100
+  ) %>%
   filter(!is.na(sd)) %>%
-  mutate(propB117_7day = rollapply(propB117, width=7,
-                  FUN=function(x) mean(x, na.rm = TRUE),
-                  by=1, by.column=TRUE, partial=FALSE,
-                  fill=NA, align="center")) %>%
-  mutate(sd_7day = rollapply(sd, width=7,
-                  FUN=function(x) mean(x, na.rm = TRUE),
-                  by=1, by.column=TRUE, partial=FALSE,
-                  fill=NA, align="center"))
+  mutate(propB117_7day = rollapply(propB117,
+    width = 7,
+    FUN = function(x) mean(x, na.rm = TRUE),
+    by = 1, by.column = TRUE, partial = FALSE,
+    fill = NA, align = "center"
+  )) %>%
+  mutate(sd_7day = rollapply(sd,
+    width = 7,
+    FUN = function(x) mean(x, na.rm = TRUE),
+    by = 1, by.column = TRUE, partial = FALSE,
+    fill = NA, align = "center"
+  ))
 
 variant_non_detect <- ww_long_prep(ott_long_ww_data) %>%
   select(date, aggregation, varB117) %>%
@@ -122,7 +128,7 @@ active_case_7_day_call <- list(type = "observed_data", y_column = "observed_acti
 
 active_case_10_day_call <- list(type = "observed_data", y_column = "observed_active_cases_10_day", name = "10-day mean \nin active cases", color = case_col, opacity = 0.15)
 
-n1_call <- list(type = "signal_data", y_column = "N1", name = "N1 RNA signal", color = n1_col, yaxis = "y2") 
+n1_call <- list(type = "signal_data", y_column = "N1", name = "N1 RNA signal", color = n1_col, yaxis = "y2")
 
 n2_call <- list(type = "signal_data", y_column = "N2", name = "N2 RNA signal", color = n2_col, yaxis = "y2")
 
@@ -172,21 +178,20 @@ var_7_day_avg <- list(type = "avg_data", y_column = "propB117_7day", name = "7 o
 ```
 
 ```{r include=FALSE}
-##Load localization file
+## Load localization file
 source("../../R/localization.R")
-localization_data <- read.csv(file.path(getwd(),"../../Data/translations/Covid Localization - Home Page.csv"))
-
-
+source("../../R/format_datetime_fr.R")
+localization_data <- read.csv(file.path(getwd(), "../../Data/translations/Covid Localization - Home Page.csv"))
 ```
 
 ```{r, results='hold', echo=FALSE, comment=NA}
 time <- .POSIXct(Sys.time(), "America/New_York")
-wwintro<- insert_translation(localization_data, lang, "WWIntro", c(format(time, '%d %B, %Y, %X')))
-end_transition_out <- insert_translation(localization_data, lang, "end_transition_out", c(format(time, '%d %B, %Y, %X')))
+wwintro <- insert_translation(localization_data, lang, "WWIntro", format_datetime_fr(time))
+end_transition_out <- insert_translation(localization_data, lang, "end_transition_out", c(format(time, "%d %B, %Y, %X")))
 curr_day <- as.Date(time)
 collect_date <- as.Date(last(ww_covid_waste$date))
-wwcollectdate<- insert_translation(localization_data, lang, "WWCollectDate", c(format(collect_date, '%d %B, %Y')))
-wwanalysesdate<- insert_translation(localization_data, lang, "WWAnalysesDate", c(format(curr_day, '%d %B, %Y')))
+wwcollectdate <- insert_translation(localization_data, lang, "WWCollectDate", format_datetime_fr(last(ww_covid_waste$date), date_only=TRUE))
+wwanalysesdate <- insert_translation(localization_data, lang, "WWAnalysesDate", format_datetime_fr(curr_day, date_only=TRUE))
 ```
 
 `r end_transition_out`
@@ -198,15 +203,11 @@ wwanalysesdate<- insert_translation(localization_data, lang, "WWAnalysesDate", c
 `r wwanalysesdate`
 
 
-The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.
+Le site Web est mis à jour du lundi au vendredi vers 17 h. Les mises à jour peuvent toutefois être retardées si les mesures ne satisfont pas aux critères d’assurance qualité et de contrôle qualité.
 
+Les échantillons collectés du lundi au jeudi sont analysés le lendemain de leur collecte. Le site Web et les graphiques sont ensuite mis à jour le jour suivant l’analyse. Les échantillons collectés du vendredi au dimanche sont analysés le lundi et publiés sur le site Web le mardi à 17 h.
 
-
-Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing. Samples that are collected from Friday to Sunday are processed on Monday and thus are posted to the website on Tuesday at 5 p.m.
-
-
-
-People with COVID-19 shed the causative SARS-CoV-2 virus in their stool, regardless of whether they have symptoms, receive a COVID-19 test or ever are diagnosed. Thus, in contrast to assessing community COVID-19 levels by measuring the number of active cases, which may miss asymptomatic infections as well as be subject to limited test availability, wastewater surveillance consistently captures most of the population with COVID-19 given that everyone goes to the washroom. In addition to serving as a valuable confirmatory data source for COVID-19 levels, wastewater can also serve as early indicator for possible outbreaks, as described below.
+Les personnes atteintes de la COVID-19 excrètent le virus SARS-CoV-2 dans leurs selles, qu’elles présentent ou non des symptômes, qu’elles aient passé un test de dépistage ou qu’elles aient reçu un diagnostic officiel. Ainsi, contrairement à l’évaluation des niveaux de COVID-19 dans la communauté à partir du nombre de cas actifs - une méthode qui peut sous-estimer les infections asymptomatiques et être influencée par l’accès limité aux tests - la surveillance des eaux usées permet de suivre de façon plus représentative la présence du virus dans la population, puisque tout le monde utilise les toilettes. En plus d’être une source précieuse de confirmation des niveaux de COVID-19 dans la communauté, la surveillance des eaux usées peut également servir d’indicateur précoce d’éventuelles éclosions, comme décrit ci-dessous.
 
 ---
 
@@ -222,23 +223,22 @@ temp_data <- new_ott_covid_waste %>% subset(!is.na(N1_N2_avg_omit))
 end_data_first <- first(temp_data$date)
 start_data_second <- last(temp_data$date)
 new_ott_covid_waste$N1_N2_7_day_p1 <- NA
-new_ott_covid_waste[(new_ott_covid_waste$date < end_data_first),"N1_N2_7_day_p1"] <- new_ott_covid_waste[(new_ott_covid_waste$date < end_data_first), "N1_N2_7_day"]
+new_ott_covid_waste[(new_ott_covid_waste$date < end_data_first), "N1_N2_7_day_p1"] <- new_ott_covid_waste[(new_ott_covid_waste$date < end_data_first), "N1_N2_7_day"]
 new_ott_covid_waste$N1_N2_7_day_p2 <- NA
-new_ott_covid_waste[(new_ott_covid_waste$date > start_data_second),"N1_N2_7_day_p2"] <- new_ott_covid_waste[(new_ott_covid_waste$date > start_data_second), "N1_N2_7_day"]
+new_ott_covid_waste[(new_ott_covid_waste$date > start_data_second), "N1_N2_7_day_p2"] <- new_ott_covid_waste[(new_ott_covid_waste$date > start_data_second), "N1_N2_7_day"]
 
 n1_n2_7_day_call_p1 <- list(type = "avg_data", y_column = "N1_N2_7_day_p1", name = "7-day rolling mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = FALSE)
 
 n1_n2_7_day_call_p2 <- list(type = "avg_data", y_column = "N1_N2_7_day_p2", name = "7-day rolling mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
 reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call_p1, n1_n2_7_day_call_p2), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>COVID-19 wastewater viral signal, Ottawa</b>"), data = new_ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
-
 ```
 
 ---
 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.asp = 0.75}
-#reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call, var_7_day_avg), error_bands = TRUE, error_pct = TRUE, error_data = "sd_7day", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
+# reworked_figure(xaxis = "date", yaxis = list(var_nondetect_call, var_call, var_7_day_avg), error_bands = TRUE, error_pct = TRUE, error_data = "sd_7day", error_col = case_shade, titles = c(y = "Proportion (%)", y2 = "", x = "Date", title = "<b>Proportion of variant B.1.1.7 RNA signal in wastewater, Ottawa</b>"), data = variant_non_detect, ticks = FALSE)
 ```
 
 <!-- ## Wastewater Projections
@@ -257,9 +257,9 @@ ww_clean <- wastewater_prep(ww_data) %>%
   mutate(date = as.Date(date))
 
 ww_normalized <- ww_clean %>%
-  mutate(N1_N2_avg_clean = N1_N2_avg_clean*1000000)
+  mutate(N1_N2_avg_clean = N1_N2_avg_clean * 1000000)
 
-#short_term_plot(
+# short_term_plot(
 #  projections = ww_forecast[[1]],
 #  obs_data = ww_normalized,
 #  obs_column = "N1_N2_avg_clean",
@@ -270,7 +270,7 @@ ww_normalized <- ww_clean %>%
 #  tick_labels_date = "%b %y",
 #  annotation_text = "*Shaded area represents the 75% credible region",
 #  interval_num = 178
-#)
+# )
 ```
 
 ## Current growth estimates for the amount of virus in wastewater
@@ -280,7 +280,7 @@ growth_measures <- ww_forecast[[2]]
 colnames(growth_measures) <- c("measure", "estimate")
 
 growth_measures[1, "measure"] <- "Expected change in viral amount"
-growth_measures <- growth_measures[-2,]
+growth_measures <- growth_measures[-2, ]
 
 knitr::kable(growth_measures)
 ```
@@ -291,66 +291,68 @@ library(readxl)
 
 variant_sheet <- as.data.frame(read_excel(file.path(getwd(), "../../Data/variant_sheet.xlsx")))
 
-names(variant_sheet) <- c("ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days","assay_id", "CDC_N1", "CDC_N2", "breadth_of_coverage_pct","mean_coverage_depth", "pangolin_lineage", "detect","prop_voc_mutations", "detection_quality", "frac_voc_detected")
+names(variant_sheet) <- c("ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days", "assay_id", "CDC_N1", "CDC_N2", "breadth_of_coverage_pct", "mean_coverage_depth", "pangolin_lineage", "detect", "prop_voc_mutations", "detection_quality", "frac_voc_detected")
 
 sheet <- variant_sheet %>%
-  select("ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days",
-                         "assay_id", "CDC_N1", "CDC_N2", "breadth_of_coverage_pct",
-                         "mean_coverage_depth", "pangolin_lineage",
-                         "prop_voc_mutations", "detection_quality", "frac_voc_detected") %>%
+  select(
+    "ENT_ID", "date_collected", "date_received_nml", "report_date", "turnaround_days",
+    "assay_id", "CDC_N1", "CDC_N2", "breadth_of_coverage_pct",
+    "mean_coverage_depth", "pangolin_lineage",
+    "prop_voc_mutations", "detection_quality", "frac_voc_detected"
+  ) %>%
   filter(!is.na(ENT_ID))
 
-#variant_text <- variant_df_prep(sheet)
+# variant_text <- variant_df_prep(sheet)
 
-#date <- format(as.Date(variant_text[variant_text$variable == "date",2]), "%B %d, %Y")
+# date <- format(as.Date(variant_text[variant_text$variable == "date",2]), "%B %d, %Y")
 
-#alphaDetect <- as.logical(variant_text[variant_text$variable == "alphaDetect",2])
+# alphaDetect <- as.logical(variant_text[variant_text$variable == "alphaDetect",2])
 
-#alphaLevel <- as.character(variant_text[variant_text$variable == "alphaLevel",2])
+# alphaLevel <- as.character(variant_text[variant_text$variable == "alphaLevel",2])
 
-#alphaSummary <- ifelse(alphaDetect == TRUE, paste("Alpha (B.1.1.7) detected in", alphaLevel, "levels by sequencing and PCR, last reported on", paste0(date, ".")), paste("Alpha (B.1.1.7) not detected, last reported on", paste0(date, ".")))
+# alphaSummary <- ifelse(alphaDetect == TRUE, paste("Alpha (B.1.1.7) detected in", alphaLevel, "levels by sequencing and PCR, last reported on", paste0(date, ".")), paste("Alpha (B.1.1.7) not detected, last reported on", paste0(date, ".")))
 
-#deltaDetect <- as.logical(variant_text[variant_text$variable == "deltaDetect",2])
+# deltaDetect <- as.logical(variant_text[variant_text$variable == "deltaDetect",2])
 
-#deltaLevel <- as.character(variant_text[variant_text$variable == "deltaLevel",2])
+# deltaLevel <- as.character(variant_text[variant_text$variable == "deltaLevel",2])
 
-#deltaSummary <- ifelse(deltaDetect == TRUE, paste("B.1.617+ including Delta variant detected at", deltaLevel, "levels by sequencing, last reported on", paste0(date, ".")), paste("B.1.617+ including Delta variant not detected by sequencing, last reported on", paste0(date, ".")))
+# deltaSummary <- ifelse(deltaDetect == TRUE, paste("B.1.617+ including Delta variant detected at", deltaLevel, "levels by sequencing, last reported on", paste0(date, ".")), paste("B.1.617+ including Delta variant not detected by sequencing, last reported on", paste0(date, ".")))
 
-#b1351Detect <- as.logical(variant_text[variant_text$variable == "B1351Detect",2])
+# b1351Detect <- as.logical(variant_text[variant_text$variable == "B1351Detect",2])
 
-#b1351Level <- as.character(variant_text[variant_text$variable == "B1351Level",2])
+# b1351Level <- as.character(variant_text[variant_text$variable == "B1351Level",2])
 
-#b1351Summary <- ifelse(b1351Detect == TRUE, paste("B.1.351 detected at", b1351Level, "levels by sequencing, last reported on", paste0(date, ".")), paste("B.1.351 not detected by sequencing, last reported on", paste0(date, ".")))
+# b1351Summary <- ifelse(b1351Detect == TRUE, paste("B.1.351 detected at", b1351Level, "levels by sequencing, last reported on", paste0(date, ".")), paste("B.1.351 not detected by sequencing, last reported on", paste0(date, ".")))
 
-#p1Detect <- as.logical(variant_text[variant_text$variable == "P1Detect",2])
+# p1Detect <- as.logical(variant_text[variant_text$variable == "P1Detect",2])
 
-#p1Level <- as.character(variant_text[variant_text$variable == "P1Level",2])
+# p1Level <- as.character(variant_text[variant_text$variable == "P1Level",2])
 
-#p1Summary <- ifelse(deltaDetect == TRUE, paste("P.1 variant detected at", deltaLevel, "levels by sequencing, last reported on", paste0(date, ".")), paste("P.1 variant not detected by sequencing, last reported on", paste0(date, ".")))
+# p1Summary <- ifelse(deltaDetect == TRUE, paste("P.1 variant detected at", deltaLevel, "levels by sequencing, last reported on", paste0(date, ".")), paste("P.1 variant not detected by sequencing, last reported on", paste0(date, ".")))
 
-#otherVOCDetect <- as.logical(variant_text[variant_text$variable == "otherVOCDetect",2])
+# otherVOCDetect <- as.logical(variant_text[variant_text$variable == "otherVOCDetect",2])
 
-#otherVOCLevel <- as.character(variant_text[variant_text$variable == "otherVOCDetails",2])
+# otherVOCLevel <- as.character(variant_text[variant_text$variable == "otherVOCDetails",2])
 
-#otherVOCSummary <- ifelse(otherVOCDetect == TRUE, otherVOCDetails, "No other VOC/VOI were identified by sequencing above the level of detection of the assay.")
+# otherVOCSummary <- ifelse(otherVOCDetect == TRUE, otherVOCDetails, "No other VOC/VOI were identified by sequencing above the level of detection of the assay.")
 
-#summaryDescription <- as.character(variant_text[variant_text$variable == "summaryDescription",2])
+# summaryDescription <- as.character(variant_text[variant_text$variable == "summaryDescription",2])
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-#detailedDescription1 <- as.character(variant_text[variant_text$variable == "detailedDescription1",2])
+# detailedDescription1 <- as.character(variant_text[variant_text$variable == "detailedDescription1",2])
 
-#detailedDescription2 <- as.character(variant_text[variant_text$variable == "detailedDescription2",2])
+# detailedDescription2 <- as.character(variant_text[variant_text$variable == "detailedDescription2",2])
 
-#detailedDescription3 <- as.character(variant_text[variant_text$variable == "detailedDescription3",2])
+# detailedDescription3 <- as.character(variant_text[variant_text$variable == "detailedDescription3",2])
 
-#detailedDescription4 <- as.character(variant_text[variant_text$variable == "detailedDescription4",2])
+# detailedDescription4 <- as.character(variant_text[variant_text$variable == "detailedDescription4",2])
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-#ctN1Assay <- variant_text[variant_text$variable == "ctN1Assay",2]
+# ctN1Assay <- variant_text[variant_text$variable == "ctN1Assay",2]
 
-#ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
+# ctN2Assay <- variant_text[variant_text$variable == "ctN2Assay",2]
 ```
 ---
 
@@ -372,15 +374,15 @@ The next plot illustrate the 7-day rolling mean in daily IAV wastewater viral si
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Create subset of data with only needed columns. Subset is needed so only valid columns are checked for NA, other columns would cause unnecessary trimming.
-inf_data <- ww_covid_waste[,c( "date", "InfA", "InfA_7_day", "RSV", "RSV_7_day")]
+inf_data <- ww_covid_waste[, c("date", "InfA", "InfA_7_day", "RSV", "RSV_7_day")]
 
 # Trim any rows with NA in any column, only affecting trailing rows
-inf_data <- na.trim(inf_data,sides="right")
+inf_data <- na.trim(inf_data, sides = "right")
 
 
 p <- reworked_figure(xaxis = "date", yaxis = list(daily_infa_signal, infa_7_day), titles = c(y = "Normalized Influenza A viral copies*", y2 = "", x = "Date", title = "<b>Influenza A wastewater viral signal, Ottawa</b>"), data = inf_data, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
 
-p <- layout(p, yaxis = list(range = c(0, 0.0001350000), exponentformat="none", tickformat=".5f"))
+p <- layout(p, yaxis = list(range = c(0, 0.0001350000), exponentformat = "none", tickformat = ".5f"))
 p
 ```
 
@@ -392,7 +394,7 @@ The next plots illustrate the 7-day rolling mean in daily RSV wastewater viral s
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 p <- reworked_figure(xaxis = "date", yaxis = list(daily_rsv_signal, rsv_7_day), titles = c(y = "Normalized RSV viral copies*", y2 = "", x = "Date", title = "<b>RSV wastewater viral signal, Ottawa</b>"), data = inf_data, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
-p <- layout(p, yaxis = list(range = c(0, 0.0008500), exponentformat="none", tickformat=".5f"))
+p <- layout(p, yaxis = list(range = c(0, 0.0008500), exponentformat = "none", tickformat = ".5f"))
 p
 ```
 
