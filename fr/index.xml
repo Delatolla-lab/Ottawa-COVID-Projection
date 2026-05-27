@@ -37,25 +37,18 @@
       <description>Contact: Dr. Robert Delatolla robert.delatolla@uottawa.ca&#xA;Remerciements pour la soutien des épidémiologistes de Santé publique Ottawa: Amira Ali, Jacqueline Willmore, Dara Spatz&#xA;Groupe de recherche uOttawa: Robert Delatolla, Élisabeth Mercier&#xA;Attribution: Les icônes de COVID-19 ont été créées par surang de www.flaticon.com.</description>
     </item>
     <item>
-      <title>Ottawa COVID-19 wastewater surveillance</title>
-      <link>https://613covid.ca/fr/wastewater/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://613covid.ca/fr/wastewater/</guid>
-      <description>Mise à jour concernant le site Web 613COVID&#xA;La surveillance des eaux usées d’Ottawa se poursuit avec des tests et des analyses quotidiens effectués dans le laboratoire de Dr. Robert Delatolla, professeur, Département de génie civil, Université d’Ottawa, qui dirige ces travaux depuis leur lancement en avril 2020.&#xA;Le laboratoire, dirigé par le Dr Delatolla, a élargi son champ d’action au-delà du SARS-CoV-2 pour inclure les virus de la grippe et du RSV, les données étant régulièrement publiées sur le site officiel.</description>
-    </item>
-    <item>
-      <title>Ottawa COVID-19 wastewater surveillance</title>
-      <link>https://613covid.ca/fr/wastewater_archive/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://613covid.ca/fr/wastewater_archive/</guid>
-      <description>Wastewater plots last updated: 26 May, 2026, 17:12:14&#xA;Wastewater samples collected up to: 17 May, 2026&#xA;Reported date up to: 26 May, 2026&#xA;The website is updated Monday to Friday at approximately 5 p.m. Updates can be delayed if measurements do not pass quality assurance and quality control checks.&#xA;Samples that are collected from Monday to Thursday are processed the day after collection. The website and plots are updated the day after processing.</description>
-    </item>
-    <item>
       <title>Roadmap</title>
       <link>https://613covid.ca/fr/roadmap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://613covid.ca/fr/roadmap/</guid>
       <description> The main purpose of this site is to visualize Ottawa-based projections for models performed by other teams.&#xA;Review and update model parameters based on recent published studies. Priories for review: ventilated patients deaths </description>
+    </item>
+    <item>
+      <title>Surveillance de la COVID-19 dans les eaux usées à Ottawa</title>
+      <link>https://613covid.ca/fr/wastewater/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://613covid.ca/fr/wastewater/</guid>
+      <description>Mise à jour concernant le site Web 613COVID&#xA;La surveillance des eaux usées d’Ottawa se poursuit grâce à des analyses quotidiennes réalisées dans le laboratoire du Dr Robert Delatolla, professeur au Département de génie civil de l’Université d’Ottawa, qui dirige ce programme depuis son lancement en avril 2020.&#xA;Le laboratoire a élargi ses activités au-delà du SARS-CoV-2 afin d’inclure également les virus de la grippe et le RSV, avec des données publiées régulièrement sur le site officiel.</description>
     </item>
   </channel>
 </rss>
