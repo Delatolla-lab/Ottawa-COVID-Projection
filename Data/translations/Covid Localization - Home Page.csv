@@ -145,24 +145,27 @@ Ottawa wastewater surveillance continues with testing and analysis performed in 
 
 Wastewater surveillance continues to be a key indicator to monitoring respiratory illnesses in Ottawa. We are honoured to have so many people in Ottawa use, consult, and support our application.
 
-This monitoring program is currently funded by Ottawa Public Health and the Delatolla Research Group. Provincial funding for wastewater monitoring ended in July 2024. We are now fundraising to help support the continuation of this important community monitoring program.
+Please support wastewater surveillance in the City of Ottawa. This program provides early, community-level information on infectious disease activity, helping Ottawa Public Health and residents understand emerging risks and make informed decisions. Since provincial funding ended on July 31, 2024, the program continues through support from the Ottawa Public Health budget and the Delatolla Research Group at the University of Ottawa. Donations through the University of Ottawa’s Zeffy link will help sustain this important public health resource for Ottawa.
 
-Watch this space for our upcoming fundraising link!
+Donate here:  [https://give.uottawa.ca/page/189424/donate/1?locale=en-CA&appealCode=27SG-SO-10](https://give.uottawa.ca/page/189424/donate/1?locale=en-CA&appealCode=27SG-SO-10).
 
 Please see [https://www.delatolla-research-group.ca](https://www.delatolla-research-group.ca) for further information about the lab.
 ","Mise à jour concernant le site Web 613COVID
 
-La surveillance des eaux usées d'Ottawa se poursuit avec des tests et des analyses quotidiens effectués dans le laboratoire de [Dr. Robert Delatolla](https://engineering.uottawa.ca/people/delatolla-robert), professeur, Département de génie civil, Université d'Ottawa, qui dirige ces travaux depuis leur lancement en avril 2020.
+La surveillance des eaux usées d’Ottawa se poursuit grâce à des analyses quotidiennes réalisées dans le laboratoire du Dr Robert Delatolla, professeur au Département de génie civil de l’Université d’Ottawa, qui dirige ce programme depuis son lancement en avril 2020.
 
-Le laboratoire, dirigé par le Dr Delatolla, a élargi son champ d'action au-delà du SARS-CoV-2 pour inclure les virus de la grippe et du RSV, les données étant régulièrement publiées sur le site officiel. 
+Le laboratoire a élargi ses activités au-delà du SARS-CoV-2 afin d’inclure également les virus de la grippe et le RSV, avec des données publiées régulièrement sur le site officiel.
 
-Veuillez suivre @DelatollaLab sur X (Twitter) pour une contextualisation plus approfondie des données.
+Veuillez suivre @DelatollaLab sur X (Twitter) pour obtenir une interprétation plus approfondie des données.
 
-La surveillance des eaux usées continue d'être un indicateur clé pour surveiller le COVID-19 et d'autres maladies et des efforts sont en cours pour créer un tableau de bord national des eaux usées.
+La surveillance des eaux usées demeure un indicateur clé pour suivre le COVID-19 et d’autres maladies, et des efforts sont en cours afin de développer un tableau de bord national de surveillance des eaux usées.
 
-Nous remercions le Dr. Doug Manuel et le Dr. Tyson Graber pour leurs précieuses contributions et leur soutien pendant la période sans précédent de la pandémie et au-delà. 
+Nous remercions le Dr Doug Manuel et le Dr Tyson Graber pour leurs précieuses contributions et leur soutien tout au long de la pandémie et au-delà.
 
-Les efforts de collaboration reflètent un engagement à faire progresser les initiatives de santé publique grâce à des recherches et des analyses de données innovantes."
+Ces collaborations reflètent un engagement commun envers l’avancement des initiatives de santé publique grâce à des recherches et des analyses de données innovantes.
+
+[https://donnez.uottawa.ca/page/189424/donate/1?locale=fr-CA&appealCode=27SG-SO-10](https://donnez.uottawa.ca/page/189424/donate/1?locale=fr-CA&appealCode=27SG-SO-10)
+"
 fewer,Fewer,Moins
 hosp_projections,## Projection of hospital census in Ottawa {#hospitalization-projections},## Projection du recensement des hôpitaux à Ottawa {#hospitalization-projections}
 hosp_projections_text,"Projection of hospital census in Ottawa are presented below. See [Methods](/model) for how the projections where created. Short-term projections can trend in different directions when there are changing patterns of community COVID-19 transmission. For example, predicted hospital counts can be underestimated during periods of rapid re-opening.","Les projections hospitalières COVID-19 à court terme sont présentées ci-dessous. Voir [Méthodes](/model) pour savoir comment les projections ont été créées. Les projections à court terme peuvent prendre des directions différentes lorsque les schémas de transmission du COVID-19 dans la communauté changent. Par exemple, le nombre d'hospitalizations prévu peut être sous-estimé pendant les périodes de reouverture rapide."
@@ -174,7 +177,7 @@ This website has forecasts of hospitalization counts from COVID-19 and wastewate
 
 Website is optimized for desktop use. For mobile users, it is recommended to view in landscape mode.
 
-Click here to access the COVID-19 Daily Dashboard created by Ottawa Public Health. The Ottawa Public Health dashboard provides up to date COVID-19 metrics that inform projections presented on this website.","_Dernière mise à jour : {{1}}._
+Click here to access the COVID-19 Daily Dashboard created by Ottawa Public Health. The Ottawa Public Health dashboard provides up to date COVID-19 metrics that inform projections presented on this website.","_Dernière mise à jour des graphiques des eaux usées: {{1}}._
 
 
 
@@ -369,6 +372,7 @@ En ce qui concerne l'interprétation des nombres et des graphiques rapportés ic
 staff_rt_projections,## Rt Projection of COVID-19 positive health care workers in Ottawa,## Projection du Rt des travailleurs de la santé positifs au COVID-19 à Ottawa
 the_same,About the same,À peu près la même
 vent_projections,## {#ventilator-projections},## {#ventilator-projections}
-WWAnalysesDate,Reported date up to: {{1}},Date rapportée jusqu'à : {{1}}
+WWAnalysesDate,Reported date up to: {{1}},Données rapportées jusqu’au : {{1}}
 WWCollectDate,Wastewater samples collected up to: {{1}},Echantillons d'eaux usées collectés jusqu'à : {{1}}
 WWIntro,Wastewater plots last updated: {{1}},Dernière mise à jour des graphiques sur les eaux usées : {{1}}
+WWSurveillance,Wastewater surveillance,Surveillance des eaux usées
