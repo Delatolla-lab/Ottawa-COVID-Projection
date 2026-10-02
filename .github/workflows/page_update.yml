@@ -23,12 +23,13 @@ jobs:
           use-public-rspm: true
 
       # Consolidated system dependencies.
-      # Removed libtbb-dev and changed libtiff5-dev to libtiff-dev.
+      # Added libtbb-dev for rstan/covidseir and changed libtiff5-dev to libtiff-dev.
       - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y --fix-missing \
             libcurl4-openssl-dev \
+            libtbb-dev \
             libharfbuzz-dev \
             libfribidi-dev \
             libfontconfig1-dev \
