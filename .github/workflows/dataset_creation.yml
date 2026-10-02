@@ -34,6 +34,7 @@ jobs:
             libpng-dev \
             libtiff-dev \
             libjpeg-dev
+          echo "LD_PRELOAD=$(ldconfig -p | grep -m1 'libtbb.so' | awk '{print $NF}')" >> $GITHUB_ENV
 
       - name: Set compiler flags for RcppParallel
         run: |

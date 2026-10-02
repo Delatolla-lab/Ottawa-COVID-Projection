@@ -38,6 +38,7 @@ jobs:
             libtiff-dev \
             libjpeg-dev \
             libuv1-dev
+          echo "LD_PRELOAD=$(ldconfig -p | grep -m1 'libtbb.so' | awk '{print $NF}')" >> $GITHUB_ENV
 
       - uses: r-lib/actions/setup-renv@v2
         with:
