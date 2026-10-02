@@ -231,7 +231,15 @@ n1_n2_7_day_call_p1 <- list(type = "avg_data", y_column = "N1_N2_7_day_p1", name
 
 n1_n2_7_day_call_p2 <- list(type = "avg_data", y_column = "N1_N2_7_day_p2", name = "7-day rolling mean viral signal", short_name = "7-day", color = rolling_avg_col, yaxis = "y2", width = 4, showlegend = TRUE)
 
-reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call_p1, n1_n2_7_day_call_p2), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>COVID-19 wastewater viral signal, Ottawa</b>"), data = new_ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
+p <- reworked_figure(xaxis = "date", yaxis = list(daily_viral_signal_call, daily_viral_signal_call_omit, n1_n2_7_day_call_p1, n1_n2_7_day_call_p2), titles = c(y = "Normalized viral copies*", y2 = "", x = "Date", title = "<b>COVID-19 wastewater viral signal, Ottawa</b>"), data = new_ott_covid_waste, date_constraint = TRUE, ticks = FALSE, constraint_val = 40, ticklabels = "%b %d")
+
+recent_covid <- new_ott_covid_waste %>% 
+  filter(date >= max(date, na.rm = TRUE) - 40)
+max_val <- max(c(recent_covid$N1_N2_avg_clean, recent_covid$N1_N2_avg_omit, recent_covid$N1_N2_7_day), na.rm = TRUE)
+y_upper <- ifelse(is.finite(max_val) && max_val > 0, max_val * 1.15, 0.0001)
+
+p <- layout(p, yaxis = list(range = c(0, y_upper), exponentformat = "none", tickformat = ".5f"))
+p
 ```
 
 ---
