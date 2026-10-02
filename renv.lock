@@ -2332,60 +2332,6 @@
       "Maintainer": "Max Kuhn <max@rstudio.com>",
       "Repository": "CRAN"
     },
-    "covidseir": {
-      "Package": "covidseir",
-      "Version": "0.0.1.9001",
-      "Source": "git",
-      "Title": "Bayesian SEIR Modelling for Multivariate COVID-19 Case Data",
-      "Authors@R": "c(person(given = c(\"Sean\", \"C.\"), family = \"Anderson\", role = c(\"aut\", \"cre\"), email = \"sean@seananderson.ca\", comment = c(ORCID = \"0000-0001-9563-1937\")), person(given = c(\"Andrew\", \"M.\"), family = \"Edwards\", role = \"aut\"), person(given = \"Madi\", family = \"Yerlanov\", role = \"aut\"), person(given = \"Nicola\", family = \"Mulberry\", role = \"aut\"), person(given = c(\"Jessica\", \"E.\"), family = \"Stockdale\", role = \"aut\"), person(given = c(\"Rebeca\", \"C.\"), family = \"Falcao\", role = \"aut\"), person(given = c(\"Sarafa\", \"A.\"), family = \"Iyaniwura\", role = \"aut\"), person(given = c(\"Michael\", \"C.\"), family = \"Otterstatter\", role = \"aut\"), person(given = c(\"Michael\", \"A.\"), family = \"Irvine\", role = \"aut\"), person(given = c(\"Naveed\", \"Z.\"), family = \"Janjua\", role = \"aut\"), person(given = \"Daniel\", family = \"Coombs\", role = \"aut\"), person(given = \"Caroline\", family = \"Colijn\", role = \"aut\", comment = \"Principal Investigator; <ccolijn@sfu.ca>\"))",
-      "Description": "Fits a Bayesian SEIR (Susceptible, Exposed, Infectious, Recovered) model to daily COVID-19 case data. The package focuses on estimating the fraction of the usual contact rate for individuals participating in physical distancing (social distancing). The model is coded in 'Stan'. The model can accommodate multiple types of case data at once (e.g., reported cases, hospitalizations, ICU admissions) and accounts for delays between symptom onset and case appearance. This model is a continuation of the models described in the preprints <doi:10.1101/2020.04.17.20070086> and  <doi:10.1101/2020.06.12.20129833>.",
-      "License": "GPL-2",
-      "Depends": [
-        "R (>= 3.5.0)"
-      ],
-      "Imports": [
-        "dplyr",
-        "furrr (>= 0.2.0)",
-        "ggplot2",
-        "glue",
-        "MASS",
-        "magrittr",
-        "methods",
-        "purrr",
-        "Rcpp (>= 0.12.0)",
-        "reshape2",
-        "rstan (>= 2.18.1)",
-        "tibble",
-        "tidyr"
-      ],
-      "Suggests": [
-        "knitr",
-        "future",
-        "lubridate",
-        "mgcv",
-        "rmarkdown",
-        "rstantools (>= 2.0.0)"
-      ],
-      "LinkingTo": [
-        "BH (>= 1.66.0)",
-        "Rcpp (>= 0.12.0)",
-        "RcppEigen (>= 0.3.3.3.0)",
-        "rstan (>= 2.18.1)",
-        "StanHeaders (>= 2.18.0)"
-      ],
-      "VignetteBuilder": "knitr",
-      "Biarch": "true",
-      "Encoding": "UTF-8",
-      "LazyData": "true",
-      "Roxygen": "list(markdown = TRUE)",
-      "RoxygenNote": "7.1.1.9000",
-      "SystemRequirements": "GNU make",
-      "Author": "Sean C. Anderson [aut, cre] (ORCID: <https://orcid.org/0000-0001-9563-1937>), Andrew M. Edwards [aut], Madi Yerlanov [aut], Nicola Mulberry [aut], Jessica E. Stockdale [aut], Rebeca C. Falcao [aut], Sarafa A. Iyaniwura [aut], Michael C. Otterstatter [aut], Michael A. Irvine [aut], Naveed Z. Janjua [aut], Daniel Coombs [aut], Caroline Colijn [aut] (Principal Investigator; <ccolijn@sfu.ca>)",
-      "Maintainer": "Sean C. Anderson <sean@seananderson.ca>",
-      "RemoteType": "git",
-      "RemoteUrl": "https://github.com/seananderson/covidseir.git",
-      "RemoteRef": ""
-    },
     "cowplot": {
       "Package": "cowplot",
       "Version": "1.2.0",
