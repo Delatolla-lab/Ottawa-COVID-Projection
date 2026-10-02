@@ -48,10 +48,12 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
 
       - name: Install hugo
-        run: Rscript -e 'blogdown::install_hugo(version = "0.123.0")'
+        run: Rscript -e 'blogdown::install_hugo(version = "0.160.1")'
 
       - name: Render website
-        run: Rscript -e 'blogdown::build_site(build_rmd = TRUE)'
+        run: |
+          rm -rf docs
+          Rscript -e 'blogdown::build_site(build_rmd = TRUE)'
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4 # Updated to v4
