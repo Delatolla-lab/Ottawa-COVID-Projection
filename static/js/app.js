@@ -2,14 +2,20 @@ var hash = window.location.hash;
 window.location.hash = "";
 
 document.addEventListener("DOMContentLoaded", function() {
-  updatePlotlyGraphs();
+  try {
+    updatePlotlyGraphs();
+  } catch(e) {
+    console.warn("Plotly graph update warning:", e);
+  }
 
   if (hash) {
-    scrollToElement(document.querySelector(hash));
-
-    setTimeout(() => {
-      history.replaceState(null, null, document.location.pathname + hash);
-    });
+    var targetEl = document.querySelector(hash);
+    if (targetEl) {
+      scrollToElement(targetEl);
+      setTimeout(() => {
+        history.replaceState(null, null, document.location.pathname + hash);
+      });
+    }
   }
 
   var dropdowns = document.getElementsByClassName("navbar-dropdown");
@@ -32,13 +38,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function updatePlotlyGraphs() {
   if (window.location.pathname === "/") {
-    // Set the image width to 100% for the peak hispitalization grpahs so it works
+    // Set the image width to 100% for the peak hispitalization graphs so it works
     // well on mobiles
-    document
-      .getElementById("peak-hosp-projections")
-      .querySelector("img").style = "width: 100%;";
+    var peakEl = document.getElementById("peak-hosp-projections");
+    if (peakEl) {
+      var img = peakEl.querySelector("img");
+      if (img) img.style.width = "100%";
+    }
     // Resize all plotly graphs if the user is viewing them on mobile screens
-    // so they lool better
+    // so they look better
     setTimeout(() => {
       if (window.innerWidth <= 425) {
         var plotlyPlots = document.querySelectorAll(".js-plotly-plot");
@@ -68,3 +76,4 @@ function scrollToElement(element) {
     behavior: "smooth"
   });
 }
+

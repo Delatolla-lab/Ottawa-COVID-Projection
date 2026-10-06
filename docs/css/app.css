@@ -59,3 +59,144 @@ figcaption {
   text-align: right;
   font-size: smaller;
 }
+
+/* ==========================================================================
+   Donation CTA Styles (Hybrid: Hero Card + Navbar Button)
+   ========================================================================== */
+
+/* Hero Callout Card */
+.cta-hero-card {
+  display: block;
+  background: linear-gradient(135deg, #f8fbff 0%, #edf5fc 100%);
+  border: 1px solid #bfdbfe;
+  border-left: 6px solid #8f001a;
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 22px 0;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+.cta-hero-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.cta-hero-icon {
+  background: #8f001a;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.cta-hero-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #173f5f;
+}
+.cta-hero-text {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #334155;
+  margin-bottom: 14px;
+}
+.cta-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+.article-content .cta-hero-card a.cta-btn-garnet,
+.cta-hero-card a.cta-btn-garnet,
+.cta-btn-garnet {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: #8f001a !important;
+  background-color: #8f001a !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  font-size: 0.92rem !important;
+  padding: 10px 22px !important;
+  border-radius: 6px !important;
+  text-decoration: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: 0 2px 6px rgba(143, 0, 26, 0.28) !important;
+  transition: background-color 0.15s ease, transform 0.1s ease !important;
+  line-height: 1.3 !important;
+}
+.article-content .cta-hero-card a.cta-btn-garnet:hover,
+.article-content .cta-hero-card a.cta-btn-garnet:focus,
+.cta-hero-card a.cta-btn-garnet:hover,
+.cta-hero-card a.cta-btn-garnet:focus,
+.cta-btn-garnet:hover,
+.cta-btn-garnet:focus {
+  background: #6e0014 !important;
+  background-color: #6e0014 !important;
+  color: #ffffff !important;
+  border-bottom: none !important;
+  box-shadow: 0 4px 10px rgba(143, 0, 26, 0.38) !important;
+  transform: translateY(-1px) !important;
+}
+.cta-hero-subtext {
+  font-size: 0.84rem;
+  color: #64748b;
+  display: inline-block;
+}
+
+/* Navbar Donate Button */
+.cta-nav-item {
+  display: flex;
+  align-items: center;
+}
+.cta-nav-btn {
+  background-color: #8f001a !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  padding: 6px 14px !important;
+  border-radius: 20px !important;
+  text-decoration: none !important;
+  margin-left: 8px;
+  margin-right: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: all 0.15s ease;
+}
+.cta-nav-btn:hover {
+  background-color: #6e0014 !important;
+  color: #ffffff !important;
+  transform: scale(1.04);
+}
+
+@media (max-width: 576px) {
+  .navbar {
+    padding: 6px 12px !important;
+  }
+  .navbar-brand {
+    font-size: 1.15rem !important;
+    margin-right: 0 !important;
+  }
+  .navbar-brand img {
+    width: 32px !important;
+  }
+  .cta-nav-btn {
+    font-size: 0.78rem !important;
+    padding: 5px 10px !important;
+    margin-left: 4px !important;
+    margin-right: 4px !important;
+  }
+  .navbar-toggler {
+    padding: 3px 6px !important;
+    font-size: 1rem !important;
+  }
+}
+
+

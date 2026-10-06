@@ -209,6 +209,20 @@ Les échantillons collectés du lundi au jeudi sont analysés le lendemain de le
 
 Les personnes atteintes de la COVID-19 excrètent le virus SARS-CoV-2 dans leurs selles, qu’elles présentent ou non des symptômes, qu’elles aient passé un test de dépistage ou qu’elles aient reçu un diagnostic officiel. Ainsi, contrairement à l’évaluation des niveaux de COVID-19 dans la communauté à partir du nombre de cas actifs - une méthode qui peut sous-estimer les infections asymptomatiques et être influencée par l’accès limité aux tests - la surveillance des eaux usées permet de suivre de façon plus représentative la présence du virus dans la population, puisque tout le monde utilise les toilettes. En plus d’être une source précieuse de confirmation des niveaux de COVID-19 dans la communauté, la surveillance des eaux usées peut également servir d’indicateur précoce d’éventuelles éclosions, comme décrit ci-dessous.
 
+<div class="cta-hero-card">
+<div class="cta-hero-card-header">
+<div class="cta-hero-icon">❤️</div>
+<h3 class="cta-hero-title">Aidez à maintenir la surveillance des eaux usées à Ottawa</h3>
+</div>
+<div class="cta-hero-text">
+Le financement provincial a pris fin en juillet 2024, et la surveillance des eaux usées d’Ottawa est désormais financée par Santé publique Ottawa et le laboratoire de recherche Delatolla de l’Université d’Ottawa. Ce financement se termine en 2027. <strong>Votre don déductible d’impôt soutiendra directement la poursuite de la surveillance et l’accès ouvert aux données de santé publique.</strong>
+</div>
+<div class="cta-hero-actions">
+<a href="https://donnez.uottawa.ca/page/189424/donate/1?locale=fr-CA&amp;appealCode=27SG-SO-10" target="_blank" rel="noopener noreferrer" class="cta-btn-garnet">Soutenir ce programme (uOttawa) &rarr;</a>
+<span class="cta-hero-subtext">Don sécurisé et déductible d'impôt via l'Université d'Ottawa</span>
+</div>
+</div>
+
 ---
 
 # {#ww-visualization}
