@@ -203,6 +203,20 @@ For mobile users, dragging the plot while in landscape mode will allow you to vi
 
 Data last reported `r as.character(tail(waste_clean$reportDate, n=1))`. Click [here](/model/#wastewater) for more details on wastewater data reporting.
 
+<div class="cta-hero-card">
+<div class="cta-hero-card-header">
+<div class="cta-hero-icon">❤️</div>
+<h3 class="cta-hero-title">Help Sustain Ottawa's Wastewater Surveillance</h3>
+</div>
+<div class="cta-hero-text">
+Provincial funding ended in July 2024, and Ottawa’s wastewater surveillance is now funded through Ottawa Public Health and the Delatolla Research Lab at the University of Ottawa. This funding ends in 2027. <strong>Your tax-deductible donation will directly support continued surveillance and open public health data.</strong>
+</div>
+<div class="cta-hero-actions">
+<a href="https://give.uottawa.ca/page/189424/donate/1?locale=en-CA&amp;appealCode=27SG-SO-10" target="_blank" rel="noopener noreferrer" class="cta-btn-garnet">Support This Program (uOttawa) &rarr;</a>
+<span class="cta-hero-subtext">Secure tax-deductible donation via University of Ottawa</span>
+</div>
+</div>
+
 ---
 
 # {#ww-visualization}
